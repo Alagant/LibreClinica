@@ -31,6 +31,8 @@
 		<!-- Library Versions -->
 		<spring.version>5.1.4.RELEASE</spring.version>
 		<db.test>localhost</db.test>
+		<jackson.version>2.9.8</jackson.version>
+		<saxon.version>8.7</saxon.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -117,12 +119,17 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.9.8</version>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.9.8</version>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -137,12 +144,12 @@
 			<dependency>
 				<groupId>net.sf.saxon</groupId>
 				<artifactId>saxon</artifactId>
-				<version>8.7</version>
+				<version>${saxon.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.saxon</groupId>
 				<artifactId>saxon-dom</artifactId>
-				<version>8.7</version>
+				<version>${saxon.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -318,6 +325,12 @@
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
 			<version>2.3.5.RELEASE</version>
+			<exclusions>
+				<exclusion>
+  					<groupId>org.codehaus.jackson</groupId>
+  					<artifactId>jackson-mapper-asl</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- HIBERNATE -->
 		<dependency>
