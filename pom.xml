@@ -33,6 +33,9 @@
 		<db.test>localhost</db.test>
 		<jackson.version>2.9.8</jackson.version>
 		<saxon.version>8.7</saxon.version>
+		<hibernate.version>5.4.2.Final</hibernate.version>
+		<castor.version>1.3.3</castor.version>
+		<logback.version>1.1.2</logback.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -142,6 +145,11 @@
                 <version>2.5</version>
             </dependency>
 			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.8.0</version>
+			</dependency>
+			<dependency>
 				<groupId>net.sf.saxon</groupId>
 				<artifactId>saxon</artifactId>
 				<version>${saxon.version}</version>
@@ -156,11 +164,130 @@
     			<artifactId>commons-dbcp2</artifactId>
     			<version>2.8.0</version>
 			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.11</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-webmvc</artifactId>
+	            <version>${spring.version}</version>
+	        </dependency>
+			<dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-jcl</artifactId>
+	            <version>${spring.version}</version>
+	            <scope>runtime</scope>
+	        </dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-ldap</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.ldap</groupId>
+				<artifactId>spring-ldap-core</artifactId>
+				<!-- make sure the version matches the one used by org.springframewok.security:spring-security-ldap -->
+				<version>2.3.2.RELEASE</version>
+			</dependency>
+			<dependency>
+    			<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache</artifactId>
+    			<!--  make sure the version matches the one used by org.hibernate:hibernate-ehcache -->
+    			<version>2.10.6</version>
+			</dependency>
+			<dependency>
+			   <groupId>javax.persistence</groupId>
+			   <artifactId>javax.persistence-api</artifactId>
+			   <!-- make sure the version matches the one used by org.hibernate:hibernate-core -->
+			   <version>2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<!-- make sue the version matches the one used by the batik libs (e.g. org.apache.xmlgraphics:batik-dom) -->
+				<version>1.3.04</version>
+			</dependency>
+			<!-- HIBERNATE -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-ehcache</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+	    		<groupId>com.mattbertolini</groupId>
+	    		<artifactId>liquibase-slf4j</artifactId>
+	    		<version>3.0.0</version>
+	    		<scope>runtime</scope>
+			</dependency>
+			<!-- LIQUIBASE -->
+			<dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-core</artifactId>
+				<version>3.6.3</version>
+			</dependency>
 		    <dependency>
 				<groupId>org.codehaus.castor</groupId>
 				<artifactId>castor</artifactId>
 				<type>pom</type>
-				<version>1.3.1</version>
+				<version>${castor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.castor</groupId>
+				<artifactId>castor-core</artifactId>
+				<version>${castor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.13.3</version>
+			</dependency>
+			<!-- LOGBACK -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -169,12 +296,6 @@
 
 	<!-- These dependencies are used by _all_ child projects -->
 	<dependencies>
-		<!-- Jackson JSON Mapper -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160212</version>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -209,45 +330,19 @@
 			<version>1.7.6</version>
 			<scope>test</scope>
 		</dependency>
-		<!--@pgawade 02-DEC-2010 Added jul-to-slf4j-1.5.6.jar to get liquibase
-			logs using SLF4JBridgeHandler -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-			<version>1.7.6</version>
+    		<groupId>com.mattbertolini</groupId>
+    		<artifactId>liquibase-slf4j</artifactId>
 		</dependency>
 		<!-- We have added this to see logging from SpringFramework it uses JCL -->
+		<!--
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>1.7.6</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- @pgawade 22-Nov-2010 Changed the logback dependency to default scope;
-			it is needed to compile log filters -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<!-- @pgawade 22-Nov-2010 Added the logback access; it will be needed to
-			get the web application usage pattern data -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-access</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.janino</groupId>
-			<artifactId>janino</artifactId>
-			<version>2.7.5</version>
-		</dependency>
+		-->
 		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -265,26 +360,6 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>${spring.version}</version>
@@ -292,24 +367,10 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-ldap</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<!--@pgawade 10-DEC-2010 Added to get spring ContextLoaderListener class
-			in core -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
     		<groupId>org.springframework</groupId>
@@ -318,87 +379,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-oxm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-			<version>2.3.5.RELEASE</version>
-			<exclusions>
-				<exclusion>
-  					<groupId>org.codehaus.jackson</groupId>
-  					<artifactId>jackson-mapper-asl</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- HIBERNATE -->
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>2.0.1.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.4.2.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.4.2.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-ehcache</artifactId>
-			<version>5.4.2.Final</version>
-		</dependency>
-		<!-- LIQUIBASE -->
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<version>3.6.3</version>
-		</dependency>
-		<!-- Explicitly defining dependencies versions for Maven 3 -->
-		<dependency>
-			<groupId>antlr</groupId>
-			<artifactId>antlr</artifactId>
-			<version>2.7.6</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.castor</groupId>
-			<artifactId>castor-core</artifactId>
-			<version>1.3.3</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils-core</artifactId>
-			<version>1.8.3</version>
-		</dependency>
-		<dependency>
-			<groupId>io.dropwizard.metrics</groupId>
-			<artifactId>metrics-core</artifactId>
-			<version>3.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>io.dropwizard.metrics</groupId>
-			<artifactId>metrics-healthchecks</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.dropwizard.metrics</groupId>
-			<artifactId>metrics-jvm</artifactId>
-			<version>3.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.7</version>
+			<artifactId>spring-jcl</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
@@ -544,6 +525,14 @@
 						<schemaDirectory>src/main/webapp/WEB-INF/schemas</schemaDirectory>
 					</configuration>
 				</plugin>
+				<plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-dependency-plugin</artifactId>
+			        <version>2.6</version>
+			        <configuration>
+			        	<ignoreNonCompile>true</ignoreNonCompile>
+			        </configuration>
+			      </plugin>
 			</plugins>
 		</pluginManagement>
 
