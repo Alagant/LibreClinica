@@ -1,4 +1,5 @@
 #!groovy
+
 pipeline {
 	agent none
   stages {
@@ -12,6 +13,11 @@ pipeline {
       	sh 'mvn clean install'
       }
     }
+    stage('Docker Build') {
+    	agent any
+      steps {
+      	sh 'docker build -t huezo/spring-petclinic:latest .'
+      }
+    }
   }
 }
-
