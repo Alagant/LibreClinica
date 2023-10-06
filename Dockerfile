@@ -1,12 +1,12 @@
 FROM maven:3-openjdk-11 as builder
+WORKDIR /vhuezo
+COPY . .
+COPY pom.xml .
 
-COPY src /usr/src/app/src
-COPY pom.xml /usr/src/app
-
-RUN mvn -f /usr/src/app/pom.xml clean package
+RUN mvn -f pom.xml clean package
 
 FROM openjdk:11
 
-COPY --from=builder /usr/src/app/target/multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar /usr/app/multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar
+COPY --from=builder multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-ENTRYPOINT ["java", "-cp", "/usr/app/multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar", "com.scalabledeveloper.multistagebuild.App"]
+ENTRYPOINT ["java", "-cp", "multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar", "com.scalabledeveloper.multistagebuild.App"]
