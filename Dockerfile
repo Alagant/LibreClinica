@@ -1,12 +1,15 @@
-FROM maven:3-openjdk-11 as builder
+FROM maven:3.5.0 as builder
 WORKDIR /vhuezo
 COPY . .
 COPY pom.xml .
 
-RUN mvn -f pom.xml clean package
+RUN mvn clean install
 
-FROM openjdk:11
+FROM tomcat:9.0
+WORKDIR /vhuezo
 
-COPY --from=builder multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar
+COPY --from=builder LibreClinica-ws-1.2.0.war webapps/LibreClinica-ws-1.2.0.war
 
-ENTRYPOINT ["java", "-cp", "multistagebuild-1.0-SNAPSHOT-jar-with-dependencies.jar", "com.scalabledeveloper.multistagebuild.App"]
+#COPY datainfo.properties.example libreclinica.config/datainfo.properties
+#COPY datainfo.properties.example libreclinica-ws.config/datainfo.properties
+
