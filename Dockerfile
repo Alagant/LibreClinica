@@ -1,4 +1,4 @@
-FROM maven:maven:3-openjdk-11 as builder
+FROM maven:3-openjdk-11 as builder
 
 COPY src /usr/src/app/src
 COPY pom.xml /usr/src/app
