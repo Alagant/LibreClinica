@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:11
+    environment: 
+      POSTGRES_PASSWORD: libreclinica
+      POSTGRES_USER: libreclinica
+      POSTGRES_DB: libreclinica
+  libreclinica:
+    build: .
+    ports: 
+      - 8484:8080
+    depends_on:
+      - postgres
+
