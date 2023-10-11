@@ -16,8 +16,9 @@ pipeline {
     stage('Docker Build') {
     	agent any
       steps {
-      	sh 'docker build -t huezo/spring-petclinic:latest .'
+      	sh 'docker build -t ghcr.io/huezo/libreclinica:jenkins .'
       }
     }
   }
 }
+
