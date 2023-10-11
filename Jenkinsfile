@@ -1,43 +1,24 @@
+#!groovy
+
 pipeline {
-  environment {
-    imagename = "ghcr.io/huezo/libreclinica"
-    registryCredential = 'gitlab'
-    dockerImage = ''
-  }
-  agent any
+	agent none
   stages {
-    stage('Cloning Git') {
+  	stage('Maven Install') {
+    	agent {
+      	docker {
+        	image 'maven:3.5.0'
+        }
+      }
       steps {
-        git([url: 'https://github.com/huezo/libreclinica.gitt', branch: 'lc-develop', credentialsId: 'github'])
-
+#      	sh 'mvn clean install'
       }
     }
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build imagename
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("$BUILD_NUMBER")
-             dockerImage.push('latest')
-
-          }
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $imagename:$BUILD_NUMBER"
-         sh "docker rmi $imagename:latest"
-
+    stage('Docker Build') {
+    	agent any
+      steps {
+      	sh 'docker build -t ghcr.io/huezo/libreclinica:jenkins .'
       }
     }
   }
 }
-
 
