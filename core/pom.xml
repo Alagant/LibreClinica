@@ -107,8 +107,8 @@
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
 		</dependency>
         <dependency>
         	<groupId>javax.activation</groupId>
@@ -135,6 +135,10 @@
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4jdbc</groupId>
+			<artifactId>log4jdbc4</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.saxon</groupId>
