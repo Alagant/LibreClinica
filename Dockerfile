@@ -1,4 +1,4 @@
-FROM 3.8-openjdk-11 as builder
+FROM maven:3.8-openjdk-11 as builder
 WORKDIR /libreclinica
 COPY . .
 COPY pom.xml .
