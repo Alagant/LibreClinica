@@ -5,8 +5,8 @@
 trigger:
 - master
 
-    pool:
-      name: Default
+pool:
+  name: Default
 
 resources:
 - repo: self
@@ -31,5 +31,6 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
-          latest
+          LibreClinica:latest
 #          $(tag)
+
