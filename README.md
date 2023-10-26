@@ -1,6 +1,10 @@
 LibreClinica
 ============
 
+[![Docker](https://github.com/Alagant/LibreClinica/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Alagant/LibreClinica/actions/workflows/docker-publish.yml)
+
+
+
 _the real open source electronic data capture (EDC) for clinical studies._
 
 [LibreClinica](https://libreclinica.org) is the community driven successor of OpenClinica. It is an open source clinical trial software for Electronic Data Capture (EDC) and Clinical Data Management (CDM). 
