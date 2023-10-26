@@ -32,8 +32,8 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
-- task: SonarQubePrepare@5
-  inputs:
-    SonarQube: 'SonarQube'
-    scannerMode: 'Other'
+    - task: SonarQubePrepare@5
+      inputs:
+       SonarQube: 'SonarQube'
+       scannerMode: 'Other'
 
