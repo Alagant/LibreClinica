@@ -5,8 +5,8 @@
 trigger:
 - master
 
-#    pool:
-#      name: Default
+    pool:
+      name: Default
 
 resources:
 - repo: self
@@ -22,8 +22,8 @@ stages:
     displayName: Build
 #    pool:
 #      vmImage: ubuntu-latest
-    pool:
-      name: Default
+#    pool:
+#      name: Default
     steps:
     - task: Docker@2
       displayName: Build an image
@@ -31,4 +31,5 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
-          $(tag)
+          latest
+#          $(tag)
