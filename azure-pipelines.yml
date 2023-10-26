@@ -3,7 +3,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- lc-develop
+- master
+
+pool:
+  default
 
 resources:
 - repo: self
