@@ -17,3 +17,5 @@ COPY datainfo.properties.example /usr/local/tomcat/webapps/libreclinica-ws.confi
 
 
 
+
+
