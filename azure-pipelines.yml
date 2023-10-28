@@ -37,12 +37,7 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: 'libreclinica'
-    - task: DockerCompose@0
-      inputs:
-        containerregistrytype: 'Azure Container Registry'
-        dockerComposeFile: '**/docker-compose.yml'
-        action: 'Run a Docker Compose command'
-        dockerComposeCommand: 'docker-compose --help'
+
 
     - task: Bash@3
       inputs:
@@ -51,6 +46,13 @@ stages:
           # Write your commands here
           
           echo 'Hello world'
+
+
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        targetPath: '$(Pipeline.Workspace)'
+
 
     - task: SonarQubePrepare@5
       inputs:
