@@ -44,6 +44,13 @@ stages:
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'docker-compose --help'
 
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo 'Hello world'
 
     - task: SonarQubePrepare@5
       inputs:
