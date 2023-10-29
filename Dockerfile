@@ -12,15 +12,14 @@ FROM tomcat:7-jdk8-slim
 MAINTAINER huezo
 WORKDIR /libreclinica
 
+COPY datainfo.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 
-COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica.config/datainfo.properties
-COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica-ws.config/datainfo.properties
 
 
 COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
 
-COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica.config/datainfo.properties
-COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica-ws.config/datainfo.properties
+#COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica.config/datainfo.properties
+#COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica-ws.config/datainfo.properties
 
 
 
