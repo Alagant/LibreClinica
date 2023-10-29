@@ -53,8 +53,3 @@ stages:
         buildType: 'current'
         targetPath: '$(Pipeline.Workspace)'
 
-
-    - task: SonarQubePrepare@5
-      inputs:
-       SonarQube: 'SonarQube'
-       scannerMode: 'Other'
