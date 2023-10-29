@@ -33,6 +33,12 @@ stages:
         tags: |
           $(tag)
 
+    - task: Docker@2
+      inputs:
+        command: 'build'
+        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: 'libreclinica:libreclinica'
+
     - task: Bash@3
       inputs:
         targetType: 'inline'
