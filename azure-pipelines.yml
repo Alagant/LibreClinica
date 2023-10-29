@@ -32,19 +32,16 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
-    - task: Docker@2
-      inputs:
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: 'libreclinica'
-
 
     - task: Bash@3
       inputs:
         targetType: 'inline'
         script: |
           # Write your commands here
-          docker rmi $(docker images -q)
+          docker rm -f libreclinica
+          docker run -d --name libreclinica -p 8183:8080 $(Build.BuildId)
+          docker ps --filter name=libreclinica
+
           echo 'Hello world'
 
 
