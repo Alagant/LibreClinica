@@ -44,7 +44,7 @@ stages:
         targetType: 'inline'
         script: |
           # Write your commands here
-          
+          docker rmi $(docker images -q)
           echo 'Hello world'
 
 
