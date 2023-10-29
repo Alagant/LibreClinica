@@ -1,4 +1,5 @@
 FROM maven:3.5.0-jdk-8 as builder
+MAINTAINER huezo
 WORKDIR /libreclinica
 COPY . .
 COPY pom.xml .
@@ -8,7 +9,13 @@ COPY pom.xml .
 RUN mvn clean install
 
 FROM tomcat:7-jdk8-slim
+MAINTAINER huezo
 WORKDIR /libreclinica
+
+
+COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica.config/datainfo.properties
+COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica-ws.config/datainfo.properties
+
 
 COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
 
