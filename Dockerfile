@@ -14,7 +14,7 @@ WORKDIR /libreclinica
 
 COPY datainfo.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 
-
+COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 
 COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
 
