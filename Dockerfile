@@ -7,7 +7,7 @@ COPY pom.xml .
 
 RUN mvn clean install
 
-FROM tomcat:9.0-jdk8
+FROM tomcat:7-jdk8-slim
 WORKDIR /libreclinica
 
 COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
