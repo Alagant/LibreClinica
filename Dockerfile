@@ -8,16 +8,22 @@ COPY pom.xml .
 
 RUN mvn clean install
 
-FROM tomcat:7-jdk8-slim
+#FROM tomcat:7-jdk8-slim
+FROM docker.io/bitnami/tomcat:10.1
+
 MAINTAINER huezo
+
+ENV TOMCAT_USERNAME=huezo
+ENV TOMCAT_PASSWORD=huezo
+
 WORKDIR /libreclinica
 
-COPY datainfo.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
+COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /opt/bitnami/tomcat/webapps/LibreClinica-ws-1.2.0.war
+COPY datainfo.properties /opt/bitnami/tomcat/libreclinica.config/datainfo.properties
 
-COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
-
-COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
-
+#COPY datainfo.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
+#COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+#COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
 #COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica.config/datainfo.properties
 #COPY datainfo.properties /usr/local/tomcat/webapps/libreclinica-ws.config/datainfo.properties
 
