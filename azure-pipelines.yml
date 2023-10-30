@@ -15,11 +15,11 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build
-  displayName: Build image
+- stage: Crear
+  displayName: Docker image
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Crear
+    displayName: Crear
 #    pool:
 #      vmImage: ubuntu-latest
 #    pool:
@@ -28,16 +28,10 @@ stages:
     - task: Docker@2
       displayName: Build an image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
-
-    - task: Docker@2
-      inputs:
         command: 'build'
-        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: 'libreclinica:libreclinica'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+
 
     - task: Bash@3
       inputs:
@@ -45,14 +39,9 @@ stages:
         script: |
           # Write your commands here
           docker rm -f libreclinica
-          docker run -d --name libreclinica -p 8183:8080 $(Build.BuildId)
+          docker run -d --name libreclinica -p 8183:8080 $(tag)
           docker ps --filter name=libreclinica
 
           echo 'Hello world'
 
-
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        targetPath: '$(Pipeline.Workspace)'
 
