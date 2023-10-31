@@ -35,6 +35,7 @@ stages:
 
 
     - task: Bash@3
+      displayName: DevOps
       inputs:
         targetType: 'inline'
         script: |
