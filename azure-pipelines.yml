@@ -1,6 +1,7 @@
 # Docker
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# https://github.com/huezo
 
 trigger:
 - master
@@ -15,11 +16,11 @@ variables:
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Crear
+- stage: DevOps
   displayName: Docker image
   jobs:
-  - job: Crear
-    displayName: Crear
+  - job: DevOps
+    displayName: DevOps
 #    pool:
 #      vmImage: ubuntu-latest
 #    pool:
@@ -37,12 +38,15 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          # Write your commands here
-          docker build -t libreclinica:2023 .
-          docker rm -f libreclinica
-          docker run -d --name libreclinica -p 8183:8080 libreclinica:2023
+          # Docker DevOps
+          docker build -t libreclinica:master .
+          docker service rm libreclinica
+          docker service create --name=libreclinica --restart-condition=any --publish=8183:8080  libreclinica:master
+           docker service ps  libreclinica
+          # docker rm -f libreclinica
+          # docker run -d --name libreclinica -p 8183:8080 libreclinica:master
           docker ps --filter name=libreclinica
 
-          echo 'Hello world'
+          echo 'Hello DevOps'
 
 
