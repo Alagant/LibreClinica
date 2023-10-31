@@ -25,12 +25,12 @@ stages:
 #    pool:
 #      name: Default
     steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: 'build'
-        Dockerfile: '**/Dockerfile'
-        tags: '$(tag)'
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: 'build'
+#        Dockerfile: '**/Dockerfile'
+#        tags: '$(tag)'
 
 
     - task: Bash@3
@@ -38,8 +38,9 @@ stages:
         targetType: 'inline'
         script: |
           # Write your commands here
+          docker build -t libreclinica:2023 .
           docker rm -f libreclinica
-          docker run -d --name libreclinica -p 8183:8080 $(tag)
+          docker run -d --name libreclinica -p 8183:8080 libreclinica:2023
           docker ps --filter name=libreclinica
 
           echo 'Hello world'
