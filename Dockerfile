@@ -6,7 +6,7 @@ COPY . .
 COPY pom.xml .
 RUN mvn clean install
 RUN find /libreclinica -type f -name "*.war"
-#RUN mvn clean install  sonar:sonar -Dsonar.host.url=http://20.115.71.236:8182/ -Dsonar.login=squ_4101c86535f983bb3c5a91fc00f7e8b0c2df3bd1 -Dsonar.projectKey=test -Dsonar.projectName=test -Dsonar.projectVersion=1.0
+RUN mvn clean install  sonar:sonar -Dsonar.host.url=http://20.115.71.236:8182/ -Dsonar.login=squ_07b2feeb980836a23bd8924dbf69b2304143370e -Dsonar.projectKey=libreclinica -Dsonar.projectName=libreclinica -Dsonar.projectVersion=1.0
 
 FROM tomcat:7-jdk8-slim
 LABEL maintainer="Victor H. <huezohuezo.1990@gmail.com>"
