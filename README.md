@@ -1,7 +1,12 @@
 LibreClinica
 ============
 
-[![Docker](https://github.com/Alagant/LibreClinica/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Alagant/LibreClinica/actions/workflows/docker-publish.yml)
+# Docker System Requirements
+
+
+| Application Server | Java       | Database      | 
+|--------------------|------------|---------------|
+| ```tomcat:7-jdk8-slim```           | ```maven:3.5.0-jdk-8``` | ```postgres:11``` |
 
 
 
