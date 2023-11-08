@@ -2,6 +2,8 @@
 # Build a Docker image
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 # https://github.com/huezo
+# Victor H. <huezohuezo.1990@gmail.com>
+# Victor H. <huezohuezo.1990@gmail.com>
 
 trigger:
 - master
@@ -59,6 +61,6 @@ stages:
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
           ls -ltra libreclinica-qa/
-          docker-compose -f libreclinica-qa/docker-compose.yml
-          echo 'Hello git'
+          docker-compose -f libreclinica-qa/docker-compose.yml up -d
+          echo 'Hello Test'
 
