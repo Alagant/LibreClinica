@@ -55,8 +55,7 @@ stages:
         targetType: 'inline'
         script: |
           # 
-          git clone https://edenilsonpineda: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@github.com/Alagant/libreclinica-qa
-          cd libreclinica-qa
-          docker-compose up -d
+          git clone https://github.com/Alagant/libreclinica-qa.git
+          docker-compose -f ./libreclinica-qa/docker-compose.yml
           echo 'Hello git'
 
