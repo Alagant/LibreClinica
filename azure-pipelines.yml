@@ -58,6 +58,7 @@ stages:
           # 
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
-          docker-compose -f ./libreclinica-qa/docker-compose.yml
+          ls -ltra libreclinica-qa/
+          docker-compose -f libreclinica-qa/docker-compose.yml
           echo 'Hello git'
 
