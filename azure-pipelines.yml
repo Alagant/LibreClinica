@@ -40,13 +40,15 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          docker build -t libreclinica:master .
-          docker service rm libreclinica
-          docker service create --name=libreclinica --restart-condition=any --publish=8183:8080  libreclinica:master
-           docker service ps  libreclinica
-          # docker rm -f libreclinica
-          # docker run -d --name libreclinica -p 8183:8080 libreclinica:master
+          docker build --no-cache --tag libreclinica:master .
+          docker rm -f libreclinica
+          docker run -d --name libreclinica -p 8183:8080 libreclinica:master
           docker ps --filter name=libreclinica
-
           echo 'Hello DevOps'
+        #  docker service rm libreclinica
+        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
+        #  docker service ps  libreclinica
+           
+
+
 
