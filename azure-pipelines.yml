@@ -64,3 +64,12 @@ stages:
           docker-compose -f libreclinica-qa/docker-compose.yml up -d
           echo 'Hello Test'
 
+    - task: GitHubRelease@1
+      displayName: GitHub Release
+      inputs:
+        repositoryName: '$(Build.Repository.Name)'
+        action: 'create'
+        target: '$(Build.SourceVersion)'
+        tagSource: 'gitTag'
+        changeLogCompareToRelease: 'lastFullRelease'
+        changeLogType: 'commitBased'
