@@ -72,6 +72,7 @@ stages:
         action: 'create'
         target: '$(Build.SourceVersion)'
         tagSource: 'gitTag'
+        tagPattern: 'devops-v1.*'
         changeLogCompareToRelease: 'lastFullRelease'
         changeLogType: 'commitBased'
 
