@@ -71,8 +71,8 @@ stages:
         repositoryName: 'Alagant/LibreClinica'
         action: 'create'
         target: '$(Build.SourceVersion)'
-        tagSource: 'gitTag'
-        tagPattern: 'devops-v1.*'
+        tagSource: 'userSpecifiedTag'
+        tag: '$(Build.BuildId)'
         changeLogCompareToRelease: 'lastFullRelease'
         changeLogType: 'commitBased'
 
