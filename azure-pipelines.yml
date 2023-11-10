@@ -74,14 +74,4 @@ stages:
         changeLogCompareToRelease: 'lastFullRelease'
         changeLogType: 'commitBased'
 
-    - task: Bash@3
-      displayName: Mostrar
-      inputs:
-       targetType: 'inline'
-       script: |
-        # Write your commands here
-        echo 'Hello world'
-        echo $LC_ROOT_USERNAME
-        echo $CONFLUENCE_SPACE_ID
-
 
