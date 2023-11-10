@@ -61,8 +61,7 @@ stages:
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
           ls -ltra libreclinica-qa/
-          docker-compose build --no-cache  -f libreclinica-qa/docker-compose.yml
-          docker-compose -f libreclinica-qa/docker-compose.yml up -d
+          docker-compose  -f libreclinica-qa/docker-compose.yml up --build -d
           echo 'Hello Test'
 
     - task: GitHubRelease@1
