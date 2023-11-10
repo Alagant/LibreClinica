@@ -61,6 +61,7 @@ stages:
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
           ls -ltra libreclinica-qa/
+          docker-compose build --no-cache  -f libreclinica-qa/docker-compose.yml
           docker-compose -f libreclinica-qa/docker-compose.yml up -d
           echo 'Hello Test'
 
@@ -75,14 +76,12 @@ stages:
         changeLogType: 'commitBased'
 
     - task: Bash@3
-      displayName: echo
+      displayName: Mostrar
       inputs:
        targetType: 'inline'
        script: |
         # Write your commands here
-      
         echo 'Hello world'
-      
         echo $LC_ROOT_USERNAME
         echo $CONFLUENCE_SPACE_ID
 
