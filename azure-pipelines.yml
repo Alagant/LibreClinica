@@ -61,8 +61,9 @@ stages:
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
           ls -ltra libreclinica-qa/
-          docker compose  -f libreclinica-qa/docker-compose.yml up --build -d
-          docker compose run /apps/entrypoint.sh
+          docker compose -f libreclinica-qa/docker-compose.yml up --build -d
+          echo 'dtrun'
+          docker compose -f libreclinica-qa/docker-compose.yml run /apps/entrypoint.sh
           echo 'Hello Test'
 
     - task: GitHubRelease@1
