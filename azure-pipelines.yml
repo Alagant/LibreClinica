@@ -48,11 +48,6 @@ stages:
           echo pwda
           pwd
           docker compose -f docker-compose.yml up --build
-          echo 'dtls'
-          pwd
-          docker compose -f libreclinica-qa/docker-compose.yml exec libreclinica-qa ls /
-          echo 'dtrun'
-          docker compose -f libreclinica-qa/docker-compose.yml exec libreclinica-qa /app/entrypoint.sh
           echo 'Hello Test'
 
     - task: Bash@3
