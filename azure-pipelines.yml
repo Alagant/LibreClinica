@@ -63,9 +63,9 @@ stages:
           ls -ltra libreclinica-qa/
           docker compose -f libreclinica-qa/docker-compose.yml up --build -d
           echo 'dtls'
-          docker compose exec -t libreclinica-qa ls /
+          docker compose exec libreclinica-qa ls /
           echo 'dtrun'
-          docker compose exec -t libreclinica-qa /app/entrypoint.sh
+          docker compose exec libreclinica-qa /app/entrypoint.sh
           echo 'Hello Test'
 
     - task: GitHubRelease@1
