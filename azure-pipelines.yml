@@ -36,24 +36,6 @@ stages:
 #        tags: '$(tag)'
 
     - task: Bash@3
-      displayName: Dockerless
-      inputs:
-        targetType: 'inline'
-        script: |
-          # 
-          git clone https://github.com/Alagant/libreclinica-qa.git
-          ls -ltra
-          ls -ltra libreclinica-qa/
-          python -m venv .venv
-          .venv/bin/python -mpip install --upgrade pip
-          .venv/bin/python -mpip install -r libreclinica-qa/requirements.txt
-          source .venv/bin/activate
-          cd libreclinica-qa/
-          pwd
-          python -m src.utils.commit_to_pdf $(Build.SourceVersion) $(Build.BuildId) $(Build.BuildNumber) $(Build.SourceVersionMessage)
-          #python -m upload_report
-
-    - task: Bash@3
       displayName: Test
       inputs:
         targetType: 'inline'
@@ -88,6 +70,25 @@ stages:
         #  docker service rm libreclinica
         #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
         #  docker service ps  libreclinica
+
+    - task: Bash@3
+      displayName: Dockerless
+      inputs:
+        targetType: 'inline'
+        script: |
+          # 
+          git clone https://github.com/Alagant/libreclinica-qa.git
+          ls -ltra
+          ls -ltra libreclinica-qa/
+          python -m venv .venv
+          .venv/bin/python -mpip install --upgrade pip
+          .venv/bin/python -mpip install -r libreclinica-qa/requirements.txt
+          source .venv/bin/activate
+          cd libreclinica-qa/
+          pwd
+          python -m src.utils.commit_to_pdf $(Build.SourceVersion) $(Build.BuildId) $(Build.BuildNumber) $(Build.SourceVersionMessage)
+          #python -m upload_report
+
 
     - task: GitHubRelease@1
       displayName: GitHub Release
