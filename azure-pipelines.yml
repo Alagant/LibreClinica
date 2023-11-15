@@ -51,7 +51,22 @@ stages:
         #  docker service rm libreclinica
         #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
         #  docker service ps  libreclinica
-           
+
+    - task: Bash@3
+      displayName: Dockerless
+      inputs:
+        targetType: 'inline'
+        script: |
+          # 
+          git clone https://github.com/Alagant/libreclinica-qa.git
+          ls -ltra
+          ls -ltra libreclinica-qa/
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r libreclinica-qa/requirements.txt
+          python libreclinica-qa/src/utils/commit_to_pdf.py
+          python libreclinica-qa/src/utils/report.py
+
     - task: Bash@3
       displayName: Test
       inputs:
@@ -61,11 +76,13 @@ stages:
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
           ls -ltra libreclinica-qa/
+          #cd libreclinica-qa/
           docker compose -f libreclinica-qa/docker-compose.yml up --build -d
           echo 'dtls'
-          docker compose exec libreclinica-qa ls /
+          pwd
+          docker compose -f libreclinica-qa/docker-compose.yml exec libreclinica-qa ls /
           echo 'dtrun'
-          docker compose exec libreclinica-qa /app/entrypoint.sh
+          docker compose -f libreclinica-qa/docker-compose.yml exec libreclinica-qa /app/entrypoint.sh
           echo 'Hello Test'
 
     - task: GitHubRelease@1
@@ -79,4 +96,13 @@ stages:
         tag: '$(Build.BuildId)'
         changeLogCompareToRelease: 'lastFullRelease'
         changeLogType: 'commitBased'
+
+    - task: Bash@3
+      displayName: Clean
+      inputs:
+        targetType: 'inline'
+        script: |
+          # 
+          rm -rf _work
+          rm -rf .venv
 
