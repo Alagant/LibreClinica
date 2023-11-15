@@ -67,7 +67,7 @@ stages:
     - task: GitHubRelease@1
       displayName: GitHub Release
       inputs:
-        gitHubConnection: 'zenithworks'
+        gitHubConnection: 'Lucioric2000'
         repositoryName: 'Alagant/LibreClinica'
         action: 'create'
         target: '$(Build.SourceVersion)'
