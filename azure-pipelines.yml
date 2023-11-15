@@ -54,22 +54,6 @@ stages:
           #python -m upload_report
 
     - task: Bash@3
-      displayName: DevOps
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Docker DevOps
-          docker build --no-cache --tag libreclinica:master .
-          docker rm -f libreclinica
-          docker run -d --name libreclinica -p 8183:8080 libreclinica:master
-          docker ps --filter name=libreclinica
-          echo 'Hello DevOps'
-          ls -ltra
-        #  docker service rm libreclinica
-        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
-        #  docker service ps  libreclinica
-
-    - task: Bash@3
       displayName: Test
       inputs:
         targetType: 'inline'
@@ -88,6 +72,22 @@ stages:
           echo 'dtrun'
           docker compose -f libreclinica-qa/docker-compose.yml exec libreclinica-qa /app/entrypoint.sh
           echo 'Hello Test'
+
+    - task: Bash@3
+      displayName: DevOps
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Docker DevOps
+          docker build --no-cache --tag libreclinica:master .
+          docker rm -f libreclinica
+          docker run -d --name libreclinica -p 8183:8080 libreclinica:master
+          docker ps --filter name=libreclinica
+          echo 'Hello DevOps'
+          ls -ltra
+        #  docker service rm libreclinica
+        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
+        #  docker service ps  libreclinica
 
     - task: GitHubRelease@1
       displayName: GitHub Release
