@@ -63,8 +63,8 @@ stages:
           ls -ltra libreclinica-qa/
           docker compose  -f libreclinica-qa/docker-compose.yml up --build -d
           echo 'Hello Test'
-          sudo apt-get install pandoc
-          sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+          python3 .github/workflows/pdfer.py "$(Build.BuildId)" "$(Build.SourceVersion)" "$(Build.SourceVersionMessage)" 
 
     - task: GitHubRelease@1
       displayName: GitHub Release
