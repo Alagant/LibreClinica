@@ -79,7 +79,7 @@ stages:
           ls -ltra
           ls -ltra libreclinica-qa/
           #cd libreclinica-qa/
-          docker compose -f libreclinica-qa/docker-compose.yml up --build -d
+          docker compose -f libreclinica-qa/docker-compose.yml up --build
           echo 'dtls'
           pwd
           docker compose -f libreclinica-qa/docker-compose.yml exec libreclinica-qa ls /
