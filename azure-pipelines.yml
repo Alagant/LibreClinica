@@ -63,6 +63,16 @@ stages:
           ls -ltra libreclinica-qa/
           docker compose  -f libreclinica-qa/docker-compose.yml up --build -d
           echo 'Hello Test'
+
+    - task: Bash@3
+      displayName: Create PDF with commit info and upload it to Confluence
+      inputs:
+        targetType: 'inline'
+        script: |
+          # 
+          git clone https://github.com/Alagant/libreclinica-qa.git
+          ls -ltra
+          ls -ltra libreclinica-qa/
           sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
           python3 libreclinica-qa/src/utils/commit_to_pdf.py "$(Build.BuildId)" "$(Build.SourceVersion)" "$(Build.SourceVersionMessage)" 
 
