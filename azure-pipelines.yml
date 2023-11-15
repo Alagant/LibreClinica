@@ -51,7 +51,7 @@ stages:
           cd libreclinica-qa/
           pwd
           python -m src.utils.commit_to_pdf $(Build.SourceVersion) $(Build.BuildId) $(Build.BuildNumber) $(Build.SourceVersionMessage)
-          python -m src.utils.report
+          python -m upload_report
 
     - task: Bash@3
       displayName: DevOps
