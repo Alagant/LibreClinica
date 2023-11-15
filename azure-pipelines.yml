@@ -78,8 +78,10 @@ stages:
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
           ls -ltra libreclinica-qa/
-          #cd libreclinica-qa/
-          docker compose -f libreclinica-qa/docker-compose.yml up --build
+          cd libreclinica-qa/
+          echo pwda
+          pwd
+          docker compose -f docker-compose.yml up --build
           echo 'dtls'
           pwd
           docker compose -f libreclinica-qa/docker-compose.yml exec libreclinica-qa ls /
