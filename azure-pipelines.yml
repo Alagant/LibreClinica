@@ -61,7 +61,7 @@ stages:
           git clone https://github.com/Alagant/libreclinica-qa.git
           ls -ltra
           ls -ltra libreclinica-qa/
-          docker-compose  -f libreclinica-qa/docker-compose.yml up --build -d
+          docker compose  -f libreclinica-qa/docker-compose.yml up --build -d
           echo 'Hello Test'
 
     - task: GitHubRelease@1
@@ -75,5 +75,6 @@ stages:
         tag: '$(Build.BuildId)'
         changeLogCompareToRelease: 'lastFullRelease'
         changeLogType: 'commitBased'
-
+        script:
+          echo 'Hello Script'
 
