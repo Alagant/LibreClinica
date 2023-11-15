@@ -35,6 +35,23 @@ stages:
 #        Dockerfile: '**/Dockerfile'
 #        tags: '$(tag)'
 
+    - task: Bash@3
+      displayName: Dockerless
+      inputs:
+        targetType: 'inline'
+        script: |
+          # 
+          git clone https://github.com/Alagant/libreclinica-qa.git
+          ls -ltra
+          ls -ltra libreclinica-qa/
+          python -m venv .venv
+          .venv/bin/python -mpip install --upgrade pip
+          .venv/bin/python -mpip install -r libreclinica-qa/requirements.txt
+          source .venv/bin/activate
+          cd libreclinica-qa/
+          pwd
+          python -m src.utils.commit_to_pdf
+          python -m src.utils.report
 
     - task: Bash@3
       displayName: DevOps
@@ -51,21 +68,6 @@ stages:
         #  docker service rm libreclinica
         #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
         #  docker service ps  libreclinica
-
-    - task: Bash@3
-      displayName: Dockerless
-      inputs:
-        targetType: 'inline'
-        script: |
-          # 
-          git clone https://github.com/Alagant/libreclinica-qa.git
-          ls -ltra
-          ls -ltra libreclinica-qa/
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install -r libreclinica-qa/requirements.txt
-          python libreclinica-qa/src/utils/commit_to_pdf.py
-          python libreclinica-qa/src/utils/report.py
 
     - task: Bash@3
       displayName: Test
