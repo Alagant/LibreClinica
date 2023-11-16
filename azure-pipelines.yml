@@ -45,10 +45,7 @@ stages:
           ls -ltra
           ls -ltra libreclinica-qa/
           cd libreclinica-qa/
-          echo pwda
-          pwd
           docker compose -f docker-compose.yml build
-          echo next
           docker compose -f docker-compose.yml up libreclinica-qa
           echo 'Hello Test'
       env:
