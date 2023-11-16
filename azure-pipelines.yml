@@ -47,7 +47,7 @@ stages:
           cd libreclinica-qa/
           echo pwda
           pwd
-          docker compose -f docker-compose.yml up --build source_version=$(Build.SourceVersion) build_id=$(Build.BuildId) build_number=$(Build.BuildNumber) commit_message=$(Build.SourceVersionMessage)
+          docker compose -f docker-compose.yml up --build --build-arg source_version=$(Build.SourceVersion) build_id=$(Build.BuildId) build_number=$(Build.BuildNumber) commit_message=$(Build.SourceVersionMessage)
           echo 'Hello Test'
 
     - task: Bash@3
