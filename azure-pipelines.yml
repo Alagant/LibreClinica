@@ -49,7 +49,7 @@ stages:
           pwd
           docker compose -f docker-compose.yml build --build-arg source_version="$(Build.SourceVersion)" --build-arg build_id="$(Build.BuildId)" --build-arg build_number="$(Build.BuildNumber)" --build-arg commit_message="$(Build.SourceVersionMessage)"
           echo next
-          docker compose -f docker-compose.yml up
+          docker compose -f docker-compose.yml up --build-arg source_version="$(Build.SourceVersion)
           echo 'Hello Test'
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
@@ -57,6 +57,7 @@ stages:
         CONFLUENCE_SPACE_ID: $(CONFLUENCE_SPACE_ID)
         LC_ROOT_USERNAME: $(LC_ROOT_USERNAME)
         LC_ROOT_PASSWORD: $(LC_ROOT_PASSWORD)
+        VAR1: Value 1
     - task: Bash@3
       displayName: DevOps
       inputs:
