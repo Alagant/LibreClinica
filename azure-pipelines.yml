@@ -49,7 +49,7 @@ stages:
           pwd
           docker compose -f docker-compose.yml build --build-arg source_version="$(Build.SourceVersion)" --build-arg build_id="$(Build.BuildId)" --build-arg build_number="$(Build.BuildNumber)" --build-arg commit_message="$(Build.SourceVersionMessage)"
           echo next
-          docker compose -f docker-compose.yml up --build-arg source_version="$(Build.SourceVersion)
+          docker compose -f docker-compose.yml up --build-arg source_version="$(Build.SourceVersion)"
           echo 'Hello Test'
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
