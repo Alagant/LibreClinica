@@ -47,7 +47,7 @@ stages:
           cd libreclinica-qa/
           echo pwda
           pwd
-          docker compose -f docker-compose.yml build --build-arg source_version="$(Build.SourceVersion)" --build-arg build_id="$(Build.BuildId)" --build-arg build_number="$(Build.BuildNumber)" --build-arg commit_message="$(Build.SourceVersionMessage)"
+          docker compose -f docker-compose.yml build
           echo next
           docker compose -f docker-compose.yml up
           echo 'Hello Test'
@@ -58,7 +58,10 @@ stages:
         CONFLUENCE_PAGEID: $(CONFLUENCE_PAGEID)
         LC_ROOT_USERNAME: $(LC_ROOT_USERNAME)
         LC_ROOT_PASSWORD: $(LC_ROOT_PASSWORD)
-        VAR1: Value 1
+        source_version: $(Build.SourceVersion)
+        build_id: $(Build.BuildId)
+        build_number: $(Build.BuildNumber)
+        commit_message: $(Build.SourceVersionMessage)
     - task: Bash@3
       displayName: DevOps
       inputs:
