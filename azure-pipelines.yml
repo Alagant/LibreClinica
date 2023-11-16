@@ -48,6 +48,7 @@ stages:
           echo pwda
           pwd
           docker compose -f docker-compose.yml build --build-arg source_version=$(Build.SourceVersion) build_id=$(Build.BuildId) build_number=$(Build.BuildNumber) commit_message=$(Build.SourceVersionMessage)
+          echo next
           docker compose -f docker-compose.yml up
           echo 'Hello Test'
 
