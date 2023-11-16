@@ -51,7 +51,12 @@ stages:
           echo next
           docker compose -f docker-compose.yml up
           echo 'Hello Test'
-
+      env:
+        CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
+        CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
+        CONFLUENCE_SPACE_ID: $(CONFLUENCE_SPACE_ID)
+        LC_ROOT_USERNAME: $(LC_ROOT_USERNAME)
+        LC_ROOT_PASSWORD: $(LC_ROOT_PASSWORD)
     - task: Bash@3
       displayName: DevOps
       inputs:
@@ -107,10 +112,3 @@ stages:
           # 
           rm -rf _work
           rm -rf .venv
-
-  env:
-    CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
-    CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
-    CONFLUENCE_SPACE_ID: $(CONFLUENCE_SPACE_ID)
-    LC_ROOT_USERNAME: $(LC_ROOT_USERNAME)
-    LC_ROOT_PASSWORD: $(LC_ROOT_PASSWORD)
