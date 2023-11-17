@@ -36,7 +36,7 @@ stages:
 #        tags: '$(tag)'
 
     - task: Bash@3
-      displayName: Test
+      displayName: Test and report commit message
       inputs:
         targetType: 'inline'
         script: |
@@ -52,7 +52,7 @@ stages:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
         CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
         CONFLUENCE_SPACE_ID: $(CONFLUENCE_SPACE_ID)
-        CONFLUENCE_PAGEID: $(CONFLUENCE_PAGEID)
+        CONFLUENCE_PAGE_ID: $(CONFLUENCE_PAGE_ID)
         LC_ROOT_USERNAME: $(LC_ROOT_USERNAME)
         LC_ROOT_PASSWORD: $(LC_ROOT_PASSWORD)
         source_version: $(Build.SourceVersion)
