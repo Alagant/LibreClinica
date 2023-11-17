@@ -9,7 +9,7 @@ trigger:
 - master
 
 pool:
-  name: Default
+  name: lucioric
 
 resources:
 - repo: self
