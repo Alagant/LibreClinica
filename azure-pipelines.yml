@@ -75,14 +75,14 @@ stages:
         #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
         #  docker service ps  libreclinica
 
-    #- task: GitHubRelease@1
-    #  displayName: GitHub Release
-    #  inputs:
-    #    gitHubConnection: 'Alagant'
-    #    repositoryName: 'Alagant/LibreClinica'
-    #    action: 'create'
-    #    target: '$(Build.SourceVersion)'
-    #    tagSource: 'userSpecifiedTag'
-    #    tag: '$(Build.BuildId)'
-    #    changeLogCompareToRelease: 'lastFullRelease'
-    #    changeLogType: 'commitBased'
+    - task: GitHubRelease@1
+      displayName: GitHub Release
+      inputs:
+        gitHubConnection: 'Alagant'
+        repositoryName: 'Alagant/LibreClinica'
+        action: 'create'
+        target: '$(Build.SourceVersion)'
+        tagSource: 'userSpecifiedTag'
+        tag: '$(Build.BuildId)'
+        changeLogCompareToRelease: 'lastFullRelease'
+        changeLogType: 'commitBased'
