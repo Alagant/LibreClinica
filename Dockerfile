@@ -19,7 +19,7 @@ COPY datainfo.properties /usr/local/tomcat/libreclinica.config/datainfo.properti
 COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.2.0.war  /usr/local/tomcat/webapps/LibreClinica.war
 RUN find /usr/local/tomcat/webapps/ -type f -name "*.war"
 ###
-#COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 #COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
 
 
