@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 
-
 <!--
 <role rolename="manager-gui"/>
 <user username="huezo" password="huezo" roles="manager-gui"/>
@@ -22,6 +21,9 @@
   limitations under the License.
 -->
 <tomcat-users>
+    <role rolename="manager-gui"/>
+    <role rolename="admin-gui"/>
+    <role rolename="standard"/>
     <user name="tomcat" password="s3cret" roles="admin-gui,standard,manager-gui"/>
 <!--
   NOTE:  By default, no user is included in the "manager-gui" role required
