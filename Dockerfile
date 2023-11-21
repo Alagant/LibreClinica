@@ -17,7 +17,7 @@ MAINTAINER   Victor H. <huezohuezo.1990@gmail.com>
 WORKDIR /libreclinica
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
-COPY datainfo.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
+COPY datainfo_docker.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 # /LibreClinica/
 COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.2.0.war  /usr/local/tomcat/webapps/LibreClinica.war
 RUN find /usr/local/tomcat/webapps/ -type f -name "*.war"
