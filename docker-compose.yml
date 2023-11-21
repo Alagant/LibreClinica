@@ -1,9 +1,14 @@
+version: '3.9'
 services:
   postgres:
     build:
       context: .
       dockerfile: Dockerfile_postgres
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
     env_file: .env
+    #environment:
+    #  POSTGRES_PASSWORD: libreclinica
     ports:
       - 5432:5432
   test:
@@ -15,3 +20,5 @@ services:
       - postgres
 volumes:
     libreclinica:
+networks:
+  default:
