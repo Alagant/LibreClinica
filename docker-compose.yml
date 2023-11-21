@@ -1,9 +1,10 @@
 version: '3.9'
 services:
   postgres:
-    build:
-      context: .
-      dockerfile: Dockerfile_postgres
+    image: postgres:14-alpine
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile_postgres
     volumes:
       - ~/apps/postgres:/var/lib/postgresql/data
     env_file: .env
@@ -11,13 +12,13 @@ services:
     #  POSTGRES_PASSWORD: libreclinica
     ports:
       - 5432:5432
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile_test
-    env_file: .env
-    depends_on:
-      - postgres
+  #test:
+  #  build:
+  #    context: .
+  #    dockerfile: Dockerfile_test
+  #  env_file: .env
+  #  depends_on:
+  #    - postgres
 volumes:
     libreclinica:
 networks:
