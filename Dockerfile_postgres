@@ -1,5 +1,5 @@
 FROM postgres:11
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
-ENTRYPOINT psql -U libreclinica -c "CREATE ROLE clinica LOGIN ENCRYPTED PASSWORD 'clinica' SUPERUSER NOINHERIT NOCREATEDB NOCREATEROLE; CREATE DATABASE libreclinica WITH ENCODING='UTF8' OWNER=clinica;"
+#ENTRYPOINT psql -U libreclinica -c "CREATE ROLE clinica LOGIN ENCRYPTED PASSWORD 'clinica' SUPERUSER NOINHERIT NOCREATEDB NOCREATEROLE; CREATE DATABASE libreclinica WITH ENCODING='UTF8' OWNER=clinica;"
 

@@ -3,10 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_postgres
-    environment: 
-      POSTGRES_PASSWORD: libreclinica
-      POSTGRES_USER: libreclinica
-      POSTGRES_DB: libreclinica
+    env_file: .env
+
   libreclinica:
     build:
       context: .
@@ -15,15 +13,19 @@ services:
     #  - 8484:8080
     depends_on:
       - postgres
-    environment:
-      POSTGRES_PASSWORD: libreclinica
-      POSTGRES_USER: libreclinica
-      POSTGRES_DB: libreclinica
+    env_file: .env
+    volumes:
+      - libreclinica:/libreclinica
   tomcat:
     build:
       context: .
       dockerfile: Dockerfile_tomcat
+    env_file: .env
     ports:
       - 8485:8080
     depends_on:
       - libreclinica
+    volumes:
+      - libreclinica:/libreclinica
+volumes:
+    libreclinica:

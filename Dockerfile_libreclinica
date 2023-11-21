@@ -1,6 +1,6 @@
-FROM maven:3.5.0-jdk-8 as builder
-LABEL maintainer="Victor H. <huezohuezo.1990@gmail.com>"
-MAINTAINER   Victor H. <huezohuezo.1990@gmail.com>
+FROM maven:3.5.0-jdk-8
+LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
+MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 WORKDIR /libreclinica
 COPY . .
 COPY pom.xml .
