@@ -22,9 +22,7 @@
 -->
 <tomcat-users>
     <role rolename="manager-gui"/>
-    <role rolename="admin-gui"/>
-    <role rolename="standard"/>
-    <user name="tomcat" password="s3cret" roles="admin-gui,standard,manager-gui"/>
+    <user name="tomcat" password="s3cret" roles="manager-gui"/>
 <!--
   NOTE:  By default, no user is included in the "manager-gui" role required
   to operate the "/manager/html" web application.  If you wish to use this app,
