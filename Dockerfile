@@ -25,4 +25,3 @@ RUN find /usr/local/tomcat/webapps/ -type f -name "*.war"
 COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 COPY docker/manager_context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
 #COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
-
