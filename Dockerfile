@@ -4,6 +4,9 @@ MAINTAINER   Victor H. <huezohuezo.1990@gmail.com>
 WORKDIR /libreclinica
 COPY . .
 COPY pom.xml .
+COPY logging.properties /libreclinica/web/src/main/resources/logging.properties
+COPY logging.properties /libreclinica/ws/src/main/resources/logging.properties
+COPY logging.properties /libreclinica/ws/src/core/resources/logging.properties
 RUN mvn clean install
 RUN find /libreclinica -type f -name "*.war"
 # RUN mvn clean install  sonar:sonar -Dsonar.host.url=http://20.115.71.236:8182/ -Dsonar.login=squ_07b2feeb980836a23bd8924dbf69b2304143370e -Dsonar.projectKey=libreclinica -Dsonar.projectName=libreclinica -Dsonar.projectVersion=1.0

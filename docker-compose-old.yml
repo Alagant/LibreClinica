@@ -1,0 +1,31 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile_postgres
+    env_file: .env
+
+  libreclinica:
+    build:
+      context: .
+      dockerfile: Dockerfile_libreclinica
+    #ports:
+    #  - 8484:8080
+    depends_on:
+      - postgres
+    env_file: .env
+    volumes:
+      - libreclinica:/libreclinica
+  tomcat:
+    build:
+      context: .
+      dockerfile: Dockerfile_tomcat
+    env_file: .env
+    ports:
+      - 8485:8080
+    depends_on:
+      - libreclinica
+    volumes:
+      - libreclinica:/libreclinica
+volumes:
+    libreclinica:
