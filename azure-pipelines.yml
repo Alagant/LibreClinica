@@ -71,6 +71,7 @@ stages:
           #docker ps --filter name=libreclinica
           docker compose down
           docker compose up -d
+          docker ps -a
           echo 'Hello DevOps'
           ls -ltra
         #  docker service rm libreclinica
