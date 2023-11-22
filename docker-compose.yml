@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8485:8080
+      - 8484:8080
     depends_on:
       - postgres
     env_file: .env
