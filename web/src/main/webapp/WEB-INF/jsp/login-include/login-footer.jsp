@@ -17,9 +17,10 @@
                  <a href="${pageContext.request.contextPath}/Contact"><fmt:message key="contact" bundle="${resword}"/></a>
                 </td>
                 <td class="footer_middle" >
+                <fmt:message key="test.message" bundle="${licensing}"/>
 				<fmt:message key="footer.license.1" bundle="${licensing}"/>
-               <fmt:message key="footer.license.2" bundle="${licensing}"/>
-			   <fmt:message key="footer.license.3" bundle="${licensing}"/></td>
+                <fmt:message key="footer.license.2" bundle="${licensing}"/>
+			    <fmt:message key="footer.license.3" bundle="${licensing}"/></td>
 
                 <td  class="footer_right">
                     <c:set var="tooltip"><fmt:message key="footer.tooltip" bundle="${licensing}"/></c:set>
