@@ -69,6 +69,7 @@ stages:
           #docker rm -f libreclinica
           #docker run -d --name libreclinica -p 8183:8080 libreclinica:master
           #docker ps --filter name=libreclinica
+          docker compose down
           docker compose up -d
           echo 'Hello DevOps'
           ls -ltra
