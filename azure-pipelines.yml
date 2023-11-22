@@ -9,7 +9,7 @@ trigger:
 - master
 
 pool:
-  name: lucioric
+  name: Libreclinica
 
 resources:
 - repo: self
