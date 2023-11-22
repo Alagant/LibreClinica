@@ -34,6 +34,18 @@ stages:
 #        command: 'build'
 #        Dockerfile: '**/Dockerfile'
 #        tags: '$(tag)'
+    - task: Bash@3
+      displayName: Clean the docker environment
+      inputs:
+        targetType: 'inline'
+        script: |
+          docker compose down
+          docker container stop $(docker container ls -aq)
+          docker container prune -f
+          docker image prune -f
+          docker volume prune -f
+          docker network prune -f
+          docker system prune -af
 
     - task: Bash@3
       displayName: Test and report commit message
@@ -69,13 +81,6 @@ stages:
           #docker rm -f libreclinica
           #docker run -d --name libreclinica -p 8183:8080 libreclinica:master
           #docker ps --filter name=libreclinica
-          docker compose down
-          docker container stop $(docker container ls -aq)
-          docker container prune -f
-          docker image prune -f
-          docker volume prune -f
-          docker network prune -f
-          docker system prune -af
           docker compose build
           docker compose up -d
           docker ps -a
