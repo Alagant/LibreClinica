@@ -9,7 +9,7 @@ trigger:
 - master
 
 pool:
-  name: lucioric
+  name: Libreclinica
 
 resources:
 - repo: self
@@ -69,7 +69,9 @@ stages:
           #docker rm -f libreclinica
           #docker run -d --name libreclinica -p 8183:8080 libreclinica:master
           #docker ps --filter name=libreclinica
-          docker compose up
+          docker compose down
+          docker compose up -d
+          docker ps -a
           echo 'Hello DevOps'
           ls -ltra
         #  docker service rm libreclinica
