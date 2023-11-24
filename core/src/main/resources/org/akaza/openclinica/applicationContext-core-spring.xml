@@ -30,6 +30,7 @@
         <property name="dataInfo" ref="dataInfo"/>
         <property name="extractInfo" ref="extractInfo"/>
         <!--  <property name="messageSource" ref="messageSource"/> -->
+        <constructor-arg ref="dataInfo"/>
     </bean>
 
 
