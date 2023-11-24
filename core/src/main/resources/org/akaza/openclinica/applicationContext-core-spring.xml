@@ -30,6 +30,7 @@
         <property name="dataInfo" ref="dataInfo"/>
         <property name="extractInfo" ref="extractInfo"/>
         <!--  <property name="messageSource" ref="messageSource"/> -->
+        <constructor-arg ref="dataInfo"/>
     </bean>
 
 
@@ -55,6 +56,7 @@
     </bean>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="classpath:org/akaza/openclinica/datainfo.properties"
           p:placeholderPrefix="s["
           p:placeholderSuffix="]"
     >

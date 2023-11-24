@@ -82,10 +82,11 @@ public class CoreResources implements ResourceLoaderAware {
     public CoreResources(Properties dataInfoProps) throws IOException {
         this.dataInfo = dataInfoProps;
         if (resourceLoader == null) {
-            resourceLoader = new DefaultResourceLoader();
+            this.setResourceLoader(new DefaultResourceLoader());
+            //the above function sets the webapp instance variable
+        } else {
+            webapp = getWebAppName(resourceLoader.getResource("/").getURI().getPath());
         }
-        
-        webapp = getWebAppName(resourceLoader.getResource("/").getURI().getPath());
     }
 
     public Properties getPropValues(Properties prop, String propFileName) throws IOException {
@@ -112,8 +113,8 @@ public class CoreResources implements ResourceLoaderAware {
             String dataInfoPropFileName = filePath + "/datainfo.properties";
             String extractPropFileName = filePath + "/extract.properties";
 
-            Properties OC_dataDataInfoProperties = getPropValues(dataInfoProp, dataInfoPropFileName);
-            Properties OC_dataExtractProperties = getPropValues(extractProp, extractPropFileName);
+            Properties OC_dataDataInfoProperties = getPropValues(dataInfo, dataInfoPropFileName);
+            Properties OC_dataExtractProperties = getPropValues(extractInfo, extractPropFileName);
 
             if (OC_dataDataInfoProperties != null)
                 dataInfo = OC_dataDataInfoProperties;
@@ -143,8 +144,8 @@ public class CoreResources implements ResourceLoaderAware {
             String dataInfoPropFileName = filePath + "/datainfo.properties";
             String extractPropFileName = filePath + "/extract.properties";
 
-            Properties OC_dataDataInfoProperties = getPropValues(dataInfoProp, dataInfoPropFileName);
-            Properties OC_dataExtractProperties = getPropValues(extractProp, extractPropFileName);
+            Properties OC_dataDataInfoProperties = getPropValues(dataInfo, dataInfoPropFileName);
+            Properties OC_dataExtractProperties = getPropValues(extractInfo, extractPropFileName);
 
             if (OC_dataDataInfoProperties != null)
                 dataInfo = OC_dataDataInfoProperties;
