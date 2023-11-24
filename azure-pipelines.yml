@@ -48,6 +48,21 @@ stages:
           docker system prune -af
 
     - task: Bash@3
+      displayName: DevOps
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Docker DevOps
+          docker compose build
+          docker compose up -d
+          docker ps -a
+          echo 'Hello DevOps'
+          ls -ltra
+        #  docker service rm libreclinica
+        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
+        #  docker service ps  libreclinica
+
+    - task: Bash@3
       displayName: Test and report commit message
       inputs:
         targetType: 'inline'
@@ -71,20 +86,6 @@ stages:
         build_id: $(Build.BuildId)
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
-    - task: Bash@3
-      displayName: DevOps
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Docker DevOps
-          docker compose build
-          docker compose up -d
-          docker ps -a
-          echo 'Hello DevOps'
-          ls -ltra
-        #  docker service rm libreclinica
-        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
-        #  docker service ps  libreclinica
 
     #- task: GitHubRelease@1
     #  displayName: GitHub Release
