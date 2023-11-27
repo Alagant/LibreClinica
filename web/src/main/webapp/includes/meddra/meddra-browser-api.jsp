@@ -27,7 +27,7 @@
 <div class="container ">
     <div class="row">
         <div class="col-md-12" style="text-align: center;">
-            <h1><fmt:message key='form_title' bundle='${meddra}'/></h1>
+            <h2><fmt:message key='form_title' bundle='${meddra}'/></h2>
         </div>
     </div>
     <div class="row">
