@@ -1,9 +1,5 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-# https://github.com/huezo
-# Victor H. <huezohuezo.1990@gmail.com>
-# Victor H. <huezohuezo.1990@gmail.com>
+# This pipeline is used to reset the docker environment
+
 
 trigger:
 - master
@@ -41,11 +37,11 @@ stages:
         script: |
           docker compose down
           docker container stop $(docker container ls -aq)
-          # docker container prune -f
-          # docker image prune -f
-          # docker volume prune -f
-          # docker network prune -f
-          # docker system prune -af
+          docker container prune -f
+          docker image prune -f
+          docker volume prune -f
+          docker network prune -f
+          docker system prune -af
 
     - task: Bash@3
       displayName: DevOps
@@ -53,7 +49,7 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          docker compose build libreclinica
+          docker compose build
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
