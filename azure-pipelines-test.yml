@@ -1,0 +1,99 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# https://github.com/huezo
+# Victor H. <huezohuezo.1990@gmail.com>
+# Victor H. <huezohuezo.1990@gmail.com>
+
+trigger:
+  branches:
+    exclude:
+      - master
+
+pool:
+  name: Libreclinica
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: DevOps
+  displayName: Docker image
+  jobs:
+  - job: DevOps
+    displayName: DevOps
+#    pool:
+#      vmImage: ubuntu-latest
+#    pool:
+#      name: Default
+    steps:
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: 'build'
+#        Dockerfile: '**/Dockerfile'
+#        tags: '$(tag)'
+    - task: Bash@3
+      displayName: Clean the docker environment
+      inputs:
+        targetType: 'inline'
+        script: |
+          docker compose -f docker-compose-test.yml down libreclinica_test
+          #docker container stop $(docker container ls -aq)
+
+    - task: Bash@3
+      displayName: DevOps
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Docker DevOps
+          docker compose -f docker-compose-test.yml build libreclinica_test
+          docker compose -f docker-compose-test.yml up -d
+          docker ps -a
+          echo 'Hello DevOps'
+          ls -ltra
+        #  docker service rm libreclinica
+        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
+        #  docker service ps  libreclinica
+
+    - task: Bash@3
+      displayName: Test and report commit message
+      inputs:
+        targetType: 'inline'
+        script: |
+          # 
+          git clone https://github.com/Alagant/libreclinica-qa.git
+          ls -ltra
+          ls -ltra libreclinica-qa/
+          cd libreclinica-qa/
+          docker compose -f docker-compose.yml build
+          docker compose -f docker-compose.yml up libreclinica-qa
+      # Change the comment text here to test a new commit.
+      env:
+        CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
+        CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
+        CONFLUENCE_SPACE_ID: $(CONFLUENCE_SPACE_ID)
+        CONFLUENCE_PAGE_ID: $(CONFLUENCE_PAGE_ID)
+        LC_ROOT_USERNAME: $(LC_ROOT_USERNAME)
+        LC_ROOT_PASSWORD: $(LC_ROOT_PASSWORD)
+        source_version: $(Build.SourceVersion)
+        build_id: $(Build.BuildId)
+        build_number: $(Build.BuildNumber)
+        commit_message: $(Build.SourceVersionMessage)
+        BEHAVE_STAGE: qa
+
+    #- task: GitHubRelease@1
+    #  displayName: GitHub Release
+    #  inputs:
+    #    gitHubConnection: 'Alagant'
+    #    repositoryName: 'Alagant/LibreClinica'
+    #    action: 'create'
+    #    target: '$(Build.SourceVersion)'
+    #    tagSource: 'userSpecifiedTag'
+    #    tag: '$(Build.BuildId)'
+    #    changeLogCompareToRelease: 'lastFullRelease'
+    #    changeLogType: 'commitBased'
+
