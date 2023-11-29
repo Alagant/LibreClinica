@@ -11,7 +11,7 @@ trigger:
       - master
 
 pool:
-  name: Libreclinica_test
+  name: Libreclinica
 
 resources:
 - repo: self
