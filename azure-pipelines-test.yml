@@ -6,10 +6,12 @@
 # Victor H. <huezohuezo.1990@gmail.com>
 
 trigger:
-- master
+  - branches:
+      exclude:
+        - master
 
 pool:
-  name: Libreclinica
+  name: Libreclinica_test
 
 resources:
 - repo: self
@@ -39,7 +41,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker compose down
+          docker compose down -f docker-compose-test.yml
           docker container stop $(docker container ls -aq)
 
     - task: Bash@3
@@ -48,8 +50,8 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          docker compose build libreclinica
-          docker compose up -d
+          docker compose build libreclinica_test -f docker-compose-test.yml
+          docker compose up -d -f docker-compose-test.yml
           docker ps -a
           echo 'Hello DevOps'
           ls -ltra
@@ -68,8 +70,8 @@ stages:
           ls -ltra libreclinica-qa/
           cd libreclinica-qa/
           docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa
-      # Change the comment text here to test a new commit. Test nov 17 2023 b.
+          docker compose -f docker-compose.yml up libreclinica-qa -e BEHAVE_STAGE=qa
+      # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
         CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
