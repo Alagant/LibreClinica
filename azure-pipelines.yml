@@ -40,7 +40,7 @@ stages:
         targetType: 'inline'
         script: |
           docker compose down
-          docker container stop $(docker container ls -aq)
+          docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
     - task: Bash@3
       displayName: DevOps
