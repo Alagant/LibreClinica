@@ -42,7 +42,7 @@ stages:
         targetType: 'inline'
         script: |
           docker compose -f docker-compose-test.yml down libreclinica_test
-          #docker container stop $(docker container ls -aq)
+          #docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
     - task: Bash@3
       displayName: DevOps
