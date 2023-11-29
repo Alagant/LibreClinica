@@ -82,6 +82,7 @@ stages:
         build_id: $(Build.BuildId)
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
+        branch: $(Build.SourceBranchName)
 
     #- task: GitHubRelease@1
     #  displayName: GitHub Release

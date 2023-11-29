@@ -83,6 +83,7 @@ stages:
         build_id: $(Build.BuildId)
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
+        branch: $(Build.SourceBranchName)
         BEHAVE_STAGE: qa
 
     #- task: GitHubRelease@1

@@ -153,17 +153,11 @@ deployment to configured Tomcat should take place. However, the first
 start of application will fail with deployment error due to missing
 config files.
 
-You need to create `libreclinica.config` folder in the folder where you
-installed the Tomcat (TOMCAT\_HOME). Locate the deployed LibreClinica in
-the *webapps* folder of your Tomcat and copy the *datainfo.properties*
-template file from there.
+You need to edit the `datainfo.properties` file in the folder core/src/main/resources/org/akaza/openclinica
+to point to your database on developer machine. The usual configuration follows:
 
 ``` {.sourceCode .bash}
-cp TOMCAT_HOME/webapps/LibreClinica/WEB-INF/classes/datainfo.properties TOMCAT_HOME/libreclinica.config/
-```
-
-You will need to edit this file to point to your database on developer
-machine. The usual configuration follows:
+template file from there.
 
 ``` {.sourceCode .bash}
 dbType=postgres

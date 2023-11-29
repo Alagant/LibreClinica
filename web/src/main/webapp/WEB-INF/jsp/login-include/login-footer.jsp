@@ -39,7 +39,10 @@
                     </c:choose>
 					</div>
 
-					<div  id="version"></div><fmt:message key="Version_release" bundle="${licensing}"/> Change tag: <fmt:message key="test.message" bundle="${licensing}"/></div>
+					<div  id="version">
+                        <fmt:message key="Version_release" bundle="${licensing}"/> Change tag: <fmt:message key="test.message" bundle="${licensing}"/>
+                        <fmt:message key="Branch" bundle="${licensing}"/> Branch: <fmt:message key="${Build.SourceBranch}:${branch}" bundle="${licensing}"/>
+                    </div>
 
                 </td>
             </tr>
