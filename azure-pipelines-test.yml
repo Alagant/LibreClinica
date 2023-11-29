@@ -70,7 +70,7 @@ stages:
           ls -ltra libreclinica-qa/
           cd libreclinica-qa/
           docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa -e BEHAVE_STAGE=qa
+          docker compose -f docker-compose.yml up libreclinica-qa
       # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
@@ -83,6 +83,7 @@ stages:
         build_id: $(Build.BuildId)
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
+        BEHAVE_STAGE: qa
 
     #- task: GitHubRelease@1
     #  displayName: GitHub Release
