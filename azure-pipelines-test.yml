@@ -41,7 +41,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker compose down libreclinica_test -f docker-compose-test.yml
+          docker compose down -f docker-compose-test.yml libreclinica_test
           #docker container stop $(docker container ls -aq)
 
     - task: Bash@3
@@ -50,7 +50,7 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          docker compose build -f docker-compose-test.yml libreclinica_test
+          docker compose -f docker-compose-test.yml build libreclinica_test
           docker compose -f docker-compose-test.yml up -d
           docker ps -a
           echo 'Hello DevOps'
