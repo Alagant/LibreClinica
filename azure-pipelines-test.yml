@@ -6,9 +6,9 @@
 # Victor H. <huezohuezo.1990@gmail.com>
 
 trigger:
-  - branches:
-      exclude:
-        - master
+  branches:
+    exclude:
+      - master
 
 pool:
   name: Libreclinica_test
