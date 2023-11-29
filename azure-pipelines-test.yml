@@ -41,7 +41,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker compose down -f docker-compose-test.yml libreclinica_test
+          docker compose -f docker-compose-test.yml down libreclinica_test
           #docker container stop $(docker container ls -aq)
 
     - task: Bash@3
