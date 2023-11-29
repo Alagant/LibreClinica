@@ -5,8 +5,8 @@
 # Victor H. <huezohuezo.1990@gmail.com>
 # Victor H. <huezohuezo.1990@gmail.com>
 
-trigger:
-- master
+#trigger:
+#- master
 
 pool:
   name: Libreclinica
@@ -39,7 +39,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker compose down
+          docker compose down -f docker-compose-test.yml
           docker container stop $(docker container ls -aq)
 
     - task: Bash@3
