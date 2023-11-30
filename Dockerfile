@@ -7,6 +7,7 @@ COPY . .
 #COPY docker/logging.properties /libreclinica/ws/src/main/resources/logging.properties
 #COPY docker/logging.properties /libreclinica/ws/src/core/resources/logging.properties
 COPY docker/datainfo_docker.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
+COPY docker/datainfo_docker.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 RUN mvn clean install
 RUN find /libreclinica -type f -name "*.war"
 # RUN mvn clean install  sonar:sonar -Dsonar.host.url=http://20.115.71.236:8182/ -Dsonar.login=squ_07b2feeb980836a23bd8924dbf69b2304143370e -Dsonar.projectKey=libreclinica -Dsonar.projectName=libreclinica -Dsonar.projectVersion=1.0
