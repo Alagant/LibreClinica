@@ -3,9 +3,6 @@ LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 WORKDIR /libreclinica
 COPY . .
-#COPY docker/logging.properties /libreclinica/web/src/main/resources/logging.properties
-#COPY docker/logging.properties /libreclinica/ws/src/main/resources/logging.properties
-#COPY docker/logging.properties /libreclinica/ws/src/core/resources/logging.properties
 COPY docker/datainfo_docker.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 RUN mvn clean install
@@ -18,7 +15,7 @@ MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 WORKDIR /libreclinica
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
-#COPY docker/datainfo_docker.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
+COPY docker/datainfo_docker.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 # /LibreClinica/
 COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.2.0.war  /usr/local/tomcat/webapps/LibreClinica.war
 RUN find /usr/local/tomcat/webapps/ -type f -name "*.war"
