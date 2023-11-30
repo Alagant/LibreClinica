@@ -21,5 +21,17 @@ services:
     env_file: .env
     volumes:
       - libreclinica:/libreclinica
+
+  flask:
+    build:
+      context: libreclinica_drug_trial_module/
+      dockerfile: Dockerfile
+    ports:
+      - 81:81
+    depends_on:
+      - postgres
+    env_file: .env
+    #volumes:
+    #  - libreclinica:/libreclinica
 volumes:
   libreclinica:
