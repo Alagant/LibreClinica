@@ -442,6 +442,7 @@ public class CoreResources implements ResourceLoaderAware {
             url = StringUtils.replace(url, "jdbc:", "jdbc:log4jdbc:");
         }
         DATAINFO.setProperty("dataBase", database);
+        System.out.println("dataUrl: "+url);
         DATAINFO.setProperty("url", url);
         DATAINFO.setProperty("hibernate.dialect", hibernateDialect);
         DATAINFO.setProperty("driver", driver);
