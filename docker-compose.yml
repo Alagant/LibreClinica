@@ -8,14 +8,14 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8070:8080
+      - "8070:8080"
 
   libreclinica:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8485:8080
+      - "8485:8080"
     depends_on:
       - postgres
     env_file: .env
@@ -27,7 +27,7 @@ services:
       context: libreclinica_drug_trial_module/
       dockerfile: Dockerfile
     ports:
-      - 81:81
+      - "81:81"
     depends_on:
       - postgres
     env_file: .env
