@@ -1,8 +1,7 @@
 # This pipeline is used to reset the docker environment
 
 
-#trigger:
-#- master
+trigger: none #Disable automatic build
 
 pool:
   name: Libreclinica
