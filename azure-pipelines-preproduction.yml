@@ -80,6 +80,8 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
+          echo "we are now at $(Build.SourceVersion)"
+          pwd
           cd libreclinica-qa/
           docker compose -f -f docker-compose-no-DMM.yml build
           docker compose -f -f docker-compose-no-DMM.yml up libreclinica-qa
