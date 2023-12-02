@@ -11,7 +11,7 @@ resources:
     - repository: LcRepo
       type: github
       endpoint: Alagant
-      name: Alagant/Libreclinica
+      name: Alagant/LibreClinica
       ref: refs/heads/lc-release-1.2.1
     - repository: LcQA
       type: github
@@ -81,6 +81,10 @@ stages:
         targetType: 'inline'
         script: |
           echo "we are now at $(Build.SourceVersion)"
+          pwd
+          ls -ltra
+          cd LibreClinica
+          echo "now at LibreCliinca"
           pwd
           ls -ltra
           cd libreclinica-qa/
