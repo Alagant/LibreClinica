@@ -17,9 +17,9 @@ WORKDIR /libreclinica
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
 COPY docker/datainfo_docker.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 # /LibreClinica/
-COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.2.0.war  /usr/local/tomcat/webapps/LibreClinica.war
+COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.2.1.war  /usr/local/tomcat/webapps/LibreClinica.war
 RUN find /usr/local/tomcat/webapps/ -type f -name "*.war"
 ###
 COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 COPY docker/manager_context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
-#COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.0.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.0.war
+#COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.1.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.1.war
