@@ -18,11 +18,11 @@ resources:
       endpoint: Alagant
       name: Alagant/libreclinica-qa
       ref: refs/heads/main
-    - repository: LcDRM
-      type: github
-      endpoint: Alagant
-      name: Alagant/libreclinica_drug_trial_module
-      ref: refs/heads/main
+    #- repository: LcDRM
+    #  type: github
+    #  endpoint: Alagant
+    #  name: Alagant/libreclinica_drug_trial_module
+    #  ref: refs/heads/main
 variables:
   tag: '$(Build.BuildId)'
 
