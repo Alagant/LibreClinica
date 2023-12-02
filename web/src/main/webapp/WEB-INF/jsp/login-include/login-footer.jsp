@@ -17,7 +17,6 @@
                  <a href="${pageContext.request.contextPath}/Contact"><fmt:message key="contact" bundle="${resword}"/></a>
                 </td>
                 <td class="footer_middle" >
-                <fmt:message key="test.message" bundle="${licensing}"/>
 				<fmt:message key="footer.license.1" bundle="${licensing}"/>
                 <fmt:message key="footer.license.2" bundle="${licensing}"/>
 			    <fmt:message key="footer.license.3" bundle="${licensing}"/></td>
@@ -40,7 +39,11 @@
                     </c:choose>
 					</div>
 
-					<div  id="version"></div><fmt:message key="Version_release" bundle="${licensing}"/> </div>
+					<div  id="version">
+                        <fmt:message key="Version_release" bundle="${licensing}"/> Change tag: <fmt:message key="test.message" bundle="${licensing}"/>
+                        <fmt:message key="DBHost" bundle="${licensing}"/> Database host: <fmt:message key="dbh ${dbHost}" bundle="${licensing}"/>
+                        <fmt:message key="Branch" bundle="${licensing}"/> Branch: <fmt:message key="${Build.SourceBranch}:${branch}" bundle="${licensing}"/>
+                    </div>
 
                 </td>
             </tr>

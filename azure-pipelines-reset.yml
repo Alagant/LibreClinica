@@ -1,12 +1,8 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-# https://github.com/huezo
-# Victor H. <huezohuezo.1990@gmail.com>
-# Victor H. <huezohuezo.1990@gmail.com>
+# This pipeline is used to reset the docker environment
 
-trigger:
-- master
+
+#trigger:
+#- master
 
 pool:
   name: Libreclinica
@@ -40,7 +36,12 @@ stages:
         targetType: 'inline'
         script: |
           docker compose down
-          docker container stop $(docker container ls -aq)||echo No Docker containers to stop
+          docker container stop $(docker container ls -aq)
+          docker container prune -f
+          docker image prune -f
+          docker volume prune -f
+          docker network prune -f
+          docker system prune -af
 
     - task: Bash@3
       displayName: DevOps
@@ -49,7 +50,7 @@ stages:
         script: |
           # Docker DevOps
           git clone https://github.com/Alagant/libreclinica_drug_trial_module
-          docker compose build libreclinica
+          docker compose build
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
