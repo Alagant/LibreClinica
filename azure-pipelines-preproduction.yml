@@ -8,9 +8,11 @@ pool:
 
 resources:
   repositories:
-    - repository: self
+    - repository: MyGitHubRepo
+      type: github
+      #endpoint: MyGitHubServiceConnection
+      name: Alagant/Libreclinica
       ref: refs/heads/lc-release-1.2.1
-
 variables:
   tag: '$(Build.BuildId)'
 
@@ -21,7 +23,18 @@ stages:
   - job: DevOps
     displayName: DevOps
     steps:
-    - checkout: self
+    - checkout: MyGitHubRepo
+      clean: true
+      persistCredentials: true
+      fetchDepth: 1
+      lfs: true
+      submodules: true
+      #path: Libreclinica
+      #ref: refs/heads/lc-release-1.2.1
+      #ref: refs/heads/master
+      #ref: refs/heads/lc-release-1.2.1
+      #ref: refs/heads/lc-release-1.2.1
+      #ref: refs
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
