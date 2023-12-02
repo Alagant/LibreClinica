@@ -1,0 +1,98 @@
+# This pipeline is used to reset the docker environment
+
+
+trigger: none #Disable automatic build
+
+pool:
+  name: Libreclinica
+
+resources:
+  repo: self
+  ref: refs/heads/lc-release-1.2.1
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: DevOps
+  displayName: Docker image
+  jobs:
+  - job: DevOps
+    displayName: DevOps
+#    pool:
+#      vmImage: ubuntu-latest
+#    pool:
+#      name: Default
+    steps:
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: 'build'
+#        Dockerfile: '**/Dockerfile'
+#        tags: '$(tag)'
+    - task: Bash@3
+      displayName: Clean the docker environment
+      inputs:
+        targetType: 'inline'
+        script: |
+          docker compose down
+          docker container stop $(docker container ls -aq)
+          docker container prune -f
+          docker image prune -f
+          docker volume prune -f
+          docker network prune -f
+          docker system prune -af
+
+    - task: Bash@3
+      displayName: DevOps
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Docker DevOps
+          git clone https://github.com/Alagant/libreclinica_drug_trial_module
+          docker compose build
+          docker compose up -d
+          docker ps -a
+          echo 'Hello DevOps'
+          ls -ltra
+        #  docker service rm libreclinica
+        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
+        #  docker service ps  libreclinica
+
+    - task: Bash@3
+      displayName: Test and report commit message
+      inputs:
+        targetType: 'inline'
+        script: |
+          # 
+          git clone https://github.com/Alagant/libreclinica-qa.git
+          ls -ltra
+          ls -ltra libreclinica-qa/
+          cd libreclinica-qa/
+          docker compose -f docker-compose.yml build
+          docker compose -f docker-compose.yml up libreclinica-qa
+      # Change the comment text here to test a new commit. Test nov 17 2023 b.
+      env:
+        CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
+        CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
+        CONFLUENCE_SPACE_ID: $(CONFLUENCE_SPACE_ID)
+        CONFLUENCE_PAGE_ID: $(CONFLUENCE_PAGE_ID)
+        LC_ROOT_USERNAME: $(LC_ROOT_USERNAME)
+        LC_ROOT_PASSWORD: $(LC_ROOT_PASSWORD)
+        source_version: $(Build.SourceVersion)
+        build_id: $(Build.BuildId)
+        build_number: $(Build.BuildNumber)
+        commit_message: $(Build.SourceVersionMessage)
+        branch: $(Build.SourceBranchName)
+
+    #- task: GitHubRelease@1
+    #  displayName: GitHub Release
+    #  inputs:
+    #    gitHubConnection: 'Alagant'
+    #    repositoryName: 'Alagant/LibreClinica'
+    #    action: 'create'
+    #    target: '$(Build.SourceVersion)'
+    #    tagSource: 'userSpecifiedTag'
+    #    tag: '$(Build.BuildId)'
+    #    changeLogCompareToRelease: 'lastFullRelease'
+    #    changeLogType: 'commitBased'
