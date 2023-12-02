@@ -8,8 +8,8 @@ pool:
 
 resources:
   repositories:
-    repository: self
-    ref: refs/heads/lc-release-1.2.1
+    - repository: self
+      ref: refs/heads/lc-release-1.2.1
 
 variables:
   tag: '$(Build.BuildId)'
