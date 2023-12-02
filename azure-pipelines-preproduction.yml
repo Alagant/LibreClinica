@@ -82,6 +82,7 @@ stages:
         script: |
           echo "we are now at $(Build.SourceVersion)"
           pwd
+          ls -ltra
           cd libreclinica-qa/
           docker compose -f -f docker-compose-no-DMM.yml build
           docker compose -f -f docker-compose-no-DMM.yml up libreclinica-qa
