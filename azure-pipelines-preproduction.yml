@@ -14,11 +14,6 @@ resources:
 variables:
   tag: '$(Build.BuildId)'
 
-steps:
-- checkout: self
-  #path: refs/heads/lc-release-1.2.1
-  enabled: true
-
 stages:
 - stage: DevOps
   displayName: Docker image
@@ -26,6 +21,7 @@ stages:
   - job: DevOps
     displayName: DevOps
     steps:
+    - checkout: self
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
