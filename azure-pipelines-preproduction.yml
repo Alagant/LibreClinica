@@ -71,7 +71,6 @@ stages:
           docker compose -f docker-compose-no-DMM.yml up -d
           docker ps -a
           echo 'Hello DevOps'
-          ls -ltra
         #  docker service rm libreclinica
         #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
         #  docker service ps  libreclinica
@@ -81,11 +80,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          # 
-          #git clone https://github.com/Alagant/libreclinica-qa.git
-          #ls -ltra
-          #ls -ltra libreclinica-qa/
-          #cd libreclinica-qa/
+          cd libreclinica-qa/
           docker compose -f -f docker-compose-no-DMM.yml build
           docker compose -f -f docker-compose-no-DMM.yml up libreclinica-qa
       # Change the comment text here to test a new commit. Test nov 17 2023 b.
