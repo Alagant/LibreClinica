@@ -140,6 +140,7 @@ const release = async () => {
 //SHOW IN A TABLE THE SEARCH PERFORMED IN MEDDRA
 const displayDataInTable = (data) => {
   const tableBody = document.getElementById('tableBody');
+  tableBody.innerHTML = '';
   data.forEach(item => {
     const row = document.createElement('tr');
     const pcode = document.createElement('td');
