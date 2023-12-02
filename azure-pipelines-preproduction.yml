@@ -17,6 +17,7 @@ variables:
 steps:
 - checkout: self
   #path: refs/heads/lc-release-1.2.1
+  enabled: true
 
 stages:
 - stage: DevOps
