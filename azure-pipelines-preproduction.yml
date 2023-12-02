@@ -46,7 +46,7 @@ stages:
       #ref: refs/heads/lc-release-1.2.1
       #ref: refs
     - checkout: LcQA
-      path: libreclinica-qa
+      path: s/LibreClinica/libreclinica-qa
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
