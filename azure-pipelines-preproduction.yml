@@ -13,6 +13,11 @@ resources:
       endpoint: Alagant
       name: Alagant/Libreclinica
       ref: refs/heads/lc-release-1.2.1
+    - repository: LcQA
+      type: github
+      endpoint: Alagant
+      name: Alagant/libreclinica-qa
+      ref: refs/heads/main
 variables:
   tag: '$(Build.BuildId)'
 
@@ -35,6 +40,8 @@ stages:
       #ref: refs/heads/lc-release-1.2.1
       #ref: refs/heads/lc-release-1.2.1
       #ref: refs
+    - checkout: LcQA
+      path: $(Pipeline.Workspace)/libreclinica-qa
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -70,10 +77,10 @@ stages:
         targetType: 'inline'
         script: |
           # 
-          git clone https://github.com/Alagant/libreclinica-qa.git
-          ls -ltra
-          ls -ltra libreclinica-qa/
-          cd libreclinica-qa/
+          #git clone https://github.com/Alagant/libreclinica-qa.git
+          #ls -ltra
+          #ls -ltra libreclinica-qa/
+          #cd libreclinica-qa/
           docker compose -f -f docker-compose-no-DMM.yml build
           docker compose -f -f docker-compose-no-DMM.yml up libreclinica-qa
       # Change the comment text here to test a new commit. Test nov 17 2023 b.
