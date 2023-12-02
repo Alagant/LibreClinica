@@ -41,10 +41,6 @@ stages:
       submodules: true
       #path: Libreclinica
       #ref: refs/heads/lc-release-1.2.1
-      #ref: refs/heads/master
-      #ref: refs/heads/lc-release-1.2.1
-      #ref: refs/heads/lc-release-1.2.1
-      #ref: refs
     - checkout: LcQA
       path: s/LibreClinica/libreclinica-qa
     - task: Bash@3
@@ -67,6 +63,7 @@ stages:
         script: |
           # Docker DevOps
           #git clone https://github.com/Alagant/libreclinica_drug_trial_module
+          cd LibreClinica/
           docker compose -f docker-compose-no-DMM.yml build
           docker compose -f docker-compose-no-DMM.yml up -d
           docker ps -a
@@ -80,9 +77,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          echo "we are now at $(Build.SourceVersion)"
-          pwd
-          ls -ltra
           cd LibreClinica/libreclinica-qa/
           docker compose build
           docker compose up libreclinica-qa
