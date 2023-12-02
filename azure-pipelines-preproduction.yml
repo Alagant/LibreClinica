@@ -83,13 +83,9 @@ stages:
           echo "we are now at $(Build.SourceVersion)"
           pwd
           ls -ltra
-          cd LibreClinica
-          echo "now at LibreCliinca"
-          pwd
-          ls -ltra
-          cd libreclinica-qa/
-          docker compose -f -f docker-compose-no-DMM.yml build
-          docker compose -f -f docker-compose-no-DMM.yml up libreclinica-qa
+          cd LibreClinica/libreclinica-qa/
+          docker compose build
+          docker compose up libreclinica-qa
       # Change the comment text here to test a new commit. Test nov 17 2023 b.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
