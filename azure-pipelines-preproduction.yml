@@ -49,6 +49,7 @@ stages:
         targetType: 'inline'
         script: |
           cd LibreClinica/
+          pwd
           docker compose -f docker-compose-no-DMM.yml down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
