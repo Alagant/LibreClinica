@@ -10,7 +10,7 @@ resources:
   repositories:
     - repository: MyGitHubRepo
       type: github
-      #endpoint: MyGitHubServiceConnection
+      endpoint: Alagant
       name: Alagant/Libreclinica
       ref: refs/heads/lc-release-1.2.1
 variables:
