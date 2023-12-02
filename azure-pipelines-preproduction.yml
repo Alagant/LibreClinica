@@ -12,7 +12,7 @@ resources:
       type: github
       endpoint: Alagant
       name: Alagant/LibreClinica
-      ref: refs/heads/lc-release-1.2.1
+      ref: refs/heads/lc-release-1.2.1-preproduction
     - repository: LcQA
       type: github
       endpoint: Alagant
