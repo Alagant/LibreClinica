@@ -18,6 +18,11 @@ resources:
       endpoint: Alagant
       name: Alagant/libreclinica-qa
       ref: refs/heads/main
+    - repository: LcDRM
+      type: github
+      endpoint: Alagant
+      name: Alagant/libreclinica_drug_trial_module
+      ref: refs/heads/main
 variables:
   tag: '$(Build.BuildId)'
 
@@ -41,7 +46,7 @@ stages:
       #ref: refs/heads/lc-release-1.2.1
       #ref: refs
     - checkout: LcQA
-      path: $(Pipeline.Workspace)/libreclinica-qa
+      path: libreclinica-qa
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
