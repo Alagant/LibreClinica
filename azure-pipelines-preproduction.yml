@@ -8,7 +8,7 @@ pool:
 
 resources:
   repositories:
-    - repository: MyGitHubRepo
+    - repository: LcRepo
       type: github
       endpoint: Alagant
       name: Alagant/Libreclinica
@@ -23,7 +23,7 @@ stages:
   - job: DevOps
     displayName: DevOps
     steps:
-    - checkout: MyGitHubRepo
+    - checkout: LcRepo
       clean: true
       persistCredentials: true
       fetchDepth: 1
@@ -40,7 +40,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker compose down
+          docker compose -f docker-compose-no-DMM.yml down
           docker container stop $(docker container ls -aq)
           docker container prune -f
           docker image prune -f
@@ -54,9 +54,9 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          git clone https://github.com/Alagant/libreclinica_drug_trial_module
-          docker compose build
-          docker compose up -d
+          #git clone https://github.com/Alagant/libreclinica_drug_trial_module
+          docker compose -f docker-compose-no-DMM.yml build
+          docker compose -f docker-compose-no-DMM.yml up -d
           docker ps -a
           echo 'Hello DevOps'
           ls -ltra
@@ -74,8 +74,8 @@ stages:
           ls -ltra
           ls -ltra libreclinica-qa/
           cd libreclinica-qa/
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa
+          docker compose -f -f docker-compose-no-DMM.yml build
+          docker compose -f -f docker-compose-no-DMM.yml up libreclinica-qa
       # Change the comment text here to test a new commit. Test nov 17 2023 b.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
@@ -89,15 +89,3 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
-
-    #- task: GitHubRelease@1
-    #  displayName: GitHub Release
-    #  inputs:
-    #    gitHubConnection: 'Alagant'
-    #    repositoryName: 'Alagant/LibreClinica'
-    #    action: 'create'
-    #    target: '$(Build.SourceVersion)'
-    #    tagSource: 'userSpecifiedTag'
-    #    tag: '$(Build.BuildId)'
-    #    changeLogCompareToRelease: 'lastFullRelease'
-    #    changeLogType: 'commitBased'
