@@ -9,7 +9,7 @@ trigger:
 - master
 
 pool:
-  name: Libreclinica
+  name: Libreclinica-azureVMs
 
 resources:
 - repo: self
@@ -21,7 +21,9 @@ stages:
 - stage: DevOps
   displayName: Docker image
   jobs:
+
   - job: DevOps
+    environment: dev
     displayName: DevOps
 #    pool:
 #      vmImage: ubuntu-latest
