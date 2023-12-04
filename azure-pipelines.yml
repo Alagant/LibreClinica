@@ -22,14 +22,15 @@ stages:
   displayName: Docker image
   jobs:
 
-  - job: DevOps
-    deployment: devops dev
+  #- job: DevOps
+  - deployment: devops dev
     environment: dev
     displayName: DevOps
 #    pool:
 #      vmImage: ubuntu-latest
 #    pool:
 #      name: Default
+  - job: DevOps
     steps:
 #    - task: Docker@2
 #      displayName: Build an image
