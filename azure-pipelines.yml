@@ -23,7 +23,7 @@ stages:
   jobs:
 
   - job: DevOps
-    deployment devops dev
+    deployment: devops dev
     environment: dev
     displayName: DevOps
 #    pool:
