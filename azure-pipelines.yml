@@ -71,6 +71,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
+          echo pwito
           pwd
           ls -ltra
           cd LibreClinica/
