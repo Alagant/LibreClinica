@@ -75,6 +75,7 @@ stages:
           pwd
           ls -ltra
           cd LibreClinica/
+          ls -ltra
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
