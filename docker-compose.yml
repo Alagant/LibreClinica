@@ -24,7 +24,7 @@ services:
 
   flask:
     build:
-      context: libreclinica_drug_trial_module/
+      context: ../libreclinica_drug_trial_module/
       dockerfile: Dockerfile
     ports:
       - "81:81"
