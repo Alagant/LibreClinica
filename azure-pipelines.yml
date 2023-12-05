@@ -57,11 +57,11 @@ stages:
 #        Dockerfile: '**/Dockerfile'
 #        tags: '$(tag)'
     - checkout: LcRepo
-      clean: true
+      #clean: true
       persistCredentials: true
       fetchDepth: 1
       lfs: true
-      submodules: true
+      #submodules: true
       #path: Libreclinica
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
@@ -71,11 +71,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          echo pwito
-          pwd
-          ls -ltra
           cd LibreClinica/
-          ls -ltra
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
