@@ -77,7 +77,7 @@ stages:
           # Docker DevOps
           cd LibreClinica/
           git clone https://github.com/Alagant/libreclinica_drug_trial_module
-          docker compose build
+          docker compose -f docker-compose-load-db-image.yml build
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
