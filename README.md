@@ -37,6 +37,12 @@ These versions of required software packages are currently available in Debian 1
 ### Database backup and migration
 If you want to backup your LibreClinica database, you can use the following command:
 `docker compose run postgres pg_dump -d libreclinica -U clinica -h postgres>libreclinica_$(date -Iseconds).sql`
+Note that Windows does not support file names with colons, so you might want to replace the colons with underscores.
+To restore a database, you can use the following command:
+`docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica<backup time>.sql`,
+for example:
+`docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica<backup time>.sql`,
+
 ### Contributions
                           
 LibreClinica is open source project that values input from contributors:
