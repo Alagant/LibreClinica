@@ -22,17 +22,18 @@ services:
     volumes:
       - libreclinica:/libreclinica
 
-  flask:
-    build:
-      context: libreclinica_drug_trial_module/
-      dockerfile: Dockerfile
-    ports:
-      - "81:81"
-    depends_on:
-      - postgres
-    env_file: .env
-    command: flask run -p 81 -h flask --no-reload
-    #volumes:
-    #  - libreclinica:/libreclinica
+# Now the DMM is not dockerized, so its definition is commented out.
+#  flask:
+#    build:
+#      context: libreclinica_drug_trial_module/
+#      dockerfile: Dockerfile
+#    ports:
+#      - "81:81"
+#    depends_on:
+#      - postgres
+#    env_file: .env
+#    command: flask run -p 81 -h flask --no-reload
+#    #volumes:
+#    #  - libreclinica:/libreclinica
 volumes:
   libreclinica:
