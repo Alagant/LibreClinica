@@ -41,7 +41,7 @@ Note that Windows does not support file names with colons, so you might want to 
 To restore a database, you can use the following command:
 `docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica<backup time>.sql`,
 for example:
-`docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica<backup time>.sql`,
+`docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica_2023-12-24T01_20_23-06_00.sql`,
 
 ### Contributions
                           
