@@ -10,6 +10,8 @@ services:
     env_file: .env
     #volumes:
     #- postgres_db:/var/lib/postgresql/data
+    volumes:
+      - ./var/pgdata:/var/lib/postgresql/data
     #command: psql -d libreclinica -U clinica -h postgres -f /data/libreclinica_2023-12-24T01_20_23-06_00.sql
   adminer:
     image: adminer
@@ -44,5 +46,5 @@ services:
 #    #  - libreclinica:/libreclinica
 volumes:
   libreclinica:
-#  postgres_db:
-#    driver: local
+  /var/pgdata:
+    driver: local

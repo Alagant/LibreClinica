@@ -1,6 +1,5 @@
 # This pipeline is used to reset the docker environment
 
-
 trigger: none #Disable automatic build
 
 pool:
