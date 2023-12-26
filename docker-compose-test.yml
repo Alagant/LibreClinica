@@ -1,7 +1,12 @@
 version: '3.1'
 services:
   postgres:
-    image: postgres:14-alpine
+  postgres:
+    build:
+      context: docker
+      dockerfile: Dockerfile_postgres
+    ports:
+      - "5432:5432"
     restart: always
     env_file: .env
   adminer:
