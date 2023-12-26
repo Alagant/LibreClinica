@@ -34,6 +34,15 @@ These versions of required software packages are currently available in Debian 1
 
 [LibreClinica Aims](https://libreclinica.org/goals.html) define main activities where community members can actively participate in the development process. In case of interest in contributing into the codebase, check out [LibreClinica Developer Documentation](https://libreclinica-docs.readthedocs.io) to learn how to [set up the development workstation](https://libreclinica-docs.readthedocs.io/en/latest/dev/dev-machine.html) and understand the [branching strategy](https://libreclinica-docs.readthedocs.io/en/latest/dev/developer.html) that is used to control the contribution workflows.
 
+### Database backup and migration
+If you want to backup your LibreClinica database, you can use the following command:
+`docker compose run postgres pg_dump -d libreclinica -U clinica -h postgres>libreclinica_$(date -Iseconds).sql`
+Note that Windows does not support file names with colons, so you might want to replace the colons with underscores.
+To restore a database, you can use the following command:
+`docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica<backup time>.sql`,
+for example:
+`docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica_2023-12-24T01_20_23-06_00.sql`,
+
 ### Contributions
                           
 LibreClinica is open source project that values input from contributors:

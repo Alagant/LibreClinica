@@ -1,0 +1,48 @@
+version: '3.1'
+services:
+  postgres:
+    build:
+      context: docker
+      dockerfile: Dockerfile_postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    env_file: .env
+    #volumes:
+    #- postgres_db:/var/lib/postgresql/data
+    #command: psql -d libreclinica -U clinica -h postgres -f /data/libreclinica_2023-12-24T01_20_23-06_00.sql
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8070:8080"
+
+  libreclinica:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8485:8080"
+    depends_on:
+      - postgres
+    env_file: .env
+    volumes:
+      - libreclinica:/libreclinica
+
+# Now the DMM is not dockerized, so its definition is commented out.
+#  flask:
+#    build:
+#      context: libreclinica_drug_trial_module/
+#      dockerfile: Dockerfile
+#    ports:
+#      - "81:81"
+#    depends_on:
+#      - postgres
+#    env_file: .env
+#    command: flask run -p 81 -h flask --no-reload
+#    #volumes:
+#    #  - libreclinica:/libreclinica
+volumes:
+  libreclinica:
+#  postgres_db:
+#    driver: local
