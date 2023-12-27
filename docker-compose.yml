@@ -13,6 +13,8 @@ services:
     restart: always
     ports:
       - "8070:8080"
+    volumes:
+      - ./var/pgdata:/var/lib/postgresql/data
 
   libreclinica:
     build:
@@ -41,3 +43,5 @@ services:
 #    #  - libreclinica:/libreclinica
 volumes:
   libreclinica:
+  /var/pgdata:
+    driver: local
