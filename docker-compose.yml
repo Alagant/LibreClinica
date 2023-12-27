@@ -43,5 +43,5 @@ services:
 #    #  - libreclinica:/libreclinica
 volumes:
   libreclinica:
-  /var/pgdata:
-    driver: local
+  #/var/pgdata:
+  #  driver: local
