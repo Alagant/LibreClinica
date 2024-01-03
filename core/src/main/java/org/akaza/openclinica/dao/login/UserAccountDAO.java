@@ -271,7 +271,11 @@ public class UserAccountDAO extends AuditableEntityDAO<UserAccountBean> {
         variables.put(7, uab.getActiveStudyId());
         variables.put(8, uab.getInstitutionalAffiliation());
         variables.put(9, uab.getStatus().getId());
-        variables.put(10, uab.getOwnerId());
+        if(uab.getOwnerId()>0)
+            variables.put(10, uab.getOwnerId());
+        else
+            variables.put(10, null);
+
         variables.put(11, uab.getPasswdChallengeQuestion());
         variables.put(12, uab.getPasswdChallengeAnswer());
         variables.put(13, uab.getPhone());
@@ -295,6 +299,9 @@ public class UserAccountDAO extends AuditableEntityDAO<UserAccountBean> {
         if (uab.isAuthsecretAbsent()) {
             nullables.put(20, STRING);
         }
+
+        if(uab.getOwnerId()<1)
+            nullables.put(10, TypeNames.INT);
 
         this.executeUpdate(digester.getQuery("insert"), variables, nullables);
         boolean success = isQuerySuccessful();

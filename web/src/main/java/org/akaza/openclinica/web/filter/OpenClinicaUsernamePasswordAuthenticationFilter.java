@@ -15,8 +15,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.acl.Owner;
 import java.util.*;
 
+import org.akaza.openclinica.bean.core.AuditableEntityBean;
 import org.akaza.openclinica.bean.core.Status;
 import org.akaza.openclinica.bean.login.UserAccountBean;
 import org.akaza.openclinica.control.SpringServletAccess;
@@ -268,10 +270,13 @@ public class OpenClinicaUsernamePasswordAuthenticationFilter extends AbstractAut
                     createdUserAccountBean.setPasswdChallengeQuestion("");
                     createdUserAccountBean.setPasswdChallengeAnswer("");
                     createdUserAccountBean.setPhone("");
-                    createdUserAccountBean.setOwner(null);
+                    //createdUserAccountBean.setOwner(createdUserAccountBean.getOwner());
                     createdUserAccountBean.setRunWebservices(null);
                     createdUserAccountBean.setAccessCode("null");
                     createdUserAccountBean.setEnableApiKey(true);
+                    createdUserAccountBean.setRunWebservices(false);
+
+                    getUserAccountDao().create(createdUserAccountBean);
 
                     if (createdUserAccountBean.isTwoFactorMarked()) {
                         TwoFactorService factorService = (TwoFactorService) getWebApplicationContext(getServletContext()).getBean("factorService");
