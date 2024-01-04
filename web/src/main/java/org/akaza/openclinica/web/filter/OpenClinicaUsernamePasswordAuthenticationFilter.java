@@ -19,10 +19,14 @@ import java.security.acl.Owner;
 import java.util.*;
 
 import org.akaza.openclinica.bean.core.AuditableEntityBean;
+import org.akaza.openclinica.bean.core.Role;
 import org.akaza.openclinica.bean.core.Status;
+import org.akaza.openclinica.bean.core.UserType;
+import org.akaza.openclinica.bean.login.StudyUserRoleBean;
 import org.akaza.openclinica.bean.login.UserAccountBean;
 import org.akaza.openclinica.control.SpringServletAccess;
 import org.akaza.openclinica.core.SecurityManager;
+import org.akaza.openclinica.dao.hibernate.AuthoritiesDao;
 import org.akaza.openclinica.dao.login.UserAccountDAO;
 
 /*
@@ -39,6 +43,7 @@ import org.akaza.openclinica.dao.login.UserAccountDAO;
  */
 
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -53,6 +58,7 @@ import org.akaza.openclinica.dao.hibernate.ConfigurationDao;
 import org.akaza.openclinica.dao.login.UserAccountDAO;
 import org.akaza.openclinica.domain.technicaladmin.AuditUserLoginBean;
 import org.akaza.openclinica.domain.technicaladmin.LoginStatus;
+import org.akaza.openclinica.domain.user.AuthoritiesBean;
 import org.akaza.openclinica.i18n.util.ResourceBundleProvider;
 import org.akaza.openclinica.service.otp.MailNotificationService;
 import org.akaza.openclinica.service.otp.TowFactorBean;
@@ -261,9 +267,22 @@ public class OpenClinicaUsernamePasswordAuthenticationFilter extends AbstractAut
                     createdUserAccountBean.setLastName(jsonNode.get("lastName").asText());
                     createdUserAccountBean.setEmail(jsonNode.get("email").asText());
                     createdUserAccountBean.setInstitutionalAffiliation(jsonNode.get("institutionalAffiliation").asText());
-                    createdUserAccountBean.setAuthtype("local");
 
-                    createdUserAccountBean.setPasswd("test");
+
+                    /*
+                    StudyUserRoleBean surb = new StudyUserRoleBean();
+                    surb.setRole(Role.MONITOR);
+                    createdUserAccountBean.addRole(surb);
+                    createdUserAccountBean.add
+                     */
+
+                    ServletContext context = getServletContext();
+                    SecurityManager sm = (SecurityManager) SpringServletAccess.getApplicationContext(context)
+                            .getBean("securityManager");
+
+
+                    String newDigestPass = sm.encryptPassword(password, createdUserAccountBean.getRunWebservices());
+                    createdUserAccountBean.setPasswd(newDigestPass);
                     createdUserAccountBean.setPasswdTimestamp(null);
                     createdUserAccountBean.setLastVisitDate(null);
                     createdUserAccountBean.setStatus(Status.AVAILABLE);
@@ -277,6 +296,9 @@ public class OpenClinicaUsernamePasswordAuthenticationFilter extends AbstractAut
                     createdUserAccountBean.setRunWebservices(false);
 
                     getUserAccountDao().create(createdUserAccountBean);
+                    AuthoritiesDao authoritiesDao = (AuthoritiesDao)
+                            SpringServletAccess.getApplicationContext(context).getBean("authoritiesDao");
+                    authoritiesDao.saveOrUpdate(new AuthoritiesBean(createdUserAccountBean.getName()));
 
                     if (createdUserAccountBean.isTwoFactorMarked()) {
                         TwoFactorService factorService = (TwoFactorService) getWebApplicationContext(getServletContext()).getBean("factorService");
