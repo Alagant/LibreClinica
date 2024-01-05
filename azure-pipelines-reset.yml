@@ -50,10 +50,10 @@ stages:
       fetchDepth: 1
       lfs: true
       submodules: true
-      #path: Libreclinica
+      path: /home/azureuser/Alagant_projects/Libreclinica
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
-      path: s/LibreClinica/libreclinica-qa
+      path: /home/azureuser/Alagant_projects/libreclinica-qa
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
