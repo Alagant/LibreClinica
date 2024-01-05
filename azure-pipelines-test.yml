@@ -13,9 +13,8 @@ trigger:
 pool:
   name: Libreclinica-test
 
-#resources:
-#- repo: self
 resources:
+#- repo: self
   repositories:
     - repository: LcRepo
       type: github
@@ -42,11 +41,6 @@ stages:
   displayName: Docker image
   jobs:
   - job: DevOps
-    displayName: DevOps
-#    pool:
-#      vmImage: ubuntu-latest
-#    pool:
-#      name: Default
     steps:
 #    - task: Docker@2
 #      displayName: Build an image

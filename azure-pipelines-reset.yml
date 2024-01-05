@@ -24,6 +24,7 @@ resources:
     #  name: Alagant/libreclinica_drug_trial_module
     #  ref: refs/heads/main
 
+
 variables:
   tag: '$(Build.BuildId)'
 
@@ -49,7 +50,7 @@ stages:
       persistCredentials: true
       fetchDepth: 1
       lfs: true
-      submodules: true
+      #submodules: true
       #path: /home/azureuser/Alagant_projects/Libreclinica
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
