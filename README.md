@@ -26,8 +26,6 @@ These versions of required software packages are currently available in Debian 1
 |--------------------|------------|---------------|
 | Tomcat 9           | OpenJDK 11 | PostgreSQL 11 |
 
-> **_NOTE:_** Installing LibreClinica in as docker image is currently not officially supported.
-
 > **_NOTE:_** LibreClinica SOAP web API is legacy, not tested and not actively developed.
 
 ### Development
