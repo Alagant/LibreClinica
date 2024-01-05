@@ -11,9 +11,8 @@ trigger:
 pool:
   name: Libreclinica-azureVMs
 
-#resources:
-#- repo: self
 resources:
+#- repo: self
   repositories:
     - repository: LcRepo
       type: github
@@ -39,15 +38,6 @@ stages:
 - stage: DevOps
   displayName: Docker image
   jobs:
-
-  #- job: DevOps
-  #- deployment: devops_dev #That would be great to have a deployment job to uninterruptible branches
-  #  environment: dev
-  #  displayName: DevOps
-#    pool:
-#      vmImage: ubuntu-latest
-#    pool:
-#      name: Default
   - job: DevOps
     steps:
 #    - task: Docker@2
@@ -62,10 +52,10 @@ stages:
       fetchDepth: 1
       lfs: true
       #submodules: true
-      #path: /home/azureuser/Alagant_projects/Libreclinica
+      #path: LibreClinica
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
-      #path: /home/azureuser/Alagant_projects/libreclinica-qa
+      #path: libreclinica-qa
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -81,8 +71,12 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          cd LibreClinica/
+          #cd LibreClinica/
           #git clone https://github.com/Alagant/libreclinica_drug_trial_module
+          cd /home/azureuser/Alagant_projects/LibreClinica/
+          git checkout $(Build.SourceBranchName)
+          echo checked out branch $(Build.SourceBranchName)
+          git pull
           docker compose build libreclinica
           docker compose up -d
           docker ps -a
@@ -101,7 +95,7 @@ stages:
           #git clone https://github.com/Alagant/libreclinica-qa.git
           #ls -ltra
           #ls -ltra libreclinica-qa/
-          cd LibreClinica/libreclinica-qa/
+          cd libreclinica-qa/
           docker compose -f docker-compose.yml build
           docker compose -f docker-compose.yml up libreclinica-qa
       # Change the comment text here to test a new commit. Test nov 17 2023 b.

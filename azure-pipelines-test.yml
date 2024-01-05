@@ -13,9 +13,8 @@ trigger:
 pool:
   name: Libreclinica-test
 
-#resources:
-#- repo: self
 resources:
+#- repo: self
   repositories:
     - repository: LcRepo
       type: github
@@ -42,11 +41,6 @@ stages:
   displayName: Docker image
   jobs:
   - job: DevOps
-    displayName: DevOps
-#    pool:
-#      vmImage: ubuntu-latest
-#    pool:
-#      name: Default
     steps:
 #    - task: Docker@2
 #      displayName: Build an image
@@ -82,6 +76,10 @@ stages:
           # Docker DevOps
           cd LibreClinica/
           #git clone https://github.com/Alagant/libreclinica_drug_trial_module
+          cd /home/azureuser/Alagant_projects/LibreClinica/
+          git checkout $(Build.SourceBranchName)
+          echo checked out branch $(Build.SourceBranchName)
+          git pull
           docker compose -f docker-compose-test.yml build libreclinica_test
           docker compose -f docker-compose-test.yml up -d
           docker ps -a
