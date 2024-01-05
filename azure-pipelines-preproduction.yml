@@ -4,7 +4,7 @@
 trigger: none #Disable automatic build
 
 pool:
-  name: Libreclinica
+  name: Libreclinica-azureVMs
 
 resources:
   repositories:
