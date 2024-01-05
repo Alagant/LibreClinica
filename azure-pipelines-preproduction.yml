@@ -40,7 +40,7 @@ stages:
       lfs: true
       submodules: true
       #path: /home/azureuser/Alagant_projects/Libreclinica
-      ref: refs/heads/lc-release-1.2.1
+      #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
       #path: /home/azureuser/Alagant_projects/libreclinica-qa
     - task: Bash@3
