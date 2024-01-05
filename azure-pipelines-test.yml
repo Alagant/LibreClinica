@@ -11,7 +11,7 @@ trigger:
       - master
 
 pool:
-  name: Libreclinica-azureVMs
+  name: Libreclinica-test
 
 #resources:
 #- repo: self
