@@ -11,7 +11,7 @@ trigger:
       - master
 
 pool:
-  name: Libreclinica-azureVMs
+  name: Libreclinica-test
 
 #resources:
 #- repo: self
@@ -60,10 +60,10 @@ stages:
       fetchDepth: 1
       lfs: true
       #submodules: true
-      path: /home/azureuser/Alagant_projects/Libreclinica
+      path: Libreclinica
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
-      path: /home/azureuser/Alagant_projects/libreclinica-qa
+      path: libreclinica-qa
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -99,7 +99,7 @@ stages:
           #git clone https://github.com/Alagant/libreclinica-qa.git
           #ls -ltra
           #ls -ltra libreclinica-qa/
-          cd LibreClinica/libreclinica-qa/
+          cd libreclinica-qa/
           docker compose -f docker-compose.yml build
           docker compose -f docker-compose.yml up libreclinica-qa
       # Change the comment text here to test a new commit.
