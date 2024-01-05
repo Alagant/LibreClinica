@@ -62,6 +62,7 @@ stages:
       #submodules: true
       path: LibreClinica
       #ref: refs/heads/lc-release-1.2.1
+      clean: true
     - checkout: LcQA
       path: libreclinica-qa
     - task: Bash@3
