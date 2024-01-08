@@ -73,17 +73,36 @@
 
             //find the Bean by username,
             UserAccountBean oauthAccount = userAccountDAO.findByUserName(a3rd_sub);
-            // the useraccount does not exist create
+            // the useraccount does not exist create {{{
             if(oauthAccount != null) {
                 oauthAccount = new UserAccountBean();
                 oauthAccount.setName(a3rd_sub);
                 oauthAccount.setFirstName(a3rd_name);
                 oauthAccount.setLastName(a3rd_family_name);
                 oauthAccount.setEmail(a3rd_email);
+
+                oauthAccount.setPasswd("**");
+                oauthAccount.setPasswdTimestamp(null);
+                oauthAccount.setLastVisitDate(null);
+                oauthAccount.setStatus(Status.AVAILABLE);
+                oauthAccount.setPasswdChallengeQuestion("");
+                oauthAccount.setPasswdChallengeAnswer("");
+                oauthAccount.setPhone("");
+                //createdUserAccountBean.setOwner(createdUserAccountBean.getOwner());
+                oauthAccount.setRunWebservices(null);
+                oauthAccount.setAccessCode("null");
+                oauthAccount.setEnableApiKey(true);
+                oauthAccount.setRunWebservices(false);
+                userAccountDAO.create(oauthAccount);
+
+                AuthoritiesDao authoritiesDao = (AuthoritiesDao) RequestContextUtils
+                        .findWebApplicationContext(request).getBean("authoritiesDao");
+                authoritiesDao.saveOrUpdate(new AuthoritiesBean(oauthAccount.getName()));
             }
+            //}}}
             // create session and redirect to main page
             request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
-
+            response.sendRedirect("/MainMenu");
 
                     /*
                     StudyUserRoleBean surb = new StudyUserRoleBean();
@@ -92,29 +111,9 @@
                     createdUserAccountBean.add
                      */
 
-            ServletContext context = getServletContext();
-            SecurityManager sm = (SecurityManager) SpringServletAccess.getApplicationContext(context)
-                    .getBean("securityManager");
+            //String newDigestPass = sm.encryptPassword("*", createdUserAccountBean.getRunWebservices());
 
 
-            String newDigestPass = sm.encryptPassword(password, createdUserAccountBean.getRunWebservices());
-            createdUserAccountBean.setPasswd(newDigestPass);
-            createdUserAccountBean.setPasswdTimestamp(null);
-            createdUserAccountBean.setLastVisitDate(null);
-            createdUserAccountBean.setStatus(Status.AVAILABLE);
-            createdUserAccountBean.setPasswdChallengeQuestion("");
-            createdUserAccountBean.setPasswdChallengeAnswer("");
-            createdUserAccountBean.setPhone("");
-            //createdUserAccountBean.setOwner(createdUserAccountBean.getOwner());
-            createdUserAccountBean.setRunWebservices(null);
-            createdUserAccountBean.setAccessCode("null");
-            createdUserAccountBean.setEnableApiKey(true);
-            createdUserAccountBean.setRunWebservices(false);
-
-            getUserAccountDao().create(createdUserAccountBean);
-            AuthoritiesDao authoritiesDao = (AuthoritiesDao)
-                    SpringServletAccess.getApplicationContext(context).getBean("authoritiesDao");
-            authoritiesDao.saveOrUpdate(new AuthoritiesBean(createdUserAccountBean.getName()));
         }
         catch (Exception ex) {
             logger.error(ex.getMessage());
