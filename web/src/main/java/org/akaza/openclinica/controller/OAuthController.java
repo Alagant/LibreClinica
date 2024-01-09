@@ -7,22 +7,30 @@ import org.akaza.openclinica.bean.login.UserAccountBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.core.CRFLocker;
 import org.akaza.openclinica.core.SecurityManager;
+import org.akaza.openclinica.dao.core.CoreResources;
 import org.akaza.openclinica.dao.hibernate.AuthoritiesDao;
+import org.akaza.openclinica.dao.hibernate.UserAccountDao;
 import org.akaza.openclinica.dao.login.UserAccountDAO;
 import org.akaza.openclinica.domain.user.AuthoritiesBean;
 import org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.security.web.util.TextEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -35,26 +43,31 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Collection;
 
-import static org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY;
-import static org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY;
+import static org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter.*;
 
 
 @Controller
 public class OAuthController {
+    @Value("${oauth.server}")
+    private String oauth_server;
     private ApplicationContext context;
     private DataSource dataSource;
     private SecurityManager securityManager;
+    private AuthenticationManager authenticationManager;
 
     final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass().getName());
     @Autowired
-    public OAuthController(ApplicationContext context, DataSource dataSource, SecurityManager securityManager) {
+    public OAuthController(ApplicationContext context, DataSource dataSource,
+                           SecurityManager securityManager, AuthenticationManager authenticationManager) {
         this.context = context;
         this.dataSource = dataSource;
         this.securityManager = securityManager;
+        this.authenticationManager = authenticationManager;
     }
     @RequestMapping("/oauth")
-    public String oauth(HttpServletRequest request/*ModelMap modelMap*/) {
+    public String oauth(HttpServletRequest request, HttpServletResponse response/*ModelMap modelMap*/) {
         String oauth_server = "https://cdcoauthmockup.azurewebsites.net";
+        //String oauth_server = CoreResources.getField("oauth.server");
         String oauth_base_url = oauth_server + "/auth/oauth/v2";
         String openid_base_url = oauth_server + "/openid/connect/v1";
         String self_url = request.getRequestURL().toString().replace(request.getRequestURI(),"");
@@ -155,17 +168,34 @@ public class OAuthController {
             }
             //}}}
 
-            //SecurityContextHolder.getContext().setAuthentication(new PreAuthenticatedAuthenticationToken());
+            UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+                    a3rd_email.trim(), a3rd_email);
+
+            // Place the last username attempted into HttpSession for views
+            HttpSession session = request.getSession(false);
+
+            if (session != null ) {
+                request.getSession().setAttribute(
+                        SPRING_SECURITY_LAST_USERNAME_KEY,
+                        TextEscapeUtils.escapeEntities(a3rd_email.trim()));
+            }
+
+            Authentication authentication = authenticationManager.authenticate(authRequest);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
             return "redirect:/MainMenu";
         }
         catch (IOException ex) {
             logger.error(ex.getMessage(), ex);
-            return "forward:/pages/login/login";
+            return "redirect:/pages/login/login";
         }
         catch(NoSuchAlgorithmException ex) {
             logger.error(ex.getMessage(), ex);
-            return "forward:/pages/login/login";
+            return "redirect:/pages/login/login";
+        }
+        catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+            return "redirect:/pages/login/login";
         }
     }
 }
