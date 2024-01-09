@@ -19,6 +19,7 @@
     
     <security:anonymous />
     <security:intercept-url pattern="/pages/login/login" access="permitAll"/>
+    <security:intercept-url pattern="/oauth" access="permitAll"/>
     <security:intercept-url pattern="/SystemStatus" access="permitAll"/>
     <security:intercept-url pattern="/RequestPassword" access="permitAll"/>
     <security:intercept-url pattern="/RequestAccount" access="permitAll"/>
