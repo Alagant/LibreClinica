@@ -18,7 +18,7 @@ resources:
       type: github
       endpoint: Alagant
       name: Alagant/LibreClinica
-      ref: refs/heads/master
+      ref: refs/heads/$(Build.SourceBranchName)
     - repository: LcQA
       type: github
       endpoint: Alagant
