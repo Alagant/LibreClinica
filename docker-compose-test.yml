@@ -1,9 +1,10 @@
 version: '3.1'
 services:
   postgres:
-    build:
-      context: docker
-      dockerfile: Dockerfile_postgres
+    image: postgres:14-alpine
+    #build:
+    #  context: docker
+    #  dockerfile: Dockerfile_postgres
     ports:
       - "5432:5432"
     restart: always
@@ -12,14 +13,14 @@ services:
     image: adminer
     restart: always
     ports:
-      - "8070:8080"
+      - "9090:8080"
 
   libreclinica_test:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8484:8080"
+      - "8080:8080"
     depends_on:
       - postgres
     env_file: .env

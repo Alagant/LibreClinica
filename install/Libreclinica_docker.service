@@ -1,0 +1,15 @@
+[Unit]
+Description=Docker compose Alagant server
+After=network.target
+
+[Service]
+#Cleaning command: docker compose down && docker container stop $(docker container ls -aq) && docker container rm $(docker container ls -aq) && docker system prune -af
+ExecStart=docker compose up
+User=azureuser
+WorkingDirectory=/home/azureuser/Alagant_projects/LibreClinica
+KillMode=process
+KillSignal=SIGTERM
+TimeoutStopSec=5min
+
+[Install]
+WantedBy=multi-user.target
