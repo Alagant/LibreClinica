@@ -25,8 +25,7 @@
                         </goals>
                         <configuration>
                             <outputDirectory>src/main/java</outputDirectory>
-                            <bindingDirectory>src/main/xjb</bindingDirectory>
-                            <bindingFiles>src/main/xjb/binding-customization.xjb</bindingFiles>
+                            <xjbSources><xjbSource>src/main/xjb/binding-customization.xjb</xjbSource></xjbSources>
                             <clearOutputDir>false</clearOutputDir>
                             <sources>
                                 <source>src/main/schemas</source>
@@ -59,6 +58,7 @@
                             <value>all</value>
                         </property>
                     </properties>
+                    <outputFile/>
                 </configuration>
             </plugin>
             <plugin>
