@@ -24,7 +24,6 @@
                             <goal>xjc</goal>
                         </goals>
                         <configuration>
-                            <schemaDirectory>src/main/schemas</schemaDirectory>
                             <outputDirectory>src/main/java</outputDirectory>
                             <bindingDirectory>src/main/xjb</bindingDirectory>
                             <bindingFiles>src/main/xjb/binding-customization.xjb</bindingFiles>
