@@ -158,4 +158,8 @@
 		<name>findAllByParentStudyIdOrderedByIdAsc</name>
 		<sql>SELECT * FROM STUDY WHERE study_id=? or parent_study_id=? order by study_id asc</sql>
 	</query>
+	<query>
+		<name>findDefaultStudy</name>
+		<sql>SELECT * FROM study WHERE unique_identifier='default-study' LIMIT 1</sql>
+	</query>
 </queries>

@@ -2,8 +2,11 @@ package org.akaza.openclinica.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.akaza.openclinica.bean.core.Role;
 import org.akaza.openclinica.bean.core.Status;
+import org.akaza.openclinica.bean.login.StudyUserRoleBean;
 import org.akaza.openclinica.bean.login.UserAccountBean;
+import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.core.CRFLocker;
 import org.akaza.openclinica.core.SecurityManager;
@@ -11,6 +14,7 @@ import org.akaza.openclinica.dao.core.CoreResources;
 import org.akaza.openclinica.dao.hibernate.AuthoritiesDao;
 import org.akaza.openclinica.dao.hibernate.UserAccountDao;
 import org.akaza.openclinica.dao.login.UserAccountDAO;
+import org.akaza.openclinica.dao.managestudy.StudyDAO;
 import org.akaza.openclinica.domain.user.AuthoritiesBean;
 import org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter;
 import org.slf4j.LoggerFactory;
@@ -40,8 +44,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
+import java.util.Date;
 
 import static org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter.*;
 
@@ -76,6 +82,8 @@ public class OAuthController {
         String oauth_code = request.getParameter("code");
         String oauth_client_id = "19216801";
         String oauth_client_secret = "3EEnASDAS6pmAASDyPzviWQSDPufTcIpg";
+
+        StudyDAO studyDAO = new StudyDAO(dataSource);
 
         if(oauth_code == null || oauth_code.isEmpty()) {
             return "redirect:/";
@@ -138,6 +146,7 @@ public class OAuthController {
             UserAccountBean oauthAccount = userAccountDAO.findByUserName(a3rd_email);
             // the useraccount does not exist create {{{
             if(oauthAccount == null || oauthAccount.getId()<1) {
+                StudyBean defaultStudy = studyDAO.getDefaultStudy();
                 oauthAccount = new UserAccountBean();
                 oauthAccount.setName(a3rd_email);
                 oauthAccount.setFirstName(a3rd_name);
@@ -146,7 +155,7 @@ public class OAuthController {
 
                 oauthAccount.setPasswd(securityManager.encryptPassword(
                         a3rd_email, oauthAccount.getRunWebservices()));
-                oauthAccount.setPasswdTimestamp(null);
+                oauthAccount.setPasswdTimestamp(new Date());
                 oauthAccount.setLastVisitDate(null);
                 oauthAccount.setStatus(Status.AVAILABLE);
                 oauthAccount.setPasswdChallengeQuestion("");
@@ -156,15 +165,30 @@ public class OAuthController {
                 oauthAccount.setRunWebservices(null);
                 oauthAccount.setAccessCode("null");
                 oauthAccount.setEnableApiKey(true);
+                oauthAccount.setActiveStudyId(defaultStudy.getId());
                 oauthAccount.setRunWebservices(false);
+                //oauthAccount.addRole(surb);
+
                 userAccountDAO.create(oauthAccount);
+                userAccountDAO.disableUpdatePassword(oauthAccount);
+                //Add to default study
+                StudyUserRoleBean surb = new StudyUserRoleBean();
+                surb.setRole(Role.COORDINATOR);
+                surb.setActive(defaultStudy.isActive());
+                surb.setStudyName(defaultStudy.getName());
+                //surb.setRoleName(Role.COORDINATOR.getName());
+                surb.setStudyId(defaultStudy.getId());
+                surb.setStatus(Status.AVAILABLE);
+                surb.setUserName(oauthAccount.getName());
+                surb.setOwner(oauthAccount);
+                userAccountDAO.createStudyUserRole(oauthAccount, surb);
+
                 //reload the user account bean
                 oauthAccount = userAccountDAO.findByUserName(a3rd_email);
 
+
                 AuthoritiesDao authoritiesDao = (AuthoritiesDao) context.getBean("authoritiesDao");
                 authoritiesDao.saveOrUpdate(new AuthoritiesBean(oauthAccount.getName()));
-                OpenClinicaUsernamePasswordAuthenticationFilter filter = new OpenClinicaUsernamePasswordAuthenticationFilter();
-
             }
             //}}}
 
@@ -180,9 +204,18 @@ public class OAuthController {
                         TextEscapeUtils.escapeEntities(a3rd_email.trim()));
             }
 
+            ArrayList<StudyUserRoleBean> roles = userAccountDAO.findAllRolesByUserName(oauthAccount.getName());
+
             Authentication authentication = authenticationManager.authenticate(authRequest);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
+            if(roles.size()>0) {
+                request.getSession().setAttribute("study", studyDAO.findByPK(roles.get(0).getStudyId()) );
+                request.getSession().setAttribute("userRole", roles.get(0));
+            }
+
+            //request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
+
             return "redirect:/MainMenu";
         }
         catch (IOException ex) {
@@ -190,7 +223,7 @@ public class OAuthController {
             return "redirect:/pages/login/login";
         }
         catch(NoSuchAlgorithmException ex) {
-            logger.error(ex.getMessage(), ex);
+                logger.error(ex.getMessage(), ex);
             return "redirect:/pages/login/login";
         }
         catch (Exception ex) {
