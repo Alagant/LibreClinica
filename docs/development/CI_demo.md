@@ -15,7 +15,7 @@ Open the project in IntelliJ IDEA, as mentioned in the development documentation
 Build the project and start the local web server
 Check the hello world message in the login page
 Open the autodeployed site, and check that the hello world message is identical to those in the local webs server login page
-Check the hello world message in the web/src/main/resources/org/akaza/openclinica/i18n/licensing.properties file in the line starting with 'test.message='
+Check the hello world message in the web/src/main/resources/org/akaza/openclinica/i18n/debug.properties file in the line starting with 'test.message='
 Commit the changes to the pipeline git repository, to the master branch
 Check that the pipeline is triggered
 While the pipeline runs, rebuild the project in IntelliJ IDEA and restart the local web server

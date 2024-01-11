@@ -13,7 +13,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - "9090:8080"
+      - "8181:8080"
 
   libreclinica_test:
     build:

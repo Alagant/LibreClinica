@@ -1,7 +1,10 @@
+<jsp:useBean id="DebugHelper" scope="request" class="org.akaza.openclinica.core.util.DebugHelper"/>
 <%@ include file="/WEB-INF/jsp/taglibs.jsp" %>
 
 <fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.licensing" var="licensing"/>
+<fmt:setBundle basename="org.akaza.openclinica.datainfo" var="dataInfo"/>
+<fmt:setBundle basename="org.akaza.openclinica.i18n.debug" var="debug"/>
 
 <script type="text/javascript" src="<c:url value='/includes/wz_tooltip/wz_tooltip.js'/>"></script>
 
@@ -40,9 +43,9 @@
 					</div>
 
 					<div  id="version">
-                        <fmt:message key="Version_release" bundle="${licensing}"/> Change tag: <fmt:message key="test.message" bundle="${licensing}"/>
-                        <fmt:message key="DBHost" bundle="${licensing}"/> Database host: <fmt:message key="dbh ${dbHost}" bundle="${licensing}"/>
-                        <fmt:message key="Branch" bundle="${licensing}"/> Branch: <fmt:message key="${Build.SourceBranch}:${branch}" bundle="${licensing}"/>
+                        <fmt:message key="Version_release" bundle="${licensing}"/> Change tag: <fmt:message key="test.message" bundle="${debug}"/>
+                        Database host: <fmt:message key="dbHost" bundle="${dataInfo}"/>
+                        Branch: ${DebugHelper.currentGitBranch}
                     </div>
 
                 </td>
