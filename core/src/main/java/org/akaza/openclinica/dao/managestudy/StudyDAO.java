@@ -814,6 +814,10 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         return executeFindAllQuery(queryName, variables);
     }
 
+    public StudyBean getDefaultStudy() {
+        return executeFindByPKQuery("findDefaultStudy");
+    }
+
     @Override
     public StudyBean emptyBean() {
         return new StudyBean();
