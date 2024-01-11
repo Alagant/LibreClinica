@@ -217,6 +217,7 @@ public class MainMenuServlet extends SecureController {
 
                 }
 
+
                 forwardPage(Page.MENU);
 //            }
 
