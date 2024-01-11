@@ -42,6 +42,11 @@
 			time_zone=?, enable_api_key=?, api_key=?, authtype=?, authsecret=? where user_id=?</sql>
 	</query>
 	<query>
+		<name>disable_update_password</name>
+		<sql>update user_account set passwd_timestamp=now() where user_id=?
+		</sql>
+	</query>
+	<query>
 		<name>createRole</name>
 		<sql>insert into study_user_role (role_name, study_id, status_id, owner_id, date_created)
 		values (?,?,?,?,now())</sql>

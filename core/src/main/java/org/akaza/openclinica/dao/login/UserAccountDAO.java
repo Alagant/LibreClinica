@@ -328,6 +328,15 @@ public class UserAccountDAO extends AuditableEntityDAO<UserAccountBean> {
         return uab;
     }
 
+    public boolean disableUpdatePassword(UserAccountBean uab) {
+        HashMap<Integer, Object> variables = new HashMap<>();
+        HashMap<Integer, Integer> nullables = new HashMap<>();
+
+        variables.put(1, uab.getId());
+        this.executeUpdate(digester.getQuery("disable_update_password"), variables, nullables);
+        return isQuerySuccessful();
+    }
+
     public StudyUserRoleBean createStudyUserRole(UserAccountBean user, StudyUserRoleBean studyRole) {
         Locale currentLocale = ResourceBundleProvider.getLocale();
         ResourceBundleProvider.updateLocale(Locale.US); 
