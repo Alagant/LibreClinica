@@ -32,6 +32,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -210,12 +214,7 @@ public class OAuthController {
                 request.getSession().setAttribute("study", studyDAO.findByPK(roles.get(0).getStudyId()) );
                 request.getSession().setAttribute("userRole", roles.get(0));
             }
-            request.getSession().setAttribute("oauth_code", oauth_code);
-            request.getSession().setAttribute("dmm_session", a3rd_sub);
-            /*
-            Cookie cookie = new Cookie("session", a3rd_sub);
-            cookie.setDomain("-");
-            response.addCookie(cookie);*/
+
 
             //request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
 
