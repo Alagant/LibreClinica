@@ -215,7 +215,7 @@ public class OAuthController {
                 request.getSession().setAttribute("userRole", roles.get(0));
             }
 
-
+            request.getSession().setAttribute("oauth_code", oauth_code);
             //request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
 
             return "redirect:/MainMenu";
