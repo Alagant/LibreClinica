@@ -945,6 +945,7 @@ public abstract class SecureController extends HttpServlet implements SingleThre
     public Boolean sendEmail(String to, String from, String subject, String body, Boolean htmlEmail, String successMessage, String failMessage,
             Boolean sendMessage) throws Exception {
         Boolean messageSent = true;
+        System.out.println("Sending email via SecureController.sendEmail()");
         try {
             JavaMailSenderImpl mailSender = (JavaMailSenderImpl) SpringServletAccess.getApplicationContext(context).getBean("mailSender");
             //@pgawade 09-Feb-2012 #issue 13201 - setting the "mail.smtp.localhost" property to localhost when java API is not able to
@@ -955,6 +956,7 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             		javaMailProperties.put("mail.smtp.localhost", "localhost");
             	}
             }
+            System.out.println(javaMailProperties.get("mail.smtp.localhost"));
 
             MimeMessage mimeMessage = mailSender.createMimeMessage();
 
