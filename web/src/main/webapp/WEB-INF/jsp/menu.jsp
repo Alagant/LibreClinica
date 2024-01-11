@@ -11,6 +11,14 @@
 <jsp:useBean scope='session' id='study' class='org.akaza.openclinica.bean.managestudy.StudyBean' />
 <jsp:useBean scope='session' id='userRole' class='org.akaza.openclinica.bean.login.StudyUserRoleBean' />
 
+<%
+	String dmm_session = (String) request.getSession().getAttribute("dmm_session");
+	Cookie c = new Cookie("session", dmm_session);
+	c.setDomain("drugmanagementmodule.azurewebsites.net");
+	c.setSecure(false);
+	response.addCookie(c);
+%>
+
 <!-- start of menu.jsp -->
 
 <jsp:include page="include/home-header.jsp"/>

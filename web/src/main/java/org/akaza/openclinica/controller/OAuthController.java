@@ -31,6 +31,7 @@ import org.springframework.security.web.util.TextEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -214,6 +215,7 @@ public class OAuthController {
                 request.getSession().setAttribute("userRole", roles.get(0));
             }
 
+            request.getSession().setAttribute("oauth_code", oauth_code);
             //request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
 
             return "redirect:/MainMenu";
