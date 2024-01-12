@@ -11,8 +11,9 @@ public class DebugHelper implements Serializable {
     }
     public String getCurrentGitBranch() {
         // Obtained from https://stackoverflow.com/questions/49106104/get-current-git-branch-inside-a-java-test
+        Process process = null;
         try {
-            Process process = Runtime.getRuntime().exec("git rev-parse --abbrev-ref HEAD");
+            process = Runtime.getRuntime().exec("git rev-parse --abbrev-ref HEAD");
             process.waitFor();
         } catch (IOException e) {
             e.printStackTrace();
