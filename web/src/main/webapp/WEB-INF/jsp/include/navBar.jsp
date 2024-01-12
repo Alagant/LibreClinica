@@ -77,8 +77,11 @@ session.setAttribute("coreResources", coreResources);
 </c:if>
 
 <%
-    String UrlDMMAuth = "https://drugmanagementmodule.azurewebsites.net/login/callback?code=" +
-                            request.getSession().getAttribute("oauth_code");
+    String UrlDMMAuth = "https://drugmanagementmodule.azurewebsites.net";
+    String oauth_code = (String)request.getSession().getAttribute("oauth_code");
+    if(oauth_code!= null && oauth_code.length()>0)
+        UrlDMMAuth +="/login/callback?code=" + oauth_code;
+
 %>
 <!-- Main Navigation -->
      <div class="oc_nav">
