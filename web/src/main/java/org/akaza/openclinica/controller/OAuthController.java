@@ -147,6 +147,8 @@ public class OAuthController {
             UserAccountBean oauthAccount = userAccountDAO.findByUserName(a3rd_email);
             // the useraccount does not exist create {{{
             if(oauthAccount == null || oauthAccount.getId()<1) {
+                return "redirect:/pages/login/login";
+                /*
                 StudyBean defaultStudy = studyDAO.getDefaultStudy();
                 oauthAccount = new UserAccountBean();
                 oauthAccount.setName(a3rd_email);
@@ -190,6 +192,7 @@ public class OAuthController {
 
                 AuthoritiesDao authoritiesDao = (AuthoritiesDao) context.getBean("authoritiesDao");
                 authoritiesDao.saveOrUpdate(new AuthoritiesBean(oauthAccount.getName()));
+                */
             }
             //}}}
 
@@ -224,10 +227,11 @@ public class OAuthController {
             logger.error(ex.getMessage(), ex);
             return "redirect:/pages/login/login";
         }
+        /*
         catch(NoSuchAlgorithmException ex) {
                 logger.error(ex.getMessage(), ex);
             return "redirect:/pages/login/login";
-        }
+        }*/
         catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
             return "redirect:/pages/login/login";
