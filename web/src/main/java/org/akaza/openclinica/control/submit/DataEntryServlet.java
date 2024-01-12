@@ -135,6 +135,11 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author ssachs
@@ -313,6 +318,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
         //JN:The following were the the global variables, moved as local.
         locale = LocaleResolver.getLocale(request);
         EventCRFBean ecb = (EventCRFBean)request.getAttribute(INPUT_EVENT_CRF);
+        System.out.println(request.getParameterMap());
         SectionBean sb = (SectionBean)request.getAttribute(SECTION_BEAN);
         ItemDataDAO iddao = new ItemDataDAO(getDataSource(),locale);
         HttpSession session = request.getSession();
@@ -593,7 +599,15 @@ public abstract class DataEntryServlet extends CoreSecureController {
         SubjectDAO subjectDao = new SubjectDAO(getDataSource());
         StudyDAO studydao = new StudyDAO(getDataSource());
         SubjectBean subject = (SubjectBean) subjectDao.findByPK(ssb.getSubjectId());
+        EnrollmentData enrollmentData = new EnrollmentData();
+        if (subject.getGender() == 'm') {
+            enrollmentData.setGender("Male");
+        } else {
+            enrollmentData.setGender("Female");
+        }
 
+        enrollmentData.setStudyID(currentStudy.getIdentifier());
+        enrollmentData.setSubjectID(ssb.getSubjectId());
         // Get the study then the parent study
         logMe("Entering  Get the study then the parent study   "+System.currentTimeMillis());
         if (study.getParentStudyId() > 0) {
@@ -612,6 +626,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
             Date enrollmentDate = ssb.getEnrollmentDate();
             age = Utils.getInstacne().processAge(enrollmentDate, subject.getDateOfBirth());
         }
+        enrollmentData.setAge(age);
         //ArrayList beans = ViewStudySubjectServlet.getDisplayStudyEventsForStudySubject(ssb, getDataSource(), ub, currentRole);
         request.setAttribute("studySubject", ssb);
         request.setAttribute("subject", subject);
@@ -825,6 +840,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
 
                 }
             }
+
             logMe("Loop ended  "+System.currentTimeMillis());
           //JN: This is the list that contains all the scd-shown items.
             List<ItemBean> itemBeansWithSCDShown = new ArrayList<ItemBean>();
@@ -834,6 +850,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                 for (int i = 0; i < allItems.size(); ++i) {
                     DisplayItemBean dib = allItems.get(i).getSingleItem();
                     ItemFormMetadataBean ifmb = dib.getMetadata();
+
                     if(ifmb.getParentId()==0) {
                         if(dib.getScdData().getScdSetsForControl().size()>0){
                             //for control item
@@ -866,6 +883,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                         }
                     }
                 }
+
                 logMe(" Validate and Loop end  "+System.currentTimeMillis());
             }
             logMe(" Validate and Loop end  "+System.currentTimeMillis());
@@ -880,6 +898,29 @@ public abstract class DataEntryServlet extends CoreSecureController {
             logMe("allItems  Loop begin  "+System.currentTimeMillis());
             for (int i = 0; i < allItems.size(); i++) {
                 DisplayItemWithGroupBean diwg = allItems.get(i);
+                if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Site ID")){
+                    enrollmentData.setSiteID(diwg.getSingleItem().getData().getValue());
+                }
+                if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Any cavitation on chest x-ray")){
+                    if(diwg.getSingleItem().getData().getValue().equalsIgnoreCase("Y")){
+
+                        enrollmentData.setCavitation(true);
+                    } else {
+                        enrollmentData.setCavitation(false);
+                    }
+                }
+                if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Weight")){
+                    enrollmentData.setWeight(diwg.getSingleItem().getData().getValue());
+                }
+                if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Weight unit")){
+                    enrollmentData.setWeightUnit(diwg.getSingleItem().getData().getValue());
+                }
+                if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Enrollment Date")){
+                    enrollmentData.setEnrollmentDate(diwg.getSingleItem().getData().getValue());
+                }
+                if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Scheduled study treatment start date")){
+                    enrollmentData.setTreatmentStartDate(diwg.getSingleItem().getData().getValue());
+                }
                 if (diwg.isInGroup()) {
                     // for the items in groups
                     DisplayItemGroupBean dgb = diwg.getItemGroup();
@@ -931,6 +972,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                     allItems.set(i, diwg);
                 }
             }
+
             logMe("allItems  Loop end  "+System.currentTimeMillis());
             // YW, 2-1-2008 <<
             // A map from item name to item bean object.
@@ -1540,6 +1582,10 @@ public abstract class DataEntryServlet extends CoreSecureController {
                     // we don't write success = success && writeToDB here
                     // since the short-circuit mechanism may prevent Java
                     // from executing writeToDB.
+                    System.out.println(diwb);
+                    System.out.println(diwb.getSingleItem().getItem().getDescription());
+                    System.out.println(diwb.getSingleItem().getData().getValue());
+
                     if (diwb.isInGroup()) {
 
                         List<DisplayItemGroupBean> dgbs = diwb.getItemGroups();
@@ -1644,7 +1690,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
                             }
                         }
 
-                    } else {
+                    }
+                    else {
                         DisplayItemBean dib = diwb.getSingleItem();
                         // TODO work on this line
 
@@ -2056,8 +2103,44 @@ public abstract class DataEntryServlet extends CoreSecureController {
                     }
                 }// end of if-block for dynamic rules not in same section, tbh 05/2010
             }// end of save
+            String apiUrl = "http://localhost:3000/dmm";
+            sendObjectAsJSON(enrollmentData, apiUrl);
         }
 
+    }
+
+    public void sendObjectAsJSON(Object object, String apiUrl) {
+        try {
+            // Convert the object to JSON format
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(object);
+
+            // Configure the HTTP connection
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            // Write JSON data to the request body
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = json.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            // Check the response code
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                System.out.println("Data sent successfully.");
+            } else {
+                System.out.println("Error sending data. Response code: " + responseCode);
+            }
+
+            // Close the connection
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     protected boolean writeDN(DisplayItemBean displayItem)
     {
