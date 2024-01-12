@@ -9,13 +9,25 @@ public class DebugHelper implements Serializable {
     public DebugHelper() {
         super();
     }
-    public String getCurrentGitBranch() throws IOException, InterruptedException {
+    public String getCurrentGitBranch() {
         // Obtained from https://stackoverflow.com/questions/49106104/get-current-git-branch-inside-a-java-test
-        Process process = Runtime.getRuntime().exec( "git rev-parse --abbrev-ref HEAD" );
-        process.waitFor();
+        try {
+            Process process = Runtime.getRuntime().exec("git rev-parse --abbrev-ref HEAD");
+            process.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Unknown(error)";
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return "Unknown(interrupted)";
+        }
 
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader( process.getInputStream() ) );
-
-        return reader.readLine();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader( process.getInputStream() ) )) {
+            return reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Unknown(error reading command output)";
+        }
+        ;
     }}
