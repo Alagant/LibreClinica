@@ -9,6 +9,7 @@ public class DebugHelper implements Serializable {
     public DebugHelper() {
         super();
     }
+
     public String getCurrentGitBranch() {
         // Obtained from https://stackoverflow.com/questions/49106104/get-current-git-branch-inside-a-java-test
         Process process = null;
@@ -24,11 +25,11 @@ public class DebugHelper implements Serializable {
         }
 
         try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader( process.getInputStream() ) )) {
+                new InputStreamReader(process.getInputStream()))) {
             return reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
             return "Unknown(error reading command output)";
         }
-        ;
-    }}
+    }
+}
