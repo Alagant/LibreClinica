@@ -1,3 +1,4 @@
+<%@ page import="org.akaza.openclinica.dao.core.CoreResources" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -12,11 +13,15 @@
 <jsp:useBean scope='session' id='userRole' class='org.akaza.openclinica.bean.login.StudyUserRoleBean' />
 
 <%
-	String dmm_session = (String) request.getSession().getAttribute("dmm_session");
-	Cookie c = new Cookie("session", dmm_session);
-	c.setDomain("drugmanagementmodule.azurewebsites.net");
-	c.setSecure(false);
-	response.addCookie(c);
+	//String dmmSiteUrl = CoreResources.getField("dmm.url");
+
+
+	//String dmm_session = (String) request.getSession().getAttribute("dmm_session");
+	//Cookie c = new Cookie("session", dmm_session);
+	//c.setDomain("drugmanagementmodule.azurewebsites.net");
+	//c.setDomain(dmmSiteUrl);
+	//c.setSecure(false);
+	//response.addCookie(c);
 %>
 
 <!-- start of menu.jsp -->

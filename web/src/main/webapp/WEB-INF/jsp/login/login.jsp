@@ -1,10 +1,16 @@
 <%
-    String oauth_server = "https://cdcoauthmockup.azurewebsites.net";
+    //String oauth_server = CoreResources.getField("oauth.url");
+            //"https://cdcoauthmockup.azurewebsites.net";
     String self_url = ServletUriComponentsBuilder.fromCurrentContextPath().build().toString();
-    String oauth_base_url = oauth_server + "/auth/oauth/v2";
-    String oauth_client_id = "19216801";
-    String oauth_redirect_uri = self_url + "/oauth";
+    //String oauth_base_url = oauth_server + "/auth/oauth/v2";
+    //String oauth_client_id = "19216801";
+    String oauth_client_id = CoreResources.getField("oauth.clientId");
+    String oauth_redirect_uri = self_url + CoreResources.getField("oauth.redirectUri") /* "/oauth"*/;
+    /*
     String oauth_authorize_url = oauth_base_url + "/authorize?response_type=code&client_id="+oauth_client_id+"&"+
+            "redirect_uri="+oauth_redirect_uri+"&scope=openid%20profile";*/
+    String oauth_authorize_url = CoreResources.getField("oauth.authorizeUrl") +
+            "?response_type=code&client_id="+oauth_client_id+"&"+
             "redirect_uri="+oauth_redirect_uri+"&scope=openid%20profile";
 
 %>
@@ -36,6 +42,7 @@
 <%@ page import="org.akaza.openclinica.dao.login.UserAccountDAO" %>
 <%@ page import="javax.sql.DataSource" %>
 <%@ page import="org.akaza.openclinica.control.core.SecureController" %>
+<%@ page import="org.akaza.openclinica.dao.core.CoreResources" %>
 
 
 <!-- For Mantis Issue 6099 -->
