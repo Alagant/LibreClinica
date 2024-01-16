@@ -73,16 +73,13 @@ public class OAuthController {
     }
     @RequestMapping("/oauth")
     public String oauth(HttpServletRequest request, HttpServletResponse response/*ModelMap modelMap*/) {
-        String oauth_server = "https://cdcoauthmockup.azurewebsites.net";
-        //String oauth_server = CoreResources.getField("oauth.server");
-        String oauth_base_url = oauth_server + "/auth/oauth/v2";
-        String openid_base_url = oauth_server + "/openid/connect/v1";
+        String oauth_server = CoreResources.getField("oauth.url"); // "https://cdcoauthmockup.azurewebsites.net";
         String self_url = request.getRequestURL().toString().replace(request.getRequestURI(),"");
         String oauth_redirect_uri = self_url + "/pages/login/login";
 
         String oauth_code = request.getParameter("code");
-        String oauth_client_id = "19216801";
-        String oauth_client_secret = "3EEnASDAS6pmAASDyPzviWQSDPufTcIpg";
+        String oauth_client_id = CoreResources.getField("oauth.clientId");
+        String oauth_client_secret = CoreResources.getField("oauth.clientSecret");
 
         StudyDAO studyDAO = new StudyDAO(dataSource);
 
@@ -91,7 +88,7 @@ public class OAuthController {
         }
 
         try {
-            String oauth_token_url = oauth_base_url + "/token";
+            String oauth_token_url = CoreResources.getField("oauth.tokenUrl"); /* oauth_base_url + "/token";*/
             URL url = new URL(oauth_token_url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             //connection.setRequestMethod("POST");
@@ -126,7 +123,7 @@ public class OAuthController {
             }
 
 
-            connection = (HttpURLConnection) new URL(openid_base_url + "/userinfo").openConnection();
+            connection = (HttpURLConnection) new URL( CoreResources.getField("oauth.userInfoUrl") ).openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Authorization", "Bearer " + access_token);
             connection.setDoOutput(true);
