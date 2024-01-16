@@ -175,7 +175,7 @@ session.setAttribute("coreResources", coreResources);
 				</table>
             </div>
 
-        </tr>
+        </div>
     </table>
     <!-- NAVIGATION DROP-DOWN -->
     
