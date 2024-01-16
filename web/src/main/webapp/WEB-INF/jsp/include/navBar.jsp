@@ -78,7 +78,6 @@ session.setAttribute("coreResources", coreResources);
 
 <%
     String UrlDMMAuth = CoreResources.getField("dmm.url");
-            //"https://drugmanagementmodule.azurewebsites.net";
     String oauth_code = (String)request.getSession().getAttribute("oauth_code");
     if(oauth_code!= null && oauth_code.length()>0)
         UrlDMMAuth +="/login/callback?code=" + oauth_code;

@@ -74,19 +74,12 @@ public class OAuthController {
     @RequestMapping("/oauth")
     public String oauth(HttpServletRequest request, HttpServletResponse response/*ModelMap modelMap*/) {
         String oauth_server = CoreResources.getField("oauth.url"); // "https://cdcoauthmockup.azurewebsites.net";
-        //String oauth_server = CoreResources.getField("oauth.server");
-        //String oauth_base_url = oauth_server + "/auth/oauth/v2";
-        //String openid_base_url = oauth_server + "/openid/connect/v1";
         String self_url = request.getRequestURL().toString().replace(request.getRequestURI(),"");
         String oauth_redirect_uri = self_url + "/pages/login/login";
 
         String oauth_code = request.getParameter("code");
         String oauth_client_id = CoreResources.getField("oauth.clientId");
         String oauth_client_secret = CoreResources.getField("oauth.clientSecret");
-        /*
-        String oauth_client_id = "19216801";
-        String oauth_client_secret = "3EEnASDAS6pmAASDyPzviWQSDPufTcIpg";
-        */
 
         StudyDAO studyDAO = new StudyDAO(dataSource);
 

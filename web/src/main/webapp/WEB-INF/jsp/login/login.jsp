@@ -1,14 +1,7 @@
 <%
-    //String oauth_server = CoreResources.getField("oauth.url");
-            //"https://cdcoauthmockup.azurewebsites.net";
     String self_url = ServletUriComponentsBuilder.fromCurrentContextPath().build().toString();
-    //String oauth_base_url = oauth_server + "/auth/oauth/v2";
-    //String oauth_client_id = "19216801";
     String oauth_client_id = CoreResources.getField("oauth.clientId");
     String oauth_redirect_uri = self_url + CoreResources.getField("oauth.redirectUri") /* "/oauth"*/;
-    /*
-    String oauth_authorize_url = oauth_base_url + "/authorize?response_type=code&client_id="+oauth_client_id+"&"+
-            "redirect_uri="+oauth_redirect_uri+"&scope=openid%20profile";*/
     String oauth_authorize_url = CoreResources.getField("oauth.authorizeUrl") +
             "?response_type=code&client_id="+oauth_client_id+"&"+
             "redirect_uri="+oauth_redirect_uri+"&scope=openid%20profile";
