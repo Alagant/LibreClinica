@@ -24,11 +24,11 @@ resources:
       endpoint: Alagant
       name: Alagant/libreclinica-qa
       ref: refs/heads/main
-    #- repository: LcDRM
-    #  type: github
-    #  endpoint: Alagant
-    #  name: Alagant/libreclinica_drug_trial_module
-    #  ref: refs/heads/main
+    - repository: LcDMM
+      type: github
+      endpoint: Alagant
+      name: Alagant/libreclinica_drug_trial_module
+      ref: refs/heads/main
 
 
 variables:
@@ -56,6 +56,7 @@ stages:
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
       #path: libreclinica-qa
+    - checkout: LcDMM
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -71,8 +72,6 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          #cd LibreClinica/
-          #git clone https://github.com/Alagant/libreclinica_drug_trial_module
           cd /home/azureuser/Alagant_projects/LibreClinica/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)

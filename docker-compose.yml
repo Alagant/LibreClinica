@@ -29,19 +29,19 @@ services:
     volumes:
       - libreclinica:/libreclinica
 
-# Now the DMM is not dockerized, so its definition is commented out.
-#  flask:
-#    build:
-#      context: libreclinica_drug_trial_module/
-#      dockerfile: Dockerfile
-#    ports:
-#      - "81:81"
-#    depends_on:
-#      - postgres
-#    env_file: .env
-#    command: flask run -p 81 -h flask --no-reload
-#    #volumes:
-#    #  - libreclinica:/libreclinica
+  dmm:
+    build:
+      context: ../libreclinica_drug_trial_module/
+      dockerfile: Dockerfile
+    ports:
+      - "81:81"  # Map port 5000 of the host to port 5000 of the container
+    volumes:
+      - ../libreclinica_drug_trial_module:/app  # Mount the current directory into the container's /app directory
+    environment:
+      FLASK_APP: flask_app  # Set the FLASK_APP environment variable
+    #command: ls -lh /app/flask_app
+    command: flask run -p 81 -h dmm --no-reload
+
 volumes:
   libreclinica:
 #  postgres_data:
