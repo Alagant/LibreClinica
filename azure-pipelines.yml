@@ -33,7 +33,7 @@ resources:
       type: github
       endpoint: Alagant
       name: Alagant/cdc_oauth_portal_mockup
-      ref: refs/heads/main
+      ref: main
 
 
 variables:
