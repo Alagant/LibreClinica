@@ -29,6 +29,11 @@ resources:
       endpoint: Alagant
       name: Alagant/libreclinica_drug_trial_module
       ref: refs/heads/main
+    - repository: CDCOauthMockup
+      type: github
+      endpoint: Alagant
+      name: Alagant/cdc_oauth_portal_mockup
+      ref: refs/heads/main
 
 
 variables:
@@ -57,6 +62,7 @@ stages:
     - checkout: LcQA
       #path: libreclinica-qa
     - checkout: LcDMM
+    - checkout: CDCOauthMockup
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -81,19 +87,12 @@ stages:
           docker ps -a
           echo 'Hello DevOps'
           ls -ltra
-        #  docker service rm libreclinica
-        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
-        #  docker service ps  libreclinica
 
     - task: Bash@3
       displayName: Test and report commit message
       inputs:
         targetType: 'inline'
         script: |
-          # 
-          #git clone https://github.com/Alagant/libreclinica-qa.git
-          #ls -ltra
-          #ls -ltra libreclinica-qa/
           cd libreclinica-qa/
           docker compose -f docker-compose.yml build
           docker compose -f docker-compose.yml up libreclinica-qa
@@ -110,15 +109,3 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
-
-    #- task: GitHubRelease@1
-    #  displayName: GitHub Release
-    #  inputs:
-    #    gitHubConnection: 'Alagant'
-    #    repositoryName: 'Alagant/LibreClinica'
-    #    action: 'create'
-    #    target: '$(Build.SourceVersion)'
-    #    tagSource: 'userSpecifiedTag'
-    #    tag: '$(Build.BuildId)'
-    #    changeLogCompareToRelease: 'lastFullRelease'
-    #    changeLogType: 'commitBased'

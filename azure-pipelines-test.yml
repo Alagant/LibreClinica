@@ -26,11 +26,16 @@ resources:
       endpoint: Alagant
       name: Alagant/libreclinica-qa
       ref: refs/heads/main
-    #- repository: LcDRM
-    #  type: github
-    #  endpoint: Alagant
-    #  name: Alagant/libreclinica_drug_trial_module
-    #  ref: refs/heads/main
+    - repository: LcDMM
+      type: github
+      endpoint: Alagant
+      name: Alagant/libreclinica_drug_trial_module
+      ref: refs/heads/main
+    - repository: CDCOauthMockup
+      type: github
+      endpoint: Alagant
+      name: Alagant/cdc_oauth_portal_mockup
+      ref: refs/heads/main
 
 
 variables:
@@ -58,7 +63,8 @@ stages:
       #ref: refs/heads/lc-release-1.2.1
       clean: true
     - checkout: LcQA
-      #path: libreclinica-qa
+    - checkout: LcDMM
+    - checkout: CDCOauthMockup
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -85,9 +91,6 @@ stages:
           docker ps -a
           echo 'Hello DevOps'
           ls -ltra
-        #  docker service rm libreclinica
-        #  docker service create --name=libreclinica --restart-condition=any --publish=8183:8080 --hostname=localhost libreclinica:master
-        #  docker service ps  libreclinica
 
     - task: Bash@3
       displayName: Test and report commit message
