@@ -28,7 +28,7 @@ resources:
       type: github
       endpoint: Alagant
       name: Alagant/libreclinica_drug_trial_module
-      ref: refs/heads/main
+      ref: main
     - repository: CDCOauthMockup
       type: github
       endpoint: Alagant
