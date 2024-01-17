@@ -28,12 +28,12 @@ resources:
       type: github
       endpoint: Alagant
       name: Alagant/libreclinica_drug_trial_module
-      ref: main
+      #ref: main
     - repository: CDCOauthMockup
       type: github
       endpoint: Alagant
       name: Alagant/cdc_oauth_portal_mockup
-      ref: main
+      #ref: main
 
 
 variables:
