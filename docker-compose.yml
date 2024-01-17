@@ -39,7 +39,6 @@ services:
       - ../libreclinica_drug_trial_module:/app  # Mount the current directory into the container's /app directory
     environment:
       FLASK_APP: flask_app  # Set the FLASK_APP environment variable
-    #command: ls -lh /app/flask_app
     command: flask run -p 81 -h dmm --no-reload
 
 volumes:
