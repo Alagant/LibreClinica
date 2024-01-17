@@ -70,14 +70,14 @@ session.setAttribute("coreResources", coreResources);
 <c:set var="profilePage" value="${param.profilePage}"/>
 <!--  If Controller Spring based append ../ to urls -->
 <c:set var="urlPrefix" value="${pageContext.request.contextPath}/"/>
-<c:set var="urlDMM" value="https://drugmanagementmodule.azurewebsites.net"/>
+
 <c:set var="requestFromSpringController" value="${param.isSpringController}" />
 <c:if test="${requestFromSpringController == 'true' }">
       <c:set var="urlPrefix" value="${pageContext.request.contextPath}/"/>
 </c:if>
 
 <%
-    String UrlDMMAuth = "https://drugmanagementmodule.azurewebsites.net";
+    String UrlDMMAuth = CoreResources.getField("dmm.url");
     String oauth_code = (String)request.getSession().getAttribute("oauth_code");
     if(oauth_code!= null && oauth_code.length()>0)
         UrlDMMAuth +="/login/callback?code=" + oauth_code;
@@ -119,7 +119,6 @@ session.setAttribute("coreResources", coreResources);
                                         <c:if test="${userRole.coordinator || userRole.director}">
                                             <li><a href="${urlPrefix}MainMenu"><fmt:message key="nav_home" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}ListStudySubjects"><fmt:message key="nav_subject_matrix" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-                                            <!-- <li><a href="${urlDMM}"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> -->
                                             <li><a href="<%= UrlDMMAuth %>"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}ViewNotes?module=submit"><fmt:message key="nav_notes_and_discrepancies" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}StudyAuditLog"><fmt:message key="nav_study_audit_log" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
@@ -127,7 +126,6 @@ session.setAttribute("coreResources", coreResources);
                                         <c:if test="${userRole.researchAssistant ||userRole.researchAssistant2}">
                                             <li><a href="${urlPrefix}MainMenu"><fmt:message key="nav_home" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}ListStudySubjects"><fmt:message key="nav_subject_matrix" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-                                            <!-- <li><a href="${urlDMM}"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> -->
                                             <li><a href="<%= UrlDMMAuth %>"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <c:if test="${study.status.available}">
                                                 <li><a href="${urlPrefix}AddNewSubject"><fmt:message key="nav_add_subject" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
@@ -137,7 +135,6 @@ session.setAttribute("coreResources", coreResources);
                                         <c:if test="${userRole.investigator}">
                                             <li><a href="${urlPrefix}MainMenu"><fmt:message key="nav_home" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}ListStudySubjects"><fmt:message key="nav_subject_matrix" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-                                            <!-- <li><a href="${urlDMM}"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> -->
                                             <li><a href="<%= UrlDMMAuth %>"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
 
                                             <c:if test="${study.status.available}">
@@ -148,7 +145,6 @@ session.setAttribute("coreResources", coreResources);
                                         <c:if test="${userRole.monitor }">
                                             <li><a href="${urlPrefix}MainMenu"><fmt:message key="nav_home" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}ListStudySubjects"><fmt:message key="nav_subject_matrix" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
-                                            <!-- <li><a href="${urlDMM}"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li> -->
                                             <li><a href="<%= UrlDMMAuth %>"><fmt:message key="nav_drug_management" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}pages/viewAllSubjectSDVtmp?sdv_restore=${restore}&studyId=${study.id}"><fmt:message key="nav_sdv" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
                                             <li><a href="${urlPrefix}ViewNotes?module=submit"><fmt:message key="nav_notes_and_discrepancies" bundle="${resword}"/></a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
