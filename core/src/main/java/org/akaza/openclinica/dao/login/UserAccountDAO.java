@@ -559,6 +559,20 @@ public class UserAccountDAO extends AuditableEntityDAO<UserAccountBean> {
         }
         return eb;
     }
+
+    public UserAccountBean findByEmail(String email) {
+        this.setTypesExpected();
+        HashMap<Integer, Object> variables = new HashMap<>();
+
+        variables.put(1, email);
+
+        ArrayList<HashMap<String, Object>> alist = this.select(digester.getQuery("findByEmail"), variables);
+        UserAccountBean eb = new UserAccountBean();
+        if (alist != null && alist.size() > 0) {
+            eb = this.getEntityFromHashMap(alist.get(0), true);
+        }
+        return eb;
+    }
     
     public UserAccountBean findByAccessCode(String name) {
         this.setTypesExpected();
