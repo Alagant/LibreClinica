@@ -21,10 +21,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.security.web.util.TextEscapeUtils;
@@ -45,10 +47,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 import static org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter.*;
 
@@ -141,7 +140,7 @@ public class OAuthController {
 
             UserAccountDAO userAccountDAO = new UserAccountDAO(dataSource);
             //find the Bean by username,
-            UserAccountBean oauthAccount = userAccountDAO.findByUserName(a3rd_email);
+            UserAccountBean oauthAccount = userAccountDAO.findByEmail(a3rd_email);
             // the useraccount does not exist create {{{
             if(oauthAccount == null || oauthAccount.getId()<1) {
                 return "redirect:/pages/login/login";
@@ -194,7 +193,8 @@ public class OAuthController {
             //}}}
 
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-                    a3rd_email.trim(), a3rd_email);
+                    oauthAccount.getName(), ""/*oauthAccount.getPasswd()*/);
+
 
             // Place the last username attempted into HttpSession for views
             HttpSession session = request.getSession(false);
@@ -202,12 +202,54 @@ public class OAuthController {
             if (session != null ) {
                 request.getSession().setAttribute(
                         SPRING_SECURITY_LAST_USERNAME_KEY,
-                        TextEscapeUtils.escapeEntities(a3rd_email.trim()));
+                        TextEscapeUtils.escapeEntities(oauthAccount.getName() ));
             }
 
             ArrayList<StudyUserRoleBean> roles = userAccountDAO.findAllRolesByUserName(oauthAccount.getName());
 
-            Authentication authentication = authenticationManager.authenticate(authRequest);
+
+            //Authentication authentication = authenticationManager.authenticate(authRequest);
+            Authentication authentication = new Authentication() {
+                @Override
+                public Collection<? extends GrantedAuthority> getAuthorities() {
+                    Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>(1);
+                    auths.add(new SimpleGrantedAuthority("ROLE_USER"));
+                    return auths;
+
+                }
+
+                @Override
+                public Object getCredentials() {
+                    return oauthAccount.getPasswd();
+                }
+
+                @Override
+                public Object getDetails() {
+                    return oauthAccount.getRoles();
+                }
+
+                @Override
+                public Object getPrincipal() {
+                    return oauthAccount;
+                }
+
+                @Override
+                public boolean isAuthenticated() {
+                    return true;
+                }
+
+                @Override
+                public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+
+                }
+
+                @Override
+                public String getName() {
+                    return oauthAccount.getName();
+                }
+
+
+            };
             SecurityContextHolder.getContext().setAuthentication(authentication);
             request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
             if(roles.size()>0) {

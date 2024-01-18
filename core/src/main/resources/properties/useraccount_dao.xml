@@ -5,6 +5,10 @@
 		<sql>SELECT * FROM USER_ACCOUNT WHERE USER_ID = ?</sql>
 	</query>
 	<query>
+		<name>findByEmail</name>
+		<sql>SELECT * FROM USER_ACCOUNT WHERE email = ?</sql>
+	</query>
+	<query>
 		<name>findAll</name>
 		<sql>SELECT * FROM USER_ACCOUNT WHERE USER_NAME NOT LIKE '%.SS_%'</sql>
 	</query>
