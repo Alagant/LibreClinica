@@ -43,7 +43,7 @@ To restore a database, you can use the following command:
 for example:
 `docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica_2023-12-24T01_20_23-06_00.sql`,
 If you want to query the database, you can use the following command:
-docker compose run postgres psql -d libreclinica -U clinica -h postgres -c "SELECT * from public.user_account;"
+`docker compose run postgres psql -d libreclinica -U clinica -h postgres -c "SELECT * from public.user_account;"`
 replacing the SELECT query with your own query.
 ### Contributions
                           
