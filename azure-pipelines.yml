@@ -16,24 +16,24 @@ resources:
   repositories:
     - repository: LcRepo
       type: github
-      endpoint: github.com_Lucioric2000
+      endpoint: Alagant
       name: Alagant/LibreClinica
       ref: refs/heads/$(Build.SourceBranchName)
     - repository: LcQA
       type: github
-      endpoint: github.com_Lucioric2000
+      endpoint: Alagant
       name: Alagant/libreclinica-qa
       ref: refs/heads/main
-#    - repository: LcDMM
-#      type: github
-#      endpoint: Alagant
-#      name: Alagant/libreclinica_drug_trial_module
-#      #ref: main
-#    - repository: CDCOauthMockup
-#      type: github
-#      endpoint: Alagant
-#      name: Alagant/cdc_oauth_portal_mockup
-#      #ref: main
+    - repository: LcDMM
+      type: github
+      endpoint: Alagant
+      name: Alagant/libreclinica_drug_trial_module
+      ref: refs/heads/main
+    - repository: CDCOauthMockup
+      type: github
+      endpoint: Alagant
+      name: Alagant/cdc_oauth_portal_mockup
+      ref: refs/heads/main
 
 
 variables:
