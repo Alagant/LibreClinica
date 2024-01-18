@@ -9,13 +9,7 @@ package org.akaza.openclinica.control.submit;
 
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -143,6 +137,9 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     protected void configureColumns(TableFacade tableFacade, Locale locale) {
         resword = ResourceBundleProvider.getWordsBundle(locale);
         resformat = ResourceBundleProvider.getFormatBundle(locale);
+        String[] newColumnNames = Arrays.copyOf(columnNames, columnNames.length + 1);
+        newColumnNames[newColumnNames.length - 1] = "pdf";
+        columnNames = newColumnNames;
         tableFacade.setColumnProperties(columnNames);
         Row row = tableFacade.getTable().getRow();
         int index = 0;
@@ -170,15 +167,17 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
                     new SubjectGroupClassDroplistFilterEditor(studyGroupClass), true, false);
         }
         // study event definition columns
-        for (int i = index + studyGroupClasses.size(); i < columnNames.length - 1; i++) {
+        for (int i = index + studyGroupClasses.size(); i < columnNames.length - 2; i++) {
             StudyEventDefinitionBean studyEventDefinition = studyEventDefinitions.get(i - (index + studyGroupClasses.size()));
             configureColumn(row.getColumn(columnNames[i]), studyEventDefinition.getName(), new StudyEventDefinitionMapCellEditor(),
                     new SubjectEventStatusDroplistFilterEditor(), true, false);
         }
         String actionsHeader = resword.getString("rule_actions")
                 + "&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;";
-        configureColumn(row.getColumn(columnNames[columnNames.length - 1]), actionsHeader, new ActionsCellEditor(), new DefaultActionsEditor(locale), true,
+        configureColumn(row.getColumn(columnNames[columnNames.length - 2]), actionsHeader, new ActionsCellEditor(), new DefaultActionsEditor(locale), true,
                 false);
+        ++index;
+        configureColumn(row.getColumn(columnNames[columnNames.length - 1]), "pdf", null, null);
 
     }
 
@@ -289,8 +288,12 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
                 theItem.put("sed_" + studyEventDefinition.getId() + "_object", studyEventDefinition);
 
             }
-
+            StringBuilder actionLink = new StringBuilder();
+            actionLink.append("<a href=\"").append("http://localhost:3000/getpdf/" + studySubjectBean.getId())
+                    .append(" class=\"pdf\">PDF</a>");
+            theItem.put("pdf", actionLink.toString());
             theItems.add(theItem);
+
         }
 
         // Do not forget to set the items back on the tableFacade.
