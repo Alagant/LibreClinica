@@ -2103,7 +2103,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
                     }
                 }// end of if-block for dynamic rules not in same section, tbh 05/2010
             }// end of save
-            String apiUrl = "http://localhost:3000/dmm";
+            String apiUrl = "https://drugmanagementmodule.azurewebsites.net/subject_api";
+            System.out.println("API URL: "+apiUrl);
             sendObjectAsJSON(enrollmentData, apiUrl);
         }
 
@@ -2113,7 +2114,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
         try {
             // Convert the object to JSON format
             ObjectMapper objectMapper = new ObjectMapper();
-            String json = objectMapper.writeValueAsString(object);
+            String json = "{\"subjects\": ["+objectMapper.writeValueAsString(object)+"]}";
+            System.out.println("\n"+json+"\n");
 
             // Configure the HTTP connection
             URL url = new URL(apiUrl);
@@ -2130,7 +2132,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
 
             // Check the response code
             int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (responseCode == HttpURLConnection.HTTP_CREATED) {
                 System.out.println("Data sent successfully.");
             } else {
                 System.out.println("Error sending data. Response code: " + responseCode);
