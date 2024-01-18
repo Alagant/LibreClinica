@@ -1,10 +1,3 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-# https://github.com/huezo
-# Victor H. <huezohuezo.1990@gmail.com>
-# Victor H. <huezohuezo.1990@gmail.com>
-
 trigger:
 - master
 
@@ -45,12 +38,6 @@ stages:
   jobs:
   - job: DevOps
     steps:
-#    - task: Docker@2
-#      displayName: Build an image
-#      inputs:
-#        command: 'build'
-#        Dockerfile: '**/Dockerfile'
-#        tags: '$(tag)'
     - checkout: LcRepo
       #clean: true
       persistCredentials: true
@@ -61,8 +48,8 @@ stages:
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
       #path: libreclinica-qa
-    #- checkout: LcDMM
-    #- checkout: CDCOauthMockup
+    - checkout: LcDMM
+    - checkout: CDCOauthMockup
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:

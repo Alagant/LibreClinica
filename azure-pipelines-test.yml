@@ -1,10 +1,3 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-# https://github.com/huezo
-# Victor H. <huezohuezo.1990@gmail.com>
-# Victor H. <huezohuezo.1990@gmail.com>
-
 trigger:
   branches:
     exclude:
@@ -47,12 +40,6 @@ stages:
   jobs:
   - job: DevOps
     steps:
-#    - task: Docker@2
-#      displayName: Build an image
-#      inputs:
-#        command: 'build'
-#        Dockerfile: '**/Dockerfile'
-#        tags: '$(tag)'
     - checkout: LcRepo
       #clean: true
       persistCredentials: true
@@ -72,7 +59,7 @@ stages:
         script: |
           cd LibreClinica/
           docker compose -f docker-compose-test.yml down libreclinica_test
-          #docker container stop $(docker container ls -aq)||echo No Docker containers to stop
+          docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
     - task: Bash@3
       displayName: DevOps
@@ -81,7 +68,6 @@ stages:
         script: |
           # Docker DevOps
           cd LibreClinica/
-          #git clone https://github.com/Alagant/libreclinica_drug_trial_module
           cd /home/azureuser/Alagant_projects/LibreClinica/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
@@ -97,10 +83,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          # 
-          #git clone https://github.com/Alagant/libreclinica-qa.git
-          #ls -ltra
-          #ls -ltra libreclinica-qa/
           cd libreclinica-qa/
           docker compose -f docker-compose.yml build
           docker compose -f docker-compose.yml up libreclinica-qa
@@ -118,15 +100,3 @@ stages:
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
         BEHAVE_STAGE: qa
-
-    #- task: GitHubRelease@1
-    #  displayName: GitHub Release
-    #  inputs:
-    #    gitHubConnection: 'Alagant'
-    #    repositoryName: 'Alagant/LibreClinica'
-    #    action: 'create'
-    #    target: '$(Build.SourceVersion)'
-    #    tagSource: 'userSpecifiedTag'
-    #    tag: '$(Build.BuildId)'
-    #    changeLogCompareToRelease: 'lastFullRelease'
-    #    changeLogType: 'commitBased'

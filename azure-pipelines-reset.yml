@@ -39,10 +39,6 @@ stages:
   jobs:
   - job: DevOps
     displayName: DevOps
-#    pool:
-#      vmImage: ubuntu-latest
-#    pool:
-#      name: Default
     steps:
     - checkout: LcRepo
       clean: true
@@ -79,8 +75,6 @@ stages:
           #cd LibreClinica/
           cd /home/azureuser/Alagant_projects/LibreClinica/
           git pull
-          #git clone https://github.com/Alagant/libreclinica_drug_trial_module
-          #docker compose build
           docker compose run -d postgres
           docker compose up -d
           docker ps -a
@@ -92,10 +86,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          # 
-          #git clone https://github.com/Alagant/libreclinica-qa.git
-          #ls -ltra
-          #ls -ltra libreclinica-qa/
           cd LibreClinica/libreclinica-qa/
           docker compose -f docker-compose.yml build
           docker compose -f docker-compose.yml up libreclinica-qa
@@ -112,15 +102,3 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
-
-    #- task: GitHubRelease@1
-    #  displayName: GitHub Release
-    #  inputs:
-    #    gitHubConnection: 'Alagant'
-    #    repositoryName: 'Alagant/LibreClinica'
-    #    action: 'create'
-    #    target: '$(Build.SourceVersion)'
-    #    tagSource: 'userSpecifiedTag'
-    #    tag: '$(Build.BuildId)'
-    #    changeLogCompareToRelease: 'lastFullRelease'
-    #    changeLogType: 'commitBased'
