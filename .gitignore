@@ -29,3 +29,5 @@ ws/.DS_Store
 # netbeans
 nb-configuration.xml
 /.README.md.html
+
+/node_modules

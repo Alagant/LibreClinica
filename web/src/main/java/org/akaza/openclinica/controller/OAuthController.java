@@ -28,6 +28,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.security.web.util.TextEscapeUtils;
 import org.springframework.stereotype.Controller;
@@ -209,47 +210,7 @@ public class OAuthController {
 
 
             //Authentication authentication = authenticationManager.authenticate(authRequest);
-            Authentication authentication = new Authentication() {
-                @Override
-                public Collection<? extends GrantedAuthority> getAuthorities() {
-                    Collection<GrantedAuthority> auths = new ArrayList<GrantedAuthority>(1);
-                    auths.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    return auths;
-
-                }
-
-                @Override
-                public Object getCredentials() {
-                    return oauthAccount.getPasswd();
-                }
-
-                @Override
-                public Object getDetails() {
-                    return oauthAccount.getRoles();
-                }
-
-                @Override
-                public Object getPrincipal() {
-                    return oauthAccount;
-                }
-
-                @Override
-                public boolean isAuthenticated() {
-                    return true;
-                }
-
-                @Override
-                public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
-                }
-
-                @Override
-                public String getName() {
-                    return oauthAccount.getName();
-                }
-
-
-            };
+            Authentication authentication = new OAuthAuthentication(oauthAccount);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
             if(roles.size()>0) {
