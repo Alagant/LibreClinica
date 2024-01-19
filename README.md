@@ -34,7 +34,7 @@ These versions of required software packages are currently available in Debian 1
 
 ### Installation
 To set up a permanent server, you can copy the file install/Libreclinica_docker.service to the folder /etc/systemd/system and run `systemctl enable Libreclinica_docker.service` to enable the service. Then you can start the service with `systemctl start Libreclinica_docker.service`. The service will automatically start on boot.
-### Database backup and migration
+### Database backup, migration and querying
 If you want to back up your LibreClinica database, you can use the following command:
 `docker compose run postgres pg_dump -d libreclinica -U clinica -h postgres>libreclinica_$(date -Iseconds).sql`
 Note that Windows does not support file names with colons, so you might want to replace the colons with underscores.
@@ -42,7 +42,9 @@ To restore a database, you can use the following command:
 `docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica<backup time>.sql`,
 for example:
 `docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica_2023-12-24T01_20_23-06_00.sql`,
-
+If you want to query the database, you can use the following command:
+`docker compose run postgres psql -d libreclinica -U clinica -h postgres -c "SELECT * from public.user_account;"`
+replacing the SELECT query with your own query.
 ### Contributions
                           
 LibreClinica is open source project that values input from contributors:

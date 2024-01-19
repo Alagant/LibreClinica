@@ -4,7 +4,7 @@ services:
     image: postgres:14-alpine
     #build:
     #  context: docker
-    #  dockerfile: Dockerfile_postgres
+    #  Dockerfile: Dockerfile_postgres
     ports:
       - "5432:5432"
     restart: always
