@@ -45,8 +45,7 @@ stages:
       fetchDepth: 1
       lfs: true
       submodules: true
-      #path: /home/azureuser/Alagant_projects/Libreclinica
-      #ref: refs/heads/lc-release-1.2.1
+       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup

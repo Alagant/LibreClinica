@@ -5,7 +5,6 @@ pool:
   name: Libreclinica-azureVMs
 
 resources:
-#- repo: self
   repositories:
     - repository: LcRepo
       type: github
@@ -44,10 +43,8 @@ stages:
       fetchDepth: 1
       lfs: true
       #submodules: true
-      #path: LibreClinica
       #ref: refs/heads/lc-release-1.2.1
     - checkout: LcQA
-      #path: libreclinica-qa
     - checkout: LcDMM
     - checkout: CDCOauthMockup
     - task: Bash@3
