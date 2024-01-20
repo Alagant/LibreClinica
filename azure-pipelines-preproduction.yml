@@ -50,6 +50,14 @@ stages:
     - checkout: LcDMM
     - checkout: CDCOauthMockup
     - task: Bash@3
+      displayName: Backup the database
+      inputs:
+        targetType: 'inline'
+        script: |
+          mkdir -p /home/azureuser/dbbackup
+          cd LibreClinica/
+          /usr/bin/docker compose run -e PGPASSWORD=$(PG_PASSWORD) postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
+    - task: Bash@3
       displayName: Clean the docker environment
       inputs:
         targetType: 'inline'
