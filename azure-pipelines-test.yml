@@ -67,7 +67,6 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          cd LibreClinica/
           cd /home/azureuser/Alagant_projects/LibreClinica/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)

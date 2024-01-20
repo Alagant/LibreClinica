@@ -38,7 +38,6 @@ stages:
   displayName: Docker image
   jobs:
   - job: DevOps
-    displayName: DevOps
     steps:
     - checkout: LcRepo
       clean: true
@@ -51,7 +50,6 @@ stages:
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
-      #path: /home/azureuser/Alagant_projects/libreclinica-qa
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -72,7 +70,6 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          #cd LibreClinica/
           cd /home/azureuser/Alagant_projects/LibreClinica/
           git pull
           docker compose run -d postgres
