@@ -1,7 +1,8 @@
 trigger:
-  branches:
-    exclude:
-      - master
+- devops
+#  branches:
+#    exclude:
+#      - master
 
 pool:
   name: Libreclinica-test
