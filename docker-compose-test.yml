@@ -28,8 +28,11 @@ services:
     env_file: .env
     volumes:
       - libreclinica:/libreclinica
+      - libreclinica_config:/usr/local/tomcat/libreclinica.config
 volumes:
   libreclinica:
+  libreclinica_config:
+    driver: local
   pgdata:
     driver: local
     #driver_opts:

@@ -9,15 +9,13 @@ services:
       - "5432:5432"
     restart: always
     env_file: .env
-    #volumes:
-    #  - postgres_data:/var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
   adminer:
     image: adminer
     restart: always
     ports:
       - "8181:8080"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
 
   libreclinica:
     build:
@@ -30,6 +28,7 @@ services:
     env_file: .env
     volumes:
       - libreclinica:/libreclinica
+      - libreclinica_config:/usr/local/tomcat/libreclinica.config
 
   dmm:
     build:
@@ -57,5 +56,7 @@ services:
 
 volumes:
   libreclinica:
+  libreclinica_config:
+    driver: local
   pgdata:
     driver: local
