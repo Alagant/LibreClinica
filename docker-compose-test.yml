@@ -9,13 +9,8 @@ services:
       - "5432:5432"
     restart: always
     env_file: .env
-    environment:
-      -POSTGRES_PASSWORD: clinica
-      -PGPASSWORD: clinica
-      -POSTGRES_USER: clinica
-      -POSTGRES_DB: libreclinica
-      -POSTGRES_HOST: postgres
-      -POSTGRES_PORT: 5432
+    volumes:
+        - pgdata:/var/lib/postgresql/data
   adminer:
     image: adminer
     restart: always
@@ -35,3 +30,9 @@ services:
       - libreclinica:/libreclinica
 volumes:
   libreclinica:
+  pgdata:
+    driver: local
+    #driver_opts:
+    #  type: none
+    #  device: /home/azureuser/pgdata
+    #  o: bind
