@@ -1,7 +1,8 @@
 trigger:
-  branches:
-    exclude:
-      - master
+- devops
+#  branches:
+#    exclude:
+#      - master
 
 pool:
   name: Libreclinica-test
@@ -56,7 +57,8 @@ stages:
         targetType: 'inline'
         script: |
           mkdir -p /home/azureuser/dbbackup
-          /usr/bin/docker compose run postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
+          cd LibreClinica/
+          /usr/bin/docker compose -f docker-compose-test.yml run -e PGPASSWORD=$(PG_PASSWORD) postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
 
     - task: Bash@3
       displayName: Clean the docker environment

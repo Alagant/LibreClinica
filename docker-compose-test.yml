@@ -4,11 +4,18 @@ services:
     image: postgres:14-alpine
     #build:
     #  context: docker
-    #  Dockerfile: Dockerfile_postgres
+    #  dockerfile: Dockerfile_postgres
     ports:
       - "5432:5432"
     restart: always
     env_file: .env
+    environment:
+      -POSTGRES_PASSWORD: clinica
+      -PGPASSWORD: clinica
+      -POSTGRES_USER: clinica
+      -POSTGRES_DB: libreclinica
+      -POSTGRES_HOST: postgres
+      -POSTGRES_PORT: 5432
   adminer:
     image: adminer
     restart: always
