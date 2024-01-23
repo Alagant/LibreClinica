@@ -11,7 +11,7 @@ services:
     env_file: .env
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./postgres/init:/docker-entrypoint-initdb.d
+      #- ./postgres/init:/docker-entrypoint-initdb.d
       - dbbackup:/dbbackup
   adminer:
     image: adminer
