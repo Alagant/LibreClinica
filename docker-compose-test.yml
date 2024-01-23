@@ -11,6 +11,8 @@ services:
     env_file: .env
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+      - dbbackup:/dbbackup
   adminer:
     image: adminer
     restart: always
@@ -61,7 +63,8 @@ volumes:
     driver: local
   pgdata:
     driver: local
-    #driver_opts:
-    #  type: none
-    #  device: /home/azureuser/pgdata
-    #  o: bind
+  dbbackup:
+    driver_opts:
+      type: none
+      device: /home/azureuser/dbbackup
+      o: bind
