@@ -1,16 +1,18 @@
 version: '3.1'
 services:
   postgres:
-    #image: postgres:14-alpine
-    build:
-      context: docker
-      dockerfile: Dockerfile_postgres
+    image: postgres:14-alpine
+    #build:
+    #  context: docker
+    #  dockerfile: Dockerfile_postgres
     ports:
       - "5432:5432"
     restart: always
     env_file: .env
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+      - dbbackup:/dbbackup
   adminer:
     image: adminer
     restart: always
@@ -60,3 +62,8 @@ volumes:
     driver: local
   pgdata:
     driver: local
+  dbbackup:
+    driver_opts:
+      type: none
+      device: /home/azureuser/dbbackup
+      o: bind

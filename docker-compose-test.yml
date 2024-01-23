@@ -32,7 +32,6 @@ services:
       - libreclinica:/libreclinica
       - libreclinica_config:/usr/local/tomcat/libreclinica.config
 
-
   dmm:
     build:
       context: ../libreclinica_drug_trial_module/
