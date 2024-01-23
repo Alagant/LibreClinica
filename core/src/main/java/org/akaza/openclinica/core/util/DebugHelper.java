@@ -31,7 +31,6 @@ public class DebugHelper implements Serializable {
             e.printStackTrace();
             return "Unknown(interrupted)";
         }
-    }
 
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(process.getInputStream()))) {
