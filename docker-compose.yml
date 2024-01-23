@@ -15,7 +15,7 @@ services:
       - dbbackup:/dbbackup
   adminer:
     image: adminer
-    restart: always
+    #restart: always
     ports:
       - "8181:8080"
 
