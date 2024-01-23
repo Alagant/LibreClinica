@@ -61,7 +61,7 @@ stages:
         targetType: 'inline'
         script: |
           cd LibreClinica/
-          docker compose down
+          docker compose stop
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
     - task: Bash@3
