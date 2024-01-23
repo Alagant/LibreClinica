@@ -7,7 +7,7 @@ services:
     #  dockerfile: Dockerfile_postgres
     ports:
       - "5432:5432"
-    restart: always
+    #restart: always
     env_file: .env
     volumes:
       - pgdata:/var/lib/postgresql/data
