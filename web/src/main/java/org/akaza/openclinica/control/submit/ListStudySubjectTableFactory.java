@@ -32,6 +32,7 @@ import org.akaza.openclinica.bean.submit.SubjectGroupMapBean;
 import org.akaza.openclinica.control.AbstractTableFactory;
 import org.akaza.openclinica.control.DefaultActionsEditor;
 import org.akaza.openclinica.control.ListStudyView;
+import org.akaza.openclinica.dao.core.CoreResources;
 import org.akaza.openclinica.dao.managestudy.EventDefinitionCRFDAO;
 import org.akaza.openclinica.dao.managestudy.FindSubjectsFilter;
 import org.akaza.openclinica.dao.managestudy.FindSubjectsSort;
@@ -177,7 +178,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         configureColumn(row.getColumn(columnNames[columnNames.length - 2]), actionsHeader, new ActionsCellEditor(), new DefaultActionsEditor(locale), true,
                 false);
         ++index;
-        configureColumn(row.getColumn(columnNames[columnNames.length - 1]), "pdf", null, null);
+        configureColumn(row.getColumn(columnNames[columnNames.length - 1]), "pdf", new PdfCellEditor(), null);
 
     }
 
@@ -223,7 +224,8 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
 
         int rowStart = limit.getRowSelect().getRowStart();
         int rowEnd = limit.getRowSelect().getRowEnd();
-        Collection<StudySubjectBean> items = getStudySubjectDAO().getWithFilterAndSort(getStudyBean(), subjectFilter, subjectSort, rowStart, rowEnd);
+        Collection<StudySubjectBean> items = getStudySubjectDAO().getWithFilterAndSort(
+                getStudyBean(), subjectFilter, subjectSort, rowStart, rowEnd);
 
         Collection<HashMap<Object, Object>> theItems = new ArrayList<HashMap<Object, Object>>();
 
@@ -288,10 +290,11 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
                 theItem.put("sed_" + studyEventDefinition.getId() + "_object", studyEventDefinition);
 
             }
-            StringBuilder actionLink = new StringBuilder();
-            actionLink.append("<a href=\"").append("http://localhost:3000/getpdf/" + studySubjectBean.getId())
-                    .append(" class=\"pdf\">PDF</a>");
-            theItem.put("pdf", actionLink.toString());
+            HtmlBuilder actionLink = new HtmlBuilder();
+
+            String url = CoreResources.getField("dmm.url") + "/subject_schedule/" + studySubjectBean.getSecondaryLabel();
+                actionLink.a().href(url).title("pdf").end().aEnd();
+            theItem.put("pdf", actionLink);
             theItems.add(theItem);
 
         }
@@ -685,6 +688,17 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
 
     }
 
+    private class PdfCellEditor implements CellEditor {
+        public Object getValue(Object item, String property, int rowcount) {
+            StudySubjectBean studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
+            HtmlBuilder actionLink = new HtmlBuilder();
+
+            String url = CoreResources.getField("dmm.url") + "/subject_schedule/" + studySubjectBean.getSecondaryLabel();
+            actionLink.a().href(url).title("pdf").end().append("PDF").aEnd();
+
+            return  actionLink.toString();
+        }
+    }
     private class ActionsCellEditor implements CellEditor {
 
         @SuppressWarnings("unchecked")
@@ -830,6 +844,14 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         actionLink.img().name("bt_Reassign1").src("images/bt_Reassign.gif").border("0").alt(resword.getString("reassign")).title(resword.getString("reassign"))
                 .append("hspace=\"2\"").end().aEnd();
         actionLink.append("&nbsp;&nbsp;&nbsp;");
+        return actionLink.toString();
+
+    }
+
+    private String pdfScheduleStudySubjectLinkBuilder(StudySubjectBean studySubject) {
+        HtmlBuilder actionLink = new HtmlBuilder();
+        actionLink.a().href(CoreResources.getField("dmm.Url") +"/subject_schedule/" + studySubject
+                        .getSecondaryLabel()).title("PDF").end().aEnd();
         return actionLink.toString();
 
     }
@@ -1362,3 +1384,4 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         return sdf.format(date);
     }
 }
+
