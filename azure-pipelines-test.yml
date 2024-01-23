@@ -59,7 +59,7 @@ stages:
           mkdir -p /home/azureuser/dbbackup
           cd LibreClinica/
           /usr/bin/docker compose -f docker-compose-test.yml run -e PGPASSWORD=$(PG_PASSWORD) postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
-        continueOnError: true
+      continueOnError: true
 
     - task: Bash@3
       displayName: Clean the docker environment
