@@ -58,8 +58,8 @@ stages:
         script: |
           mkdir -p /home/azureuser/dbbackup
           cd LibreClinica/
-          /usr/bin/docker compose -f docker-compose-test.yml run -e PGPASSWORD=$(PG_PASSWORD) postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
-        continueOnError: true
+          /usr/bin/docker compose run -e PGPASSWORD=$(PG_PASSWORD) postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
+      continueOnError: true
 
     - task: Bash@3
       displayName: Clean the docker environment
@@ -67,7 +67,7 @@ stages:
         targetType: 'inline'
         script: |
           cd LibreClinica/
-          docker compose -f docker-compose-test.yml down libreclinica_test
+          docker compose down libreclinica_test
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
     - task: Bash@3
@@ -80,8 +80,8 @@ stages:
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
-          docker compose -f docker-compose-test.yml build libreclinica_test
-          docker compose -f docker-compose-test.yml up -d
+          docker compose build libreclinica_test
+          docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
           ls -ltra

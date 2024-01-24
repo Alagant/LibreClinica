@@ -29,6 +29,7 @@ public class DebugHelper implements Serializable {
             }
         } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
+
         }
 
         try (BufferedReader reader = new BufferedReader(
