@@ -956,7 +956,8 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             		javaMailProperties.put("mail.smtp.localhost", "localhost");
             	}
             }
-            System.out.println(javaMailProperties.get("mail.smtp.localhost"));
+            System.out.println("Mail localhost is: "+javaMailProperties.get("mail.smtp.localhost"));
+            logger.info("info log. Mail localhost is: "+javaMailProperties.get("mail.smtp.localhost"));//Check what happens with the logger INFO messages
 
             MimeMessage mimeMessage = mailSender.createMimeMessage();
 
@@ -975,7 +976,7 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             if (failMessage != null && sendMessage) {
                 addPageMessage(failMessage);
             }
-            logger.debug("Email could not be sent on {} due to: {}", new Date(), me.toString());
+            System.out.println("Email could not be sent due to: "+me.toString());
             messageSent = false;
         }
         return messageSent;
