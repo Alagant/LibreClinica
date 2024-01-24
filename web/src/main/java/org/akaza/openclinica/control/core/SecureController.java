@@ -956,8 +956,8 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             		javaMailProperties.put("mail.smtp.localhost", "localhost");
             	}
             }
-            System.out.println("Mail host is: "+javaMailProperties.get("mail.smtp.localhost"));
-            logger.info("info log. Mail host is: "+javaMailProperties.get("mail.smtp.localhost"));
+            System.out.println("Mail localhost is: "+javaMailProperties.get("mail.smtp.localhost"));
+            logger.info("info log. Mail localhost is: "+javaMailProperties.get("mail.smtp.localhost"));//Check what happens with the logger INFO messages
 
             MimeMessage mimeMessage = mailSender.createMimeMessage();
 
