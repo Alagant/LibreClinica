@@ -975,7 +975,7 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             if (failMessage != null && sendMessage) {
                 addPageMessage(failMessage);
             }
-            System.out.println("Email could not be sent on {} due to: {}", new Date(), me.toString());
+            System.out.println("Email could not be sent due to: "+me.toString());
             messageSent = false;
         }
         return messageSent;
