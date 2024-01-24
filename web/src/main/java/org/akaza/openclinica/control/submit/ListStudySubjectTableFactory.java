@@ -140,6 +140,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         resformat = ResourceBundleProvider.getFormatBundle(locale);
         String[] newColumnNames = Arrays.copyOf(columnNames, columnNames.length + 1);
         newColumnNames[newColumnNames.length - 1] = "pdf";
+        newColumnNames[newColumnNames.length - 1] = "pid";
         columnNames = newColumnNames;
         tableFacade.setColumnProperties(columnNames);
         Row row = tableFacade.getTable().getRow();
@@ -175,10 +176,11 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         }
         String actionsHeader = resword.getString("rule_actions")
                 + "&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;";
-        configureColumn(row.getColumn(columnNames[columnNames.length - 2]), actionsHeader, new ActionsCellEditor(), new DefaultActionsEditor(locale), true,
+        configureColumn(row.getColumn(columnNames[columnNames.length - 3]), actionsHeader, new ActionsCellEditor(), new DefaultActionsEditor(locale), true,
                 false);
         ++index;
-        configureColumn(row.getColumn(columnNames[columnNames.length - 1]), "pdf", new PdfCellEditor(), null);
+        configureColumn(row.getColumn(columnNames[columnNames.length - 2]), "pdf", new PdfCellEditor(), null);
+        configureColumn(row.getColumn(columnNames[columnNames.length - 1]), "pid", new PidCellEditor(), null);
 
     }
 
@@ -697,6 +699,13 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             actionLink.a().href(url).title("pdf").end().append("PDF").aEnd();
 
             return  actionLink.toString();
+        }
+    }
+
+    private class PidCellEditor implements CellEditor {
+        public Object getValue(Object item, String property, int rowcount) {
+            StudySubjectBean studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
+            return  studySubjectBean.getSecondaryLabel();
         }
     }
     private class ActionsCellEditor implements CellEditor {
