@@ -20,16 +20,16 @@ public class DebugHelper implements Serializable {
             try {
                 process = Runtime.getRuntime().exec(new String[]{"/bin/bash", "-c", "git rev-parse --abbrev-ref HEAD"});
                 process.waitFor();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (IOException ex2) {
+                ex2.printStackTrace();
                 return "Unknown(error)";
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+            } catch (InterruptedException ex3) {
+                ex3.printStackTrace();
                 return "Unknown(interrupted)";
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return "Unknown(interrupted)";
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+
         }
 
         try (BufferedReader reader = new BufferedReader(
