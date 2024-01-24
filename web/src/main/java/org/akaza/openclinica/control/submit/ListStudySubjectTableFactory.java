@@ -294,7 +294,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             }
             HtmlBuilder actionLink = new HtmlBuilder();
 
-            String url = CoreResources.getField("dmm.url") + "/subject_schedule/" + studySubjectBean.getSecondaryLabel();
+            String url = CoreResources.getField("dmm.url") + "/subjectpid/" + studySubjectBean.getSecondaryLabel();
                 actionLink.a().href(url).title("pdf").end().aEnd();
             theItem.put("pdf", actionLink);
             theItems.add(theItem);
