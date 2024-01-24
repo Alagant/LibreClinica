@@ -109,6 +109,7 @@ public class CoreResources implements ResourceLoaderAware {
 
             filePath = replaceWebapp(filePath);
             filePath = replaceCatHome(filePath);
+            System.out.println("getPropertiesSource: "+filePath);
 
             String dataInfoPropFileName = filePath + "/datainfo.properties";
             String extractPropFileName = filePath + "/extract.properties";
@@ -140,6 +141,7 @@ public class CoreResources implements ResourceLoaderAware {
 
             filePath = replaceWebapp(filePath);
             filePath = replaceCatHome(filePath);
+            System.out.println("setResourceLoader: "+filePath);
 
             String dataInfoPropFileName = filePath + "/datainfo.properties";
             String extractPropFileName = filePath + "/extract.properties";
@@ -196,6 +198,7 @@ public class CoreResources implements ResourceLoaderAware {
             // replacePaths(vals);
             vals = replaceWebapp(vals);
             vals = replaceCatHome(vals);
+            System.out.println("setDataInfoVals: "+vals);
             DATAINFO.setProperty(key, vals);
         }
 
@@ -532,6 +535,7 @@ public class CoreResources implements ResourceLoaderAware {
 
         filePath = replaceWebapp(filePath);
         filePath = replaceCatHome(filePath);
+        System.out.println("copyConfig: "+filePath);
 
         File dest = new File(filePath);
         if (!dest.exists()) {
