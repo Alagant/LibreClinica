@@ -5,7 +5,9 @@
     String oauth_authorize_url = CoreResources.getField("oauth.authorizeUrl") +
             "?response_type=code&client_id="+oauth_client_id+"&"+
             "redirect_uri="+oauth_redirect_uri+"&scope=openid%20profile";
-
+    String oauth_as_first_page = CoreResources.getField("oauth.as_login_page");
+    if("true".compareTo(oauth_as_first_page)==0)
+        response.sendRedirect(oauth_authorize_url);
 %>
 
 <%@ include file="/WEB-INF/jsp/taglibs.jsp" %>
