@@ -14,3 +14,7 @@ cd ${mydir}/.. && /usr/bin/docker compose run postgres psql -d postgres -U clini
 cd ${mydir}/.. && /usr/bin/docker compose run postgres psql -d postgres -U clinica -h postgres -c "CREATE DATABASE libreclinica;"
 echo Restoring database from $backupfilename
 cd ${mydir}/.. && /usr/bin/docker compose run postgres psql -d libreclinica -U clinica -h postgres -f $backupfilename
+
+# Lastly, adds function and trigger for PID
+${mydir}/db_add_function_and_trigger_for_PID.bash
+
