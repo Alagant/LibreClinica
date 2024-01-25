@@ -198,7 +198,7 @@ public class CoreResources implements ResourceLoaderAware {
             // replacePaths(vals);
             vals = replaceWebapp(vals);
             vals = replaceCatHome(vals);
-            //System.out.println("setDataInfoVals: "+key+":"+vals);
+            System.out.println("setDataInfoVals: "+key+":"+vals);
             DATAINFO.setProperty(key, vals);
         }
 
