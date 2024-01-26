@@ -23,7 +23,7 @@ public enum Page {
     /**
      * Page for logging in
      */
-        WELCOME("/WEB-INF/jsp/login/welcome.jsp", "Welcome LibreClinica"),
+        WELCOME("/WEB-INF/jsp/welcome.jsp", "Welcome LibreClinica"),
       	LOGIN("/WEB-INF/jsp/login/login.jsp", "LibreClinica Login"),
     	LOGIN_USER_ACCOUNT_DELETED("/WEB-INF/jsp/login/login.jsp" + "?action=userAccountDeleted",
                 "Unsuccessful Login Due to Account Deletion"),
