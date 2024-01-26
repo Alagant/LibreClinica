@@ -144,52 +144,7 @@ public class OAuthController {
             UserAccountBean oauthAccount = userAccountDAO.findByEmail(a3rd_email);
             // the useraccount does not exist create {{{
             if(oauthAccount == null || oauthAccount.getId()<1) {
-                return "redirect:/pages/login/login";
-                /*
-                StudyBean defaultStudy = studyDAO.getDefaultStudy();
-                oauthAccount = new UserAccountBean();
-                oauthAccount.setName(a3rd_email);
-                oauthAccount.setFirstName(a3rd_name);
-                oauthAccount.setLastName(a3rd_family_name);
-                oauthAccount.setEmail(a3rd_email);
-
-                oauthAccount.setPasswd(securityManager.encryptPassword(
-                        a3rd_email, oauthAccount.getRunWebservices()));
-                oauthAccount.setPasswdTimestamp(new Date());
-                oauthAccount.setLastVisitDate(null);
-                oauthAccount.setStatus(Status.AVAILABLE);
-                oauthAccount.setPasswdChallengeQuestion("");
-                oauthAccount.setPasswdChallengeAnswer("");
-                oauthAccount.setPhone("");
-                //createdUserAccountBean.setOwner(createdUserAccountBean.getOwner());
-                oauthAccount.setRunWebservices(null);
-                oauthAccount.setAccessCode("null");
-                oauthAccount.setEnableApiKey(true);
-                oauthAccount.setActiveStudyId(defaultStudy.getId());
-                oauthAccount.setRunWebservices(false);
-                //oauthAccount.addRole(surb);
-
-                userAccountDAO.create(oauthAccount);
-                userAccountDAO.disableUpdatePassword(oauthAccount);
-                //Add to default study
-                StudyUserRoleBean surb = new StudyUserRoleBean();
-                surb.setRole(Role.COORDINATOR);
-                surb.setActive(defaultStudy.isActive());
-                surb.setStudyName(defaultStudy.getName());
-                //surb.setRoleName(Role.COORDINATOR.getName());
-                surb.setStudyId(defaultStudy.getId());
-                surb.setStatus(Status.AVAILABLE);
-                surb.setUserName(oauthAccount.getName());
-                surb.setOwner(oauthAccount);
-                userAccountDAO.createStudyUserRole(oauthAccount, surb);
-
-                //reload the user account bean
-                oauthAccount = userAccountDAO.findByUserName(a3rd_email);
-
-
-                AuthoritiesDao authoritiesDao = (AuthoritiesDao) context.getBean("authoritiesDao");
-                authoritiesDao.saveOrUpdate(new AuthoritiesBean(oauthAccount.getName()));
-                */
+                return "redirect:/pages/login/login?action=nooauthlogin";
             }
             //}}}
 

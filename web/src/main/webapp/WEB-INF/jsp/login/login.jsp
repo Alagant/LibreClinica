@@ -148,9 +148,7 @@ session.setAttribute("factorService", factorService);
                         </c:if>
 
                         <input type="submit" name="submit" value="<fmt:message key='login' bundle='${resword}'/>" class="loginbutton" />
-                        <a href="<%= oauth_authorize_url%>">
-                                OAuth Login
-                        </a>
+
                         <a href="#" id="requestPassword"> <fmt:message key="forgot_password" bundle="${resword}"/></a>
                    </form>
 

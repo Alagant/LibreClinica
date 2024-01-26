@@ -23,20 +23,21 @@ public enum Page {
     /**
      * Page for logging in
      */
-      	LOGIN("/WEB-INF/jsp/login/login.jsp", "OpenClinica Login"),
+        WELCOME("/WEB-INF/jsp/login/welcome.jsp", "Welcome LibreClinica"),
+      	LOGIN("/WEB-INF/jsp/login/login.jsp", "LibreClinica Login"),
     	LOGIN_USER_ACCOUNT_DELETED("/WEB-INF/jsp/login/login.jsp" + "?action=userAccountDeleted",
                 "Unsuccessful Login Due to Account Deletion"),
-                ENTERPRISE("/WEB-INF/jsp/login/enterprise.jsp", "OpenClinica Enterprise"),
+                ENTERPRISE("/WEB-INF/jsp/login/enterprise.jsp", "LibreClinica Enterprise"),
    /**
      * Page for logging out
      */
-                LOGOUT("/WEB-INF/jsp/login/logout.jsp", "OpenClinica Log Out"),
+                LOGOUT("/WEB-INF/jsp/login/logout.jsp", "LibreClinica Log Out"),
 
     /**
      * Page to show the main menu of openclinica
      */
-                MENU("/WEB-INF/jsp/menu.jsp", "Welcome to OpenClinica"),
-                MENU_SERVLET("/MainMenu", "Welcome to OpenClinica Main Servlet"),
+                MENU("/WEB-INF/jsp/menu.jsp", "Welcome to LibreClinica"),
+                MENU_SERVLET("/MainMenu", "Welcome to LibreClinica Main Servlet"),
               
     // YW 06-25-2007 <<
     /**
