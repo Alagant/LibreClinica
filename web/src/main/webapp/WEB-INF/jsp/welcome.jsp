@@ -1,6 +1,8 @@
 <%
     String self_url = ServletUriComponentsBuilder.fromCurrentContextPath().build().toString();
     String oauth_client_id = CoreResources.getField("oauth.clientId");
+	String oauth_account_management_url = CoreResources.getField("oauth.url") + "/login";
+
     String oauth_redirect_uri = self_url + CoreResources.getField("oauth.redirectUri") /* "/oauth"*/;
     String oauth_authorize_url = CoreResources.getField("oauth.authorizeUrl") +
             "?response_type=code&client_id="+oauth_client_id+"&"+
@@ -105,8 +107,8 @@ session.setAttribute("factorService", factorService);
 
 
 		<div class="login-options">
-			<a href="login/login" class="local-login">Local login</a>
-
+			<a href="login/login" class="local-login">Libreclinica login</a>
+			<a href="<%= oauth_account_management_url %>" class="oauth-login">Oauth Account Management</a>
 			<a href="<%= oauth_authorize_url %>" class="oauth-login">Oauth login</a>
 		</div>
 </div>
