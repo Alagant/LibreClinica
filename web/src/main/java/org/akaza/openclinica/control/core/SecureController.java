@@ -962,7 +962,8 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             MimeMessage mimeMessage = mailSender.createMimeMessage();
 
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, htmlEmail);
-            helper.setFrom(from);
+            helper.setFrom(mailSender.getUsername());
+            helper.setReplyTo(from);
             helper.setTo(processMultipleImailAddresses(to.trim()));
             helper.setSubject(subject);
             helper.setText(body, true);
