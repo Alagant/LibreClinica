@@ -142,11 +142,17 @@ public class OAuthController {
             UserAccountDAO userAccountDAO = new UserAccountDAO(dataSource);
             //find the Bean by username,
             UserAccountBean oauthAccount = userAccountDAO.findByEmail(a3rd_email);
+
             // the useraccount does not exist create {{{
             if(oauthAccount == null || oauthAccount.getId()<1) {
                 return "redirect:/pages/login/login?action=nooauthlogin";
             }
             //}}}
+
+
+            userAccountDAO.disableUpdatePassword(oauthAccount);
+            if(oauthAccount.getPasswdTimestamp()==null)
+                oauthAccount.setPasswdTimestamp(new Date());
 
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
                     oauthAccount.getName(), ""/*oauthAccount.getPasswd()*/);
