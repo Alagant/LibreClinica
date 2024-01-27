@@ -52,16 +52,15 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          mkdir -p /home/azureuser/dbbackup
-          cd LibreClinica/
-          /usr/bin/docker compose run -e PGPASSWORD=$(PG_PASSWORD) postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
+          ./LibreClinica/docker/db_backup.sh
+      continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
         targetType: 'inline'
         script: |
           cd LibreClinica/
-          docker compose stop
+          docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
 
     - task: Bash@3
@@ -74,7 +73,7 @@ stages:
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
-          docker compose build libreclinica
+          docker compose build
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
@@ -86,8 +85,8 @@ stages:
         targetType: 'inline'
         script: |
           cd libreclinica-qa/
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa
+          docker compose build
+          docker compose up libreclinica-qa
       # Change the comment text here to test a new commit. Test nov 17 2023 b.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
