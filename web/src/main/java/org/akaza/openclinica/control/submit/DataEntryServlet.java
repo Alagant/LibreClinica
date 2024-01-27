@@ -18,7 +18,9 @@ import static org.akaza.openclinica.core.util.ClassCastHelper.asArrayList;
 import static org.akaza.openclinica.core.util.ClassCastHelper.asHashMap;
 import static org.akaza.openclinica.core.util.ClassCastHelper.getAsType;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -153,6 +155,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
 	private static final long serialVersionUID = -7746736869624506259L;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DataEntryServlet.class);
+    private String pid = "";
 
     Locale locale;
     // < ResourceBundleresmessage,restext,resexception,respage;
@@ -699,7 +702,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
             logMe("Time Took for this block"+(System.currentTimeMillis()-t));
             forwardPage(getJSPPage(), request, response);
             return;
-        } else {
+        }
+        else {
             logMe("Entering Checks !submitted not entered  "+System.currentTimeMillis());
             //
             // VALIDATION / LOADING DATA
@@ -1499,155 +1503,195 @@ public abstract class DataEntryServlet extends CoreSecureController {
                 // << tbh 01/2010
                 setUpPanel(section);
                 forwardPage(getJSPPage(), request, response);
-            } else {
-            	//reshuffleReasonForChangeHashAndDiscrepancyNotes( allItems, request, ecb);
+            }
+            else {
                 LOGGER.debug("Do we hit this in save ?????");
                 logMe("Do we hit this in save ????  "+System.currentTimeMillis());
+                System.out.println(sb.getTitle());
+                if(sb.getTitle().equalsIgnoreCase("Enrollment Form")){
+                    //Send data to dmm server
+                    String apiUrl = "https://drugmanagementmodule.azurewebsites.net/subject_api";
+                    System.out.println("API URL: "+apiUrl);
+                    try {
+                        // Convert the object to JSON format
+                        ObjectMapper objectMapper = new ObjectMapper();
+                        String json = "{\"subjects\": ["+objectMapper.writeValueAsString(enrollmentData)+"]}";
+                        System.out.println("\n"+json+"\n");
 
-                boolean success = true;
-                boolean temp = true;
+                        // Configure the HTTP connection
+                        URL url = new URL(apiUrl);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("POST");
+                        connection.setRequestProperty("Content-Type", "application/json");
+                        connection.setDoOutput(true);
 
-                // save interviewer name and date into DB
-                ecb.setInterviewerName(fp.getString(INPUT_INTERVIEWER));
-                if (!(interviewDate == null || interviewDate.trim().isEmpty())) {
-                    ecb.setDateInterviewed(fp.getDate(INPUT_INTERVIEW_DATE));
-                } else {
-                    ecb.setDateInterviewed(null);
-                }
+                        // Write JSON data to the request body
+                        try (OutputStream os = connection.getOutputStream()) {
+                            byte[] input = json.getBytes(StandardCharsets.UTF_8);
+                            os.write(input, 0, input.length);
+                        }
 
-                if (ecdao == null) {
-                    ecdao = new EventCRFDAO(getDataSource());
-                }
-                // set validator id for DDE
-                DataEntryStage stage = ecb.getStage();
-                if (stage.equals(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE) || stage.equals(DataEntryStage.DOUBLE_DATA_ENTRY)) {
-                    ecb.setValidatorId(ub.getId());
+                        // Check the response code
+                        int responseCode = connection.getResponseCode();
 
-                }
-                /*
-                 * if(studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus .SIGNED)){ if(edcBean.isDoubleEntry()){
-                 * ecb.setStage(DataEntryStage.DOUBLE_DATA_ENTRY_COMPLETE); }else{ ecb.setStage(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE); } }
-                 */
+                        if (responseCode == HttpURLConnection.HTTP_CREATED) {
+                            System.out.println("Data sent successfully.");
+                            SuccessResponse successObject = new SuccessResponse();
+                            try (BufferedReader successReader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                                StringBuilder successResponse = new StringBuilder();
+                                String line;
+                                while ((line = successReader.readLine()) != null) {
+                                    successResponse.append(line);
+                                }
+                                System.out.println(successResponse.toString());
+                                ObjectMapper objectMapperSuccess = new ObjectMapper();
+                                successObject = objectMapperSuccess.readValue(successResponse.toString(), SuccessResponse.class);
+                                this.pid = successObject.getPid();
+                                System.out.println("Response: " + successObject.getPid());
+                                boolean success = true;
+                                boolean temp = true;
 
-                // for Administrative editing
-                if (studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus.SIGNED) && changedItemsList.size() > 0) {
-                    studyEventBean.setSubjectEventStatus(SubjectEventStatus.COMPLETED);
-                    studyEventBean.setUpdater(ub);
-                    studyEventBean.setUpdatedDate(new Date());
-                    seDao.update(studyEventBean);
-                }
+                                // save interviewer name and date into DB
+                                ecb.setInterviewerName(fp.getString(INPUT_INTERVIEWER));
+                                if (!(interviewDate == null || interviewDate.trim().isEmpty())) {
+                                    ecb.setDateInterviewed(fp.getDate(INPUT_INTERVIEW_DATE));
+                                } else {
+                                    ecb.setDateInterviewed(null);
+                                }
 
-                // If the Study Subject's Satus is signed and we save a section
-                // , change status to available
-                LOGGER.debug("Status of Study Subject {}", ssb.getStatus().getName());
-                if (ssb.getStatus() == Status.SIGNED && changedItemsList.size() > 0) {
-                    LOGGER.debug("Status of Study Subject is Signed we are updating");
-                    StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
-                    ssb.setStatus(Status.AVAILABLE);
-                    ssb.setUpdater(ub);
-                    ssb.setUpdatedDate(new Date());
-                    studySubjectDao.update(ssb);
-                }
-                if (ecb.isSdvStatus() && changedItemsList.size() > 0) {
-                    LOGGER.debug("Status of Study Subject is SDV we are updating");
-                    StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
-                    ssb.setStatus(Status.AVAILABLE);
-                    ssb.setUpdater(ub);
-                    ssb.setUpdatedDate(new Date());
-                    studySubjectDao.update(ssb);
-                    ecb.setSdvStatus(false);
-                    ecb.setSdvUpdateId(ub.getId());
-                }
+                                if (ecdao == null) {
+                                    ecdao = new EventCRFDAO(getDataSource());
+                                }
+                                // set validator id for DDE
+                                DataEntryStage stage = ecb.getStage();
+                                if (stage.equals(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE) || stage.equals(DataEntryStage.DOUBLE_DATA_ENTRY)) {
+                                    ecb.setValidatorId(ub.getId());
 
-                ecb = (EventCRFBean) ecdao.update(ecb);
+                                }
+                                /*
+                                 * if(studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus .SIGNED)){ if(edcBean.isDoubleEntry()){
+                                 * ecb.setStage(DataEntryStage.DOUBLE_DATA_ENTRY_COMPLETE); }else{ ecb.setStage(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE); } }
+                                 */
 
-                // save discrepancy notes into DB
-                FormDiscrepancyNotes fdn = (FormDiscrepancyNotes) session.getAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
-                dndao = new DiscrepancyNoteDAO(getDataSource());
+                                // for Administrative editing
+                                if (studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus.SIGNED) && changedItemsList.size() > 0) {
+                                    studyEventBean.setSubjectEventStatus(SubjectEventStatus.COMPLETED);
+                                    studyEventBean.setUpdater(ub);
+                                    studyEventBean.setUpdatedDate(new Date());
+                                    seDao.update(studyEventBean);
+                                }
 
-                AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEWER, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
-                AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEW_DATE, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
+                                // If the Study Subject's Satus is signed and we save a section
+                                // , change status to available
+                                LOGGER.debug("Status of Study Subject {}", ssb.getStatus().getName());
+                                if (ssb.getStatus() == Status.SIGNED && changedItemsList.size() > 0) {
+                                    LOGGER.debug("Status of Study Subject is Signed we are updating");
+                                    StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
+                                    ssb.setStatus(Status.AVAILABLE);
+                                    ssb.setUpdater(ub);
+                                    ssb.setUpdatedDate(new Date());
+                                    studySubjectDao.update(ssb);
+                                }
+                                if (ecb.isSdvStatus() && changedItemsList.size() > 0) {
+                                    LOGGER.debug("Status of Study Subject is SDV we are updating");
+                                    StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
+                                    ssb.setStatus(Status.AVAILABLE);
+                                    ssb.setUpdater(ub);
+                                    ssb.setUpdatedDate(new Date());
+                                    studySubjectDao.update(ssb);
+                                    ecb.setSdvStatus(false);
+                                    ecb.setSdvUpdateId(ub.getId());
+                                }
 
-                // items = section.getItems();
-                allItems = section.getDisplayItemGroups();
-                int nextOrdinal = 0;
+                                ecb = (EventCRFBean) ecdao.update(ecb);
 
-                LOGGER.debug("all items before saving into DB" + allItems.size());
-                this.output(allItems);
+                                // save discrepancy notes into DB
+                                FormDiscrepancyNotes fdn = (FormDiscrepancyNotes) session.getAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                                dndao = new DiscrepancyNoteDAO(getDataSource());
+
+                                AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEWER, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
+                                AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEW_DATE, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
+
+                                // items = section.getItems();
+                                allItems = section.getDisplayItemGroups();
+                                int nextOrdinal = 0;
+
+                                LOGGER.debug("all items before saving into DB" + allItems.size());
+                                this.output(allItems);
 //TODO:Seems longer here, check this
-                logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
-                for (int i = 0; i < allItems.size(); i++) {
-                    DisplayItemWithGroupBean diwb = allItems.get(i);
+                                logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
+                                for (int i = 0; i < allItems.size(); i++) {
+                                    DisplayItemWithGroupBean diwb = allItems.get(i);
 
-                    // we don't write success = success && writeToDB here
-                    // since the short-circuit mechanism may prevent Java
-                    // from executing writeToDB.
-                    System.out.println(diwb);
-                    System.out.println(diwb.getSingleItem().getItem().getDescription());
-                    System.out.println(diwb.getSingleItem().getData().getValue());
+                                    // we don't write success = success && writeToDB here
+                                    // since the short-circuit mechanism may prevent Java
+                                    // from executing writeToDB.
+                                    System.out.println(diwb);
+                                    System.out.println(diwb.getSingleItem().getItem().getDescription());
+                                    System.out.println(diwb.getSingleItem().getData().getValue());
 
-                    if (diwb.isInGroup()) {
+                                    if (diwb.isInGroup()) {
 
-                        List<DisplayItemGroupBean> dgbs = diwb.getItemGroups();
-                        // using the above gets us the correct number of manual groups, tbh 01/2010
-                        List<DisplayItemGroupBean> dbGroups = diwb.getDbItemGroups();
-                        LOGGER.debug("item group size: " + dgbs.size());
-                        LOGGER.debug("item db-group size: " + dbGroups.size());
-                        for (int j = 0; j < dgbs.size(); j++) {
-                            DisplayItemGroupBean displayGroup = dgbs.get(j);
-                            List<DisplayItemBean> items = displayGroup.getItems();
-                            // this ordinal will only useful to create a new
-                            // item data
-                            // update an item data won't touch its ordinal
-                          //  int nextOrdinal = iddao.getMaxOrdinalForGroup(ecb, sb, displayGroup.getItemGroupBean()) + 1;
+                                        List<DisplayItemGroupBean> dgbs = diwb.getItemGroups();
+                                        // using the above gets us the correct number of manual groups, tbh 01/2010
+                                        List<DisplayItemGroupBean> dbGroups = diwb.getDbItemGroups();
+                                        LOGGER.debug("item group size: " + dgbs.size());
+                                        LOGGER.debug("item db-group size: " + dbGroups.size());
+                                        for (int j = 0; j < dgbs.size(); j++) {
+                                            DisplayItemGroupBean displayGroup = dgbs.get(j);
+                                            List<DisplayItemBean> items = displayGroup.getItems();
+                                            // this ordinal will only useful to create a new
+                                            // item data
+                                            // update an item data won't touch its ordinal
+                                            //  int nextOrdinal = iddao.getMaxOrdinalForGroup(ecb, sb, displayGroup.getItemGroupBean()) + 1;
 
-                            // Determine if any items in this group have data.  If so we need to undelete and previously deleted items.
-                            boolean undelete = false;
-                            for (DisplayItemBean displayItem : items) {
-                                String currItemVal = displayItem.getData().getValue();
-                                if (currItemVal != null && !currItemVal.equals("")){
-                                    undelete = true;
-                                    break;
-                                }
-                            }
+                                            // Determine if any items in this group have data.  If so we need to undelete and previously deleted items.
+                                            boolean undelete = false;
+                                            for (DisplayItemBean displayItem : items) {
+                                                String currItemVal = displayItem.getData().getValue();
+                                                if (currItemVal != null && !currItemVal.equals("")){
+                                                    undelete = true;
+                                                    break;
+                                                }
+                                            }
 
-                            for (DisplayItemBean displayItem : items) {
-                                String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
-                                boolean writeDN = true;
-                                displayItem.setEditFlag(displayGroup.getEditFlag());
-                                LOGGER.debug("group item value: " + displayItem.getData().getValue());
-                //                if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
-                //                    displayItem.getData().setValue("");
-                 //               }
+                                            for (DisplayItemBean displayItem : items) {
+                                                String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
+                                                boolean writeDN = true;
+                                                displayItem.setEditFlag(displayGroup.getEditFlag());
+                                                LOGGER.debug("group item value: " + displayItem.getData().getValue());
+                                                //                if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
+                                                //                    displayItem.getData().setValue("");
+                                                //               }
 
-                                //15350, this particular logic, takes into consideration that a DN is created properly as long as the item data record exists and it fails to get created when it doesnt.
-                                //so, we are expanding the logic from writeToDb method to avoid creating duplicate records.
-                                writeDN = writeDN(displayItem);
-                                //pulling from dataset instead of database and correcting the flawed logic of using the database ordinals as max ordinal...
-                                nextOrdinal =      displayItem.getData().getOrdinal();
+                                                //15350, this particular logic, takes into consideration that a DN is created properly as long as the item data record exists and it fails to get created when it doesnt.
+                                                //so, we are expanding the logic from writeToDb method to avoid creating duplicate records.
+                                                writeDN = writeDN(displayItem);
+                                                //pulling from dataset instead of database and correcting the flawed logic of using the database ordinals as max ordinal...
+                                                nextOrdinal =      displayItem.getData().getOrdinal();
 
-                                temp = writeToDB(displayItem, iddao, nextOrdinal, request);
-                                LOGGER.debug("just executed writeToDB - 1");
-                                LOGGER.debug("next ordinal: " + nextOrdinal);
+                                                temp = writeToDB(displayItem, iddao, nextOrdinal, request);
+                                                LOGGER.debug("just executed writeToDB - 1");
+                                                LOGGER.debug("next ordinal: " + nextOrdinal);
 
-                                // Undelete item if any item in the repeating group has data.
-                                if (undelete && displayItem.getDbData() != null && displayItem.getDbData().isDeleted()) {
-                                    iddao.undelete(displayItem.getDbData().getId(),ub.getId());
-                                }
+                                                // Undelete item if any item in the repeating group has data.
+                                                if (undelete && displayItem.getDbData() != null && displayItem.getDbData().isDeleted()) {
+                                                    iddao.undelete(displayItem.getDbData().getId(),ub.getId());
+                                                }
 
-                                if (temp && newUploadedFiles.containsKey(fileName)) {
-                                    newUploadedFiles.remove(fileName);
-                                }
-                                // maybe put ordinal in the place of j? maybe subtract max rows from next ordinal if j is gt
-                                // next ordinal?
-                                String inputName = getGroupItemInputName(displayGroup, j, displayItem);
-                                // String inputName2 = getGroupItemManualInputName(displayGroup, j, displayItem);
-                                if (!displayGroup.isAuto()) {
-                                    LOGGER.trace("not auto");
-                                    inputName = this.getGroupItemManualInputName(displayGroup, j, displayItem);
+                                                if (temp && newUploadedFiles.containsKey(fileName)) {
+                                                    newUploadedFiles.remove(fileName);
+                                                }
+                                                // maybe put ordinal in the place of j? maybe subtract max rows from next ordinal if j is gt
+                                                // next ordinal?
+                                                String inputName = getGroupItemInputName(displayGroup, j, displayItem);
+                                                // String inputName2 = getGroupItemManualInputName(displayGroup, j, displayItem);
+                                                if (!displayGroup.isAuto()) {
+                                                    LOGGER.trace("not auto");
+                                                    inputName = this.getGroupItemManualInputName(displayGroup, j, displayItem);
 
-                                }
-                                //htaycher last DN is not stored for new rows
+                                                }
+                                                //htaycher last DN is not stored for new rows
 //                                if (j == dgbs.size() - 1) {
 //                                    // LAST ONE
 //                                    logger.trace("last one");
@@ -1655,260 +1699,260 @@ public abstract class DataEntryServlet extends CoreSecureController {
 //                                    logger.debug("+++ found manual rows from line 1326: " + ordinal);
 //                                    inputName = getGroupItemInputName(displayGroup, ordinal, displayItem);
 //                                }
-                                // logger.trace("&&& we get previous looking at input name: " + inputName + " " + inputName2);
-                                LOGGER.trace("&&& we get previous looking at input name: " + inputName);
-                                // input name 2 removed from below
-                                inputName = displayItem.getFieldName();
-                              if(writeDN)
-                                {
-                            	  AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, displayItem.getData().getId(), "itemData", currentStudy, ecb.getId());
-                                }
-                                success = success && temp;
-                            }
-                        }
-                        for (int j = 0; j < dbGroups.size(); j++) {
-                            DisplayItemGroupBean displayGroup = dbGroups.get(j);
-                            //JN: Since remove button is gone, the following code can be commented out, however it needs to be tested? Can be tackled when handling discrepancy note w/repeating groups issues.
-                            if ("remove".equalsIgnoreCase(displayGroup.getEditFlag())) {
-                                List<DisplayItemBean> items = displayGroup.getItems();
-                                for (DisplayItemBean displayItem : items) {
-                                    String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
-                                    displayItem.setEditFlag(displayGroup.getEditFlag());
-                                    LOGGER.debug("group item value: " + displayItem.getData().getValue());
-                     //               if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
-                     //                   displayItem.getData().setValue("");
-                     //               }
-                                    temp = writeToDB(displayItem, iddao, 0, request);
-                                    LOGGER.debug("just executed writeToDB - 2");
-                                    if (temp && newUploadedFiles.containsKey(fileName)) {
-                                        newUploadedFiles.remove(fileName);
-                                    }
-                                    // just use 0 here since update doesn't
-                                    // touch ordinal
-                                    success = success && temp;
-                                }
-                            }
-                        }
-
-                    }
-                    else {
-                        DisplayItemBean dib = diwb.getSingleItem();
-                        // TODO work on this line
-
-                      //  this.addAttachedFilePath(dib, attachedFilePath);
-                        String fileName= addAttachedFilePath(dib, attachedFilePath);
-                        boolean writeDN = writeDN(dib);
-                        temp = writeToDB(dib, iddao, 1, request);
-                        LOGGER.debug("just executed writeToDB - 3");
-                        if (temp && (newUploadedFiles.containsKey(dib.getItem().getId() + "") || newUploadedFiles.containsKey(fileName))) {
-                            // so newUploadedFiles will contain only failed file
-                            // items;
-                            newUploadedFiles.remove(dib.getItem().getId() + "");
-                            newUploadedFiles.remove(fileName);
-                        }
-
-                        String inputName = getInputName(dib);
-                        LOGGER.trace("3 - found input name: " + inputName);
-                        if(writeDN )
-                        AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, dib.getData().getId(), "itemData", currentStudy, ecb.getId());
-
-                        success = success && temp;
-
-                        ArrayList<DisplayItemBean> childItems = dib.getChildren();
-                        for (int j = 0; j < childItems.size(); j++) {
-                            DisplayItemBean child = (DisplayItemBean) childItems.get(j);
-                            this.addAttachedFilePath(child, attachedFilePath);
-                            writeDN =  writeDN(child);
-                            temp = writeToDB(child, iddao, 1, request);
-                            LOGGER.debug("just executed writeToDB - 4");
-                            if (temp && newUploadedFiles.containsKey(child.getItem().getId() + "")) {
-                                // so newUploadedFiles will contain only failed
-                                // file items;
-                                newUploadedFiles.remove(child.getItem().getId() + "");
-                            }
-                            inputName = getInputName(child);
-                            if( writeDN)
-                            AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, child.getData().getId(), "itemData", currentStudy, ecb.getId());
-                            success = success && temp;
-                        }
-                    }
-                }
-                logMe("DisplayItemWithGroupBean allitems4 end "+System.currentTimeMillis());
-                LOGGER.debug("running rules: " + phase2.name());
-                List<Integer> prevShownDynItemDataIds = shouldRunRules?
-                    this.getItemMetadataService().getDynamicsItemFormMetadataDao().findShowItemDataIdsInSection(
-                            section.getSection().getId(), ecb.getCRFVersionId(), ecb.getId())
-                    :new ArrayList<Integer>();
-                logMe("DisplayItemWithGroupBean dryrun  start"+System.currentTimeMillis());
-                HashMap<String, ArrayList<String>> rulesPostDryRun = runRules(allItems, ruleSets, false, shouldRunRules, MessageType.WARNING, phase2,ecb, request);
-
-
-                HashMap<String, ArrayList<String>> errorsPostDryRun = new HashMap<String, ArrayList<String>>();
-                // additional step needed, run rules and see if any items are 'shown' AFTER saving data
-                logMe("DisplayItemWithGroupBean dryrun  end"+System.currentTimeMillis());
-                boolean inSameSection = false;
-                logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
-                if (!rulesPostDryRun.isEmpty()) {
-                    // in same section?
-
-                    // iterate through the OIDs and see if any of them belong to this section
-                    for(String fieldName : rulesPostDryRun.keySet()) {
-                        LOGGER.debug("found oid after post dry run " + fieldName);
-                        // set up a listing of OIDs in the section
-                        // BUT: Oids can have the group name in them.
-                        int ordinal = -1;
-                        String newFieldName = fieldName;
-                        String[] fieldNames = fieldName.split("\\.");
-                        if (fieldNames.length == 2) {
-                            newFieldName = fieldNames[1];
-                            // check items in item groups here?
-                            if(fieldNames[0].contains("[")) {
-                                int p1 = fieldNames[0].indexOf("[");
-                                int p2 = fieldNames[0].indexOf("]");
-                                try{
-                                    ordinal = Integer.valueOf(fieldNames[0].substring(p1+1,p2));
-                                }catch(NumberFormatException e) {
-                                    ordinal = -1;
-                                }
-                                fieldNames[0] = fieldNames[0].substring(0,p1);
-                            }
-                        }
-                        List<DisplayItemWithGroupBean> displayGroupsWithItems = section.getDisplayItemGroups();
-                        //ArrayList<DisplayItemBean> displayItems = section.getItems();
-                        for (int i = 0; i < displayGroupsWithItems.size(); i++) {
-                            DisplayItemWithGroupBean itemWithGroup = displayGroupsWithItems.get(i);
-                            if (itemWithGroup.isInGroup()) {
-                                LOGGER.debug("found group: " + fieldNames[0]);
-                                // do something there
-                                List<DisplayItemGroupBean> digbs = itemWithGroup.getItemGroups();
-                                LOGGER.debug("digbs size: " + digbs.size());
-                                for (int j = 0; j < digbs.size(); j++) {
-                                    DisplayItemGroupBean displayGroup = digbs.get(j);
-                                    if (displayGroup.getItemGroupBean().getOid().equals(fieldNames[0])&& displayGroup.getOrdinal()==ordinal-1) {
-                                        List<DisplayItemBean> items = displayGroup.getItems();
-
-                                        for (int k = 0; k < items.size(); k++) {
-                                            DisplayItemBean dib = items.get(k);
-                                            if (dib.getItem().getOid().equals(newFieldName)) {
-                                                //inSameSection = true;
-                                                if (!dib.getMetadata().isShowItem()) {
-                                                    LOGGER.debug("found item in group " + this.getGroupItemInputName(displayGroup, j, dib) + " vs. "
-                                                        + fieldName + " and is show item: " + dib.getMetadata().isShowItem());
-                                                    dib.getMetadata().setShowItem(true);
+                                                // logger.trace("&&& we get previous looking at input name: " + inputName + " " + inputName2);
+                                                LOGGER.trace("&&& we get previous looking at input name: " + inputName);
+                                                // input name 2 removed from below
+                                                inputName = displayItem.getFieldName();
+                                                if(writeDN)
+                                                {
+                                                    AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, displayItem.getData().getId(), "itemData", currentStudy, ecb.getId());
                                                 }
-                                                if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(dib.getData().getId())) {
-                                                    inSameSection = true;
-                                                    errorsPostDryRun.put(this.getGroupItemInputName(displayGroup, j, dib), rulesPostDryRun.get(fieldName));
+                                                success = success && temp;
+                                            }
+                                        }
+                                        for (int j = 0; j < dbGroups.size(); j++) {
+                                            DisplayItemGroupBean displayGroup = dbGroups.get(j);
+                                            //JN: Since remove button is gone, the following code can be commented out, however it needs to be tested? Can be tackled when handling discrepancy note w/repeating groups issues.
+                                            if ("remove".equalsIgnoreCase(displayGroup.getEditFlag())) {
+                                                List<DisplayItemBean> items = displayGroup.getItems();
+                                                for (DisplayItemBean displayItem : items) {
+                                                    String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
+                                                    displayItem.setEditFlag(displayGroup.getEditFlag());
+                                                    LOGGER.debug("group item value: " + displayItem.getData().getValue());
+                                                    //               if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
+                                                    //                   displayItem.getData().setValue("");
+                                                    //               }
+                                                    temp = writeToDB(displayItem, iddao, 0, request);
+                                                    LOGGER.debug("just executed writeToDB - 2");
+                                                    if (temp && newUploadedFiles.containsKey(fileName)) {
+                                                        newUploadedFiles.remove(fileName);
+                                                    }
+                                                    // just use 0 here since update doesn't
+                                                    // touch ordinal
+                                                    success = success && temp;
                                                 }
                                             }
-                                            items.set(k, dib);
                                         }
-                                        displayGroup.setItems(items);
-                                        digbs.set(j, displayGroup);
+
+                                    }
+                                    else {
+                                        DisplayItemBean dib = diwb.getSingleItem();
+                                        // TODO work on this line
+
+                                        //  this.addAttachedFilePath(dib, attachedFilePath);
+                                        String fileName= addAttachedFilePath(dib, attachedFilePath);
+                                        boolean writeDN = writeDN(dib);
+                                        temp = writeToDB(dib, iddao, 1, request);
+                                        LOGGER.debug("just executed writeToDB - 3");
+                                        if (temp && (newUploadedFiles.containsKey(dib.getItem().getId() + "") || newUploadedFiles.containsKey(fileName))) {
+                                            // so newUploadedFiles will contain only failed file
+                                            // items;
+                                            newUploadedFiles.remove(dib.getItem().getId() + "");
+                                            newUploadedFiles.remove(fileName);
+                                        }
+
+                                        String inputName = getInputName(dib);
+                                        LOGGER.trace("3 - found input name: " + inputName);
+                                        if(writeDN )
+                                            AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, dib.getData().getId(), "itemData", currentStudy, ecb.getId());
+
+                                        success = success && temp;
+
+                                        ArrayList<DisplayItemBean> childItems = dib.getChildren();
+                                        for (int j = 0; j < childItems.size(); j++) {
+                                            DisplayItemBean child = (DisplayItemBean) childItems.get(j);
+                                            this.addAttachedFilePath(child, attachedFilePath);
+                                            writeDN =  writeDN(child);
+                                            temp = writeToDB(child, iddao, 1, request);
+                                            LOGGER.debug("just executed writeToDB - 4");
+                                            if (temp && newUploadedFiles.containsKey(child.getItem().getId() + "")) {
+                                                // so newUploadedFiles will contain only failed
+                                                // file items;
+                                                newUploadedFiles.remove(child.getItem().getId() + "");
+                                            }
+                                            inputName = getInputName(child);
+                                            if( writeDN)
+                                                AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, child.getData().getId(), "itemData", currentStudy, ecb.getId());
+                                            success = success && temp;
+                                        }
                                     }
                                 }
-                                itemWithGroup.setItemGroups(digbs);
-                            } else {
-                                DisplayItemBean displayItemBean = itemWithGroup.getSingleItem();
-                                ItemBean itemBean = displayItemBean.getItem();
-                                if (newFieldName.equals(itemBean.getOid())) {
-                                    //System.out.println("is show item for " + displayItemBean.getItem().getId() + ": " + displayItemBean.getMetadata().isShowItem());
-                                    //System.out.println("check run dynamics item check " + runDynamicsItemCheck(displayItemBean).getMetadata().isShowItem());
-                                    if (!displayItemBean.getMetadata().isShowItem()) {
-                                        // double check there?
-                                        LOGGER.debug("found item " + this.getInputName(displayItemBean) + " vs. " + fieldName + " and is show item: "
-                                            + displayItemBean.getMetadata().isShowItem());
-                                        // if is repeating, use the other input name? no
+                                logMe("DisplayItemWithGroupBean allitems4 end "+System.currentTimeMillis());
+                                LOGGER.debug("running rules: " + phase2.name());
+                                List<Integer> prevShownDynItemDataIds = shouldRunRules?
+                                        this.getItemMetadataService().getDynamicsItemFormMetadataDao().findShowItemDataIdsInSection(
+                                                section.getSection().getId(), ecb.getCRFVersionId(), ecb.getId())
+                                        :new ArrayList<Integer>();
+                                logMe("DisplayItemWithGroupBean dryrun  start"+System.currentTimeMillis());
+                                HashMap<String, ArrayList<String>> rulesPostDryRun = runRules(allItems, ruleSets, false, shouldRunRules, MessageType.WARNING, phase2,ecb, request);
 
-                                        displayItemBean.getMetadata().setShowItem(true);
-                                        if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(displayItemBean.getData().getId())) {
-                                            inSameSection = true;
-                                            errorsPostDryRun.put(this.getInputName(displayItemBean), rulesPostDryRun.get(fieldName));
+
+                                HashMap<String, ArrayList<String>> errorsPostDryRun = new HashMap<String, ArrayList<String>>();
+                                // additional step needed, run rules and see if any items are 'shown' AFTER saving data
+                                logMe("DisplayItemWithGroupBean dryrun  end"+System.currentTimeMillis());
+                                boolean inSameSection = false;
+                                logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
+                                if (!rulesPostDryRun.isEmpty()) {
+                                    // in same section?
+
+                                    // iterate through the OIDs and see if any of them belong to this section
+                                    for(String fieldName : rulesPostDryRun.keySet()) {
+                                        LOGGER.debug("found oid after post dry run " + fieldName);
+                                        // set up a listing of OIDs in the section
+                                        // BUT: Oids can have the group name in them.
+                                        int ordinal = -1;
+                                        String newFieldName = fieldName;
+                                        String[] fieldNames = fieldName.split("\\.");
+                                        if (fieldNames.length == 2) {
+                                            newFieldName = fieldNames[1];
+                                            // check items in item groups here?
+                                            if(fieldNames[0].contains("[")) {
+                                                int p1 = fieldNames[0].indexOf("[");
+                                                int p2 = fieldNames[0].indexOf("]");
+                                                try{
+                                                    ordinal = Integer.valueOf(fieldNames[0].substring(p1+1,p2));
+                                                }catch(NumberFormatException e) {
+                                                    ordinal = -1;
+                                                }
+                                                fieldNames[0] = fieldNames[0].substring(0,p1);
+                                            }
                                         }
+                                        List<DisplayItemWithGroupBean> displayGroupsWithItems = section.getDisplayItemGroups();
+                                        //ArrayList<DisplayItemBean> displayItems = section.getItems();
+                                        for (int i = 0; i < displayGroupsWithItems.size(); i++) {
+                                            DisplayItemWithGroupBean itemWithGroup = displayGroupsWithItems.get(i);
+                                            if (itemWithGroup.isInGroup()) {
+                                                LOGGER.debug("found group: " + fieldNames[0]);
+                                                // do something there
+                                                List<DisplayItemGroupBean> digbs = itemWithGroup.getItemGroups();
+                                                LOGGER.debug("digbs size: " + digbs.size());
+                                                for (int j = 0; j < digbs.size(); j++) {
+                                                    DisplayItemGroupBean displayGroup = digbs.get(j);
+                                                    if (displayGroup.getItemGroupBean().getOid().equals(fieldNames[0])&& displayGroup.getOrdinal()==ordinal-1) {
+                                                        List<DisplayItemBean> items = displayGroup.getItems();
+
+                                                        for (int k = 0; k < items.size(); k++) {
+                                                            DisplayItemBean dib = items.get(k);
+                                                            if (dib.getItem().getOid().equals(newFieldName)) {
+                                                                //inSameSection = true;
+                                                                if (!dib.getMetadata().isShowItem()) {
+                                                                    LOGGER.debug("found item in group " + this.getGroupItemInputName(displayGroup, j, dib) + " vs. "
+                                                                            + fieldName + " and is show item: " + dib.getMetadata().isShowItem());
+                                                                    dib.getMetadata().setShowItem(true);
+                                                                }
+                                                                if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(dib.getData().getId())) {
+                                                                    inSameSection = true;
+                                                                    errorsPostDryRun.put(this.getGroupItemInputName(displayGroup, j, dib), rulesPostDryRun.get(fieldName));
+                                                                }
+                                                            }
+                                                            items.set(k, dib);
+                                                        }
+                                                        displayGroup.setItems(items);
+                                                        digbs.set(j, displayGroup);
+                                                    }
+                                                }
+                                                itemWithGroup.setItemGroups(digbs);
+                                            } else {
+                                                DisplayItemBean displayItemBean = itemWithGroup.getSingleItem();
+                                                ItemBean itemBean = displayItemBean.getItem();
+                                                if (newFieldName.equals(itemBean.getOid())) {
+                                                    //System.out.println("is show item for " + displayItemBean.getItem().getId() + ": " + displayItemBean.getMetadata().isShowItem());
+                                                    //System.out.println("check run dynamics item check " + runDynamicsItemCheck(displayItemBean).getMetadata().isShowItem());
+                                                    if (!displayItemBean.getMetadata().isShowItem()) {
+                                                        // double check there?
+                                                        LOGGER.debug("found item " + this.getInputName(displayItemBean) + " vs. " + fieldName + " and is show item: "
+                                                                + displayItemBean.getMetadata().isShowItem());
+                                                        // if is repeating, use the other input name? no
+
+                                                        displayItemBean.getMetadata().setShowItem(true);
+                                                        if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(displayItemBean.getData().getId())) {
+                                                            inSameSection = true;
+                                                            errorsPostDryRun.put(this.getInputName(displayItemBean), rulesPostDryRun.get(fieldName));
+                                                        }
+                                                    }
+                                                }
+                                                itemWithGroup.setSingleItem(displayItemBean);
+                                            }
+                                            displayGroupsWithItems.set(i, itemWithGroup);
+                                        }
+                                        logMe("DisplayItemWithGroupBean allitems4  end,begin"+System.currentTimeMillis());
+                                        // check groups
+                                        //List<DisplayItemGroupBean> itemGroups = new ArrayList<DisplayItemGroupBean>();
+                                        //itemGroups = section.getDisplayFormGroups();
+                                        //   But in jsp: section.displayItemGroups.itemGroup.groupMetaBean.showGroup
+                                        List<DisplayItemWithGroupBean> itemGroups = section.getDisplayItemGroups();
+                                        // List<DisplayItemGroupBean> newItemGroups = new ArrayList<DisplayItemGroupBean>();
+                                        for (DisplayItemWithGroupBean itemGroup : itemGroups) {
+                                            DisplayItemGroupBean displayGroup = itemGroup.getItemGroup();
+                                            if (newFieldName.equals(displayGroup.getItemGroupBean().getOid())) {
+                                                if (!displayGroup.getGroupMetaBean().isShowGroup()) {
+                                                    inSameSection = true;
+                                                    LOGGER.debug("found itemgroup " + displayGroup.getItemGroupBean().getOid() + " vs. " + fieldName + " and is show item: "
+                                                            + displayGroup.getGroupMetaBean().isShowGroup());
+                                                    // hmmm how to set highlighting for a group?
+                                                    errorsPostDryRun.put(displayGroup.getItemGroupBean().getOid(), rulesPostDryRun.get(fieldName));
+                                                    displayGroup.getGroupMetaBean().setShowGroup(true);
+                                                    // add necessary rows to the display group here????
+                                                    // we have to set the items in the itemGroup for the displayGroup
+                                                    loadItemsWithGroupRows(itemGroup, sb, edcb, ecb, request);
+
+                                                }
+                                            }
+                                            // newItemGroups.add(displayGroup);
+                                        }
+                                        logMe("DisplayItemWithGroupBean allitems4  end,end"+System.currentTimeMillis());
+                                        // trying to reset the display form groups here, tbh
+
+                                        // section.setItems(displayItems);
+                                        section.setDisplayItemGroups(displayGroupsWithItems);
+                                        populateInstantOnChange(request.getSession(), ecb, section);
+
+                                        // section.setDisplayFormGroups(newDisplayBean.getDisplayFormGroups());
+
+                                    }
+                                    //
+                                    this.getItemMetadataService().updateGroupDynamicsInSection(displayItemWithGroups, section.getSection().getId(), ecb);
+                                    toc =
+                                            TableOfContentsServlet.getDisplayBeanWithShownSections(getDataSource(), (DisplayTableOfContentsBean) request.getAttribute(TOC_DISPLAY),
+                                                    (DynamicsMetadataService) SpringServletAccess.getApplicationContext(getServletContext()).getBean("dynamicsMetadataService"));
+                                    request.setAttribute(TOC_DISPLAY, toc);
+                                    sectionIdsInToc = TableOfContentsServlet.sectionIdsInToc(toc);
+                                    sIndex = TableOfContentsServlet.sectionIndexInToc(section.getSection(), toc, sectionIdsInToc);
+                                    previousSec = this.prevSection(section.getSection(), ecb, toc, sIndex);
+                                    nextSec = this.nextSection(section.getSection(), ecb, toc, sIndex);
+                                    section.setFirstSection(!previousSec.isActive());
+                                    section.setLastSection(!nextSec.isActive());
+                                    //
+                                    // we need the following for repeating groups, tbh
+                                    // >> tbh 06/2010
+                                    // List<DisplayItemWithGroupBean> displayItemWithGroups2 = createItemWithGroups(section, hasGroup, eventDefinitionCRFId);
+
+                                    // section.setDisplayItemGroups(displayItemWithGroups2);
+
+                                    // if so, stay at this section
+                                    LOGGER.debug(" in same section: " + inSameSection);
+                                    if (inSameSection) {
+                                        // copy of one line from early on around line 400, forcing a re-show of the items
+                                        // section = getDisplayBean(hasGroup, true);// include all items, tbh
+                                        // below a copy of three lines from the if errors = true line, tbh 03/2010
+                                        String[] textFields = { INPUT_INTERVIEWER, INPUT_INTERVIEW_DATE };
+                                        fp.setCurrentStringValuesAsPreset(textFields);
+                                        setPresetValues(fp.getPresetValues(), request);
+                                        // below essetially a copy except for rulesPostDryRun
+                                        request.setAttribute(BEAN_DISPLAY, section);
+                                        request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                                        setInputMessages(errorsPostDryRun, request);
+                                        addPageMessage(respage.getString("your_answers_activated_hidden_items"), request);
+                                        request.setAttribute("hasError", "true");
+                                        request.setAttribute("hasShown", "true");
+
+                                        session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+                                        setUpPanel(section);
+                                        forwardPage(getJSPPage(), request, response);
                                     }
                                 }
-                                itemWithGroup.setSingleItem(displayItemBean);
-                            }
-                            displayGroupsWithItems.set(i, itemWithGroup);
-                        }
-                        logMe("DisplayItemWithGroupBean allitems4  end,begin"+System.currentTimeMillis());
-                        // check groups
-                        //List<DisplayItemGroupBean> itemGroups = new ArrayList<DisplayItemGroupBean>();
-                        //itemGroups = section.getDisplayFormGroups();
-                        //   But in jsp: section.displayItemGroups.itemGroup.groupMetaBean.showGroup
-                        List<DisplayItemWithGroupBean> itemGroups = section.getDisplayItemGroups();
-                        // List<DisplayItemGroupBean> newItemGroups = new ArrayList<DisplayItemGroupBean>();
-                        for (DisplayItemWithGroupBean itemGroup : itemGroups) {
-                            DisplayItemGroupBean displayGroup = itemGroup.getItemGroup();
-                            if (newFieldName.equals(displayGroup.getItemGroupBean().getOid())) {
-                                if (!displayGroup.getGroupMetaBean().isShowGroup()) {
-                                    inSameSection = true;
-                                    LOGGER.debug("found itemgroup " + displayGroup.getItemGroupBean().getOid() + " vs. " + fieldName + " and is show item: "
-                                        + displayGroup.getGroupMetaBean().isShowGroup());
-                                    // hmmm how to set highlighting for a group?
-                                    errorsPostDryRun.put(displayGroup.getItemGroupBean().getOid(), rulesPostDryRun.get(fieldName));
-                                    displayGroup.getGroupMetaBean().setShowGroup(true);
-                                    // add necessary rows to the display group here????
-                                    // we have to set the items in the itemGroup for the displayGroup
-                                    loadItemsWithGroupRows(itemGroup, sb, edcb, ecb, request);
 
-                                }
-                            }
-                            // newItemGroups.add(displayGroup);
-                        }
-                        logMe("DisplayItemWithGroupBean allitems4  end,end"+System.currentTimeMillis());
-                        // trying to reset the display form groups here, tbh
-
-                        // section.setItems(displayItems);
-                        section.setDisplayItemGroups(displayGroupsWithItems);
-                        populateInstantOnChange(request.getSession(), ecb, section);
-
-                        // section.setDisplayFormGroups(newDisplayBean.getDisplayFormGroups());
-
-                    }
-                    //
-                    this.getItemMetadataService().updateGroupDynamicsInSection(displayItemWithGroups, section.getSection().getId(), ecb);
-                    toc =
-                        TableOfContentsServlet.getDisplayBeanWithShownSections(getDataSource(), (DisplayTableOfContentsBean) request.getAttribute(TOC_DISPLAY),
-                                (DynamicsMetadataService) SpringServletAccess.getApplicationContext(getServletContext()).getBean("dynamicsMetadataService"));
-                    request.setAttribute(TOC_DISPLAY, toc);
-                    sectionIdsInToc = TableOfContentsServlet.sectionIdsInToc(toc);
-                    sIndex = TableOfContentsServlet.sectionIndexInToc(section.getSection(), toc, sectionIdsInToc);
-                    previousSec = this.prevSection(section.getSection(), ecb, toc, sIndex);
-                    nextSec = this.nextSection(section.getSection(), ecb, toc, sIndex);
-                    section.setFirstSection(!previousSec.isActive());
-                    section.setLastSection(!nextSec.isActive());
-                    //
-                    // we need the following for repeating groups, tbh
-                    // >> tbh 06/2010
-                    // List<DisplayItemWithGroupBean> displayItemWithGroups2 = createItemWithGroups(section, hasGroup, eventDefinitionCRFId);
-
-                    // section.setDisplayItemGroups(displayItemWithGroups2);
-
-                    // if so, stay at this section
-                    LOGGER.debug(" in same section: " + inSameSection);
-                   if (inSameSection) {
-                        // copy of one line from early on around line 400, forcing a re-show of the items
-                        // section = getDisplayBean(hasGroup, true);// include all items, tbh
-                        // below a copy of three lines from the if errors = true line, tbh 03/2010
-                        String[] textFields = { INPUT_INTERVIEWER, INPUT_INTERVIEW_DATE };
-                        fp.setCurrentStringValuesAsPreset(textFields);
-                        setPresetValues(fp.getPresetValues(), request);
-                        // below essetially a copy except for rulesPostDryRun
-                        request.setAttribute(BEAN_DISPLAY, section);
-                        request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
-                        setInputMessages(errorsPostDryRun, request);
-                        addPageMessage(respage.getString("your_answers_activated_hidden_items"), request);
-                        request.setAttribute("hasError", "true");
-                        request.setAttribute("hasShown", "true");
-
-                        session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
-                        setUpPanel(section);
-                        forwardPage(getJSPPage(), request, response);
-                    }
-                }
-
-                if (!inSameSection) {// else if not in same section, progress as usual
+                                if (!inSameSection) {// else if not in same section, progress as usual
                     /*
                     toc =
                         TableOfContentsServlet.getDisplayBeanWithShownSections(getDataSource(), (DisplayTableOfContentsBean) request.getAttribute(TOC_DISPLAY),
@@ -1921,229 +1965,1481 @@ public abstract class DataEntryServlet extends CoreSecureController {
                     section.setFirstSection(!previousSec.isActive());
                     section.setLastSection(!nextSec.isActive());
                     */
-                    // can we just forward page or do we actually need an ELSE here?
-                    // yes, we do. tbh 05/03/2010
+                                    // can we just forward page or do we actually need an ELSE here?
+                                    // yes, we do. tbh 05/03/2010
 
-                    ArrayList<String> updateFailedItems = sc.redoCalculations(scoreItems, scoreItemdata, changedItems, itemOrdinals, sb.getId());
-                    success = updateFailedItems.size() > 0 ? false : true;
+                                    ArrayList<String> updateFailedItems = sc.redoCalculations(scoreItems, scoreItemdata, changedItems, itemOrdinals, sb.getId());
+                                    success = updateFailedItems.size() > 0 ? false : true;
 
-                    // now check if CRF is marked complete
-                    boolean markComplete = fp.getString(INPUT_MARK_COMPLETE).equals(VALUE_YES);
-                    boolean markSuccessfully = false; // if the CRF was marked
-                    // complete
-                    // successfully
-                    if (markComplete && section.isLastSection()) {
-                        LOGGER.debug("need to mark CRF as complete");
-                        markSuccessfully = markCRFComplete(request);
-                        LOGGER.debug("...marked CRF as complete: " + markSuccessfully);
-                        if (!markSuccessfully) {
+                                    // now check if CRF is marked complete
+                                    boolean markComplete = fp.getString(INPUT_MARK_COMPLETE).equals(VALUE_YES);
+                                    boolean markSuccessfully = false; // if the CRF was marked
+                                    // complete
+                                    // successfully
+                                    if (markComplete && section.isLastSection()) {
+                                        LOGGER.debug("need to mark CRF as complete");
+                                        markSuccessfully = markCRFComplete(request);
+                                        LOGGER.debug("...marked CRF as complete: " + markSuccessfully);
+                                        if (!markSuccessfully) {
+                                            request.setAttribute(BEAN_DISPLAY, section);
+                                            request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                                            setUpPanel(section);
+                                            forwardPage(getJSPPage(), request, response);
+                                            return;
+                                        }
+                                    }
+
+                                    // now write the event crf bean to the database
+                                    String annotations = fp.getString(INPUT_ANNOTATIONS);
+                                    setEventCRFAnnotations(annotations, request);
+                                    Date now = new Date();
+                                    ecb.setUpdatedDate(now);
+                                    ecb.setUpdater(ub);
+                                    ecb = ecdao.update(ecb);
+                                    success = success && ecb.isActive();
+
+                                    StudyEventDAO sedao = new StudyEventDAO(getDataSource());
+                                    StudyEventBean seb = sedao.findByPK(ecb.getStudyEventId());
+                                    seb.setUpdatedDate(now);
+                                    seb.setUpdater(ub);
+                                    //seb.getStudySubject().setSecondaryLabel(successObject.getPid());
+                                    seb = sedao.update(seb);
+                                    success = success && seb.isActive();
+
+                                    request.setAttribute(INPUT_IGNORE_PARAMETERS, Boolean.TRUE);
+
+                                    if (newUploadedFiles.size() > 0) {
+                                        if (this.unloadFiles(newUploadedFiles)) {
+
+                                        } else {
+                                            String missed = newUploadedFiles.keySet().stream().collect(Collectors.joining(" "));
+                                            addPageMessage(respage.getString("uploaded_files_not_deleted_or_not_exist") + ": " + missed, request);
+                                        }
+                                    }
+                                    if (!success) {
+                                        // YW, 3-6-2008 <<
+                                        if (updateFailedItems.size() > 0) {
+                                            String mess = "";
+                                            for (String ss : updateFailedItems) {
+                                                mess += ss + ", ";
+                                            }
+                                            mess = mess.substring(0, mess.length() - 2);
+                                            addPageMessage(resexception.getString("item_save_failed_because_database_error") + mess, request);
+                                        } else {
+                                            // YW>>
+                                            addPageMessage(resexception.getString("database_error"), request);
+                                        }
+                                        request.setAttribute(BEAN_DISPLAY, section);
+                                        session.removeAttribute(GROUP_HAS_DATA);
+                                        session.removeAttribute(HAS_DATA_FLAG);
+                                        session.removeAttribute(DDE_PROGESS);
+                                        session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                                        LOGGER.debug("try to remove to_create_crf");
+                                        session.removeAttribute("to_create_crf");
+                                        session.removeAttribute(instantAtt);
+
+                                        // forwardPage(Page.SUBMIT_DATA_SERVLET);
+                                        forwardPage(Page.LIST_STUDY_SUBJECTS_SERVLET, request, response);
+                                        // >> changed tbh, 06/2009
+                                    } else {
+                                        boolean forwardingSucceeded = false;
+
+                                        if (!fp.getString(GO_PREVIOUS).equals("")) {
+                                            if (previousSec.isActive()) {
+                                                forwardingSucceeded = true;
+                                                request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                                request.setAttribute(INPUT_SECTION, previousSec);
+                                                int tabNum = 0;
+                                                if (fp.getString("tab") == null) {
+                                                    tabNum = 1;
+                                                } else {
+                                                    tabNum = fp.getInt("tab");
+                                                }
+                                                request.setAttribute("tab", new Integer(tabNum - 1).toString());
+
+                                                //  forwardPage(getServletPage(request), request, response);
+                                                getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                            }
+                                        } else if (!fp.getString(GO_NEXT).equals("")) {
+                                            if (nextSec.isActive()) {
+                                                forwardingSucceeded = true;
+                                                request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                                request.setAttribute(INPUT_SECTION, nextSec);
+                                                int tabNum = 0;
+                                                if (fp.getString("tab") == null) {
+                                                    tabNum = 1;
+                                                } else {
+                                                    tabNum = fp.getInt("tab");
+                                                }
+                                                request.setAttribute("tab", new Integer(tabNum + 1).toString());
+                                                getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                                //forwardPage(getServletPage(request), request, response);
+                                            }
+                                        }
+
+                                        if (!forwardingSucceeded) {
+                                            // request.setAttribute(TableOfContentsServlet.
+                                            // INPUT_EVENT_CRF_BEAN,
+                                            // ecb);
+                                            if (markSuccessfully) {
+                                                addPageMessage(respage.getString("data_saved_CRF_marked_complete"), request);
+                                                session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                                                session.removeAttribute(GROUP_HAS_DATA);
+                                                session.removeAttribute(HAS_DATA_FLAG);
+                                                session.removeAttribute(DDE_PROGESS);
+                                                session.removeAttribute("to_create_crf");
+
+                                                request.setAttribute("eventId", new Integer(ecb.getStudyEventId()).toString());
+                                                forwardPage(Page.ENTER_DATA_FOR_STUDY_EVENT_SERVLET, request, response);
+                                            } else {
+                                                // use clicked 'save'
+                                                addPageMessage(respage.getString("data_saved_continue_entering_edit_later"), request);
+                                                request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                                request.setAttribute(INPUT_EVENT_CRF_ID, new Integer(ecb.getId()).toString());
+                                                // forward to the next section if the previous one
+                                                // is not the last section
+                                                if (!section.isLastSection()) {
+                                                    request.setAttribute(INPUT_SECTION, nextSec);
+                                                    request.setAttribute(INPUT_SECTION_ID, new Integer(nextSec.getId()).toString());
+                                                    session.removeAttribute("mayProcessUploading");
+                                                } else if(section.isLastSection()){ //JN ADDED TO avoid return down
+                                                    // already the last section, should go back to
+                                                    // view event page
+                                                    session.removeAttribute(GROUP_HAS_DATA);
+                                                    session.removeAttribute(HAS_DATA_FLAG);
+                                                    session.removeAttribute(DDE_PROGESS);
+                                                    session.removeAttribute("to_create_crf");
+                                                    session.removeAttribute("mayProcessUploading");
+
+                                                    request.setAttribute("eventId", new Integer(ecb.getStudyEventId()).toString());
+                                                    if(fromViewNotes != null && "1".equals(fromViewNotes)) {
+                                                        String viewNotesPageFileName = (String)session.getAttribute("viewNotesPageFileName");
+                                                        session.removeAttribute("viewNotesPageFileName");
+                                                        session.removeAttribute("viewNotesURL");
+                                                        if(viewNotesPageFileName!=null && viewNotesPageFileName.length()>0) {
+                                                            // forwardPage(Page.setNewPage(viewNotesPageFileName, "View Notes"), request, response);
+                                                            getServletContext().getRequestDispatcher(viewNotesPageFileName).forward(request, response);
+                                                        }
+                                                    }
+                                                    session.removeAttribute(instantAtt);
+                                                    forwardPage(Page.ENTER_DATA_FOR_STUDY_EVENT_SERVLET, request, response);
+                                                    return;
+
+                                                }
+
+
+                                                int tabNum = 0;
+                                                if (fp.getString("tab") == null) {
+                                                    tabNum = 1;
+                                                } else {
+                                                    tabNum = fp.getInt("tab");
+                                                }
+                                                if (!section.isLastSection()) {
+                                                    request.setAttribute("tab", new Integer(tabNum + 1).toString());
+                                                }
+
+                                                //  forwardPage(getServletPage(request), request, response);
+                                                getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                            }
+                                            // session.removeAttribute(AddNewSubjectServlet.
+                                            // FORM_DISCREPANCY_NOTES_NAME);
+                                            // forwardPage(Page.SUBMIT_DATA_SERVLET);
+                                        }
+                                    }
+                                }
+
+                            }catch (Exception e){
+                            }
+
+                        }
+                        else {
+                            ArrayList<String> errorsMessage = new ArrayList<String>();
+                            try (BufferedReader errorReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
+                                StringBuilder errorResponse = new StringBuilder();
+                                String line;
+                                while ((line = errorReader.readLine()) != null) {
+                                    errorResponse.append(line);
+                                }
+
+                                // Parse the error response as a key-value object
+                                ObjectMapper objectMapperError = new ObjectMapper();
+                                // Assuming the response is in JSON format, you can adjust accordingly
+                                // YourErrorResponseType should be a class representing the structure of the error response
+                                ErrorResponse errorObject = objectMapperError.readValue(errorResponse.toString(), ErrorResponse.class);
+
+
+                                // Print the error response as plain text
+                                System.out.println("Error: " + responseCode);
+                                if(errorObject.getError().contains("already exists in DMM database")){
+                                    boolean success = true;
+                                    boolean temp = true;
+
+                                    // save interviewer name and date into DB
+                                    ecb.setInterviewerName(fp.getString(INPUT_INTERVIEWER));
+                                    if (!(interviewDate == null || interviewDate.trim().isEmpty())) {
+                                        ecb.setDateInterviewed(fp.getDate(INPUT_INTERVIEW_DATE));
+                                    } else {
+                                        ecb.setDateInterviewed(null);
+                                    }
+
+                                    if (ecdao == null) {
+                                        ecdao = new EventCRFDAO(getDataSource());
+                                    }
+                                    // set validator id for DDE
+                                    DataEntryStage stage = ecb.getStage();
+                                    if (stage.equals(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE) || stage.equals(DataEntryStage.DOUBLE_DATA_ENTRY)) {
+                                        ecb.setValidatorId(ub.getId());
+
+                                    }
+                                    /*
+                                     * if(studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus .SIGNED)){ if(edcBean.isDoubleEntry()){
+                                     * ecb.setStage(DataEntryStage.DOUBLE_DATA_ENTRY_COMPLETE); }else{ ecb.setStage(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE); } }
+                                     */
+
+                                    // for Administrative editing
+                                    if (studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus.SIGNED) && changedItemsList.size() > 0) {
+                                        studyEventBean.setSubjectEventStatus(SubjectEventStatus.COMPLETED);
+                                        studyEventBean.setUpdater(ub);
+                                        studyEventBean.setUpdatedDate(new Date());
+                                        seDao.update(studyEventBean);
+                                    }
+
+                                    // If the Study Subject's Satus is signed and we save a section
+                                    // , change status to available
+                                    LOGGER.debug("Status of Study Subject {}", ssb.getStatus().getName());
+                                    if (ssb.getStatus() == Status.SIGNED && changedItemsList.size() > 0) {
+                                        LOGGER.debug("Status of Study Subject is Signed we are updating");
+                                        StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
+                                        ssb.setStatus(Status.AVAILABLE);
+                                        ssb.setUpdater(ub);
+                                        ssb.setUpdatedDate(new Date());
+                                        studySubjectDao.update(ssb);
+                                    }
+                                    if (ecb.isSdvStatus() && changedItemsList.size() > 0) {
+                                        LOGGER.debug("Status of Study Subject is SDV we are updating");
+                                        StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
+                                        ssb.setStatus(Status.AVAILABLE);
+                                        ssb.setUpdater(ub);
+                                        ssb.setUpdatedDate(new Date());
+                                        studySubjectDao.update(ssb);
+                                        ecb.setSdvStatus(false);
+                                        ecb.setSdvUpdateId(ub.getId());
+                                    }
+
+                                    ecb = (EventCRFBean) ecdao.update(ecb);
+
+                                    // save discrepancy notes into DB
+                                    FormDiscrepancyNotes fdn = (FormDiscrepancyNotes) session.getAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                                    dndao = new DiscrepancyNoteDAO(getDataSource());
+
+                                    AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEWER, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
+                                    AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEW_DATE, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
+
+                                    // items = section.getItems();
+                                    allItems = section.getDisplayItemGroups();
+                                    int nextOrdinal = 0;
+
+                                    LOGGER.debug("all items before saving into DB" + allItems.size());
+                                    this.output(allItems);
+//TODO:Seems longer here, check this
+                                    logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
+                                    for (int i = 0; i < allItems.size(); i++) {
+                                        DisplayItemWithGroupBean diwb = allItems.get(i);
+
+                                        // we don't write success = success && writeToDB here
+                                        // since the short-circuit mechanism may prevent Java
+                                        // from executing writeToDB.
+                                        System.out.println(diwb);
+                                        System.out.println(diwb.getSingleItem().getItem().getDescription());
+                                        System.out.println(diwb.getSingleItem().getData().getValue());
+
+                                        if (diwb.isInGroup()) {
+
+                                            List<DisplayItemGroupBean> dgbs = diwb.getItemGroups();
+                                            // using the above gets us the correct number of manual groups, tbh 01/2010
+                                            List<DisplayItemGroupBean> dbGroups = diwb.getDbItemGroups();
+                                            LOGGER.debug("item group size: " + dgbs.size());
+                                            LOGGER.debug("item db-group size: " + dbGroups.size());
+                                            for (int j = 0; j < dgbs.size(); j++) {
+                                                DisplayItemGroupBean displayGroup = dgbs.get(j);
+                                                List<DisplayItemBean> items = displayGroup.getItems();
+                                                // this ordinal will only useful to create a new
+                                                // item data
+                                                // update an item data won't touch its ordinal
+                                                //  int nextOrdinal = iddao.getMaxOrdinalForGroup(ecb, sb, displayGroup.getItemGroupBean()) + 1;
+
+                                                // Determine if any items in this group have data.  If so we need to undelete and previously deleted items.
+                                                boolean undelete = false;
+                                                for (DisplayItemBean displayItem : items) {
+                                                    String currItemVal = displayItem.getData().getValue();
+                                                    if (currItemVal != null && !currItemVal.equals("")){
+                                                        undelete = true;
+                                                        break;
+                                                    }
+                                                }
+
+                                                for (DisplayItemBean displayItem : items) {
+                                                    String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
+                                                    boolean writeDN = true;
+                                                    displayItem.setEditFlag(displayGroup.getEditFlag());
+                                                    LOGGER.debug("group item value: " + displayItem.getData().getValue());
+                                                    //                if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
+                                                    //                    displayItem.getData().setValue("");
+                                                    //               }
+
+                                                    //15350, this particular logic, takes into consideration that a DN is created properly as long as the item data record exists and it fails to get created when it doesnt.
+                                                    //so, we are expanding the logic from writeToDb method to avoid creating duplicate records.
+                                                    writeDN = writeDN(displayItem);
+                                                    //pulling from dataset instead of database and correcting the flawed logic of using the database ordinals as max ordinal...
+                                                    nextOrdinal =      displayItem.getData().getOrdinal();
+
+                                                    temp = writeToDB(displayItem, iddao, nextOrdinal, request);
+                                                    LOGGER.debug("just executed writeToDB - 1");
+                                                    LOGGER.debug("next ordinal: " + nextOrdinal);
+
+                                                    // Undelete item if any item in the repeating group has data.
+                                                    if (undelete && displayItem.getDbData() != null && displayItem.getDbData().isDeleted()) {
+                                                        iddao.undelete(displayItem.getDbData().getId(),ub.getId());
+                                                    }
+
+                                                    if (temp && newUploadedFiles.containsKey(fileName)) {
+                                                        newUploadedFiles.remove(fileName);
+                                                    }
+                                                    // maybe put ordinal in the place of j? maybe subtract max rows from next ordinal if j is gt
+                                                    // next ordinal?
+                                                    String inputName = getGroupItemInputName(displayGroup, j, displayItem);
+                                                    // String inputName2 = getGroupItemManualInputName(displayGroup, j, displayItem);
+                                                    if (!displayGroup.isAuto()) {
+                                                        LOGGER.trace("not auto");
+                                                        inputName = this.getGroupItemManualInputName(displayGroup, j, displayItem);
+
+                                                    }
+                                                    //htaycher last DN is not stored for new rows
+//                                if (j == dgbs.size() - 1) {
+//                                    // LAST ONE
+//                                    logger.trace("last one");
+//                                    int ordinal = j - this.getManualRows(dgbs);
+//                                    logger.debug("+++ found manual rows from line 1326: " + ordinal);
+//                                    inputName = getGroupItemInputName(displayGroup, ordinal, displayItem);
+//                                }
+                                                    // logger.trace("&&& we get previous looking at input name: " + inputName + " " + inputName2);
+                                                    LOGGER.trace("&&& we get previous looking at input name: " + inputName);
+                                                    // input name 2 removed from below
+                                                    inputName = displayItem.getFieldName();
+                                                    if(writeDN)
+                                                    {
+                                                        AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, displayItem.getData().getId(), "itemData", currentStudy, ecb.getId());
+                                                    }
+                                                    success = success && temp;
+                                                }
+                                            }
+                                            for (int j = 0; j < dbGroups.size(); j++) {
+                                                DisplayItemGroupBean displayGroup = dbGroups.get(j);
+                                                //JN: Since remove button is gone, the following code can be commented out, however it needs to be tested? Can be tackled when handling discrepancy note w/repeating groups issues.
+                                                if ("remove".equalsIgnoreCase(displayGroup.getEditFlag())) {
+                                                    List<DisplayItemBean> items = displayGroup.getItems();
+                                                    for (DisplayItemBean displayItem : items) {
+                                                        String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
+                                                        displayItem.setEditFlag(displayGroup.getEditFlag());
+                                                        LOGGER.debug("group item value: " + displayItem.getData().getValue());
+                                                        //               if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
+                                                        //                   displayItem.getData().setValue("");
+                                                        //               }
+                                                        temp = writeToDB(displayItem, iddao, 0, request);
+                                                        LOGGER.debug("just executed writeToDB - 2");
+                                                        if (temp && newUploadedFiles.containsKey(fileName)) {
+                                                            newUploadedFiles.remove(fileName);
+                                                        }
+                                                        // just use 0 here since update doesn't
+                                                        // touch ordinal
+                                                        success = success && temp;
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                        else {
+                                            DisplayItemBean dib = diwb.getSingleItem();
+                                            // TODO work on this line
+
+                                            //  this.addAttachedFilePath(dib, attachedFilePath);
+                                            String fileName= addAttachedFilePath(dib, attachedFilePath);
+                                            boolean writeDN = writeDN(dib);
+                                            temp = writeToDB(dib, iddao, 1, request);
+                                            LOGGER.debug("just executed writeToDB - 3");
+                                            if (temp && (newUploadedFiles.containsKey(dib.getItem().getId() + "") || newUploadedFiles.containsKey(fileName))) {
+                                                // so newUploadedFiles will contain only failed file
+                                                // items;
+                                                newUploadedFiles.remove(dib.getItem().getId() + "");
+                                                newUploadedFiles.remove(fileName);
+                                            }
+
+                                            String inputName = getInputName(dib);
+                                            LOGGER.trace("3 - found input name: " + inputName);
+                                            if(writeDN )
+                                                AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, dib.getData().getId(), "itemData", currentStudy, ecb.getId());
+
+                                            success = success && temp;
+
+                                            ArrayList<DisplayItemBean> childItems = dib.getChildren();
+                                            for (int j = 0; j < childItems.size(); j++) {
+                                                DisplayItemBean child = (DisplayItemBean) childItems.get(j);
+                                                this.addAttachedFilePath(child, attachedFilePath);
+                                                writeDN =  writeDN(child);
+                                                temp = writeToDB(child, iddao, 1, request);
+                                                LOGGER.debug("just executed writeToDB - 4");
+                                                if (temp && newUploadedFiles.containsKey(child.getItem().getId() + "")) {
+                                                    // so newUploadedFiles will contain only failed
+                                                    // file items;
+                                                    newUploadedFiles.remove(child.getItem().getId() + "");
+                                                }
+                                                inputName = getInputName(child);
+                                                if( writeDN)
+                                                    AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, child.getData().getId(), "itemData", currentStudy, ecb.getId());
+                                                success = success && temp;
+                                            }
+                                        }
+                                    }
+                                    logMe("DisplayItemWithGroupBean allitems4 end "+System.currentTimeMillis());
+                                    LOGGER.debug("running rules: " + phase2.name());
+                                    List<Integer> prevShownDynItemDataIds = shouldRunRules?
+                                            this.getItemMetadataService().getDynamicsItemFormMetadataDao().findShowItemDataIdsInSection(
+                                                    section.getSection().getId(), ecb.getCRFVersionId(), ecb.getId())
+                                            :new ArrayList<Integer>();
+                                    logMe("DisplayItemWithGroupBean dryrun  start"+System.currentTimeMillis());
+                                    HashMap<String, ArrayList<String>> rulesPostDryRun = runRules(allItems, ruleSets, false, shouldRunRules, MessageType.WARNING, phase2,ecb, request);
+
+
+                                    HashMap<String, ArrayList<String>> errorsPostDryRun = new HashMap<String, ArrayList<String>>();
+                                    // additional step needed, run rules and see if any items are 'shown' AFTER saving data
+                                    logMe("DisplayItemWithGroupBean dryrun  end"+System.currentTimeMillis());
+                                    boolean inSameSection = false;
+                                    logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
+                                    if (!rulesPostDryRun.isEmpty()) {
+                                        // in same section?
+
+                                        // iterate through the OIDs and see if any of them belong to this section
+                                        for(String fieldName : rulesPostDryRun.keySet()) {
+                                            LOGGER.debug("found oid after post dry run " + fieldName);
+                                            // set up a listing of OIDs in the section
+                                            // BUT: Oids can have the group name in them.
+                                            int ordinal = -1;
+                                            String newFieldName = fieldName;
+                                            String[] fieldNames = fieldName.split("\\.");
+                                            if (fieldNames.length == 2) {
+                                                newFieldName = fieldNames[1];
+                                                // check items in item groups here?
+                                                if(fieldNames[0].contains("[")) {
+                                                    int p1 = fieldNames[0].indexOf("[");
+                                                    int p2 = fieldNames[0].indexOf("]");
+                                                    try{
+                                                        ordinal = Integer.valueOf(fieldNames[0].substring(p1+1,p2));
+                                                    }catch(NumberFormatException e) {
+                                                        ordinal = -1;
+                                                    }
+                                                    fieldNames[0] = fieldNames[0].substring(0,p1);
+                                                }
+                                            }
+                                            List<DisplayItemWithGroupBean> displayGroupsWithItems = section.getDisplayItemGroups();
+                                            //ArrayList<DisplayItemBean> displayItems = section.getItems();
+                                            for (int i = 0; i < displayGroupsWithItems.size(); i++) {
+                                                DisplayItemWithGroupBean itemWithGroup = displayGroupsWithItems.get(i);
+                                                if (itemWithGroup.isInGroup()) {
+                                                    LOGGER.debug("found group: " + fieldNames[0]);
+                                                    // do something there
+                                                    List<DisplayItemGroupBean> digbs = itemWithGroup.getItemGroups();
+                                                    LOGGER.debug("digbs size: " + digbs.size());
+                                                    for (int j = 0; j < digbs.size(); j++) {
+                                                        DisplayItemGroupBean displayGroup = digbs.get(j);
+                                                        if (displayGroup.getItemGroupBean().getOid().equals(fieldNames[0])&& displayGroup.getOrdinal()==ordinal-1) {
+                                                            List<DisplayItemBean> items = displayGroup.getItems();
+
+                                                            for (int k = 0; k < items.size(); k++) {
+                                                                DisplayItemBean dib = items.get(k);
+                                                                if (dib.getItem().getOid().equals(newFieldName)) {
+                                                                    //inSameSection = true;
+                                                                    if (!dib.getMetadata().isShowItem()) {
+                                                                        LOGGER.debug("found item in group " + this.getGroupItemInputName(displayGroup, j, dib) + " vs. "
+                                                                                + fieldName + " and is show item: " + dib.getMetadata().isShowItem());
+                                                                        dib.getMetadata().setShowItem(true);
+                                                                    }
+                                                                    if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(dib.getData().getId())) {
+                                                                        inSameSection = true;
+                                                                        errorsPostDryRun.put(this.getGroupItemInputName(displayGroup, j, dib), rulesPostDryRun.get(fieldName));
+                                                                    }
+                                                                }
+                                                                items.set(k, dib);
+                                                            }
+                                                            displayGroup.setItems(items);
+                                                            digbs.set(j, displayGroup);
+                                                        }
+                                                    }
+                                                    itemWithGroup.setItemGroups(digbs);
+                                                } else {
+                                                    DisplayItemBean displayItemBean = itemWithGroup.getSingleItem();
+                                                    ItemBean itemBean = displayItemBean.getItem();
+                                                    if (newFieldName.equals(itemBean.getOid())) {
+                                                        //System.out.println("is show item for " + displayItemBean.getItem().getId() + ": " + displayItemBean.getMetadata().isShowItem());
+                                                        //System.out.println("check run dynamics item check " + runDynamicsItemCheck(displayItemBean).getMetadata().isShowItem());
+                                                        if (!displayItemBean.getMetadata().isShowItem()) {
+                                                            // double check there?
+                                                            LOGGER.debug("found item " + this.getInputName(displayItemBean) + " vs. " + fieldName + " and is show item: "
+                                                                    + displayItemBean.getMetadata().isShowItem());
+                                                            // if is repeating, use the other input name? no
+
+                                                            displayItemBean.getMetadata().setShowItem(true);
+                                                            if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(displayItemBean.getData().getId())) {
+                                                                inSameSection = true;
+                                                                errorsPostDryRun.put(this.getInputName(displayItemBean), rulesPostDryRun.get(fieldName));
+                                                            }
+                                                        }
+                                                    }
+                                                    itemWithGroup.setSingleItem(displayItemBean);
+                                                }
+                                                displayGroupsWithItems.set(i, itemWithGroup);
+                                            }
+                                            logMe("DisplayItemWithGroupBean allitems4  end,begin"+System.currentTimeMillis());
+                                            // check groups
+                                            //List<DisplayItemGroupBean> itemGroups = new ArrayList<DisplayItemGroupBean>();
+                                            //itemGroups = section.getDisplayFormGroups();
+                                            //   But in jsp: section.displayItemGroups.itemGroup.groupMetaBean.showGroup
+                                            List<DisplayItemWithGroupBean> itemGroups = section.getDisplayItemGroups();
+                                            // List<DisplayItemGroupBean> newItemGroups = new ArrayList<DisplayItemGroupBean>();
+                                            for (DisplayItemWithGroupBean itemGroup : itemGroups) {
+                                                DisplayItemGroupBean displayGroup = itemGroup.getItemGroup();
+                                                if (newFieldName.equals(displayGroup.getItemGroupBean().getOid())) {
+                                                    if (!displayGroup.getGroupMetaBean().isShowGroup()) {
+                                                        inSameSection = true;
+                                                        LOGGER.debug("found itemgroup " + displayGroup.getItemGroupBean().getOid() + " vs. " + fieldName + " and is show item: "
+                                                                + displayGroup.getGroupMetaBean().isShowGroup());
+                                                        // hmmm how to set highlighting for a group?
+                                                        errorsPostDryRun.put(displayGroup.getItemGroupBean().getOid(), rulesPostDryRun.get(fieldName));
+                                                        displayGroup.getGroupMetaBean().setShowGroup(true);
+                                                        // add necessary rows to the display group here????
+                                                        // we have to set the items in the itemGroup for the displayGroup
+                                                        loadItemsWithGroupRows(itemGroup, sb, edcb, ecb, request);
+
+                                                    }
+                                                }
+                                                // newItemGroups.add(displayGroup);
+                                            }
+                                            logMe("DisplayItemWithGroupBean allitems4  end,end"+System.currentTimeMillis());
+                                            // trying to reset the display form groups here, tbh
+
+                                            // section.setItems(displayItems);
+                                            section.setDisplayItemGroups(displayGroupsWithItems);
+                                            populateInstantOnChange(request.getSession(), ecb, section);
+
+                                            // section.setDisplayFormGroups(newDisplayBean.getDisplayFormGroups());
+
+                                        }
+                                        //
+                                        this.getItemMetadataService().updateGroupDynamicsInSection(displayItemWithGroups, section.getSection().getId(), ecb);
+                                        toc =
+                                                TableOfContentsServlet.getDisplayBeanWithShownSections(getDataSource(), (DisplayTableOfContentsBean) request.getAttribute(TOC_DISPLAY),
+                                                        (DynamicsMetadataService) SpringServletAccess.getApplicationContext(getServletContext()).getBean("dynamicsMetadataService"));
+                                        request.setAttribute(TOC_DISPLAY, toc);
+                                        sectionIdsInToc = TableOfContentsServlet.sectionIdsInToc(toc);
+                                        sIndex = TableOfContentsServlet.sectionIndexInToc(section.getSection(), toc, sectionIdsInToc);
+                                        previousSec = this.prevSection(section.getSection(), ecb, toc, sIndex);
+                                        nextSec = this.nextSection(section.getSection(), ecb, toc, sIndex);
+                                        section.setFirstSection(!previousSec.isActive());
+                                        section.setLastSection(!nextSec.isActive());
+                                        //
+                                        // we need the following for repeating groups, tbh
+                                        // >> tbh 06/2010
+                                        // List<DisplayItemWithGroupBean> displayItemWithGroups2 = createItemWithGroups(section, hasGroup, eventDefinitionCRFId);
+
+                                        // section.setDisplayItemGroups(displayItemWithGroups2);
+
+                                        // if so, stay at this section
+                                        LOGGER.debug(" in same section: " + inSameSection);
+                                        if (inSameSection) {
+                                            // copy of one line from early on around line 400, forcing a re-show of the items
+                                            // section = getDisplayBean(hasGroup, true);// include all items, tbh
+                                            // below a copy of three lines from the if errors = true line, tbh 03/2010
+                                            String[] textFields = { INPUT_INTERVIEWER, INPUT_INTERVIEW_DATE };
+                                            fp.setCurrentStringValuesAsPreset(textFields);
+                                            setPresetValues(fp.getPresetValues(), request);
+                                            // below essetially a copy except for rulesPostDryRun
+                                            request.setAttribute(BEAN_DISPLAY, section);
+                                            request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                                            setInputMessages(errorsPostDryRun, request);
+                                            addPageMessage(respage.getString("your_answers_activated_hidden_items"), request);
+                                            request.setAttribute("hasError", "true");
+                                            request.setAttribute("hasShown", "true");
+
+                                            session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+                                            setUpPanel(section);
+                                            forwardPage(getJSPPage(), request, response);
+                                        }
+                                    }
+
+                                    if (!inSameSection) {// else if not in same section, progress as usual
+                    /*
+                    toc =
+                        TableOfContentsServlet.getDisplayBeanWithShownSections(getDataSource(), (DisplayTableOfContentsBean) request.getAttribute(TOC_DISPLAY),
+                                (DynamicsMetadataService) SpringServletAccess.getApplicationContext(getServletContext()).getBean("dynamicsMetadataService"));
+                    request.setAttribute(TOC_DISPLAY, toc);
+                    sectionIdsInToc = TableOfContentsServlet.sectionIdsInToc(toc);
+                    sIndex = TableOfContentsServlet.sectionIndexInToc(section.getSection(), toc, sectionIdsInToc);
+                    previousSec = this.prevSection(section.getSection(), ecb, toc, sIndex);
+                    nextSec = this.nextSection(section.getSection(), ecb, toc, sIndex);
+                    section.setFirstSection(!previousSec.isActive());
+                    section.setLastSection(!nextSec.isActive());
+                    */
+                                        // can we just forward page or do we actually need an ELSE here?
+                                        // yes, we do. tbh 05/03/2010
+
+                                        ArrayList<String> updateFailedItems = sc.redoCalculations(scoreItems, scoreItemdata, changedItems, itemOrdinals, sb.getId());
+                                        success = updateFailedItems.size() > 0 ? false : true;
+
+                                        // now check if CRF is marked complete
+                                        boolean markComplete = fp.getString(INPUT_MARK_COMPLETE).equals(VALUE_YES);
+                                        boolean markSuccessfully = false; // if the CRF was marked
+                                        // complete
+                                        // successfully
+                                        if (markComplete && section.isLastSection()) {
+                                            LOGGER.debug("need to mark CRF as complete");
+                                            markSuccessfully = markCRFComplete(request);
+                                            LOGGER.debug("...marked CRF as complete: " + markSuccessfully);
+                                            if (!markSuccessfully) {
+                                                request.setAttribute(BEAN_DISPLAY, section);
+                                                request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                                                setUpPanel(section);
+                                                forwardPage(getJSPPage(), request, response);
+                                                return;
+                                            }
+                                        }
+
+                                        // now write the event crf bean to the database
+                                        String annotations = fp.getString(INPUT_ANNOTATIONS);
+                                        setEventCRFAnnotations(annotations, request);
+                                        Date now = new Date();
+                                        ecb.setUpdatedDate(now);
+                                        ecb.setUpdater(ub);
+                                        ecb = ecdao.update(ecb);
+                                        success = success && ecb.isActive();
+
+                                        StudyEventDAO sedao = new StudyEventDAO(getDataSource());
+                                        StudyEventBean seb = sedao.findByPK(ecb.getStudyEventId());
+                                        seb.setUpdatedDate(now);
+                                        seb.setUpdater(ub);
+                                        seb = sedao.update(seb);
+                                        success = success && seb.isActive();
+
+                                        request.setAttribute(INPUT_IGNORE_PARAMETERS, Boolean.TRUE);
+
+                                        if (newUploadedFiles.size() > 0) {
+                                            if (this.unloadFiles(newUploadedFiles)) {
+
+                                            } else {
+                                                String missed = newUploadedFiles.keySet().stream().collect(Collectors.joining(" "));
+                                                addPageMessage(respage.getString("uploaded_files_not_deleted_or_not_exist") + ": " + missed, request);
+                                            }
+                                        }
+                                        if (!success) {
+                                            // YW, 3-6-2008 <<
+                                            if (updateFailedItems.size() > 0) {
+                                                String mess = "";
+                                                for (String ss : updateFailedItems) {
+                                                    mess += ss + ", ";
+                                                }
+                                                mess = mess.substring(0, mess.length() - 2);
+                                                addPageMessage(resexception.getString("item_save_failed_because_database_error") + mess, request);
+                                            } else {
+                                                // YW>>
+                                                addPageMessage(resexception.getString("database_error"), request);
+                                            }
+                                            request.setAttribute(BEAN_DISPLAY, section);
+                                            session.removeAttribute(GROUP_HAS_DATA);
+                                            session.removeAttribute(HAS_DATA_FLAG);
+                                            session.removeAttribute(DDE_PROGESS);
+                                            session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                                            LOGGER.debug("try to remove to_create_crf");
+                                            session.removeAttribute("to_create_crf");
+                                            session.removeAttribute(instantAtt);
+
+                                            // forwardPage(Page.SUBMIT_DATA_SERVLET);
+                                            forwardPage(Page.LIST_STUDY_SUBJECTS_SERVLET, request, response);
+                                            // >> changed tbh, 06/2009
+                                        } else {
+                                            boolean forwardingSucceeded = false;
+
+                                            if (!fp.getString(GO_PREVIOUS).equals("")) {
+                                                if (previousSec.isActive()) {
+                                                    forwardingSucceeded = true;
+                                                    request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                                    request.setAttribute(INPUT_SECTION, previousSec);
+                                                    int tabNum = 0;
+                                                    if (fp.getString("tab") == null) {
+                                                        tabNum = 1;
+                                                    } else {
+                                                        tabNum = fp.getInt("tab");
+                                                    }
+                                                    request.setAttribute("tab", new Integer(tabNum - 1).toString());
+
+                                                    //  forwardPage(getServletPage(request), request, response);
+                                                    getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                                }
+                                            } else if (!fp.getString(GO_NEXT).equals("")) {
+                                                if (nextSec.isActive()) {
+                                                    forwardingSucceeded = true;
+                                                    request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                                    request.setAttribute(INPUT_SECTION, nextSec);
+                                                    int tabNum = 0;
+                                                    if (fp.getString("tab") == null) {
+                                                        tabNum = 1;
+                                                    } else {
+                                                        tabNum = fp.getInt("tab");
+                                                    }
+                                                    request.setAttribute("tab", new Integer(tabNum + 1).toString());
+                                                    getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                                    //forwardPage(getServletPage(request), request, response);
+                                                }
+                                            }
+
+                                            if (!forwardingSucceeded) {
+                                                // request.setAttribute(TableOfContentsServlet.
+                                                // INPUT_EVENT_CRF_BEAN,
+                                                // ecb);
+                                                if (markSuccessfully) {
+                                                    addPageMessage(respage.getString("data_saved_CRF_marked_complete"), request);
+                                                    session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                                                    session.removeAttribute(GROUP_HAS_DATA);
+                                                    session.removeAttribute(HAS_DATA_FLAG);
+                                                    session.removeAttribute(DDE_PROGESS);
+                                                    session.removeAttribute("to_create_crf");
+
+                                                    request.setAttribute("eventId", new Integer(ecb.getStudyEventId()).toString());
+                                                    forwardPage(Page.ENTER_DATA_FOR_STUDY_EVENT_SERVLET, request, response);
+                                                } else {
+                                                    // use clicked 'save'
+                                                    addPageMessage(respage.getString("data_saved_continue_entering_edit_later"), request);
+                                                    request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                                    request.setAttribute(INPUT_EVENT_CRF_ID, new Integer(ecb.getId()).toString());
+                                                    // forward to the next section if the previous one
+                                                    // is not the last section
+                                                    if (!section.isLastSection()) {
+                                                        request.setAttribute(INPUT_SECTION, nextSec);
+                                                        request.setAttribute(INPUT_SECTION_ID, new Integer(nextSec.getId()).toString());
+                                                        session.removeAttribute("mayProcessUploading");
+                                                    } else if(section.isLastSection()){ //JN ADDED TO avoid return down
+                                                        // already the last section, should go back to
+                                                        // view event page
+                                                        session.removeAttribute(GROUP_HAS_DATA);
+                                                        session.removeAttribute(HAS_DATA_FLAG);
+                                                        session.removeAttribute(DDE_PROGESS);
+                                                        session.removeAttribute("to_create_crf");
+                                                        session.removeAttribute("mayProcessUploading");
+
+                                                        request.setAttribute("eventId", new Integer(ecb.getStudyEventId()).toString());
+                                                        if(fromViewNotes != null && "1".equals(fromViewNotes)) {
+                                                            String viewNotesPageFileName = (String)session.getAttribute("viewNotesPageFileName");
+                                                            session.removeAttribute("viewNotesPageFileName");
+                                                            session.removeAttribute("viewNotesURL");
+                                                            if(viewNotesPageFileName!=null && viewNotesPageFileName.length()>0) {
+                                                                // forwardPage(Page.setNewPage(viewNotesPageFileName, "View Notes"), request, response);
+                                                                getServletContext().getRequestDispatcher(viewNotesPageFileName).forward(request, response);
+                                                            }
+                                                        }
+                                                        session.removeAttribute(instantAtt);
+                                                        forwardPage(Page.ENTER_DATA_FOR_STUDY_EVENT_SERVLET, request, response);
+                                                        return;
+
+                                                    }
+
+
+                                                    int tabNum = 0;
+                                                    if (fp.getString("tab") == null) {
+                                                        tabNum = 1;
+                                                    } else {
+                                                        tabNum = fp.getInt("tab");
+                                                    }
+                                                    if (!section.isLastSection()) {
+                                                        request.setAttribute("tab", new Integer(tabNum + 1).toString());
+                                                    }
+
+                                                    //  forwardPage(getServletPage(request), request, response);
+                                                    getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                                }
+                                                // session.removeAttribute(AddNewSubjectServlet.
+                                                // FORM_DISCREPANCY_NOTES_NAME);
+                                                // forwardPage(Page.SUBMIT_DATA_SERVLET);
+                                            }
+                                        }
+                                    }
+                                }
+                                errorsMessage.add(errorObject.getError());
+
+                            }catch (Exception e){
+                                System.out.println("Error: " + responseCode);
+                                System.out.println("Error sending data. Response code: " + responseCode);
+                                errors.put("Error to sending data to dmm", errorsMessage);
+                                request.setAttribute("markComplete", fp.getString(INPUT_MARK_COMPLETE));
+                                // << tbh, 02/2010
+                                // YW >>
+                                // copied
+                                request.setAttribute(BEAN_DISPLAY, section);
+                                request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                                setInputMessages(errors, request);
+                                addPageMessage(respage.getString("errors_in_submission_see_below"), request);
+                                request.setAttribute("hasError", "true");
+                                // addPageMessage("To override these errors and keep the data as
+                                // you
+                                // entered it, click one of the \"Confirm\" buttons. ");
+                                // if (section.isCheckInputs()) {
+                                // addPageMessage("Please notice that you must enter data for
+                                // the
+                                // <b>required</b> entries.");
+                                // }
+                                // we do not save any DNs if we get here, so we have to set it back into session...
+                                session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+                                // << tbh 01/2010
+                                setUpPanel(section);
+                                forwardPage(getJSPPage(), request, response);
+                            }
+
+                            System.out.println("Error: " + responseCode);
+                            System.out.println("Error sending data. Response code: " + responseCode);
+                            errors.put("Error to sending data to dmm", errorsMessage);
+                            request.setAttribute("markComplete", fp.getString(INPUT_MARK_COMPLETE));
+                            // << tbh, 02/2010
+                            // YW >>
+                            // copied
                             request.setAttribute(BEAN_DISPLAY, section);
                             request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                            setInputMessages(errors, request);
+                            addPageMessage(respage.getString("errors_in_submission_see_below"), request);
+                            request.setAttribute("hasError", "true");
+                            // addPageMessage("To override these errors and keep the data as
+                            // you
+                            // entered it, click one of the \"Confirm\" buttons. ");
+                            // if (section.isCheckInputs()) {
+                            // addPageMessage("Please notice that you must enter data for
+                            // the
+                            // <b>required</b> entries.");
+                            // }
+                            // we do not save any DNs if we get here, so we have to set it back into session...
+                            session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+                            // << tbh 01/2010
                             setUpPanel(section);
                             forwardPage(getJSPPage(), request, response);
-                            return;
                         }
+
+                        // Close the connection
+                        connection.disconnect();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-
-                    // now write the event crf bean to the database
-                    String annotations = fp.getString(INPUT_ANNOTATIONS);
-                    setEventCRFAnnotations(annotations, request);
-                    Date now = new Date();
-                    ecb.setUpdatedDate(now);
-                    ecb.setUpdater(ub);
-                    ecb = ecdao.update(ecb);
-                    success = success && ecb.isActive();
-
-                    StudyEventDAO sedao = new StudyEventDAO(getDataSource());
-                    StudyEventBean seb = sedao.findByPK(ecb.getStudyEventId());
-                    seb.setUpdatedDate(now);
-                    seb.setUpdater(ub);
-                    seb = sedao.update(seb);
-                    success = success && seb.isActive();
-
-                    request.setAttribute(INPUT_IGNORE_PARAMETERS, Boolean.TRUE);
-
-                    if (newUploadedFiles.size() > 0) {
-                        if (this.unloadFiles(newUploadedFiles)) {
-
-                        } else {
-                            String missed = newUploadedFiles.keySet().stream().collect(Collectors.joining(" "));
-                            addPageMessage(respage.getString("uploaded_files_not_deleted_or_not_exist") + ": " + missed, request);
-                        }
-                    }
-                    if (!success) {
-                        // YW, 3-6-2008 <<
-                        if (updateFailedItems.size() > 0) {
-                            String mess = "";
-                            for (String ss : updateFailedItems) {
-                                mess += ss + ", ";
-                            }
-                            mess = mess.substring(0, mess.length() - 2);
-                            addPageMessage(resexception.getString("item_save_failed_because_database_error") + mess, request);
-                        } else {
-                            // YW>>
-                            addPageMessage(resexception.getString("database_error"), request);
-                        }
-                        request.setAttribute(BEAN_DISPLAY, section);
-                        session.removeAttribute(GROUP_HAS_DATA);
-                        session.removeAttribute(HAS_DATA_FLAG);
-                        session.removeAttribute(DDE_PROGESS);
-                        session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
-                        LOGGER.debug("try to remove to_create_crf");
-                        session.removeAttribute("to_create_crf");
-                        session.removeAttribute(instantAtt);
-
-                        // forwardPage(Page.SUBMIT_DATA_SERVLET);
-                        forwardPage(Page.LIST_STUDY_SUBJECTS_SERVLET, request, response);
-                        // >> changed tbh, 06/2009
+                }
+                else{
+                    boolean success = true;
+                    boolean temp = true;
+                    // save interviewer name and date into DB
+                    ecb.setInterviewerName(fp.getString(INPUT_INTERVIEWER));
+                    if (!(interviewDate == null || interviewDate.trim().isEmpty())) {
+                        ecb.setDateInterviewed(fp.getDate(INPUT_INTERVIEW_DATE));
                     } else {
-                        boolean forwardingSucceeded = false;
+                        ecb.setDateInterviewed(null);
+                    }
 
-                        if (!fp.getString(GO_PREVIOUS).equals("")) {
-                            if (previousSec.isActive()) {
-                                forwardingSucceeded = true;
-                                request.setAttribute(INPUT_EVENT_CRF, ecb);
-                                request.setAttribute(INPUT_SECTION, previousSec);
-                                int tabNum = 0;
-                                if (fp.getString("tab") == null) {
-                                    tabNum = 1;
-                                } else {
-                                    tabNum = fp.getInt("tab");
+                    if (ecdao == null) {
+                        ecdao = new EventCRFDAO(getDataSource());
+                    }
+                    // set validator id for DDE
+                    DataEntryStage stage = ecb.getStage();
+                    if (stage.equals(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE) || stage.equals(DataEntryStage.DOUBLE_DATA_ENTRY)) {
+                        ecb.setValidatorId(ub.getId());
+
+                    }
+                    /*
+                     * if(studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus .SIGNED)){ if(edcBean.isDoubleEntry()){
+                     * ecb.setStage(DataEntryStage.DOUBLE_DATA_ENTRY_COMPLETE); }else{ ecb.setStage(DataEntryStage.INITIAL_DATA_ENTRY_COMPLETE); } }
+                     */
+
+                    // for Administrative editing
+                    if (studyEventBean.getSubjectEventStatus().equals(SubjectEventStatus.SIGNED) && changedItemsList.size() > 0) {
+                        studyEventBean.setSubjectEventStatus(SubjectEventStatus.COMPLETED);
+                        studyEventBean.setUpdater(ub);
+                        studyEventBean.setUpdatedDate(new Date());
+                        seDao.update(studyEventBean);
+                    }
+
+                    // If the Study Subject's Satus is signed and we save a section
+                    // , change status to available
+                    LOGGER.debug("Status of Study Subject {}", ssb.getStatus().getName());
+                    if (ssb.getStatus() == Status.SIGNED && changedItemsList.size() > 0) {
+                        LOGGER.debug("Status of Study Subject is Signed we are updating");
+                        StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
+                        ssb.setStatus(Status.AVAILABLE);
+                        ssb.setUpdater(ub);
+                        ssb.setUpdatedDate(new Date());
+                        studySubjectDao.update(ssb);
+                    }
+                    if (ecb.isSdvStatus() && changedItemsList.size() > 0) {
+                        LOGGER.debug("Status of Study Subject is SDV we are updating");
+                        StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
+                        ssb.setStatus(Status.AVAILABLE);
+                        ssb.setUpdater(ub);
+                        ssb.setUpdatedDate(new Date());
+                        studySubjectDao.update(ssb);
+                        ecb.setSdvStatus(false);
+                        ecb.setSdvUpdateId(ub.getId());
+                    }
+
+                    ecb = (EventCRFBean) ecdao.update(ecb);
+
+                    // save discrepancy notes into DB
+                    FormDiscrepancyNotes fdn = (FormDiscrepancyNotes) session.getAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                    dndao = new DiscrepancyNoteDAO(getDataSource());
+
+                    AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEWER, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
+                    AddNewSubjectServlet.saveFieldNotes(INPUT_INTERVIEW_DATE, fdn, dndao, ecb.getId(), "EventCRF", currentStudy);
+
+                    // items = section.getItems();
+                    allItems = section.getDisplayItemGroups();
+                    int nextOrdinal = 0;
+
+                    LOGGER.debug("all items before saving into DB" + allItems.size());
+                    this.output(allItems);
+//TODO:Seems longer here, check this
+                    logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
+                    for (int i = 0; i < allItems.size(); i++) {
+                        DisplayItemWithGroupBean diwb = allItems.get(i);
+
+                        // we don't write success = success && writeToDB here
+                        // since the short-circuit mechanism may prevent Java
+                        // from executing writeToDB.
+                        System.out.println(diwb);
+                        System.out.println(diwb.getSingleItem().getItem().getDescription());
+                        System.out.println(diwb.getSingleItem().getData().getValue());
+
+                        if (diwb.isInGroup()) {
+
+                            List<DisplayItemGroupBean> dgbs = diwb.getItemGroups();
+                            // using the above gets us the correct number of manual groups, tbh 01/2010
+                            List<DisplayItemGroupBean> dbGroups = diwb.getDbItemGroups();
+                            LOGGER.debug("item group size: " + dgbs.size());
+                            LOGGER.debug("item db-group size: " + dbGroups.size());
+                            for (int j = 0; j < dgbs.size(); j++) {
+                                DisplayItemGroupBean displayGroup = dgbs.get(j);
+                                List<DisplayItemBean> items = displayGroup.getItems();
+                                // this ordinal will only useful to create a new
+                                // item data
+                                // update an item data won't touch its ordinal
+                                //  int nextOrdinal = iddao.getMaxOrdinalForGroup(ecb, sb, displayGroup.getItemGroupBean()) + 1;
+
+                                // Determine if any items in this group have data.  If so we need to undelete and previously deleted items.
+                                boolean undelete = false;
+                                for (DisplayItemBean displayItem : items) {
+                                    String currItemVal = displayItem.getData().getValue();
+                                    if (currItemVal != null && !currItemVal.equals("")){
+                                        undelete = true;
+                                        break;
+                                    }
                                 }
-                                request.setAttribute("tab", new Integer(tabNum - 1).toString());
 
-                              //  forwardPage(getServletPage(request), request, response);
-                                getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                for (DisplayItemBean displayItem : items) {
+                                    String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
+                                    boolean writeDN = true;
+                                    displayItem.setEditFlag(displayGroup.getEditFlag());
+                                    LOGGER.debug("group item value: " + displayItem.getData().getValue());
+                                    //                if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
+                                    //                    displayItem.getData().setValue("");
+                                    //               }
+
+                                    //15350, this particular logic, takes into consideration that a DN is created properly as long as the item data record exists and it fails to get created when it doesnt.
+                                    //so, we are expanding the logic from writeToDb method to avoid creating duplicate records.
+                                    writeDN = writeDN(displayItem);
+                                    //pulling from dataset instead of database and correcting the flawed logic of using the database ordinals as max ordinal...
+                                    nextOrdinal =      displayItem.getData().getOrdinal();
+
+                                    temp = writeToDB(displayItem, iddao, nextOrdinal, request);
+                                    LOGGER.debug("just executed writeToDB - 1");
+                                    LOGGER.debug("next ordinal: " + nextOrdinal);
+
+                                    // Undelete item if any item in the repeating group has data.
+                                    if (undelete && displayItem.getDbData() != null && displayItem.getDbData().isDeleted()) {
+                                        iddao.undelete(displayItem.getDbData().getId(),ub.getId());
+                                    }
+
+                                    if (temp && newUploadedFiles.containsKey(fileName)) {
+                                        newUploadedFiles.remove(fileName);
+                                    }
+                                    // maybe put ordinal in the place of j? maybe subtract max rows from next ordinal if j is gt
+                                    // next ordinal?
+                                    String inputName = getGroupItemInputName(displayGroup, j, displayItem);
+                                    // String inputName2 = getGroupItemManualInputName(displayGroup, j, displayItem);
+                                    if (!displayGroup.isAuto()) {
+                                        LOGGER.trace("not auto");
+                                        inputName = this.getGroupItemManualInputName(displayGroup, j, displayItem);
+
+                                    }
+                                    //htaycher last DN is not stored for new rows
+//                                if (j == dgbs.size() - 1) {
+//                                    // LAST ONE
+//                                    logger.trace("last one");
+//                                    int ordinal = j - this.getManualRows(dgbs);
+//                                    logger.debug("+++ found manual rows from line 1326: " + ordinal);
+//                                    inputName = getGroupItemInputName(displayGroup, ordinal, displayItem);
+//                                }
+                                    // logger.trace("&&& we get previous looking at input name: " + inputName + " " + inputName2);
+                                    LOGGER.trace("&&& we get previous looking at input name: " + inputName);
+                                    // input name 2 removed from below
+                                    inputName = displayItem.getFieldName();
+                                    if(writeDN)
+                                    {
+                                        AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, displayItem.getData().getId(), "itemData", currentStudy, ecb.getId());
+                                    }
+                                    success = success && temp;
+                                }
                             }
-                        } else if (!fp.getString(GO_NEXT).equals("")) {
-                            if (nextSec.isActive()) {
-                                forwardingSucceeded = true;
-                                request.setAttribute(INPUT_EVENT_CRF, ecb);
-                                request.setAttribute(INPUT_SECTION, nextSec);
-                                int tabNum = 0;
-                                if (fp.getString("tab") == null) {
-                                    tabNum = 1;
-                                } else {
-                                    tabNum = fp.getInt("tab");
+                            for (int j = 0; j < dbGroups.size(); j++) {
+                                DisplayItemGroupBean displayGroup = dbGroups.get(j);
+                                //JN: Since remove button is gone, the following code can be commented out, however it needs to be tested? Can be tackled when handling discrepancy note w/repeating groups issues.
+                                if ("remove".equalsIgnoreCase(displayGroup.getEditFlag())) {
+                                    List<DisplayItemBean> items = displayGroup.getItems();
+                                    for (DisplayItemBean displayItem : items) {
+                                        String fileName = this.addAttachedFilePath(displayItem, attachedFilePath);
+                                        displayItem.setEditFlag(displayGroup.getEditFlag());
+                                        LOGGER.debug("group item value: " + displayItem.getData().getValue());
+                                        //               if ("add".equalsIgnoreCase(displayItem.getEditFlag()) && fileName.length() > 0 && !newUploadedFiles.containsKey(fileName)) {
+                                        //                   displayItem.getData().setValue("");
+                                        //               }
+                                        temp = writeToDB(displayItem, iddao, 0, request);
+                                        LOGGER.debug("just executed writeToDB - 2");
+                                        if (temp && newUploadedFiles.containsKey(fileName)) {
+                                            newUploadedFiles.remove(fileName);
+                                        }
+                                        // just use 0 here since update doesn't
+                                        // touch ordinal
+                                        success = success && temp;
+                                    }
                                 }
-                                request.setAttribute("tab", new Integer(tabNum + 1).toString());
-                                getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
-                                //forwardPage(getServletPage(request), request, response);
+                            }
+
+                        }
+                        else {
+                            DisplayItemBean dib = diwb.getSingleItem();
+                            // TODO work on this line
+
+                            //  this.addAttachedFilePath(dib, attachedFilePath);
+                            String fileName= addAttachedFilePath(dib, attachedFilePath);
+                            boolean writeDN = writeDN(dib);
+                            temp = writeToDB(dib, iddao, 1, request);
+                            LOGGER.debug("just executed writeToDB - 3");
+                            if (temp && (newUploadedFiles.containsKey(dib.getItem().getId() + "") || newUploadedFiles.containsKey(fileName))) {
+                                // so newUploadedFiles will contain only failed file
+                                // items;
+                                newUploadedFiles.remove(dib.getItem().getId() + "");
+                                newUploadedFiles.remove(fileName);
+                            }
+
+                            String inputName = getInputName(dib);
+                            LOGGER.trace("3 - found input name: " + inputName);
+                            if(writeDN )
+                                AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, dib.getData().getId(), "itemData", currentStudy, ecb.getId());
+
+                            success = success && temp;
+
+                            ArrayList<DisplayItemBean> childItems = dib.getChildren();
+                            for (int j = 0; j < childItems.size(); j++) {
+                                DisplayItemBean child = (DisplayItemBean) childItems.get(j);
+                                this.addAttachedFilePath(child, attachedFilePath);
+                                writeDN =  writeDN(child);
+                                temp = writeToDB(child, iddao, 1, request);
+                                LOGGER.debug("just executed writeToDB - 4");
+                                if (temp && newUploadedFiles.containsKey(child.getItem().getId() + "")) {
+                                    // so newUploadedFiles will contain only failed
+                                    // file items;
+                                    newUploadedFiles.remove(child.getItem().getId() + "");
+                                }
+                                inputName = getInputName(child);
+                                if( writeDN)
+                                    AddNewSubjectServlet.saveFieldNotes(inputName, fdn, dndao, child.getData().getId(), "itemData", currentStudy, ecb.getId());
+                                success = success && temp;
+                            }
+                        }
+                    }
+                    logMe("DisplayItemWithGroupBean allitems4 end "+System.currentTimeMillis());
+                    LOGGER.debug("running rules: " + phase2.name());
+                    List<Integer> prevShownDynItemDataIds = shouldRunRules?
+                            this.getItemMetadataService().getDynamicsItemFormMetadataDao().findShowItemDataIdsInSection(
+                                    section.getSection().getId(), ecb.getCRFVersionId(), ecb.getId())
+                            :new ArrayList<Integer>();
+                    logMe("DisplayItemWithGroupBean dryrun  start"+System.currentTimeMillis());
+                    HashMap<String, ArrayList<String>> rulesPostDryRun = runRules(allItems, ruleSets, false, shouldRunRules, MessageType.WARNING, phase2,ecb, request);
+
+
+                    HashMap<String, ArrayList<String>> errorsPostDryRun = new HashMap<String, ArrayList<String>>();
+                    // additional step needed, run rules and see if any items are 'shown' AFTER saving data
+                    logMe("DisplayItemWithGroupBean dryrun  end"+System.currentTimeMillis());
+                    boolean inSameSection = false;
+                    logMe("DisplayItemWithGroupBean allitems4 "+System.currentTimeMillis());
+                    if (!rulesPostDryRun.isEmpty()) {
+                        // in same section?
+
+                        // iterate through the OIDs and see if any of them belong to this section
+                        for(String fieldName : rulesPostDryRun.keySet()) {
+                            LOGGER.debug("found oid after post dry run " + fieldName);
+                            // set up a listing of OIDs in the section
+                            // BUT: Oids can have the group name in them.
+                            int ordinal = -1;
+                            String newFieldName = fieldName;
+                            String[] fieldNames = fieldName.split("\\.");
+                            if (fieldNames.length == 2) {
+                                newFieldName = fieldNames[1];
+                                // check items in item groups here?
+                                if(fieldNames[0].contains("[")) {
+                                    int p1 = fieldNames[0].indexOf("[");
+                                    int p2 = fieldNames[0].indexOf("]");
+                                    try{
+                                        ordinal = Integer.valueOf(fieldNames[0].substring(p1+1,p2));
+                                    }catch(NumberFormatException e) {
+                                        ordinal = -1;
+                                    }
+                                    fieldNames[0] = fieldNames[0].substring(0,p1);
+                                }
+                            }
+                            List<DisplayItemWithGroupBean> displayGroupsWithItems = section.getDisplayItemGroups();
+                            //ArrayList<DisplayItemBean> displayItems = section.getItems();
+                            for (int i = 0; i < displayGroupsWithItems.size(); i++) {
+                                DisplayItemWithGroupBean itemWithGroup = displayGroupsWithItems.get(i);
+                                if (itemWithGroup.isInGroup()) {
+                                    LOGGER.debug("found group: " + fieldNames[0]);
+                                    // do something there
+                                    List<DisplayItemGroupBean> digbs = itemWithGroup.getItemGroups();
+                                    LOGGER.debug("digbs size: " + digbs.size());
+                                    for (int j = 0; j < digbs.size(); j++) {
+                                        DisplayItemGroupBean displayGroup = digbs.get(j);
+                                        if (displayGroup.getItemGroupBean().getOid().equals(fieldNames[0])&& displayGroup.getOrdinal()==ordinal-1) {
+                                            List<DisplayItemBean> items = displayGroup.getItems();
+
+                                            for (int k = 0; k < items.size(); k++) {
+                                                DisplayItemBean dib = items.get(k);
+                                                if (dib.getItem().getOid().equals(newFieldName)) {
+                                                    //inSameSection = true;
+                                                    if (!dib.getMetadata().isShowItem()) {
+                                                        LOGGER.debug("found item in group " + this.getGroupItemInputName(displayGroup, j, dib) + " vs. "
+                                                                + fieldName + " and is show item: " + dib.getMetadata().isShowItem());
+                                                        dib.getMetadata().setShowItem(true);
+                                                    }
+                                                    if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(dib.getData().getId())) {
+                                                        inSameSection = true;
+                                                        errorsPostDryRun.put(this.getGroupItemInputName(displayGroup, j, dib), rulesPostDryRun.get(fieldName));
+                                                    }
+                                                }
+                                                items.set(k, dib);
+                                            }
+                                            displayGroup.setItems(items);
+                                            digbs.set(j, displayGroup);
+                                        }
+                                    }
+                                    itemWithGroup.setItemGroups(digbs);
+                                } else {
+                                    DisplayItemBean displayItemBean = itemWithGroup.getSingleItem();
+                                    ItemBean itemBean = displayItemBean.getItem();
+                                    if (newFieldName.equals(itemBean.getOid())) {
+                                        //System.out.println("is show item for " + displayItemBean.getItem().getId() + ": " + displayItemBean.getMetadata().isShowItem());
+                                        //System.out.println("check run dynamics item check " + runDynamicsItemCheck(displayItemBean).getMetadata().isShowItem());
+                                        if (!displayItemBean.getMetadata().isShowItem()) {
+                                            // double check there?
+                                            LOGGER.debug("found item " + this.getInputName(displayItemBean) + " vs. " + fieldName + " and is show item: "
+                                                    + displayItemBean.getMetadata().isShowItem());
+                                            // if is repeating, use the other input name? no
+
+                                            displayItemBean.getMetadata().setShowItem(true);
+                                            if(prevShownDynItemDataIds==null || !prevShownDynItemDataIds.contains(displayItemBean.getData().getId())) {
+                                                inSameSection = true;
+                                                errorsPostDryRun.put(this.getInputName(displayItemBean), rulesPostDryRun.get(fieldName));
+                                            }
+                                        }
+                                    }
+                                    itemWithGroup.setSingleItem(displayItemBean);
+                                }
+                                displayGroupsWithItems.set(i, itemWithGroup);
+                            }
+                            logMe("DisplayItemWithGroupBean allitems4  end,begin"+System.currentTimeMillis());
+                            // check groups
+                            //List<DisplayItemGroupBean> itemGroups = new ArrayList<DisplayItemGroupBean>();
+                            //itemGroups = section.getDisplayFormGroups();
+                            //   But in jsp: section.displayItemGroups.itemGroup.groupMetaBean.showGroup
+                            List<DisplayItemWithGroupBean> itemGroups = section.getDisplayItemGroups();
+                            // List<DisplayItemGroupBean> newItemGroups = new ArrayList<DisplayItemGroupBean>();
+                            for (DisplayItemWithGroupBean itemGroup : itemGroups) {
+                                DisplayItemGroupBean displayGroup = itemGroup.getItemGroup();
+                                if (newFieldName.equals(displayGroup.getItemGroupBean().getOid())) {
+                                    if (!displayGroup.getGroupMetaBean().isShowGroup()) {
+                                        inSameSection = true;
+                                        LOGGER.debug("found itemgroup " + displayGroup.getItemGroupBean().getOid() + " vs. " + fieldName + " and is show item: "
+                                                + displayGroup.getGroupMetaBean().isShowGroup());
+                                        // hmmm how to set highlighting for a group?
+                                        errorsPostDryRun.put(displayGroup.getItemGroupBean().getOid(), rulesPostDryRun.get(fieldName));
+                                        displayGroup.getGroupMetaBean().setShowGroup(true);
+                                        // add necessary rows to the display group here????
+                                        // we have to set the items in the itemGroup for the displayGroup
+                                        loadItemsWithGroupRows(itemGroup, sb, edcb, ecb, request);
+
+                                    }
+                                }
+                                // newItemGroups.add(displayGroup);
+                            }
+                            logMe("DisplayItemWithGroupBean allitems4  end,end"+System.currentTimeMillis());
+                            // trying to reset the display form groups here, tbh
+
+                            // section.setItems(displayItems);
+                            section.setDisplayItemGroups(displayGroupsWithItems);
+                            populateInstantOnChange(request.getSession(), ecb, section);
+
+                            // section.setDisplayFormGroups(newDisplayBean.getDisplayFormGroups());
+
+                        }
+                        //
+                        this.getItemMetadataService().updateGroupDynamicsInSection(displayItemWithGroups, section.getSection().getId(), ecb);
+                        toc =
+                                TableOfContentsServlet.getDisplayBeanWithShownSections(getDataSource(), (DisplayTableOfContentsBean) request.getAttribute(TOC_DISPLAY),
+                                        (DynamicsMetadataService) SpringServletAccess.getApplicationContext(getServletContext()).getBean("dynamicsMetadataService"));
+                        request.setAttribute(TOC_DISPLAY, toc);
+                        sectionIdsInToc = TableOfContentsServlet.sectionIdsInToc(toc);
+                        sIndex = TableOfContentsServlet.sectionIndexInToc(section.getSection(), toc, sectionIdsInToc);
+                        previousSec = this.prevSection(section.getSection(), ecb, toc, sIndex);
+                        nextSec = this.nextSection(section.getSection(), ecb, toc, sIndex);
+                        section.setFirstSection(!previousSec.isActive());
+                        section.setLastSection(!nextSec.isActive());
+                        //
+                        // we need the following for repeating groups, tbh
+                        // >> tbh 06/2010
+                        // List<DisplayItemWithGroupBean> displayItemWithGroups2 = createItemWithGroups(section, hasGroup, eventDefinitionCRFId);
+
+                        // section.setDisplayItemGroups(displayItemWithGroups2);
+
+                        // if so, stay at this section
+                        LOGGER.debug(" in same section: " + inSameSection);
+                        if (inSameSection) {
+                            // copy of one line from early on around line 400, forcing a re-show of the items
+                            // section = getDisplayBean(hasGroup, true);// include all items, tbh
+                            // below a copy of three lines from the if errors = true line, tbh 03/2010
+                            String[] textFields = { INPUT_INTERVIEWER, INPUT_INTERVIEW_DATE };
+                            fp.setCurrentStringValuesAsPreset(textFields);
+                            setPresetValues(fp.getPresetValues(), request);
+                            // below essetially a copy except for rulesPostDryRun
+                            request.setAttribute(BEAN_DISPLAY, section);
+                            request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                            setInputMessages(errorsPostDryRun, request);
+                            addPageMessage(respage.getString("your_answers_activated_hidden_items"), request);
+                            request.setAttribute("hasError", "true");
+                            request.setAttribute("hasShown", "true");
+
+                            session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+                            setUpPanel(section);
+                            forwardPage(getJSPPage(), request, response);
+                        }
+                    }
+
+                    if (!inSameSection) {// else if not in same section, progress as usual
+                    /*
+                    toc =
+                        TableOfContentsServlet.getDisplayBeanWithShownSections(getDataSource(), (DisplayTableOfContentsBean) request.getAttribute(TOC_DISPLAY),
+                                (DynamicsMetadataService) SpringServletAccess.getApplicationContext(getServletContext()).getBean("dynamicsMetadataService"));
+                    request.setAttribute(TOC_DISPLAY, toc);
+                    sectionIdsInToc = TableOfContentsServlet.sectionIdsInToc(toc);
+                    sIndex = TableOfContentsServlet.sectionIndexInToc(section.getSection(), toc, sectionIdsInToc);
+                    previousSec = this.prevSection(section.getSection(), ecb, toc, sIndex);
+                    nextSec = this.nextSection(section.getSection(), ecb, toc, sIndex);
+                    section.setFirstSection(!previousSec.isActive());
+                    section.setLastSection(!nextSec.isActive());
+                    */
+                        // can we just forward page or do we actually need an ELSE here?
+                        // yes, we do. tbh 05/03/2010
+
+                        ArrayList<String> updateFailedItems = sc.redoCalculations(scoreItems, scoreItemdata, changedItems, itemOrdinals, sb.getId());
+                        success = updateFailedItems.size() > 0 ? false : true;
+
+                        // now check if CRF is marked complete
+                        boolean markComplete = fp.getString(INPUT_MARK_COMPLETE).equals(VALUE_YES);
+                        boolean markSuccessfully = false; // if the CRF was marked
+                        // complete
+                        // successfully
+                        if (markComplete && section.isLastSection()) {
+                            LOGGER.debug("need to mark CRF as complete");
+                            markSuccessfully = markCRFComplete(request);
+                            LOGGER.debug("...marked CRF as complete: " + markSuccessfully);
+                            if (!markSuccessfully) {
+                                request.setAttribute(BEAN_DISPLAY, section);
+                                request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                                setUpPanel(section);
+                                forwardPage(getJSPPage(), request, response);
+                                return;
                             }
                         }
 
-                        if (!forwardingSucceeded) {
-                            // request.setAttribute(TableOfContentsServlet.
-                            // INPUT_EVENT_CRF_BEAN,
-                            // ecb);
-                            if (markSuccessfully) {
-                                addPageMessage(respage.getString("data_saved_CRF_marked_complete"), request);
-                                session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
-                                session.removeAttribute(GROUP_HAS_DATA);
-                                session.removeAttribute(HAS_DATA_FLAG);
-                                session.removeAttribute(DDE_PROGESS);
-                                session.removeAttribute("to_create_crf");
+                        // now write the event crf bean to the database
+                        String annotations = fp.getString(INPUT_ANNOTATIONS);
+                        setEventCRFAnnotations(annotations, request);
+                        Date now = new Date();
+                        ecb.setUpdatedDate(now);
+                        ecb.setUpdater(ub);
+                        ecb = ecdao.update(ecb);
+                        success = success && ecb.isActive();
 
-                                request.setAttribute("eventId", new Integer(ecb.getStudyEventId()).toString());
-                                forwardPage(Page.ENTER_DATA_FOR_STUDY_EVENT_SERVLET, request, response);
+                        StudyEventDAO sedao = new StudyEventDAO(getDataSource());
+                        StudyEventBean seb = sedao.findByPK(ecb.getStudyEventId());
+                        seb.setUpdatedDate(now);
+                        seb.setUpdater(ub);
+                        seb = sedao.update(seb);
+                        success = success && seb.isActive();
+
+                        request.setAttribute(INPUT_IGNORE_PARAMETERS, Boolean.TRUE);
+
+                        if (newUploadedFiles.size() > 0) {
+                            if (this.unloadFiles(newUploadedFiles)) {
+
                             } else {
-                                // use clicked 'save'
-                                addPageMessage(respage.getString("data_saved_continue_entering_edit_later"), request);
-                                request.setAttribute(INPUT_EVENT_CRF, ecb);
-                                request.setAttribute(INPUT_EVENT_CRF_ID, new Integer(ecb.getId()).toString());
-                                // forward to the next section if the previous one
-                                // is not the last section
-                                if (!section.isLastSection()) {
+                                String missed = newUploadedFiles.keySet().stream().collect(Collectors.joining(" "));
+                                addPageMessage(respage.getString("uploaded_files_not_deleted_or_not_exist") + ": " + missed, request);
+                            }
+                        }
+                        if (!success) {
+                            // YW, 3-6-2008 <<
+                            if (updateFailedItems.size() > 0) {
+                                String mess = "";
+                                for (String ss : updateFailedItems) {
+                                    mess += ss + ", ";
+                                }
+                                mess = mess.substring(0, mess.length() - 2);
+                                addPageMessage(resexception.getString("item_save_failed_because_database_error") + mess, request);
+                            } else {
+                                // YW>>
+                                addPageMessage(resexception.getString("database_error"), request);
+                            }
+                            request.setAttribute(BEAN_DISPLAY, section);
+                            session.removeAttribute(GROUP_HAS_DATA);
+                            session.removeAttribute(HAS_DATA_FLAG);
+                            session.removeAttribute(DDE_PROGESS);
+                            session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+                            LOGGER.debug("try to remove to_create_crf");
+                            session.removeAttribute("to_create_crf");
+                            session.removeAttribute(instantAtt);
+
+                            // forwardPage(Page.SUBMIT_DATA_SERVLET);
+                            forwardPage(Page.LIST_STUDY_SUBJECTS_SERVLET, request, response);
+                            // >> changed tbh, 06/2009
+                        } else {
+                            boolean forwardingSucceeded = false;
+
+                            if (!fp.getString(GO_PREVIOUS).equals("")) {
+                                if (previousSec.isActive()) {
+                                    forwardingSucceeded = true;
+                                    request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                    request.setAttribute(INPUT_SECTION, previousSec);
+                                    int tabNum = 0;
+                                    if (fp.getString("tab") == null) {
+                                        tabNum = 1;
+                                    } else {
+                                        tabNum = fp.getInt("tab");
+                                    }
+                                    request.setAttribute("tab", new Integer(tabNum - 1).toString());
+
+                                    //  forwardPage(getServletPage(request), request, response);
+                                    getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                }
+                            } else if (!fp.getString(GO_NEXT).equals("")) {
+                                if (nextSec.isActive()) {
+                                    forwardingSucceeded = true;
+                                    request.setAttribute(INPUT_EVENT_CRF, ecb);
                                     request.setAttribute(INPUT_SECTION, nextSec);
-                                    request.setAttribute(INPUT_SECTION_ID, new Integer(nextSec.getId()).toString());
-                                    session.removeAttribute("mayProcessUploading");
-                                } else if(section.isLastSection()){ //JN ADDED TO avoid return down
-                                    // already the last section, should go back to
-                                    // view event page
+                                    int tabNum = 0;
+                                    if (fp.getString("tab") == null) {
+                                        tabNum = 1;
+                                    } else {
+                                        tabNum = fp.getInt("tab");
+                                    }
+                                    request.setAttribute("tab", new Integer(tabNum + 1).toString());
+                                    getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                    //forwardPage(getServletPage(request), request, response);
+                                }
+                            }
+
+                            if (!forwardingSucceeded) {
+                                // request.setAttribute(TableOfContentsServlet.
+                                // INPUT_EVENT_CRF_BEAN,
+                                // ecb);
+                                if (markSuccessfully) {
+                                    addPageMessage(respage.getString("data_saved_CRF_marked_complete"), request);
+                                    session.removeAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
                                     session.removeAttribute(GROUP_HAS_DATA);
                                     session.removeAttribute(HAS_DATA_FLAG);
                                     session.removeAttribute(DDE_PROGESS);
                                     session.removeAttribute("to_create_crf");
-                                    session.removeAttribute("mayProcessUploading");
 
                                     request.setAttribute("eventId", new Integer(ecb.getStudyEventId()).toString());
-                                    if(fromViewNotes != null && "1".equals(fromViewNotes)) {
-                                        String viewNotesPageFileName = (String)session.getAttribute("viewNotesPageFileName");
-                                        session.removeAttribute("viewNotesPageFileName");
-                                        session.removeAttribute("viewNotesURL");
-                                        if(viewNotesPageFileName!=null && viewNotesPageFileName.length()>0) {
-                                           // forwardPage(Page.setNewPage(viewNotesPageFileName, "View Notes"), request, response);
-                                        	 getServletContext().getRequestDispatcher(viewNotesPageFileName).forward(request, response);
-                                        }
-                                    }
-                                    session.removeAttribute(instantAtt);
                                     forwardPage(Page.ENTER_DATA_FOR_STUDY_EVENT_SERVLET, request, response);
-                                    return;
-
-                                }
-
-
-                                int tabNum = 0;
-                                if (fp.getString("tab") == null) {
-                                    tabNum = 1;
                                 } else {
-                                    tabNum = fp.getInt("tab");
-                                }
-                                if (!section.isLastSection()) {
-                                    request.setAttribute("tab", new Integer(tabNum + 1).toString());
-                                }
+                                    // use clicked 'save'
+                                    addPageMessage(respage.getString("data_saved_continue_entering_edit_later"), request);
+                                    request.setAttribute(INPUT_EVENT_CRF, ecb);
+                                    request.setAttribute(INPUT_EVENT_CRF_ID, new Integer(ecb.getId()).toString());
+                                    // forward to the next section if the previous one
+                                    // is not the last section
+                                    if (!section.isLastSection()) {
+                                        request.setAttribute(INPUT_SECTION, nextSec);
+                                        request.setAttribute(INPUT_SECTION_ID, new Integer(nextSec.getId()).toString());
+                                        session.removeAttribute("mayProcessUploading");
+                                    } else if(section.isLastSection()){ //JN ADDED TO avoid return down
+                                        // already the last section, should go back to
+                                        // view event page
+                                        session.removeAttribute(GROUP_HAS_DATA);
+                                        session.removeAttribute(HAS_DATA_FLAG);
+                                        session.removeAttribute(DDE_PROGESS);
+                                        session.removeAttribute("to_create_crf");
+                                        session.removeAttribute("mayProcessUploading");
 
-                              //  forwardPage(getServletPage(request), request, response);
-                                getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                        request.setAttribute("eventId", new Integer(ecb.getStudyEventId()).toString());
+                                        if(fromViewNotes != null && "1".equals(fromViewNotes)) {
+                                            String viewNotesPageFileName = (String)session.getAttribute("viewNotesPageFileName");
+                                            session.removeAttribute("viewNotesPageFileName");
+                                            session.removeAttribute("viewNotesURL");
+                                            if(viewNotesPageFileName!=null && viewNotesPageFileName.length()>0) {
+                                                // forwardPage(Page.setNewPage(viewNotesPageFileName, "View Notes"), request, response);
+                                                getServletContext().getRequestDispatcher(viewNotesPageFileName).forward(request, response);
+                                            }
+                                        }
+                                        session.removeAttribute(instantAtt);
+                                        forwardPage(Page.ENTER_DATA_FOR_STUDY_EVENT_SERVLET, request, response);
+                                        return;
+
+                                    }
+
+
+                                    int tabNum = 0;
+                                    if (fp.getString("tab") == null) {
+                                        tabNum = 1;
+                                    } else {
+                                        tabNum = fp.getInt("tab");
+                                    }
+                                    if (!section.isLastSection()) {
+                                        request.setAttribute("tab", new Integer(tabNum + 1).toString());
+                                    }
+
+                                    //  forwardPage(getServletPage(request), request, response);
+                                    getServletContext().getRequestDispatcher(getServletPage(request)).forward(request, response);
+                                }
+                                // session.removeAttribute(AddNewSubjectServlet.
+                                // FORM_DISCREPANCY_NOTES_NAME);
+                                // forwardPage(Page.SUBMIT_DATA_SERVLET);
                             }
-                            // session.removeAttribute(AddNewSubjectServlet.
-                            // FORM_DISCREPANCY_NOTES_NAME);
-                            // forwardPage(Page.SUBMIT_DATA_SERVLET);
                         }
                     }
-                }// end of if-block for dynamic rules not in same section, tbh 05/2010
+                }
+
+
+                // end of if-block for dynamic rules not in same section, tbh 05/2010
             }// end of save
-            String apiUrl = "https://drugmanagementmodule.azurewebsites.net/subject_api";
-            System.out.println("API URL: "+apiUrl);
-            sendObjectAsJSON(enrollmentData, apiUrl);
         }
 
     }
 
-    public void sendObjectAsJSON(Object object, String apiUrl) {
-        try {
-            // Convert the object to JSON format
-            ObjectMapper objectMapper = new ObjectMapper();
-            String json = "{\"subjects\": ["+objectMapper.writeValueAsString(object)+"]}";
-            System.out.println("\n"+json+"\n");
-
-            // Configure the HTTP connection
-            URL url = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setDoOutput(true);
-
-            // Write JSON data to the request body
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = json.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
-
-            // Check the response code
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_CREATED) {
-                System.out.println("Data sent successfully.");
-            } else {
-                System.out.println("Error sending data. Response code: " + responseCode);
-            }
-
-            // Close the connection
-            connection.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     protected boolean writeDN(DisplayItemBean displayItem)
     {
     	boolean writeDN=true;

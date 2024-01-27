@@ -10,14 +10,21 @@ package org.akaza.openclinica.control.managestudy;
 import static org.akaza.openclinica.core.util.ClassCastHelper.asArrayList;
 import static org.akaza.openclinica.core.util.ClassCastHelper.asHashMap;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.akaza.openclinica.bean.admin.CRFBean;
 import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.core.Role;
@@ -32,6 +39,7 @@ import org.akaza.openclinica.control.SpringServletAccess;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.control.form.FormProcessor;
 import org.akaza.openclinica.control.form.Validator;
+import org.akaza.openclinica.control.submit.SiteJson;
 import org.akaza.openclinica.dao.admin.CRFDAO;
 import org.akaza.openclinica.dao.managestudy.EventDefinitionCRFDAO;
 import org.akaza.openclinica.dao.managestudy.StudyDAO;
@@ -739,6 +747,44 @@ public class CreateSubStudyServlet extends SecureController {
                     }
                 }
             }
+        }
+        SiteJson siteJson = new SiteJson(site.getName() ,currentStudy.getName() ,site.getIdentifier() ,site.getSecondaryIdentifier() ,site.getPrincipalInvestigator() ,site.getSummary() ,site.getProtocolDateVerification() ,site.getDatePlannedStart() ,site.getDatePlannedEnd() ,site.getExpectedTotalEnrollment() ,site.getFacilityName() ,site.getFacilityCity() ,site.getFacilityState() ,site.getFacilityZip() ,site.getFacilityCountry() ,site.getFacilityContactName() ,site.getFacilityContactDegree() ,site.getFacilityContactPhone() ,site.getFacilityContactEmail());
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String json = objectMapper.writeValueAsString(siteJson);
+            // Configure the HTTP connection
+            String apiUrl = "http://localhost:3000/api/sites";
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            // Write JSON data to the request body
+            try (OutputStream os = connection.getOutputStream()) {
+                byte[] input = json.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            // Check the response code
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+                // Success
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuffer response = new StringBuffer();
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                // Print result
+                System.out.println(response.toString());
+            }
+            else {
+                throw new RuntimeException("Failed : HTTP error code : " + responseCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         session.removeAttribute("definitions");
         session.removeAttribute("changed");
