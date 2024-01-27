@@ -1,6 +1,7 @@
-trigger: none
+trigger:
+  - master
   #Commits to an environment that is the playground for developers.
-  #Now the deployment is done manually.
+  #No data should be considered safe here against corruption or loss.
 
 pool:
   name: Developers-playground
