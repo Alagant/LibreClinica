@@ -88,8 +88,8 @@
                     <td><div class="formfieldXL_BG">
                     <c:choose>
                      <c:when test="${study.studyParameterConfig.subjectIdGeneration =='auto non-editable'}">
-                      <input onfocus="this.select()" type="text" value="<c:out value="${label}"/>" class="formfield" disabled>
-                      <input type="hidden" name="label" value="<c:out value="${label}"/>">
+                      <input onfocus="this.select()" type="text" value="<c:out value="${study.newId()}"/>" class="formfield" disabled>
+                      <input type="hidden" name="label" value="<c:out value="${study.newId()}"/>">
                      </c:when>
                      <c:otherwise>
                        <input onfocus="this.select()" type="text" name="label" value="<c:out value="${label}"/>" class="formfieldXL">

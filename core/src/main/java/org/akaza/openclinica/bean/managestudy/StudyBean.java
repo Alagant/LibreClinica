@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.akaza.openclinica.bean.core.AuditableEntityBean;
 import org.akaza.openclinica.bean.core.Status;
 import org.akaza.openclinica.bean.oid.OidGenerator;
@@ -1202,5 +1205,11 @@ public class StudyBean extends AuditableEntityBean {
 
     public boolean contactEmailAbsentButNotification() {
         return ENABLED.name().equalsIgnoreCase(this.mailNotification) && contactEmailAbsent();
+    }
+
+    public String newId() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
+        return now.format(formatter);
     }
 }
