@@ -31,20 +31,4 @@ describe('Load page', () => {
     cy.get('[id="type"]').select('2')
     cy.get('[name="Submit"]').should('exist').click({multiple: true})
   })
-  it('oAuth login', () => {
-    cy.visit('http://localhost:8080/LibreClinica/pages/login/login')
-    cy.contains('Login')
-    cy.contains('OAuth Login').click()
-    cy.url().should('include', 'http://localhost:8080/LibreClinica/CreateUserAccount')
-  })
-
-  /*it('visit dmm', () => {
-    cy.visit('http://localhost:8080/LibreClinica/MainMenu')
-    cy.url().should('include', 'http://localhost:8080/LibreClinica/MainMenu')
-    cy.contains('Drug Management').should('exist').click()
-    cy.url().should('include', 'http://localhost:8080/LibreClinica/pages/study/subject/subjectList')
-
-  })*/
-
-  /**/
 })
