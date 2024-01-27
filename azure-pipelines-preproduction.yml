@@ -54,21 +54,18 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          mkdir -p /home/azureuser/dbbackup
-          cd LibreClinica/
-          /usr/bin/docker compose run -e PGPASSWORD=$(PG_PASSWORD) postgres pg_dump -d libreclinica -U clinica -h postgres>/home/azureuser/dbbackup/libreclinica_$(date -Iseconds).sql
+          ./LibreClinica/docker/db_backup.sh
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
         targetType: 'inline'
         script: |
           cd LibreClinica/
-          pwd
-          docker compose -f docker-compose.yml down
+          docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
           docker image prune -f
-          docker volume prune -f
+          #docker volume prune -f #Be careful with this one
           docker network prune -f
           docker system prune -af
 
@@ -81,10 +78,11 @@ stages:
           cd /home/azureuser/Alagant_projects/LibreClinica/
           git checkout lc-release-1.2.1
           git pull
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up -d
+          docker compose build
+          docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
+          ls -ltra
 
     - task: Bash@3
       displayName: Test and report commit message
