@@ -284,6 +284,7 @@ public class CoreResources implements ResourceLoaderAware {
         String database = DATAINFO.getProperty("dbType");
 
         setDatabaseProperties(database);
+        System.out.println("setDataInfoProperties: "+filePath+", "+database);
 
         setDataInfoVals();
         if (DATAINFO.getProperty("filePath") == null || DATAINFO.getProperty("filePath").length() <= 0) {
