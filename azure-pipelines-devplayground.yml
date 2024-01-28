@@ -59,7 +59,7 @@ stages:
           ls -ltra
           ls -ltra LibreClinica/
           cd LibreClinica/
-          git checkout master
+          git checkout develop
           git pull
           ./docker/db_backup.sh
       continueOnError: true
