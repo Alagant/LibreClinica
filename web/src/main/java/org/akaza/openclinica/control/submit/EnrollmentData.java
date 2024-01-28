@@ -12,12 +12,12 @@ public class EnrollmentData {
     private String treatmentStartDate;
     private String studyID;
     private String siteID;
-    private int subjectID;
+    private String subjectID;
 
     public EnrollmentData() {
     }
 
-    public EnrollmentData(String gender, boolean cavitation, String weight, String age, String enrollmentDate, String treatmentStartDate, String studyID, String siteID, String weightUnit, int subjectID) {
+    public EnrollmentData(String gender, boolean cavitation, String weight, String age, String enrollmentDate, String treatmentStartDate, String studyID, String siteID, String weightUnit, String subjectID) {
         this.gender = gender;
         this.cavitation = cavitation;
         this.weight = weight;
@@ -102,11 +102,11 @@ public class EnrollmentData {
         this.siteID = siteNumber;
     }
 
-    public int getSubjectID() {
+    public String getSubjectID() {
         return subjectID;
     }
 
-    public void setSubjectID(int subjectID) {
+    public void setSubjectID(String subjectID) {
         this.subjectID = subjectID;
     }
 }
