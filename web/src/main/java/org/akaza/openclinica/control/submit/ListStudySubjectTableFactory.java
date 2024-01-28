@@ -153,8 +153,8 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         ++index;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("gender"), null, null, true, false);
         ++index;
-        configureColumn(row.getColumn(columnNames[index]), resword.getString("secondary_ID"), null, null);
-        ++index;
+        // configureColumn(row.getColumn(columnNames[index]), resword.getString("secondary_ID"), null, null);
+        // ++index;
         // configureColumn(row.getColumn(columnNames[index]), resword.getString("subject_unique_ID"), null, null);
         // ++index;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("pdf"), new PdfCellEditor(), null);
@@ -353,7 +353,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         columnNamesList.add("enrolledAt");
         columnNamesList.add("studySubject.oid");
         columnNamesList.add("subject.charGender");
-        columnNamesList.add("studySubject.secondaryLabel");
+        // columnNamesList.add("studySubject.secondaryLabel");
         // columnNamesList.add("subject.uniqueIdentifier");
         columnNamesList.add("PDF");
         for (StudyGroupClassBean studyGroupClass : getStudyGroupClasses()) {
