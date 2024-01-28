@@ -58,7 +58,9 @@ stages:
           pwd
           ls -ltra
           ls -ltra LibreClinica/
-          LibreClinica/docker/db_backup.sh
+          cd LibreClinica/
+          git pull
+          ./docker/db_backup.sh
       continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
