@@ -55,7 +55,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ./LibreClinica/docker/db_backup.sh
+          ./Libreclinica/docker/db_backup.sh
       continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
@@ -72,10 +72,18 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          cd /home/azureuser/Alagant_projects/LibreClinica/
+          cd ~/Alagant_projects/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
+          echo user string ${USER}
           git pull
+          git submodule update --init --recursive
+          git submodule foreach "git stash"
+          git submodule foreach "git checkout master||git checkout main"
+          git submodule foreach "git stash; git pull"
+          echo "Status of submodules:"
+          git submodule foreach --recursive git status
+          cd ~/Alagant_projects/LibreClinica/
           docker compose build
           docker compose up -d
           docker ps -a
