@@ -52,7 +52,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ./LibreClinica/docker/db_backup.sh
+          ./LibreClinica/docker/db_backup.bash
       continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
