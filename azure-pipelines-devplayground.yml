@@ -63,7 +63,7 @@ stages:
           git pull --rebase
           echo lsdoc
           ls -ltra docker/
-          ./docker/db_backup.sh
+          ./docker/db_backup.bash
       continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
