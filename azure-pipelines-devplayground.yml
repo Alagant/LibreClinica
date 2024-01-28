@@ -58,10 +58,11 @@ stages:
           pwd
           ls -ltra
           ls -ltra LibreClinica/
-          ls -ltra LibreClinica/docker/
           cd LibreClinica/
           git checkout develop
           git pull --rebase
+          echo lsdoc
+          ls -ltra docker/
           ./docker/db_backup.sh
       continueOnError: true
     - task: Bash@3
