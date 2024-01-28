@@ -610,7 +610,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
         }
 
         enrollmentData.setStudyID(currentStudy.getIdentifier());
-        enrollmentData.setSubjectID(ssb.getSubjectId());
+        enrollmentData.setSubjectID(String.valueOf(ssb.getSubjectId()));
         // Get the study then the parent study
         logMe("Entering  Get the study then the parent study   "+System.currentTimeMillis());
         if (study.getParentStudyId() > 0) {
