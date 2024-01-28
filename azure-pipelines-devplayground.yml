@@ -60,7 +60,7 @@ stages:
           ls -ltra LibreClinica/
           cd LibreClinica/
           git checkout develop
-          git pull
+          git pull --rebase
           ./docker/db_backup.sh
       continueOnError: true
     - task: Bash@3
