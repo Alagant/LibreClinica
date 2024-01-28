@@ -1508,7 +1508,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                 LOGGER.debug("Do we hit this in save ?????");
                 logMe("Do we hit this in save ????  "+System.currentTimeMillis());
                 System.out.println(sb.getTitle());
-                if(sb.getTitle().equalsIgnoreCase("Enrollment Form")){
+                if(sb.getTitle().equalsIgnoreCase("Enrollment Form") || sb.getTitle().equalsIgnoreCase("Study Entry Enrollment")){
                     //Send data to dmm server
                     String apiUrl = "https://drugmanagementmodule.azurewebsites.net/subject_api";
                     System.out.println("API URL: "+apiUrl);
@@ -2173,6 +2173,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
 
                                 // Print the error response as plain text
                                 System.out.println("Error: " + responseCode);
+                                System.out.println(errorObject.getError());
                                 if(errorObject.getError().contains("already exists in DMM database")){
                                     boolean success = true;
                                     boolean temp = true;
