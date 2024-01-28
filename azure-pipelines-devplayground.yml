@@ -55,7 +55,13 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ./Libreclinica/docker/db_backup.sh
+          pwd
+          ls -ltra
+          ls -ltra LibreClinica/
+          cd LibreClinica/
+          git checkout develop
+          git pull --rebase
+          ./docker/db_backup.sh
       continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
