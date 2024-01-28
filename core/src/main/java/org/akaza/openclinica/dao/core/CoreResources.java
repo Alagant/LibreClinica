@@ -198,7 +198,7 @@ public class CoreResources implements ResourceLoaderAware {
             // replacePaths(vals);
             vals = replaceWebapp(vals);
             vals = replaceCatHome(vals);
-            //System.out.println("setDataInfoVals: "+key+":"+vals);
+            System.out.println("setDataInfoVals: "+key+":"+vals);
             DATAINFO.setProperty(key, vals);
         }
 
@@ -284,6 +284,7 @@ public class CoreResources implements ResourceLoaderAware {
         String database = DATAINFO.getProperty("dbType");
 
         setDatabaseProperties(database);
+        System.out.println("setDataInfoProperties: "+filePath+", "+database);
 
         setDataInfoVals();
         if (DATAINFO.getProperty("filePath") == null || DATAINFO.getProperty("filePath").length() <= 0) {
