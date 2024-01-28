@@ -58,6 +58,7 @@ stages:
           pwd
           ls -ltra
           ls -ltra LibreClinica/
+          ls -ltra LibreClinica/docker/
           cd LibreClinica/
           git checkout develop
           git pull --rebase
