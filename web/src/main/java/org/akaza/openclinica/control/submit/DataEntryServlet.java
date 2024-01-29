@@ -2779,6 +2779,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                 }
                                 else{
                                     errorsMessage.add(errorObject.getError());
+                                    errors.put("Error to sending data to dmm", errorsMessage);
                                     request.setAttribute("markComplete", fp.getString(INPUT_MARK_COMPLETE));
                                     // << tbh, 02/2010
                                     // YW >>
