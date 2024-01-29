@@ -925,6 +925,9 @@ public abstract class DataEntryServlet extends CoreSecureController {
                 if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Scheduled study treatment start date")){
                     enrollmentData.setTreatmentStartDate(diwg.getSingleItem().getData().getValue());
                 }
+                if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Date of birth")){
+                    enrollmentData.setDob(diwg.getSingleItem().getData().getValue());
+                }
                 if (diwg.isInGroup()) {
                     // for the items in groups
                     DisplayItemGroupBean dgb = diwg.getItemGroup();
@@ -2774,8 +2777,31 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                         }
                                     }
                                 }
-                                errorsMessage.add(errorObject.getError());
-
+                                else{
+                                    errorsMessage.add(errorObject.getError());
+                                    request.setAttribute("markComplete", fp.getString(INPUT_MARK_COMPLETE));
+                                    // << tbh, 02/2010
+                                    // YW >>
+                                    // copied
+                                    request.setAttribute(BEAN_DISPLAY, section);
+                                    request.setAttribute(BEAN_ANNOTATIONS, fp.getString(INPUT_ANNOTATIONS));
+                                    setInputMessages(errors, request);
+                                    addPageMessage(respage.getString("errors_in_submission_see_below"), request);
+                                    request.setAttribute("hasError", "true");
+                                    // addPageMessage("To override these errors and keep the data as
+                                    // you
+                                    // entered it, click one of the \"Confirm\" buttons. ");
+                                    // if (section.isCheckInputs()) {
+                                    // addPageMessage("Please notice that you must enter data for
+                                    // the
+                                    // <b>required</b> entries.");
+                                    // }
+                                    // we do not save any DNs if we get here, so we have to set it back into session...
+                                    session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+                                    // << tbh 01/2010
+                                    setUpPanel(section);
+                                    forwardPage(getJSPPage(), request, response);
+                                }
                             }catch (Exception e){
                                 System.out.println("Error: " + responseCode);
                                 System.out.println("Error sending data. Response code: " + responseCode);

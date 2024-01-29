@@ -8,6 +8,7 @@ public class EnrollmentData {
     private String weight;
     private String weightUnit;
     private String age;
+    private String dob;
     private String enrollmentDate;
     private String treatmentStartDate;
     private String studyID;
@@ -17,7 +18,7 @@ public class EnrollmentData {
     public EnrollmentData() {
     }
 
-    public EnrollmentData(String gender, boolean cavitation, String weight, String age, String enrollmentDate, String treatmentStartDate, String studyID, String siteID, String weightUnit, String subjectID) {
+    public EnrollmentData(String gender, boolean cavitation, String weight, String age, String enrollmentDate, String treatmentStartDate, String studyID, String siteID, String weightUnit, String subjectID, String dob) {
         this.gender = gender;
         this.cavitation = cavitation;
         this.weight = weight;
@@ -28,6 +29,7 @@ public class EnrollmentData {
         this.studyID = studyID;
         this.siteID = siteID;
         this.subjectID = subjectID;
+        this.dob = dob;
     }
 
     public String getGender() {
@@ -109,4 +111,11 @@ public class EnrollmentData {
     public void setSubjectID(String subjectID) {
         this.subjectID = subjectID;
     }
+    public String getDob() {
+            return dob;
+        }
+
+        public void setDob(String dob) {
+            this.dob = dob;
+        }
 }
