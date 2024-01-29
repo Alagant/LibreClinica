@@ -108,7 +108,7 @@ public class ListStudySubjectTableToolbar extends DefaultToolbar {
          *      java.util.Locale)
          */
         String getIndexes() {
-            String result = "2,3,4,5,6";
+            String result = "2,3,4,5";
             for (int i = 0; i < studyGroupClasses.size(); i++) {
                 result += "," + (6 + i + 1);
             }
