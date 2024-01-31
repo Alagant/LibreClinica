@@ -2178,6 +2178,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                 System.out.println("Error: " + responseCode);
                                 System.out.println(errorObject.getError());
                                 if(errorObject.getError().contains("already exists in DMM database")){
+                                    errorsMessage.add("The subject already exists in DMM database");
+                                    errors.put("Error to sending data to dmm", errorsMessage);
                                     boolean success = true;
                                     boolean temp = true;
 
