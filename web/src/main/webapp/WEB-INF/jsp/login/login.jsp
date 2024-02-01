@@ -8,6 +8,7 @@
     String oauth_as_first_page = CoreResources.getField("oauth.as_login_page");
     if("true".compareTo(oauth_as_first_page)==0)
         response.sendRedirect(oauth_authorize_url);
+    String url_options = self_url + "/pages/welcome";
 %>
 
 <%@ include file="/WEB-INF/jsp/taglibs.jsp" %>
@@ -150,7 +151,7 @@ session.setAttribute("factorService", factorService);
                         <input type="submit" name="submit" value="<fmt:message key='login' bundle='${resword}'/>" class="loginbutton" />
 
                         <a href="#" id="requestPassword"> <fmt:message key="forgot_password" bundle="${resword}"/></a>
-                        <a href="./pages/welcome" id="gowelcome"> Return to options</a>
+                        <a href="<%= url_options %>" id="gowelcome" style="margin-left: 10px;"> Return to options</a>
                    </form>
 
                    <br/><jsp:include page="../login-include/login-alertbox.jsp"/>
