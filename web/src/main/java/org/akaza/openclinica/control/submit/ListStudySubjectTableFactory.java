@@ -706,7 +706,10 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private class PidCellEditor implements CellEditor {
         public Object getValue(Object item, String property, int rowcount) {
             StudySubjectBean studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
-            return  studySubjectBean.getSecondaryLabel();
+            HtmlBuilder pidDiv = new HtmlBuilder();
+            pidDiv.div().style("text-align: center; padding-left: 15px; padding-right: 15px; ").close();
+            pidDiv.append(studySubjectBean.getSecondaryLabel());
+            return pidDiv.toString();
         }
     }
     private class ActionsCellEditor implements CellEditor {
