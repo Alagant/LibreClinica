@@ -208,6 +208,7 @@
         <url-pattern>/oauth/*</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
         <servlet-name>ws</servlet-name>
         <servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>

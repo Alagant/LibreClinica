@@ -14,3 +14,4 @@
 <!-- move the alert message to the sidebar-->
 <jsp:include page="../include/sideAlert.jsp"/>
 
+<marquee>${subjectId}</marquee>
