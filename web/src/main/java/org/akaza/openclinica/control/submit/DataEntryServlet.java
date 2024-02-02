@@ -2201,6 +2201,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                             }
                                             System.out.println(successResponse.toString());
                                             ObjectMapper objectMapperSuccess = new ObjectMapper();
+                                            successObject = new SuccessResponse();
                                             successObject = objectMapperSuccess.readValue(successResponse.toString(), SuccessResponse.class);
                                             this.pid = successObject.getPid();
                                             System.out.println("Response: " + successObject.getPid());
