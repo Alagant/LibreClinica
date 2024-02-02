@@ -694,9 +694,13 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private class PdfCellEditor implements CellEditor {
         public Object getValue(Object item, String property, int rowcount) {
             StudySubjectBean studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
+
+            String secondaryLabel =  studySubjectBean.getSecondaryLabel();
+            if(secondaryLabel == null || secondaryLabel.isEmpty())
+                return "&nbsp;";
             HtmlBuilder actionLink = new HtmlBuilder();
 
-            String url = CoreResources.getField("dmm.url") + "/subject_schedule/" + studySubjectBean.getSecondaryLabel();
+            String url = CoreResources.getField("dmm.url") + "/subject_schedule/" + secondaryLabel;
             actionLink.a().href(url).append("target=\"_blank\"").title("pdf").end().append("PDF").aEnd();
 
             return  actionLink.toString();
