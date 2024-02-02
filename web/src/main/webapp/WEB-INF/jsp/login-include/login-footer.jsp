@@ -43,9 +43,12 @@
 					</div>
 
 					<div  id="version">
-                        <fmt:message key="Version_release" bundle="${licensing}"/> Change tag: <fmt:message key="test.message" bundle="${debug}"/>
+                        <fmt:message key="Version_release" bundle="${licensing}"/> <%-- Change tag:
+                        <fmt:message key="test.message" bundle="${debug}"/> -->
+                        <%--
                         Database host: <fmt:message key="dbHost" bundle="${dataInfo}"/>
                         Branch: ${DebugHelper.currentGitBranch}
+                        --%>
                     </div>
 
                 </td>

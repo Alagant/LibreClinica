@@ -697,7 +697,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             HtmlBuilder actionLink = new HtmlBuilder();
 
             String url = CoreResources.getField("dmm.url") + "/subject_schedule/" + studySubjectBean.getSecondaryLabel();
-            actionLink.a().href(url).title("pdf").end().append("PDF").aEnd();
+            actionLink.a().href(url).append("target=\"_blank\"").title("pdf").end().append("PDF").aEnd();
 
             return  actionLink.toString();
         }
