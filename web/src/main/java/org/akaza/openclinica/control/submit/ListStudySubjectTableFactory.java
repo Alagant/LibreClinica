@@ -711,7 +711,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         public Object getValue(Object item, String property, int rowcount) {
             StudySubjectBean studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
             HtmlBuilder pidDiv = new HtmlBuilder();
-            pidDiv.div().style("text-align: center; padding-left: 15px; padding-right: 15px; ").close();
+            pidDiv.div().style("text-align: center; padding-left: 15px; padding-right: 15px; white-space: nowrap; ").close();
             pidDiv.append(studySubjectBean.getSecondaryLabel());
             return pidDiv.toString();
         }
