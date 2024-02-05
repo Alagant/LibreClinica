@@ -28,9 +28,18 @@
 <body>
 <h1>Appointments</h1>
 <table id="appointmentsTable">
-    <tr>
-        <th>Date</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${appointments}" var="appointment">
+            <tr>
+                <td>${appointment.value}</td>
+            </tr>
+        </c:forEach>
+    </tbody>
 </table>
 </body>
 </html>
