@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -29,16 +28,16 @@
 <h1>Appointments</h1>
 <table id="appointmentsTable">
     <thead>
-        <tr>
-            <th>Date</th>
-        </tr>
+    <tr>
+        <th>Date</th>
+    </tr>
     </thead>
     <tbody>
-        <c:forEach items="${appointments}" var="appointment">
-            <tr>
-                <td>${appointment.value}</td>
-            </tr>
-        </c:forEach>
+    <c:forEach items="${appointments}" var="appointment">
+        <tr>
+            <td>${appointment.value}</td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 </body>
