@@ -93,6 +93,7 @@ import org.akaza.openclinica.core.SecurityManager;
 import org.akaza.openclinica.core.SessionManager;
 import org.akaza.openclinica.dao.admin.AuditDAO;
 import org.akaza.openclinica.dao.admin.CRFDAO;
+import org.akaza.openclinica.dao.core.CoreResources;
 import org.akaza.openclinica.dao.login.UserAccountDAO;
 import org.akaza.openclinica.dao.managestudy.DiscrepancyNoteDAO;
 import org.akaza.openclinica.dao.managestudy.EventDefinitionCRFDAO;
@@ -1513,7 +1514,9 @@ public abstract class DataEntryServlet extends CoreSecureController {
                 System.out.println(sb.getTitle());
                 if(sb.getTitle().equalsIgnoreCase("Enrollment Form") || sb.getTitle().equalsIgnoreCase("Study Entry Enrollment")){
                     //Send data to dmm server
-                    String apiUrl = "https://drugmanagementmodule.azurewebsites.net/subject_api";
+
+                    String apiUrl = CoreResources.getField("dmm.url") + "/subject_api";
+                    //"https://drugmanagementmodule.azurewebsites.net/subject_api";
                     //String apiUrl = "http://localhost:3001/api/sites";
                     System.out.println("API URL: "+apiUrl);
                     try {
@@ -2182,7 +2185,9 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     connection.disconnect();
                                     errorsMessage.add("The subject already exists in DMM database");
                                     // Configure the HTTP connection
-                                    String pidUrl = "https://drugmanagementmodule.azurewebsites.net/subjectpid/" + enrollmentData.getSubjectID().trim();
+                                    String pidUrl = CoreResources.getField("dmm.url") + "/subjectpid/" +
+                                            /*"https://drugmanagementmodule.azurewebsites.net/subjectpid/" +*/
+                                            enrollmentData.getSubjectID().trim();
                                     System.out.println(pidUrl);
                                     URL urlPid = new URL(pidUrl);
                                     HttpURLConnection connectionPid = (HttpURLConnection) urlPid.openConnection();

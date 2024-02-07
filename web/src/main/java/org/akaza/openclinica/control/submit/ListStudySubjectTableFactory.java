@@ -157,7 +157,8 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         // ++index;
         // configureColumn(row.getColumn(columnNames[index]), resword.getString("subject_unique_ID"), null, null);
         // ++index;
-        configureColumn(row.getColumn(columnNames[index]), resword.getString("pdf"), new PdfCellEditor(), null);
+        configureColumn(row.getColumn(columnNames[index]), resword.getString("subject_matrix_schedule"),
+                new PdfCellEditor(), null);
         ++index;
         // group class columns
         for (int i = index; i < index + studyGroupClasses.size(); i++) {

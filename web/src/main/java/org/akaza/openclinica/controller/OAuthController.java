@@ -131,14 +131,6 @@ public class OAuthController {
             JsonNode jsonNode = objectMapper.readTree(
                     new InputStreamReader(connection.getInputStream(), "utf-8")
             );
-            JsonNode profileNode = jsonNode.get("profile");
-            /*
-            String a3rd_sub = jsonNode.get("sub").asText();
-            String a3rd_account_id = profileNode.get("account_id").asText();
-            String a3rd_name = profileNode.get("name").asText();
-            String a3rd_family_name = profileNode.get("family_name").asText();
-            String a3rd_middle_name = profileNode.get("middle_name").asText();
-            */
             String a3rd_email = jsonNode.get("email").asText();
 
             UserAccountDAO userAccountDAO = new UserAccountDAO(dataSource);
@@ -172,18 +164,11 @@ public class OAuthController {
             ArrayList<StudyUserRoleBean> roles = userAccountDAO.findAllRolesByUserName(oauthAccount.getName());
 
 
-            //Authentication authentication = authenticationManager.authenticate(authRequest);
             Authentication authentication = new OAuthAuthentication(oauthAccount);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
-            /*
-            if(roles.size()>0) {
-                request.getSession().setAttribute("study", studyDAO.findByPK(roles.get(0).getStudyId()) );
-                request.getSession().setAttribute("userRole", roles.get(0));
-            }*/
 
             request.getSession().setAttribute("oauth_code", oauth_code);
-            //request.getSession().setAttribute(SecureController.USER_BEAN_NAME, oauthAccount);
 
             return "redirect:/MainMenu";
         }
