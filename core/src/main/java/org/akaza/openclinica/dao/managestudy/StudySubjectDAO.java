@@ -382,7 +382,8 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         return executeFindByPKQuery(queryName, variables);
     }
 
-    public ArrayList<StudySubjectBean> getWithFilterAndSort(StudyBean currentStudy, FindSubjectsFilter filter, FindSubjectsSort sort, int rowStart, int rowEnd) {
+    public ArrayList<StudySubjectBean> getWithFilterAndSort(
+            StudyBean currentStudy, FindSubjectsFilter filter, FindSubjectsSort sort, int rowStart, int rowEnd) {
         setTypesExpected();
         // type for Study unique_identifier from StudySubject getWithFilterAndSort query
         setTypeExpected(14, TypeNames.STRING);

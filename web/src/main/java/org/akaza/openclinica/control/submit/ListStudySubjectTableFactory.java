@@ -349,7 +349,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private void getColumnNamesMap() {
         ArrayList<String> columnNamesList = new ArrayList<String>();
         columnNamesList.add("studySubject.label");
-        columnNamesList.add("PID");
+        columnNamesList.add("pid");
         columnNamesList.add("studySubject.status");
         columnNamesList.add("enrolledAt");
         columnNamesList.add("studySubject.oid");
@@ -376,7 +376,11 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             String value = filter.getValue();
             if ("studySubject.status".equalsIgnoreCase(property)) {
                 value = Status.getByName(value).getId() + "";
-            } else if (property.startsWith("sgc_")) {
+            }
+            /*
+            else if ("pid".equalsIgnoreCase(property)) {
+                    value = Status.getByName(value).getId() + "";
+            }*/ else if (property.startsWith("sgc_")) {
                 int studyGroupClassId = property.endsWith("_") ? 0 : Integer.valueOf(property.split("_")[1]);
                 value = studyGroupDAO.findByNameAndGroupClassID(value, studyGroupClassId).getId() + "";
             }
