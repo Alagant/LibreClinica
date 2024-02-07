@@ -88,7 +88,7 @@ stages:
           echo "Status of submodules:"
           git submodule foreach --recursive git status
           cd ~/Alagant_projects/LibreClinica/
-          docker compose build --build-arg ENVIRONMENT=development
+          docker compose build --build-arg ENVIRONMENT=CRFS_QA
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
