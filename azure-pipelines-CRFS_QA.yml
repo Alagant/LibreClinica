@@ -36,7 +36,7 @@ variables:
 - group: 'Lc_root_access'
 - group: 'Libreclinica_postgres'
 - name: ENVIRONMENT
-  value: development
+  value: CRFS_QA
 
 stages:
 - stage: DevOps
@@ -116,4 +116,4 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
-        BEHAVE_STAGE: qa
+        BEHAVE_STAGE: crfs_qa

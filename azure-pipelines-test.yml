@@ -32,7 +32,10 @@ resources:
 
 
 variables:
-  tag: '$(Build.BuildId)'
+- tag: '$(Build.BuildId)'
+- group: 'Confluence'
+- name: ENVIRONMENT
+  value: test
 
 stages:
 - stage: DevOps
