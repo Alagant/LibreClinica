@@ -14,6 +14,7 @@ RUN find /libreclinica -type f -name "*.war"
 FROM tomcat:8.5.96-jdk8
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
+ARG ENVIRONMENT
 WORKDIR /libreclinica
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
