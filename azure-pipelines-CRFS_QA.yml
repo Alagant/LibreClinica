@@ -1,5 +1,5 @@
 trigger:
-  - develop
+- CRFS_QA
   #Commits to an environment that is the playground for developers.
   #No data should be considered safe here against corruption or loss.
 
