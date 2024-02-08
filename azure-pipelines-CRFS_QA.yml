@@ -45,7 +45,7 @@ stages:
   - job: DevOps
     steps:
     - checkout: LcRepo
-      #clean: true
+      clean: true
       persistCredentials: true
       fetchDepth: 1
       lfs: true
@@ -70,6 +70,11 @@ stages:
           cd LibreClinica/
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
+          docker container prune -f
+          docker image prune -f
+          #docker volume prune -f #Be careful with this one
+          docker network prune -f
+          docker system prune -af
 
     - task: Bash@3
       displayName: DevOps
@@ -89,7 +94,7 @@ stages:
           echo "Status of submodules:"
           git submodule foreach --recursive git status
           cd ~/Alagant_projects/LibreClinica/
-          docker compose build
+          docker compose build --build-arg ENVIRONMENT=CRFS_QA
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
@@ -101,8 +106,8 @@ stages:
         targetType: 'inline'
         script: |
           cd libreclinica-qa/
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa
+          docker compose build
+          docker compose up libreclinica-qa
       # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
