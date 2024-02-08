@@ -4,7 +4,7 @@ trigger:
   #No data should be considered safe here against corruption or loss.
 
 pool:
-  name: CRFs_QA
+  name: CRFs-QA
 
 resources:
   repositories:
