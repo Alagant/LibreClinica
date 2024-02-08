@@ -4,7 +4,7 @@ trigger:
   #No data should be considered safe here against corruption or loss.
 
 pool:
-  name: Developers-playground
+  name: Development
 
 resources:
   repositories:
@@ -31,7 +31,12 @@ resources:
 
 
 variables:
-  tag: '$(Build.BuildId)'
+#- tag: '$(Build.BuildId)'
+- group: 'Confluence'
+- group: 'Lc_root_access'
+- group: 'Libreclinica_postgres'
+- name: ENVIRONMENT
+  value: CRFS_QA
 
 stages:
 - stage: DevOps
@@ -46,6 +51,7 @@ stages:
       lfs: true
       #submodules: true
       #ref: refs/heads/lc-release-1.2.1
+      clean: true
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
@@ -115,4 +121,4 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
-        BEHAVE_STAGE: develop
+        BEHAVE_STAGE: crfs_qa

@@ -2,6 +2,7 @@ FROM maven:3.5.0-jdk-8 as builder
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 WORKDIR /libreclinica
+RUN echo environment variable: $ENVIRONMENT
 COPY . .
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties

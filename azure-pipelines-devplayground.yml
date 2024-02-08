@@ -4,7 +4,7 @@ trigger:
   #No data should be considered safe here against corruption or loss.
 
 pool:
-  name: Developers-playground
+  name: Development
 
 resources:
   repositories:
@@ -31,7 +31,12 @@ resources:
 
 
 variables:
-  tag: '$(Build.BuildId)'
+#- tag: '$(Build.BuildId)'
+- group: 'Confluence'
+- group: 'Lc_root_access'
+- group: 'Libreclinica_postgres'
+- name: ENVIRONMENT
+  value: development
 
 stages:
 - stage: DevOps

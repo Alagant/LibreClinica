@@ -31,7 +31,12 @@ resources:
 
 
 variables:
-  tag: '$(Build.BuildId)'
+#- tag: '$(Build.BuildId)'
+- group: 'Confluence'
+- group: 'Lc_root_access'
+- group: 'Libreclinica_postgres'
+- name: ENVIRONMENT
+  value: QA
 
 stages:
 - stage: DevOps
