@@ -51,7 +51,6 @@ stages:
       lfs: true
       #submodules: true
       #ref: refs/heads/lc-release-1.2.1
-      clean: true
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
