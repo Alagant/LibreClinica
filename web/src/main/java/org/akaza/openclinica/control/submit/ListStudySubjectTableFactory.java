@@ -153,19 +153,14 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         ++index;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("gender"), null, null, true, false);
         ++index;
-        // configureColumn(row.getColumn(columnNames[index]), resword.getString("secondary_ID"), null, null);
-        // ++index;
-        // configureColumn(row.getColumn(columnNames[index]), resword.getString("subject_unique_ID"), null, null);
-        // ++index;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("subject_matrix_schedule"),
                 new PdfCellEditor(), null);
+        ++index;
+        configureColumn(row.getColumn(columnNames[index]), "Appointments", new AppointmentCellEditor(), null);
         ++index;
         // group class columns
         for (int i = index; i < index + studyGroupClasses.size(); i++) {
             StudyGroupClassBean studyGroupClass = studyGroupClasses.get(i - index);
-            // configureColumn(row.getColumn(columnNames[i]),
-            // studyGroupClass.getName(), new
-            // StudyGroupClassCellEditor(studyGroupClass), null, false, false);
             configureColumn(row.getColumn(columnNames[i]), studyGroupClass.getName(), new StudyGroupClassCellEditor(studyGroupClass),
                     new SubjectGroupClassDroplistFilterEditor(studyGroupClass), true, false);
         }
@@ -179,8 +174,6 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
                 + "&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;";
         configureColumn(row.getColumn(columnNames[columnNames.length - 1]), actionsHeader, new ActionsCellEditor(), new DefaultActionsEditor(locale), true,
                 false);
-        ++index;
-
     }
 
     @Override
@@ -239,7 +232,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             theItem.put("studySubject.oid", studySubjectBean.getOid());
             theItem.put("studySubject.secondaryLabel", studySubjectBean.getSecondaryLabel());
             theItem.put("pid", studySubjectBean.getSecondaryLabel());
-
+            theItems.add(theItem);
             SubjectBean subjectBean = (SubjectBean) getSubjectDAO().findByPK(studySubjectBean.getSubjectId());
             theItem.put("subject", subjectBean);
             theItem.put("subject.charGender", subjectBean.getGender());
@@ -292,12 +285,6 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
                 theItem.put("sed_" + studyEventDefinition.getId() + "_object", studyEventDefinition);
 
             }
-            HtmlBuilder actionLink = new HtmlBuilder();
-
-            String url = CoreResources.getField("dmm.url") + "/subjectpid/" + studySubjectBean.getSecondaryLabel();
-            actionLink.a().href(url).title("pdf").end().aEnd();
-            theItem.put("pdf", actionLink);
-            theItems.add(theItem);
 
         }
 
@@ -354,9 +341,8 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         columnNamesList.add("enrolledAt");
         columnNamesList.add("studySubject.oid");
         columnNamesList.add("subject.charGender");
-        // columnNamesList.add("studySubject.secondaryLabel");
-        // columnNamesList.add("subject.uniqueIdentifier");
         columnNamesList.add("PDF");
+        columnNamesList.add("Appointments");
         for (StudyGroupClassBean studyGroupClass : getStudyGroupClasses()) {
             columnNamesList.add("sgc_" + studyGroupClass.getId());
         }
@@ -722,6 +708,22 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             pidDiv.div().style("text-align: center; padding-left: 15px; padding-right: 15px; white-space: nowrap; ").close();
             pidDiv.append(studySubjectBean.getSecondaryLabel());
             return pidDiv.toString();
+        }
+    }
+
+    private class AppointmentCellEditor implements CellEditor {
+        public Object getValue(Object item, String property, int rowcount) {
+            StudySubjectBean studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
+
+            int subjectID =  studySubjectBean.getSubjectId();
+            HtmlBuilder actionLink = new HtmlBuilder();
+
+            String url = "/LibreClinica/pages/appointments/" + subjectID;
+
+            actionLink.a().href(url).append("target=\"_blank\"").title("See subject schedule").style("display: block; margin: auto; text-align: center;").end()
+                    .append("<img src='" + imageIconPaths.get(1) + "' border='0' style='position: relative; left: 7px;'>").aEnd();
+
+            return  actionLink;
         }
     }
     private class ActionsCellEditor implements CellEditor {
