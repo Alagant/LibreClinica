@@ -10,14 +10,14 @@ describe('Load page', () => {
         cy.visit('http://localhost:8080/LibreClinica/pages/login/login')
         cy.url().should('include', 'http://localhost:8080/LibreClinica/pages/login/login')
         cy.get('[id="username"]').should('exist').type('root')
-        cy.get('[id="j_password"]').should('exist').type('123456789')
+        cy.get('[id="j_password"]').should('exist').type('kevin12345')
         cy.get('[name="submit"]').should('exist').click()
         cy.url().should('include', 'http://localhost:8080/LibreClinica/MainMenu')
         cy.contains('Welcome to')
         cy.contains('Drug Management').click()
-        cy.origin('cdcoauthmockup.azurewebsites.net', () => {
-            cy.url().should('contain', 'cdcoauthmockup.azurewebsites.net')
-            cy.contains('SAMS login mockup')
+        cy.origin('cdcoauthmockup2.azurewebsites.net', () => {
+            cy.url().should('contain', 'cdcoauthmockup2.azurewebsites.net')
+            cy.contains('OAuth Login')
             cy.get('[id="username"]').should('exist').type('test')
             cy.get('[id="password"]').should('exist').type(`${"test"}{enter}`)
         })
