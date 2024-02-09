@@ -718,8 +718,8 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             int subjectID =  studySubjectBean.getSubjectId();
             HtmlBuilder actionLink = new HtmlBuilder();
 
-            String url = "/LibreClinica/pages/appointments/" + subjectID;
-
+            //String url = "/LibreClinica/pages/appointments/" + subjectID;
+            String url = "/LibreClinica/Appointments?id=" + subjectID;
             actionLink.a().href(url).append("target=\"_blank\"").title("See subject schedule").style("display: block; margin: auto; text-align: center;").end()
                     .append("<img src='" + imageIconPaths.get(1) + "' border='0' style='position: relative; left: 7px;'>").aEnd();
 
