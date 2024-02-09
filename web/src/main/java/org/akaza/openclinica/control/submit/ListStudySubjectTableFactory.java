@@ -706,7 +706,10 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             HtmlBuilder actionLink = new HtmlBuilder();
 
             String url = CoreResources.getField("dmm.url") + "/subject_schedule/" + secondaryLabel;
-            actionLink.a().href(url).append("target=\"_blank\"").title("pdf").end().append("PDF").aEnd();
+
+            actionLink.a().href(url).append("target=\"_blank\"").title("See subject schedule").end()
+                    .append("<img src='" + imageIconPaths.get(1) + "' border='0' style='position: relative; left: 7px;'>")
+                    /*.append("PDF")*/.aEnd();
 
             return  actionLink.toString();
         }
