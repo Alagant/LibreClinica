@@ -62,13 +62,29 @@
 
 
 
-<h1><div class="title_manage"><fmt:message key="view_study_metadata" bundle="${resword}"/>
-</div></h1>
+<h1><div class="title_manage">Appointment schedule</div></h1>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Subject id</th>
+            <td>${subject.label}</td>
+        </tr>
+        <tr>
+            <th>gender</th>
+            <td>${subject.gender}</td>
+        </tr>
+        <tr>
+            <th>Date of birth</th>
+            <td>${subject.dateOfBirth}</td>
+        </tr>
+    </tbody>
+</table>
 
 
-<table id="appointmentsTable">
+<table>
     <thead>
-    <tr>
+    <tr class="header">
         <th>App no</th>
         <th>Date</th>
     </tr>
