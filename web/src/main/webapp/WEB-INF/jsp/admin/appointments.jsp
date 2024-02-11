@@ -63,6 +63,7 @@
 
 
 <h1><div class="title_manage">Appointment schedule</div></h1>
+<h1><div class="title_manage">(Page under construction)</div></h1>
 
 <table>
     <tbody>
