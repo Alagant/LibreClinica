@@ -82,10 +82,7 @@ stages:
         script: |
           # Docker DevOps
           cd ~/Alagant_projects/
-          git checkout $(Build.SourceBranchName)
-          echo checked out branch $(Build.SourceBranchName)
           echo user string ${USER}
-          git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
           git submodule foreach "git checkout master||git checkout main"
@@ -93,6 +90,11 @@ stages:
           echo "Status of submodules:"
           git submodule foreach --recursive git status
           cd ~/Alagant_projects/LibreClinica/
+          git checkout $(Build.SourceBranchName)
+          echo checked out branch $(Build.SourceBranchName)
+          git pull
+          echo running git status
+          git status
           docker compose build --build-arg ENVIRONMENT=CRFS_QA
           docker compose up -d
           docker ps -a

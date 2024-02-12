@@ -93,6 +93,7 @@ stages:
           cd ~/Alagant_projects/LibreClinica/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
+          git pull
           git status
           docker compose build --build-arg ENVIRONMENT=development
           docker compose up -d
