@@ -82,6 +82,8 @@ stages:
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
+          echo running git status
+          git status
           docker compose build
           docker compose up -d
           docker ps -a
