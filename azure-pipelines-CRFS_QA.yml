@@ -1,9 +1,10 @@
-# This pipeline is used to reset the docker environment
-
-trigger: none #Disable automatic build
+trigger:
+- CRFS_QA
+  #Commits to an environment that is the playground for developers.
+  #No data should be considered safe here against corruption or loss.
 
 pool:
-  name: Libreclinica-azureVMs
+  name: CRFs-QA
 
 resources:
   repositories:
@@ -34,6 +35,8 @@ variables:
 - group: 'Confluence'
 - group: 'Lc_root_access'
 - group: 'Libreclinica_postgres'
+- name: ENVIRONMENT
+  value: CRFS_QA
 
 stages:
 - stage: DevOps
@@ -57,6 +60,7 @@ stages:
         targetType: 'inline'
         script: |
           ./LibreClinica/docker/db_backup.bash
+      continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -67,7 +71,7 @@ stages:
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
           docker image prune -f
-          #docker volume prune -f #be careful with this one
+          #docker volume prune -f #Be careful with this one
           docker network prune -f
           docker system prune -af
 
@@ -77,9 +81,19 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          cd /home/azureuser/Alagant_projects/LibreClinica/
+          cd ~/Alagant_projects/
+          git checkout $(Build.SourceBranchName)
+          echo checked out branch $(Build.SourceBranchName)
+          echo user string ${USER}
           git pull
-          docker compose run -d postgres
+          git submodule update --init --recursive
+          git submodule foreach "git stash"
+          git submodule foreach "git checkout master||git checkout main"
+          git submodule foreach "git stash; git pull"
+          echo "Status of submodules:"
+          git submodule foreach --recursive git status
+          cd ~/Alagant_projects/LibreClinica/
+          docker compose build --build-arg ENVIRONMENT=CRFS_QA
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
@@ -90,10 +104,10 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          cd LibreClinica/libreclinica-qa/
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa
-      # Change the comment text here to test a new commit. Test nov 17 2023 b.
+          cd libreclinica-qa/
+          docker compose build
+          docker compose up libreclinica-qa
+      # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
         CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
@@ -106,3 +120,4 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
+        BEHAVE_STAGE: crfs_qa

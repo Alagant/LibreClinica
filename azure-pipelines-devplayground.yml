@@ -4,7 +4,7 @@ trigger:
   #No data should be considered safe here against corruption or loss.
 
 pool:
-  name: Developers-playground
+  name: Development
 
 resources:
   repositories:
@@ -31,7 +31,12 @@ resources:
 
 
 variables:
-  tag: '$(Build.BuildId)'
+#- tag: '$(Build.BuildId)'
+- group: 'Confluence'
+- group: 'Lc_root_access'
+- group: 'Libreclinica_postgres'
+- name: ENVIRONMENT
+  value: development
 
 stages:
 - stage: DevOps
@@ -40,13 +45,12 @@ stages:
   - job: DevOps
     steps:
     - checkout: LcRepo
-      #clean: true
+      clean: true
       persistCredentials: true
       fetchDepth: 1
       lfs: true
       #submodules: true
       #ref: refs/heads/lc-release-1.2.1
-      clean: true
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
@@ -65,6 +69,11 @@ stages:
           cd LibreClinica/
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
+          docker container prune -f
+          docker image prune -f
+          #docker volume prune -f #Be careful with this one
+          docker network prune -f
+          docker system prune -af
 
     - task: Bash@3
       displayName: DevOps
@@ -84,7 +93,7 @@ stages:
           echo "Status of submodules:"
           git submodule foreach --recursive git status
           cd ~/Alagant_projects/LibreClinica/
-          docker compose build
+          docker compose build --build-arg ENVIRONMENT=development
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
@@ -96,8 +105,8 @@ stages:
         targetType: 'inline'
         script: |
           cd libreclinica-qa/
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa
+          docker compose build
+          docker compose up libreclinica-qa
       # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
@@ -111,4 +120,4 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
-        BEHAVE_STAGE: qa
+        BEHAVE_STAGE: develop

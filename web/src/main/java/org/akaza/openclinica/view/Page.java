@@ -81,6 +81,7 @@ public enum Page {
      * Page for changing study
      */
    CHANGE_STUDY ("/WEB-INF/jsp/login/changeStudy.jsp", "Change Study"),
+   APPOINTMENT("/WEB-INF/jsp/admin/appointments.jsp", "Appointment"),
     CHANGE_STUDY_CONFIRM ("/WEB-INF/jsp/login/changeStudyConfirm.jsp", "Change Study Confirm"),
 
     REQUEST_ACCOUNT("/WEB-INF/jsp/login/requestAccount.jsp", "Request account form"),

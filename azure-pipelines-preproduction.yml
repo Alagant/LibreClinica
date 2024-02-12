@@ -31,7 +31,12 @@ resources:
 
 
 variables:
-  tag: '$(Build.BuildId)'
+#- tag: '$(Build.BuildId)'
+- group: 'Confluence'
+- group: 'Lc_root_access'
+- group: 'Libreclinica_postgres'
+- name: ENVIRONMENT
+  value: QA
 
 stages:
 - stage: DevOps
@@ -55,6 +60,7 @@ stages:
         targetType: 'inline'
         script: |
           ./LibreClinica/docker/db_backup.bash
+      continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -75,7 +81,7 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          cd /home/azureuser/Alagant_projects/LibreClinica/
+          cd ~/Alagant_projects/LibreClinica/
           git checkout lc-release-1.2.1
           git pull
           docker compose build
@@ -90,7 +96,7 @@ stages:
         targetType: 'inline'
         script: |
           cd libreclinica-qa/
-          docker compose build
+          docker compose build --build-arg ENVIRONMENT=QA
           docker compose up libreclinica-qa
       # Change the comment text here to test a new commit. Test nov 17 2023 b.
       env:
@@ -105,3 +111,4 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
+        BEHAVE_STAGE: qa

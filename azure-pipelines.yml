@@ -1,5 +1,5 @@
-trigger:
-- master
+trigger: none
+#- master
 
 pool:
   name: Libreclinica-azureVMs
@@ -69,11 +69,11 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          cd /home/azureuser/Alagant_projects/LibreClinica/
+          cd ~/Alagant_projects/LibreClinica/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
-          docker compose build
+          docker compose build --build-arg ENVIRONMENT=none_test_here
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'

@@ -376,12 +376,21 @@
         <description>The Main Servlet</description>
         <servlet-class>org.akaza.openclinica.control.MainMenuServlet</servlet-class>
     </servlet>
+
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <display-name>LogoutServlet</display-name>
         <description>The log out Servlet</description>
         <servlet-class>org.akaza.openclinica.control.login.LogoutServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>AppointmentServlet</servlet-name>
+        <display-name>AppointmentServlet</display-name>
+        <description>Servlet for appointments</description>
+        <servlet-class>org.akaza.openclinica.control.managestudy.AppointmentServlet</servlet-class>
+    </servlet>
+
     <!--    <servlet>
             <servlet-name>EnterpriseServlet</servlet-name>
             <display-name>EnterpriseServlet</display-name>
@@ -2195,6 +2204,11 @@
     <servlet-mapping>
         <servlet-name>PrintoutCertificateServlet</servlet-name>
         <url-pattern>/PrintoutCertificate</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AppointmentServlet</servlet-name>
+        <url-pattern>/Appointments</url-pattern>
     </servlet-mapping>
 
     <!-- just for testing purposes -->
