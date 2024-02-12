@@ -23,22 +23,29 @@ import java.util.Iterator;
 public class AppointmentServlet extends SecureController {
     @Override
     protected void processRequest() throws Exception {
-        String subjectId = request.getParameter("id");
-        if(subjectId == null || subjectId.isEmpty()) {
+        int subjectId = 0;
+
+        try {
+            String parameterSubjectId = request.getParameter("id");
+            if(parameterSubjectId == null || parameterSubjectId.isEmpty())
+                throw new NumberFormatException();
+            subjectId = Integer.parseInt(parameterSubjectId) ;
+        }
+        catch (NumberFormatException ex) {
             addPageMessage("The subject Id parameter has an invalid format");
             forwardPage(Page.VIEW_STUDY);
             return;
         }
 
+
         StudySubjectDAO studySubjectDAO = new StudySubjectDAO(sm.getDataSource());
         StudySubjectBean studySubjectBean = studySubjectDAO
-                .findByLabelAndStudy(subjectId, currentStudy);
-        if(studySubjectBean == null || studySubjectBean.getSubjectId()<0) {
+                .findBySubjectIdAndStudy(subjectId, currentStudy);
+        if(studySubjectBean == null || studySubjectBean.getSubjectId()<1) {
             addPageMessage("The subject could not be retrieved");
             forwardPage(Page.VIEW_STUDY);
             return;
         }
-
 
         HashMap<Integer, String> hashMap = new HashMap<>();
         try {
@@ -65,9 +72,10 @@ public class AppointmentServlet extends SecureController {
             else if(responseCode == 500) {
                 addPageMessage("An error occurred when retrieving the appointment schedule");
                 //Dump dummy data
+                /*
                 hashMap.put(1, "01-01-1990");
                 hashMap.put(2, "02-01-1990");
-                hashMap.put(3, "03-01-1990");
+                hashMap.put(3, "03-01-1990");*/
             }
         } catch (MalformedURLException e) {
             addPageMessage("An error occurred when retrieving the appointment schedule");

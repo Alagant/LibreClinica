@@ -58,34 +58,35 @@
 
 <jsp:useBean scope='request' id='studyToView' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
 
+<h1><div class="title_manage">Details of subject</div></h1>
 
-
-
-
-<h1><div class="title_manage">Appointment schedule</div></h1>
-<h1><div class="title_manage">(Page under construction)</div></h1>
-
-<table>
+<table class="summaryTable">
     <tbody>
         <tr>
             <th>Subject id</th>
             <td>${subject.label}</td>
         </tr>
         <tr>
+            <th>PID</th>
+            <td>${subject.secondaryLabel}</td>
+        </tr>
+        <tr>
             <th>gender</th>
             <td>${subject.gender}</td>
         </tr>
         <tr>
-            <th>Date of birth</th>
-            <td>${subject.dateOfBirth}</td>
+            <th>Enrollment date</th>
+            <td>${subject.enrollmentDate}</td>
         </tr>
     </tbody>
 </table>
 
+<c:if test="${!appointments.isEmpty()}">
+<h1><div class="title_manage">Details of schedule</div></h1>
 
-<table>
+<table class="summaryTable" align="center">
     <thead>
-    <tr class="header">
+    <tr>
         <th>App no</th>
         <th>Date</th>
     </tr>
@@ -99,7 +100,7 @@
     </c:forEach>
     </tbody>
 </table>
-
+</c:if>
 <jsp:include page="../include/footer.jsp"/>
 
 
