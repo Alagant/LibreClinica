@@ -30,6 +30,7 @@ public class AppointmentServlet extends SecureController {
             if(parameterSubjectId == null || parameterSubjectId.isEmpty())
                 throw new NumberFormatException();
             subjectId = Integer.parseInt(parameterSubjectId) ;
+            if(subjectId<0) throw new NumberFormatException();
         }
         catch (NumberFormatException ex) {
             addPageMessage("The subject Id parameter has an invalid format");
