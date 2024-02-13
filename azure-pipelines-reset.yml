@@ -78,7 +78,11 @@ stages:
         script: |
           # Docker DevOps
           cd /home/azureuser/Alagant_projects/LibreClinica/
+          git checkout $(Build.SourceBranchName)
+          echo checked out branch $(Build.SourceBranchName)
           git pull
+          echo running git status
+          git status
           docker compose run -d postgres
           docker compose up -d
           docker ps -a

@@ -84,6 +84,8 @@ stages:
           cd ~/Alagant_projects/LibreClinica/
           git checkout lc-release-1.3.0-preproduction
           git pull
+          echo running git status
+          git status
           docker compose build
           docker compose up -d
           docker ps -a

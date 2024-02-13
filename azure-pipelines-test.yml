@@ -87,7 +87,7 @@ stages:
           docker compose build
           docker compose up -d
           docker ps -a
-          echo 'Hello DevOps'
+          echo 'Hello DevOps from Azure DevOps!'
           ls -ltra
 
     - task: Bash@3
