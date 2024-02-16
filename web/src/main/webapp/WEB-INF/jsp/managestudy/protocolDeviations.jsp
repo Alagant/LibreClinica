@@ -72,6 +72,11 @@
         ${findProtocolDeviationsHtml}
     </form>
 </div>
+<div id="addSubjectForm" style="display:none;">
+    <c:import url="../submit/addNewSubjectExpressNew.jsp">
+    </c:import>
+</div>
+
 <jsp:include page="../include/footer.jsp"/>
 
 
