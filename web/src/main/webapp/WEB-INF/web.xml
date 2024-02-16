@@ -391,6 +391,13 @@
         <servlet-class>org.akaza.openclinica.control.managestudy.AppointmentServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ProtocolDeviationServlet</servlet-name>
+        <display-name>ProtocolDeviationServlet</display-name>
+        <description>Servlet for protocol deviations</description>
+        <servlet-class>org.akaza.openclinica.control.managestudy.ProtocolDeviationServlet</servlet-class>
+    </servlet>
+
     <!--    <servlet>
             <servlet-name>EnterpriseServlet</servlet-name>
             <display-name>EnterpriseServlet</display-name>
@@ -2209,6 +2216,11 @@
     <servlet-mapping>
         <servlet-name>AppointmentServlet</servlet-name>
         <url-pattern>/Appointments</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ProtocolDeviationServlet</servlet-name>
+        <url-pattern>/ProtocolDeviations</url-pattern>
     </servlet-mapping>
 
     <!-- just for testing purposes -->

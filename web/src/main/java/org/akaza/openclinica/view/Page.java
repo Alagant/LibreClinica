@@ -136,6 +136,7 @@ public enum Page {
     CREATE_STUDY7 ("/WEB-INF/jsp/managestudy/createStudy7.jsp", "Create a new Study seventh section"),
      CREATE_STUDY8 ("/WEB-INF/jsp/managestudy/createStudy8.jsp", "Create a new Study last section"),
 
+   PROTOCOL_DEVIATIONS("/WEB-INF/jsp/managestudy/protocolDeviations.jsp", "Protocol deviations"),
     /**
      * Page for confirming a new study.
      */

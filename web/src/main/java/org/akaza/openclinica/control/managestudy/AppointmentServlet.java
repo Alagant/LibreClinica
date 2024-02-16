@@ -51,7 +51,7 @@ public class AppointmentServlet extends SecureController {
         HashMap<Integer, String> hashMap = new HashMap<>();
         try {
             String appointments_url = CoreResources.getField("dmm.url") + "/appointments/" +
-                    studySubjectBean.getSecondaryLabel();
+                    studySubjectBean.getSubjectId();
             URL url = new URL(appointments_url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             int responseCode = connection.getResponseCode();
