@@ -54,6 +54,20 @@ public class DefaultToolbar extends AbstractToolbar {
 
         return super.render();
     }
+    public class ProtocolDeviationItem extends AbstractItem {
+
+        @Override
+        public String disabled() {
+            return null;
+        }
+
+        @Override
+        public String enabled() {
+            HtmlBuilder html = new HtmlBuilder();
+            html.a().href("ProtocolDeviations").end().append("Protocol deviations").aEnd();
+            return html.toString();
+        }
+    }
     public class NewHiddenItem extends AbstractItem {
 
         @Override

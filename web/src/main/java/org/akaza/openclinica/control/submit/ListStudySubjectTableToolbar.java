@@ -50,6 +50,8 @@ public class ListStudySubjectTableToolbar extends DefaultToolbar {
         if (addSubjectLinkShow) {
             addToolbarItem(createAddSubjectItem());
         }
+        addToolbarItem(ToolbarItemType.SEPARATOR);
+        addToolbarItem(createCustomItem(new ProtocolDeviationItem()));
     }
 
     private ToolbarItem createCustomItem(AbstractItem item) {
