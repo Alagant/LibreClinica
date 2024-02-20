@@ -45,6 +45,9 @@ for example:
 If you want to query the database, you can use the following command:
 `docker compose run postgres psql -d libreclinica -U clinica -h postgres -c "SELECT * from public.user_account;"`
 replacing the SELECT query with your own query.
+To delete the subjects from the database, but retaining CRFs, users and study data, use the following command:
+```docker compose run postgres psql -d libreclinica -U clinica -h postgres -c "TRUNCATE table subject, dn_subject_map, dn_study_subject_map, study_subject, event_crf, study_event, subject_group_map, dn_event_crf_map, item_data, dn_study_event_map, dn_item_data_map;"```
+In the corresponding DMM instance, you should execute: `flask clear_subjects_and_drug_quantities`
 ### Contributions
                           
 LibreClinica is open source project that values input from contributors:
