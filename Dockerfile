@@ -4,7 +4,7 @@ MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
 WORKDIR /libreclinica
 RUN echo environment variable: $ENVIRONMENT
-#COPY . .
+COPY . .
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 RUN mvn -B clean install
