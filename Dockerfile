@@ -22,7 +22,7 @@ WORKDIR /libreclinica
 ENV M2_HOME='/opt/apache-maven-3.5.0'
 ENV PATH="$M2_HOME/bin:$PATH"
 #obtains Maven for this image
-COPY --from=0 $M2_HOME $M2_HOME
+#COPY --from=0 $M2_HOME $M2_HOME
 
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
