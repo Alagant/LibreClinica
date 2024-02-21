@@ -4,7 +4,7 @@ MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
 WORKDIR /libreclinica
 RUN echo environment variable: $ENVIRONMENT
-COPY . .
+#COPY . .
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 RUN mvn -B clean install
@@ -16,6 +16,11 @@ LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
 WORKDIR /libreclinica
+
+#Environment variables
+ENV M2_HOME='/opt/apache-maven-3.6.3'
+ENV PATH="$M2_HOME/bin:$PATH"
+
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
