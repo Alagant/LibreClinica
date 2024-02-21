@@ -19,7 +19,7 @@ ARG ENVIRONMENT
 WORKDIR /libreclinica
 
 #Environment variables
-ENV M2_HOME='/usr/src/mymaven'
+ENV M2_HOME='/usr/share/maven'
 ENV PATH="$M2_HOME/bin:$PATH"
 #obtains Maven for this image
 #COPY --from=0 $M2_HOME $M2_HOME
