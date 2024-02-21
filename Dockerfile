@@ -9,6 +9,7 @@ COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/mai
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 RUN mvn -B clean install
 RUN find /libreclinica -type f -name "*.war"
+RUN ls /opt
 # RUN mvn clean install  sonar:sonar -Dsonar.host.url=http://20.115.71.236:8182/ -Dsonar.login=squ_07b2feeb980836a23bd8924dbf69b2304143370e -Dsonar.projectKey=libreclinica -Dsonar.projectName=libreclinica -Dsonar.projectVersion=1.0
 
 FROM tomcat:9-jdk8
@@ -18,7 +19,7 @@ ARG ENVIRONMENT
 WORKDIR /libreclinica
 
 #Environment variables
-ENV M2_HOME='/opt/apache-maven-3.6.3'
+ENV M2_HOME='/opt/apache-maven-3.5.0'
 ENV PATH="$M2_HOME/bin:$PATH"
 #obtains Maven for this image
 COPY --from=0 $M2_HOME $M2_HOME
