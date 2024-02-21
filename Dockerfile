@@ -19,6 +19,8 @@ WORKDIR /libreclinica
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
+COPY docker/index_${ENVIRONMENT}.html  /usr/local/tomcat/webapps/ROOT/index.html
+COPY docker/web.xml /usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
 #RUN mkdir -p /usr/local/tomcat/libreclinica.data
 # /LibreClinica/
 COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.2.0.war  /usr/local/tomcat/webapps/LibreClinica.war
