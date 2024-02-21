@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.TreeMap;
 
 public class AppointmentServlet extends SecureController {
     @Override
@@ -48,7 +49,7 @@ public class AppointmentServlet extends SecureController {
             return;
         }
 
-        HashMap<Integer, String> hashMap = new HashMap<>();
+        TreeMap<Integer, String> hashMap = new TreeMap<Integer, String>();
         try {
             String appointments_url = CoreResources.getField("dmm.url") + "/appointments/" +
                     studySubjectBean.getSubjectId();
