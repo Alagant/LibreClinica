@@ -37,7 +37,9 @@ public class ProtocolDeviationTableToolbar extends DefaultToolbar  {
             HtmlBuilder html = new HtmlBuilder();
             //@pgawade 25-June-2012: fix for issue 14427
             //html.a().href("#").id("addSubject");// onclick(
-            html.a().href("javascript:;").id("addSubject");
+            //html.a().href("javascript:;").id("addSubject");
+            //html.a().append(" onclick='jQuery.blockUI({ message: jQuery(\"#addSubjectForm\"), css:{left: \"300px\", top:\"10px\" } })' ").id("addSubject");
+            html.a().href("javascript:").id("addSubject");
             // "initmb();sm('box', 730,100);"
             // );
             html.quote();
