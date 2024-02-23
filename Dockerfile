@@ -31,7 +31,7 @@ COPY docker/index_${ENVIRONMENT}.html  /usr/local/tomcat/webapps/ROOT/index.html
 COPY docker/web.xml /usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
 #RUN mkdir -p /usr/local/tomcat/libreclinica.data
 # /LibreClinica/
-COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.2.0.war  /usr/local/tomcat/webapps/LibreClinica.war
+COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.3.1.war  /usr/local/tomcat/webapps/LibreClinica.war
 RUN find /usr/local/tomcat/webapps/ -type f -name "*.war"
 ###
 COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
