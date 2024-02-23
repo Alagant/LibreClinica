@@ -29,8 +29,12 @@ resources:
 
 
 variables:
-  tag: '$(Build.BuildId)'
-
+  - group: 'Confluence'
+  - group: 'Lc_root_access'
+  - group: 'Libreclinica_postgres'
+  - group: 'Email credentials'
+  - name: tag
+    value: '$(Build.BuildId)'
 stages:
 - stage: DevOps
   displayName: Docker image
@@ -62,6 +66,11 @@ stages:
           cd LibreClinica/
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
+          docker container prune -f
+          docker image prune -f
+          #docker volume prune -f #Be careful with this one
+          docker network prune -f
+          docker system prune -af
 
     - task: Bash@3
       displayName: DevOps
@@ -69,14 +78,25 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
+          cd ~/Alagant_projects/
+          echo user string ${USER}
+          git pull
+          git submodule update --init --recursive
+          git submodule foreach "git stash"
+          git submodule foreach "git checkout master||git checkout main"
+          git submodule foreach "git stash; git pull"
+          echo "Status of submodules:"
+          git submodule foreach --recursive git status
           cd ~/Alagant_projects/LibreClinica/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
+          echo running git status
+          git status
           docker compose build --build-arg ENVIRONMENT=none_test_here
           docker compose up -d
           docker ps -a
-          echo 'Hello DevOps'
+          echo 'Hello DevOps from Azure DevOps!'
           ls -ltra
 
     - task: Bash@3
@@ -87,7 +107,7 @@ stages:
           cd libreclinica-qa/
           docker compose build
           docker compose up libreclinica-qa
-      # Change the comment text here to test a new commit. Test nov 17 2023 b.
+      # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
         CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)
