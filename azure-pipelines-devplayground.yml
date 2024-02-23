@@ -101,8 +101,8 @@ stages:
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
-      #env:
-        #adminEmail: $(adminEmail)
+      env:
+        ADMINEMAIL: $(adminEmail)
         #mailUsername: $(mailUsername)
         #mailPassword: $(mailPassword)
         #mailErrorMsg: $(developerEmails)
