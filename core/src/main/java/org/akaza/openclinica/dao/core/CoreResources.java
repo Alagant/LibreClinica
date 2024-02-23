@@ -268,8 +268,8 @@ public class CoreResources implements ResourceLoaderAware {
         return value;
     }
 
-    private String replaceEnvVariables(String value) {
-        String pattern = "\\$\\{([A-Za-z0-9_]+)\\}";
+    public String replaceEnvVariables(String value) {
+        String pattern = "\\$\\{([a-zA-Z_]{1,}[a-zA-Z0-9_]*)\\}";//Environment variables should not start with a digit
         Pattern expr = Pattern.compile(pattern);
         int old_end = 0;
         StringBuffer sbval = new StringBuffer();
@@ -278,7 +278,6 @@ public class CoreResources implements ResourceLoaderAware {
             String envValue = this.environment.getProperty(matcher.group(1));
             if (envValue == null) {
             } else {
-                sbval.append(value.substring(old_end, matcher.start()));
                 matcher.appendReplacement(sbval, envValue.replace("\\", "\\\\"));
                 old_end = matcher.end();
             }
@@ -967,6 +966,8 @@ public class CoreResources implements ResourceLoaderAware {
     public void setExtractInfo(Properties extractInfo) {
         this.extractInfo = extractInfo;
     }
+
+    public Environment getEnvironment(){ return this.environment;}
 
     // Pradnya G code added by Jamuna
     public String getWebAppName(String servletCtxRealPath) {
