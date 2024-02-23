@@ -35,6 +35,7 @@ variables:
 - group: 'Confluence'
 - group: 'Lc_root_access'
 - group: 'Libreclinica_postgres'
+- group: 'Email credentials'
 - name: ENVIRONMENT
   value: QA
 
@@ -81,12 +82,22 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
+          cd ~/Alagant_projects/
+          echo user string ${USER}
+          git pull
+          git submodule update --init --recursive
+          git submodule foreach "git stash"
+          git submodule foreach "git checkout master||git checkout main"
+          git submodule foreach "git stash; git pull"
+          echo "Status of submodules:"
+          git submodule foreach --recursive git status
           cd ~/Alagant_projects/LibreClinica/
           git checkout lc-release-1.3.0-preproduction
+          echo checked out branch lc-release-1.3.0-preproduction (while this pipeline was triggered on the branch $(Build.SourceBranchName))
           git pull
           echo running git status
           git status
-          docker compose build
+          docker compose build --build-arg ENVIRONMENT=QA
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps'
@@ -98,9 +109,9 @@ stages:
         targetType: 'inline'
         script: |
           cd libreclinica-qa/
-          docker compose build --build-arg ENVIRONMENT=QA
+          docker compose build
           docker compose up libreclinica-qa
-      # Change the comment text here to test a new commit. Test nov 17 2023 b.
+      # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)
         CONFLUENCE_ACCESS_TOKEN: $(CONFLUENCE_ACCESS_TOKEN)

@@ -35,6 +35,7 @@ variables:
 - group: 'Confluence'
 - group: 'Lc_root_access'
 - group: 'Libreclinica_postgres'
+- group: 'Email credentials'
 - name: ENVIRONMENT
   value: development
 
@@ -94,6 +95,7 @@ stages:
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
+          echo running git status
           git status
           docker compose build --build-arg ENVIRONMENT=development
           docker compose up -d
