@@ -82,7 +82,7 @@ stages:
         script: |
           # Docker DevOps
           cd ~/Alagant_projects/
-          echo user string ${USER}
+          echo user string ${USER}, for $(adminEmail), oe ${adminEmail}
           git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
