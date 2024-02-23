@@ -102,10 +102,11 @@ stages:
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
       env:
-        ADMINEMAIL: $(adminEmail)
-        #mailUsername: $(mailUsername)
-        #mailPassword: $(mailPassword)
-        #mailErrorMsg: $(developerEmails)
+        ADMIN_EMAIL: $(adminEmail)
+        MAIL_USERNAME: $(mailUsername)
+        MAIL_PASSWORD: $(mailPassword)
+        MAIL_ERROR_MSG: $(developerEmails)
+        adminEmail: $(adminEmail)
 
     - task: Bash@3
       displayName: Test and report commit message
