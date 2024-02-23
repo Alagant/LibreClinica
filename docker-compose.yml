@@ -42,6 +42,7 @@ services:
     volumes:
       - ../libreclinica_drug_trial_module:/app  # Mount the current directory into the container's /app directory
     environment:
+      ADMINEMAIL: ${ADMINEMAIL}
       FLASK_APP: flask_app  # Set the FLASK_APP environment variable
       SQLALCHEMY_DATABASE_URI: postgresql://clinica:ready4Sprint@dmmlc.postgres.database.azure.com/dmm-dev  # Set the SQLALCHEMY_DATABASE_URI environment variable
     command: python -mpytest
