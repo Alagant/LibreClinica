@@ -82,7 +82,7 @@ stages:
         script: |
           # Docker DevOps
           cd ~/Alagant_projects/
-          echo user string ${USER}, for $(adminEmail), oe ${adminEmail}
+          echo user string ${USER}, for $(adminEmail), oe ${adminEmail}, mu ${MAILUSERNAME}
           git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
@@ -103,9 +103,9 @@ stages:
           ls -ltra
       env:
         adminEmail: $(adminEmail)
-        mailUsername: $(mailUsername)
-        mailPassword: $(mailPassword)
-        mailErrorMsg: $(developerEmails)
+        #mailUsername: $(mailUsername)
+        #mailPassword: $(mailPassword)
+        #mailErrorMsg: $(developerEmails)
 
     - task: Bash@3
       displayName: Test and report commit message
