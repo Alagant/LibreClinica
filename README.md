@@ -48,6 +48,9 @@ replacing the SELECT query with your own query.
 To delete the subjects from the database, but retaining CRFs, users and study data, use the following command:
 ```docker compose run postgres psql -d libreclinica -U clinica -h postgres -c "TRUNCATE table subject, dn_subject_map, dn_study_subject_map, study_subject, event_crf, study_event, subject_group_map, dn_event_crf_map, item_data, dn_study_event_map, dn_item_data_map;"```
 In the corresponding DMM instance, you should execute: `flask clear_subjects_and_drug_quantities`
+To delete the event definitions from the database, use the following command:
+```docker compose run postgres psql -d libreclinica -U clinica -h postgres -c "TRUNCATE table study_event_definition,event_definition_crf,study_event,dataset_crf_version_map,dn_study_event_map,event_crf,dn_event_crf_map,item_data,dn_item_data_map;"```
+
 ### Contributions
                           
 LibreClinica is open source project that values input from contributors:

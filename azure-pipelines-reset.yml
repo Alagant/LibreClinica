@@ -69,7 +69,6 @@ stages:
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
           docker image prune -f
-          #docker volume prune -f #Be careful with this one
           docker network prune -f
           docker system prune -af
 
