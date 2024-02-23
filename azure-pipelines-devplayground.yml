@@ -100,8 +100,13 @@ stages:
           docker compose build --build-arg ENVIRONMENT=development
           docker compose up -d
           docker ps -a
-          echo 'Hello DevOps'
+          echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
+      env:
+        adminEmail: $(adminEmail)
+        mailUsername: $(mailUsername)
+        mailPassword: $(mailPassword)
+        mailErrorMsg: $(developerEmails)
 
     - task: Bash@3
       displayName: Test and report commit message
@@ -124,4 +129,8 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
+        adminEmail: $(adminEmail)
+        mailUsername: $(mailUsername)
+        mailPassword: $(mailPassword)
+        mailErrorMsg: $(developerEmails)
         BEHAVE_STAGE: develop
