@@ -13,8 +13,6 @@ services:
       - pgdata:/var/lib/postgresql/data
       #- ./postgres/init:/docker-entrypoint-initdb.d
       - dbbackup:/dbbackup
-    environment:
-      ADMINEMAIL: ${ADMINEMAIL}
   adminer:
     image: adminer
     #restart: always
@@ -35,6 +33,8 @@ services:
       - libreclinica_config:/usr/local/tomcat/libreclinica.config
       - libreclinica_data:/usr/local/tomcat/libreclinica.data
       #- mvn_cache:/root/.m2
+    environment:
+      ADMINEMAIL: ${ADMINEMAIL}
 
 #  dmm:
 #    build:
