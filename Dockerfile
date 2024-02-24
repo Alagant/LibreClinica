@@ -4,7 +4,7 @@ MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
 WORKDIR /libreclinica
 #VOLUME /root/.m2
-RUN echo environment variable: $ENVIRONMENT
+#RUN echo environment variable: $ENVIRONMENT
 
 FROM tomcat:9-jdk8
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
