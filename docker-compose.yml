@@ -35,6 +35,7 @@ services:
       #- mvn_cache:/root/.m2
     environment:
       - ADMINEMAIL=${ADMINEMAIL}
+      - AEM=${ADMIN_EMAIL}
 
 #  dmm:
 #    build:
