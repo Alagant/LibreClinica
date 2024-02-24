@@ -15,7 +15,8 @@ WORKDIR /libreclinica
 #Environment variables
 ENV M2_HOME='/usr/share/maven'
 ENV PATH="$M2_HOME/bin:$PATH"
-ENV ADMIN_EMAIL=${ADMIN_EMAIL}
+ARG ADMIN_EMAIL
+ENV ADMINEMAIL=${ADMIN_EMAIL}
 #obtains Maven for this image
 COPY --from=0 $M2_HOME $M2_HOME
 
