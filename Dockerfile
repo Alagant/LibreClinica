@@ -3,6 +3,7 @@ LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
 WORKDIR /libreclinica
+VOLUME /root/.m2
 RUN echo environment variable: $ENVIRONMENT
 RUN ls /usr/share
 COPY . .
