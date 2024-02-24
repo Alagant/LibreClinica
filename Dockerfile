@@ -1,7 +1,7 @@
 FROM maven:3.5.0-jdk-8 as builder
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
-#ARG ENVIRONMENT
+ARG ENVIRONMENT
 WORKDIR /libreclinica
 #VOLUME /root/.m2
 #RUN echo environment variable: $ENVIRONMENT
