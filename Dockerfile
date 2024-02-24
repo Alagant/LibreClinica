@@ -15,7 +15,8 @@ WORKDIR /libreclinica
 #Environment variables
 ENV M2_HOME='/usr/share/maven'
 ENV PATH="$M2_HOME/bin:$PATH"
-#ARG ADMINEMAIL
+ARG ADMINEMAIL
+#ENV ADMINEMAIL
 #ENV ADMIN_EMAIL=${ADMINEMAIL}
 #obtains Maven for this image
 COPY --from=0 $M2_HOME $M2_HOME
@@ -43,6 +44,5 @@ COPY docker/manager_context.xml /usr/local/tomcat/webapps/manager/META-INF/conte
 #COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.1.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.1.war
 
 RUN env
-RUN mvn -B clean
-RUN mvn -B clean install -T 100 -DskipTests
-#RUN mvn -B build -DskipTests
+#RUN mvn -B clean install -T 100 -DskipTests
+COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.3.1.war  /usr/local/tomcat/webapps/LibreClinica.war
