@@ -34,7 +34,7 @@ services:
       - libreclinica_data:/usr/local/tomcat/libreclinica.data
       #- mvn_cache:/root/.m2
     environment:
-      ADMINEMAIL: ${ADMINEMAIL}
+      - ADMINEMAIL=${ADMINEMAIL}
 
 #  dmm:
 #    build:
