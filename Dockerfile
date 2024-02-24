@@ -23,7 +23,7 @@ COPY . .
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 RUN find /libreclinica -type f -name "*.war"
-RUN /bin/bash -c "ls -lh /libreclinica"
+#RUN /bin/bash -c "ls -lh /libreclinica"
 #RUN mvn -B clean install -DskipTests
 
 # /SampleWebApp
