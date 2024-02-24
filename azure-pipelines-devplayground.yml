@@ -107,7 +107,7 @@ stages:
         MAIL_USERNAME: $(mailUsername)
         MAIL_PASSWORD: $(mailPassword)
         MAIL_ERROR_MSG: $(developerEmails)
-        adminEmail: $(adminEmail)
+
 
     - task: Bash@3
       displayName: Test and report commit message
