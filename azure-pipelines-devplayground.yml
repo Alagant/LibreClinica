@@ -96,6 +96,7 @@ stages:
           git pull
           echo running git status
           git status
+          export ADMIN_EMAIL=$(adminEmail)
           set
           
           docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=$(mailPassword) --build-arg MAIL_ERROR_MSG=$(developerEmails)
@@ -104,7 +105,7 @@ stages:
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
       env:
-        ADMIN_EMAIL: $(adminEmail)
+        #ADMIN_EMAIL: $(adminEmail)
         MAIL_USERNAME: $(mailUsername)
         MAIL_PASSWORD: $(mailPassword)
         MAIL_ERROR_MSG: $(developerEmails)
