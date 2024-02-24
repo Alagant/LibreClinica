@@ -35,10 +35,9 @@ services:
       - mvn_cache:/root/.m2
     environment:
       - ADMINEMAIL
-      - ADMIN_EMAIL
-      #- AEM=${ADMIN_EMAIL}
-      - TEST=hehe
-      - JUELA
+      - MAILUSERNAME
+      - MAILPASSWORD
+      - DEVELOPEREMAILS
 
 #  dmm:
 #    build:
