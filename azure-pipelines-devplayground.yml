@@ -104,11 +104,11 @@ stages:
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
-      env:
-        #ADMIN_EMAIL: $(adminEmail)
-        MAIL_USERNAME: $(mailUsername)
-        MAIL_PASSWORD: $(mailPassword)
-        MAIL_ERROR_MSG: $(developerEmails)
+      #env:
+      #  #ADMIN_EMAIL: $(adminEmail)
+      #  MAIL_USERNAME: $(mailUsername)
+      #  MAIL_PASSWORD: $(mailPassword)
+      #  MAIL_ERROR_MSG: $(developerEmails)
 
 
     - task: Bash@3
