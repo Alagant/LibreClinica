@@ -9,7 +9,7 @@ COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/mai
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 COPY . .
 
-RUN mvn -B clean install -T 100 -DskipTests
+RUN mvn -B clean install -DskipTests
 
 FROM tomcat:9-jdk8
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
