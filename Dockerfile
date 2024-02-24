@@ -21,8 +21,6 @@ WORKDIR /libreclinica
 ENV M2_HOME='/usr/share/maven'
 ENV PATH="$M2_HOME/bin:$PATH"
 ARG ADMINEMAIL
-#ENV ADMINEMAIL
-#ENV ADMIN_EMAIL=${ADMINEMAIL}
 #obtains Maven for this image
 COPY --from=builder $M2_HOME $M2_HOME
 
@@ -40,11 +38,7 @@ COPY docker/web.xml /usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
 COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 COPY docker/manager_context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
 
-# /LibreClinica/
-#COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.3.1.war  /usr/local/tomcat/webapps/LibreClinica.war
-#RUN find /usr/local/tomcat/webapps/ -type f -name "*.war"
-###
 #COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.1.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.1.war
 
 RUN env
-COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.3.1.war  /usr/local/tomcat/webapps/LibreClinica.war
+#COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.3.1.war  /usr/local/tomcat/webapps/LibreClinica.war
