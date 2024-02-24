@@ -46,7 +46,7 @@ stages:
   - job: DevOps
     steps:
     - checkout: LcRepo
-      clean: true
+      #clean: true
       persistCredentials: true
       fetchDepth: 1
       lfs: true
