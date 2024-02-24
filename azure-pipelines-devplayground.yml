@@ -96,7 +96,7 @@ stages:
           git pull
           echo running git status
           git status
-          export ADMIN_EMAIL=$(adminEmail)
+          export JUELA=$(adminEmail)
           set
           
           docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=$(mailPassword) --build-arg MAIL_ERROR_MSG=$(developerEmails)

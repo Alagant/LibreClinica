@@ -38,7 +38,7 @@ services:
       - ADMIN_EMAIL
       #- AEM=${ADMIN_EMAIL}
       - TEST=hehe
-      - WASSANABE
+      - JUELA
 
 #  dmm:
 #    build:
