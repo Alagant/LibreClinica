@@ -41,6 +41,6 @@ COPY docker/manager_context.xml /usr/local/tomcat/webapps/manager/META-INF/conte
 ###
 #COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.1.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.1.war
 
-#RUN mvn -B clean
-RUN mvn -B clean install -T 100 -DskipTests
+RUN mvn -B clean
+#RUN mvn -B clean install -T 100 -DskipTests
 #RUN mvn -B build -DskipTests
