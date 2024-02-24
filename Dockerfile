@@ -7,6 +7,7 @@ MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 #RUN echo environment variable: $ENVIRONMENT
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
+COPY . .
 
 RUN mvn -B clean install -T 100 -DskipTests
 
