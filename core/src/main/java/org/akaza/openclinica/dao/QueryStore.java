@@ -76,17 +76,25 @@ public class QueryStore implements Serializable, ResourceLoaderAware {
     }
 
     protected String resolveDbFolder() {
+        String url;
         try {
             System.out.println("Will get DB URL");
-            String url = dataSource.getConnection().getMetaData().getURL();
+            url = dataSource.getConnection().getMetaData().getURL();
             System.out.println("DB URL: "+url);
-            if (url.startsWith("jdbc:postgresql")) {
-                return "postgres";
-            }
-            throw new BeanInitializationException("Unrecognized JDBC url " + url);
         } catch (SQLException e) {
-            throw new BeanInitializationException("Unable to read datasource information", e);
+            url = "jdbc:log4jdbc:postgresql://postgres:5432/libreclinica";
+            System.out.println("Error getting DB URL"+e.toString());
+            e.printStackTrace();
+            System.out.println("DB URL defaulted to: "+url);
         }
+        //try {
+        if (url.startsWith("jdbc:postgresql")) {
+            return "postgres";
+        }
+        throw new BeanInitializationException("Unrecognized JDBC url " + url);
+        //} catch (SQLException e) {
+        //    throw new BeanInitializationException("Unable to read datasource information", e);
+        //}
     }
 
     public void setResourceLoader(ResourceLoader resourceLoader) {
