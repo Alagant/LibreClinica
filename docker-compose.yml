@@ -32,6 +32,7 @@ services:
       - .:/libreclinica
       - libreclinica_config:/usr/local/tomcat/libreclinica.config
       - libreclinica_data:/usr/local/tomcat/libreclinica.data
+      - mvn_cache:/root/.m2
 
 #  dmm:
 #    build:
@@ -47,7 +48,7 @@ services:
 #      SQLALCHEMY_DATABASE_URI: postgresql://clinica:ready4Sprint@dmmlc.postgres.database.azure.com/dmm-dev  # Set the SQLALCHEMY_DATABASE_URI environment variable
 #    command: python -mpytest
 volumes:
-  #libreclinica:
+  mvn_cache:
   libreclinica_config:
     driver: local
   libreclinica_data:
