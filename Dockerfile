@@ -3,13 +3,12 @@ LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
 WORKDIR /libreclinica
-VOLUME /root/.m2
+#VOLUME /root/.m2
 RUN echo environment variable: $ENVIRONMENT
 RUN ls /usr/share
 COPY . .
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
-RUN mvn -B clean install -DskipTests
 RUN find /libreclinica -type f -name "*.war"
 # RUN mvn clean install  sonar:sonar -Dsonar.host.url=http://20.115.71.236:8182/ -Dsonar.login=squ_07b2feeb980836a23bd8924dbf69b2304143370e -Dsonar.projectKey=libreclinica -Dsonar.projectName=libreclinica -Dsonar.projectVersion=1.0
 
@@ -24,6 +23,9 @@ ENV M2_HOME='/usr/share/maven'
 ENV PATH="$M2_HOME/bin:$PATH"
 #obtains Maven for this image
 COPY --from=0 $M2_HOME $M2_HOME
+
+#installs using Maven
+RUN mvn -B clean install -DskipTests
 
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
