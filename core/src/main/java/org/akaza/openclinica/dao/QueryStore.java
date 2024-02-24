@@ -77,12 +77,13 @@ public class QueryStore implements Serializable, ResourceLoaderAware {
 
     protected String resolveDbFolder() {
         String url;
+        System.out.println("Dasource: "+dataSource.toString());
         try {
             System.out.println("Will get DB URL");
             url = dataSource.getConnection().getMetaData().getURL();
             System.out.println("DB URL: "+url);
         } catch (SQLException e) {
-            url = "jdbc:log4jdbc:postgresql://postgres:5432/libreclinica";
+            url = "jdbc:postgresql://postgres:5432/libreclinica";
             System.out.println("Error getting DB URL"+e.toString());
             e.printStackTrace();
             System.out.println("DB URL defaulted to: "+url);
