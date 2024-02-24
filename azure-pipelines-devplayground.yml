@@ -55,13 +55,13 @@ stages:
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
-    - task: Bash@3
-      displayName: Backup the database
-      inputs:
-        targetType: 'inline'
-        script: |
-          ./LibreClinica/docker/db_backup.bash
-      continueOnError: true
+    #- task: Bash@3
+    #  displayName: Backup the database
+    #  inputs:
+    #    targetType: 'inline'
+    #    script: |
+    #      ./LibreClinica/docker/db_backup.bash
+    #  continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
