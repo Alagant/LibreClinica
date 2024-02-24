@@ -35,6 +35,7 @@ variables:
 - group: 'Confluence'
 - group: 'Lc_root_access'
 - group: 'Libreclinica_postgres'
+- group: 'Email credentials'
 - name: ENVIRONMENT
   value: development
 
@@ -45,7 +46,7 @@ stages:
   - job: DevOps
     steps:
     - checkout: LcRepo
-      clean: true
+      #clean: true
       persistCredentials: true
       fetchDepth: 1
       lfs: true
@@ -54,13 +55,13 @@ stages:
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
-    - task: Bash@3
-      displayName: Backup the database
-      inputs:
-        targetType: 'inline'
-        script: |
-          ./LibreClinica/docker/db_backup.bash
-      continueOnError: true
+    #- task: Bash@3
+    #  displayName: Backup the database
+    #  inputs:
+    #    targetType: 'inline'
+    #    script: |
+    #      ./LibreClinica/docker/db_backup.bash
+    #  continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -71,7 +72,6 @@ stages:
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
           docker image prune -f
-          #docker volume prune -f #Be careful with this one
           docker network prune -f
           docker system prune -af
 
@@ -82,7 +82,7 @@ stages:
         script: |
           # Docker DevOps
           cd ~/Alagant_projects/
-          echo user string ${USER}
+          echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
           git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
@@ -94,12 +94,22 @@ stages:
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
+          echo running git status
           git status
-          docker compose build --build-arg ENVIRONMENT=development
-          docker compose up -d
+          export JUELA=$(adminEmail)
+          set
+          
+          docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=$(mailPassword) --build-arg MAIL_ERROR_MSG=$(developerEmails)
+          docker compose up -d #--env ADMIN_EMAIL=$(adminEmail) --env MAIL_USERNAME=$(mailUsername) --env MAIL_PASSWORD=$(mailPassword) --env MAIL_ERROR_MSG=$(developerEmails)
           docker ps -a
-          echo 'Hello DevOps'
+          echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
+      env:
+        #ADMIN_EMAIL: $(adminEmail)
+        MAIL_USERNAME: $(mailUsername)
+        MAIL_PASSWORD: $(mailPassword)
+        MAIL_ERROR_MSG: $(developerEmails)
+
 
     - task: Bash@3
       displayName: Test and report commit message
@@ -122,4 +132,8 @@ stages:
         build_number: $(Build.BuildNumber)
         commit_message: $(Build.SourceVersionMessage)
         branch: $(Build.SourceBranchName)
+        adminEmail: $(adminEmail)
+        mailUsername: $(mailUsername)
+        mailPassword: $(mailPassword)
+        mailErrorMsg: $(developerEmails)
         BEHAVE_STAGE: develop

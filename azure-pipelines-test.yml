@@ -36,6 +36,7 @@ variables:
 - group: 'Confluence'
 - group: 'Lc_root_access'
 - group: 'Libreclinica_postgres'
+- group: 'Email credentials'
 - name: ENVIRONMENT
   value: test
 
@@ -71,6 +72,10 @@ stages:
           cd LibreClinica/
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
+          docker container prune -f
+          docker image prune -f
+          docker network prune -f
+          docker system prune -af
 
     - task: Bash@3
       displayName: DevOps
@@ -78,13 +83,22 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          cd /home/azureuser/Alagant_projects/LibreClinica/
+          cd ~/Alagant_projects/
+          echo user string ${USER}
+          git pull
+          git submodule update --init --recursive
+          git submodule foreach "git stash"
+          git submodule foreach "git checkout master||git checkout main"
+          git submodule foreach "git stash; git pull"
+          echo "Status of submodules:"
+          git submodule foreach --recursive git status
+          cd ~/Alagant_projects/LibreClinica/
           git checkout $(Build.SourceBranchName)
           echo checked out branch $(Build.SourceBranchName)
           git pull
           echo running git status
           git status
-          docker compose build
+          docker compose build --build-arg ENVIRONMENT=test
           docker compose up -d
           docker ps -a
           echo 'Hello DevOps from Azure DevOps!'
@@ -96,8 +110,8 @@ stages:
         targetType: 'inline'
         script: |
           cd libreclinica-qa/
-          docker compose -f docker-compose.yml build
-          docker compose -f docker-compose.yml up libreclinica-qa
+          docker compose build
+          docker compose up libreclinica-qa
       # Change the comment text here to test a new commit.
       env:
         CONFLUENCE_USERNAME: $(CONFLUENCE_USERNAME)

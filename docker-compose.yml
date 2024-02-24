@@ -8,7 +8,7 @@ services:
     ports:
       - "5432:5432"
     restart: always
-    env_file: .env
+    #env_file: .env
     volumes:
       - pgdata:/var/lib/postgresql/data
       #- ./postgres/init:/docker-entrypoint-initdb.d
@@ -27,26 +27,34 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-    env_file: .env
+    #env_file: .env
     volumes:
-      - libreclinica:/libreclinica
+      - .:/libreclinica
       - libreclinica_config:/usr/local/tomcat/libreclinica.config
       - libreclinica_data:/usr/local/tomcat/libreclinica.data
-
-  dmm:
-    build:
-      context: ../libreclinica_drug_trial_module/
-      dockerfile: Dockerfile
-    ports:
-      - "81:81"  # Map port 81 of the host to port 81 of the container
-    volumes:
-      - ../libreclinica_drug_trial_module:/app  # Mount the current directory into the container's /app directory
+      - mvn_cache:/root/.m2
     environment:
-      FLASK_APP: flask_app  # Set the FLASK_APP environment variable
-      SQLALCHEMY_DATABASE_URI: postgresql://clinica:ready4Sprint@dmmlc.postgres.database.azure.com/dmm-dev  # Set the SQLALCHEMY_DATABASE_URI environment variable
-    command: python -mpytest
+      - ADMINEMAIL
+      - ADMIN_EMAIL
+      #- AEM=${ADMIN_EMAIL}
+      - TEST=hehe
+      - JUELA
+
+#  dmm:
+#    build:
+#      context: ../libreclinica_drug_trial_module/
+#      dockerfile: Dockerfile
+#    ports:
+#      - "81:81"  # Map port 81 of the host to port 81 of the container
+#    volumes:
+#      - ../libreclinica_drug_trial_module:/app  # Mount the current directory into the container's /app directory
+#    environment:
+#      ADMINEMAIL: ${ADMINEMAIL}
+#      FLASK_APP: flask_app  # Set the FLASK_APP environment variable
+#      SQLALCHEMY_DATABASE_URI: postgresql://clinica:ready4Sprint@dmmlc.postgres.database.azure.com/dmm-dev  # Set the SQLALCHEMY_DATABASE_URI environment variable
+#    command: python -mpytest
 volumes:
-  libreclinica:
+  mvn_cache:
   libreclinica_config:
     driver: local
   libreclinica_data:
