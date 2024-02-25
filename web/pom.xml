@@ -325,12 +325,12 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/jboss/jboss-j2ee -->
-		<dependency>
+		<!--dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jboss-j2ee</artifactId>
 			<version>4.2.2.GA</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency-->
 		<dependency>
          <groupId>xerces</groupId>
          <artifactId>xmlParserAPIs</artifactId>
