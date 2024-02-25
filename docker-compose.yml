@@ -32,6 +32,7 @@ services:
       - libreclinica_src:/libreclinica
       - libreclinica_config:/usr/local/tomcat/libreclinica.config
       - libreclinica_data:/usr/local/tomcat/libreclinica.data
+      - libreclinica_webapps:/usr/local/tomcat/webapps
       - mvn_cache:/root/.m2
     environment:
       - ADMINEMAIL
@@ -54,6 +55,8 @@ services:
 #    command: python -mpytest
 volumes:
   libreclinica_src:
+    driver: local
+  libreclinica_webapps:
     driver: local
   mvn_cache:
     driver: local

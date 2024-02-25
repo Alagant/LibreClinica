@@ -100,7 +100,7 @@ stages:
           set
           
           docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=$(mailPassword) --build-arg MAIL_ERROR_MSG=$(developerEmails)
-          docker compose run libreclinica mvn -B clean install -DskipTests
+          docker compose run libreclinica mvn -B clean install -DskipTests>mvn.log
           docker compose up#--env ADMIN_EMAIL=$(adminEmail) --env MAIL_USERNAME=$(mailUsername) --env MAIL_PASSWORD=$(mailPassword) --env MAIL_ERROR_MSG=$(developerEmails)
           
           docker ps -a
