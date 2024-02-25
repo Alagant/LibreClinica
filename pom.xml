@@ -1146,8 +1146,8 @@
 		</repository-->
 		<repository>
 			<id>spring-plugin-repository-group</id>
-			<name>JSpring plugins repository</name>
-			<url>	https://repo.spring.io/plugins-release/</url>
+			<name>Spring plugins repository</name>
+			<url>https://repo.spring.io/plugins-release/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -1170,8 +1170,8 @@
 		</pluginRepository-->
 		<pluginRepository>
 			<id>spring-plugin-repository-group</id>
-			<name>JSpring plugins repository</name>
-			<url>	https://repo.spring.io/plugins-release/</url>
+			<name>Spring plugins repository</name>
+			<url>https://repo.spring.io/plugins-release/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
