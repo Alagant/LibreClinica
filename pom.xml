@@ -1128,7 +1128,7 @@
 			<id>openclinica.jfrog.io-libs-release</id>
 			<name>openclinica.jfrog.io-libs-release</name>
 			<url>https://openclinica.jfrog.io/openclinica/libs-release</url>
-		</repository-->
+		</repository>
 		<repository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Repository Group</name>
@@ -1143,8 +1143,8 @@
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
 		</repository>
-	</repositories>
-	<pluginRepositories>
+	</repositories-->
+	<!--pluginRepositories>
 		<pluginRepository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Repository Group</name>
@@ -1156,7 +1156,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
-	</pluginRepositories>
+	</pluginRepositories-->
 
 	<distributionManagement>
 		<repository>
