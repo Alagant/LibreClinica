@@ -1121,8 +1121,8 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<!--repositories>
-		<repository>
+	<repositories>
+		<!--repository>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -1143,10 +1143,21 @@
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
+		</repository-->
+		<repository>
+			<id>spring-plugin-repository-group</id>
+			<name>JSpring plugins repository</name>
+			<url>	https://repo.spring.io/plugins-release/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
-	</repositories-->
-	<!--pluginRepositories>
-		<pluginRepository>
+	</repositories>
+	<pluginRepositories>
+		<!--pluginRepository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Repository Group</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
@@ -1156,8 +1167,19 @@
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+		</pluginRepository-->
+		<pluginRepository>
+			<id>spring-plugin-repository-group</id>
+			<name>JSpring plugins repository</name>
+			<url>	https://repo.spring.io/plugins-release/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</pluginRepository>
-	</pluginRepositories-->
+	</pluginRepositories>
 
 	<distributionManagement>
 		<repository>
