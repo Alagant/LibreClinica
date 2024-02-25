@@ -26,6 +26,7 @@ COPY --from=builder $M2_HOME $M2_HOME
 
 #installs using Maven
 COPY . .
+ARG ENVIRONMENT
 #RUN find /libreclinica -type f -name "*.war"
 #RUN /bin/bash -c "ls -lh /libreclinica"
 #RUN mvn -B clean install -DskipTests
