@@ -29,7 +29,7 @@ COPY --from=builder $M2_HOME $M2_HOME
 COPY . .
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/WS/src/main/filters/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/ws/src/main/filters/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/datainfo.properties
 #RUN find /libreclinica -type f -name "*.war"
 #RUN mvn -B clean install -DskipTests
