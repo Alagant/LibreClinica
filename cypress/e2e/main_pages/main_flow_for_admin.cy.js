@@ -1,19 +1,20 @@
-Cypress.on('uncaught:exception', (err, runnable) => {
+/*Cypress.on('uncaught:exception', (err, runnable) => {
     return false;
-});
+});*/
 
+const path = "http://localhost:8080";
 describe('Load page', () => {
     it('Visits the LibreClinica', () => {
-        cy.visit('http://localhost:8080/LibreClinica/pages/login/login')
+        cy.visit(path+'/LibreClinica/pages/login/login')
         cy.contains('Login')
     })
     it('Login and navegate for main pages', () => {
-        cy.visit('http://localhost:8080/LibreClinica/pages/login/login')
-        cy.url().should('include', 'http://localhost:8080/LibreClinica/pages/login/login')
+        cy.visit(path+'/LibreClinica/pages/login/login')
+        cy.url().should('include', path+'/LibreClinica/pages/login/login')
         cy.get('[id="username"]').should('exist').type('root')
         cy.get('[id="j_password"]').should('exist').type('kevin12345')
         cy.get('[name="submit"]').should('exist').click()
-        cy.url().should('include', 'http://localhost:8080/LibreClinica/MainMenu')
+        cy.url().should('include', path+'/LibreClinica/MainMenu')
         cy.contains('Welcome to')
         cy.contains('Change Study/Site')
         cy.contains('Log Out')
