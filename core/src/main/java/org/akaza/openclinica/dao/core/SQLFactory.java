@@ -32,6 +32,7 @@ public class SQLFactory {
     // DAO KEYS TO USE FOR RETRIEVING DIGESTER
     public final String DAO_USERACCOUNT = "useraccount";
     public final String DAO_STUDY = "study";
+    public final String PROTOCOL_DEVIATION = "protocoldeviation";
     public final String DAO_STUDYEVENTDEFNITION = "studyeventdefintion";
     public final String DAO_SUBJECT = "subject";
     public final String DAO_STUDYSUBJECT = "study_subject";
