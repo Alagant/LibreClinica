@@ -92,6 +92,8 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
 
     final HashMap<Integer, String> imageIconPaths = new HashMap<Integer, String>(8);
 
+    private boolean EnrrollmentStatusIsComplete;
+
     @Override
     // To avoid showing title in other pages, the request element is used to determine where the request came from.
     public TableFacade createTable(HttpServletRequest request, HttpServletResponse response) {
@@ -380,7 +382,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
      * A very custom way to sort the items. The PresidentSort acts as a command for the Hibernate criteria object. There
      * are probably many ways to do this, but this is the most flexible way I have found. The point is you need to
      * somehow take the Limit information and sort the rows.
-     * 
+     *
      * @param limit
      *            The Limit to use.
      */
@@ -644,7 +646,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         }
 
         @SuppressWarnings("unchecked")
-		public Object getValue(Object item, String property, int rowcount) {
+        public Object getValue(Object item, String property, int rowcount) {
             groupName = (String) ((HashMap<Object, Object>) item).get("grpName_sgc_" + studyGroupClass.getId());
             return logic();
         }
@@ -672,11 +674,20 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
 
             StringBuilder url = new StringBuilder();
-            url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
-            url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
-            url.append(getCount());
-            url.append("</a></td></tr></table>");
-
+            String nameEvent = studyEventDefinition.getName();
+            if(nameEvent.equalsIgnoreCase("EN")){
+                if (subjectEventStatus.getId()== 3 || subjectEventStatus.getId() == 4) {
+                    EnrrollmentStatusIsComplete = true;
+                }else {
+                    EnrrollmentStatusIsComplete = false;
+                }
+            }
+            if(EnrrollmentStatusIsComplete || nameEvent.equalsIgnoreCase("EN")){
+                url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
+                url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
+                url.append(getCount());
+                url.append("</a></td></tr></table>");
+            }
             return url.toString();
         }
 
@@ -878,7 +889,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private String pdfScheduleStudySubjectLinkBuilder(StudySubjectBean studySubject) {
         HtmlBuilder actionLink = new HtmlBuilder();
         actionLink.a().href(CoreResources.getField("dmm.Url") +"/subject_schedule/" + studySubject
-                        .getSecondaryLabel()).title("PDF").end().aEnd();
+                .getSecondaryLabel()).title("PDF").end().aEnd();
         return actionLink.toString();
 
     }
@@ -897,7 +908,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private String eventDivBuilder(SubjectBean subject, Integer rowCount, List<StudyEventBean> studyEvents, StudyEventDefinitionBean sed,
-            StudySubjectBean studySubject) {
+                                   StudySubjectBean studySubject) {
 
         String studySubjectLabel = studySubject.getLabel();
 
@@ -939,7 +950,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private void repeatingEventDivBuilder(HtmlBuilder eventDiv, SubjectBean subject, Integer rowCount, List<StudyEventBean> studyEvents,
-            StudyEventDefinitionBean sed, StudySubjectBean studySubject) {
+                                          StudyEventDefinitionBean sed, StudySubjectBean studySubject) {
 
         String tableHeaderRowStyleClass = "table_header_row";
         String tableHeaderRowLeftStyleClass = "table_header_row_left";
@@ -1057,7 +1068,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private void linksDivBuilder(HtmlBuilder eventDiv, SubjectBean subject, Integer rowCount, List<StudyEventBean> studyEvents, StudyEventDefinitionBean sed,
-            StudySubjectBean studySubject, StudyEventBean currentEvent) {
+                                 StudySubjectBean studySubject, StudyEventBean currentEvent) {
 
         Status eventSysStatus = studySubject.getStatus();
         SubjectEventStatus eventStatus = currentEvent.getSubjectEventStatus();
@@ -1126,7 +1137,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private void singleEventDivBuilder(HtmlBuilder eventDiv, SubjectBean subject, Integer rowCount, List<StudyEventBean> studyEvents,
-            StudyEventDefinitionBean sed, StudySubjectBean studySubject) {
+                                       StudyEventDefinitionBean sed, StudySubjectBean studySubject) {
 
         String tableHeaderRowStyleClass = "table_header_row";
         String tableHeaderRowLeftStyleClass = "table_header_row_left";
@@ -1154,12 +1165,14 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             eventDiv.append(resword.getString("status")).append(":").append(eventStatus.getName()).br();
             eventDiv.tdEnd();
             eventDiv.td(0).styleClass(tableHeaderRowLeftStyleClass).align("right").close();
+            //LINEA A EDITAR
             linkBuilder(eventDiv, studySubjectLabel, rowCount, studyEvents, sed);
             eventDiv.tdEnd();
 
         } else {
             eventDiv.tdEnd();
             eventDiv.td(0).styleClass(tableHeaderRowLeftStyleClass).align("right").close();
+            //LINEA A EDITAR
             linkBuilder(eventDiv, studySubjectLabel, rowCount, studyEvents, sed);
             eventDiv.tdEnd();
 
@@ -1319,7 +1332,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private void repeatingLockLinkBuilder(HtmlBuilder builder, String studySubjectLabel, Integer rowCount, List<StudyEventBean> studyEvents,
-            StudyEventDefinitionBean sed) {
+                                          StudyEventDefinitionBean sed) {
         String href1 = "javascript:ExpandEventOccurrences('" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'," + studyEvents.size() + "); ";
         // String href1 = "javascript:leftnavExpand('Menu_on_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount
         // + "'); ";
@@ -1339,7 +1352,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private void repeatingIconLinkBuilder(HtmlBuilder builder, String studySubjectLabel, Integer rowCount, List<StudyEventBean> studyEvents,
-            StudyEventDefinitionBean sed) {
+                                          StudyEventDefinitionBean sed) {
         String href1 = "javascript:ExpandEventOccurrences('" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'," + studyEvents.size() + "); ";
         // String href1 = "javascript:leftnavExpand('Menu_on_" +
         // studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
@@ -1379,7 +1392,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private void divCloseRepeatinglinkBuilder(HtmlBuilder builder, String studySubjectLabel, Integer rowCount, List<StudyEventBean> studyEvents,
-            StudyEventDefinitionBean sed) {
+                                              StudyEventDefinitionBean sed) {
         String href1 = "javascript:ExpandEventOccurrences('" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'," + studyEvents.size() + "); ";
         String href2 = "javascript:leftnavExpand('Menu_off_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
         String onClick1 = "layersShowOrHide('hidden','Lock_all'); ";
@@ -1393,16 +1406,20 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     private void linkBuilder(HtmlBuilder builder, String studySubjectLabel, Integer rowCount, List<StudyEventBean> studyEvents, StudyEventDefinitionBean sed) {
-        String href1 = "javascript:leftnavExpand('Menu_on_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
-        String href2 = "javascript:leftnavExpand('Menu_off_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
-        String onClick1 = "layersShowOrHide('hidden','Lock_all'); ";
-        String onClick2 = "layersShowOrHide('hidden','Event_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
-        String onClick3 = "layersShowOrHide('hidden','Lock_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
-        String onClick4 = "javascript:setImage('ExpandIcon_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "','images/icon_blank.gif'); ";
-        builder.a().href(href1 + href2);
-        builder.onclick(onClick1 + onClick2 + onClick3 + onClick4);
-        builder.close().append("X").aEnd();
-
+        if(EnrrollmentStatusIsComplete){
+            String href1 = "javascript:leftnavExpand('Menu_on_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
+            String href2 = "javascript:leftnavExpand('Menu_off_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
+            String onClick1 = "layersShowOrHide('hidden','Lock_all'); ";
+            String onClick2 = "layersShowOrHide('hidden','Event_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
+            String onClick3 = "layersShowOrHide('hidden','Lock_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "'); ";
+            String onClick4 = "javascript:setImage('ExpandIcon_" + studySubjectLabel + "_" + sed.getId() + "_" + rowCount + "','images/icon_blank.gif'); ";
+            builder.a().href(href1 + href2);
+            builder.onclick(onClick1 + onClick2 + onClick3 + onClick4);
+            builder.close().append("X").aEnd();
+        }else{
+            builder.a();
+            builder.close();
+        }
     }
 
     private String formatDate(Date date) {
