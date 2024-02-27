@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.8'
 services:
   postgres:
     #image: postgres:14-alpine
@@ -27,7 +27,9 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
-    #env_file: .env
+    env_file:
+      - .env
+      - .env_emails
     volumes:
       - libreclinica_src:/libreclinica
       - libreclinica_config:/usr/local/tomcat/libreclinica.config
@@ -35,10 +37,10 @@ services:
       - libreclinica_webapps:/usr/local/tomcat/webapps
       - mvn_cache:/root/.m2
     environment:
-      - ADMINEMAIL
-      - MAILUSERNAME
+      #- ADMINEMAIL
+      #- MAILUSERNAME
       - MAILPASSWORD_FILE=/run/secrets/mail_password
-      - DEVELOPEREMAILS
+      #- DEVELOPEREMAILS
     secrets:
       - mail_password
 
@@ -76,3 +78,8 @@ volumes:
 secrets:
   mail_password:
     environment: "MAIL_PASSWORD"
+env_file:
+  - path: ./.env
+    required: true # default
+  - path: ./.env_emails
+    required: false
