@@ -113,7 +113,7 @@ public class CoreResources implements ResourceLoaderAware {
 
     public void getPropertiesSource() {
         try {
-            String filePath = "$catalina.home/$WEBAPP.lower.config";
+            String filePath = "$catalina.home/$WEBAPP.lower:.config";
 
             filePath = replaceWebapp(filePath);
             filePath = replaceCatHome(filePath);

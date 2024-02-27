@@ -37,18 +37,24 @@
         jQuery("#add-subject").click(()=> {
             var newSubject = jQuery("#new-subject").val();
             var option = jQuery('#new-subject option[value="'+newSubject+'"]');
+            /*jQuery(option).css('display', 'none');
+            jQuery("#new-subject").val("");*/
 
-            jQuery("table#subjects-added tbody").append('<tr><td>' +
-                '<input type="hidden" value="' + newSubject + '" ' +
-                    'name="subjects[]" ' +
-                    '>' +
 
-                $(option).text()+'</td><td>&nbsp;'/*+newSubject*/+'</td>'+
-                '</tr>');
+            jQuery("#subjects-added").append(
+                '<div class="protocol-deviation-subject">'+
+                    '<div style="flex: 1">'+
+                        '<input type="hidden" name="subjects[]" value="'+newSubject+'"/>'+
+                        $(option).text()+
+                    '</div>'+
+                    '<div class="remove-item">'+
+                        '<a href="javascript:" class="remove-subject">Remove</a>'+
+                    '<div>'+
+                '</div>');
         });
 
         jQuery('#addSubject').click(function() {
-            jQuery.blockUI({ message: jQuery('#addSubjectForm'), css:{left: "300px", top:"10px" } });
+            jQuery.blockUI({ message: jQuery('#protocol-deviation-editor'), css:{left: "300px", top:"10px" } });
         });
 
         jQuery('#cancel').click(function() {
@@ -96,7 +102,8 @@
         ${findProtocolDeviationsHtml}
     </form>
 </div>
-<div id="addSubjectForm" style="display:none;">
+
+<div id="protocol-deviation-editor" style="display:none;">
     <c:import url="../submit/addNewProtocolDeviation.jsp">
     </c:import>
 </div>
@@ -105,7 +112,8 @@
 
 <script type="text/javascript">
     <c:if test="${showOverlay}">
-    jQuery.blockUI({ message: jQuery('#addSubjectForm'), css:{left: "300px", top:"10px" } });
+    //jQuery.blockUI({ message: jQuery('#addSubjectForm'), css:{left: "300px", top:"10px" } });
+    jQuery.blockUI({ message: jQuery('#protocol-deviation-editor'), css:{left: "300px", top:"10px" } });
     </c:if>
 </script>
 

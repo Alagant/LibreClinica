@@ -51,10 +51,44 @@
 	  </sql>
 	</query>
 	<query>
+		<name>countProtocolDeviationByStudy</name>
+		<sql>
+			SELECT COUNT( mss.study_subject_id) FROM study_subject mss, study mst
+			WHERE
+			mss.study_id = mst.study_id AND
+			(mst.study_id=? or mst.parent_study_id=?)
+		</sql>
+	</query>
+	<query>
+		<name>findProtocolDeviationSubjectById</name>
+		<sql>SELECT s.*
+			FROM protocol_deviation_subject
+			WHERE protocol_deviation_id = ? AND subject_id = ?
+		</sql>
+	</query>
+	<query>
+		<name>createProtocolDeviationSubject</name>
+		<sql>INSERT INTO protocol_deviation_subject(protocol_deviation_id, subject_id) VALUES(?, ?);
+		</sql>
+	</query>
+	<query>
+		<name>getCurrentProtocolDeviationPrimaryKey</name>
+		<sql>SELECT currval('protocol_deviation_id_seq') AS key</sql>
+	</query>
+	<query>
+		<name>getCurrentProtocolDeviationSubjectPrimaryKey</name>
+		<sql>SELECT currval('protocol_deviation_subject_id_seq') AS key</sql>
+	</query>
+	<query>
 		<name>findAllProtocolDeviationsByStudyId</name>
 		<sql>SELECT p.*
 				FROM protocol_deviation p
 				WHERE p.study_id = ?
+		</sql>
+	</query>
+	<query>
+		<name>createProtocolDeviation</name>
+		<sql>INSERT INTO protocol_deviation(protocol_deviation_id, study_id) VALUES(?, ?);
 		</sql>
 	</query>
 	<query>
