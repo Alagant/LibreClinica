@@ -73,3 +73,6 @@ volumes:
       type: none
       device: ${HOME}/dbbackup
       o: bind
+secrets:
+  mail_password:
+    environment: "MAIL_PASSWORD"
