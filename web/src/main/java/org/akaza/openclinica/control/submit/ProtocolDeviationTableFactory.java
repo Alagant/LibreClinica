@@ -1,14 +1,21 @@
 package org.akaza.openclinica.control.submit;
 
-import org.akaza.openclinica.bean.managestudy.StudyEventDefinitionBean;
-import org.akaza.openclinica.bean.managestudy.StudyGroupClassBean;
+import org.akaza.openclinica.bean.core.Role;
+import org.akaza.openclinica.bean.core.Status;
+import org.akaza.openclinica.bean.managestudy.*;
 import org.akaza.openclinica.control.AbstractTableFactory;
+import org.akaza.openclinica.control.DefaultActionsEditor;
 import org.akaza.openclinica.control.ListStudyView;
 import org.akaza.openclinica.dao.managestudy.FindSubjectsFilter;
+import org.akaza.openclinica.dao.managestudy.ProtocolDeviationDAO;
+import org.akaza.openclinica.dao.managestudy.ProtocolDeviationFilter;
 import org.akaza.openclinica.i18n.util.ResourceBundleProvider;
 import org.jmesa.facade.TableFacade;
+import org.jmesa.limit.Filter;
+import org.jmesa.limit.FilterSet;
 import org.jmesa.limit.Limit;
 import org.jmesa.view.component.Row;
+import org.jmesa.view.editor.CellEditor;
 import org.jmesa.view.html.HtmlBuilder;
 import org.jmesa.view.html.toolbar.AbstractItem;
 
@@ -20,6 +27,17 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
     private String[] columnNames = new String[] {};
     private ResourceBundle resword;
     private ResourceBundle resformat;
+    private ProtocolDeviationDAO protocolDeviationDAO;
+    private StudyBean studyBean;
+
+    public ProtocolDeviationDAO getProtocolDeviationDAO() {
+        return protocolDeviationDAO;
+    }
+
+    public void setProtocolDeviationDAO(ProtocolDeviationDAO protocolDeviationDAO) {
+        this.protocolDeviationDAO = protocolDeviationDAO;
+    }
+
     @Override
     protected String getTableName() {
         return "protocolDeviations";
@@ -53,6 +71,13 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         int index = 0;
         configureColumn(row.getColumn(columnNames[index]), "PDID", null, null);
         ++index;
+
+        //configureColumn(row.getColumn(columnNames[index]), "Actions", null, null);
+        ++index;
+
+        configureColumn(row.getColumn(columnNames[columnNames.length - 1]), "Actions", new ActionsCellEditor(), null, false,
+                false);
+        ++index;
     }
 
     @Override
@@ -74,25 +99,24 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         return tableFacade;
     }
 
-    /*
-    public void configureTableFacadeCustomView(TableFacade tableFacade, HttpServletRequest request) {
-        tableFacade.setView(new ListStudyView(getLocale(), request));
-    }*/
-
     @Override
     public void setDataAndLimitVariables(TableFacade tableFacade) {
         Limit limit = tableFacade.getLimit();
 
-        //FindSubjectsFilter subjectFilter = getSubjectFilter(limit);
+        Collection<ProtocolDeviationBean> items = getProtocolDeviationDAO().findByStudy(
+                getStudyBean().getId()
+        );
 
-        if (!limit.isComplete()) {
-            //int totalRows = getStudySubjectDAO().getCountWithFilter(subjectFilter, getStudyBean());
-            tableFacade.setTotalRows(0);
-        }
+        /*int rowStart = limit.getRowSelect().getRowStart();
+        int rowEnd = limit.getRowSelect().getRowEnd();*/
         Collection<HashMap<Object, Object>> theItems = new ArrayList<HashMap<Object, Object>>();
-        HashMap<Object, Object> theItem = new HashMap<Object, Object>();
-        theItem.put("protocolDeviation.id", "0001-001");
-        theItems.add(theItem);
+        for(ProtocolDeviationBean pdb: items) {
+            HashMap<Object, Object> theItem = new HashMap<Object, Object>();
+            theItem.put("protocolDeviation.id", pdb.getId());
+            theItem.put("protocolDeviation.pdid", pdb.getProtocolDeviationId());
+            theItems.add(theItem);
+        }
+
         tableFacade.setItems(theItems);
         tableFacade.setTotalRows(theItems.size());
     }
@@ -104,4 +128,48 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
     }
 
 
+    protected ProtocolDeviationFilter getSubjectFilter(Limit limit) {
+        ProtocolDeviationFilter auditUserLoginFilter = new ProtocolDeviationFilter();
+        /*
+        FilterSet filterSet = limit.getFilterSet();
+        Collection<Filter> filters = filterSet.getFilters();
+        for (Filter filter : filters) {
+            String property = filter.getProperty();
+            String value = filter.getValue();
+            if ("studySubject.status".equalsIgnoreCase(property)) {
+                value = Status.getByName(value).getId() + "";
+            }
+            else if (property.startsWith("sgc_")) {
+                int studyGroupClassId = property.endsWith("_") ? 0 : Integer.valueOf(property.split("_")[1]);
+                value = studyGroupDAO.findByNameAndGroupClassID(value, studyGroupClassId).getId() + "";
+            }
+            auditUserLoginFilter.addFilter(property, value);
+        }
+        */
+        return auditUserLoginFilter;
+    }
+
+
+    public StudyBean getStudyBean() {
+        return studyBean;
+    }
+
+    public void setStudyBean(StudyBean studyBean) {
+        this.studyBean = studyBean;
+    }
+
+    private class ActionsCellEditor implements CellEditor {
+
+        @SuppressWarnings("unchecked")
+        public Object getValue(Object item, String property, int rowcount) {
+            String value = "";
+            long rowId = (Long) ((HashMap<Object, Object>) item).get("protocolDeviation.pdid");
+            StringBuilder url = new StringBuilder();
+            url.append("<a href=\"javascript:\" class=\"protocol-deviation-editor\" data-id=\"" + rowId + "\">Edit</a>");
+
+
+            return url.toString();
+        }
+
+    }
 }

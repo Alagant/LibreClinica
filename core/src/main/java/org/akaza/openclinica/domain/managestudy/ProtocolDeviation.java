@@ -13,6 +13,7 @@ import javax.persistence.Table;
 public class ProtocolDeviation extends AbstractAuditableMutableDomainObject {
     private static final long serialVersionUID = -3852612749282796891L;
     private long protocolDeviationId;
+    private int studyId;
 
     public long getProtocolDeviationId() {
         return protocolDeviationId;
@@ -21,4 +22,12 @@ public class ProtocolDeviation extends AbstractAuditableMutableDomainObject {
     public void setProtocolDeviationId(long protocolDeviationId) {
         this.protocolDeviationId = protocolDeviationId;
     }
+    public int getStudyId() {
+        return studyId;
+    }
+
+    public void setStudyId(int studyId) {
+        this.studyId = studyId;
+    }
+
 }

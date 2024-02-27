@@ -6,12 +6,21 @@
 		<comment>Creating new attribute for mail notification for login.</comment>
 	
 		<createTable tableName="protocol_deviation">
-			<column name="protocol_deviation_id" type="java.sql.Types.INTEGER">
+			<column autoIncrement="true" name="id" type="int">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="protocol_deviation_id" type="java.sql.Types.BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="study_id" type="java.sql.Types.INTEGER">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
 
 		<createTable tableName="protocol_deviation_subject">
+			<column autoIncrement="true" name="id" type="int">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
 			<column name="subject_id" type="java.sql.Types.INTEGER">
 				<constraints nullable="false" />
 			</column>

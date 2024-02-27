@@ -1,30 +1,38 @@
 package org.akaza.openclinica.dao.managestudy;
 
 import org.akaza.openclinica.bean.core.EntityBean;
-import org.akaza.openclinica.bean.managestudy.DiscrepancyNoteBean;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationBean;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
+import org.akaza.openclinica.bean.submit.SubjectBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
-import org.akaza.openclinica.dao.core.DAODigester;
 import org.akaza.openclinica.dao.core.SQLFactory;
+import org.akaza.openclinica.dao.core.TypeNames;
 import org.akaza.openclinica.exception.OpenClinicaException;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBean> {
     public ProtocolDeviationDAO(DataSource ds) {
         super(ds);
         setDigesterName();
+        setQueryNames();
     }
 
-    public ProtocolDeviationDAO(DataSource ds, DAODigester digester) {
-        super(ds);
-        this.digester = digester;
+    protected void setQueryNames() {
+        getCurrentPKName = "getCurrentProtocolDeviationPrimaryKey";
     }
 
+    public Integer getCountWithFilter(ProtocolDeviationFilter filter, StudyBean currentStudy) {
+        HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
+        String query = digester.getQuery("getCountWithStudy");
+        query += filter.execute("");
+        return getCountByQuery(query, variables);
+    }
     @Override
     public ProtocolDeviationBean findByPKAndStudy(int id, StudyBean study) {
         return super.findByPKAndStudy(id, study);
@@ -32,8 +40,16 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
 
     @Override
     public ProtocolDeviationBean getEntityFromHashMap(HashMap<String, Object> hm) {
-        return null;
+        ProtocolDeviationBean eb = new ProtocolDeviationBean();
+        //super.setEntityAuditInformation(eb, hm);
+        eb.setId((Integer) hm.get("id"));
+        eb.setProtocolDeviationId((Long) hm.get("protocol_deviation_id"));
+        eb.setStudyId((Integer) hm.get("study_id"));
+
+        return eb;
     }
+
+
 
     @Override
     public ArrayList<ProtocolDeviationBean> findAll(String strOrderByColumn, boolean blnAscendingSort,
@@ -52,7 +68,21 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
     }
 
     public ProtocolDeviationBean create(ProtocolDeviationBean pdb) {
-        return null;
+        HashMap<Integer, Object> variables = new HashMap<>();
+        HashMap<Integer, Integer> nullVars = new HashMap<>();
+
+        LocalDateTime ldt = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        long newProtocolDeviationId = Long.parseLong(ldt.format(dtf));
+        pdb.setProtocolDeviationId(newProtocolDeviationId);
+
+        variables.put(1, newProtocolDeviationId);
+        variables.put(2, pdb.getStudyId());
+        executeUpdateWithPK(digester.getQuery("createProtocolDeviation"), variables, nullVars);
+        if (isQuerySuccessful()) {
+            pdb.setId(getLatestPK());
+        }
+        return pdb;
     }
 
     @Override
@@ -72,7 +102,10 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
 
     @Override
     public void setTypesExpected() {
-
+        this.unsetTypeExpected();
+        this.setTypeExpected(1, TypeNames.INT);
+        this.setTypeExpected(2, TypeNames.LONG);
+        this.setTypeExpected(3, TypeNames.INT);
     }
 
     public ArrayList<ProtocolDeviationBean> findByStudy(int studyId) {
@@ -91,4 +124,5 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
     public ProtocolDeviationBean emptyBean() {
         return new ProtocolDeviationBean();
     }
+
 }
