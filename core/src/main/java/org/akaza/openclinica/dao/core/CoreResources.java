@@ -275,7 +275,18 @@ public class CoreResources implements ResourceLoaderAware {
         StringBuffer sbval = new StringBuffer();
         Matcher matcher = expr.matcher(value);
         while (matcher.find()) {
-            String envValue = this.environment.getProperty(matcher.group(1));
+            String key = matcher.group(1);
+            String envValue = null;
+            if (key.equals("MAILPASSWORD") || this.environment.containsProperty("MAILPASSWORD_FILE")) {
+                try {
+                    envValue = IOUtils.toString(new FileInputStream(this.environment.getProperty("MAILPASSWORD_FILE")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                envValue = this.environment.getProperty(key);
+            }
+
             if (envValue == null) {
             } else {
                 matcher.appendReplacement(sbval, envValue.replace("\\", "\\\\"));

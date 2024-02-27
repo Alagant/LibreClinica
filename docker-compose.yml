@@ -37,8 +37,10 @@ services:
     environment:
       - ADMINEMAIL
       - MAILUSERNAME
-      - MAILPASSWORD
+      - MAILPASSWORD_FILE=/run/secrets/mail_password
       - DEVELOPEREMAILS
+    secrets:
+      - mail_password
 
 #  dmm:
 #    build:
