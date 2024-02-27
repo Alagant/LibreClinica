@@ -50,7 +50,13 @@
 	       ORDER BY s.subject_id, stu.study_id
 	  </sql>
 	</query>
-
+	<query>
+		<name>findAllProtocolDeviationsByStudyId</name>
+		<sql>SELECT p.*
+				FROM protocol_deviation p
+				WHERE p.study_id = ?
+		</sql>
+	</query>
 	<query>
 		<name>findByUniqueIdentifierAndStudy</name>
 		<sql>

@@ -73,7 +73,7 @@ public class CoreResources implements ResourceLoaderAware {
 
     public static String ODM_MAPPING_DIR;
 
-    @Autowired
+    //@Autowired
     private Environment environment;
 
     public CoreResources() {

@@ -19,6 +19,7 @@
 
 	<properties>
 		<!-- Default configuration activation -->
+		<spring.profiles.active>local,no-liquibase</spring.profiles.active>
 		<config.id>default</config.id>
 
 		<skipTests>true</skipTests>
@@ -1121,7 +1122,7 @@
 	</scm>
 
 	<repositories>
-		<repository>
+		<!--repository>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -1142,13 +1143,35 @@
 				<enabled>true</enabled>
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
+		</repository-->
+		<repository>
+			<id>springa-plugin-repository-group</id>
+			<name>Spring plugins repository</name>
+			<url>https://repo.spring.io/plugins-release/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
+		<!--pluginRepository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Repository Group</name>
 			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository-->
+		<pluginRepository>
+			<id>springr-plugin-repository-group</id>
+			<name>Spring plugins repository</name>
+			<url>https://repo.spring.io/plugins-release/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>

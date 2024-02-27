@@ -13,6 +13,7 @@
 
 	<properties>
 		<assembly.name>LibreClinica</assembly.name>
+		<spring.profiles.active>local,no-liquibase</spring.profiles.active>
 	</properties>
 
 	<dependencies>
@@ -328,7 +329,7 @@
 		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jboss-j2ee</artifactId>
-			<version>4.2.0.GA</version>
+			<version>4.2.2.GA</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

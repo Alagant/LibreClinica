@@ -9,6 +9,8 @@ import org.akaza.openclinica.i18n.util.ResourceBundleProvider;
 import org.jmesa.facade.TableFacade;
 import org.jmesa.limit.Limit;
 import org.jmesa.view.component.Row;
+import org.jmesa.view.html.HtmlBuilder;
+import org.jmesa.view.html.toolbar.AbstractItem;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -94,4 +96,12 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         tableFacade.setItems(theItems);
         tableFacade.setTotalRows(theItems.size());
     }
+
+    @Override
+    public void configureTableFacadePostColumnConfiguration(TableFacade tableFacade) {
+        tableFacade.setToolbar(
+                new ProtocolDeviationTableToolbar(/*addSubjectLinkShow*/));
+    }
+
+
 }
