@@ -675,12 +675,11 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
 
             StringBuilder url = new StringBuilder();
             String nameEvent = studyEventDefinition.getName();
-            if(nameEvent.equalsIgnoreCase("EN")){
-                if (subjectEventStatus.getId()== 3 || subjectEventStatus.getId() == 4) {
-                    EnrrollmentStatusIsComplete = true;
-                }else {
-                    EnrrollmentStatusIsComplete = false;
-                }
+            String pid = studySubjectBean.getSecondaryLabel();
+            if(pid.isEmpty()){
+                EnrrollmentStatusIsComplete = false;
+            }else{
+                EnrrollmentStatusIsComplete = true;
             }
             if(EnrrollmentStatusIsComplete || nameEvent.equalsIgnoreCase("EN")){
                 url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
