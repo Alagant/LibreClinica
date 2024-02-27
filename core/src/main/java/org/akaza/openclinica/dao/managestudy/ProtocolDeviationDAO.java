@@ -3,18 +3,21 @@ package org.akaza.openclinica.dao.managestudy;
 import org.akaza.openclinica.bean.core.EntityBean;
 import org.akaza.openclinica.bean.managestudy.DiscrepancyNoteBean;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationBean;
+import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.DAODigester;
 import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.exception.OpenClinicaException;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBean> {
     public ProtocolDeviationDAO(DataSource ds) {
         super(ds);
+        setDigesterName();
     }
 
     public ProtocolDeviationDAO(DataSource ds, DAODigester digester) {
@@ -22,7 +25,10 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
         this.digester = digester;
     }
 
-
+    @Override
+    public ProtocolDeviationBean findByPKAndStudy(int id, StudyBean study) {
+        return super.findByPKAndStudy(id, study);
+    }
 
     @Override
     public ProtocolDeviationBean getEntityFromHashMap(HashMap<String, Object> hm) {
@@ -69,15 +75,17 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
 
     }
 
-    public ArrayList<ProtocolDeviationBean> findByStudy(int study) {
-
-        return null;
+    public ArrayList<ProtocolDeviationBean> findByStudy(int studyId) {
+        HashMap<Integer, Object> parameters = new HashMap<>();
+        parameters.put(1, studyId);
+        return this.executeFindAllQuery("findAllProtocolDeviationsByStudyId", parameters);
     }
 
     @Override
     protected void setDigesterName() {
-        digesterName = SQLFactory.getInstance().DAO_STUDYSUBJECT;
+        digesterName = SQLFactory.getInstance().DAO_SUBJECT;
     }
+
 
     @Override
     public ProtocolDeviationBean emptyBean() {
