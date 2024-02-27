@@ -78,6 +78,6 @@ volumes:
 secrets:
   mail_password:
     environment: "MAIL_PASSWORD"
-env_file:
-  - ./.env
-  - ./.env_emails
+#env_file:
+#  - ./.env
+#  - ./.env_emails
