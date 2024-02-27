@@ -289,6 +289,7 @@ public class CoreResources implements ResourceLoaderAware {
             }
 
             if (envValue == null) {
+                System.out.println("Environment variable " + key + " not found");
             } else {
                 matcher.appendReplacement(sbval, envValue.replace("\\", "\\\\"));
                 old_end = matcher.end();
