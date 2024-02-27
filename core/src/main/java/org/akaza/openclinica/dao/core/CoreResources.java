@@ -278,7 +278,7 @@ public class CoreResources implements ResourceLoaderAware {
             String key = matcher.group(1);
             String envValue = null;
             if (key.equals("MAILPASSWORD") && this.environment.containsProperty("MAILPASSWORD_FILE")) {
-                System.out.println(("getting password from file"));
+                System.out.println(("getting password from file, as key is " + key + " and value is " + this.environment.getProperty("MAILPASSWORD_FILE")));
                 try {
                     envValue = IOUtils.toString(new FileInputStream(this.environment.getProperty("MAILPASSWORD_FILE")));
                 } catch (IOException e) {
