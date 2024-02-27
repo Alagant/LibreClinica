@@ -79,7 +79,5 @@ secrets:
   mail_password:
     environment: "MAIL_PASSWORD"
 env_file:
-  - path: ./.env
-    required: true # default
-  - path: ./.env_emails
-    required: false
+  - ./.env
+  - ./.env_emails
