@@ -974,10 +974,11 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             }
             logger.debug("Email sent successfully on {}", new Date());
         } catch (MailException me) {
+            JavaMailSenderImpl mailSender = (JavaMailSenderImpl) SpringServletAccess.getApplicationContext(context).getBean("mailSender");
             if (failMessage != null && sendMessage) {
                 addPageMessage(failMessage);
             }
-            System.out.println("Email could not be sent due to: "+me.toString());
+            System.out.println("Email could not be sent from the address "+mailSender.getUsername()+" due to: "+me.toString());
             messageSent = false;
         }
         return messageSent;
