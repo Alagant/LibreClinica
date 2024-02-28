@@ -37,26 +37,10 @@ services:
       - libreclinica_webapps:/usr/local/tomcat/webapps
       - mvn_cache:/root/.m2
     environment:
-      #- ADMINEMAIL
-      #- MAILUSERNAME
       - MAILPASSWORD_FILE=/run/secrets/mail_password
-      #- DEVELOPEREMAILS
     secrets:
       - mail_password
 
-#  dmm:
-#    build:
-#      context: ../libreclinica_drug_trial_module/
-#      dockerfile: Dockerfile
-#    ports:
-#      - "81:81"  # Map port 81 of the host to port 81 of the container
-#    volumes:
-#      - ../libreclinica_drug_trial_module:/app  # Mount the current directory into the container's /app directory
-#    environment:
-#      ADMINEMAIL: ${ADMINEMAIL}
-#      FLASK_APP: flask_app  # Set the FLASK_APP environment variable
-#      SQLALCHEMY_DATABASE_URI: postgresql://clinica:ready4Sprint@dmmlc.postgres.database.azure.com/dmm-dev  # Set the SQLALCHEMY_DATABASE_URI environment variable
-#    command: python -mpytest
 volumes:
   libreclinica_src:
     driver: local
@@ -78,6 +62,3 @@ volumes:
 secrets:
   mail_password:
     environment: "MAIL_PASSWORD"
-#env_file:
-#  - ./.env
-#  - ./.env_emails

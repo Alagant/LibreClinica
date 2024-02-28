@@ -114,11 +114,6 @@ stages:
           ls -ltra
       env:
         MAIL_PASSWORD: $(mailPassword)
-      #  #ADMIN_EMAIL: $(adminEmail)
-      #  MAIL_USERNAME: $(mailUsername)
-      #  MAIL_PASSWORD: $(mailPassword)
-      #  MAIL_ERROR_MSG: $(developerEmails)
-
 
     - task: Bash@3
       displayName: Test and report commit message
