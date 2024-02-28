@@ -112,8 +112,8 @@ stages:
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
-      #env:
-      #  MAIL_PASSWORD: $(mailPassword)
+      env:
+        MAILPASSWORD: $(mailPassword)
 
     - task: Bash@3
       displayName: Test and report commit message
