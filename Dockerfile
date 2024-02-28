@@ -1,12 +1,6 @@
 FROM maven:3.5.0-jdk-8 as builder
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
-#ARG ENVIRONMENT
-#WORKDIR /libreclinica
-#VOLUME /root/.m2
-#COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
-#COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
-#COPY . .
 
 FROM tomcat:9-jdk8
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
