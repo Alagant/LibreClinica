@@ -139,5 +139,5 @@ stages:
         adminEmail: $(adminEmail)
         mailUsername: $(mailUsername)
         mailPassword: $(mailPassword)
-        mailErrorMsg: $(testdeveloperEmails)
+        mailErrorMsg: $(developerEmails)
         BEHAVE_STAGE: develop
