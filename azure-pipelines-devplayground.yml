@@ -74,7 +74,7 @@ stages:
           docker image prune -f
           docker network prune -f
           docker system prune -af
-          docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_mvn_cache
+          docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_config libreclinica_mvn_cache
           docker system prune -af
 
     - task: Bash@3

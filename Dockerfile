@@ -22,12 +22,12 @@ COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/mai
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/ws/src/main/filters/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 #RUN find /libreclinica -type f -name "*.war"
 #RUN mvn -B clean install -DskipTests
 
 # /SampleWebApp
 COPY SampleWebApp.war /usr/local/tomcat/webapps/SampleWebApp.war
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 COPY docker/index_${ENVIRONMENT}.html  /usr/local/tomcat/webapps/ROOT/index.html
 COPY docker/web.xml /usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
 COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
