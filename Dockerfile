@@ -11,18 +11,18 @@ WORKDIR /libreclinica
 #Environment variables
 ENV M2_HOME='/usr/share/maven'
 ENV PATH="$M2_HOME/bin:$PATH"
-ARG ADMINEMAIL
+#ARG ADMINEMAIL
 ARG ENVIRONMENT
 #obtains Maven for this image
 COPY --from=builder $M2_HOME $M2_HOME
 
 #installs using Maven
 COPY . .
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/ws/src/main/filters/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}_test1.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}_test2.properties /libreclinica/web/src/main/resources/org/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}_test3.properties /libreclinica/ws/src/main/filters/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}_test4.properties /libreclinica/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}_test5.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 #RUN find /libreclinica -type f -name "*.war"
 #RUN mvn -B clean install -DskipTests
 
@@ -33,7 +33,7 @@ COPY docker/web.xml /usr/local/tomcat/webapps/ROOT/WEB-INF/web.xml
 COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
 COPY docker/manager_context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
 
-#COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.2.1.war /usr/local/tomcat/webapps/LibreClinica-ws-1.2.1.war
+#COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.3.1.war /usr/local/tomcat/webapps/LibreClinica-ws-1.3.1.war
 
 RUN env
 #COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.3.1.war  /usr/local/tomcat/webapps/LibreClinica.war
