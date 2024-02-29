@@ -56,7 +56,6 @@
     </bean>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="classpath:org/akaza/openclinica/datainfo.properties"
           p:placeholderPrefix="s["
           p:placeholderSuffix="]"
     >
