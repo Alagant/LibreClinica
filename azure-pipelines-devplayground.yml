@@ -60,13 +60,13 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          ./LibreClinica/docker/db_backup.bash
+          echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
     - task: Bash@3
       displayName: Backup the database
       inputs:
         targetType: 'inline'
         script: |
-          echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
+          ./LibreClinica/docker/db_backup.bash
       continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
