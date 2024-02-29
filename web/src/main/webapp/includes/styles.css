@@ -2179,7 +2179,7 @@ frm_msg{
     max-height: 500px;
 }
 
-.protocol-deviation-subject-container .protocol-deviation-subject:nth-child(even) {
+.protocol-deviation-subject-container .protocol-deviation-subject:nth-child(odd) {
     background-color: var(--gray-l40);
 }
 

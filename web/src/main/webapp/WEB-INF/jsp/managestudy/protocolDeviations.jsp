@@ -37,8 +37,8 @@
         jQuery("#add-subject").click(()=> {
             var newSubject = jQuery("#new-subject").val();
             var option = jQuery('#new-subject option[value="'+newSubject+'"]');
-            /*jQuery(option).css('display', 'none');
-            jQuery("#new-subject").val("");*/
+            jQuery(option).css('display', 'none');
+            jQuery("#new-subject").val("");
 
 
             jQuery("#subjects-added").append(
@@ -55,6 +55,31 @@
 
         jQuery('#addSubject').click(function() {
             jQuery.blockUI({ message: jQuery('#protocol-deviation-editor'), css:{left: "300px", top:"10px" } });
+        });
+
+        jQuery('.protocol-deviation-editor').click(function(e) {
+            const protocolId = $(e.target).data('id');
+            jQuery.ajax({
+                url: "${pageContext.request.contextPath}/ProtocolDeviations?action=get&pdid="+
+                        protocolId,
+                success: function(response) {
+                    jQuery('#subjects-added').html('');
+                    (response?.subjects || []).forEach((x,i) => {
+                        jQuery('#subjects-added').append('<div class="protocol-deviation-subject">'+
+                            '<div style="flex: 1">'+
+                                '<input type="hidden" name="subjects[]" value="'+ x.id +'"/>'+
+                                x.label+
+                                '</div>'+
+                                '<div class="remove-item">'+
+                                '<a href="javascript:" class="remove-subject">Remove</a>'+
+                                '<div>'+
+                            '</div>'
+                        );
+                    });
+                    jQuery.blockUI({ message: jQuery('#protocol-deviation-editor'), css:{left: "300px", top:"10px" } });
+                    console.log(response);
+                }
+            });
         });
 
         jQuery('#cancel').click(function() {

@@ -59,13 +59,47 @@
 			(mst.study_id=? or mst.parent_study_id=?)
 		</sql>
 	</query>
+
 	<query>
-		<name>findProtocolDeviationSubjectById</name>
-		<sql>SELECT s.*
-			FROM protocol_deviation_subject
-			WHERE protocol_deviation_id = ? AND subject_id = ?
+		<name>findAllProtocolDeviationSeverity</name>
+		<sql>
+			SELECT * FROM protocol_deviation_severity
+			ORDER BY protocol_deviation_severity_id;
 		</sql>
 	</query>
+
+	<query>
+		<name>findProtocolDeviationSubjectById</name>
+		<sql>SELECT pds.id, pds.protocol_deviation_id, pds.subject_id,
+			ss.label, ss.secondary_label
+			FROM protocol_deviation_subject pds
+			INNER JOIN study_subject ss ON
+			pds.subject_id  = ss.study_subject_id
+			WHERE pds.protocol_deviation_id = ? AND pds.subject_id = ?
+		</sql>
+	</query>
+	<query>
+		<name>findProtocolDeviationByIdAndStudy</name>
+		<sql>SELECT pd.protocol_deviation_id, pd.label, pd.description,
+			pd.protocol_deviation_severity,
+			pds.label AS protocol_deviation_severity_label,
+			pd.study_id
+			FROM protocol_deviation pd INNER JOIN protocol_deviation_severity pds ON
+			pds.protocol_deviation_severity_id = pd.protocol_deviation_severity_id
+			WHERE protocol_deviation_id = ? AND study_id = ? AND
+			study_id = ?
+		</sql>
+	</query>
+	<query>
+		<name>findSubjectsByProtocolDeviationId</name>
+		<sql>SELECT pds.id, pds.protocol_deviation_id, pds.subject_id,
+			ss.label, ss.secondary_label
+			FROM protocol_deviation_subject pds INNER JOIN study_subject ss ON
+			pds.subject_id = ss.study_subject_id
+			WHERE protocol_deviation_id = ?
+		</sql>
+	</query>
+
 	<query>
 		<name>createProtocolDeviationSubject</name>
 		<sql>INSERT INTO protocol_deviation_subject(protocol_deviation_id, subject_id) VALUES(?, ?);
@@ -73,7 +107,7 @@
 	</query>
 	<query>
 		<name>getCurrentProtocolDeviationPrimaryKey</name>
-		<sql>SELECT currval('protocol_deviation_id_seq') AS key</sql>
+		<sql>SELECT currval('protocol_deviation_protocol_deviation_id_seq') AS key</sql>
 	</query>
 	<query>
 		<name>getCurrentProtocolDeviationSubjectPrimaryKey</name>
@@ -81,14 +115,20 @@
 	</query>
 	<query>
 		<name>findAllProtocolDeviationsByStudyId</name>
-		<sql>SELECT p.*
-				FROM protocol_deviation p
-				WHERE p.study_id = ?
+		<sql>
+			SELECT pd.protocol_deviation_id, pd.label, pd.description,
+			pd.protocol_deviation_severity_id,
+			pds.label AS protocol_deviation_severity_label,
+			pd.study_id
+			FROM protocol_deviation pd INNER JOIN protocol_deviation_severity pds ON
+			pds.protocol_deviation_severity_id = pd.protocol_deviation_severity_id
+			WHERE study_id = ?
 		</sql>
 	</query>
 	<query>
 		<name>createProtocolDeviation</name>
-		<sql>INSERT INTO protocol_deviation(protocol_deviation_id, study_id) VALUES(?, ?);
+		<sql>INSERT INTO protocol_deviation(label, description, protocol_deviation_severity_id, study_id)
+			VALUES(?, ?, ?, ?);
 		</sql>
 	</query>
 	<query>
