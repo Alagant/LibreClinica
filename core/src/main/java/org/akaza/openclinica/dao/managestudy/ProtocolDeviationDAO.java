@@ -24,6 +24,7 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
     }
 
     protected void setQueryNames() {
+        findByPKAndStudyName = "findProtocolDeviationByIdAndStudy";
         getCurrentPKName = "getCurrentProtocolDeviationPrimaryKey";
     }
 
@@ -42,8 +43,11 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
     public ProtocolDeviationBean getEntityFromHashMap(HashMap<String, Object> hm) {
         ProtocolDeviationBean eb = new ProtocolDeviationBean();
         //super.setEntityAuditInformation(eb, hm);
-        eb.setId((Integer) hm.get("id"));
-        eb.setProtocolDeviationId((Long) hm.get("protocol_deviation_id"));
+        eb.setProtocolDeviationId((Integer) hm.get("protocol_deviation_id"));
+        eb.setLabel((String) hm.get("label"));
+        eb.setDescription((String) hm.get("description"));
+        eb.setSeverityId((Integer) hm.get("protocol_deviation_severity_id"));
+        eb.setSeverityLabel((String) hm.get("protocol_deviation_severity_label"));
         eb.setStudyId((Integer) hm.get("study_id"));
 
         return eb;
@@ -72,17 +76,20 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
         HashMap<Integer, Integer> nullVars = new HashMap<>();
 
         LocalDateTime ldt = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-        long newProtocolDeviationId = Long.parseLong(ldt.format(dtf));
-        pdb.setProtocolDeviationId(newProtocolDeviationId);
 
-        variables.put(1, newProtocolDeviationId);
-        variables.put(2, pdb.getStudyId());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String label = ldt.format(dtf);
+        pdb.setLabel(label);
+
+        variables.put(1, label);
+        variables.put(2, pdb.getDescription());
+        variables.put(3, pdb.getSeverityId());
+        variables.put(4, pdb.getStudyId());
         executeUpdateWithPK(digester.getQuery("createProtocolDeviation"), variables, nullVars);
         if (isQuerySuccessful()) {
-            pdb.setId(getLatestPK());
+            pdb.setProtocolDeviationId(getLatestPK());
         }
-        return pdb;
+            return pdb;
     }
 
     @Override
@@ -104,13 +111,17 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
     public void setTypesExpected() {
         this.unsetTypeExpected();
         this.setTypeExpected(1, TypeNames.INT);
-        this.setTypeExpected(2, TypeNames.LONG);
-        this.setTypeExpected(3, TypeNames.INT);
+        this.setTypeExpected(2, TypeNames.STRING);
+        this.setTypeExpected(3, TypeNames.STRING);
+        this.setTypeExpected(4, TypeNames.INT);
+        this.setTypeExpected(5, TypeNames.STRING);
+        this.setTypeExpected(6, TypeNames.INT);
     }
 
     public ArrayList<ProtocolDeviationBean> findByStudy(int studyId) {
         HashMap<Integer, Object> parameters = new HashMap<>();
         parameters.put(1, studyId);
+
         return this.executeFindAllQuery("findAllProtocolDeviationsByStudyId", parameters);
     }
 

@@ -48,7 +48,8 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         super.configureTableFacade(response, tableFacade);
         getColumnNamesMap();
         ArrayList<String> columnNamesList = new ArrayList<String>();
-        columnNamesList.add("protocolDeviation.id");
+        columnNamesList.add("protocolDeviation.label");
+        columnNamesList.add("protocolDeviation.severityLabel");
     }
 
     public void configureTableFacadeCustomView(TableFacade tableFacade, HttpServletRequest request) {
@@ -57,7 +58,8 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
 
     private void getColumnNamesMap() {
         ArrayList<String> columnNamesList = new ArrayList<String>();
-        columnNamesList.add("protocolDeviation.id");
+        columnNamesList.add("protocolDeviation.label");
+        columnNamesList.add("protocolDeviation.severityLabel");
         columnNamesList.add("actions");
         columnNames = columnNamesList.toArray(columnNames);
     }
@@ -70,6 +72,8 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         Row row = tableFacade.getTable().getRow();
         int index = 0;
         configureColumn(row.getColumn(columnNames[index]), "PDID", null, null);
+        ++index;
+        configureColumn(row.getColumn(columnNames[index]), "Severity", null, null);
         ++index;
 
         //configureColumn(row.getColumn(columnNames[index]), "Actions", null, null);
@@ -103,7 +107,8 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
     public void setDataAndLimitVariables(TableFacade tableFacade) {
         Limit limit = tableFacade.getLimit();
 
-        Collection<ProtocolDeviationBean> items = getProtocolDeviationDAO().findByStudy(
+        Collection<ProtocolDeviationBean> items = getProtocolDeviationDAO()
+                .findByStudy(
                 getStudyBean().getId()
         );
 
@@ -112,8 +117,10 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         Collection<HashMap<Object, Object>> theItems = new ArrayList<HashMap<Object, Object>>();
         for(ProtocolDeviationBean pdb: items) {
             HashMap<Object, Object> theItem = new HashMap<Object, Object>();
-            theItem.put("protocolDeviation.id", pdb.getId());
-            theItem.put("protocolDeviation.pdid", pdb.getProtocolDeviationId());
+            theItem.put("protocolDeviation.id", pdb.getProtocolDeviationId());
+            theItem.put("protocolDeviation.label", pdb.getLabel());
+            theItem.put("protocolDeviation.severityLabel", pdb.getSeverityLabel());
+            theItem.put("protocolDeviation.description", pdb.getDescription());
             theItems.add(theItem);
         }
 
@@ -163,7 +170,7 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         @SuppressWarnings("unchecked")
         public Object getValue(Object item, String property, int rowcount) {
             String value = "";
-            long rowId = (Long) ((HashMap<Object, Object>) item).get("protocolDeviation.pdid");
+            int rowId = (Integer) ((HashMap<Object, Object>) item).get("protocolDeviation.id");
             StringBuilder url = new StringBuilder();
             url.append("<a href=\"javascript:\" class=\"protocol-deviation-editor\" data-id=\"" + rowId + "\">Edit</a>");
 
