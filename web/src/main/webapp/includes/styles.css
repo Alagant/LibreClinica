@@ -2167,3 +2167,34 @@ frm_msg{
     color:#ff0000;
 }
 
+.protocol-deviation-form {
+    width: 300px;
+    height: 600px;
+}
+.protocol-deviation-subject-container {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    max-height: 500px;
+}
+
+.protocol-deviation-subject-container .protocol-deviation-subject:nth-child(odd) {
+    background-color: var(--gray-l40);
+}
+
+.protocol-deviation-subject {
+    display: flex;
+    height: 32px;
+    align-items: center;
+}
+
+.protocol-deviation-subject > .remove-item {
+    width: 60px;
+}
+
+.form-standard {
+    font-family: Tahoma Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #4D4D4D;
+}

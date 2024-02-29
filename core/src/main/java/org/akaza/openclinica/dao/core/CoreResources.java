@@ -113,7 +113,7 @@ public class CoreResources implements ResourceLoaderAware {
 
     public void getPropertiesSource() {
         try {
-            String filePath = "$catalina.home/$WEBAPP.lower.config";
+            String filePath = "$catalina.home/$WEBAPP.lower:.config";
 
             filePath = replaceWebapp(filePath);
             filePath = replaceCatHome(filePath);
@@ -275,8 +275,21 @@ public class CoreResources implements ResourceLoaderAware {
         StringBuffer sbval = new StringBuffer();
         Matcher matcher = expr.matcher(value);
         while (matcher.find()) {
-            String envValue = this.environment.getProperty(matcher.group(1));
+            String key = matcher.group(1);
+            String envValue = null;
+            if (key.equals("MAILPASSWORD") && this.environment.containsProperty("MAILPASSWORD_FILE")) {
+                System.out.println(("getting password from file, as key is " + key + " and value is " + this.environment.getProperty("MAILPASSWORD_FILE")));
+                try {
+                    envValue = IOUtils.toString(new FileInputStream(this.environment.getProperty("MAILPASSWORD_FILE")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                envValue = this.environment.getProperty(key);
+            }
+
             if (envValue == null) {
+                System.out.println("Environment variable " + key + " not found, with value " + value);
             } else {
                 matcher.appendReplacement(sbval, envValue.replace("\\", "\\\\"));
                 old_end = matcher.end();

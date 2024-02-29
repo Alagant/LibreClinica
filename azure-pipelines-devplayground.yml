@@ -46,7 +46,7 @@ stages:
   - job: DevOps
     steps:
     - checkout: LcRepo
-      #clean: true
+      clean: true
       persistCredentials: true
       fetchDepth: 1
       lfs: true
@@ -55,13 +55,13 @@ stages:
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
-    #- task: Bash@3
-    #  displayName: Backup the database
-    #  inputs:
-    #    targetType: 'inline'
-    #    script: |
-    #      ./LibreClinica/docker/db_backup.bash
-    #  continueOnError: true
+    - task: Bash@3
+      displayName: Backup the database
+      inputs:
+        targetType: 'inline'
+        script: |
+          ./LibreClinica/docker/db_backup.bash
+      continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
       inputs:
@@ -71,8 +71,10 @@ stages:
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
-          docker image prune -f
+          docker image prune -af
           docker network prune -f
+          docker system prune -af
+          docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_libreclinica_config libreclinica_mvn_cache
           docker system prune -af
 
     - task: Bash@3
@@ -96,23 +98,22 @@ stages:
           git pull
           echo running git status
           git status
-          export JUELA=$(adminEmail)
-          set
           
-          docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=$(mailPassword) --build-arg MAIL_ERROR_MSG=$(developerEmails)
+          echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
+          docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=${MAIL_PASSWORD} --build-arg MAIL_ERROR_MSG=${DEVELOPER_EMAILS}
           docker compose run libreclinica mvn -B clean install -DskipTests>mvn.log
+          
           sudo cp /docker/volumes/libreclinica_libreclinica_src/_data/web/target/LibreClinica-web-1.3.1.war /docker/volumes/libreclinica_libreclinica_webapps/_data/LibreClinica.war
-          docker compose up -d #--env ADMIN_EMAIL=$(adminEmail) --env MAIL_USERNAME=$(mailUsername) --env MAIL_PASSWORD=$(mailPassword) --env MAIL_ERROR_MSG=$(developerEmails)
+          docker compose up -d
+          #If you need to paste in a new database, adapt and uncomment the following line:
+          #sleep 10; ./docker/db_restore.bash /dbbackup/libcqavm01_libreclinica_2024-02-26T10_45_01+00_00.sql
+          #Be aware that the database restore script is not yet fully tested and may not work as expected.
           
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
-      #env:
-      #  #ADMIN_EMAIL: $(adminEmail)
-      #  MAIL_USERNAME: $(mailUsername)
-      #  MAIL_PASSWORD: $(mailPassword)
-      #  MAIL_ERROR_MSG: $(developerEmails)
-
+      env:
+        MAILPASSWORD: $(mailPassword)
 
     - task: Bash@3
       displayName: Test and report commit message

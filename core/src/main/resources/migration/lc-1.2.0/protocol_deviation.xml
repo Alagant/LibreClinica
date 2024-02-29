@@ -3,15 +3,62 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 	
 	<changeSet id="3" author="dx31">
-		<comment>Creating new attribute for mail notification for login.</comment>
-	
+		<comment>Protocol deviations.</comment>
+		<createTable tableName="protocol_deviation_severity">
+			<column autoIncrement="true" name="protocol_deviation_severity_id" type="int">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="label" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<insert tableName="protocol_deviation_severity">
+			<column name="protocol_deviation_severity_id" valueNumeric="1"/>
+			<column name="label" value="No impact on data quality or patient safety"/>
+		</insert>
+		<insert tableName="protocol_deviation_severity">
+			<column name="protocol_deviation_severity_id" valueNumeric="2"/>
+			<column name="label" value="Minor impact on data quality"/>
+		</insert>
+		<insert tableName="protocol_deviation_severity">
+			<column name="protocol_deviation_severity_id" valueNumeric="3"/>
+			<column name="label" value="Minor impact on patient safety"/>
+		</insert>
+		<insert tableName="protocol_deviation_severity">
+			<column name="protocol_deviation_severity_id" valueNumeric="4"/>
+			<column name="label" value="Major impact on data quality or patient safety"/>
+		</insert>
+		<insert tableName="protocol_deviation_severity">
+			<column name="protocol_deviation_severity_id" valueNumeric="5"/>
+			<column name="label" value="Leading to patient/(s) death"/>
+		</insert>
+
+
 		<createTable tableName="protocol_deviation">
-			<column name="protocol_deviation_id" type="java.sql.Types.INTEGER">
+			<column autoIncrement="true" name="protocol_deviation_id" type="int">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="label" type="java.sql.Types.VARCHAR(20)">
+				<constraints nullable="false" />
+			</column>
+			<column name="protocol_deviation_severity_id" type="java.sql.Types.INTEGER">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="TEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="study_id" type="java.sql.Types.INTEGER">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
 
 		<createTable tableName="protocol_deviation_subject">
+			<column autoIncrement="true" name="id" type="int">
+				<constraints nullable="false" primaryKey="true"/>
+			</column>
+			<column name="protocol_deviation_id" type="java.sql.Types.INTEGER">
+				<constraints nullable="false" />
+			</column>
 			<column name="subject_id" type="java.sql.Types.INTEGER">
 				<constraints nullable="false" />
 			</column>

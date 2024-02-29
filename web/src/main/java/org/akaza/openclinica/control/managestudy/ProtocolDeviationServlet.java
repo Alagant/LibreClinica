@@ -1,57 +1,119 @@
 package org.akaza.openclinica.control.managestudy;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationBean;
+import org.akaza.openclinica.bean.managestudy.ProtocolDeviationSeverityBean;
+import org.akaza.openclinica.bean.managestudy.ProtocolDeviationSubjectBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.control.submit.ListStudySubjectTableFactory;
 import org.akaza.openclinica.control.submit.ProtocolDeviationTableFactory;
-import org.akaza.openclinica.dao.managestudy.ProtocolDeviationDAO;
-import org.akaza.openclinica.dao.managestudy.StudyDAO;
-import org.akaza.openclinica.dao.managestudy.StudySubjectDAO;
+import org.akaza.openclinica.dao.managestudy.*;
+import org.akaza.openclinica.domain.managestudy.ProtocolDeviationSubject;
+import org.akaza.openclinica.exception.OpenClinicaException;
 import org.akaza.openclinica.view.Page;
 import org.akaza.openclinica.web.InsufficientPermissionException;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class ProtocolDeviationServlet extends SecureController {
-    @Override
-    protected void processRequest() throws Exception {
+    private ProtocolDeviationSeverityDAO protocolDeviationSeverityDAO;
+    private ProtocolDeviationDAO protocolDeviationDAO;
+    private ProtocolDeviationSubjectDAO protocolDeviationSubjectDAO;
+    private ProtocolDeviationSeverityDAO getProtocolDeviationSeverityDAO() {
+        if(protocolDeviationSeverityDAO == null)
+            protocolDeviationSeverityDAO = new ProtocolDeviationSeverityDAO(sm.getDataSource());
+
+        return protocolDeviationSeverityDAO;
+    }
+
+    private ProtocolDeviationDAO getProtocolDeviationDAO() {
+        if(protocolDeviationDAO == null)
+            protocolDeviationDAO = new ProtocolDeviationDAO(sm.getDataSource());
+
+        return protocolDeviationDAO;
+    }
+
+    private ProtocolDeviationSubjectDAO getProtocolDeviationSubjectDAO() {
+        if(protocolDeviationSubjectDAO == null)
+            protocolDeviationSubjectDAO = new ProtocolDeviationSubjectDAO(sm.getDataSource());
+
+        return protocolDeviationSubjectDAO;
+    }
+
+    private void processSaveProtocolDeviation() {
         ProtocolDeviationDAO protocolDeviationDAO = new ProtocolDeviationDAO(sm.getDataSource());
-        if(request.getMethod().compareTo("POST")==0) {
-            int protocolDeviationId = -1;
-            try {
+
+        int protocolDeviationId = -1;
+        try {
+            if(request.getParameter("protocolDeviationId") != null)
                 protocolDeviationId = Integer.parseInt(
                         request.getParameter("protocolDeviationId")
                 );
-            }
-            catch(NumberFormatException ex) {
-                addPageMessage("Protocol deviation id has an incorrect format");
-            }
+        }
+        catch(NumberFormatException ex) {
+            addPageMessage("Protocol deviation id not found or it has an incorrect format");
+            return;
+        }
 
-            String[] subjectsId = request.getParameterValues("subjects[]");
-            ProtocolDeviationBean pdb = protocolDeviationDAO.findByPKAndStudy(protocolDeviationId, currentStudy);
+        String[] subjectsId = request.getParameterValues("subjects[]");
+        ProtocolDeviationBean pdb = protocolDeviationDAO.findByPKAndStudy(protocolDeviationId, currentStudy);
 
+        ProtocolDeviationSubjectDAO protocolDeviationSubjectDAO =
+                new ProtocolDeviationSubjectDAO(sm.getDataSource());
 
-            if(pdb.getId()<1) {
-                pdb = protocolDeviationDAO.create(pdb);
-            }
-            else {
-                protocolDeviationDAO.update(pdb);
+        if(pdb == null || pdb.getId()<1) {
+            pdb.setStudyId(currentStudy.getId());
+            pdb.setDescription(request.getParameter("description"));
+            pdb.setSeverityId( Integer.parseInt(request.getParameter("severity")) );
+            pdb = protocolDeviationDAO.create(pdb);
+
+            //add subjects to the protocol deviation
+            for(String s: subjectsId) {
+                int subjectId = Integer.parseInt(s);
+                ProtocolDeviationSubjectBean pdsb = protocolDeviationSubjectDAO
+                        .findSubjectById(pdb.getProtocolDeviationId(), subjectId);
+                if(pdsb == null || pdsb.getId()<1) {
+                    pdsb = new ProtocolDeviationSubjectBean();
+                    pdsb.setProtocolDeviationId(pdb.getProtocolDeviationId());
+                    pdsb.setSubjectId(subjectId);
+                    protocolDeviationSubjectDAO.create(pdsb);
+                }
             }
         }
 
 
+    }
+    @Override
+    protected void processRequest() throws Exception {
+        String action = request.getParameter("action");
+
+        if(request.getMethod().compareTo("POST")==0)
+            processSaveProtocolDeviation();
+        else if(action != null && (action.compareTo("get")==0) &&
+                request.getParameter("pdid") != null) {
+            String stringProtocolDeviationId = request.getParameter("pdid");
+            int protocolDeviationId = Integer.parseInt(stringProtocolDeviationId);
+            getProtocolDeviationWithSubjects(protocolDeviationId);
+            return;
+        }
+        ArrayList<ProtocolDeviationSeverityBean> severities =
+                getProtocolDeviationSeverityDAO().findAll();
+
         ArrayList<ProtocolDeviationBean> protocolDeviations =
-                protocolDeviationDAO.findByStudy(currentStudy.getId());
-        StudyDAO studyDAO = new StudyDAO(sm.getDataSource());
-        StudySubjectDAO studySubjectDAO = new StudySubjectDAO(sm.getDataSource());
+                getProtocolDeviationDAO().findByStudy(currentStudy.getId());
 
-        ProtocolDeviationTableFactory  factory = new ProtocolDeviationTableFactory();
         request.setAttribute("protocolDeviations", protocolDeviations);
+        request.setAttribute("severities", severities);
 
-        String findProtocolDeviationsHtml = factory.createTable(request, response).render();
-        request.setAttribute("findProtocolDeviationsHtml", findProtocolDeviationsHtml);
-        request.setAttribute("subjects", studySubjectDAO.findAllByStudyId(currentStudy.getId()));
+        createTable();
 
 
         forwardPage(Page.PROTOCOL_DEVIATIONS);
@@ -75,6 +137,33 @@ public class ProtocolDeviationServlet extends SecureController {
 
         request.setAttribute("findSubjectsHtml", findSubjectsHtml);
         * */
+    }
+
+    private void getProtocolDeviationWithSubjects(int id) throws IOException {
+        PrintWriter printWriter = response.getWriter();;
+        ProtocolDeviationBean protocolDeviationBean =
+                getProtocolDeviationDAO().findByPKAndStudy(id, currentStudy);
+        protocolDeviationBean.setSubjects(
+                getProtocolDeviationSubjectDAO()
+                        .findByProtocolDeviation(protocolDeviationBean.getId())
+        );
+
+        response.setHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        printWriter.print(objectWriter.writeValueAsString(protocolDeviationBean));
+    }
+
+    private void createTable() {
+        StudyDAO studyDAO = new StudyDAO(sm.getDataSource());
+        StudySubjectDAO studySubjectDAO = new StudySubjectDAO(sm.getDataSource());
+
+        ProtocolDeviationTableFactory  factory = new ProtocolDeviationTableFactory();
+        factory.setStudyBean(currentStudy);
+        factory.setProtocolDeviationDAO(getProtocolDeviationDAO());
+
+        String findProtocolDeviationsHtml = factory.createTable(request, response).render();
+        request.setAttribute("findProtocolDeviationsHtml", findProtocolDeviationsHtml);
+        request.setAttribute("subjects", studySubjectDAO.findAllByStudyId(currentStudy.getId()));
     }
 
     @Override
