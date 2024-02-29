@@ -972,7 +972,8 @@ public abstract class SecureController extends HttpServlet implements SingleThre
             if (successMessage != null && sendMessage) {
                 addPageMessage(successMessage);
             }
-            logger.debug("Email sent successfully on {}", new Date());
+            logger.debug("Email sent successfully from the address "+mailSender.getUsername()+" on {}", new Date());
+            System.out.println("Email sent successfully from the address "+mailSender.getUsername());
         } catch (MailException me) {
             JavaMailSenderImpl mailSender = (JavaMailSenderImpl) SpringServletAccess.getApplicationContext(context).getBean("mailSender");
             if (failMessage != null && sendMessage) {
