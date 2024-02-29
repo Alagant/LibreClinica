@@ -26,6 +26,12 @@
                     <version>2.3.1</version>
                     <executions>
                         <execution>
+                            <id>xjc</id>
+                            <goals>
+                                <goal>xjc</goal>
+                            </goals>
+                        </execution>
+                        <execution>
                             <id>schemas-generate</id>
                             <goals>
                                 <goal>xjc</goal>
