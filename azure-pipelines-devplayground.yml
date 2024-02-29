@@ -105,6 +105,7 @@ stages:
           echo running git status
           git status
           
+          echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
           docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=${MAIL_PASSWORD} --build-arg MAIL_ERROR_MSG=${DEVELOPER_EMAILS}
           docker compose run libreclinica mvn -B clean install -DskipTests>mvn.log
           
