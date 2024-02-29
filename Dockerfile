@@ -18,11 +18,11 @@ COPY --from=builder $M2_HOME $M2_HOME
 
 #installs using Maven
 COPY . .
-COPY docker/datainfo_docker_${ENVIRONMENT}_test1.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}_test2.properties /libreclinica/web/src/main/resources/org/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}_test3.properties /libreclinica/ws/src/main/filters/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}_test4.properties /libreclinica/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}_test5.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/ws/src/main/filters/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
 #RUN find /libreclinica -type f -name "*.war"
 #RUN mvn -B clean install -DskipTests
 
