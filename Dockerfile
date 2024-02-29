@@ -15,6 +15,7 @@ ENV PATH="$M2_HOME/bin:$PATH"
 ARG ENVIRONMENT
 #obtains Maven for this image
 COPY --from=builder $M2_HOME $M2_HOME
+RUN rm -rf /root/.m2/*
 
 #installs using Maven
 COPY . .
