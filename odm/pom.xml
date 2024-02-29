@@ -17,6 +17,7 @@
         </dependency>
         </dependencies>
     <build>
+        <pluginManagement>
         <plugins>
             <!-- Automate the creation of binding classes for XML schemas - JAXB marshall/ unmarshall -->
             <plugin>
@@ -79,5 +80,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        </pluginManagement>
     </build>
 </project>
