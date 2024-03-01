@@ -1,4 +1,4 @@
-FROM maven:3.5.0-jdk-8 as builder
+FROM maven:3.5.0-jdk-11 as builder
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 
