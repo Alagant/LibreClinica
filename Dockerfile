@@ -1,8 +1,8 @@
-FROM maven:3.6.3-jdk-11 as builder
+FROM maven:3.5.0-jdk-8 as builder
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 
-FROM tomcat:9-jdk11-openjdk
+FROM tomcat:9-jdk8-openjdk
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
