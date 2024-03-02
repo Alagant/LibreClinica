@@ -93,6 +93,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     final HashMap<Integer, String> imageIconPaths = new HashMap<Integer, String>(8);
 
     private boolean EnrrollmentStatusIsComplete;
+    private String EnrrollmentCompleted;
 
     @Override
     // To avoid showing title in other pages, the request element is used to determine where the request came from.
@@ -672,7 +673,6 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             subjectEventStatus = SubjectEventStatus.get((Integer) ((HashMap<Object, Object>) item).get(property));
             subject = (SubjectBean) ((HashMap<Object, Object>) item).get("subject");
             studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
-
             StringBuilder url = new StringBuilder();
             String nameEvent = studyEventDefinition.getName();
             String pid = studySubjectBean.getSecondaryLabel();
@@ -681,7 +681,27 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             }else{
                 EnrrollmentStatusIsComplete = true;
             }
-            if(EnrrollmentStatusIsComplete || nameEvent.equalsIgnoreCase("EN")){
+            if ((subjectEventStatus.getId() == 3 || subjectEventStatus.getId() == 4) && nameEvent.equalsIgnoreCase("EN")) {
+                EnrrollmentCompleted = "EN";
+            } if ((subjectEventStatus.getId()== 3 || subjectEventStatus.getId() == 4) && nameEvent.equalsIgnoreCase("NE")) {
+                EnrrollmentCompleted = "NE";
+            }
+            if(EnrrollmentStatusIsComplete || nameEvent.equalsIgnoreCase("EN") || nameEvent.equalsIgnoreCase("NE")){
+                if("NE".equalsIgnoreCase(EnrrollmentCompleted) || "EN".equalsIgnoreCase(EnrrollmentCompleted)){
+                    if(!"NE".equalsIgnoreCase(EnrrollmentCompleted)){
+                        url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
+                        url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
+                        url.append(getCount());
+                        url.append("</a></td></tr></table>");
+                    }
+                }else{
+                    url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
+                    url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
+                    url.append(getCount());
+                    url.append("</a></td></tr></table>");
+                }
+            }
+            if(nameEvent.equalsIgnoreCase("BL")){
                 url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
                 url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
                 url.append(getCount());
