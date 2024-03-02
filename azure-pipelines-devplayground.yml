@@ -56,6 +56,12 @@ stages:
     - checkout: LcDMM
     - checkout: CDCOauthMockup
     - task: Bash@3
+      displayName: Generate the .env files
+      inputs:
+        targetType: 'inline'
+        script: |
+          echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
+    - task: Bash@3
       displayName: Backup the database
       inputs:
         targetType: 'inline'
@@ -74,7 +80,9 @@ stages:
           docker image prune -af
           docker network prune -f
           docker system prune -af
-          docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_libreclinica_config libreclinica_mvn_cache
+          docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_libreclinica_config libreclinica_mvn_cache libreclinica_libreclinica_src
+          docker container prune -f
+          docker image prune -af
           docker system prune -af
 
     - task: Bash@3

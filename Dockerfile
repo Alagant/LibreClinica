@@ -2,7 +2,7 @@ FROM maven:3.5.0-jdk-8 as builder
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 
-FROM tomcat:9-jdk8
+FROM tomcat:9-jdk8-openjdk
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 ARG ENVIRONMENT
@@ -15,6 +15,7 @@ ENV PATH="$M2_HOME/bin:$PATH"
 ARG ENVIRONMENT
 #obtains Maven for this image
 COPY --from=builder $M2_HOME $M2_HOME
+RUN rm -rf /root/.m2/*
 
 #installs using Maven
 COPY . .
@@ -36,4 +37,5 @@ COPY docker/manager_context.xml /usr/local/tomcat/webapps/manager/META-INF/conte
 #COPY --from=builder /libreclinica/ws/target/LibreClinica-ws-1.3.1.war /usr/local/tomcat/webapps/LibreClinica-ws-1.3.1.war
 
 RUN env
+#RUN mvn -B clean install -DskipTests|tee /libreclinica/build.log
 #COPY --from=builder /libreclinica/web/target/LibreClinica-web-1.3.1.war  /usr/local/tomcat/webapps/LibreClinica.war
