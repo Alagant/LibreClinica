@@ -5,7 +5,6 @@ MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
 FROM tomcat:9-jdk8-openjdk
 LABEL maintainer="Lucio M. <lucioric2000@hotmail.com>"
 MAINTAINER   Lucio M. <lucioric2000@hotmail.com>
-ARG ENVIRONMENT
 WORKDIR /libreclinica
 
 #Environment variables
