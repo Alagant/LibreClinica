@@ -145,6 +145,7 @@ public class ListStudySubjectsServlet extends SecureController {
         factory.setEventDefintionCRFDAO(getEventDefinitionCRFDAO());
         factory.setStudyGroupDAO(getStudyGroupDAO());
         factory.setStudyParameterValueDAO(getStudyParameterValueDAO());
+        factory.loadCountOfStudySubjectsAtStudyOrSiteToStudyBean();
         String findSubjectsHtml = factory.createTable(request, response).render();
 
         request.setAttribute("findSubjectsHtml", findSubjectsHtml);

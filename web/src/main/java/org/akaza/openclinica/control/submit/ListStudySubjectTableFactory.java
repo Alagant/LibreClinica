@@ -89,6 +89,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private final ResourceBundle resterms = ResourceBundleProvider.getTermsBundle();
     private StudyParameterValueDAO studyParameterValueDAO;
     private ParticipantPortalRegistrar participantPortalRegistrar;
+    private Integer countOfStudySubjectsAtStudyOrSite;
 
     final HashMap<Integer, String> imageIconPaths = new HashMap<Integer, String>(8);
 
@@ -533,6 +534,11 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
 
     public void setCurrentUser(UserAccountBean currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public void loadCountOfStudySubjectsAtStudyOrSiteToStudyBean() {
+        this.countOfStudySubjectsAtStudyOrSite = studySubjectDAO.getCountofStudySubjectsAtStudyOrSite(studyBean);
+        this.studyBean.setCountOfStudySubjectsAtStudyOrSite(this.countOfStudySubjectsAtStudyOrSite);
     }
 
     private class CharFilterMatcher implements FilterMatcher {

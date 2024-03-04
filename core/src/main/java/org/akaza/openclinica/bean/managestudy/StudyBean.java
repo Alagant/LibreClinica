@@ -92,6 +92,7 @@ public class StudyBean extends AuditableEntityBean {
     private String studyUuid;
     private String mailNotification = MailNotificationType.DISABLED.name();
     private String contactEmail;
+    private Integer countOfStudySubjectsAtStudyOrSite;
 
     public boolean isPublished() {
         return published;
@@ -1205,6 +1206,25 @@ public class StudyBean extends AuditableEntityBean {
 
     public boolean contactEmailAbsentButNotification() {
         return ENABLED.name().equalsIgnoreCase(this.mailNotification) && contactEmailAbsent();
+    }
+
+    public Integer getCountOfStudySubjectsAtStudyOrSite() {
+        return countOfStudySubjectsAtStudyOrSite;
+    }
+
+    public void setCountOfStudySubjectsAtStudyOrSite(Integer countOfStudySubjectsAtStudyOrSite) {
+        this.countOfStudySubjectsAtStudyOrSite = countOfStudySubjectsAtStudyOrSite;
+    }
+
+    public String getSiteIdOfStudy() {
+        if (parentStudyId > 0) {
+            String identifier = getIdentifier();
+            String[] splitStringIdentifier = identifier.split(" ");
+            return splitStringIdentifier[0];
+        } else {
+            return "00";
+        }
+
     }
 
     public String newId() {

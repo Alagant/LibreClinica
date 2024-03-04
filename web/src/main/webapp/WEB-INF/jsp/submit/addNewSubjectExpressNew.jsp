@@ -88,8 +88,8 @@
                     <td><div class="formfieldXL_BG">
                     <c:choose>
                      <c:when test="${study.studyParameterConfig.subjectIdGeneration =='auto non-editable'}">
-                      <input onfocus="this.select()" type="text" value="<c:out value="${study.newId()}"/>" class="formfield" disabled>
-                      <input type="hidden" name="label" value="<c:out value="${study.newId()}"/>">
+                      <input onfocus="this.select()" type="text" value="" id="studySubjectIdText" class="formfield" disabled>
+                      <input type="hidden" name="label" value="" id="studySubjectIdHidden">
                      </c:when>
                      <c:otherwise>
                        <input onfocus="this.select()" type="text" name="label" value="<c:out value="${label}"/>" class="formfieldXL">
@@ -144,6 +144,30 @@
     </c:choose>
 
     <tr>
+        <td class="formlabel"><fmt:message key="enrollment_type" bundle="${resword}"/>:</td>
+        <td>
+            <table>
+                <tr><td>
+                    <div class="formfieldM_BG">
+                        <select name="studyEventDefinition" class="formfieldM" id="enrollmentTypeSelection" onchange="handleSelection()">
+                            <option value="">-<fmt:message key="select" bundle="${resword}"/>-</option>
+                            <option value="EN"><fmt:message key="enrollment_type_enrollment" bundle="${resword}"/></option>
+                            <option value="NE"><fmt:message key="enrollment_type_non_enrollment" bundle="${resword}"/></option>
+                        </select>
+                    </div>
+                </td>
+                    <td><span class="formlabel">*</span></td>
+                </tr>
+                <%--
+                <tr>
+                    <td colspan="2"><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="studyEventDefinition"/></jsp:include></td>
+                </tr>
+                --%>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
         <td class="formlabel">
             <fmt:message key="enrollment_date" bundle="${resword}"/>:
         </td>
@@ -167,7 +191,7 @@
         </td>
     </tr>
 
-    
+
         <c:if test="${study.studyParameterConfig.genderRequired !='not used'}">
 	        <tr>
 	        <td class="formlabel"><fmt:message key="gender" bundle="${resword}"/>:</td>
@@ -209,7 +233,7 @@
 					</tr>
 					<tr><td colspan="2"><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="gender"/></jsp:include></td></tr>
 				</table>
-	        </td>   
+	        </td>
 	    </tr>
 	</c:if>
 
@@ -397,4 +421,33 @@
 </div>
 
 </form>
+
+<script>
+    function handleSelection() {
+        var selectedValue = document.getElementById("enrollmentTypeSelection").value;
+
+        var countOfStudySubjectsAtStudyOrSite = JSON.stringify( <%= study.getCountOfStudySubjectsAtStudyOrSite() %> );
+        var siteIdentifier = JSON.stringify( <%= study.getSiteIdOfStudy() %> );
+
+        countOfStudySubjectsAtStudyOrSite = countOfStudySubjectsAtStudyOrSite.padStart(5, "0");
+        siteIdentifier = siteIdentifier.padStart(2, "0");
+
+        var studySubjectIdEnrollment = siteIdentifier+ "-EN" + countOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdNonEnrollment = siteIdentifier + "-N" + countOfStudySubjectsAtStudyOrSite;
+
+        switch (selectedValue) {
+            case "EN":
+                document.getElementById("studySubjectIdText").value = studySubjectIdEnrollment;
+                document.getElementById("studySubjectIdHidden").value = studySubjectIdEnrollment;
+                break;
+            case "NE":
+                document.getElementById("studySubjectIdText").value = studySubjectIdNonEnrollment;
+                document.getElementById("studySubjectIdHidden").value = studySubjectIdNonEnrollment;
+                break;
+            default:
+                document.getElementById("studySubjectId").value = "";
+                break;
+        }
+    }
+</script>
 <!-- start of submit/addNewSubjectExpressNew.jsp -->
