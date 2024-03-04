@@ -1227,6 +1227,7 @@ public class StudyBean extends AuditableEntityBean {
 
     }
 
+    @Deprecated
     public String newId() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
