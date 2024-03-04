@@ -417,6 +417,12 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         return getCountByQuery(query, variables);
     }
 
+    public Integer getCountofStudySubjectsAtStudyOrSiteRandomized(StudyBean currentStudy) {
+        HashMap<Integer, Object> variables = variables(currentStudy.getId());
+        String query = digester.getQuery("getCountofStudySubjectsAtStudyOrSiteRandomized");
+        return getCountByQuery(query, variables);
+    }
+
     public Integer getTotalCountStudySubjectForCrfMigration(CRFVersionBean sourceCrfVersionBean , CRFVersionBean targetCrfVersionBean ,ArrayList<String> studyEventDefnlist ,ArrayList<String>  sitelist) {
         HashMap<Integer, Object> variables = new HashMap<>();
         String eventStr =StringUtils.join(studyEventDefnlist, ",");

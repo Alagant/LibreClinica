@@ -35,6 +35,10 @@
         <name>getCountofStudySubjectsAtStudyOrSite</name>
         <sql>select count(*) from study_subject where study_id = ?</sql>
     </query>
+	<query>
+		<name>getCountofStudySubjectsAtStudyOrSiteRandomized</name>
+		<sql>select count(*) from study_subject where study_id = ? AND secondary_label IS NOT NULL</sql>
+	</query>
     <query>
         <name>getCountofStudySubjectsAtStudyOrSite</name>
         <sql>select count(*) from study_subject where study_id = ?</sql>
