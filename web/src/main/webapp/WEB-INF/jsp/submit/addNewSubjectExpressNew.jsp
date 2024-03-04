@@ -432,8 +432,8 @@
         countOfStudySubjectsAtStudyOrSite = countOfStudySubjectsAtStudyOrSite.padStart(5, "0");
         siteIdentifier = siteIdentifier.padStart(2, "0");
 
-        var studySubjectIdEnrollment = siteIdentifier+ "-EN" + countOfStudySubjectsAtStudyOrSite;
-        var studySubjectIdNonEnrollment = siteIdentifier + "-N" + countOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdEnrollment = "38-" + siteIdentifier+ "-EN" + countOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdNonEnrollment = "38-" + siteIdentifier + "-N" + countOfStudySubjectsAtStudyOrSite;
 
         switch (selectedValue) {
             case "EN":
