@@ -7,7 +7,10 @@
 <div class="add_new_subject_div form-standard" style="display: flex; flex-direction: column; padding: 10px; row-gap: 10px;">
     <h3>New protocol deviation</h3>
     <form method="post" action="${pageContext.request.contextPath}/ProtocolDeviations">
+        <c:import url="../submit/protocolDeviationEditorSectionA.jsp">
+        </c:import>
     <div style="display: flex;">
+
         <div class="formlabel" style="width: 120px;">
             Severity:
         </div>
