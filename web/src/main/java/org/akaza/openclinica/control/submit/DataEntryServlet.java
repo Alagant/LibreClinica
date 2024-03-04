@@ -610,6 +610,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
             enrollmentData.setGender("Female");
         }
 
+
+
         enrollmentData.setStudyID(currentStudy.getIdentifier());
         enrollmentData.setSubjectID(String.valueOf(ssb.getSubjectId()));
         // Get the study then the parent study
@@ -2011,7 +2013,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     seb.setUpdater(ub);
                                     StudySubjectDAO studao = new StudySubjectDAO(getDataSource());
                                     StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
-                                    ssbe.setSecondaryLabel(successObject.getPid());
+                                    ssbe.setLabel(successObject.getPid());
                                     studao.update(ssbe);
                                     seb = sedao.update(seb);
                                     success = success && seb.isActive();
@@ -2668,7 +2670,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                                 seb.setUpdater(ub);
                                                 StudySubjectDAO studao = new StudySubjectDAO(getDataSource());
                                                 StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
-                                                ssbe.setSecondaryLabel(successObject.getPid());
+                                                ssbe.setLabel(successObject.getPid());
                                                 studao.update(ssbe);
                                                 seb = sedao.update(seb);
                                                 success = success && seb.isActive();
