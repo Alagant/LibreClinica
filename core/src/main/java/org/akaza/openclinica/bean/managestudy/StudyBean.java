@@ -1212,6 +1212,10 @@ public class StudyBean extends AuditableEntityBean {
         return countOfStudySubjectsAtStudyOrSite;
     }
 
+    public Integer getNextCountOfStudySubjectsAtStudyOrSite() {
+        return Integer.sum(getCountOfStudySubjectsAtStudyOrSite(), 1);
+    }
+
     public void setCountOfStudySubjectsAtStudyOrSite(Integer countOfStudySubjectsAtStudyOrSite) {
         this.countOfStudySubjectsAtStudyOrSite = countOfStudySubjectsAtStudyOrSite;
     }

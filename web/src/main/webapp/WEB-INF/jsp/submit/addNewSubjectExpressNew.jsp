@@ -426,14 +426,14 @@
     function handleSelection() {
         var selectedValue = document.getElementById("enrollmentTypeSelection").value;
 
-        var countOfStudySubjectsAtStudyOrSite = JSON.stringify( <%= study.getCountOfStudySubjectsAtStudyOrSite() %> );
+        var nextCountOfStudySubjectsAtStudyOrSite = JSON.stringify( <%= study.getNextCountOfStudySubjectsAtStudyOrSite() %> );
         var siteIdentifier = JSON.stringify( <%= study.getSiteIdOfStudy() %> );
 
-        countOfStudySubjectsAtStudyOrSite = countOfStudySubjectsAtStudyOrSite.padStart(5, "0");
+        nextCountOfStudySubjectsAtStudyOrSite = nextCountOfStudySubjectsAtStudyOrSite.padStart(5, "0");
         siteIdentifier = siteIdentifier.padStart(2, "0");
 
-        var studySubjectIdEnrollment = "38-" + siteIdentifier+ "-EN" + countOfStudySubjectsAtStudyOrSite;
-        var studySubjectIdNonEnrollment = "38-" + siteIdentifier + "-N" + countOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdEnrollment = "38-" + siteIdentifier+ "-EN" + nextCountOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdNonEnrollment = "38-" + siteIdentifier + "-N" + nextCountOfStudySubjectsAtStudyOrSite;
 
         switch (selectedValue) {
             case "EN":
