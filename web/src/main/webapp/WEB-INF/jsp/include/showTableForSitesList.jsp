@@ -103,11 +103,6 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td valign="top">
-						<div class="formfieldM_BG">
-						<input name="ebl_filterKeyword" type="text" class="formfieldM" value="<c:out value="${table.keywordFilter}"/>" /> 
-						</div>
-					</td>
-					<td valign="top">
 						<input type="submit" class="button_search" value="<fmt:message key="find" bundle="${resword}"/>" 
 							<c:choose>
 								<c:when test="${searchFormDisplayed == 0}">
@@ -118,6 +113,19 @@
 								</c:otherwise>
 							</c:choose>
 						/>
+					</td>
+					<td valign="top">
+						<div class="formfieldM_BG">
+							<input name="ebl_filterKeyword" type="text" class="formfieldM" value="<c:out value="${table.keywordFilter}"/>" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top">
+						<input type="checkbox" name="active_site"></input>Active site
+					</td>
+					<td valign="top">
+			    		<input type="checkbox" name="inactive_site"></input>Inactive site
 					</td>
 				</tr>
 			</table>
