@@ -432,7 +432,7 @@
         nextCountOfStudySubjectsAtStudyOrSite = nextCountOfStudySubjectsAtStudyOrSite.padStart(5, "0");
         siteIdentifier = siteIdentifier.padStart(2, "0");
 
-        var studySubjectIdEnrollment = "38-" + siteIdentifier+ "-EN" + nextCountOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdEnrollment = siteIdentifier+ "-P" + nextCountOfStudySubjectsAtStudyOrSite;
         var studySubjectIdNonEnrollment = "38-" + siteIdentifier + "-N" + nextCountOfStudySubjectsAtStudyOrSite;
 
         switch (selectedValue) {
