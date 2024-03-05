@@ -537,7 +537,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     public void loadCountOfStudySubjectsAtStudyOrSiteToStudyBean() {
-        this.countOfStudySubjectsAtStudyOrSite = studySubjectDAO.getCountofStudySubjectsAtStudyOrSite(studyBean);
+        this.countOfStudySubjectsAtStudyOrSite = studySubjectDAO.getCountofStudySubjectsAtStudyOrSiteRandomized(studyBean);
         this.studyBean.setCountOfStudySubjectsAtStudyOrSite(this.countOfStudySubjectsAtStudyOrSite);
     }
 
