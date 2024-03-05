@@ -64,5 +64,14 @@
 			</column>
 		</createTable>
 	</changeSet>
-
+	<!--
+	<changeSet id="4" author="dx31">
+		<addColumn tableName="protocol_deviation">
+			<column name="item_a_1" type="SMALLINT" defaultValue="0"/>
+			<column name="item_a_2" type="SMALLINT" defaultValue="0"/>
+			<column name="item_a_3" type="DATE"  />
+			<column name="item_a_4" type="DATE"/>
+		</addColumn>
+	</changeSet>
+	-->
 </databaseChangeLog>

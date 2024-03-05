@@ -23,6 +23,9 @@
             list-style-image: none;
             margin-bottom: 8px;
         }
+        li:nth-child(even) {
+            background: #4D4D4D;
+        }
     </style>
     <h1 id="title-editor">New Protocol Deviation</h1>
     <form method="post" action="${pageContext.request.contextPath}/ProtocolDeviations">

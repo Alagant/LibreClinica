@@ -23,16 +23,25 @@
         <li>
             <span class="question">
                 Date the incident occurred:
+                <div class="detail">
+                <input type="text" name="item_a_3"/>
+                </div>
             </span>
         </li>
         <li>
             <span class="question">
                 Date site staff became aware of the incident:
+                <div class="detail">
+                <input type="text" name="item_a_4"/>
+                </div>
             </span>
         </li>
         <li>
             <span class="question">
                 Date of first communication with the clinical Research Branch about the incident:
+                <div class="detail">
+                    <input type="text" name="item_a_5"/>
+                </div>
             </span>
         </li>
         <li>
