@@ -9,6 +9,18 @@
     <form method="post" action="${pageContext.request.contextPath}/ProtocolDeviations">
         <c:import url="../submit/protocolDeviationEditorSectionA.jsp">
         </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionB.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionC.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionD.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionE.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionF.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionG.jsp">
+        </c:import>
     <div style="display: flex;">
 
         <div class="formlabel" style="width: 120px;">
