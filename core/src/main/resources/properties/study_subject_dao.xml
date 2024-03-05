@@ -42,8 +42,8 @@
 				length(secondary_label)>0 </sql>
 	</query>
     <query>
-        <name>getCountofStudySubjectsAtStudyOrSite</name>
-        <sql>select count(*) from study_subject where study_id = ?</sql>
+        <name>getCountofStudySubjectsAtStudyOrSiteRandomized</name>
+        <sql>select count(*) from study_subject where study_id = ? AND (secondary_label IS NOT NULL) AND (NOT secondary_label='')</sql>
     </query>
     <query>
         <name>getCountofStudySubjectsAtStudy</name>
@@ -53,14 +53,22 @@
                 (s.study_id = ? or s.parent_study_id = ?)
         </sql>
     </query>
-    <query>
-        <name>getCountofStudySubjects</name>
-        <sql>
-            select count (*) from (select distinct ss.* from study_subject ss, study s where
-                ss.study_id = s.study_id AND
-                ( s.study_id = ? or s.parent_study_id = ? )) as ss
-        </sql>
-    </query>
+	<query>
+		<name>getCountofStudySubjectsRandomized</name>
+		<sql>
+			select count (*) from (select distinct ss.* from study_subject ss, study s where
+			ss.study_id = s.study_id AND ss.secondary_label IS NOT NULL AND (NOT ss.secondary_label='') AND
+			( s.study_id = ? or s.parent_study_id = ? )) as ss
+		</sql>
+	</query>
+	<query>
+		<name>getCountofStudySubjects</name>
+		<sql>
+			select count (*) from (select distinct ss.* from study_subject ss, study s where
+			ss.study_id = s.study_id AND
+			( s.study_id = ? or s.parent_study_id = ? )) as ss
+		</sql>
+	</query>
     <query>
         <name>getCountofStudySubjectsBasedOnStatus</name>
         <sql>
