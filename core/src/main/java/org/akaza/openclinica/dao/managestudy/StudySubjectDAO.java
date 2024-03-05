@@ -411,9 +411,9 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         return studySubjects;
     }
 
-    public Integer getCountofStudySubjectsAtStudyOrSiteRandomized(StudyBean currentStudy) {
+    public Integer getCountofStudySubjectsAtStudyOrSite(StudyBean currentStudy) {
         HashMap<Integer, Object> variables = variables(currentStudy.getId());
-        String query = digester.getQuery("getCountofStudySubjectsAtStudyOrSiteRandomized");
+        String query = digester.getQuery("getCountofStudySubjectsAtStudyOrSite");
         return getCountByQuery(query, variables);
     }
 
@@ -459,7 +459,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         return getCountByQuery(query, variables);
     }
 
-    public Integer getCountofStudySubjectsRendomized(StudyBean currentStudy) {
+    public Integer getCountofStudySubjectsRandomized(StudyBean currentStudy) {
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
         String query = digester.getQuery("getCountofStudySubjectsRandomized");
         return getCountByQuery(query, variables);

@@ -87,7 +87,7 @@ public class StudySubjectStatusStatisticsTableFactory extends AbstractTableFacto
             tableFacade.setTotalRows(totalRows);
         }
 
-        Integer totalStudySubjects = studySubjectDao.getCountofStudySubjectsRendomized(currentStudy);
+        Integer totalStudySubjects = studySubjectDao.getCountofStudySubjectsRandomized(currentStudy);
 
         for (Status status : statuses) {
             Integer totalStudySubjectsByStatus = studySubjectDao.getCountofStudySubjectsBasedOnStatus(currentStudy, status);
