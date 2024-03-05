@@ -31,3 +31,5 @@ nb-configuration.xml
 /.README.md.html
 
 /node_modules
+.env_emails
+.env
