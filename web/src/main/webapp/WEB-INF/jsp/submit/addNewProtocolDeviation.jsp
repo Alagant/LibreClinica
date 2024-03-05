@@ -5,7 +5,26 @@
 <fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 <div class="add_new_subject_div form-standard" style="display: flex; flex-direction: column; padding: 10px; row-gap: 10px;">
-    <h3>New protocol deviation</h3>
+    <style type="text/css" scoped>
+        h1 {
+            display: block;
+            color: var(--lightblue-d20);
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+        }
+        h2 {
+            display: block;
+            color: white;
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+            font-size: 1rem;
+            padding: 4px;
+            background: var(--lightblue-d20);
+        }
+        li {
+            list-style-image: none;
+            margin-bottom: 8px;
+        }
+    </style>
+    <h1 id="title-editor">New Protocol Deviation</h1>
     <form method="post" action="${pageContext.request.contextPath}/ProtocolDeviations">
         <c:import url="../submit/protocolDeviationEditorSectionA.jsp">
         </c:import>
