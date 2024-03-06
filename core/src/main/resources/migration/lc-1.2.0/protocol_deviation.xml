@@ -139,6 +139,12 @@
 			<column name="item_g_8" type="VARCHAR(200)"/>
 			<column name="item_g_9" type="VARCHAR(400)"/>
 		</addColumn>
-	</changeSet>
 
+	</changeSet>
+	<changeSet id="5" author="dx31">
+		<dropColumn tableName="protocol_deviation"
+					columnName="protocol_deviation_severity_id"/>
+		<dropColumn tableName="protocol_deviation"
+					columnName="description"/>
+	</changeSet>
 </databaseChangeLog>
