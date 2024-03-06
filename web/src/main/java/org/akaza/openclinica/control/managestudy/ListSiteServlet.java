@@ -83,6 +83,14 @@ public class ListSiteServlet extends SecureController {
             EntityBeanTable table = fp.getEntityBeanTable();
             ArrayList<StudyRow> allStudyRows = StudyRow.generateRowsFromBeans(studies);
 
+            Boolean fActive = fp.getString("active_site").equals("on");
+            Boolean fInactive = fp.getString("inactive_site").equals("on");
+            if (fActive && !fInactive) {
+                allStudyRows.removeIf(row -> row.getBean().getStatus().getName().equals("available"));
+            } else if (!fActive && fInactive) {
+                allStudyRows.removeIf(row -> row.getBean().getStatus().getName().equals("unavailable"));
+            }
+
             String[] columns =
                 { resword.getString("name"), resword.getString("unique_identifier"), resword.getString("OID"), resword.getString("principal_investigator"),
                     resword.getString("facility_name"), resword.getString("date_created"), resword.getString("status"), resword.getString("actions") };
