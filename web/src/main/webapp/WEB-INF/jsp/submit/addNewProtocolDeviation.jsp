@@ -5,13 +5,13 @@
 <fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 <div class="add_new_subject_div form-standard" style="display: flex; flex-direction: column; padding: 10px; row-gap: 10px;">
-    <style type="text/css" scoped>
-        h1 {
+    <style scoped>
+        #protocol-deviation-editor h1 {
             display: block;
             color: var(--lightblue-d20);
             font-family: Tahoma, Arial, Helvetica, sans-serif;
         }
-        h2 {
+        #protocol-deviation-editor h2 {
             display: block;
             color: white;
             font-family: Tahoma, Arial, Helvetica, sans-serif;
@@ -19,12 +19,13 @@
             padding: 4px;
             background: var(--lightblue-d20);
         }
-        li {
+        #protocol-deviation-editor li {
             list-style-image: none;
             margin-bottom: 8px;
+            min-height: 40px;
         }
-        li:nth-child(even) {
-            background: #4D4D4D;
+        #protocol-deviation-editor li:nth-child(even) {
+            background: var(--gray-l40);
         }
     </style>
     <h1 id="title-editor">New Protocol Deviation</h1>

@@ -85,6 +85,8 @@
                 <input type="radio" name="item_a_7" value="0">No
                 <div>
                     a. Date when site staff reported incident to the participant
+                    <input type="text" name="item_a_7_1"/>
+
                 </div>
             </div>
         </li>

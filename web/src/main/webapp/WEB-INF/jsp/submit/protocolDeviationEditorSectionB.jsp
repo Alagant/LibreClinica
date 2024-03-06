@@ -98,9 +98,9 @@
             </strong>
             </span>
             <div class="detail">
-            <input type="radio" name="item_b_12" value="1">Yes
-            <input type="radio" name="item_b_12" value="0">No
-                </div>
+                <input type="radio" name="item_b_12" value="1">Yes
+                <input type="radio" name="item_b_12" value="0">No
+            </div>
         </li>
         <li>
             <span class="question">

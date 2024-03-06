@@ -13,15 +13,15 @@
     <li>
         2. <span class="question">CDC IRB Reporting Category:</span>
         <div class="detail">
-            <input type="checkbox" name="item_g_2" value="1">
+            <input type="checkbox" name="item_g_2_1" value="1">
                 Unanticipated problem(s) involving risks to subjects or others
-            <input type="checkbox" name="item_g_2" value="1">
+            <input type="checkbox" name="item_g_2_2" value="1">
                 Serious or continuing noncompliance with regulations or IRB requirements
                 (e.g. breach of protocol)
-            <input type="checkbox" name="item_g_3" value="1">
+            <input type="checkbox" name="item_g_2_3" value="1">
             Suspension or termination (for reasons other than expiration)
             [if termination, also submit 0.1253]
-            <input type="checkbox" name="item_g_4" value="1">
+            <input type="checkbox" name="item_g_2_4" value="1">
             Other incidents as specified in the protocol or requested by the IRB
         </div>
     </li>

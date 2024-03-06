@@ -9,15 +9,15 @@
             </div>
         </li>
         <li>
-            2. <span class="question">:</span>
+            2. <span class="question">Name of person completing form:</span>
             <div class="detail">
-            <textarea name="item_f_2"></textarea>
+                <input type="text" name="item_f_2">
             </div>
         </li>
         <li>
             3. <span class="question">Date Form Completed:</span>
             <div class="detail">
-            <textarea name="item_f_3"></textarea>
+                <input type="text" name="item_f_3">
             </div>
         </li>
     </ol>
