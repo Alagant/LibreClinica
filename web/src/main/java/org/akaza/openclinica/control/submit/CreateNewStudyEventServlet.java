@@ -317,9 +317,9 @@ public class CreateNewStudyEventServlet extends SecureController {
             	// add an error here, tbh
             	Validator.addError(errors, INPUT_STUDY_SUBJECT, respage.getString("must_enter_subject_ID_for_identifying"));
             }
-            if(!"EN".equalsIgnoreCase(definition.getName())){
+            if(!("EN".equalsIgnoreCase(definition.getName()) || "BL".equalsIgnoreCase(definition.getName()))){
                 if(studySubject.getSecondaryLabel().isEmpty()) {
-                    Validator.addError(errors, INPUT_STUDY_SUBJECT, "Study Subject is not enrolled. Enroll subject from subject matrix.");
+                    //Validator.addError(errors, INPUT_STUDY_SUBJECT, "Study Subject is not enrolled. Enroll subject from subject matrix.");
                     if(!definition.getName().isEmpty()){
                         Validator.addError(errors, INPUT_STUDY_EVENT_DEFINITION, "Only the EN event can be scheduled for new subjects.");
                     }
@@ -336,7 +336,7 @@ public class CreateNewStudyEventServlet extends SecureController {
                     int pk = fp.getInt(INPUT_STUDY_EVENT_DEFINITION_SCHEDULED[i]);
                     if (pk > 0) {
                         StudyEventDefinitionBean sedb = (StudyEventDefinitionBean) seddao.findByPK(pk);
-                        if(!"EN".equalsIgnoreCase(definition.getName())){
+                        if(!("EN".equalsIgnoreCase(definition.getName()) || "BL".equalsIgnoreCase(definition.getName()))){
                             if(studySubject.getSecondaryLabel().isEmpty()) {
                                 if(!sedb.getName().isEmpty()){
                                     Validator.addError(errors, INPUT_STUDY_EVENT_DEFINITION_SCHEDULED[i], "Only the EN event can be scheduled for new subjects.");
