@@ -693,14 +693,27 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
                 EnrrollmentCompleted = "NE";
             }
             if(EnrrollmentStatusIsComplete || nameEvent.equalsIgnoreCase("EN") || nameEvent.equalsIgnoreCase("NE")){
-                if("NE".equalsIgnoreCase(EnrrollmentCompleted) || "EN".equalsIgnoreCase(EnrrollmentCompleted)){
-                    if(!"NE".equalsIgnoreCase(EnrrollmentCompleted)){
+                if(!"BL".equalsIgnoreCase(nameEvent)){
+                    if("NE".equalsIgnoreCase(EnrrollmentCompleted) || "EN".equalsIgnoreCase(EnrrollmentCompleted)){
+                        if(!"NE".equalsIgnoreCase(EnrrollmentCompleted)){
+                            url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
+                            url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
+                            url.append(getCount());
+                            url.append("</a></td></tr></table>");
+                        }
+                    }else{
                         url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
                         url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
                         url.append(getCount());
                         url.append("</a></td></tr></table>");
                     }
                 }
+            }
+            if(nameEvent.equalsIgnoreCase("BL")){
+                url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
+                url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
+                url.append(getCount());
+                url.append("</a></td></tr></table>");
             }
             return url.toString();
         }
