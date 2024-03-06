@@ -2014,6 +2014,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     StudySubjectDAO studao = new StudySubjectDAO(getDataSource());
                                     StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
                                     ssbe.setLabel(successObject.getPid());
+                                    ssbe.setSecondaryLabel(successObject.getPid());
                                     studao.update(ssbe);
                                     seb = sedao.update(seb);
                                     success = success && seb.isActive();
@@ -2671,6 +2672,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                                 StudySubjectDAO studao = new StudySubjectDAO(getDataSource());
                                                 StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
                                                 ssbe.setLabel(successObject.getPid());
+                                                ssbe.setSecondaryLabel(successObject.getPid());
                                                 studao.update(ssbe);
                                                 seb = sedao.update(seb);
                                                 success = success && seb.isActive();
