@@ -65,4 +65,80 @@
 		</createTable>
 	</changeSet>
 
+	<changeSet id="4" author="dx31">
+		<addColumn tableName="protocol_deviation">
+			<column name="item_a_1" type="SMALLINT" defaultValue="0"/>
+			<column name="item_a_2" type="SMALLINT" defaultValue="0"/>
+			<column name="item_a_3" type="DATE"  />
+			<column name="item_a_4" type="DATE"/>
+			<column name="item_a_5" type="DATE"/>
+			<column name="item_a_6" type="SMALLINT" defaultValue="0"/>
+			<column name="item_a_7" type="SMALLINT" defaultValue="0"/>
+			<column name="item_a_7_1" type="DATE"/>
+			<column name="item_a_8" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_1" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_2" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_3" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_4" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_5" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_6" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_7" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_8" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_9" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_10" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_11" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_12" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_13" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_14" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_15" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_16" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_17" type="SMALLINT" defaultValue="0"/>
+			<column name="item_b_18" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_1" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_2" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_3" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_4" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_5" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_6" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_7" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_8" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_9" type="SMALLINT" defaultValue="0"/>
+			<column name="item_c_1_10" type="VARCHAR(40)"/>
+			<column name="item_c_2" type="VARCHAR(400)"/>
+			<column name="item_d_1_a" type="DATE"/>
+			<column name="item_d_1_b" type="VARCHAR(400)"/>
+			<column name="item_e_1_a" type="VARCHAR(400)"/>
+			<column name="item_e_1_b" type="VARCHAR(400)"/>
+			<column name="item_e_1_c" type="VARCHAR(400)"/>
+			<column name="item_e_1_d" type="VARCHAR(400)"/>
+			<column name="item_f_1" type="VARCHAR(200)"/>
+			<column name="item_f_2" type="VARCHAR(200)"/>
+			<column name="item_f_3" type="DATE"/>
+			<column name="item_g_1" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_2_1" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_2_2" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_2_3" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_2_4" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_3" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_4" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_5" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_6" type="DATE"/>
+			<column name="item_g_6_1_a" type="VARCHAR(200)"/>
+			<column name="item_g_6_1_b" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_6_1_c" type="VARCHAR(200)"/>
+			<column name="item_g_6_2_a" type="VARCHAR(200)"/>
+			<column name="item_g_6_2_b" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_6_2_c" type="VARCHAR(200)"/>
+			<column name="item_g_6_3_a" type="VARCHAR(200)"/>
+			<column name="item_g_6_3_b" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_6_3_c" type="VARCHAR(200)"/>
+			<column name="item_g_6_4_a" type="VARCHAR(200)"/>
+			<column name="item_g_6_4_b" type="SMALLINT" defaultValue="0"/>
+			<column name="item_g_6_4_c" type="VARCHAR(200)"/>
+			<column name="item_g_7" type="VARCHAR(200)"/>
+			<column name="item_g_8" type="VARCHAR(200)"/>
+			<column name="item_g_9" type="VARCHAR(400)"/>
+		</addColumn>
+	</changeSet>
+
 </databaseChangeLog>
