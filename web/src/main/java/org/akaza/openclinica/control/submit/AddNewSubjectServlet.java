@@ -879,7 +879,7 @@ public class AddNewSubjectServlet extends SecureController {
 
 
                 se.setSampleOrdinal(sedao.getMaxSampleOrdinal(sed, s) + 1);
-                if("BL".equalsIgnoreCase(sed.getName())){
+                if("EN".equalsIgnoreCase(sed.getName())){
                     sedao.create(se);
                 }
 
