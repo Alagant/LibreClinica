@@ -122,10 +122,10 @@
 				</tr>
 				<tr>
 					<td valign="top">
-						<input type="checkbox" name="active_site"></input>Active site
+						<input type="checkbox" name="active_site" />Active site
 					</td>
 					<td valign="top">
-			    		<input type="checkbox" name="inactive_site"></input>Inactive site
+			    		<input type="checkbox" name="inactive_site" />Inactive site
 					</td>
 				</tr>
 			</table>
