@@ -147,8 +147,6 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         int index = 0;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("study_subject_ID"), new StudySubjectIdCellEditor(), null);
         ++index;
-        configureColumn(row.getColumn(columnNames[index]), resword.getString("pid"), new PidCellEditor(), null);
-        ++index;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("subject_status"), new StatusCellEditor(), new StatusDroplistFilterEditor());
         ++index;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("site_id"), null, null);
@@ -340,7 +338,6 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private void getColumnNamesMap() {
         ArrayList<String> columnNamesList = new ArrayList<String>();
         columnNamesList.add("studySubject.label");
-        columnNamesList.add("pid");
         columnNamesList.add("studySubject.status");
         columnNamesList.add("enrolledAt");
         columnNamesList.add("studySubject.oid");
