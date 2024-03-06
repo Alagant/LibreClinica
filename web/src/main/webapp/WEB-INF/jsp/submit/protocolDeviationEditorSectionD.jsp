@@ -3,7 +3,7 @@
     <h2>D. Reporting Incident</h2>
     <ol>
         <li>
-            1. <span class="question">Local IRB/ethics board reporting: Date when site staff reported incident to local
+            <span class="question">Local IRB/ethics board reporting: Date when site staff reported incident to local
             IRB/ethics board:</span>
             <div class="detail">
                 <div>a. <input type="text" name="item_d_1_a"></div>

@@ -3,19 +3,19 @@
     <h2>F. Form Completion</h2>
     <ol>
         <li>
-            1. <span class="question">Name of Principal Investigator or Co-PI:</span>
+            <span class="question">Name of Principal Investigator or Co-PI:</span>
             <div class="detail">
-            <input type="text" name="item_f_1">
+                <input type="text" name="item_f_1">
             </div>
         </li>
         <li>
-            2. <span class="question">Name of person completing form:</span>
+            <span class="question">Name of person completing form:</span>
             <div class="detail">
                 <input type="text" name="item_f_2">
             </div>
         </li>
         <li>
-            3. <span class="question">Date Form Completed:</span>
+            <span class="question">Date Form Completed:</span>
             <div class="detail">
                 <input type="text" name="item_f_3">
             </div>

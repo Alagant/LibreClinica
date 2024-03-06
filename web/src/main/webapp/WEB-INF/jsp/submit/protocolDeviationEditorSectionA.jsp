@@ -7,8 +7,8 @@
                 Is this incident associated with an adverse event or the development of TB evaluation?
             </span>
             <div class="detail">
-                <input type="radio" name="item_a_1" value="1">Yes
-                <input type="radio" name="item_a_1" value="0">No
+                <label><input type="radio" name="item_a_1" value="1">Yes</label>
+                <label><input type="radio" name="item_a_1" value="0">No</label>
             </div>
         </li>
         <li>
@@ -16,15 +16,15 @@
                 Did this incident occurred because of modifications due to COVID-19 or a COVID-19 diagnosis?
             </span>
             <div class="detail">
-                <input type="radio" name="item_a_2" value="1">Yes
-                <input type="radio" name="item_a_2" value="0">No
+                <label><input type="radio" name="item_a_2" value="1">Yes</label>
+                <label><input type="radio" name="item_a_2" value="0">No</label>
             </div>
         </li>
         <li>
             <span class="question">
                 Date the incident occurred:
                 <div class="detail">
-                <input type="text" name="item_a_3"/>
+                  <input type="text" name="item_a_3"/>
                 </div>
             </span>
         </li>
@@ -32,7 +32,7 @@
             <span class="question">
                 Date site staff became aware of the incident:
                 <div class="detail">
-                <input type="text" name="item_a_4"/>
+                    <input type="text" name="item_a_4"/>
                 </div>
             </span>
         </li>
@@ -48,41 +48,36 @@
             <span class="question">
                 As a result of the incident describe above, the participant:
             </span>
-            <div class="detail">
-                <div>
-                    <input type="radio" name="item_a_6" value="1">
-                    Remained in study
-                </div>
-                <div>
-                    <input type="radio" name="item_a_6" value="2">
-                    Discontinued study treatment, was referred to the local program for care, and continued study
-                    follow-up (Complete Study Treatment Completion Form)
-                </div>
-                <div>
-                    <input type="radio" name="item_a_6" value="3">
-                    Discontinued study treatment, was referred to the local program for care, and permanently discontinued
-                    from study (Complete both Study Treatment and Follow-Up Completion Forms)
-                </div>
-                <div>
-                    <input type="radio" name="item_a_6" value="4">
-                    Discontinued study follow-up and permanently discontinued
-                    from study (Complete Follow-Up Completion Form)
-                </div>
-                <div>
-                    <input type="radio" name="item_a_6" value="5">
-                    Died <strong>(Complete Notification of Death Form)</strong>
-                </div>
-                <div>
-                    <input type="radio" name="item_a_6" value="6">
-                    Other
-                </div>
+            <div class="detail vertical">
+                <label><input type="radio" name="item_a_6" value="1">
+                    Remained in study</label>
+
+                <label><input type="radio" name="item_a_6" value="2">
+                Discontinued study treatment, was referred to the local program for care, and continued study
+                follow-up (Complete Study Treatment Completion Form)</label>
+
+                <label><input type="radio" name="item_a_6" value="3">
+                Discontinued study treatment, was referred to the local program for care, and permanently discontinued
+                from study (Complete both Study Treatment and Follow-Up Completion Forms)</label>
+
+                <label><input type="radio" name="item_a_6" value="4">
+                Discontinued study follow-up and permanently discontinued
+                from study (Complete Follow-Up Completion Form)</label>
+
+                <label><input type="radio" name="item_a_6" value="5">
+                    Died <strong>(Complete Notification of Death Form)</strong></label>
+
+                <label><input type="radio" name="item_a_6" value="6"> Other</label>
+
             </div>
         </li>
         <li>
-            Did site report incident to the participant:
+            <span class="question">Did site report incident to the participant:</span>
+
+
             <div class="detail">
-                <input type="radio" name="item_a_7" value="1">Yes
-                <input type="radio" name="item_a_7" value="0">No
+                <label><input type="radio" name="item_a_7" value="1">Yes</label>
+                <label><input type="radio" name="item_a_7" value="0">No</label>
                 <div>
                     a. Date when site staff reported incident to the participant
                     <input type="text" name="item_a_7_1"/>
@@ -91,10 +86,10 @@
             </div>
         </li>
         <li>
-            Did this incident occur among more than one participant?
+            <span class="question">Did this incident occur among more than one participant?</span>
             <div class="detail">
-                <input type="radio" name="item_a_8" value="1">Yes
-                <input type="radio" name="item_a_8" value="0">No
+                <label><input type="radio" name="item_a_8" value="1">Yes</label>
+                <label><input type="radio" name="item_a_8" value="0">No</label>
             </div>
         </li>
     </ol>
