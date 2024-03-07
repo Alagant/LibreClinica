@@ -89,6 +89,7 @@ public class ProtocolDeviationSubjectDAO extends AuditableEntityDAO<ProtocolDevi
 
         variables.put(1, pdb.getProtocolDeviationId());
         variables.put(2, pdb.getSubjectId());
+
         executeUpdateWithPK(digester.getQuery("createProtocolDeviationSubject"), variables, nullVars);
         if (isQuerySuccessful()) {
             pdb.setId(getLatestPK());

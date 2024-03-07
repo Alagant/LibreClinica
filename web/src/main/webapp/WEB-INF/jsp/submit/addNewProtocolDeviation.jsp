@@ -11,6 +11,13 @@
             color: var(--lightblue-d20);
             font-family: Tahoma, Arial, Helvetica, sans-serif;
         }
+
+        #protocol-deviation-editor .validation-error {
+            font-weight: bold;
+            display: block;
+            color: var(--orange);
+        }
+
         #protocol-deviation-editor h2 {
             display: block;
             color: white;
@@ -57,7 +64,8 @@
         }
     </style>
     <h1 id="title-editor">New Protocol Deviation</h1>
-    <form method="post" action="${pageContext.request.contextPath}/ProtocolDeviations">
+    <form method="post" onsubmit="return validateForm()"
+          action="${pageContext.request.contextPath}/ProtocolDeviations">
         <c:import url="../submit/protocolDeviationEditorSectionA.jsp">
         </c:import>
         <c:import url="../submit/protocolDeviationEditorSectionB.jsp">
@@ -110,5 +118,30 @@
     </form>
 
 </div>
+<script>
+    function validateForm() {
+        const toValidateRadios= ['item_a_1', 'item_a_2', 'item_a_6', 'item_a_7', 'item_a_8',
+            'item_b_1', 'item_b_2', 'item_b_3', 'item_b_4', 'item_b_5', 'item_b_6',
+            'item_b_7', 'item_b_8', 'item_b_9', 'item_b_10', 'item_b_11', 'item_b_12',
+            'item_b_13', 'item_b_14', 'item_b_15', 'item_b_16', 'item_b_17', 'item_b_18',
+            'item_g_1', 'item_g_3', 'item_g_4', 'item_g_5',
+        ];
 
+        jQuery('#protocol-deviation-editor').find('.validation-error').remove();
+        let retval = true;
+        for(var v of toValidateRadios) {
+            const selector='input[name="'+v+'"]';
+            //console.log(selector, jQuery(selector));
+            if(!jQuery(selector+':checked').val()) {
+                let parent = jQuery(selector).first().closest('li');
+                //console.log(parent);
+                jQuery(parent).append('<div class="validation-error">This field cannot be empty</div>');
+                retval = false;
+            }
+        }
+
+        //retval = false;
+        return retval;
+    }
+</script>
 <DIV ID="testdiv1" STYLE="position:absolute;z-index:5;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>

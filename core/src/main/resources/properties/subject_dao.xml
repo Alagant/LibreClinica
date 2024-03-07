@@ -120,8 +120,35 @@
 
 	<query>
 		<name>createProtocolDeviation</name>
-		<sql>INSERT INTO protocol_deviation(label, description, protocol_deviation_severity_id, study_id)
-			VALUES(?, ?, ?, ?);
+		<sql>INSERT INTO protocol_deviation(label, study_id,
+			item_a_1, item_a_2, item_a_3, item_a_4, item_a_5, item_a_6,
+			item_a_7, item_a_7_1, item_a_8, item_b_1, item_b_2, item_b_3,
+			item_b_4, item_b_5, item_b_6, item_b_7, item_b_8, item_b_9,
+			item_b_10, item_b_11, item_b_12, item_b_13, item_b_14, item_b_15,
+			item_b_16, item_b_17, item_b_18, item_c_1_1, item_c_1_2, item_c_1_3,
+			item_c_1_4, item_c_1_5, item_c_1_6, item_c_1_7, item_c_1_8, item_c_1_9,
+			item_c_1_10, item_c_2, item_d_1_a, item_d_1_b, item_e_1_a,
+			item_e_1_b, item_e_1_c, item_e_1_d, item_f_1,
+			item_f_2, item_f_3, item_g_1, item_g_2_1, item_g_2_2, item_g_2_3,
+			item_g_2_4, item_g_3, item_g_4, item_g_5, item_g_6,
+			item_g_6_1_a, item_g_6_1_b, item_g_6_1_c,
+			item_g_6_2_a, item_g_6_2_b, item_g_6_2_c, item_g_6_3_a, item_g_6_3_b, item_g_6_3_c,
+			item_g_6_4_a, item_g_6_4_b, item_g_6_4_c,
+			item_g_7, item_g_8, item_g_9)
+			VALUES(?, ?, ?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?,
+			?, ?, ?, ?,
+			?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?,
+			?, ?, ?,
+			?, ?, ?, ?, ?, ?,
+			?, ?, ?,
+			?, ?, ?);
 		</sql>
 	</query>
 	<query>
