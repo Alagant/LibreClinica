@@ -12,7 +12,8 @@
 <jsp:useBean scope="request" id="table" class="org.akaza.openclinica.web.bean.EntityBeanTable" />
 <c:set var="rowURL" value="${param.rowURL}" />
 <c:set var="outerFormName" value="${param.outerFormName}" />
-<c:set var="searchFormOnClickJS" value="${param.searchFormOnClickJS}" />
+<c:set var="active_site" value="${param.active_site}" />
+<c:set var="inactive_site" value="${param.inactive_site}" />
 <c:choose>
 	<c:when test='${(outerFormName != null) && (outerFormName != "")}'><c:set var="searchFormDisplayed" value="${0}"/></c:when>
 	<c:otherwise><c:set var="searchFormDisplayed" value="${1}"/></c:otherwise>
@@ -103,7 +104,12 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td valign="top">
-						<input type="submit" class="button_search" value="<fmt:message key="find" bundle="${resword}"/>" 
+						<div class="formfieldM_BG">
+							<input name="ebl_filterKeyword" type="text" class="formfieldM" value="<c:out value="${table.keywordFilter}"/>" />
+						</div>
+					</td>
+					<td valign="top">
+						<input type="submit" class="button_search" value="<fmt:message key="find" bundle="${resword}"/>"
 							<c:choose>
 								<c:when test="${searchFormDisplayed == 0}">
 									onClick="if (document.<c:out value="${outerFormName}"/>.ebl_filterKeyword.value == '') return false; document.<c:out value="${outerFormName}"/>.elements['submitted'].value=0;document.<c:out value="${outerFormName}"/>.elements['action'].value='';<c:out value="${searchFormOnClickJS}" escapeXml="false" />"
@@ -114,15 +120,10 @@
 							</c:choose>
 						/>
 					</td>
-					<td valign="top">
-						<div class="formfieldM_BG">
-							<input name="ebl_filterKeyword" type="text" class="formfieldM" value="<c:out value="${table.keywordFilter}"/>" />
-						</div>
-					</td>
 				</tr>
 				<tr>
-					<td valign="top">
-						<input type="checkbox" name="active_site" />Active site
+					<td valign="top" style="min-width: 100px;">
+						<input type="checkbox" name="active_site" value="<%= request.getAttribute("test_attr") %>" /><% session.setAttribute("test_attr", "yes"); %>Active site as <%= session.getAttribute("active_site") %>
 					</td>
 					<td valign="top">
 			    		<input type="checkbox" name="inactive_site" />Inactive site
