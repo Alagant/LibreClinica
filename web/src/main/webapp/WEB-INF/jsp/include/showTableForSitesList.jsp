@@ -104,7 +104,12 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td valign="top">
-						<input type="submit" class="button_search" value="<fmt:message key="find" bundle="${resword}"/>" 
+						<div class="formfieldM_BG">
+							<input name="ebl_filterKeyword" type="text" class="formfieldM" value="<c:out value="${table.keywordFilter}"/>" />
+						</div>
+					</td>
+					<td valign="top">
+						<input type="submit" class="button_search" value="<fmt:message key="find" bundle="${resword}"/>"
 							<c:choose>
 								<c:when test="${searchFormDisplayed == 0}">
 									onClick="if (document.<c:out value="${outerFormName}"/>.ebl_filterKeyword.value == '') return false; document.<c:out value="${outerFormName}"/>.elements['submitted'].value=0;document.<c:out value="${outerFormName}"/>.elements['action'].value='';<c:out value="${searchFormOnClickJS}" escapeXml="false" />"
@@ -114,11 +119,7 @@
 								</c:otherwise>
 							</c:choose>
 						/>
-					</td>
-					<td valign="top">
-						<div class="formfieldM_BG">
-							<input name="ebl_filterKeyword" type="text" class="formfieldM" value="<c:out value="${table.keywordFilter}"/>" />
-						</div>
+						<input type="button" class="button" value="<fmt:message key="clear" bundle="${resword}"/>" />
 					</td>
 				</tr>
 				<tr>
