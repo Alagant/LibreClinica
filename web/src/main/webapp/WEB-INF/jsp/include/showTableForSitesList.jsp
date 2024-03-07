@@ -119,7 +119,6 @@
 								</c:otherwise>
 							</c:choose>
 						/>
-						<input type="button" class="button" value="<fmt:message key="clear" bundle="${resword}"/>" />
 					</td>
 				</tr>
 				<tr>
@@ -127,7 +126,7 @@
 						<input type="checkbox" name="active_site" value="<%= request.getAttribute("test_attr") %>" /><% session.setAttribute("test_attr", "yes"); %>Active site as <%= session.getAttribute("active_site") %>
 					</td>
 					<td valign="top">
-			    		<input type="checkbox" name="inactive_site" checked />Inactive site
+			    		<input type="checkbox" name="inactive_site" />Inactive site
 					</td>
 				</tr>
 			</table>
