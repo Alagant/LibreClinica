@@ -89,10 +89,12 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private final ResourceBundle resterms = ResourceBundleProvider.getTermsBundle();
     private StudyParameterValueDAO studyParameterValueDAO;
     private ParticipantPortalRegistrar participantPortalRegistrar;
+    private Integer countOfStudySubjectsAtStudyOrSite;
 
     final HashMap<Integer, String> imageIconPaths = new HashMap<Integer, String>(8);
 
     private boolean EnrrollmentStatusIsComplete;
+    private String EnrrollmentCompleted;
 
     @Override
     // To avoid showing title in other pages, the request element is used to determine where the request came from.
@@ -143,9 +145,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         tableFacade.setColumnProperties(columnNames);
         Row row = tableFacade.getTable().getRow();
         int index = 0;
-        configureColumn(row.getColumn(columnNames[index]), resword.getString("study_subject_ID"), null, null);
-        ++index;
-        configureColumn(row.getColumn(columnNames[index]), resword.getString("pid"), new PidCellEditor(), null);
+        configureColumn(row.getColumn(columnNames[index]), resword.getString("study_subject_ID"), new StudySubjectIdCellEditor(), null);
         ++index;
         configureColumn(row.getColumn(columnNames[index]), resword.getString("subject_status"), new StatusCellEditor(), new StatusDroplistFilterEditor());
         ++index;
@@ -338,7 +338,6 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     private void getColumnNamesMap() {
         ArrayList<String> columnNamesList = new ArrayList<String>();
         columnNamesList.add("studySubject.label");
-        columnNamesList.add("pid");
         columnNamesList.add("studySubject.status");
         columnNamesList.add("enrolledAt");
         columnNamesList.add("studySubject.oid");
@@ -534,6 +533,11 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         this.currentUser = currentUser;
     }
 
+    public void loadCountOfStudySubjectsAtStudyOrSiteToStudyBean() {
+        this.countOfStudySubjectsAtStudyOrSite = studySubjectDAO.getCountofStudySubjectsAtStudyOrSite(studyBean);
+        this.studyBean.setCountOfStudySubjectsAtStudyOrSite(this.countOfStudySubjectsAtStudyOrSite);
+    }
+
     private class CharFilterMatcher implements FilterMatcher {
         public boolean evaluate(Object itemValue, String filterValue) {
             String item = StringUtils.lowerCase(String.valueOf(itemValue));
@@ -672,7 +676,6 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             subjectEventStatus = SubjectEventStatus.get((Integer) ((HashMap<Object, Object>) item).get(property));
             subject = (SubjectBean) ((HashMap<Object, Object>) item).get("subject");
             studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
-
             StringBuilder url = new StringBuilder();
             String nameEvent = studyEventDefinition.getName();
             String pid = studySubjectBean.getSecondaryLabel();
@@ -681,11 +684,25 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             }else{
                 EnrrollmentStatusIsComplete = true;
             }
-            if(EnrrollmentStatusIsComplete || nameEvent.equalsIgnoreCase("EN")){
-                url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
-                url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
-                url.append(getCount());
-                url.append("</a></td></tr></table>");
+            if ((subjectEventStatus.getId() == 3 || subjectEventStatus.getId() == 4) && nameEvent.equalsIgnoreCase("EN")) {
+                EnrrollmentCompleted = "EN";
+            } if ((subjectEventStatus.getId()== 3 || subjectEventStatus.getId() == 4) && nameEvent.equalsIgnoreCase("NE")) {
+                EnrrollmentCompleted = "NE";
+            }
+            if(EnrrollmentStatusIsComplete || nameEvent.equalsIgnoreCase("EN") || nameEvent.equalsIgnoreCase("NE")){
+                if("NE".equalsIgnoreCase(EnrrollmentCompleted) || "EN".equalsIgnoreCase(EnrrollmentCompleted)){
+                    if(!"NE".equalsIgnoreCase(EnrrollmentCompleted)){
+                        url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
+                        url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
+                        url.append(getCount());
+                        url.append("</a></td></tr></table>");
+                    }
+                }else{
+                    url.append(eventDivBuilder(subject, rowcount, studyEvents, studyEventDefinition, studySubjectBean));
+                    url.append("<img src='" + imageIconPaths.get(subjectEventStatus.getId()) + "' border='0' style='position: relative; left: 7px;'>");
+                    url.append(getCount());
+                    url.append("</a></td></tr></table>");
+                }
             }
             return url.toString();
         }
@@ -717,6 +734,19 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             HtmlBuilder pidDiv = new HtmlBuilder();
             pidDiv.div().style("text-align: center; padding-left: 15px; padding-right: 15px; white-space: nowrap; ").close();
             pidDiv.append(studySubjectBean.getSecondaryLabel());
+            return pidDiv.toString();
+        }
+    }
+
+    private class StudySubjectIdCellEditor implements CellEditor {
+        public Object getValue(Object item, String property, int rowcount) {
+            StudySubjectBean studySubjectBean = (StudySubjectBean) ((HashMap<Object, Object>) item).get("studySubject");
+            String studySubjectLabel = studySubjectBean.getLabel();
+            HtmlBuilder pidDiv = new HtmlBuilder();
+            if (studySubjectLabel.contains("P")) {
+                pidDiv.div().style("color: #E46E16; ").close();
+            }
+            pidDiv.append(studySubjectLabel);
             return pidDiv.toString();
         }
     }

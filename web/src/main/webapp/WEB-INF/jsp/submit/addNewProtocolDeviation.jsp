@@ -5,33 +5,75 @@
 <fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 <div class="add_new_subject_div form-standard" style="display: flex; flex-direction: column; padding: 10px; row-gap: 10px;">
-    <h3>New protocol deviation</h3>
+    <style scoped>
+        #protocol-deviation-editor h1 {
+            display: block;
+            color: var(--lightblue-d20);
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+        }
+        #protocol-deviation-editor h2 {
+            display: block;
+            color: white;
+            font-family: Tahoma, Arial, Helvetica, sans-serif;
+            font-size: 1rem;
+            padding: 4px;
+            background: var(--lightblue-d20);
+        }
+        #protocol-deviation-editor li {
+            list-style-image: none;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        #protocol-deviation-editor li .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #protocol-deviation-editor li .detail {
+            font-weight: normal;
+        }
+
+        #protocol-deviation-editor li .detail label {
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        #protocol-deviation-editor li .detail.vertical {
+            font-weight: bold;
+        }
+
+        #protocol-deviation-editor li .detail textarea {
+            display: block;
+            height: 60px;
+            width: 90%;
+        }
+
+        #protocol-deviation-editor li .detail.vertical > label {
+            display: block;
+        }
+
+        #protocol-deviation-editor li:nth-child(even) {
+            background: var(--gray-l40);
+        }
+    </style>
+    <h1 id="title-editor">New Protocol Deviation</h1>
     <form method="post" action="${pageContext.request.contextPath}/ProtocolDeviations">
-    <div style="display: flex;">
-        <div class="formlabel" style="width: 120px;">
-            Severity:
-        </div>
-        <div class="formlabel" style="">
-            <select class="formfield" id="severity" name="severity">
-                <c:forEach var="p" items="${severities}">
-                    <option value="${p.protocolDeviationSeverityId}">
-                            ${p.label}
-                    </option>
-                </c:forEach>
-            </select>
-        </div>
-    </div>
-    <div style="display: flex;">
-        <div class="formlabel" style="width: 120px;">
-            Description:
-        </div>
-        <div class="formlabel" style="">
-            <textarea id="description" name="description" rows="3"></textarea>
-        </div>
-    </div>
+        <c:import url="../submit/protocolDeviationEditorSectionA.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionB.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionC.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionD.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionE.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionF.jsp">
+        </c:import>
+        <c:import url="../submit/protocolDeviationEditorSectionG.jsp">
+        </c:import>
 
-
-    <h3>Subjects added</h3>
+    <h2>Participants</h2>
         <div style="display: flex;">
             <div class="formlabel" style="width: 120px;">
                 Subject Id:
