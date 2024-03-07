@@ -171,6 +171,7 @@ public class AddNewSubjectServlet extends SecureController {
         // tbh
         StudyParameterValueBean checkPersonId = spvdao.findByHandleAndStudy(parentStudyId, "subjectPersonIdRequired");
         currentStudy.getStudyParameterConfig().setSubjectPersonIdRequired(checkPersonId.getValue());
+        currentStudy.setCountOfStudySubjectsAtStudyOrSite(ssd.getCountofStudySubjectsAtStudyOrSite(currentStudy));
         // end fix for 1750, tbh 10 2007
 
         if (!fp.isSubmitted()) {
