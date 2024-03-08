@@ -52,6 +52,13 @@ stages:
     - checkout: LcDMM
     - checkout: CDCOauthMockup
     - task: Bash@3
+      displayName: Create env files
+      inputs:
+        targetType: 'inline'
+        script: |
+          cd LibreClinica/
+          echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
+    - task: Bash@3
       displayName: Backup the database
       inputs:
         targetType: 'inline'
@@ -67,8 +74,10 @@ stages:
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
-          docker image prune -f
+          docker image prune -af
           docker network prune -f
+          docker system prune -af
+          docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_libreclinica_config libreclinica_mvn_cache
           docker system prune -af
 
     - task: Bash@3
@@ -97,6 +106,8 @@ stages:
           docker ps -a
           echo 'Hello DevOps from Azure DevOps!'
           ls -ltra
+      env:
+        MAILPASSWORD: $(mailPassword)
 
     - task: Bash@3
       displayName: Test and report commit message

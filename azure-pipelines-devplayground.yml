@@ -56,10 +56,11 @@ stages:
     - checkout: LcDMM
     - checkout: CDCOauthMockup
     - task: Bash@3
-      displayName: Generate the .env files
+      displayName: Create env files
       inputs:
         targetType: 'inline'
         script: |
+          cd LibreClinica/
           echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
     - task: Bash@3
       displayName: Backup the database

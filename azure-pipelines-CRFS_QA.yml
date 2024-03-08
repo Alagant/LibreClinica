@@ -56,6 +56,13 @@ stages:
     - checkout: LcDMM
     - checkout: CDCOauthMockup
     - task: Bash@3
+      displayName: Create env files
+      inputs:
+        targetType: 'inline'
+        script: |
+          cd LibreClinica/
+          echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
+    - task: Bash@3
       displayName: Backup the database
       inputs:
         targetType: 'inline'
@@ -75,6 +82,8 @@ stages:
           docker network prune -f
           docker system prune -af
           docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_libreclinica_config libreclinica_mvn_cache
+          docker container prune -f
+          docker image prune -af
           docker system prune -af
 
     - task: Bash@3
@@ -100,7 +109,7 @@ stages:
           git status
           
           echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
-          docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=${MAIL_PASSWORD} --build-arg MAIL_ERROR_MSG=${DEVELOPER_EMAILS}
+          docker compose build --build-arg ENVIRONMENT=CRFS_QA --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=${MAIL_PASSWORD} --build-arg MAIL_ERROR_MSG=${DEVELOPER_EMAILS}
           docker compose run libreclinica mvn -B clean install -DskipTests>mvn.log
           
           sudo cp /var/lib/docker/volumes/libreclinica_libreclinica_src/_data/web/target/LibreClinica-web-1.3.1.war /var/lib/docker/volumes/libreclinica_libreclinica_webapps/_data/LibreClinica.war
