@@ -1,25 +1,18 @@
 package org.akaza.openclinica.control.managestudy;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationBean;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationSeverityBean;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationSubjectBean;
 import org.akaza.openclinica.control.core.SecureController;
-import org.akaza.openclinica.control.submit.ListStudySubjectTableFactory;
 import org.akaza.openclinica.control.submit.ProtocolDeviationTableFactory;
 import org.akaza.openclinica.dao.managestudy.*;
-import org.akaza.openclinica.domain.managestudy.ProtocolDeviationSubject;
-import org.akaza.openclinica.exception.OpenClinicaException;
 import org.akaza.openclinica.view.Page;
 import org.akaza.openclinica.web.InsufficientPermissionException;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -125,10 +118,10 @@ public class ProtocolDeviationServlet extends SecureController {
             pdb.setItemC2(request.getParameter("item_c_2"));
             //pdb.setItemD1_A(request.getParameter("item_d_1_a"));
             pdb.setItemD1_B(request.getParameter("item_d_1_b"));
-            pdb.setItemE1_A(request.getParameter("item_e_1_a"));
-            pdb.setItemE1_B(request.getParameter("item_e_1_b"));
-            pdb.setItemE1_C(request.getParameter("item_e_1_c"));
-            pdb.setItemE1_D(request.getParameter("item_e_1_d"));
+            pdb.setItemE1(request.getParameter("item_e_1"));
+            pdb.setItemE2(request.getParameter("item_e_2"));
+            pdb.setItemE3(request.getParameter("item_e_3"));
+            pdb.setItemE4(request.getParameter("item_e_4"));
             pdb.setItemF1(request.getParameter("item_f_1"));
             pdb.setItemF2(request.getParameter("item_f_2"));
             //pdb.setItemF3(request.getParameter("item_f_3"));
@@ -192,14 +185,7 @@ public class ProtocolDeviationServlet extends SecureController {
             getProtocolDeviationWithSubjects(protocolDeviationId);
             return;
         }
-        ArrayList<ProtocolDeviationSeverityBean> severities =
-                getProtocolDeviationSeverityDAO().findAll();
 
-        ArrayList<ProtocolDeviationBean> protocolDeviations =
-                getProtocolDeviationDAO().findByStudy(currentStudy.getId());
-
-        request.setAttribute("protocolDeviations", protocolDeviations);
-        request.setAttribute("severities", severities);
 
         createTable();
 

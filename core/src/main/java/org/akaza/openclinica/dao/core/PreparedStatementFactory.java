@@ -66,7 +66,7 @@ public class PreparedStatementFactory {
             if (objParam == null) {
                 logger.debug("found null object! " + order);
                 if (nullVars.get(order) != null) {
-                    Integer nullType = nullVars.get(order);
+                        Integer nullType = nullVars.get(order);
                     ps.setNull(order.intValue(), nullType.intValue());
                 } else {
                     throw new NullPointerException("No type found for this null object at order:" + order + ", make sure you set the type in your DAO.");

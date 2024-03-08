@@ -87,7 +87,7 @@
                 <tr>
                     <td>
                         Branch chief to ADS:
-                        <input type="text" name="item_6_3_a">
+                        <input type="text" name="item_g_6_3_a">
                         <label><input type="checkbox" name="item_g_6_3_b"> Not applicable</label>
                     </td>
                     <td>
@@ -97,7 +97,7 @@
                 <tr>
                     <td>
                         ADS to HRPO:
-                        <input type="text" name="item_6_4_a">
+                        <input type="text" name="item_g_6_4_a">
                         <label><input type="checkbox" name="item_g_6_4_b"> Not applicable</label>
                     </td>
                     <td>
