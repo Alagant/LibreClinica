@@ -19,7 +19,6 @@
 
 	<properties>
 		<!-- Default configuration activation -->
-		<spring.profiles.active>local,no-liquibase</spring.profiles.active>
 		<config.id>default</config.id>
 
 		<skipTests>true</skipTests>
