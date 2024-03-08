@@ -63,6 +63,7 @@
                 url: "${pageContext.request.contextPath}/ProtocolDeviations?action=get&pdid="+
                         protocolId,
                 success: function(response) {
+                    jQuery('input[name="protocol_deviation_id"]').val(response.protocolDeviationId);
                     jQuery('input[name="item_a_1"][value="'+response.itemA1+'"]').prop('checked', true);
                     jQuery('input[name="item_a_2"][value="'+response.itemA2+'"]').prop('checked', true);
                     jQuery('input[name="item_a_3"]').val(response.itemA3);
@@ -102,15 +103,15 @@
                     jQuery('input[name="item_c_1_8"]').prop('checked', response.itemC1_8);
                     jQuery('input[name="item_c_1_9"]').prop('checked', response.itemC1_9);
                     jQuery('input[name="item_c_1_10"]').val(response.itemC1_10);
-                    jQuery('input[name="item_c_2"]').val(response.itemC2);
+                    jQuery('textarea[name="item_c_2"]').val(response.itemC2);
 
                     jQuery('input[name="item_d_1_a"]').val(response.itemD1_A);
-                    jQuery('input[name="item_d_1_b"]').val(response.itemD2_B);
+                    jQuery('textarea[name="item_d_1_b"]').val(response.itemD2_B);
 
-                    jQuery('input[name="item_e_1"]').val(response.itemE1);
-                    jQuery('input[name="item_e_2"]').val(response.itemE2);
-                    jQuery('input[name="item_e_3"]').val(response.itemE3);
-                    jQuery('input[name="item_e_4"]').val(response.itemE4);
+                    jQuery('textarea[name="item_e_1"]').val(response.itemE1);
+                    jQuery('textarea[name="item_e_2"]').val(response.itemE2);
+                    jQuery('textarea[name="item_e_3"]').val(response.itemE3);
+                    jQuery('textarea[name="item_e_4"]').val(response.itemE4);
 
                     jQuery('input[name="item_f_1"]').val(response.itemF1);
                     jQuery('input[name="item_f_2"]').val(response.itemF2);
@@ -139,7 +140,7 @@
                     jQuery('input[name="item_g_6_4_c"]').val(response.itemG6_4_C);
                     jQuery('input[name="item_g_7"]').val(response.itemG7);
                     jQuery('input[name="item_g_8"]').val(response.itemG8);
-                    jQuery('input[name="item_g_9"]').val(response.itemG9);
+                    jQuery('textarea[name="item_g_9"]').val(response.itemG9);
 
 
                     jQuery('#subjects-added').html('');

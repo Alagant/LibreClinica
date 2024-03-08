@@ -117,6 +117,7 @@
 			pd.item_g_6_4_a, pd.item_g_6_4_b, pd.item_g_6_4_c, pd.item_g_7, pd.item_g_8, pd.item_g_9
 			FROM protocol_deviation pd
 			WHERE study_id = ?
+			ORDER BY pd.label
 		</sql>
 	</query>
 	<query>
@@ -180,8 +181,6 @@
 		<name>updateProtocolDeviation</name>
 		<sql>
 			UPDATE protocol_deviation SET
-			label = ?,
-			study_id = ?,
 			item_a_1 = ?,
 			item_a_2 = ?,
 			item_a_3 = ?,

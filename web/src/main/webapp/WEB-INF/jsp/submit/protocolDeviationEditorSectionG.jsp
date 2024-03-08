@@ -70,7 +70,7 @@
                             To study officer:
                             <input type="text" name="item_g_6_1_a">
                             <div>
-                                <label><input type="checkbox" name="item_g_6_1_b"> Not applicable</label>
+                                <label><input type="checkbox" name="item_g_6_1_b" value="1"> Not applicable</label>
                             </div>
                         </td>
                         <td>
@@ -82,7 +82,7 @@
                             Study officer to branch chief:
                             <input type="text" name="item_g_6_2_a">
                             <div>
-                                <label><input type="checkbox" name="item_g_6_2_b"> Not applicable</label>
+                                <label><input type="checkbox" name="item_g_6_2_b" value="1"> Not applicable</label>
                             </div>
                         </td>
                         <td>
@@ -94,7 +94,7 @@
                             Branch chief to ADS:
                             <input type="text" name="item_g_6_3_a">
                             <div>
-                                <label><input type="checkbox" name="item_g_6_3_b"> Not applicable</label>
+                                <label><input type="checkbox" name="item_g_6_3_b" value="1"> Not applicable</label>
                             </div>
                         </td>
                         <td>
@@ -106,7 +106,7 @@
                             ADS to HRPO:
                             <input type="text" name="item_g_6_4_a">
                             <div>
-                                <label><input type="checkbox" name="item_g_6_4_b"> Not applicable</label>
+                                <label><input type="checkbox" name="item_g_6_4_b" value="1"> Not applicable</label>
                             </div>
                         </td>
                         <td>

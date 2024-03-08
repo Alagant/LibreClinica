@@ -14,7 +14,7 @@
                 <label><input type="checkbox" name="item_c_1_7" value="1"> Investigator/study decision</label>
                 <label><input type="checkbox" name="item_c_1_8" value="1"> Shipment error</label>
                 <label><input type="checkbox" name="item_c_1_9" value="1"> Other, specify</label>
-                <label><input type="text" name="item_c_1_10">
+                <label><input type="text" name="item_c_1_10"></label>
             </div>
         </li>
         <li>
