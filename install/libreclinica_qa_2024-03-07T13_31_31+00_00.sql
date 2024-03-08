@@ -3093,7 +3093,78 @@ CREATE TABLE public.protocol_deviation (
     label character varying(20) NOT NULL,
     protocol_deviation_severity_id integer NOT NULL,
     description text NOT NULL,
-    study_id integer NOT NULL
+    study_id integer NOT NULL,
+    item_a_1 smallint DEFAULT 0,
+    item_a_2 smallint DEFAULT 0,
+    item_a_3 date,
+    item_a_4 date,
+    item_a_5 date,
+    item_a_6 smallint DEFAULT 0,
+    item_a_7 smallint DEFAULT 0,
+    item_a_7_1 date,
+    item_a_8 smallint DEFAULT 0,
+    item_b_1 smallint DEFAULT 0,
+    item_b_2 smallint DEFAULT 0,
+    item_b_3 smallint DEFAULT 0,
+    item_b_4 smallint DEFAULT 0,
+    item_b_5 smallint DEFAULT 0,
+    item_b_6 smallint DEFAULT 0,
+    item_b_7 smallint DEFAULT 0,
+    item_b_8 smallint DEFAULT 0,
+    item_b_9 smallint DEFAULT 0,
+    item_b_10 smallint DEFAULT 0,
+    item_b_11 smallint DEFAULT 0,
+    item_b_12 smallint DEFAULT 0,
+    item_b_13 smallint DEFAULT 0,
+    item_b_14 smallint DEFAULT 0,
+    item_b_15 smallint DEFAULT 0,
+    item_b_16 smallint DEFAULT 0,
+    item_b_17 smallint DEFAULT 0,
+    item_b_18 smallint DEFAULT 0,
+    item_c_1_1 smallint DEFAULT 0,
+    item_c_1_2 smallint DEFAULT 0,
+    item_c_1_3 smallint DEFAULT 0,
+    item_c_1_4 smallint DEFAULT 0,
+    item_c_1_5 smallint DEFAULT 0,
+    item_c_1_6 smallint DEFAULT 0,
+    item_c_1_7 smallint DEFAULT 0,
+    item_c_1_8 smallint DEFAULT 0,
+    item_c_1_9 smallint DEFAULT 0,
+    item_c_1_10 character varying(40),
+    item_c_2 character varying(400),
+    item_d_1_a date,
+    item_d_1_b character varying(400),
+    item_e_1_a character varying(400),
+    item_e_1_b character varying(400),
+    item_e_1_c character varying(400),
+    item_e_1_d character varying(400),
+    item_f_1 character varying(200),
+    item_f_2 character varying(200),
+    item_f_3 date,
+    item_g_1 smallint DEFAULT 0,
+    item_g_2_1 smallint DEFAULT 0,
+    item_g_2_2 smallint DEFAULT 0,
+    item_g_2_3 smallint DEFAULT 0,
+    item_g_2_4 smallint DEFAULT 0,
+    item_g_3 smallint DEFAULT 0,
+    item_g_4 smallint DEFAULT 0,
+    item_g_5 smallint DEFAULT 0,
+    item_g_6 date,
+    item_g_6_1_a character varying(200),
+    item_g_6_1_b smallint DEFAULT 0,
+    item_g_6_1_c character varying(200),
+    item_g_6_2_a character varying(200),
+    item_g_6_2_b smallint DEFAULT 0,
+    item_g_6_2_c character varying(200),
+    item_g_6_3_a character varying(200),
+    item_g_6_3_b smallint DEFAULT 0,
+    item_g_6_3_c character varying(200),
+    item_g_6_4_a character varying(200),
+    item_g_6_4_b smallint DEFAULT 0,
+    item_g_6_4_c character varying(200),
+    item_g_7 character varying(200),
+    item_g_8 character varying(200),
+    item_g_9 character varying(400)
 );
 
 
@@ -6508,45 +6579,137 @@ COPY public.audit_log_event (audit_id, audit_date, audit_table, user_id, entity_
 1045	2024-02-21 04:22:37.28652	item_data	1	496	ZCNAME	initial value	1	\N	Lucio	29	39	17	1
 1047	2024-02-21 04:22:37.303162	item_data	1	497	ZCDAT	initial value	1	\N	2024-02-20	29	39	17	1
 1049	2024-02-21 04:22:37.370811	study_subject	0	32	Secondary Subject ID	\N	4		38-9-00032	\N	\N	\N	\N
-1065	2024-03-01 16:51:30.075642	subject	1	33	\N	\N	5	\N	\N	\N	\N	\N	\N
-1066	2024-03-01 16:51:30.104389	study_subject	1	33	\N	\N	2	\N	\N	\N	\N	\N	\N
-1067	2024-03-01 16:51:30.104389	study_subject	\N	33	Secondary Subject ID	\N	4		38-30-0033	\N	\N	\N	\N
-1068	2024-03-01 16:52:16.864814	subject	1	34	\N	\N	5	\N	\N	\N	\N	\N	\N
-1069	2024-03-01 16:52:16.885808	study_subject	1	34	\N	\N	2	\N	\N	\N	\N	\N	\N
-1070	2024-03-01 16:52:16.885808	study_subject	\N	34	Secondary Subject ID	\N	4		38-30-0034	\N	\N	\N	\N
-1071	2024-03-01 16:52:49.287126	event_crf	1	30	Status	\N	41	2	1	30	\N	\N	\N
-1072	2024-03-01 16:52:49.307632	study_event	1	41	Status	\N	18	1	3	\N	\N	\N	\N
-1073	2024-03-01 16:53:58.37186	subject	1	35	\N	\N	5	\N	\N	\N	\N	\N	\N
-1074	2024-03-01 16:53:58.389539	study_subject	1	35	\N	\N	2	\N	\N	\N	\N	\N	\N
-1075	2024-03-01 16:53:58.389539	study_subject	\N	35	Secondary Subject ID	\N	4		38-30-0035	\N	\N	\N	\N
-1076	2024-03-01 17:12:20.470284	subject	1	36	\N	\N	5	\N	\N	\N	\N	\N	\N
-1077	2024-03-01 17:12:20.491367	study_subject	1	36	\N	\N	2	\N	\N	\N	\N	\N	\N
-1078	2024-03-01 17:12:20.491367	study_subject	\N	36	Secondary Subject ID	\N	4		38-30-0036	\N	\N	\N	\N
-1079	2024-03-01 17:17:23.183111	subject	9	37	\N	\N	5	\N	\N	\N	\N	\N	\N
-1080	2024-03-01 17:17:23.201802	study_subject	9	37	\N	\N	2	\N	\N	\N	\N	\N	\N
-1081	2024-03-01 17:17:23.201802	study_subject	\N	37	Secondary Subject ID	\N	4		38-30-0037	\N	\N	\N	\N
-1082	2024-03-01 18:00:46.404618	subject	1	38	\N	\N	5	\N	\N	\N	\N	\N	\N
-1083	2024-03-01 18:00:46.423052	study_subject	1	38	\N	\N	2	\N	\N	\N	\N	\N	\N
-1084	2024-03-01 18:00:46.423052	study_subject	\N	38	Secondary Subject ID	\N	4		38-30-0038	\N	\N	\N	\N
-1085	2024-03-01 21:52:14.155758	subject	1	39	\N	\N	5	\N	\N	\N	\N	\N	\N
-1086	2024-03-01 21:52:14.17359	study_subject	1	39	\N	\N	2	\N	\N	\N	\N	\N	\N
-1087	2024-03-01 21:52:14.17359	study_subject	\N	39	Secondary Subject ID	\N	4		38-30-0039	\N	\N	\N	\N
-1088	2024-03-02 00:03:19.515438	event_definition_crf	1	29	Status	\N	13	1	5	29	40	7	\N
-1089	2024-03-03 16:51:57.466331	subject	1	40	\N	\N	5	\N	\N	\N	\N	\N	\N
-1090	2024-03-03 16:51:57.488533	study_subject	1	40	\N	\N	2	\N	\N	\N	\N	\N	\N
-1091	2024-03-03 16:51:57.488533	study_subject	\N	40	Secondary Subject ID	\N	4		38-30-0040	\N	\N	\N	\N
-1092	2024-03-03 16:55:23.668706	subject	1	41	\N	\N	5	\N	\N	\N	\N	\N	\N
-1093	2024-03-03 16:55:23.68687	study_subject	1	41	\N	\N	2	\N	\N	\N	\N	\N	\N
-1094	2024-03-03 16:55:23.68687	study_subject	\N	41	Secondary Subject ID	\N	4		38-30-0041	\N	\N	\N	\N
-1095	2024-03-03 17:09:45.882221	subject	1	42	\N	\N	5	\N	\N	\N	\N	\N	\N
-1096	2024-03-03 17:09:45.900192	study_subject	1	42	\N	\N	2	\N	\N	\N	\N	\N	\N
-1097	2024-03-03 17:09:45.900192	study_subject	\N	42	Secondary Subject ID	\N	4		38-30-0042	\N	\N	\N	\N
-1098	2024-03-05 12:10:52.613289	subject	1	43	\N	\N	5	\N	\N	\N	\N	\N	\N
-1099	2024-03-05 12:13:02.417722	subject	1	44	\N	\N	5	\N	\N	\N	\N	\N	\N
-1100	2024-03-05 12:18:24.195624	event_crf	1	31	Status	\N	41	2	1	31	\N	\N	\N
-1101	2024-03-05 12:18:24.217563	study_event	1	44	Status	\N	18	1	3	\N	\N	\N	\N
-1102	2024-03-05 12:21:51.049377	event_crf	1	32	Status	\N	41	2	1	32	\N	\N	\N
-1103	2024-03-05 12:21:51.066602	study_event	1	45	Status	\N	18	1	3	\N	\N	\N	\N
+1065	2024-02-27 21:26:30.398604	subject	1	33	\N	\N	5	\N	\N	\N	\N	\N	\N
+1066	2024-02-27 21:26:30.413811	study_subject	1	33	\N	\N	2	\N	\N	\N	\N	\N	\N
+1067	2024-02-27 21:26:30.413811	study_subject	\N	33	Secondary Subject ID	\N	4		38-30-0033	\N	\N	\N	\N
+1068	2024-02-27 23:26:46.625338	subject	1	34	\N	\N	5	\N	\N	\N	\N	\N	\N
+1069	2024-02-27 23:26:46.647629	study_subject	1	34	\N	\N	2	\N	\N	\N	\N	\N	\N
+1070	2024-02-27 23:26:46.647629	study_subject	\N	34	Secondary Subject ID	\N	4		38-30-0034	\N	\N	\N	\N
+1071	2024-02-27 23:32:10.469141	event_crf	1	30	Status	\N	41	2	1	30	\N	\N	\N
+1072	2024-02-27 23:32:10.488268	study_event	1	43	Status	\N	18	1	3	\N	\N	\N	\N
+1073	2024-02-27 23:34:09.218635	item_data	1	498	SITEID	initial value	1	\N	9	30	43	17	1
+1075	2024-02-27 23:34:09.239279	item_data	1	499	VISDAT	initial value	1	\N	2024-02-20	30	43	17	1
+1077	2024-02-27 23:34:09.255744	item_data	1	500	BRTHDAT	initial value	1	\N	2002-02-28	30	43	17	1
+1080	2024-02-27 23:34:09.287479	item_data	1	502	DSSTDAT	initial value	1	\N	2024-02-13	30	43	17	1
+1082	2024-02-27 23:34:09.303519	item_data	1	503	DSSTDATB	initial value	1	\N	2024-02-21	30	43	17	1
+1085	2024-02-27 23:34:09.334236	item_data	1	505	VSORRESN	initial value	1	\N	100	30	43	17	1
+1087	2024-02-27 23:34:09.35393	item_data	1	506	VSORRESU	initial value	1	\N	in	30	43	17	1
+1089	2024-02-27 23:34:09.369164	item_data	1	507	VSORRESNW	initial value	1	\N	76	30	43	17	1
+1091	2024-02-27 23:34:09.384233	item_data	1	508	VSORRESUW	initial value	1	\N	kg	30	43	17	1
+1093	2024-02-27 23:34:09.399363	item_data	1	509	VSDAT	initial value	1	\N	2024-02-27	30	43	17	1
+1095	2024-02-27 23:34:09.414719	item_data	1	510	MODAT	initial value	1	\N	2024-02-26	30	43	17	1
+1097	2024-02-27 23:34:09.430003	item_data	1	511	MOORRESC	initial value	1	\N	N	30	43	17	1
+1099	2024-02-27 23:34:09.446535	item_data	1	512	XDSTDAT	initial value	1	\N	2024-02-21	30	43	17	1
+1101	2024-02-27 23:34:09.461706	item_data	1	513	COVAL	initial value	1	\N	no	30	43	17	1
+1103	2024-02-27 23:34:09.476664	item_data	1	514	ZCNAME	initial value	1	\N	no	30	43	17	1
+1105	2024-02-27 23:34:09.491633	item_data	1	515	ZCDAT	initial value	1	\N	2024-02-13	30	43	17	1
+1107	2024-02-27 23:34:09.738701	study_subject	0	34	Secondary Subject ID	\N	4	38-30-0034	38-9-00034	\N	\N	\N	\N
+1108	2024-02-29 10:53:34.155663	subject	1	35	\N	\N	5	\N	\N	\N	\N	\N	\N
+1109	2024-02-29 10:53:34.168151	study_subject	1	35	\N	\N	2	\N	\N	\N	\N	\N	\N
+1110	2024-02-29 10:53:34.168151	study_subject	\N	35	Secondary Subject ID	\N	4		38-30-0035	\N	\N	\N	\N
+1111	2024-02-29 13:51:46.171983	subject	2	36	\N	\N	5	\N	\N	\N	\N	\N	\N
+1112	2024-02-29 13:51:46.206481	study_subject	2	36	\N	\N	2	\N	\N	\N	\N	\N	\N
+1113	2024-02-29 13:51:46.206481	study_subject	\N	36	Secondary Subject ID	\N	4		38-30-0036	\N	\N	\N	\N
+1114	2024-02-29 14:40:40.782302	event_crf	2	31	Status	\N	41	2	1	31	\N	\N	\N
+1115	2024-02-29 14:40:40.798937	study_event	2	46	Status	\N	18	1	3	\N	\N	\N	\N
+1116	2024-02-29 14:41:59.305415	subject	2	37	\N	\N	5	\N	\N	\N	\N	\N	\N
+1117	2024-02-29 14:41:59.327635	study_subject	2	37	\N	\N	2	\N	\N	\N	\N	\N	\N
+1118	2024-02-29 14:41:59.327635	study_subject	\N	37	Secondary Subject ID	\N	4		38-30-0037	\N	\N	\N	\N
+1119	2024-02-29 17:16:16.034669	event_crf	1	32	Status	\N	41	2	1	32	\N	\N	\N
+1120	2024-02-29 17:16:16.051003	study_event	1	47	Status	\N	18	1	3	\N	\N	\N	\N
+1121	2024-02-29 17:17:50.659964	item_data	1	516	SITEID	initial value	1	\N	9	32	47	17	1
+1123	2024-02-29 17:17:50.679532	item_data	1	517	VISDAT	initial value	1	\N	2024-02-28	32	47	17	1
+1125	2024-02-29 17:17:50.695844	item_data	1	518	BRTHDAT	initial value	1	\N	2002-02-28	32	47	17	1
+1128	2024-02-29 17:17:50.728603	item_data	1	520	DSSTDAT	initial value	1	\N	2024-02-21	32	47	17	1
+1130	2024-02-29 17:17:50.745502	item_data	1	521	DSSTDATB	initial value	1	\N	2024-02-21	32	47	17	1
+1133	2024-02-29 17:17:50.777233	item_data	1	523	VSORRESN	initial value	1	\N	89	32	47	17	1
+1135	2024-02-29 17:17:50.793168	item_data	1	524	VSORRESU	initial value	1	\N	in	32	47	17	1
+1137	2024-02-29 17:17:50.808691	item_data	1	525	VSORRESNW	initial value	1	\N	76	32	47	17	1
+1139	2024-02-29 17:17:50.824159	item_data	1	526	VSORRESUW	initial value	1	\N	kg	32	47	17	1
+1141	2024-02-29 17:17:50.839691	item_data	1	527	VSDAT	initial value	1	\N	2024-02-28	32	47	17	1
+1143	2024-02-29 17:17:50.854967	item_data	1	528	MODAT	initial value	1	\N	2024-02-28	32	47	17	1
+1145	2024-02-29 17:17:50.870108	item_data	1	529	MOORRESC	initial value	1	\N	N	32	47	17	1
+1147	2024-02-29 17:17:50.885686	item_data	1	530	XDSTDAT	initial value	1	\N	2024-02-21	32	47	17	1
+1149	2024-02-29 17:17:50.900749	item_data	1	531	COVAL	initial value	1	\N	no	32	47	17	1
+1151	2024-02-29 17:17:50.915945	item_data	1	532	ZCNAME	initial value	1	\N	no	32	47	17	1
+1153	2024-02-29 17:17:50.931278	item_data	1	533	ZCDAT	initial value	1	\N	2024-02-20	32	47	17	1
+1155	2024-02-29 17:17:50.99005	study_subject	0	37	Secondary Subject ID	\N	4	38-30-0037	38-9-00037	\N	\N	\N	\N
+1156	2024-03-01 16:46:38.77923	study_subject	1	6	Study id	\N	27	7406	25 (Pending)	\N	\N	\N	\N
+1157	2024-03-01 17:01:57.273937	event_crf	1	33	Status	\N	41	2	1	33	\N	\N	\N
+1158	2024-03-01 17:01:57.2899	study_event	1	49	Status	\N	18	1	3	\N	\N	\N	\N
+1159	2024-03-02 05:14:20.724726	subject	1	38	\N	\N	5	\N	\N	\N	\N	\N	\N
+1160	2024-03-02 05:14:20.76046	study_subject	1	38	\N	\N	2	\N	\N	\N	\N	\N	\N
+1161	2024-03-02 05:14:20.76046	study_subject	\N	38	Secondary Subject ID	\N	4	test_secondary_id	38-30-0038	\N	\N	\N	\N
+1162	2024-03-02 05:14:20.77794	subject_group_map	1	38	Enrollment state	\N	28		Enrolled	\N	\N	\N	\N
+1163	2024-03-02 05:15:11.580885	event_crf	1	34	Status	\N	41	2	1	34	\N	\N	\N
+1164	2024-03-02 05:15:11.624169	study_event	1	50	Status	\N	18	1	3	\N	\N	\N	\N
+1165	2024-03-02 05:16:39.735764	item_data	1	534	SITEID	initial value	1	\N	30	34	50	17	1
+1167	2024-03-02 05:16:39.759103	item_data	1	535	VISDAT	initial value	1	\N	2024-03-01	34	50	17	1
+1169	2024-03-02 05:16:39.77775	item_data	1	536	BRTHDAT	initial value	1	\N	2000-03-01	34	50	17	1
+1172	2024-03-02 05:16:39.812739	item_data	1	538	DSSTDAT	initial value	1	\N	2024-03-01	34	50	17	1
+1174	2024-03-02 05:16:39.830334	item_data	1	539	DSSTDATB	initial value	1	\N	2024-03-01	34	50	17	1
+1177	2024-03-02 05:16:39.867907	item_data	1	541	VSORRESN	initial value	1	\N	180	34	50	17	1
+1179	2024-03-02 05:16:39.889563	item_data	1	542	VSORRESU	initial value	1	\N	cm	34	50	17	1
+1181	2024-03-02 05:16:39.906459	item_data	1	543	VSORRESNW	initial value	1	\N	80	34	50	17	1
+1183	2024-03-02 05:16:39.923533	item_data	1	544	VSORRESUW	initial value	1	\N	kg	34	50	17	1
+1185	2024-03-02 05:16:39.940342	item_data	1	545	VSDAT	initial value	1	\N	2024-03-01	34	50	17	1
+1187	2024-03-02 05:16:39.958391	item_data	1	546	MODAT	initial value	1	\N	2024-03-01	34	50	17	1
+1189	2024-03-02 05:16:39.977356	item_data	1	547	MOORRESC	initial value	1	\N	Y	34	50	17	1
+1191	2024-03-02 05:16:39.993815	item_data	1	548	XDSTDAT	initial value	1	\N	2024-03-01	34	50	17	1
+1194	2024-03-02 05:16:40.025978	item_data	1	550	ZCNAME	initial value	1	\N	Lucio	34	50	17	1
+1196	2024-03-02 05:16:40.04197	item_data	1	551	ZCDAT	initial value	1	\N	2024-03-01	34	50	17	1
+1198	2024-03-02 05:16:40.116244	study_subject	0	38	Secondary Subject ID	\N	4	38-30-0038	38-30-00038	\N	\N	\N	\N
+1199	2024-03-07 01:12:19.605862	subject	1	39	\N	\N	5	\N	\N	\N	\N	\N	\N
+1200	2024-03-07 01:12:19.656262	study_subject	1	39	\N	\N	2	\N	\N	\N	\N	\N	\N
+1201	2024-03-07 01:12:19.656262	study_subject	\N	39	Secondary Subject ID	\N	4		38-30-0039	\N	\N	\N	\N
+1202	2024-03-07 01:12:19.678224	subject_group_map	1	39	Enrollment state	\N	28		Enrolled	\N	\N	\N	\N
+1203	2024-03-07 01:13:06.718814	event_crf	1	35	Status	\N	41	2	1	35	\N	\N	\N
+1204	2024-03-07 01:13:06.741634	study_event	1	51	Status	\N	18	1	3	\N	\N	\N	\N
+1205	2024-03-07 01:14:23.315886	event_crf	1	36	Status	\N	41	2	1	36	\N	\N	\N
+1206	2024-03-07 01:14:23.334115	study_event	1	52	Status	\N	18	1	3	\N	\N	\N	\N
+1207	2024-03-07 01:16:47.86611	item_data	1	552	SITEID	initial value	1	\N	9	36	52	17	1
+1209	2024-03-07 01:16:47.903824	item_data	1	553	VISDAT	initial value	1	\N	2024-03-06	36	52	17	1
+1211	2024-03-07 01:16:47.942772	item_data	1	554	BRTHDAT	initial value	1	\N	2003-03-03	36	52	17	1
+1214	2024-03-07 01:16:47.97947	item_data	1	556	DSSTDAT	initial value	1	\N	2024-03-06	36	52	17	1
+1216	2024-03-07 01:16:47.997526	item_data	1	557	DSSTDATB	initial value	1	\N	2024-03-06	36	52	17	1
+1219	2024-03-07 01:16:48.032906	item_data	1	559	VSORRESN	initial value	1	\N	160	36	52	17	1
+1221	2024-03-07 01:16:48.058519	item_data	1	560	VSORRESU	initial value	1	\N	cm	36	52	17	1
+1223	2024-03-07 01:16:48.07567	item_data	1	561	VSORRESNW	initial value	1	\N	60	36	52	17	1
+1225	2024-03-07 01:16:48.092576	item_data	1	562	VSORRESUW	initial value	1	\N	kg	36	52	17	1
+1227	2024-03-07 01:16:48.11108	item_data	1	563	VSDAT	initial value	1	\N	2024-03-06	36	52	17	1
+1229	2024-03-07 01:16:48.127998	item_data	1	564	MODAT	initial value	1	\N	2024-03-06	36	52	17	1
+1231	2024-03-07 01:16:48.144871	item_data	1	565	MOORRESC	initial value	1	\N	N	36	52	17	1
+1233	2024-03-07 01:16:48.161872	item_data	1	566	XDSTDAT	initial value	1	\N	2024-03-06	36	52	17	1
+1236	2024-03-07 01:16:48.194979	item_data	1	568	ZCNAME	initial value	1	\N	Kevin	36	52	17	1
+1238	2024-03-07 01:16:48.212785	item_data	1	569	ZCDAT	initial value	1	\N	2024-03-06	36	52	17	1
+1240	2024-03-07 01:16:48.277246	study_subject	0	39	Study Subject ID	\N	4	00-P00001	38-9-00039	\N	\N	\N	\N
+1241	2024-03-07 01:16:48.277246	study_subject	0	39	Secondary Subject ID	\N	4	38-30-0039	38-9-00039	\N	\N	\N	\N
+1242	2024-03-07 08:53:16.881372	subject	1	40	\N	\N	5	\N	\N	\N	\N	\N	\N
+1243	2024-03-07 08:53:16.910599	study_subject	1	40	\N	\N	2	\N	\N	\N	\N	\N	\N
+1244	2024-03-07 08:53:16.910599	study_subject	\N	40	Secondary Subject ID	\N	4		38-30-0040	\N	\N	\N	\N
+1245	2024-03-07 08:53:16.923443	subject_group_map	1	40	Enrollment state	\N	28		Enrolled	\N	\N	\N	\N
+1246	2024-03-07 08:56:47.377441	event_crf	1	37	Status	\N	41	2	1	37	\N	\N	\N
+1247	2024-03-07 08:56:47.407972	study_event	1	53	Status	\N	18	1	3	\N	\N	\N	\N
+1248	2024-03-07 08:57:08.064379	item_data	1	570	PID	initial value	1	\N	00-P00002	37	53	32	1
+1250	2024-03-07 08:57:08.086919	item_data	1	571	STATUS	initial value	1	\N	Y	37	53	32	1
+1252	2024-03-07 08:58:51.899565	item_data	1	572	SITEID	initial value	1	\N	9	37	53	32	1
+1254	2024-03-07 08:58:51.923212	item_data	1	573	VISDATEN	initial value	1	\N	2024-03-06	37	53	32	1
+1256	2024-03-07 08:58:51.940808	item_data	1	574	BRTHDAT	initial value	1	\N	2002-03-07	37	53	32	1
+1259	2024-03-07 08:58:51.97612	item_data	1	576	DSSTDAT	initial value	1	\N	2024-03-05	37	53	32	1
+1261	2024-03-07 08:58:51.99287	item_data	1	577	DSSTDATB	initial value	1	\N	2024-03-06	37	53	32	1
+1264	2024-03-07 08:58:52.026335	item_data	1	579	VSORRESNH	initial value	1	\N	80	37	53	32	1
+1266	2024-03-07 08:58:52.042568	item_data	1	580	VSORRESUH	initial value	1	\N	in	37	53	32	1
+1268	2024-03-07 08:58:52.063945	item_data	1	581	VSORRESNW	initial value	1	\N	80	37	53	32	1
+1270	2024-03-07 08:58:52.081473	item_data	1	582	VSORRESUW	initial value	1	\N	kg	37	53	32	1
+1272	2024-03-07 08:58:52.098727	item_data	1	583	VSDATW	initial value	1	\N	2024-03-06	37	53	32	1
+1274	2024-03-07 08:58:52.115203	item_data	1	584	MODAT	initial value	1	\N	2024-03-06	37	53	32	1
+1276	2024-03-07 08:58:52.131799	item_data	1	585	MOORRESC	initial value	1	\N	N	37	53	32	1
+1278	2024-03-07 08:58:52.148044	item_data	1	586	XDSTDAT	initial value	1	\N	2024-03-06	37	53	32	1
+1280	2024-03-07 08:58:52.164724	item_data	1	587	COVALEN	initial value	1	\N	no	37	53	32	1
+1282	2024-03-07 08:58:52.180789	item_data	1	588	ZCNAMEEN	initial value	1	\N	no	37	53	32	1
+1284	2024-03-07 08:58:52.200796	item_data	1	589	ZCDATEN	initial value	1	\N	2024-03-06	37	53	32	1
+1286	2024-03-07 08:58:52.257311	study_subject	0	40	Study Subject ID	\N	4	00-P00002	38-09-00040	\N	\N	\N	\N
+1287	2024-03-07 08:58:52.257311	study_subject	0	40	Secondary Subject ID	\N	4	38-30-0040	38-09-00040	\N	\N	\N	\N
 \.
 
 
@@ -6650,22 +6813,17 @@ COPY public.audit_user_login (id, user_name, user_account_id, login_attempt_date
 49	root	1	2024-02-09 23:06:27.5	4	0	\N
 50	Melissa_Fagley	4	2024-02-09 23:09:15.455	4	0	\N
 51	Kit_Whitworth	8	2024-02-09 23:27:52.264	4	0	\N
-52	root	1	2024-03-01 15:51:55.331	2	0	\N
-53	root	1	2024-03-01 15:52:05.408	2	0	\N
-54	root	1	2024-03-01 15:53:51.047	2	0	\N
-55	root	1	2024-03-01 15:54:00.61	2	0	\N
-56	root	1	2024-03-01 15:54:08.245	2	0	\N
-57	root	1	2024-03-01 16:59:23.301	4	0	\N
-58	root	1	2024-03-01 17:01:19.145	2	0	\N
-59	root	1	2024-03-01 17:01:49.315	4	0	\N
-60	root	1	2024-03-01 17:15:08.98	4	0	\N
-61	root	1	2024-03-01 21:49:29.321	2	0	\N
-62	root	1	2024-03-02 19:33:11.347	2	0	\N
-63	root	1	2024-03-02 19:33:36.787	2	0	\N
-64	root	1	2024-03-04 19:08:57.47	1	0	\N
-65	root	1	2024-03-04 20:09:17.787	4	0	\N
-66	root	1	2024-03-04 20:23:35.366	2	0	\N
-67	Claudia	\N	2024-03-05 17:21:10.568	2	0	\N
+52	root	1	2024-02-27 18:03:27.569	2	0	\N
+53	Kia_Bryant	2	2024-02-28 14:16:23.127	4	0	\N
+54	CDCuser	\N	2024-02-29 13:30:34.42	2	0	\N
+55	root	1	2024-02-29 14:07:36.066	4	0	\N
+56	Kia_Bryant	2	2024-02-29 14:18:56.624	4	0	\N
+57	Kia_Bryant	2	2024-02-29 14:55:53.512	4	0	\N
+58	root	1	2024-02-29 18:16:53.949	4	0	\N
+59	root	1	2024-03-02 04:40:41.867	2	0	\N
+60	root	1	2024-03-02 04:40:51.398	2	0	\N
+61	root	1	2024-03-03 07:12:32.827	2	0	\N
+62	root	1	2024-03-03 13:34:11.372	4	0	\N
 \.
 
 
@@ -6682,7 +6840,6 @@ COPY public.authorities (id, username, authority, version) FROM stdin;
 6	Francois_Egbuonu	ROLE_USER	0
 7	Jessica_Brown	ROLE_USER	0
 8	Kit_Whitworth	ROLE_USER	0
-9	lucioric	ROLE_USER	0
 \.
 
 
@@ -6734,7 +6891,7 @@ COPY public.crf (crf_id, status_id, name, description, owner_id, date_created, d
 3	1	38_TC_TreatmentCompletionForm	intial version	1	2024-02-02	2024-02-24	1	F_38_TC_TREATM	3
 16	1	38_TSPK_DrugSparceSpecimenCollection	Second versions	1	2024-02-02	2024-02-24	1	F_38_TSPK_DRUG	3
 14	1	38_TX_TreatmentEvaluationForm	first versions	1	2024-02-02	2024-02-24	1	F_38_TX_TREATM	3
-18	1	38_BL_Baseline	intial versions	1	2024-03-05	2024-03-05	1	F_38_BL_BASELI	3
+18	1	38_BL_Baseline	intial versions	1	2024-03-06	2024-03-06	1	F_38_BL_BASELI	3
 \.
 
 
@@ -6773,7 +6930,8 @@ COPY public.crf_version (crf_version_id, crf_id, name, description, revision_not
 28	3	v1.2	intial version	ab 16-Jan-2023, ct30-Jan-2024	1	2024-02-24	\N	1	\N	F_38_TC_TREATM_V12	\N	\N
 29	16	v2.6x	Second versions	ab 18-Feb-2024	1	2024-02-24	\N	1	\N	F_38_TSPK_DRUG_V26X	\N	\N
 30	14	v1.4	first versions	ab 17-Jan-2024	1	2024-02-24	\N	1	\N	F_38_TX_TREATM_V14	\N	\N
-31	18	v1.0u	intial versions	ct 19-Feb-2024 (combined EN-NE-HX), HIV section without hide function	1	2024-03-05	\N	1	\N	F_38_BL_BASELI_V10U	\N	\N
+31	18	v1.0w	intial versions	ct 19-Feb-2024 (combined EN-NE-HX), HIV section without hide function	1	2024-03-06	\N	1	\N	F_38_BL_BASELI_V10W	\N	\N
+32	18	v1.0x	intial versions	ct 19-Feb-2024 (combined EN-NE-HX), HIV section without hide function	1	2024-03-06	\N	1	\N	F_38_BL_BASELI_V10X	\N	\N
 \.
 
 
@@ -7797,7 +7955,8 @@ COPY public.databasechangelog (id, author, filename, dateexecuted, orderexecuted
 1	jbley	migration/lc-1.2.0/mail_notification.xml	2024-02-02 17:36:58.359678	1005	EXECUTED	8:8980622c67d3cd6e563ac5148d27c56e	addColumn tableName=study	Creating new attribute for mail notification for login.	\N	3.6.3	\N	\N	6895382328
 2	jbley	migration/lc-1.2.0/mail_notification.xml	2024-02-02 17:36:58.382986	1006	EXECUTED	8:c6a37c0cf0997327de243b8a61345fce	createIndex indexName=ix1_study, tableName=study	Creating index on 'study' for newly created attribute.	\N	3.6.3	\N	\N	6895382328
 3	thillger	migration/lc-1.2.0/mail_notification.xml	2024-02-02 17:36:58.397201	1007	EXECUTED	8:cd11d12019f45a24105fe031acc8a9f7	addColumn tableName=study	Creating new attribute for contacting purpose in case of mail notifications.	\N	3.6.3	\N	\N	6895382328
-3	dx31	migration/lc-1.2.0/protocol_deviation.xml	2024-03-01 15:46:28.752546	1008	EXECUTED	8:dd1b631aebe2b1bc08b69a37a088b7ad	createTable tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert table...	Protocol deviations.	\N	3.6.3	\N	\N	9307988186
+3	dx31	migration/lc-1.2.0/protocol_deviation.xml	2024-03-02 04:39:47.469258	1008	EXECUTED	8:dd1b631aebe2b1bc08b69a37a088b7ad	createTable tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert tableName=protocol_deviation_severity; insert table...	Protocol deviations.	\N	3.6.3	\N	\N	9354386622
+4	dx31	migration/lc-1.2.0/protocol_deviation.xml	2024-03-07 00:55:21.699901	1009	EXECUTED	8:53f78d8d47a80b0118211ee8a51f69df	addColumn tableName=protocol_deviation		\N	3.6.3	\N	\N	9772920720
 \.
 
 
@@ -7930,6 +8089,8 @@ COPY public.discrepancy_note (discrepancy_note_id, description, discrepancy_note
 6	ERROR_ENDATEASSENT_GT14DAYSBEFORE [Error] Cannot be more than 14 days prior to  enrollment.	1	1		2024-02-07 16:30:42.043543+00	1	5	itemData	3	\N
 7	ERROR_ENDATEPARTOLEG_GT14DAYSBEFORE [Error] Cannot be more than 14 days prior to  enrollment.	1	1		2024-02-07 16:30:42.171543+00	1	\N	itemData	3	\N
 8	ERROR_ENDATEPARTOLEG_GT14DAYSBEFORE [Error] Cannot be more than 14 days prior to  enrollment.	1	1		2024-02-07 16:30:42.190643+00	1	7	itemData	3	\N
+9	ERROR_ENHEIGHTIN_NOTTYPICAL [Warning] Value is not typical; please check the result before submitting this record	1	1		2024-02-27 23:34:09.631785+00	1	\N	itemData	3	\N
+10	ERROR_ENHEIGHTIN_NOTTYPICAL [Warning] Value is not typical; please check the result before submitting this record	1	1		2024-02-27 23:34:09.660241+00	1	9	itemData	3	\N
 \.
 
 
@@ -8009,6 +8170,87 @@ COPY public.dyn_item_group_metadata (id, item_group_metadata_id, item_group_id, 
 3	683	66	f	13	0	0
 4	684	66	f	13	0	0
 5	685	66	f	13	0	0
+6	1601	77	t	37	0	0
+7	1602	77	t	37	0	0
+8	1603	77	t	37	0	0
+9	1604	77	t	37	0	0
+10	1605	77	t	37	0	0
+11	1606	77	t	37	0	0
+12	1607	77	t	37	0	0
+13	1608	77	t	37	0	0
+14	1609	77	t	37	0	0
+15	1610	77	t	37	0	0
+16	1611	77	t	37	0	0
+17	1612	77	t	37	0	0
+18	1613	77	t	37	0	0
+19	1614	77	t	37	0	0
+20	1615	77	t	37	0	0
+21	1616	77	t	37	0	0
+22	1617	77	t	37	0	0
+23	1618	77	t	37	0	0
+24	1619	78	t	37	0	0
+25	1620	79	t	37	0	0
+26	1621	79	t	37	0	0
+27	1622	79	t	37	0	0
+28	1623	79	t	37	0	0
+29	1624	79	t	37	0	0
+30	1625	79	t	37	0	0
+31	1626	79	t	37	0	0
+32	1627	79	t	37	0	0
+33	1628	79	t	37	0	0
+34	1629	79	t	37	0	0
+35	1630	79	t	37	0	0
+36	1631	79	t	37	0	0
+37	1632	79	t	37	0	0
+38	1634	79	t	37	0	0
+39	1636	79	t	37	0	0
+40	1638	79	t	37	0	0
+41	1640	79	t	37	0	0
+42	1641	79	t	37	0	0
+43	1642	79	t	37	0	0
+44	1643	79	t	37	0	0
+45	1644	79	t	37	0	0
+46	1645	79	t	37	0	0
+47	1646	79	t	37	0	0
+48	1647	79	t	37	0	0
+49	1648	79	t	37	0	0
+50	1649	84	t	37	0	0
+51	1650	84	t	37	0	0
+52	1651	84	t	37	0	0
+53	1652	84	t	37	0	0
+54	1653	84	t	37	0	0
+55	1655	86	t	37	0	0
+56	1656	86	t	37	0	0
+57	1657	86	t	37	0	0
+58	1658	86	t	37	0	0
+59	1659	86	t	37	0	0
+60	1660	86	t	37	0	0
+61	1661	86	t	37	0	0
+62	1662	86	t	37	0	0
+63	1663	86	t	37	0	0
+64	1664	86	t	37	0	0
+65	1665	86	t	37	0	0
+66	1666	86	t	37	0	0
+67	1667	86	t	37	0	0
+68	1668	86	t	37	0	0
+69	1669	86	t	37	0	0
+70	1670	86	t	37	0	0
+71	1671	86	t	37	0	0
+72	1673	86	t	37	0	0
+73	1674	88	t	37	0	0
+74	1675	88	t	37	0	0
+75	1676	88	t	37	0	0
+76	1677	88	t	37	0	0
+77	1678	88	t	37	0	0
+78	1679	88	t	37	0	0
+79	1680	88	t	37	0	0
+80	1681	88	t	37	0	0
+81	1685	90	t	37	0	0
+82	1686	90	t	37	0	0
+83	1687	90	t	37	0	0
+84	1688	90	t	37	0	0
+85	1689	90	t	37	0	0
+86	1672	87	t	37	0	0
 \.
 
 
@@ -8017,9 +8259,9 @@ COPY public.dyn_item_group_metadata (id, item_group_metadata_id, item_group_id, 
 --
 
 COPY public.event_crf (event_crf_id, study_event_id, crf_version_id, date_interviewed, interviewer_name, completion_status_id, status_id, annotations, date_completed, validator_id, date_validate, date_validate_completed, validator_annotations, validate_string, owner_id, date_created, study_subject_id, date_updated, update_id, electronic_signature_status, sdv_status, old_status_id, sdv_update_id) FROM stdin;
-30	41	7	\N		1	1		\N	\N	\N	\N			1	2024-03-01 16:52:49.287126+00	34	\N	\N	f	f	1	0
-31	44	7	\N		1	1		\N	\N	\N	\N			1	2024-03-05 12:18:24.195624+00	43	\N	\N	f	f	1	0
-32	45	7	\N		1	1		\N	\N	\N	\N			1	2024-03-05 12:21:51.049377+00	2	\N	\N	f	f	1	0
+35	51	31	\N		1	1		\N	\N	\N	\N			1	2024-03-07 01:13:06.718814+00	39	\N	\N	f	f	1	0
+36	52	17	\N		1	1		\N	0	\N	\N			1	2024-03-07 01:14:23.315886+00	39	2024-03-07 01:16:48.253562+00	1	f	f	1	0
+37	53	32	\N		1	1		\N	0	\N	\N			1	2024-03-07 08:56:47.377441+00	40	2024-03-07 08:58:52.233642+00	1	f	f	1	0
 \.
 
 
@@ -8044,12 +8286,41 @@ COPY public.event_crf_flag_workflow (id, workflow_id, workflow_status, owner_id,
 --
 
 COPY public.event_definition_crf (event_definition_crf_id, study_event_definition_id, study_id, crf_id, required_crf, double_entry, require_all_text_filled, decision_conditions, null_values, default_version_id, status_id, owner_id, date_created, date_updated, update_id, ordinal, electronic_signature, hide_crf, source_data_verification_code, selected_version_ids, parent_id, participant_form, allow_anonymous_submission, submission_url) FROM stdin;
+30	16	3	6	t	f	f	f		6	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+31	16	3	14	t	f	f	f		13	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+32	16	3	7	t	f	f	f		7	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+33	17	3	6	t	f	f	f		6	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+34	17	3	14	t	f	f	f		13	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+35	17	3	7	t	f	f	f		7	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+36	18	3	6	t	f	f	f		6	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+37	18	3	14	t	f	f	f		13	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+38	18	3	7	t	f	f	f		7	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
 95	36	3	6	t	f	f	f		27	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
 96	36	3	1	t	f	f	f		24	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
 97	36	3	7	t	f	f	f		20	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+39	19	3	6	t	f	f	f		6	1	1	2024-02-24	2024-02-24	1	1	f	f	3		\N	f	f	
+40	19	3	14	t	f	f	f		13	1	1	2024-02-24	2024-02-24	1	2	f	f	3		\N	f	f	
+41	19	3	7	t	f	f	f		7	1	1	2024-02-24	2024-02-24	1	3	f	f	3		\N	f	f	
+45	19	3	17	t	f	f	f		16	1	1	2024-02-24	\N	\N	4	f	f	3		\N	f	f	
+46	19	3	10	t	f	f	f		10	1	1	2024-02-24	\N	\N	6	f	f	3		\N	f	f	
 98	37	3	7	t	f	f	f		20	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
 99	37	3	1	t	f	f	f		24	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
 42	20	3	6	t	f	f	f		6	7	1	2024-02-24	2024-02-24	1	1	f	f	3		\N	f	f	
+49	21	3	6	t	f	f	f		6	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+50	21	3	14	t	f	f	f		13	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+51	21	3	7	t	f	f	f		7	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+52	22	3	6	t	f	f	f		6	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+53	22	3	14	t	f	f	f		13	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+54	22	3	7	t	f	f	f		7	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+55	23	3	6	t	f	f	f		6	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+56	23	3	14	t	f	f	f		13	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+57	23	3	7	t	f	f	f		7	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+58	24	3	6	t	f	f	f		6	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+59	24	3	14	t	f	f	f		13	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+60	24	3	7	t	f	f	f		7	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+61	25	3	6	t	f	f	f		27	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+62	25	3	14	t	f	f	f		30	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+63	25	3	7	t	f	f	f		20	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
 64	26	3	6	t	f	f	f		27	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
 65	26	3	14	f	f	f	f		30	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
 66	26	3	1	t	f	f	f		24	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
@@ -8068,6 +8339,11 @@ COPY public.event_definition_crf (event_definition_crf_id, study_event_definitio
 79	30	3	6	t	f	f	f		27	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
 80	30	3	1	t	f	f	f		24	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
 81	30	3	7	t	f	f	f		20	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+82	31	3	7	t	f	f	f		20	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
+83	31	3	10	t	f	f	f		25	1	1	2024-02-24	\N	\N	2	f	f	3		\N	f	f	
+84	31	3	17	t	f	f	f		26	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
+85	31	3	6	t	f	f	f		27	1	1	2024-02-24	\N	\N	4	f	f	3		\N	f	f	
+86	31	3	14	t	f	f	f		30	1	1	2024-02-24	\N	\N	5	f	f	3		\N	f	f	
 43	20	3	14	t	f	f	f		13	7	1	2024-02-24	2024-02-24	1	2	f	f	3		\N	f	f	
 44	20	3	7	t	f	f	f		7	7	1	2024-02-24	2024-02-24	1	3	f	f	3		\N	f	f	
 47	20	3	10	t	f	f	f		10	7	1	2024-02-24	2024-02-24	1	4	f	f	3		\N	f	f	
@@ -8089,47 +8365,11 @@ COPY public.event_definition_crf (event_definition_crf_id, study_event_definitio
 106	39	3	9	t	f	f	f		21	1	1	2024-02-24	\N	\N	3	f	f	3		\N	f	f	
 107	39	3	6	t	f	f	f		27	1	1	2024-02-24	\N	\N	4	f	f	3		\N	f	f	
 108	40	3	8	t	f	f	f		22	1	1	2024-02-24	\N	\N	1	f	f	3		\N	f	f	
-27	15	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-28	15	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-29	15	3	14	f	f	f	f		13	5	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-30	16	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-31	16	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-32	16	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-34	17	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-35	17	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-109	17	3	17	f	f	f	f		26	1	1	2024-03-02	\N	\N	4	f	f	3		\N	f	f	
-37	18	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-38	18	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-110	18	3	17	f	f	f	f		26	1	1	2024-03-02	\N	\N	4	f	f	3		\N	f	f	
-40	19	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-41	19	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-45	19	3	17	f	f	f	f		16	1	1	2024-02-24	2024-03-02	1	4	f	f	3		\N	f	f	
-46	19	3	10	f	f	f	f		10	1	1	2024-02-24	2024-03-02	1	6	f	f	3		\N	f	f	
-82	31	3	7	f	f	f	f		20	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-39	19	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-83	31	3	10	f	f	f	f		25	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-84	31	3	17	f	f	f	f		26	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-85	31	3	6	f	f	f	f		27	1	1	2024-02-24	2024-03-02	1	4	f	f	3		\N	f	f	
-86	31	3	14	t	f	f	f		30	1	1	2024-02-24	2024-03-02	1	5	f	f	3		\N	f	f	
-50	21	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-51	21	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-111	21	3	17	f	f	f	f		26	1	1	2024-03-02	\N	\N	4	f	f	3		\N	f	f	
-52	22	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-53	22	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-54	22	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-55	23	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-56	23	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-57	23	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-58	24	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-59	24	3	14	t	f	f	f		13	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-60	24	3	7	f	f	f	f		7	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-61	25	3	6	f	f	f	f		27	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-62	25	3	14	t	f	f	f		30	1	1	2024-02-24	2024-03-02	1	2	f	f	3		\N	f	f	
-63	25	3	7	f	f	f	f		20	1	1	2024-02-24	2024-03-02	1	3	f	f	3		\N	f	f	
-33	17	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-36	18	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-49	21	3	6	f	f	f	f		6	1	1	2024-02-24	2024-03-02	1	1	f	f	3		\N	f	f	
-112	41	3	18	t	f	f	f		31	1	1	2024-03-05	\N	\N	1	f	f	3		\N	f	f	
+27	15	3	7	f	f	f	f		7	1	1	2024-02-24	2024-02-27	1	1	f	f	3		\N	f	f	
+28	15	3	6	f	f	f	f		6	1	1	2024-02-24	2024-02-27	1	2	f	f	3		\N	f	f	
+29	15	3	14	f	f	f	f		13	1	1	2024-02-24	2024-02-27	1	3	f	f	3		\N	f	f	
+109	15	3	15	t	f	f	f		17	1	1	2024-02-27	\N	\N	4	f	f	3		\N	f	f	
+110	41	3	18	t	f	f	f		31	1	1	2024-03-06	\N	\N	1	f	f	3		\N	f	f	
 \.
 
 
@@ -8252,7 +8492,6 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 11	ZNORRESN	If yes, how many specimens were collected		f	5	1	1	1	2024-02-02	\N	\N	I_38_FU_ZNORRESN
 12	ZNTERMRS	Was sputum collected for RS ratio assay		f	5	1	1	1	2024-02-02	\N	\N	I_38_FU_ZNTERMRS
 13	ZNTERMPG	Was a specimen for pharmacogenomics testing collected		f	5	1	1	1	2024-02-02	\N	\N	I_38_FU_ZNTERMPG
-203	CESTATC	Abdomnal symptoms: Not Assessed?		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CESTATC
 737	BEREFIDCCA	Sparse PK 1C 3 hrs post ref. dose TBTC Label Number 1	####3#	f	5	1	1	1	2024-02-02	\N	\N	I_38_PK_BEREFIDCCA
 738	BEREFIDCCB	Sparse PK 1C 3 hrs post ref. dose TBTC Label Number 2	####3#	f	5	1	1	1	2024-02-02	\N	\N	I_38_PK_BEREFIDCCB
 739	BEREFIDCCC	Sparse PK 1C 3 hrs post ref. dose TBTC Label Number 3	####3#	f	5	1	1	1	2024-02-02	\N	\N	I_38_PK_BEREFIDCCC
@@ -8383,6 +8622,8 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 644	COVAL	Comments		f	5	1	1	1	2024-02-02	\N	\N	I_38_TX_COVAL
 645	ZCNAME	Form Completion		f	5	1	1	1	2024-02-02	\N	\N	I_38_TX_ZCNAME
 646	ZCDAT	Date Treatment Evaluation Form Completed	DD-MMM-YYYY	f	9	1	1	1	2024-02-02	\N	\N	I_38_TX_ZCDAT
+915	NESCATOTH	Specific medical conditions that, in the investigator’s judgment, make study participation not in the individual’s best interest		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATOTH
+916	NESCATHIV	Main reason(s) patient does not meet eligibility criteria: For participants with HIV		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATHIV
 157	VSDAT	Vital signs: Date	DD-MMM-YYYY	f	9	1	1	1	2024-02-02	\N	\N	I_38_SS_VSDAT
 158	VSPERFB	Test for weight Not done?		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_VSPERFB
 159	VSORRESNA	Weight Value		f	7	1	1	1	2024-02-02	\N	\N	I_38_SS_VSORRESNA
@@ -8429,6 +8670,7 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 200	CETOXGRL	Easy bruising: Grade		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CETOXGRL
 201	CEOCCURM	Participant had Petechiae		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CEOCCURM
 202	CETOXGRM	Petechiae: Grade		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CETOXGRM
+203	CESTATC	Abdomnal symptoms: Not Assessed?		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CESTATC
 204	CEOCCURN	Participant had Nausea		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CEOCCURN
 205	CETOXGRN	Nausea: Grade		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CETOXGRN
 206	CEOCCURO	Participant was Vomiting		f	5	1	1	1	2024-02-02	\N	\N	I_38_SS_CEOCCURO
@@ -8609,6 +8851,7 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 541	SCTESTALCOHOL	Risk factors within the past year: Alcohol use led to problems in relationships		f	5	1	1	1	2024-02-02	\N	\N	I_38_HX_SCTESTALCOHOL
 542	MHOCCURFAM	Mental health history: Family member with mental illness (primary relationship-biologic mother, biologic father, full sibling, or biologic child) with mental illness		f	5	1	1	1	2024-02-02	\N	\N	I_38_HX_MHOCCURFAM
 526	COVAL	Comments		f	5	1	1	1	2024-02-02	\N	\N	I_38_IP_COVAL
+870	MHTERMHEPUNK	Hepatitis (Type unknown)		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMHEPUNK
 543	MHTERMFAM	If participant has family member with mental illness, please specify the past mental health diagnoses		f	5	1	1	1	2024-02-02	\N	\N	I_38_HX_MHTERMFAM
 544	MHOCCURSELF	Mental health history: Past personal mental illness		f	5	1	1	1	2024-02-02	\N	\N	I_38_HX_MHOCCURSELF
 545	MHTERMSELF	If participant has past personal mental illness, please specify the past mental health diagnoses		f	5	1	1	1	2024-02-02	\N	\N	I_38_HX_MHTERMSELF
@@ -8701,12 +8944,23 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 633	ZNTERMSS	Symptoms assessed		f	5	1	1	1	2024-02-02	\N	\N	I_38_TX_ZNTERMSS
 634	ZNTERMMB	Sputum Collection Attempted		f	5	1	1	1	2024-02-02	\N	\N	I_38_TX_ZNTERMMB
 643	TXSTATB	Study Treatment		f	5	1	1	1	2024-02-02	\N	\N	I_38_TX_TXSTATB
+899	COVALHX	Comments History form		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_COVALHX
 665	USUBJID	Participant's ID		f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_USUBJID
 666	VISIT	Visit or date of blood specimen collection		f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_VISIT
 667	VISDAT	Date of Visit	DD-MMM-YYYY	f	9	1	1	1	2024-02-02	\N	\N	I_38_TS_VISDAT
 668	EXSTDAT	Reference Dose & Vomiting (Pre-reference dose A) Date		f	9	1	1	1	2024-02-02	\N	\N	I_38_TS_EXSTDAT
 669	EXSTTIM	Reference Dose & Vomiting (Pre-reference dose A) Time	HH:MM	f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_EXSTTIM
 670	EXTMCOND	Reference Dose & Vomiting (Pre-reference dose A) Estimated		f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_EXTMCOND
+917	NESCATLAB	Main reason(s) patient does not meet eligibility criteria: Laboratory parameters done at or within 14 days prior to screening		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATLAB
+918	NESCATEDA	Patient expressed a concern or objection related to: A. Experimental Components		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATEDA
+919	NESCATEDB	Patient expressed a concern or objection related to: B. Study Procedures		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATEDB
+920	NESCATEDC	Patient expressed a concern or objection related to: C. Difficulties or Costs Associated with Study Participation		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATEDC
+921	NESCATEDD	Patient expressed a concern or objection related to: D. Opinion or Response of Others Stigma		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATEDD
+922	NESCATEDE	Patient expressed a concern or objection related to: E. Miscellaneous STUDY PROCEDURES		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATEDE
+923	NESCATEDF	Patient declined / refused to provide a reason for decision/ did not return to clinic/ unsuccessful attempts to contact patient)		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATEDF
+924	NESCATE	Site decides not to enroll patient		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATE
+925	NCNAME	Name of person completing the Non-enrollment form		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NCNAME
+926	NCDAT	Date Non-enrollment Form completed	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_NCDAT
 716	BEREFIDCA	TBTC Label Number at 3 hrs (post ref. dose) 1	####3#	f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_BEREFIDCA
 717	BEREFIDCB	TBTC Label Number at 3 hrs (post ref. dose) 2	####3#	f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_BEREFIDCB
 718	BEREFIDCC	TBTC Label Number at 3 hrs (post ref. dose) 3	####3#	f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_BEREFIDCC
@@ -8715,6 +8969,58 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 728	BESCAT	Aliquots collected for which type of sampling		f	5	1	1	1	2024-02-02	\N	\N	I_38_PK_BESCAT
 721	ZCNAME	PRINT name of person completing form		f	5	1	1	1	2024-02-02	\N	\N	I_38_TS_ZCNAME
 722	ZCDAT	Date Form completed	DD-MMM-YYYY	f	9	1	1	1	2024-02-02	\N	\N	I_38_TS_ZCDAT
+811	PID	Subject ID		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_PID
+812	STATUS	Enrollment status		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_STATUS
+813	SITEID	Site ID		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SITEID
+814	VISDATEN	Enrollment Date	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_VISDATEN
+815	BRTHDAT	Date of birth	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_BRTHDAT
+816	BRTHCOND	Date of birth estimated		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_BRTHCOND
+817	DSSTDAT	Date participant or legal guardian signed informed consent	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_DSSTDAT
+818	DSSTDATB	Date participant gave assent	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_DSSTDATB
+819	DSDECOD	Date participant gave assent NA		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_DSDECOD
+820	VSORRESNH	Height		f	7	1	1	1	2024-03-06	\N	\N	I_38_BL_VSORRESNH
+821	VSORRESUH	Height unit		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_VSORRESUH
+822	VSORRESNW	Weight		f	7	1	1	1	2024-03-06	\N	\N	I_38_BL_VSORRESNW
+823	VSORRESUW	Weight unit		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_VSORRESUW
+824	VSDATW	Date of weight:	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_VSDATW
+825	MODAT	Date of chest X-ray	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_MODAT
+826	MOORRESC	Any cavitation on chest x-ray		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MOORRESC
+827	XDSTDAT	Scheduled study treatment start date		f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_XDSTDAT
+828	COVALEN	Comments EN form		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_COVALEN
+829	ZCNAMEEN	Name of person completing EN form		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ZCNAMEEN
+830	ZCDATEN	Date enrollment EN form completed	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_ZCDATEN
+831	TDARM	Assigned treatment arm		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_TDARM
+832	VISDATHX	Visit date	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_VISDATHX
+833	SEX	Participant's Sex		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SEX
+834	BRTHCTRY	Participant's Place of birth		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_BRTHCTRY
+835	ETHNIC	Participant's Ethnicity		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ETHNIC
+836	RACE	Participant's Race		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_RACE
+837	RACENR	Race was not reported		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_RACENR
+838	RACEOTH	Specify other Participant's race		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_RACEOTH
+839	SCTESTHOMELES	Risk factors within the past year: Homeless		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SCTESTHOMELES
+840	SCTESTIDU	Risk factors within the past year: Injecting drug use		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SCTESTIDU
+841	SCTESTNIDU	Risk factors within the past year: Non-injecting drug use		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SCTESTNIDU
+842	SCTESTCORRFACP	Risk factors within the past year: Resident of correctional facility		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SCTESTCORRFACP
+843	SCTESTALCOHOL	Risk factors within the past year: Alcohol use led to problems in relationships		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SCTESTALCOHOL
+844	MHOCCURFAM	Mental health history: Family member with mental illness		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURFAM
+845	MHTERMFAM	Mental health history: Family member's past mental health diagnoses		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMFAM
+846	MHOCCURSELF	Mental health history: Past personal mental illness		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURSELF
+847	MHTERMSELF	Mental health history: Personal past mental health diagnoses		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMSELF
+848	MHOCCURTRAUMA	Mental health history: Past personal experience of traumatic event(s)		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURTRAUMA
+849	MHTERMTRAUMA	Mental health history: Past personal traumatic event(s)		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMTRAUMA
+850	MHOCCURCHANGE	Mental health history: Unintended mental status changes induced by specific medications or substances		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURCHANGE
+851	MHTERMCHANGE	Mental health history: Unintended mental status changes induced by specific medications or substances: specify medication and mental status change		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMCHANGE
+852	SUNCF	Has participant ever smoked tobacco		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SUNCF
+853	SUCDURC	Total duration of tobacco use unknown		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SUCDURC
+854	SUCDURU	Unit of total duration of tobacco use		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SUCDURU
+855	SUCDURN	Total duration of tobacco use		f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_SUCDURN
+856	SUDSTXT	Number of cigarettes currently or formerly smoked per day		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SUDSTXT
+857	SUQDURC	Time since participant quit smoking unknown		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SUQDURC
+858	SUQDURU	Unit of amount of time since participant quit smoking		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SUQDURU
+859	SUQDURN	Amount of time since participant quit smoking		f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_SUQDURN
+860	SCORRESN	Karnofsky score		f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_SCORRESN
+861	MHOCCURPRIORTX	Was the participant ever treated for active TB prior to this episode		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURPRIORTX
+862	MHSTMO	The most recent month and year of TB diagnosis	MMM-YYYY	f	10	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTMO
 647	SITEID	Site ID		f	5	1	1	1	2024-02-02	\N	\N	I_38_EN_SITEID
 648	VISDAT	Enrollment Date	DD-MMM-YYYY	f	9	1	1	1	2024-02-02	\N	\N	I_38_EN_VISDAT
 649	BRTHDAT	Date of birth	DD-MMM-YYYY	f	9	1	1	1	2024-02-02	\N	\N	I_38_EN_BRTHDAT
@@ -9005,121 +9311,56 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 528	ZCDAT	Date Form Completed	DD-MMM-YYYY	f	9	1	1	1	2024-02-02	\N	\N	I_38_IP_ZCDAT
 794	COVALA	Name of site POC for specimens		f	5	1	1	1	2024-02-24	\N	\N	I_38_IP_COVALA
 795	COVALB	Phone number of site POC for specimens		f	5	1	1	1	2024-02-24	\N	\N	I_38_IP_COVALB
-811	PID	Subject ID		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_PID
-812	STATUS	Enrollment status		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_STATUS
-813	VISDATEN	Enrollment Date	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_VISDATEN
-814	BRTHDAT	Date of birth	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_BRTHDAT
-815	BRTHCOND	Date of birth estimated		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_BRTHCOND
-816	DSSTDAT	Date participant or legal guardian signed informed consent	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_DSSTDAT
-817	DSSTDATB	Date participant gave assent	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_DSSTDATB
-818	DSDECOD	Date participant gave assent NA		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_DSDECOD
-819	VSORRESNH	Height		f	7	1	1	1	2024-03-05	\N	\N	I_38_BL_VSORRESNH
-820	VSORRESUH	Height unit		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_VSORRESUH
-821	VSORRESNW	Weight		f	7	1	1	1	2024-03-05	\N	\N	I_38_BL_VSORRESNW
-822	VSORRESUW	Weight unit		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_VSORRESUW
-823	VSDATW	Date of weight:	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_VSDATW
-824	MODAT	Date of chest X-ray	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_MODAT
-825	MOORRESC	Any cavitation on chest x-ray		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MOORRESC
-826	XDSTDAT	Scheduled study treatment start date		f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_XDSTDAT
-827	COVALEN	Comments EN form		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_COVALEN
-828	ZCNAMEEN	Name of person completing EN form		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ZCNAMEEN
-829	ZCDATEN	Date enrollment EN form completed	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_ZCDATEN
-830	TDARM	Assigned treatment arm		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_TDARM
-831	VISDATHX	Visit date	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_VISDATHX
-832	SEX	Participant's Sex		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SEX
-833	BRTHCTRY	Participant's Place of birth		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_BRTHCTRY
-834	ETHNIC	Participant's Ethnicity		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ETHNIC
-835	RACE	Participant's Race		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_RACE
-836	RACENR	Race was not reported		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_RACENR
-837	RACEOTH	Specify other Participant's race		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_RACEOTH
-838	SCTESTHOMELES	Risk factors within the past year: Homeless		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SCTESTHOMELES
-839	SCTESTIDU	Risk factors within the past year: Injecting drug use		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SCTESTIDU
-840	SCTESTNIDU	Risk factors within the past year: Non-injecting drug use		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SCTESTNIDU
-841	SCTESTCORRFACP	Risk factors within the past year: Resident of correctional facility		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SCTESTCORRFACP
-842	SCTESTALCOHOL	Risk factors within the past year: Alcohol use led to problems in relationships		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SCTESTALCOHOL
-843	MHOCCURFAM	Mental health history: Family member with mental illness		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURFAM
-844	MHTERMFAM	Mental health history: Family member's past mental health diagnoses		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMFAM
-845	MHOCCURSELF	Mental health history: Past personal mental illness		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURSELF
-846	MHTERMSELF	Mental health history: Personal past mental health diagnoses		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMSELF
-847	MHOCCURTRAUMA	Mental health history: Past personal experience of traumatic event(s)		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURTRAUMA
-848	MHTERMTRAUMA	Mental health history: Past personal traumatic event(s)		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMTRAUMA
-849	MHOCCURCHANGE	Mental health history: Unintended mental status changes induced by specific medications or substances		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURCHANGE
-850	MHTERMCHANGE	Mental health history: Unintended mental status changes induced by specific medications or substances: specify medication and mental status change		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMCHANGE
-851	SUNCF	Has participant ever smoked tobacco		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SUNCF
-852	SUCDURC	Total duration of tobacco use unknown		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SUCDURC
-853	SUCDURU	Unit of total duration of tobacco use		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SUCDURU
-854	SUCDURN	Total duration of tobacco use		f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_SUCDURN
-855	SUDSTXT	Number of cigarettes currently or formerly smoked per day		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SUDSTXT
-856	SUQDURC	Time since participant quit smoking unknown		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SUQDURC
-857	SUQDURU	Unit of amount of time since participant quit smoking		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SUQDURU
-858	SUQDURN	Amount of time since participant quit smoking		f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_SUQDURN
-859	SCORRESN	Karnofsky score		f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_SCORRESN
-860	MHOCCURPRIORTX	Was the participant ever treated for active TB prior to this episode		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURPRIORTX
-861	MHSTMO	The most recent month and year of TB diagnosis	MMM-YYYY	f	10	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTMO
-862	MHSTYRCOND	The most recent month and year of TB diagnosis is an estimation		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTYRCOND
-863	MHOCCURCPLTPRTX	Did participant complete prescribed TB treatment		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURCPLTPRTX
-864	MHOCCUREXTRATB	Does participant currently have extrapulmonary TB		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCUREXTRATB
-865	MHBODSYS	System organ class of extrapulmonary TB site		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHBODSYS
-866	MHTERMLIVER	Liver disease		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMLIVER
-867	MHTERMHEPB	Hepatitis B		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMHEPB
-868	MHTERMHEPC	Hepatitis C		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMHEPC
-869	MHTERMHEPUNK	Hepatitis (Type unknown)		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMHEPUNK
-870	MHTERMHEPALC	Hepatitis due to alcohol use		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMHEPALC
-871	MHTERMOTHER	Other liver disease		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMOTHER
-872	MHSCATDIAB	Diabetes		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSCATDIAB
-873	MHTERMDIAB	Diabetes type		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMDIAB
-874	MHSTYR	Year Diabetes was diagnosed		f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTYR
-875	MHSTYRCONDDIAB	Stated year of diabetes diagnosis is an estimation or is unknown		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTYRCONDDIAB
-876	MHRECA	Are medical records confirming diabetes diagnosis available		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHRECA
-877	ZNCATAT	Was the participant taking any antidiabetic medications in the 14 days prior to study treatment start date?		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ZNCATAT
-878	MHOCCURPERINEUR	Peripheral neuropathy		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURPERINEUR
-879	MHOCCURCANCER	Cancer		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURCANCER
-880	MHTERMCANCER	Specify cancer		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMCANCER
-881	MHOCCURCARDIAC	Cardiac conditions		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURCARDIAC
-882	MHTERMCARDIAC	Specify cardiac condition		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMCARDIAC
-883	OTHERCA	Other concomitant diagnoses, including any current/active mental illness or problems		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_OTHERCA
-884	MHCATHIVPOSNA	Not Applicable - Participant is HIV-negative		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHCATHIVPOSNA
-885	MHSTYRHIVPOS	Year the participant was first documented as HIV-positive	YYYY	f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTYRHIVPOS
-886	MHSTYRCONDA	Year the participant was first documented as HIV-positive is an estimation		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTYRCONDA
-887	MHOCCURCD	Has the participant ever had a CD4 cell count below 200 cells/mm^3?		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHOCCURCD
-888	MHTERMART	Has the participant ever been prescribed and taken antiretroviral therapy (ART)?		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMART
-889	ZNTERMART	Year ART was initiated	YYYY	f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_ZNTERMART
-890	MHSTYRCONDART	Year ART was initiated is an estimation		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTYRCONDART
-891	ZNOCCURHIVCM	Was the participant taking any antiretroviral therapy in the 14 days prior to study treatment start date		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ZNOCCURHIVCM
-892	MHWHO4COND	Any WHO Clinical Stage 4 Conditions?		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHWHO4COND
-893	MHTERMWHO	WHO Clinical Stage 4 Condition		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHTERMWHO
-894	MHSTMOWHO	Month		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTMOWHO
-895	MHSTYRWHO	Year	YYYY	f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_MHSTYRWHO
-896	ZNOCCURDR	Was the participant taking pre-study TB treatment in the 6 months prior to study start date and/or drugs with anti-TB activity given for purposes other than treatment of TB in the 30 days prior to study treatment start date.		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ZNOCCURDR
-897	ZNOCCURCM	Was the participant taking non-TB medications, including over-the-counter drugs, in the 14 days prior to study treatment start date		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ZNOCCURCM
-898	COVALHX	Comments History form		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_COVALHX
-899	ZCNAMEHX	name of person completing History form		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ZCNAMEHX
-900	ZCDATHX	Date History Form completed	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_ZCDATHX
-901	VISDATNE	Screening date		f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_VISDATNE
-902	SEXNE	Sex		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SEXNE
-903	BRTHYR	Year of birth	YYYY	f	6	1	1	1	2024-03-05	\N	\N	I_38_BL_BRTHYR
-904	BRTHCONDNE	Year of birth given above is an estimation		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_BRTHCONDNE
-905	BRTHCTRYNE	Place of birth		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_BRTHCTRYNE
-906	BRTHCTRYREASND	Plase of birth unknown or not reported		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_BRTHCTRYREASND
-907	ETHNICNE	Ethnicity		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_ETHNICNE
-908	RACENE	Race		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_RACENE
-909	RACENRNE	Race was not reported		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_RACENRNE
-910	RACEOTHNE	Specify other race		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_RACEOTHNE
-911	SCRID	Site Screening Number		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_SCRID
-912	NECATAB	Reason for Non-Enrollment		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NECATAB
-913	NESCATMAIN	Main reason(s) patient does not meet eligibility criteria: Uncategorised		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATMAIN
-914	NESCATOTH	Specific medical conditions that, in the investigator’s judgment, make study participation not in the individual’s best interest		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATOTH
-915	NESCATHIV	Main reason(s) patient does not meet eligibility criteria: For participants with HIV		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATHIV
-916	NESCATLAB	Main reason(s) patient does not meet eligibility criteria: Laboratory parameters done at or within 14 days prior to screening		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATLAB
-917	NESCATEDA	Patient expressed a concern or objection related to: A. Experimental Components		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATEDA
-918	NESCATEDB	Patient expressed a concern or objection related to: B. Study Procedures		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATEDB
-919	NESCATEDC	Patient expressed a concern or objection related to: C. Difficulties or Costs Associated with Study Participation		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATEDC
-920	NESCATEDD	Patient expressed a concern or objection related to: D. Opinion or Response of Others Stigma		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATEDD
-921	NESCATEDE	Patient expressed a concern or objection related to: E. Miscellaneous STUDY PROCEDURES		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATEDE
-922	NESCATEDF	Patient declined / refused to provide a reason for decision/ did not return to clinic/ unsuccessful attempts to contact patient)		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATEDF
-923	NESCATE	Site decides not to enroll patient		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NESCATE
-924	NCNAME	Name of person completing the Non-enrollment form		f	5	1	1	1	2024-03-05	\N	\N	I_38_BL_NCNAME
-925	NCDAT	Date Non-enrollment Form completed	DD-MMM-YYYY	f	9	1	1	1	2024-03-05	\N	\N	I_38_BL_NCDAT
+863	MHSTYRCOND	The most recent month and year of TB diagnosis is an estimation		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTYRCOND
+864	MHOCCURCPLTPRTX	Did participant complete prescribed TB treatment		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURCPLTPRTX
+865	MHOCCUREXTRATB	Does participant currently have extrapulmonary TB		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCUREXTRATB
+866	MHBODSYS	System organ class of extrapulmonary TB site		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHBODSYS
+867	MHTERMLIVER	Liver disease		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMLIVER
+868	MHTERMHEPB	Hepatitis B		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMHEPB
+869	MHTERMHEPC	Hepatitis C		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMHEPC
+871	MHTERMHEPALC	Hepatitis due to alcohol use		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMHEPALC
+872	MHTERMOTHER	Other liver disease		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMOTHER
+873	MHSCATDIAB	Diabetes		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSCATDIAB
+874	MHTERMDIAB	Diabetes type		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMDIAB
+875	MHSTYR	Year Diabetes was diagnosed		f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTYR
+876	MHSTYRCONDDIAB	Stated year of diabetes diagnosis is an estimation or is unknown		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTYRCONDDIAB
+877	MHRECA	Are medical records confirming diabetes diagnosis available		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHRECA
+878	ZNCATAT	Was the participant taking any antidiabetic medications in the 14 days prior to study treatment start date?		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ZNCATAT
+879	MHOCCURPERINEUR	Peripheral neuropathy		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURPERINEUR
+880	MHOCCURCANCER	Cancer		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURCANCER
+881	MHTERMCANCER	Specify cancer		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMCANCER
+882	MHOCCURCARDIAC	Cardiac conditions		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURCARDIAC
+883	MHTERMCARDIAC	Specify cardiac condition		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMCARDIAC
+884	OTHERCA	Other concomitant diagnoses, including any current/active mental illness or problems		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_OTHERCA
+885	MHCATHIVPOSNA	Not Applicable - Participant is HIV-negative		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHCATHIVPOSNA
+886	MHSTYRHIVPOS	Year the participant was first documented as HIV-positive	YYYY	f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTYRHIVPOS
+887	MHSTYRCONDA	Year the participant was first documented as HIV-positive is an estimation		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTYRCONDA
+888	MHOCCURCD	Has the participant ever had a CD4 cell count below 200 cells/mm^3?		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHOCCURCD
+889	MHTERMART	Has the participant ever been prescribed and taken antiretroviral therapy (ART)?		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMART
+890	ZNTERMART	Year ART was initiated	YYYY	f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_ZNTERMART
+891	MHSTYRCONDART	Year ART was initiated is an estimation		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTYRCONDART
+892	ZNOCCURHIVCM	Was the participant taking any antiretroviral therapy in the 14 days prior to study treatment start date		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ZNOCCURHIVCM
+893	MHWHO4COND	Any WHO Clinical Stage 4 Conditions?		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHWHO4COND
+894	MHTERMWHO	WHO Clinical Stage 4 Condition		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHTERMWHO
+895	MHSTMOWHO	Month		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTMOWHO
+896	MHSTYRWHO	Year	YYYY	f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_MHSTYRWHO
+897	ZNOCCURDR	Was the participant taking pre-study TB treatment in the 6 months prior to study start date and/or drugs with anti-TB activity given for purposes other than treatment of TB in the 30 days prior to study treatment start date.		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ZNOCCURDR
+898	ZNOCCURCM	Was the participant taking non-TB medications, including over-the-counter drugs, in the 14 days prior to study treatment start date		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ZNOCCURCM
+900	ZCNAMEHX	name of person completing History form		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ZCNAMEHX
+901	ZCDATHX	Date History Form completed	DD-MMM-YYYY	f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_ZCDATHX
+902	VISDATNE	Screening date		f	9	1	1	1	2024-03-06	\N	\N	I_38_BL_VISDATNE
+903	SEXNE	Sex		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SEXNE
+904	BRTHYR	Year of birth	YYYY	f	6	1	1	1	2024-03-06	\N	\N	I_38_BL_BRTHYR
+905	BRTHCONDNE	Year of birth given above is an estimation		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_BRTHCONDNE
+906	BRTHCTRYNE	Place of birth		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_BRTHCTRYNE
+907	BRTHCTRYREASND	Plase of birth unknown or not reported		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_BRTHCTRYREASND
+908	ETHNICNE	Ethnicity		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_ETHNICNE
+909	RACENE	Race		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_RACENE
+910	RACENRNE	Race was not reported		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_RACENRNE
+911	RACEOTHNE	Specify other race		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_RACEOTHNE
+912	SCRID	Site Screening Number		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_SCRID
+913	NECATAB	Reason for Non-Enrollment		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NECATAB
+914	NESCATMAIN	Main reason(s) patient does not meet eligibility criteria: Uncategorised		f	5	1	1	1	2024-03-06	\N	\N	I_38_BL_NESCATMAIN
 \.
 
 
@@ -9128,6 +9369,44 @@ COPY public.item (item_id, name, description, units, phi_status, item_data_type_
 --
 
 COPY public.item_data (item_data_id, item_id, event_crf_id, status_id, value, date_created, date_updated, owner_id, update_id, ordinal, old_status_id, deleted) FROM stdin;
+552	647	36	2	9	2024-03-07	\N	1	\N	1	2	f
+553	648	36	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+554	649	36	2	2003-03-03	2024-03-07	\N	1	\N	1	2	f
+555	650	36	1		2024-03-07	\N	1	\N	1	1	f
+556	651	36	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+557	652	36	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+558	653	36	1		2024-03-07	\N	1	\N	1	1	f
+559	654	36	2	160	2024-03-07	\N	1	\N	1	2	f
+560	655	36	2	cm	2024-03-07	\N	1	\N	1	2	f
+561	656	36	2	60	2024-03-07	\N	1	\N	1	2	f
+562	657	36	2	kg	2024-03-07	\N	1	\N	1	2	f
+563	658	36	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+564	659	36	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+565	660	36	2	N	2024-03-07	\N	1	\N	1	2	f
+566	661	36	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+567	662	36	1		2024-03-07	\N	1	\N	1	1	f
+568	663	36	2	Kevin	2024-03-07	\N	1	\N	1	2	f
+569	664	36	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+570	811	37	2	00-P00002	2024-03-07	\N	1	\N	1	2	f
+571	812	37	2	Y	2024-03-07	\N	1	\N	1	2	f
+572	813	37	2	9	2024-03-07	\N	1	\N	1	2	f
+573	814	37	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+574	815	37	2	2002-03-07	2024-03-07	\N	1	\N	1	2	f
+575	816	37	1		2024-03-07	\N	1	\N	1	1	f
+576	817	37	2	2024-03-05	2024-03-07	\N	1	\N	1	2	f
+577	818	37	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+578	819	37	1		2024-03-07	\N	1	\N	1	1	f
+579	820	37	2	80	2024-03-07	\N	1	\N	1	2	f
+580	821	37	2	in	2024-03-07	\N	1	\N	1	2	f
+581	822	37	2	80	2024-03-07	\N	1	\N	1	2	f
+582	823	37	2	kg	2024-03-07	\N	1	\N	1	2	f
+583	824	37	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+584	825	37	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+585	826	37	2	N	2024-03-07	\N	1	\N	1	2	f
+586	827	37	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
+587	828	37	2	no	2024-03-07	\N	1	\N	1	2	f
+588	829	37	2	no	2024-03-07	\N	1	\N	1	2	f
+589	830	37	2	2024-03-06	2024-03-07	\N	1	\N	1	2	f
 \.
 
 
@@ -10331,7 +10610,7 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1158	724	26	PK SHIPPING FORM FOR TB DRUG SPARSE PK AND INTENSIVE PK SPECIMEN		0		0			Participant's ID	<div id="I_ParticipantID"></div><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  <script>\n       $(document).ready(function() {\n    const participantID = $("#I_ParticipantID").parent().parent().find("input"); \n    const  participantIDval = '${studySubject}';\n    participantID.attr('readonly',true);\n                  participantID.css("background-color", "#E6E6E6");     \n    participantID.val(participantIDval);\n    participantID.change();\n      });\n  </script>	103	\N	376			2	f				t
 1159	725	26	A. Visit Information		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style=text-indent:20px; margin-bottom: 0px;><span>1. Visit or date of blood specimen collection  <strong>(check one)</strong>:</span></p></tr><tr><p style=text-indent:40px; margin-bottom: 0px;><span>Study Evaluations</strong>:</span></p></tr>	103	\N	377			3	t				f
 1160	726	26			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>Date of Visit</strong>:</span></p></tr>	103	\N	376			4	t				f
-1500	828	31	C. Form Completion		0		0				<tr><p style="text-indent:20px;margin-bottom:0px;">Name of person completing form:</span></p></tr>	129	\N	446			18	t		Horizontal		t
+1617	829	32	C. Form Completion		0		0				<tr><p style="text-indent:20px;margin-bottom:0px;">Name of person completing form:</span></p></tr>	142	\N	522			19	t		Horizontal		t
 1161	727	26	B. Transport/Shipping		0		0				<tr><p style=text-indent:20px; margin-bottom: 0px;><span>1. Date aliquots shipped to analysis laboratory or central storage facility:</span></p></tr>	103	\N	376			5	t				f
 1162	796	26			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n    <p style="text-indent:0px; margin-bottom: 0px;">\n        <span style="margin-left: 20px; margin-bottom: 9px">2.   Aliquots collected for which type of sampling </span>\n        <span style="display: block; margin-left: 33px; font-size: 9px;"><strong>If aliquots are being shipped from several collection activities (e.g., separate sparse samplings, intensive sampling and sparse sampling) a separate shipping form is required for each collection and must be associated with the appropriate PK sampling form.</strong></span>\n    </p>\n</tr>	103	\N	378			6	t				f
 1163	797	26	C. Study 38 TB Drug Sparse PK Cryovial Label Numbers		0		1			<div class="I_TBTCLBL"></div><span style= "color: #123499;"><strong>1a</strong></span> <b>&nbsp Pre ref. dose</b>		104	\N	379			7	f				t
@@ -10351,7 +10630,7 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1177	740	26			0		5			<div class="I_TBTCLBLS"></div>	<div id="I_BEREFIDCCD"></div><a href="#" class="btn primary" onClick="openPopup('I_BEREFIDCCD'); return false;">Search</a><div class="I_TBTC"></div>	104	\N	376	regexp: /[0-9]{4}3[0-9]{1}/	[Error] Invalid TBTC Label Number. Correct format is  ####3#	21	f				t
 1178	800	26	D. Study 38 PK/PD TB Drug Intensive PK Cryovial Label Numbers		0		1			<div class="I_TBTCLBL"></div><span style= "color: #123499;"><strong>1a</strong></span> <b>&nbsp Pre ref. dose</b>		105	\N	379			22	f				t
 1200	758	26			0		3			<div class="I_TBTCLBLS"></div>	<div id="I_BEREFIDDEB"></div><a href="#" class="btn primary" onClick="openPopup('I_BEREFIDDEB'); return false;">Search</a><div class="I_TBTC"></div>	105	\N	376	regexp: /[0-9]{4}6[0-9]{1}/	[Error] Invalid TBTC Label Number. Correct format is  ####6#	44	f				t
-1501	829	31			0		0				<tr><p style="text-indent:20px;margin-bottom:0px;">Date Enrollment Form completed: </span></p></tr>	129	\N	446			19	t		Horizontal		t
+1503	831	31	Treatment Assignment upon Successful Enrollment Submission		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Assigned treatment arm (study kit medications)</span></p></tr>	130	\N	455			21	t		Vertical		t
 1179	741	26			0		2			<div class="I_TBTCLBLS"></div>	<div id="I_BEREFIDDAA"></div><a href="#" class="btn primary" onClick="openPopup('I_BEREFIDDAA'); return false;">Search</a><div class="I_TBTC"></div><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <script>\n     $(document).ready(function() {\n          $(".I_TBTC").parent().parent().find("input").css({ 'width': '70px'}); $(".I_TBTCLBL").parent().css({ 'width': '130px','text-align':'left'});$(".I_TBTCLBLS").parent().css({ 'width': '40px'});$(".I_TBTCLBLSM").parent().css({ 'width': '35px'});\n}); function openPopup(labelid){\n\t\tvar site = $(".tablebox_center").find("tbody:first").children("tr:nth-child(4)").children("td:nth-child(2)").text();\n        site = $.trim(site);\n\t\tif(site == "N/A"){\n\t\t\tsite = "30";\n\t\t}\n\t\topenNewWindow('includes/label_numbers/labels.jsp?site='+site+'&cat=SPK&labelid='+labelid,'dnote_win','directories=no,location=no,menubar=no,scrollbars=yes,toolbar=no,status=no,resizable=yes','labels');\n\t }\n     window.addEventListener('message', function(event) {\n      const rowData = event.data; \n      var tbtcCode = $("#"+rowData.label).parent().parent().find("input"); \n\t  tbtcCode.val(rowData.selected);\n\t  tbtcCode.change();\n      console.log("Valor seleccionado: " +rowData.selected);\n    });  </script>	105	\N	376	regexp: /[0-9]{4}-1[0-9]{1}/	[Error] Invalid TBTC Label Number. Correct format is  ####-1#	23	f				t
 1180	742	26			0		3			<div class="I_TBTCLBLS"></div>	<div id="I_BEREFIDDAB"></div><a href="#" class="btn primary" onClick="openPopup('I_BEREFIDDAB'); return false;">Search</a><div class="I_TBTC"></div>	105	\N	376	regexp: /[0-9]{4}-1[0-9]{1}/	[Error] Invalid TBTC Label Number. Correct format is  ####-1#	24	f				t
 1181	743	26			0		4			<div class="I_TBTCLBLS"></div>	<div id="I_BEREFIDDAC"></div><a href="#" class="btn primary" onClick="openPopup('I_BEREFIDDAC'); return false;">Search</a><div class="I_TBTC"></div>	105	\N	376	regexp: /[0-9]{4}-1[0-9]{1}/	[Error] Invalid TBTC Label Number. Correct format is  ####-1#	25	f				t
@@ -10427,6 +10706,7 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1251	177	27			0		2				<img id="undoradio9" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio9").click(function (e) {\n        for (i = 0; i < radioGroup9.length; i++) { \n            radioGroup9[i].checked = false;  \n        }\n        radioGroup9.change();\n    });\n    var radioGroup9 = $("#undoradio9").parent().parent().find("input");\n});\n</script>	110	\N	393			30	t		Vertical		f
 1252	178	27			0		1		3	<b>Headache</b>	<div class="I_PAIN"></div><img id="undoradio10" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio10").click(function (e) {\n        for (i = 0; i < radioGroup10.length; i++) { \n            radioGroup10[i].checked = false;  \n        }\n        radioGroup10.change();\n    });\n    var radioGroup10 = $("#undoradio10").parent().parent().find("input");\n});\n</script>	110	\N	398			31	f		Vertical		t
 1385	310	27			0		0				<tr>\n<p style="text-indent:0px; margin-bottom: 0px;">\n<span style="margin-left: 20px; margin-bottom: 0px">Date Signs and Symptoms Form completed:</span>\n</p>\n</tr>	117	\N	387			164	t				t
+1504	832	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Visit date</span></p></tr>	131	\N	446			22	t				t
 1253	179	27			0		2				<img id="undoradio11" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio11").click(function (e) {\n        for (i = 0; i < radioGroup11.length; i++) { \n            radioGroup11[i].checked = false;  \n        }\n        radioGroup11.change();\n    });\n    var radioGroup11 = $("#undoradio11").parent().parent().find("input");\n});\n</script>	110	\N	393			32	t		Vertical		f
 1254	180	27			0		1		4	<b>Bone pain</b>	<div class="I_PAIN"></div><img id="undoradio12" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio12").click(function (e) {\n        for (i = 0; i < radioGroup12.length; i++) { \n            radioGroup12[i].checked = false;  \n        }\n        radioGroup12.change();\n    });\n    var radioGroup12 = $("#undoradio12").parent().parent().find("input");\n});\n</script>	110	\N	398			33	f		Vertical		t
 1255	181	27			0		2				<img id="undoradio13" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio13").click(function (e) {\n        for (i = 0; i < radioGroup13.length; i++) { \n            radioGroup13[i].checked = false;  \n        }\n        radioGroup13.change();\n    });\n    var radioGroup13 = $("#undoradio13").parent().parent().find("input");\n});\n</script>	110	\N	393			34	t		Vertical		f
@@ -10451,7 +10731,7 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1273	199	27			0		1		9	<b>Easy bruising</b>	<div class="I_SKIN"></div><img id="undoradio28" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio28").click(function (e) {\n        for (i = 0; i < radioGroup28.length; i++) { \n            radioGroup28[i].checked = false;  \n        }\n        radioGroup28.change();\n    });\n    var radioGroup28 = $("#undoradio28").parent().parent().find("input");\n});\n</script>	111	\N	398			52	f		Vertical		t
 1274	200	27			0		2				<img id="undoradio29" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio29").click(function (e) {\n        for (i = 0; i < radioGroup29.length; i++) { \n            radioGroup29[i].checked = false;  \n        }\n        radioGroup29.change();\n    });\n    var radioGroup29 = $("#undoradio29").parent().parent().find("input");\n});\n</script>	111	\N	400			53	t		Vertical		f
 1275	201	27			0		1		10	<b>Petechiae</b>	<div class="I_SKIN"></div><img id="undoradio30" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio30").click(function (e) {\n        for (i = 0; i < radioGroup30.length; i++) { \n            radioGroup30[i].checked = false;  \n        }\n        radioGroup30.change();\n    });\n    var radioGroup30 = $("#undoradio30").parent().parent().find("input");\n});\n</script>	111	\N	398			54	f		Vertical		t
-1502	830	31	Treatment Assignment upon Successful Enrollment Submission		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Assigned treatment arm (study kit medications)</span></p></tr>	130	\N	454			20	t		Vertical		t
+1500	828	31	B. Comments Enrollment Form		0		0					129	\N	454			18	f		Horizontal		t
 1276	202	27			0		2				<img id="undoradio31" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio31").click(function (e) {\n        for (i = 0; i < radioGroup31.length; i++) { \n            radioGroup31[i].checked = false;  \n        }\n        radioGroup31.change();\n    });\n    var radioGroup31 = $("#undoradio31").parent().parent().find("input");\n});\n</script>	111	\N	393			55	t		Vertical		f
 1277	203	27			0		0				<div id="I_TERMAB"></div><tr>\n<p style="text-indent:0px; margin-bottom: 0px;">\n<span style="margin-left: 20px; margin-bottom: 11px; font-size: 10px;"><b>Evaluation of symptoms marked with an asterisk (*) are required at the baseline visit, all scheduled study </b></span>\n</br><span style="margin-left: 20px; font-size: 10px;"><b>evaluations, and early Off-Treatment Termination Visit. The participant should be asked if he/she has </b> </span>\n</br><span style="margin-left: 20px; font-size: 10px;"><b>experienced any symptoms since the previous study visit.</b></span> </p>\n<p style="text-indent:0px; margin-bottom: 0px;">\n<span style="margin-left: 20px; font-size: 10px; color: #123499;"><strong>  (If not assessed or no abdominal symptoms reported skip to Section F)</strong><img id="undoradioabs" src="images/bt_Restore.gif" style="margin-left: 15px;"></span>\n</p> \n</tr><script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradioabs").click(function (e) {\n        for (i = 0; i < radioGrouppain.length; i++) { \n            radioGrouppain[i].checked = false;  \n        }\n        radioGrouppain.change();enableFields("#I_TERMAB", "all",".I_ABDOMINAL");resetValue(".I_ABDOMINAL");\n    });\n    var radioGrouppain = $("#undoradioabs").parent().parent().parent().parent().parent().find("input");\n});\nfunction setValue(clase){\n    var radios = $(clase).parent().parent().find("input[type='radio'][value='N']");\n\tradios.each(function() {\n\t\t$(this).prop("checked", true).change();\n\t});\n}\nfunction resetValue(clase){\n    var radios = $(clase).parent().parent().find("input[type='radio']");\n\tradios.each(function() {\n\t\t$(this).prop("checked", false).change();\n\t});\n}\n\n</script>	112	\N	401			56	f		Vertical		t
 1278	204	27	E. Abdominal		0		1		1	<b>Nausea*</b>	<div class="I_ABDOMINAL"></div><img id="undoradio32" src="images/bt_Restore.gif" >\n<script src="includes/jmesa/jquery.min.js"></script>\n<script>\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio32").click(function (e) {\n        for (i = 0; i < radioGroup32.length; i++) { \n            radioGroup32[i].checked = false;  \n        }\n        radioGroup32.change();\n    });\n    var radioGroup32 = $("#undoradio32").parent().parent().find("input");\n});\n</script><tr><p style="margin-left: 110px; margin-bottom: 0px; color: #123499;"><span><u>Symptom</u></span></p></tr><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><script>\njQuery(document).ready(function() {\n\tenableFields("#I_TERMAB", "all",".I_ABDOMINAL");\n});\n\n\tfunction enableFields(containerId, dimension, containerhide) {\n\t\tvar inputContainer = jQuery(containerId);\n\t\tvar inputContainerhide = jQuery(containerhide);\n\t\tvar inputCheck = inputContainer.parent().parent().find("input");\n\t\t\n\t\tif (dimension=="line"){\n\t\t     var fields = inputContainerhide.parent().parent().parent().parent();\n\t\t}else{\n\t\t     var fields = inputContainerhide.parent().parent().parent().parent().parent().parent().parent().parent().parent();\n\t\t}\n\tvar valcheck = getValueCheck(inputCheck);\n\t    if ($(inputCheck).is(":checked") && valcheck == "N" ) {\n\t\t\tfields.css("display", "none");\n\t\t} else {\n\t\t    fields.css("display", "block");\n\t\t}\n\n\t\t$(inputCheck).change(function() { \n\t\t\tvar valuech = getValueCheck(inputCheck);\n\t\t\tif (valuech == "N"){\n\t\t\t    resetValue(containerhide);\n\t\t        fields.css("display", "none");\n\t        }else {\t\t  \n\t\t\t    fields.css("display", "block");\n            }\n\t\t\tif (valuech == "NA"){\n\t\t\t\tsetValue(containerhide);\n\t\t\t}\n\t\t});\n}\n\t\nfunction getValueCheck(radiosToCheck){\n\t var valueToCheck = "";\n\tfor (var i = 0; i < radiosToCheck.length; i++) {\n\t\tif (radiosToCheck[i].checked) {\n\t\t\tvar valueToCheck = radiosToCheck[i].value;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn valueToCheck;\n}\n</script>	112	\N	398			57	f		Vertical		t
@@ -10510,7 +10790,7 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1331	257	27			0		2					114	\N	406			110	f		Vertical		f
 1332	258	27			0		1			C. During hallucinations, hears unusual or strange things or creatures (auditory)	<div class="I_PSY"></div><img id="undoradio82" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio82").click(function (e) {\n        for (i = 0; i < radioGroup82.length; i++) { \n            radioGroup82[i].checked = false;  \n        }\n        radioGroup82.change();\n    });\n    var radioGroup82 = $("#undoradio82").parent().parent().find("input");\n});\n</script>	114	\N	398			111	f		Vertical		f
 1333	259	27			0		2					114	\N	406			112	f		Vertical		f
-1503	831	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Visit date</span></p></tr>	131	\N	446			21	t				t
+1583	911	31			0		0				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>Specify other race</span></p></tr>	136	\N	446			101	t			200(0)	f
 1334	260	27			0		1			D. During hallucinations, feels unusual or strange things or creatures on the body (tactile)	<div class="I_PSY"></div><img id="undoradio83" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio83").click(function (e) {\n        for (i = 0; i < radioGroup83.length; i++) { \n            radioGroup83[i].checked = false;  \n        }\n        radioGroup83.change();\n    });\n    var radioGroup83 = $("#undoradio83").parent().parent().find("input");\n});\n</script>	114	\N	398			113	f		Vertical		f
 1335	261	27			0		2					114	\N	406			114	f		Vertical		f
 1336	262	27			0		1			E. During hallucinations, smells things that others do not smell (olfactory)	<div class="I_PSY"></div><img id="undoradio84" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio84").click(function (e) {\n        for (i = 0; i < radioGroup84.length; i++) { \n            radioGroup84[i].checked = false;  \n        }\n        radioGroup84.change();\n    });\n    var radioGroup84 = $("#undoradio84").parent().parent().find("input");\n});\n</script>	114	\N	398			115	f		Vertical		f
@@ -10534,7 +10814,7 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1354	279	27			0		2					115	\N	406			133	f		Vertical		f
 1355	280	27			0		0				<div id="I_TERMSYS"></div><tr>\n<p style="text-indent:0px; margin-bottom: 0px;">\n<span style="margin-left: 20px; margin-bottom: 11px; font-size: 10px;"><b>Evaluation of symptoms marked with an asterisk (*) are required at the baseline visit, all scheduled study </b></span>\n</br><span style="margin-left: 20px; font-size: 10px;"><b>evaluations, and early Off-Treatment Termination Visit. The participant should be asked if he/she has </b> </span>\n</br><span style="margin-left: 20px; font-size: 10px;"><b>experienced any symptoms since the previous study visit.</b></span> </p>\n<p style="text-indent:0px; margin-bottom: 0px;">\n<span style="margin-left: 20px; font-size: 10px; color: #123499;"><strong>(If not assessed or no systemic/other symptoms reported skip to Section I)</strong><img id="undoradioSys" src="images/bt_Restore.gif" style="margin-left: 15px;"></span>\n</p> \n</tr><script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradioSys").click(function (e) {\n        for (i = 0; i < radioGrouppain.length; i++) { \n            radioGrouppain[i].checked = false;  \n        }\n        radioGrouppain.change();enableFields("#I_TERMSYS", "all",".I_SYS");resetValue(".I_SYS");\n    });\n    var radioGrouppain = $("#undoradioSys").parent().parent().parent().parent().parent().find("input");\n});\nfunction setValue(clase){\n    var radios = $(clase).parent().parent().find("input[type='radio'][value='N']");\n\tradios.each(function() {\n\t\t$(this).prop("checked", true).change();\n\t});\n}\nfunction resetValue(clase){\n    var radios = $(clase).parent().parent().find("input[type='radio']");\n\tradios.each(function() {\n\t\t$(this).prop("checked", false).change();\n\t});\n}\n\n</script>	116	\N	407			134	f		Vertical		t
 1356	281	27	H. Systemic/Other		0		1		1	<b>Dizziness</b>	<div class="I_SYS"></div><img id="undoradio97" src="images/bt_Restore.gif">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script>\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio97").click(function (e) {\n        for (i = 0; i < radioGroup97.length; i++) { \n            radioGroup97[i].checked = false;  \n        }\n        radioGroup97.change();\n    });\n    var radioGroup97 = $("#undoradio97").parent().parent().find("input");\n});\n</script><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><script>\njQuery(document).ready(function() {\n\t\n\tenableFields("#I_TERMSYS", "all",".I_SYS");\n\t\n});\n\n\tfunction enableFields(containerId, dimension, containerhide) {\n\t\tvar inputContainer = jQuery(containerId);\n\t\tvar inputContainerhide = jQuery(containerhide);\n\t\tvar inputCheck = inputContainer.parent().parent().find("input");\n\t\t\n\t\tif (dimension=="line"){\n\t\t     var fields = inputContainerhide.parent().parent().parent().parent();\n\t\t}else{\n\t\t     var fields = inputContainerhide.parent().parent().parent().parent().parent().parent().parent().parent().parent();\n\t\t}\n\tvar valcheck = getValueCheck(inputCheck);\n\t    if ($(inputCheck).is(":checked") && valcheck == "N" ) {\n\t\t\tfields.css("display", "none");\n\t\t} else {\n\t\t    fields.css("display", "block");\n\t\t}\n\n\t\t$(inputCheck).change(function() { \n\t\t\tvar valuech = getValueCheck(inputCheck);\n\t\t\tif (valuech == "N"){\n\t\t\t    resetValue(containerhide);\n\t\t        fields.css("display", "none");\n\t        }else {\t\t  \n\t\t\t    fields.css("display", "block");\n            }\n\t\t\tif (valuech == "NA"){\n\t\t\t\tsetValue(containerhide);\n\t\t\t}\n\t\t});\n}\n\t\nfunction getValueCheck(radiosToCheck){\n\t var valueToCheck = "";\n\tfor (var i = 0; i < radiosToCheck.length; i++) {\n\t\tif (radiosToCheck[i].checked) {\n\t\t\tvar valueToCheck = radiosToCheck[i].value;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn valueToCheck;\n}\n</script>	116	\N	398			135	f		Vertical		t
-1504	832	31	A. Participant History		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. Sex:</span></p></tr>	131	\N	455			22	t		Horizontal		t
+1501	829	31	C. Form Completion		0		0				<tr><p style="text-indent:20px;margin-bottom:0px;">Name of person completing form:</span></p></tr>	129	\N	446			19	t		Horizontal		t
 1357	282	27			0		2				<img id="undoradio98" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio98").click(function (e) {\n        for (i = 0; i < radioGroup98.length; i++) { \n            radioGroup98[i].checked = false;  \n        }\n        radioGroup98.change();\n    });\n    var radioGroup98 = $("#undoradio98").parent().parent().find("input");\n});\n</script>	116	\N	393			136	t		Vertical		f
 1358	283	27			0		1		2	<b>Weakness</b>	<div class="I_SYS"></div><img id="undoradio99" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio99").click(function (e) {\n        for (i = 0; i < radioGroup99.length; i++) { \n            radioGroup99[i].checked = false;  \n        }\n        radioGroup99.change();\n    });\n    var radioGroup99 = $("#undoradio99").parent().parent().find("input");\n});\n</script>	116	\N	398			137	f		Vertical		t
 1359	284	27			0		2				<img id="undoradio100" src="images/bt_Restore.gif" style="margin-left: 15px;">\n<script src="includes/jmesa/jquery.min.js"></script>\n<script lang="Javascript">\n$.noConflict();\njQuery(document).ready(function($){\n    $("#undoradio100").click(function (e) {\n        for (i = 0; i < radioGroup100.length; i++) { \n            radioGroup100[i].checked = false;  \n        }\n        radioGroup100.change();\n    });\n    var radioGroup100 = $("#undoradio100").parent().parent().find("input");\n});\n</script>	116	\N	393			138	t		Vertical		f
@@ -10648,7 +10928,7 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1470	634	30			0		0			<tr><p style="text-indent:20px;margin-bottom:0px;">6. Was sputum collection attempted or other specimen collected for AFB work-up?</span></p> </tr><td style="width:20px">	<p id="MBMessage" class="reminder" style="display:none; margin-top:0px; text-indent:0px; font-weight:bold;" >[Reminder] Complete Mycobacteriology Form</p>	126	\N	438			10	t		Horizontal		t
 1471	635	30			0		0			<tr><p style="text-indent:40px;margin-bottom:0px;">If "Yes", how many specimens were collected?</span></p></tr><td style="width:40px">	<p class="reminder" ></p>	126	\N	435			11	t		Horizontal		f
 1472	636	30			0		0			<tr><p style="text-indent:20px;margin-bottom:0px;">7. Was sputum collected for RS ratio essay?</span></p></tr><td style="width:20px">	<p id="RSMessage" class="reminder" style="display:none; margin-top:0px; text-indent:0px; font-weight:bold;" >[Reminder] Complete Mycobacteriology Form</p>	126	\N	438			12	t		Horizontal		t
-1505	833	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Place of birth:</span></p></tr>	131	\N	456			23	t				t
+1502	830	31			0		0				<tr><p style="text-indent:20px;margin-bottom:0px;">Date Enrollment Form completed: </span></p></tr>	129	\N	446			20	t		Horizontal		t
 1473	637	30			0		0			<tr><p style="text-indent:20px;margin-bottom:0px;">8. Was a specimen for pharmacogenomics testing collected?</span></p></tr><td style="width:20px">	<p id="PGMessage" class="reminder" style="display:none; margin-top:0px; text-indent:0px; font-weight:bold;" >[Reminder] Complete Pharmacogenomic Blood Sample Form</p>	126	\N	439			13	t		Horizontal		t
 1474	638	30			0		0			<tr><p style="text-indent:20px;margin-bottom:0px;">9. Was a specimen for biomarker analysis collected? <strong> (i.e., blood)</strong></span></p></tr><td style="width:20px">	<p class="reminder" ></p>	126	\N	440			14	t		Horizontal		t
 1475	639	30			0		0			<tr><p style="text-indent:20px;margin-bottom:0px;">10. Were TB drug sparse PK specimens collected?</span></p></tr><td style="width:20px">	<p id="SPKMessage" class="reminder" style="display:none; margin-top:0px; text-indent:0px; font-weight:bold;" >[Reminder] Complete Sparse PK Form</p>	126	\N	441			15	t		Horizontal		t
@@ -10661,113 +10941,229 @@ COPY public.item_form_metadata (item_form_metadata_id, item_id, crf_version_id, 
 1482	646	30			0		0				<tr><p style="text-indent:20px;margin-bottom:0px;">Date Treatment Evaluation Form completed:</span></p></tr>	127	\N	435			22	t		Horizontal		t
 1483	811	31			0		0			Subject ID	<div name="copySubjectID"></div>\n<div id="linkSubjectID"></div>\n<script lang="Javascript">\njQuery(document).ready(function(){disable("#linkSubjectID");});\njQuery.noConflict();\n</script>	128	\N	446			1	f				t
 1484	812	31	TBTC Study 38		0		0				<div id="linkSTATUS"></div>\n<script lang="Javascript">\nfunction setSTATUS(){\n var SSID = getSubjectID();\n// SSID = jQuery.trim(SSID);\n var SSIDctN = SSID.includes("N");\n if (SSIDctN == true){\n    var Status = 'N';\n    } else {\n    Status = 'Y';\n    };\n return Status;\n};\njQuery.noConflict();\njQuery(document).ready(function(jQuery) { \n enableUpdateTargetOnChange("#linkSubjectID", "#linkSTATUS", setSTATUS);\n});\n disable("#linkSTATUS");\n</script>	128	\N	447			2	t		Vertical		t
-1485	813	31	A. Study Entry Enrollment		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Enrollment date</span> </span></p></tr>	129	\N	446			3	f				t
-1486	814	31			0		1				<div name="readOnly"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. Date of birth:</span> </span></p></tr>	129	\N	446			4	t				t
-1487	815	31			0		2				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	448			5	f		Horizontal		t
-1488	816	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Date participant or legal guardian signed informed consent</span> </span></p></tr>	129	\N	446			6	t		Horizontal		t
-1489	817	31			0		1				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Date participant assent:</span> </span></p></tr>	129	\N	446			7	f		Horizontal		t
-1490	818	31			0		2				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	449			8	f		Horizontal		t
-1491	819	31			0		1				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. Height:</span> </span></p></tr>	129	\N	446			9	t		Horizontal		t
-1492	820	31			0		2				<div name="undoradio"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	450			10	t		Horizontal		t
-1493	821	31			0		1				<div name="readOnly"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>5. Weight:</span> </span></p></tr>	129	\N	446			11	t		Horizontal		t
-1494	822	31			0		2				<div name="readOnly"></div>\n<div name="undoradio"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	451			12	t		Horizontal		t
-1495	823	31			0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">a. Date of weight:</span>\n     </br><span style="margin-left: 53px; font-size: 9px;"><strong>(Cannot be more than 7 days prior to enrollment)</strong></span>\n  </p>\n</tr>	129	\N	446			13	t		Horizontal		t
-1496	824	31			0		0				<div name="readOnly"></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">6. Date of chest X-ray:</span>\n     </br><span style="margin-left: 33px; font-size: 9px;"><strong>(Alternative imaging techniques (e.g. CT or MRI) may NOT be used in place of a plain chest X-ray)</strong></span>\n  </p>\n</tr>	129	\N	446			14	t		Horizontal		t
-1497	825	31			0		0				<div name="readOnly"></div>\n<div name="undoradio"></div>\n<tr><p style="text-indent:40px;margin-bottom:0px;"> a. Any cavitation on chest X-ray: </span></p></tr>	129	\N	452			15	t		Horizontal		t
-1498	826	31			0		0			<style type="text/css">.aka_text_block{width:15px;text-align:left;}</style>	<tr><p style="text-indent:20px;margin-bottom:0px;">7. Scheduled study treatment start date:</span></p></tr>	129	\N	446			16	t		Horizontal		t
-1499	827	31	B. Comments Enrollment Form		0		0					129	\N	453			17	f		Horizontal		t
-1506	834	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Ethnicity:</span></p></tr>	131	\N	457			24	t		Vertical		t
-1507	835	31			0		1				<div id="I_RACE"></div><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. Race:</span></p></tr>	131	\N	458			25	f		Vertical		t
-1508	836	31			0		2				<div id="I_RACENR"></div><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><script>\njQuery(document).ready(function() {\n\t\n\tenableFields("#I_RACENR", "line","#I_RACE");\n\t\n});\n\n\tfunction enableFields(containerId, dimension, containerhide) {\n\t\tvar inputContainer = jQuery(containerId);\n\t\tvar inputContainerhide = jQuery(containerhide);\n\t\tvar inputCheck = inputContainer.parent().parent().find("input");\n\t\t\n\t\tvar fields = inputContainerhide.parent().parent().parent().parent();\n\t\t\n\t    if (inputCheck.checked) {\n\t\t\tfields.css("display", "none");\n\t\t} else {\n\t\t\tfields.css("display", "block");\t\t}\n\n\t\t$(inputCheck).change(function() { \t\t\tif ($(this).is(':checked')) {\n                fields.css("display", "none");\t\t\t} else {\n\t\t\t\tfields.css("display", "block");\n\t\t\t}\n\t\t});\n}\n\t\n</script>	131	\N	459			26	f				t
-1509	837	31			0		0			<div style="text-indent:20px; text-align:left">Specify:	<div name="inputWidth500"></div>	131	\N	446			27	t			200(0)	f
-1510	838	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>5. Risk factors within the past year</span></p></tr><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. Homeless:</span></p></tr>	131	\N	460			28	t		Horizontal		t
-1511	839	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Injecting drug use:</span></p></tr>	131	\N	461			29	t		Horizontal		t
-1512	840	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Non-injecting drug use:</span></p></tr>	131	\N	462			30	t		Horizontal		t
-1513	841	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Resident of correctional facility:</span></p></tr>	131	\N	463			31	t		Horizontal		t
-1514	842	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>e. Alcohol use led to problems in relationships, health, employment/work performance or finances:</span></p></tr>	131	\N	464			32	t		Horizontal		t
-1515	843	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">6. Mental health history</span>\n     </br><span style="margin-left: 33px; font-size: 9px;"><strong>(Past mental illness refers to issues for which the participant is NOT currently receiving medications and/or seeing clinician at present)</strong></span>\n  </p><p style="text-indent:40px; margin-bottom: 0px;">a. Family member with mental illness <b><small>(primary relationship-biologic mother, biologic father, full sibling, or biologic child)</small></b> with mental illness*</p>\n</tr>	131	\N	465			33	t		Horizontal		t
-1516	844	31			0		0			<div name="inputWidth500"></div>		131	\N	446			34	t				t
-1517	845	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Past personal mental illness:</span></p></tr>	131	\N	466			35	t		Horizontal		t
-1518	846	31			0		0			<div name="inputWidth500"></div>		131	\N	446			36	f				t
-1519	847	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Past personal experience of traumatic event(s):</span></p></tr>	131	\N	466			37	t		Horizontal		t
-1520	848	31			0		0			<div name="inputWidth500"></div>		131	\N	446			38	f				t
-1521	849	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message1">&nbsp;&nbsp;&nbsp;<strong>(If participant is currently taking medication, complete Concomitant Medication Form):</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message1", "Y");\n});\n</script><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Unintended mental status changes induced by specific medications or substances</span></p></tr>	131	\N	466			39	t		Horizontal		t
-1522	850	31			0		0			<div name="inputWidth500"></div>		131	\N	446			40	f				t
-1523	851	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message3a">&nbsp;&nbsp;&nbsp;<strong>(Skip to A8)</strong></div>\n<div id="Message3b">&nbsp;&nbsp;&nbsp;<strong>(Complete A7b-A7c, then skip to A8)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message3a", "NEVER");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message3b", "CURRENT");\n});\n</script>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>7. Cigarette use</span></p><p style="text-indent:30px; margin-bottom: 0px;"><span>a. Has participant ever smoked tobacco? </span></p></tr>	131	\N	467			41	t		Vertical		t
-1524	852	31			0		0				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>b. Total duration of tobacco use: </span></p></tr>	131	\N	468			42	f		Horizontal		f
-1525	853	31			0		0			<b>Unit:</b>	&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	469			43	f		Horizontal		f
-1526	854	31			0		0			<b>Amount:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	446			44	f				f
-1527	855	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>c. Number of cigarettes currently or formerly smoked per day: </span></p></tr>	131	\N	470			45	t		Horizontal		f
-1528	856	31			0		1				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>d. Time since participant quit smoking: </span></p></tr>	131	\N	471			46	f		Horizontal		f
-1529	857	31			0		2			<b>Unit:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	469			47	f		Horizontal		f
-1530	858	31			0		3			<b>Amount:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	446			48	f				f
-1531	859	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>8. Karnofsky score: </span></p></tr>	131	\N	472			49	t		Horizontal		t
-1583	911	31			0		0				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>6. Site Screening Number</span></p></tr>	136	\N	446			101	t				t
-1532	860	31	B. Tuberculosis (TB) History and Treatment		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message10a">&nbsp;&nbsp;&nbsp;<strong>(If "No" or "Unknown", skip to B2)</strong></div>\n<div id="Message10b">&nbsp;&nbsp;&nbsp;<strong>(If "No" or "Unknown", skip to B2)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Was the participant ever treated for active TB prior to this episode?</span>\n  </p>\n</tr>	132	\N	473			50	t		Horizontal		t
-1533	861	31			0		1				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>a. If 'yes', what were the most recent month and year <b>(e.g., JAN-2021)</b> of diagnosis?</span></p></tr>	132	\N	446			51	f				f
-1534	862	31			0		2				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>&nbsp; </span></p></tr>	132	\N	474			52	t				f
-1535	863	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>b. Did participant complete prescribed TB treatment?   </span></p></tr>	132	\N	475			53	t		Horizontal		f
-1536	864	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Does participant currently have extrapulmonary TB?</span></p></tr>	132	\N	476			54	t		Horizontal		t
-1537	865	31			0		0				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>If 'yes', specify the system organ class for each extrapulmonary site :</span></p></tr>	132	\N	477			55	t				f
-1538	866	31	C. Concomitant Diagnoses at the Time of TB Diagnosis		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message4a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C2)</strong></div>\n<div id="Message4b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C2)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message4a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message4b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Liver disease</span>\n  </p>\n</tr>	133	\N	478			56	t		Horizontal		t
-1539	867	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Hepatitis B:</span></p></tr>	133	\N	479			57	t		Horizontal		f
-1540	868	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Hepatitis C:</span></p></tr>	133	\N	480			58	t		Horizontal		f
-1541	869	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Hepatitis (Type unknown):</span></p></tr>	133	\N	481			59	t		Horizontal		f
-1542	870	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>e. Hepatitis due to alcohol use:</span></p></tr>	133	\N	482			60	t		Horizontal		f
-1543	871	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message5">&nbsp;&nbsp;&nbsp;<strong>(Specify in C6, as applicable)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message5", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">f. Other: </span>\n  </p>\n</tr>	133	\N	483			61	t		Horizontal		f
-1544	872	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message6a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C3)</strong></div>\n<div id="Message6b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C3)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message6a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message6b", "U");\n});\n</script>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">2. Diabetes</span>\n  </p>\n</tr>	133	\N	484			62	t		Horizontal		t
-1545	873	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. Specify diabetes type:</span></p></tr>	133	\N	485			63	t		Horizontal		f
-1546	874	31			0		1				<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. In what year was diabetes diagnosed?</span></p></tr>	133	\N	446			64	f				f
-1547	875	31			0		2				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span> </span></p></tr>	133	\N	486			65	f				f
-1548	876	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Medical records confirming diabetes diagnosis available?</span></p></tr>	133	\N	487			66	t		Horizontal		f
-1549	877	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message7">&nbsp;&nbsp;&nbsp;<strong>(If “yes,” list on Concomitant Medications form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message7", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">d. Was the participant taking any antidiabetic medications in the 14 days prior to study treatment start date?</span>\n  </p>\n</tr>	133	\N	488			67	t		Horizontal		f
-1550	878	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Peripheral neuropathy:</span></p></tr>	133	\N	489			68	t		Horizontal		t
-1551	879	31			0		1				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">4. Cancer</span>\n    </p>\n</tr>	133	\N	490			69	t		Horizontal		t
-1552	880	31			0		2				<tr><p style="text-indent:150px; margin-bottom: 0px;"><span> Specify: </span></p></tr>	133	\N	453			70	t			1000(0)	f
-1553	881	31			0		1				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">5. Cardiac conditions</span>\n  </p>\n</tr>	133	\N	491			71	t		Horizontal		t
-1554	882	31			0		2				<tr><p style="text-indent:150px; margin-bottom: 0px;"><span> Specify: </span></p></tr>	133	\N	453			72	t			1000(0)	f
-1555	883	31			0		0				<div name="inputWidth400"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>6. Other concomitant diagnoses, including any current/active mental illness or problems:</span></p></tr>	133	\N	446			73	f			1000(0)	t
-1556	884	31	D. HIV Infection History		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message13">&nbsp;&nbsp;&nbsp;<strong>(If “NA”, skip to Section E)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message13", "NA");\n});\n</script><tr><p style="text-indent:20px; margin-bottom: 0px;">\n        <span><strong> Participants HIV Infection History</strong></span></p>\n</tr>	134	\N	492			74	f				t
-1557	885	31			0		1				<div class="I_HIV"><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. What year was the participant first documented as HIV-positive?</span></p></tr></div>	134	\N	446			75	f				f
-1558	886	31			0		2				<div class="I_HIV">&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr></div>	134	\N	493			76	f				f
-1559	887	31			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Has the participant ever had a CD4 cell count below 200 cells/mm<sup>3</sup>?</span></p></tr>	134	\N	494			77	t		Horizontal		f
-1560	888	31			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message8a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, Skip to D4)</strong></div>\n<div id="Message8b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, Skip to D4)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message8a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message8b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">3. Has the participant ever been prescribed and taken antiretroviral therapy (ART)? </span>\n  </p>\n</tr>	134	\N	495			78	t		Horizontal		f
-1561	889	31			0		1				<div class="I_HIV"></div><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. In what year was ART initiated?</span></p></tr>	134	\N	446			79	t				f
-1562	890	31			0		2				<div class="I_HIV"><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr></div>	134	\N	496			80	f				f
-1563	891	31			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message9">&nbsp;&nbsp;&nbsp;<strong>(If “yes,” complete Concomitant Medications form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message9", "Y");\n});\n</script>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">b. Was the participant taking any antiretroviral therapy in the 14 days prior to study treatment start date? </span>\n  </p>\n</tr>	134	\N	497			81	t		Horizontal		f
-1564	892	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message12">&nbsp;&nbsp;&nbsp;<strong> (If there are no WHO Clinical Stage 4 Conditions skip to Section E)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message12", "N");\n});\n</script><tr><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. List WHO Clinical Stage 4 Conditions and provide month and year</span>	134	\N	498			82	f				f
-1565	893	31			0		0			WHO Clinical Stage 4 Condition		134	\N	499			83	f				t
-1566	894	31			0		0			Month		134	\N	500			84	f				t
-1567	895	31			0		0			<div name="inputWidth40"></div>Year		134	\N	446			85	f				t
-1568	896	31	E. Additional Information		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message10">&nbsp;&nbsp;&nbsp;<strong>(If “Yes”, complete TB Drug Dose Record Form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Was the participant taking pre-study TB treatment in the 6 months prior to study start date and/or drugs with anti-TB activity given </span>\n     </br><span style="margin-left: 30px;">for purposes other than treatment of TB in the 30 days prior to study treatment start date?</span>\n  </p>\n</tr>	135	\N	501			86	t		Horizontal		t
-1569	897	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message11">&nbsp;&nbsp;&nbsp;<strong>(If “Yes”, complete Concomitant Medication Form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message11", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">2. Was the participant taking non-TB medications, including over-the-counter drugs, in the 14 days prior to study treatment start date?</span>\n  </p>\n</tr>	135	\N	502			87	t		Horizontal		t
-1570	898	31	Comments		0		0					135	\N	453			88	f			3500(0)	t
-1571	899	31	F. Form Completion		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Name of person completing form:</span></p></tr>	135	\N	446			89	t			200(0)	t
-1572	900	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Date History Form completed:</span></p></tr>	135	\N	446			90	t				t
-1573	901	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>Screening date:</span></p></tr>	136	\N	446			91	t				t
-1574	902	31	A. Patient Information		0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:35px; margin-bottom: 0px;><span>1. Sex:</span></p></tr>	136	\N	503			92	t		Horizontal		t
-1575	903	31			0		1				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>2. Year of birth:</span></p></tr>	136	\N	446			93	f				t
-1576	904	31			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	136	\N	504			94	f		Horizontal		t
-1577	905	31			0		0				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>3. Place of birth:</span></p></tr>	136	\N	505			95	f		Horizontal		t
-1578	906	31			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	136	\N	506			96	f		Horizontal		t
-1579	907	31			0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:35px; margin-bottom: 0px;><span>4. Ethnicity:</span></p></tr>	136	\N	507			97	t		Vertical		t
-1580	908	31			0		1				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 35px; margin-bottom: 11px">5. Race <strong> (if reported, check all that apply below)</strong></span>\n  </p>\n</tr>	136	\N	508			98	f		Vertical		t
-1581	909	31			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	136	\N	509			99	f				t
-1582	910	31			0		0				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>Specify other race</span></p></tr>	136	\N	446			100	t			200(0)	f
-1584	912	31	B. Reason for Non-Enrollment		0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:20px; margin-bottom: 0px;><span> 1. Reason for non-enrollment</span></p></tr>	137	\N	510			102	t		Vertical		t
-1585	913	31	C. Main reason(s) patient does not meet eligibility criteria </b>(Check all that apply)		0		0					138	\N	511			103	f				t
-1586	914	31			0		0				<tr><p style="margin-left: 60px; margin-bottom: 0px;"><span>Specify Other medical conditions</span></p></tr>	138	\N	453			104	f				f
-1587	915	31		Main reason(s) patient does not meet eligibility criteria (Check all that apply): <b>For participants with HIV</b>	0		0					138	\N	512			105	f				t
-1588	916	31		Main reason(s) patient does not meet eligibility criteria (Check all that apply): <b>Laboratory parameters done at or within 14 days prior to screening:</b>	0		0					138	\N	513			106	f				t
-1589	917	31	D. Patient declines to participate		0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px; font-size: 11px;">\n    <span style="margin-left: 20px; margin-bottom: 11px"><b>Patient expressed a concern or objection related to…</b> </span></p>\n     <p><span style="margin-left: 40px;">1. Experimental Components</span>\n  </p>\n</tr>	139	\N	514			107	f				t
-1590	918	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>2. Study Procedures NESCAT</span></p></tr>	139	\N	515			108	f				t
-1591	919	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>3. Difficulties or Costs Associated with Study Participation</span></p></tr>	139	\N	516			109	f				t
-1592	920	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>4. Opinion or Response of Others / Stigma</span></p></tr>	139	\N	517			110	f				t
-1593	921	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>5. Miscellaneous STUDY PROCEDURES</span></p></tr>	139	\N	518			111	f				t
-1594	922	31			0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">6. Reason Unknown</span>\n     </br><span style="margin-left: 53px; font-size: 9px;"><strong>(Patient declined / refused to provide a reason for decision/ did not return to clinic/ unsuccessful attempts to contact patient)</strong></span>\n  </p>\n</tr>	139	\N	519			112	f				t
-1595	923	31	E. Site decides not to enroll patient </b>(Check all that apply)		0		0					140	\N	520			113	f				t
-1596	924	31	F. Form Completion		0		0				<tr><p style=text-indent:20px; margin-bottom: 0px;><span>Name of person completing Non-enrollment form:</span></p></tr>	140	\N	446			114	t			200(0)	t
-1597	925	31			0		0				<tr><p style=text-indent:20px; margin-bottom: 0px;><span>Date Non-enrollment Form completed </span></p></tr>	140	\N	446			115	t				t
+1485	813	31	A. Study Entry Enrollment		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Site ID</span> </span></p></tr>	129	\N	448			3	f				t
+1486	814	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Enrollment date</span> </span></p></tr>	129	\N	446			4	f				t
+1487	815	31			0		1				<div name="readOnly"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. Date of birth:</span> </span></p></tr>	129	\N	446			5	t				t
+1488	816	31			0		2				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	449			6	f		Horizontal		t
+1489	817	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Date participant or legal guardian signed informed consent</span> </span></p></tr>	129	\N	446			7	t		Horizontal		t
+1490	818	31			0		1				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Date participant assent:</span> </span></p></tr>	129	\N	446			8	f		Horizontal		t
+1491	819	31			0		2				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	450			9	f		Horizontal		t
+1492	820	31			0		1				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. Height:</span> </span></p></tr>	129	\N	446			10	t		Horizontal		t
+1493	821	31			0		2				<div name="undoradio"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	451			11	t		Horizontal		t
+1494	822	31			0		1				<div name="readOnly"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>5. Weight:</span> </span></p></tr>	129	\N	446			12	t		Horizontal		t
+1495	823	31			0		2				<div name="readOnly"></div>\n<div name="undoradio"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	129	\N	452			13	t		Horizontal		t
+1496	824	31			0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">a. Date of weight:</span>\n     </br><span style="margin-left: 53px; font-size: 9px;"><strong>(Cannot be more than 7 days prior to enrollment)</strong></span>\n  </p>\n</tr>	129	\N	446			14	t		Horizontal		t
+1497	825	31			0		0				<div name="readOnly"></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">6. Date of chest X-ray:</span>\n     </br><span style="margin-left: 33px; font-size: 9px;"><strong>(Alternative imaging techniques (e.g. CT or MRI) may NOT be used in place of a plain chest X-ray)</strong></span>\n  </p>\n</tr>	129	\N	446			15	t		Horizontal		t
+1498	826	31			0		0				<div name="readOnly"></div>\n<div name="undoradio"></div>\n<tr><p style="text-indent:40px;margin-bottom:0px;"> a. Any cavitation on chest X-ray: </span></p></tr>	129	\N	453			16	t		Horizontal		t
+1499	827	31			0		0			<style type="text/css">.aka_text_block{width:15px;text-align:left;}</style>	<tr><p style="text-indent:20px;margin-bottom:0px;">7. Scheduled study treatment start date:</span></p></tr>	129	\N	446			17	t		Horizontal		t
+1505	833	31	A. Participant History		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. Sex:</span></p></tr>	131	\N	456			23	t		Horizontal		t
+1506	834	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Place of birth:</span></p></tr>	131	\N	457			24	t				t
+1507	835	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Ethnicity:</span></p></tr>	131	\N	458			25	t		Vertical		t
+1508	836	31			0		1				<div id="I_RACE"></div><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. Race:</span></p></tr>	131	\N	459			26	f		Vertical		t
+1509	837	31			0		2				<div id="I_RACENR"></div><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><script>\njQuery(document).ready(function() {\n\t\n\tenableFields("#I_RACENR", "line","#I_RACE");\n\t\n});\n\n\tfunction enableFields(containerId, dimension, containerhide) {\n\t\tvar inputContainer = jQuery(containerId);\n\t\tvar inputContainerhide = jQuery(containerhide);\n\t\tvar inputCheck = inputContainer.parent().parent().find("input");\n\t\t\n\t\tvar fields = inputContainerhide.parent().parent().parent().parent();\n\t\t\n\t    if (inputCheck.checked) {\n\t\t\tfields.css("display", "none");\n\t\t} else {\n\t\t\tfields.css("display", "block");\t\t}\n\n\t\t$(inputCheck).change(function() { \t\t\tif ($(this).is(':checked')) {\n                fields.css("display", "none");\t\t\t} else {\n\t\t\t\tfields.css("display", "block");\n\t\t\t}\n\t\t});\n}\n\t\n</script>	131	\N	460			27	f				t
+1510	838	31			0		0			<div style="text-indent:20px; text-align:left">Specify:	<div name="inputWidth500"></div>	131	\N	446			28	t			200(0)	f
+1511	839	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>5. Risk factors within the past year</span></p></tr><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. Homeless:</span></p></tr>	131	\N	461			29	t		Horizontal		t
+1512	840	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Injecting drug use:</span></p></tr>	131	\N	462			30	t		Horizontal		t
+1513	841	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Non-injecting drug use:</span></p></tr>	131	\N	463			31	t		Horizontal		t
+1514	842	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Resident of correctional facility:</span></p></tr>	131	\N	464			32	t		Horizontal		t
+1515	843	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>e. Alcohol use led to problems in relationships, health, employment/work performance or finances:</span></p></tr>	131	\N	465			33	t		Horizontal		t
+1516	844	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">6. Mental health history</span>\n     </br><span style="margin-left: 33px; font-size: 9px;"><strong>(Past mental illness refers to issues for which the participant is NOT currently receiving medications and/or seeing clinician at present)</strong></span>\n  </p><p style="text-indent:40px; margin-bottom: 0px;">a. Family member with mental illness <b><small>(primary relationship-biologic mother, biologic father, full sibling, or biologic child)</small></b> with mental illness*</p>\n</tr>	131	\N	466			34	t		Horizontal		t
+1517	845	31			0		0			<div name="inputWidth500"></div>		131	\N	446			35	t				t
+1518	846	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Past personal mental illness:</span></p></tr>	131	\N	467			36	t		Horizontal		t
+1519	847	31			0		0			<div name="inputWidth500"></div>		131	\N	446			37	f				t
+1520	848	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Past personal experience of traumatic event(s):</span></p></tr>	131	\N	467			38	t		Horizontal		t
+1521	849	31			0		0			<div name="inputWidth500"></div>		131	\N	446			39	f				t
+1522	850	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message1">&nbsp;&nbsp;&nbsp;<strong>(If participant is currently taking medication, complete Concomitant Medication Form):</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message1", "Y");\n});\n</script><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Unintended mental status changes induced by specific medications or substances</span></p></tr>	131	\N	467			40	t		Horizontal		t
+1523	851	31			0		0			<div name="inputWidth500"></div>		131	\N	446			41	f				t
+1524	852	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message3a">&nbsp;&nbsp;&nbsp;<strong>(Skip to A8)</strong></div>\n<div id="Message3b">&nbsp;&nbsp;&nbsp;<strong>(Complete A7b-A7c, then skip to A8)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message3a", "NEVER");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message3b", "CURRENT");\n});\n</script>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>7. Cigarette use</span></p><p style="text-indent:30px; margin-bottom: 0px;"><span>a. Has participant ever smoked tobacco? </span></p></tr>	131	\N	468			42	t		Vertical		t
+1525	853	31			0		0				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>b. Total duration of tobacco use: </span></p></tr>	131	\N	469			43	f		Horizontal		f
+1526	854	31			0		0			<b>Unit:</b>	&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	470			44	f		Horizontal		f
+1527	855	31			0		0			<b>Amount:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	446			45	f				f
+1528	856	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>c. Number of cigarettes currently or formerly smoked per day: </span></p></tr>	131	\N	471			46	t		Horizontal		f
+1529	857	31			0		1				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>d. Time since participant quit smoking: </span></p></tr>	131	\N	472			47	f		Horizontal		f
+1530	858	31			0		2			<b>Unit:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	470			48	f		Horizontal		f
+1531	859	31			0		3			<b>Amount:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	131	\N	446			49	f				f
+1584	912	31			0		0				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>6. Site Screening Number</span></p></tr>	136	\N	446			102	t				t
+1532	860	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>8. Karnofsky score: </span></p></tr>	131	\N	473			50	t		Horizontal		t
+1533	861	31	B. Tuberculosis (TB) History and Treatment		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message10a">&nbsp;&nbsp;&nbsp;<strong>(If "No" or "Unknown", skip to B2)</strong></div>\n<div id="Message10b">&nbsp;&nbsp;&nbsp;<strong>(If "No" or "Unknown", skip to B2)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Was the participant ever treated for active TB prior to this episode?</span>\n  </p>\n</tr>	132	\N	474			51	t		Horizontal		t
+1534	862	31			0		1				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>a. If 'yes', what were the most recent month and year <b>(e.g., JAN-2021)</b> of diagnosis?</span></p></tr>	132	\N	446			52	f				f
+1535	863	31			0		2				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>&nbsp; </span></p></tr>	132	\N	475			53	t				f
+1536	864	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>b. Did participant complete prescribed TB treatment?   </span></p></tr>	132	\N	476			54	t		Horizontal		f
+1537	865	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Does participant currently have extrapulmonary TB?</span></p></tr>	132	\N	477			55	t		Horizontal		t
+1538	866	31			0		0				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>If 'yes', specify the system organ class for each extrapulmonary site :</span></p></tr>	132	\N	478			56	t				f
+1539	867	31	C. Concomitant Diagnoses at the Time of TB Diagnosis		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message4a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C2)</strong></div>\n<div id="Message4b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C2)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message4a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message4b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Liver disease</span>\n  </p>\n</tr>	133	\N	479			57	t		Horizontal		t
+1540	868	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Hepatitis B:</span></p></tr>	133	\N	480			58	t		Horizontal		f
+1541	869	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Hepatitis C:</span></p></tr>	133	\N	481			59	t		Horizontal		f
+1542	870	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Hepatitis (Type unknown):</span></p></tr>	133	\N	482			60	t		Horizontal		f
+1543	871	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>e. Hepatitis due to alcohol use:</span></p></tr>	133	\N	483			61	t		Horizontal		f
+1544	872	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message5">&nbsp;&nbsp;&nbsp;<strong>(Specify in C6, as applicable)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message5", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">f. Other: </span>\n  </p>\n</tr>	133	\N	484			62	t		Horizontal		f
+1545	873	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message6a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C3)</strong></div>\n<div id="Message6b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C3)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message6a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message6b", "U");\n});\n</script>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">2. Diabetes</span>\n  </p>\n</tr>	133	\N	485			63	t		Horizontal		t
+1546	874	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. Specify diabetes type:</span></p></tr>	133	\N	486			64	t		Horizontal		f
+1547	875	31			0		1				<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. In what year was diabetes diagnosed?</span></p></tr>	133	\N	446			65	f				f
+1548	876	31			0		2				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span> </span></p></tr>	133	\N	487			66	f				f
+1549	877	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Medical records confirming diabetes diagnosis available?</span></p></tr>	133	\N	488			67	t		Horizontal		f
+1550	878	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message7">&nbsp;&nbsp;&nbsp;<strong>(If “yes,” list on Concomitant Medications form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message7", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">d. Was the participant taking any antidiabetic medications in the 14 days prior to study treatment start date?</span>\n  </p>\n</tr>	133	\N	489			68	t		Horizontal		f
+1551	879	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Peripheral neuropathy:</span></p></tr>	133	\N	490			69	t		Horizontal		t
+1552	880	31			0		1				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">4. Cancer</span>\n    </p>\n</tr>	133	\N	491			70	t		Horizontal		t
+1553	881	31			0		2				<tr><p style="text-indent:150px; margin-bottom: 0px;"><span> Specify: </span></p></tr>	133	\N	454			71	t			1000(0)	f
+1554	882	31			0		1				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">5. Cardiac conditions</span>\n  </p>\n</tr>	133	\N	492			72	t		Horizontal		t
+1555	883	31			0		2				<tr><p style="text-indent:150px; margin-bottom: 0px;"><span> Specify: </span></p></tr>	133	\N	454			73	t			1000(0)	f
+1616	828	32	B. Comments Enrollment Form		0		0					142	\N	530			18	f		Horizontal		t
+1556	884	31			0		0				<div name="inputWidth400"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>6. Other concomitant diagnoses, including any current/active mental illness or problems:</span></p></tr>	133	\N	446			74	f			1000(0)	t
+1557	885	31	D. HIV Infection History		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message13">&nbsp;&nbsp;&nbsp;<strong>(If “NA”, skip to Section E)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message13", "NA");\n});\n</script><tr><p style="text-indent:20px; margin-bottom: 0px;">\n        <span><strong> Participants HIV Infection History</strong></span></p>\n</tr>	134	\N	493			75	f				t
+1558	886	31			0		1				<div class="I_HIV"><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. What year was the participant first documented as HIV-positive?</span></p></tr></div>	134	\N	446			76	f				f
+1559	887	31			0		2				<div class="I_HIV">&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr></div>	134	\N	494			77	f				f
+1560	888	31			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Has the participant ever had a CD4 cell count below 200 cells/mm<sup>3</sup>?</span></p></tr>	134	\N	495			78	t		Horizontal		f
+1561	889	31			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message8a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, Skip to D4)</strong></div>\n<div id="Message8b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, Skip to D4)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message8a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message8b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">3. Has the participant ever been prescribed and taken antiretroviral therapy (ART)? </span>\n  </p>\n</tr>	134	\N	496			79	t		Horizontal		f
+1562	890	31			0		1				<div class="I_HIV"></div><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. In what year was ART initiated?</span></p></tr>	134	\N	446			80	t				f
+1563	891	31			0		2				<div class="I_HIV"><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr></div>	134	\N	497			81	f				f
+1564	892	31			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message9">&nbsp;&nbsp;&nbsp;<strong>(If “yes,” complete Concomitant Medications form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message9", "Y");\n});\n</script>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">b. Was the participant taking any antiretroviral therapy in the 14 days prior to study treatment start date? </span>\n  </p>\n</tr>	134	\N	498			82	t		Horizontal		f
+1565	893	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message12">&nbsp;&nbsp;&nbsp;<strong> (If there are no WHO Clinical Stage 4 Conditions skip to Section E)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message12", "N");\n});\n</script><tr><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. List WHO Clinical Stage 4 Conditions and provide month and year</span>	134	\N	499			83	f				f
+1566	894	31			0		0			WHO Clinical Stage 4 Condition		134	\N	500			84	f				t
+1567	895	31			0		0			Month		134	\N	501			85	f				t
+1568	896	31			0		0			<div name="inputWidth40"></div>Year		134	\N	446			86	f				t
+1569	897	31	E. Additional Information		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message10">&nbsp;&nbsp;&nbsp;<strong>(If “Yes”, complete TB Drug Dose Record Form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Was the participant taking pre-study TB treatment in the 6 months prior to study start date and/or drugs with anti-TB activity given </span>\n     </br><span style="margin-left: 30px;">for purposes other than treatment of TB in the 30 days prior to study treatment start date?</span>\n  </p>\n</tr>	135	\N	502			87	t		Horizontal		t
+1570	898	31			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message11">&nbsp;&nbsp;&nbsp;<strong>(If “Yes”, complete Concomitant Medication Form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message11", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">2. Was the participant taking non-TB medications, including over-the-counter drugs, in the 14 days prior to study treatment start date?</span>\n  </p>\n</tr>	135	\N	503			88	t		Horizontal		t
+1571	899	31	Comments		0		0					135	\N	454			89	f			3500(0)	t
+1572	900	31	F. Form Completion		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Name of person completing form:</span></p></tr>	135	\N	446			90	t			200(0)	t
+1573	901	31			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Date History Form completed:</span></p></tr>	135	\N	446			91	t				t
+1574	902	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>Screening date:</span></p></tr>	136	\N	446			92	t				t
+1575	903	31	A. Patient Information		0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:35px; margin-bottom: 0px;><span>1. Sex:</span></p></tr>	136	\N	504			93	t		Horizontal		t
+1576	904	31			0		1				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>2. Year of birth:</span></p></tr>	136	\N	446			94	f				t
+1577	905	31			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	136	\N	505			95	f		Horizontal		t
+1578	906	31			0		0				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>3. Place of birth:</span></p></tr>	136	\N	506			96	f		Horizontal		t
+1579	907	31			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	136	\N	507			97	f		Horizontal		t
+1580	908	31			0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:35px; margin-bottom: 0px;><span>4. Ethnicity:</span></p></tr>	136	\N	508			98	t		Vertical		t
+1581	909	31			0		1				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 35px; margin-bottom: 11px">5. Race <strong> (if reported, check all that apply below)</strong></span>\n  </p>\n</tr>	136	\N	509			99	f		Vertical		t
+1582	910	31			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	136	\N	510			100	f				t
+1585	913	31	B. Reason for Non-Enrollment		0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:20px; margin-bottom: 0px;><span> 1. Reason for non-enrollment</span></p></tr>	137	\N	511			103	t		Vertical		t
+1586	914	31	C. Main reason(s) patient does not meet eligibility criteria </b>(Check all that apply)		0		0					138	\N	512			104	f				t
+1587	915	31			0		0				<tr><p style="margin-left: 60px; margin-bottom: 0px;"><span>Specify Other medical conditions</span></p></tr>	138	\N	454			105	f				f
+1588	916	31		Main reason(s) patient does not meet eligibility criteria (Check all that apply): <b>For participants with HIV</b>	0		0					138	\N	513			106	f				t
+1589	917	31		Main reason(s) patient does not meet eligibility criteria (Check all that apply): <b>Laboratory parameters done at or within 14 days prior to screening:</b>	0		0					138	\N	514			107	f				t
+1590	918	31	D. Patient declines to participate		0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px; font-size: 11px;">\n    <span style="margin-left: 20px; margin-bottom: 11px"><b>Patient expressed a concern or objection related to…</b> </span></p>\n     <p><span style="margin-left: 40px;">1. Experimental Components</span>\n  </p>\n</tr>	139	\N	515			108	f				t
+1591	919	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>2. Study Procedures NESCAT</span></p></tr>	139	\N	516			109	f				t
+1592	920	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>3. Difficulties or Costs Associated with Study Participation</span></p></tr>	139	\N	517			110	f				t
+1593	921	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>4. Opinion or Response of Others / Stigma</span></p></tr>	139	\N	518			111	f				t
+1594	922	31			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>5. Miscellaneous STUDY PROCEDURES</span></p></tr>	139	\N	519			112	f				t
+1595	923	31			0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">6. Reason Unknown</span>\n     </br><span style="margin-left: 53px; font-size: 9px;"><strong>(Patient declined / refused to provide a reason for decision/ did not return to clinic/ unsuccessful attempts to contact patient)</strong></span>\n  </p>\n</tr>	139	\N	520			113	f				t
+1596	924	31	E. Site decides not to enroll patient </b>(Check all that apply)		0		0					140	\N	521			114	f				t
+1597	925	31	F. Form Completion		0		0				<tr><p style=text-indent:20px; margin-bottom: 0px;><span>Name of person completing Non-enrollment form:</span></p></tr>	140	\N	446			115	t			200(0)	t
+1598	926	31			0		0				<tr><p style=text-indent:20px; margin-bottom: 0px;><span>Date Non-enrollment Form completed </span></p></tr>	140	\N	446			116	t				t
+1599	811	32			0		0			Subject ID	<div name="copySubjectID"></div>\n<div id="linkSubjectID"></div>\n<script lang="Javascript">\njQuery(document).ready(function(){disable("#linkSubjectID"); disable("#linkSTATUS");});\njQuery.noConflict();\n</script>	141	\N	522			1	f				t
+1600	812	32	TBTC Study 38		0		0				<div id="linkSTATUS"></div>\n<script lang="Javascript">\nfunction setSTATUS(){\n var SSID = getSubjectID();\n// SSID = jQuery.trim(SSID);\n var SSIDctN = SSID.includes("N");\n if (SSIDctN == true){\n    var Status = 'N';\n    } else {\n    Status = 'Y';\n    };\n return Status;\n};\njQuery.noConflict();\njQuery(document).ready(function(jQuery) { \n enableUpdateTargetOnChange("#linkSubjectID", "#linkSTATUS", setSTATUS);\n});\n\n</script>	141	\N	523			2	t		Vertical		t
+1601	813	32	A. Study Entry Enrollment		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Site ID</span> </span></p></tr>	142	\N	524			3	f				t
+1602	814	32			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Enrollment date</span> </span></p></tr>	142	\N	522			4	f				t
+1603	815	32			0		1				<div name="readOnly"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. Date of birth:</span> </span></p></tr>	142	\N	522			5	t				t
+1604	816	32			0		2				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	142	\N	525			6	f		Horizontal		t
+1605	817	32			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Date participant or legal guardian signed informed consent</span> </span></p></tr>	142	\N	522			7	t		Horizontal		t
+1606	818	32			0		1				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Date participant assent:</span> </span></p></tr>	142	\N	522			8	f		Horizontal		t
+1607	819	32			0		2				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	142	\N	526			9	f		Horizontal		t
+1608	820	32			0		1				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. Height:</span> </span></p></tr>	142	\N	522			10	t		Horizontal		t
+1609	821	32			0		2				<div name="undoradio"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	142	\N	527			11	t		Horizontal		t
+1610	822	32			0		1				<div name="readOnly"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>5. Weight:</span> </span></p></tr>	142	\N	522			12	t		Horizontal		t
+1611	823	32			0		2				<div name="readOnly"></div>\n<div name="undoradio"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span> </span></p></tr>	142	\N	528			13	t		Horizontal		t
+1612	824	32			0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">a. Date of weight:</span>\n     </br><span style="margin-left: 53px; font-size: 9px;"><strong>(Cannot be more than 7 days prior to enrollment)</strong></span>\n  </p>\n</tr>	142	\N	522			14	t		Horizontal		t
+1613	825	32			0		0				<div name="readOnly"></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">6. Date of chest X-ray:</span>\n     </br><span style="margin-left: 33px; font-size: 9px;"><strong>(Alternative imaging techniques (e.g. CT or MRI) may NOT be used in place of a plain chest X-ray)</strong></span>\n  </p>\n</tr>	142	\N	522			15	t		Horizontal		t
+1614	826	32			0		0				<div name="readOnly"></div>\n<div name="undoradio"></div>\n<tr><p style="text-indent:40px;margin-bottom:0px;"> a. Any cavitation on chest X-ray: </span></p></tr>	142	\N	529			16	t		Horizontal		t
+1615	827	32			0		0			<style type="text/css">.aka_text_block{width:15px;text-align:left;}</style>	<tr><p style="text-indent:20px;margin-bottom:0px;">7. Scheduled study treatment start date:</span></p></tr>	142	\N	522			17	t		Horizontal		t
+1618	830	32			0		0				<tr><p style="text-indent:20px;margin-bottom:0px;">Date Enrollment Form completed: </span></p></tr>	142	\N	522			20	t		Horizontal		t
+1619	831	32	Treatment Assignment upon Successful Enrollment Submission		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Assigned treatment arm (study kit medications)</span></p></tr>	143	\N	531			21	t		Vertical		t
+1620	832	32			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Visit date</span></p></tr>	144	\N	522			22	t				t
+1621	833	32	A. Participant History		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. Sex:</span></p></tr>	144	\N	532			23	t		Horizontal		t
+1622	834	32			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Place of birth:</span></p></tr>	144	\N	533			24	t				t
+1623	835	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Ethnicity:</span></p></tr>	144	\N	534			25	t		Vertical		t
+1624	836	32			0		1				<div id="I_RACE"></div><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. Race:</span></p></tr>	144	\N	535			26	f		Vertical		t
+1625	837	32			0		2				<div id="I_RACENR"></div><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><script>\njQuery(document).ready(function() {\n\t\n\tenableFields("#I_RACENR", "line","#I_RACE");\n\t\n});\n\n\tfunction enableFields(containerId, dimension, containerhide) {\n\t\tvar inputContainer = jQuery(containerId);\n\t\tvar inputContainerhide = jQuery(containerhide);\n\t\tvar inputCheck = inputContainer.parent().parent().find("input");\n\t\t\n\t\tvar fields = inputContainerhide.parent().parent().parent().parent();\n\t\t\n\t    if (inputCheck.checked) {\n\t\t\tfields.css("display", "none");\n\t\t} else {\n\t\t\tfields.css("display", "block");\t\t}\n\n\t\t$(inputCheck).change(function() { \t\t\tif ($(this).is(':checked')) {\n                fields.css("display", "none");\t\t\t} else {\n\t\t\t\tfields.css("display", "block");\n\t\t\t}\n\t\t});\n}\n\t\n</script>	144	\N	536			27	f				t
+1626	838	32			0		0			<div style="text-indent:20px; text-align:left">Specify:	<div name="inputWidth500"></div>	144	\N	522			28	t			200(0)	f
+1627	839	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>5. Risk factors within the past year</span></p></tr><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. Homeless:</span></p></tr>	144	\N	537			29	t		Horizontal		t
+1628	840	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Injecting drug use:</span></p></tr>	144	\N	538			30	t		Horizontal		t
+1629	841	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Non-injecting drug use:</span></p></tr>	144	\N	539			31	t		Horizontal		t
+1630	842	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Resident of correctional facility:</span></p></tr>	144	\N	540			32	t		Horizontal		t
+1631	843	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>e. Alcohol use led to problems in relationships, health, employment/work performance or finances:</span></p></tr>	144	\N	541			33	t		Horizontal		t
+1632	844	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">6. Mental health history</span>\n     </br><span style="margin-left: 33px; font-size: 9px;"><strong>(Past mental illness refers to issues for which the participant is NOT currently receiving medications and/or seeing clinician at present)</strong></span>\n  </p><p style="text-indent:40px; margin-bottom: 0px;">a. Family member with mental illness <b><small>(primary relationship-biologic mother, biologic father, full sibling, or biologic child)</small></b> with mental illness*</p>\n</tr>	144	\N	542			34	t		Horizontal		t
+1633	845	32			0		0			<div name="inputWidth500"></div>		144	\N	522			35	t				t
+1634	846	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Past personal mental illness:</span></p></tr>	144	\N	543			36	t		Horizontal		t
+1635	847	32			0		0			<div name="inputWidth500"></div>		144	\N	522			37	f				t
+1636	848	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Past personal experience of traumatic event(s):</span></p></tr>	144	\N	543			38	t		Horizontal		t
+1637	849	32			0		0			<div name="inputWidth500"></div>		144	\N	522			39	f				t
+1638	850	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message1">&nbsp;&nbsp;&nbsp;<strong>(If participant is currently taking medication, complete Concomitant Medication Form):</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message1", "Y");\n});\n</script><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Unintended mental status changes induced by specific medications or substances</span></p></tr>	144	\N	543			40	t		Horizontal		t
+1639	851	32			0		0			<div name="inputWidth500"></div>		144	\N	522			41	f				t
+1640	852	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message3a">&nbsp;&nbsp;&nbsp;<strong>(Skip to A8)</strong></div>\n<div id="Message3b">&nbsp;&nbsp;&nbsp;<strong>(Complete A7b-A7c, then skip to A8)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message3a", "NEVER");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message3b", "CURRENT");\n});\n</script>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>7. Cigarette use</span></p><p style="text-indent:30px; margin-bottom: 0px;"><span>a. Has participant ever smoked tobacco? </span></p></tr>	144	\N	544			42	t		Vertical		t
+1641	853	32			0		0				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>b. Total duration of tobacco use: </span></p></tr>	144	\N	545			43	f		Horizontal		f
+1642	854	32			0		0			<b>Unit:</b>	&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	144	\N	546			44	f		Horizontal		f
+1643	855	32			0		0			<b>Amount:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	144	\N	522			45	f				f
+1644	856	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>c. Number of cigarettes currently or formerly smoked per day: </span></p></tr>	144	\N	547			46	t		Horizontal		f
+1645	857	32			0		1				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>d. Time since participant quit smoking: </span></p></tr>	144	\N	548			47	f		Horizontal		f
+1646	858	32			0		2			<b>Unit:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	144	\N	546			48	f		Horizontal		f
+1647	859	32			0		3			<b>Amount:</b>	<tr><p style= margin-bottom: 0px;><span>&nbsp;</span></p></tr>	144	\N	522			49	f				f
+1648	860	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>8. Karnofsky score: </span></p></tr>	144	\N	549			50	t		Horizontal		t
+1649	861	32	B. Tuberculosis (TB) History and Treatment		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message10a">&nbsp;&nbsp;&nbsp;<strong>(If "No" or "Unknown", skip to B2)</strong></div>\n<div id="Message10b">&nbsp;&nbsp;&nbsp;<strong>(If "No" or "Unknown", skip to B2)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Was the participant ever treated for active TB prior to this episode?</span>\n  </p>\n</tr>	145	\N	550			51	t		Horizontal		t
+1650	862	32			0		1				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>a. If 'yes', what were the most recent month and year <b>(e.g., JAN-2021)</b> of diagnosis?</span></p></tr>	145	\N	522			52	f				f
+1651	863	32			0		2				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>&nbsp; </span></p></tr>	145	\N	551			53	t				f
+1652	864	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>b. Did participant complete prescribed TB treatment?   </span></p></tr>	145	\N	552			54	t		Horizontal		f
+1653	865	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Does participant currently have extrapulmonary TB?</span></p></tr>	145	\N	553			55	t		Horizontal		t
+1654	866	32			0		0				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span>If 'yes', specify the system organ class for each extrapulmonary site :</span></p></tr>	145	\N	554			56	t				f
+1655	867	32	C. Concomitant Diagnoses at the Time of TB Diagnosis		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message4a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C2)</strong></div>\n<div id="Message4b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C2)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message4a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message4b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Liver disease</span>\n  </p>\n</tr>	146	\N	555			57	t		Horizontal		t
+1656	868	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. Hepatitis B:</span></p></tr>	146	\N	556			58	t		Horizontal		f
+1657	869	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Hepatitis C:</span></p></tr>	146	\N	557			59	t		Horizontal		f
+1658	870	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>d. Hepatitis (Type unknown):</span></p></tr>	146	\N	558			60	t		Horizontal		f
+1659	871	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>e. Hepatitis due to alcohol use:</span></p></tr>	146	\N	559			61	t		Horizontal		f
+1660	872	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message5">&nbsp;&nbsp;&nbsp;<strong>(Specify in C6, as applicable)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message5", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">f. Other: </span>\n  </p>\n</tr>	146	\N	560			62	t		Horizontal		f
+1661	873	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message6a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C3)</strong></div>\n<div id="Message6b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, skip to C3)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message6a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message6b", "U");\n});\n</script>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">2. Diabetes</span>\n  </p>\n</tr>	146	\N	561			63	t		Horizontal		t
+1662	874	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. Specify diabetes type:</span></p></tr>	146	\N	562			64	t		Horizontal		f
+1663	875	32			0		1				<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>b. In what year was diabetes diagnosed?</span></p></tr>	146	\N	522			65	f				f
+1664	876	32			0		2				<tr><p style="text-indent:30px; margin-bottom: 0px;"><span> </span></p></tr>	146	\N	563			66	f				f
+1665	877	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:40px; margin-bottom: 0px;"><span>c. Medical records confirming diabetes diagnosis available?</span></p></tr>	146	\N	564			67	t		Horizontal		f
+1666	878	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message7">&nbsp;&nbsp;&nbsp;<strong>(If “yes,” list on Concomitant Medications form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message7", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">d. Was the participant taking any antidiabetic medications in the 14 days prior to study treatment start date?</span>\n  </p>\n</tr>	146	\N	565			68	t		Horizontal		f
+1667	879	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>3. Peripheral neuropathy:</span></p></tr>	146	\N	566			69	t		Horizontal		t
+1668	880	32			0		1				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">4. Cancer</span>\n    </p>\n</tr>	146	\N	567			70	t		Horizontal		t
+1669	881	32			0		2				<tr><p style="text-indent:150px; margin-bottom: 0px;"><span> Specify: </span></p></tr>	146	\N	530			71	t			1000(0)	f
+1670	882	32			0		1				&nbsp;&nbsp;<div name=undoradio></div>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">5. Cardiac conditions</span>\n  </p>\n</tr>	146	\N	568			72	t		Horizontal		t
+1671	883	32			0		2				<tr><p style="text-indent:150px; margin-bottom: 0px;"><span> Specify: </span></p></tr>	146	\N	530			73	t			1000(0)	f
+1672	884	32			0		0				<div name="inputWidth400"></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>6. Other concomitant diagnoses, including any current/active mental illness or problems:</span></p></tr>	146	\N	522			74	f			1000(0)	t
+1673	885	32	D. HIV Infection History		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message13">&nbsp;&nbsp;&nbsp;<strong>(If “NA”, skip to Section E)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message13", "NA");\n});\n</script><tr><p style="text-indent:20px; margin-bottom: 0px;">\n        <span><strong> Participants HIV Infection History</strong></span></p>\n</tr>	147	\N	569			75	f				t
+1674	886	32			0		1				<div class="I_HIV"><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>1. What year was the participant first documented as HIV-positive?</span></p></tr></div>	147	\N	522			76	f				f
+1675	887	32			0		2				<div class="I_HIV">&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr></div>	147	\N	570			77	f				f
+1676	888	32			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>2. Has the participant ever had a CD4 cell count below 200 cells/mm<sup>3</sup>?</span></p></tr>	147	\N	571			78	t		Horizontal		f
+1677	889	32			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message8a">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, Skip to D4)</strong></div>\n<div id="Message8b">&nbsp;&nbsp;&nbsp;<strong>(If “No” or “Unknown”, Skip to D4)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message8a", "N");\n});\n</script><script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message8b", "U");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">3. Has the participant ever been prescribed and taken antiretroviral therapy (ART)? </span>\n  </p>\n</tr>	147	\N	572			79	t		Horizontal		f
+1678	890	32			0		1				<div class="I_HIV"></div><tr><p style="text-indent:40px; margin-bottom: 0px;"><span>a. In what year was ART initiated?</span></p></tr>	147	\N	522			80	t				f
+1679	891	32			0		2				<div class="I_HIV"><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>&nbsp;</span></p></tr></div>	147	\N	573			81	f				f
+1680	892	32			0		0				<div class="I_HIV"></div>&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message9">&nbsp;&nbsp;&nbsp;<strong>(If “yes,” complete Concomitant Medications form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message9", "Y");\n});\n</script>\n<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">b. Was the participant taking any antiretroviral therapy in the 14 days prior to study treatment start date? </span>\n  </p>\n</tr>	147	\N	574			82	t		Horizontal		f
+1681	893	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message12">&nbsp;&nbsp;&nbsp;<strong> (If there are no WHO Clinical Stage 4 Conditions skip to Section E)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message12", "N");\n});\n</script><tr><tr><p style="text-indent:20px; margin-bottom: 0px;"><span>4. List WHO Clinical Stage 4 Conditions and provide month and year</span>	147	\N	575			83	f				f
+1682	894	32			0		0			WHO Clinical Stage 4 Condition		147	\N	576			84	f				t
+1683	895	32			0		0			Month		147	\N	577			85	f				t
+1684	896	32			0		0			<div name="inputWidth40"></div>Year		147	\N	522			86	f				t
+1685	897	32	E. Additional Information		0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message10">&nbsp;&nbsp;&nbsp;<strong>(If “Yes”, complete TB Drug Dose Record Form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message10", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">1. Was the participant taking pre-study TB treatment in the 6 months prior to study start date and/or drugs with anti-TB activity given </span>\n     </br><span style="margin-left: 30px;">for purposes other than treatment of TB in the 30 days prior to study treatment start date?</span>\n  </p>\n</tr>	148	\N	578			87	t		Horizontal		t
+1686	898	32			0		0				&nbsp;&nbsp;<div name=undoradio></div>\n<div id="Message11">&nbsp;&nbsp;&nbsp;<strong>(If “Yes”, complete Concomitant Medication Form)</strong></div>\n<script>\njQuery(document).ready(function() {\nenableRadioMessage("#Message11", "Y");\n});\n</script><tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 20px; margin-bottom: 11px">2. Was the participant taking non-TB medications, including over-the-counter drugs, in the 14 days prior to study treatment start date?</span>\n  </p>\n</tr>	148	\N	579			88	t		Horizontal		t
+1687	899	32	Comments		0		0					148	\N	530			89	f			3500(0)	t
+1688	900	32	F. Form Completion		0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Name of person completing form:</span></p></tr>	148	\N	522			90	t			200(0)	t
+1689	901	32			0		0				<tr><p style="text-indent:20px; margin-bottom: 0px;"><span>Date History Form completed:</span></p></tr>	148	\N	522			91	t				t
+1690	902	32			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>Screening date:</span></p></tr>	149	\N	522			92	t				t
+1691	903	32	A. Patient Information		0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:35px; margin-bottom: 0px;><span>1. Sex:</span></p></tr>	149	\N	580			93	t		Horizontal		t
+1692	904	32			0		1				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>2. Year of birth:</span></p></tr>	149	\N	522			94	f				t
+1693	905	32			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	149	\N	581			95	f		Horizontal		t
+1694	906	32			0		0				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>3. Place of birth:</span></p></tr>	149	\N	582			96	f		Horizontal		t
+1695	907	32			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	149	\N	583			97	f		Horizontal		t
+1696	908	32			0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:35px; margin-bottom: 0px;><span>4. Ethnicity:</span></p></tr>	149	\N	584			98	t		Vertical		t
+1697	909	32			0		1				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 35px; margin-bottom: 11px">5. Race <strong> (if reported, check all that apply below)</strong></span>\n  </p>\n</tr>	149	\N	585			99	f		Vertical		t
+1698	910	32			0		2				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>&nbsp;</span></p></tr>	149	\N	586			100	f				t
+1699	911	32			0		0				<tr><p style=text-indent:43px; margin-bottom: 0px;><span>Specify other race</span></p></tr>	149	\N	522			101	t			200(0)	f
+1700	912	32			0		0				<tr><p style=text-indent:35px; margin-bottom: 0px;><span>6. Site Screening Number</span></p></tr>	149	\N	522			102	t				t
+1701	913	32	B. Reason for Non-Enrollment		0		0				&nbsp;&nbsp;<div name="undoradio"></div>\n<tr><p style=text-indent:20px; margin-bottom: 0px;><span> 1. Reason for non-enrollment</span></p></tr>	150	\N	587			103	t		Vertical		t
+1702	914	32	C. Main reason(s) patient does not meet eligibility criteria </b>(Check all that apply)		0		0					151	\N	588			104	f				t
+1703	915	32			0		0				<tr><p style="margin-left: 60px; margin-bottom: 0px;"><span>Specify Other medical conditions</span></p></tr>	151	\N	530			105	f				f
+1704	916	32		Main reason(s) patient does not meet eligibility criteria (Check all that apply): <b>For participants with HIV</b>	0		0					151	\N	589			106	f				t
+1705	917	32		Main reason(s) patient does not meet eligibility criteria (Check all that apply): <b>Laboratory parameters done at or within 14 days prior to screening:</b>	0		0					151	\N	590			107	f				t
+1706	918	32	D. Patient declines to participate		0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px; font-size: 11px;">\n    <span style="margin-left: 20px; margin-bottom: 11px"><b>Patient expressed a concern or objection related to…</b> </span></p>\n     <p><span style="margin-left: 40px;">1. Experimental Components</span>\n  </p>\n</tr>	152	\N	591			108	f				t
+1707	919	32			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>2. Study Procedures NESCAT</span></p></tr>	152	\N	592			109	f				t
+1708	920	32			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>3. Difficulties or Costs Associated with Study Participation</span></p></tr>	152	\N	593			110	f				t
+1709	921	32			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>4. Opinion or Response of Others / Stigma</span></p></tr>	152	\N	594			111	f				t
+1710	922	32			0		0				<tr><p style=text-indent:40px; margin-bottom: 0px;><span>5. Miscellaneous STUDY PROCEDURES</span></p></tr>	152	\N	595			112	f				t
+1711	923	32			0		0				<tr>\n  <p style="text-indent:0px; margin-bottom: 0px;">\n    <span style="margin-left: 40px; margin-bottom: 11px">6. Reason Unknown</span>\n     </br><span style="margin-left: 53px; font-size: 9px;"><strong>(Patient declined / refused to provide a reason for decision/ did not return to clinic/ unsuccessful attempts to contact patient)</strong></span>\n  </p>\n</tr>	152	\N	596			113	f				t
+1712	924	32	E. Site decides not to enroll patient </b>(Check all that apply)		0		0					153	\N	597			114	f				t
+1713	925	32	F. Form Completion		0		0				<tr><p style=text-indent:20px; margin-bottom: 0px;><span>Name of person completing Non-enrollment form:</span></p></tr>	153	\N	522			115	t			200(0)	t
+1714	926	32			0		0				<tr><p style=text-indent:20px; margin-bottom: 0px;><span>Date Non-enrollment Form completed </span></p></tr>	153	\N	522			116	t				t
 \.
 
 
@@ -10850,28 +11246,28 @@ COPY public.item_group (item_group_id, name, crf_id, status_id, date_created, da
 72	E	17	1	2024-02-02	\N	1	\N	IG_38_PK_E
 73	F	17	1	2024-02-02	\N	1	\N	IG_38_PK_F
 74	A1	4	1	2024-02-24	\N	1	\N	IG_38_AF_A1
-75	Ungrouped	18	1	2024-03-05	\N	1	\N	IG_38_BL_UNGROUPED
-76	STATUS	18	1	2024-03-05	\N	1	\N	IG_38_BL_STATUS
-77	EN	18	1	2024-03-05	\N	1	\N	IG_38_BL_EN
-78	XD	18	1	2024-03-05	\N	1	\N	IG_38_BL_XD
-79	HXA	18	1	2024-03-05	\N	1	\N	IG_38_BL_HXA
-80	FAM	18	1	2024-03-05	\N	1	\N	IG_38_BL_FAM
-81	SELF	18	1	2024-03-05	\N	1	\N	IG_38_BL_SELF
-82	TRAUMA	18	1	2024-03-05	\N	1	\N	IG_38_BL_TRAUMA
-83	CHANGE	18	1	2024-03-05	\N	1	\N	IG_38_BL_CHANGE
-84	HXB	18	1	2024-03-05	\N	1	\N	IG_38_BL_HXB
-85	BODSYS	18	1	2024-03-05	\N	1	\N	IG_38_BL_BODSYS
-86	HXC	18	1	2024-03-05	\N	1	\N	IG_38_BL_HXC
-87	OTHERCA	18	1	2024-03-05	\N	1	\N	IG_38_BL_OTHERCA
-88	HXD	18	1	2024-03-05	\N	1	\N	IG_38_BL_HXD
-89	WHO	18	1	2024-03-05	\N	1	\N	IG_38_BL_WHO
-90	HXE	18	1	2024-03-05	\N	1	\N	IG_38_BL_HXE
-91	NEA	18	1	2024-03-05	\N	1	\N	IG_38_BL_NEA
-92	NEB	18	1	2024-03-05	\N	1	\N	IG_38_BL_NEB
-93	NEC	18	1	2024-03-05	\N	1	\N	IG_38_BL_NEC
-94	NED	18	1	2024-03-05	\N	1	\N	IG_38_BL_NED
-95	NEE	18	1	2024-03-05	\N	1	\N	IG_38_BL_NEE
-96	NEF	18	1	2024-03-05	\N	1	\N	IG_38_BL_NEF
+75	Ungrouped	18	1	2024-03-06	\N	1	\N	IG_38_BL_UNGROUPED
+76	STATUS	18	1	2024-03-06	\N	1	\N	IG_38_BL_STATUS
+77	EN	18	1	2024-03-06	\N	1	\N	IG_38_BL_EN
+78	XD	18	1	2024-03-06	\N	1	\N	IG_38_BL_XD
+79	HXA	18	1	2024-03-06	\N	1	\N	IG_38_BL_HXA
+80	FAM	18	1	2024-03-06	\N	1	\N	IG_38_BL_FAM
+81	SELF	18	1	2024-03-06	\N	1	\N	IG_38_BL_SELF
+82	TRAUMA	18	1	2024-03-06	\N	1	\N	IG_38_BL_TRAUMA
+83	CHANGE	18	1	2024-03-06	\N	1	\N	IG_38_BL_CHANGE
+84	HXB	18	1	2024-03-06	\N	1	\N	IG_38_BL_HXB
+85	BODSYS	18	1	2024-03-06	\N	1	\N	IG_38_BL_BODSYS
+86	HXC	18	1	2024-03-06	\N	1	\N	IG_38_BL_HXC
+87	OTHERCA	18	1	2024-03-06	\N	1	\N	IG_38_BL_OTHERCA
+88	HXD	18	1	2024-03-06	\N	1	\N	IG_38_BL_HXD
+89	WHO	18	1	2024-03-06	\N	1	\N	IG_38_BL_WHO
+90	HXE	18	1	2024-03-06	\N	1	\N	IG_38_BL_HXE
+91	NEA	18	1	2024-03-06	\N	1	\N	IG_38_BL_NEA
+92	NEB	18	1	2024-03-06	\N	1	\N	IG_38_BL_NEB
+93	NEC	18	1	2024-03-06	\N	1	\N	IG_38_BL_NEC
+94	NED	18	1	2024-03-06	\N	1	\N	IG_38_BL_NED
+95	NEE	18	1	2024-03-06	\N	1	\N	IG_38_BL_NEE
+96	NEF	18	1	2024-03-06	\N	1	\N	IG_38_BL_NEF
 \.
 
 
@@ -12381,8 +12777,8 @@ COPY public.item_group_metadata (item_group_metadata_id, item_group_id, header, 
 1499	77				1	1		0	31	827	17	\N	f	f
 1500	77				1	1		0	31	828	18	\N	f	f
 1501	77				1	1		0	31	829	19	\N	f	f
-1502	78				1	1		0	31	830	20	\N	f	f
-1503	79				1	1		0	31	831	21	\N	f	f
+1502	77				1	1		0	31	830	20	\N	f	f
+1503	78				1	1		0	31	831	21	\N	f	f
 1504	79				1	1		0	31	832	22	\N	f	f
 1505	79				1	1		0	31	833	23	\N	f	f
 1506	79				1	1		0	31	834	24	\N	f	f
@@ -12395,14 +12791,14 @@ COPY public.item_group_metadata (item_group_metadata_id, item_group_id, header, 
 1513	79				1	1		0	31	841	31	\N	f	f
 1514	79				1	1		0	31	842	32	\N	f	f
 1515	79				1	1		0	31	843	33	\N	f	f
-1516	80	If yes, please specify the past mental health diagnoses:			1	4		0	31	844	34	\N	f	t
-1517	79				1	1		0	31	845	35	\N	f	f
-1518	81	If yes, please specify the past mental health diagnoses:			1	4		0	31	846	36	\N	f	t
-1519	79				1	1		0	31	847	37	\N	f	f
-1520	82	If yes, please specify the event(s):			1	4		0	31	848	38	\N	f	t
-1521	79				1	1		0	31	849	39	\N	f	f
-1522	83	If yes, please specify medication and mental status change:			1	4		0	31	850	40	\N	f	t
-1523	79				1	1		0	31	851	41	\N	f	f
+1516	79				1	1		0	31	844	34	\N	f	f
+1517	80	If yes, please specify the past mental health diagnoses:			1	4		0	31	845	35	\N	f	t
+1518	79				1	1		0	31	846	36	\N	f	f
+1519	81	If yes, please specify the past mental health diagnoses:			1	4		0	31	847	37	\N	f	t
+1520	79				1	1		0	31	848	38	\N	f	f
+1521	82	If yes, please specify the event(s):			1	4		0	31	849	39	\N	f	t
+1522	79				1	1		0	31	850	40	\N	f	f
+1523	83	If yes, please specify medication and mental status change:			1	4		0	31	851	41	\N	f	t
 1524	79				1	1		0	31	852	42	\N	f	f
 1525	79				1	1		0	31	853	43	\N	f	f
 1526	79				1	1		0	31	854	44	\N	f	f
@@ -12411,13 +12807,13 @@ COPY public.item_group_metadata (item_group_metadata_id, item_group_id, header, 
 1529	79				1	1		0	31	857	47	\N	f	f
 1530	79				1	1		0	31	858	48	\N	f	f
 1531	79				1	1		0	31	859	49	\N	f	f
-1532	84				1	1		0	31	860	50	\N	f	f
+1532	79				1	1		0	31	860	50	\N	f	f
 1533	84				1	1		0	31	861	51	\N	f	f
 1534	84				1	1		0	31	862	52	\N	f	f
 1535	84				1	1		0	31	863	53	\N	f	f
 1536	84				1	1		0	31	864	54	\N	f	f
-1537	85				1	1		0	31	865	55	\N	f	f
-1538	86				1	1		0	31	866	56	\N	f	f
+1537	84				1	1		0	31	865	55	\N	f	f
+1538	85				1	1		0	31	866	56	\N	f	f
 1539	86				1	1		0	31	867	57	\N	f	f
 1540	86				1	1		0	31	868	58	\N	f	f
 1541	86				1	1		0	31	869	59	\N	f	f
@@ -12434,9 +12830,9 @@ COPY public.item_group_metadata (item_group_metadata_id, item_group_id, header, 
 1552	86				1	1		0	31	880	70	\N	f	f
 1553	86				1	1		0	31	881	71	\N	f	f
 1554	86				1	1		0	31	882	72	\N	f	f
-1555	87	Other concomitant diagnoses, including any current/active mental illness or problems*			1	40		0	31	883	73	\N	f	t
-1556	86				1	1		0	31	884	74	\N	f	f
-1557	88				1	1		0	31	885	75	\N	f	f
+1555	86				1	1		0	31	883	73	\N	f	f
+1556	87	Other concomitant diagnoses, including any current/active mental illness or problems*			1	40		0	31	884	74	\N	f	t
+1557	86				1	1		0	31	885	75	\N	f	f
 1558	88				1	1		0	31	886	76	\N	f	f
 1559	88				1	1		0	31	887	77	\N	f	f
 1560	88				1	1		0	31	888	78	\N	f	f
@@ -12444,15 +12840,15 @@ COPY public.item_group_metadata (item_group_metadata_id, item_group_id, header, 
 1562	88				1	1		0	31	890	80	\N	f	f
 1563	88				1	1		0	31	891	81	\N	f	f
 1564	88				1	1		0	31	892	82	\N	f	f
-1565	89				1	40		0	31	893	83	\N	f	t
+1565	88				1	1		0	31	893	83	\N	f	f
 1566	89				1	40		0	31	894	84	\N	f	t
 1567	89				1	40		0	31	895	85	\N	f	t
-1568	90				1	1		0	31	896	86	\N	f	f
+1568	89				1	40		0	31	896	86	\N	f	t
 1569	90				1	1		0	31	897	87	\N	f	f
 1570	90				1	1		0	31	898	88	\N	f	f
 1571	90				1	1		0	31	899	89	\N	f	f
 1572	90				1	1		0	31	900	90	\N	f	f
-1573	91				1	1		0	31	901	91	\N	f	f
+1573	90				1	1		0	31	901	91	\N	f	f
 1574	91				1	1		0	31	902	92	\N	f	f
 1575	91				1	1		0	31	903	93	\N	f	f
 1576	91				1	1		0	31	904	94	\N	f	f
@@ -12463,20 +12859,137 @@ COPY public.item_group_metadata (item_group_metadata_id, item_group_id, header, 
 1581	91				1	1		0	31	909	99	\N	f	f
 1582	91				1	1		0	31	910	100	\N	f	f
 1583	91				1	1		0	31	911	101	\N	f	f
-1584	92				1	1		0	31	912	102	\N	f	f
-1585	93				1	1		0	31	913	103	\N	f	f
+1584	91				1	1		0	31	912	102	\N	f	f
+1585	92				1	1		0	31	913	103	\N	f	f
 1586	93				1	1		0	31	914	104	\N	f	f
 1587	93				1	1		0	31	915	105	\N	f	f
 1588	93				1	1		0	31	916	106	\N	f	f
-1589	94				1	1		0	31	917	107	\N	f	f
+1589	93				1	1		0	31	917	107	\N	f	f
 1590	94				1	1		0	31	918	108	\N	f	f
 1591	94				1	1		0	31	919	109	\N	f	f
 1592	94				1	1		0	31	920	110	\N	f	f
 1593	94				1	1		0	31	921	111	\N	f	f
 1594	94				1	1		0	31	922	112	\N	f	f
-1595	95				1	1		0	31	923	113	\N	f	f
-1596	96				1	1		0	31	924	114	\N	f	f
+1595	94				1	1		0	31	923	113	\N	f	f
+1596	95				1	1		0	31	924	114	\N	f	f
 1597	96				1	1		0	31	925	115	\N	f	f
+1598	96				1	1		0	31	926	116	\N	f	f
+1599	76				1	1		0	32	811	1	\N	t	f
+1600	76				1	1		0	32	812	2	\N	t	f
+1601	77				1	1		0	32	813	3	\N	f	f
+1602	77				1	1		0	32	814	4	\N	f	f
+1603	77				1	1		0	32	815	5	\N	f	f
+1604	77				1	1		0	32	816	6	\N	f	f
+1605	77				1	1		0	32	817	7	\N	f	f
+1606	77				1	1		0	32	818	8	\N	f	f
+1607	77				1	1		0	32	819	9	\N	f	f
+1608	77				1	1		0	32	820	10	\N	f	f
+1609	77				1	1		0	32	821	11	\N	f	f
+1610	77				1	1		0	32	822	12	\N	f	f
+1611	77				1	1		0	32	823	13	\N	f	f
+1612	77				1	1		0	32	824	14	\N	f	f
+1613	77				1	1		0	32	825	15	\N	f	f
+1614	77				1	1		0	32	826	16	\N	f	f
+1615	77				1	1		0	32	827	17	\N	f	f
+1616	77				1	1		0	32	828	18	\N	f	f
+1617	77				1	1		0	32	829	19	\N	f	f
+1618	77				1	1		0	32	830	20	\N	f	f
+1619	78				1	1		0	32	831	21	\N	f	f
+1620	79				1	1		0	32	832	22	\N	f	f
+1621	79				1	1		0	32	833	23	\N	f	f
+1622	79				1	1		0	32	834	24	\N	f	f
+1623	79				1	1		0	32	835	25	\N	f	f
+1624	79				1	1		0	32	836	26	\N	f	f
+1625	79				1	1		0	32	837	27	\N	f	f
+1626	79				1	1		0	32	838	28	\N	f	f
+1627	79				1	1		0	32	839	29	\N	f	f
+1628	79				1	1		0	32	840	30	\N	f	f
+1629	79				1	1		0	32	841	31	\N	f	f
+1630	79				1	1		0	32	842	32	\N	f	f
+1631	79				1	1		0	32	843	33	\N	f	f
+1632	79				1	1		0	32	844	34	\N	f	f
+1633	80	If yes, please specify the past mental health diagnoses:			1	4		0	32	845	35	\N	f	t
+1634	79				1	1		0	32	846	36	\N	f	f
+1635	81	If yes, please specify the past mental health diagnoses:			1	4		0	32	847	37	\N	f	t
+1636	79				1	1		0	32	848	38	\N	f	f
+1637	82	If yes, please specify the event(s):			1	4		0	32	849	39	\N	f	t
+1638	79				1	1		0	32	850	40	\N	f	f
+1639	83	If yes, please specify medication and mental status change:			1	4		0	32	851	41	\N	f	t
+1640	79				1	1		0	32	852	42	\N	f	f
+1641	79				1	1		0	32	853	43	\N	f	f
+1642	79				1	1		0	32	854	44	\N	f	f
+1643	79				1	1		0	32	855	45	\N	f	f
+1644	79				1	1		0	32	856	46	\N	f	f
+1645	79				1	1		0	32	857	47	\N	f	f
+1646	79				1	1		0	32	858	48	\N	f	f
+1647	79				1	1		0	32	859	49	\N	f	f
+1648	79				1	1		0	32	860	50	\N	f	f
+1649	84				1	1		0	32	861	51	\N	f	f
+1650	84				1	1		0	32	862	52	\N	f	f
+1651	84				1	1		0	32	863	53	\N	f	f
+1652	84				1	1		0	32	864	54	\N	f	f
+1653	84				1	1		0	32	865	55	\N	f	f
+1654	85				1	1		0	32	866	56	\N	f	f
+1655	86				1	1		0	32	867	57	\N	f	f
+1656	86				1	1		0	32	868	58	\N	f	f
+1657	86				1	1		0	32	869	59	\N	f	f
+1658	86				1	1		0	32	870	60	\N	f	f
+1659	86				1	1		0	32	871	61	\N	f	f
+1660	86				1	1		0	32	872	62	\N	f	f
+1661	86				1	1		0	32	873	63	\N	f	f
+1662	86				1	1		0	32	874	64	\N	f	f
+1663	86				1	1		0	32	875	65	\N	f	f
+1664	86				1	1		0	32	876	66	\N	f	f
+1665	86				1	1		0	32	877	67	\N	f	f
+1666	86				1	1		0	32	878	68	\N	f	f
+1667	86				1	1		0	32	879	69	\N	f	f
+1668	86				1	1		0	32	880	70	\N	f	f
+1669	86				1	1		0	32	881	71	\N	f	f
+1670	86				1	1		0	32	882	72	\N	f	f
+1671	86				1	1		0	32	883	73	\N	f	f
+1672	87	Other concomitant diagnoses, including any current/active mental illness or problems*			1	40		0	32	884	74	\N	f	t
+1673	86				1	1		0	32	885	75	\N	f	f
+1674	88				1	1		0	32	886	76	\N	f	f
+1675	88				1	1		0	32	887	77	\N	f	f
+1676	88				1	1		0	32	888	78	\N	f	f
+1677	88				1	1		0	32	889	79	\N	f	f
+1678	88				1	1		0	32	890	80	\N	f	f
+1679	88				1	1		0	32	891	81	\N	f	f
+1680	88				1	1		0	32	892	82	\N	f	f
+1681	88				1	1		0	32	893	83	\N	f	f
+1682	89				1	40		0	32	894	84	\N	f	t
+1683	89				1	40		0	32	895	85	\N	f	t
+1684	89				1	40		0	32	896	86	\N	f	t
+1685	90				1	1		0	32	897	87	\N	f	f
+1686	90				1	1		0	32	898	88	\N	f	f
+1687	90				1	1		0	32	899	89	\N	f	f
+1688	90				1	1		0	32	900	90	\N	f	f
+1689	90				1	1		0	32	901	91	\N	f	f
+1690	91				1	1		0	32	902	92	\N	f	f
+1691	91				1	1		0	32	903	93	\N	f	f
+1692	91				1	1		0	32	904	94	\N	f	f
+1693	91				1	1		0	32	905	95	\N	f	f
+1694	91				1	1		0	32	906	96	\N	f	f
+1695	91				1	1		0	32	907	97	\N	f	f
+1696	91				1	1		0	32	908	98	\N	f	f
+1697	91				1	1		0	32	909	99	\N	f	f
+1698	91				1	1		0	32	910	100	\N	f	f
+1699	91				1	1		0	32	911	101	\N	f	f
+1700	91				1	1		0	32	912	102	\N	f	f
+1701	92				1	1		0	32	913	103	\N	f	f
+1702	93				1	1		0	32	914	104	\N	f	f
+1703	93				1	1		0	32	915	105	\N	f	f
+1704	93				1	1		0	32	916	106	\N	f	f
+1705	93				1	1		0	32	917	107	\N	f	f
+1706	94				1	1		0	32	918	108	\N	f	f
+1707	94				1	1		0	32	919	109	\N	f	f
+1708	94				1	1		0	32	920	110	\N	f	f
+1709	94				1	1		0	32	921	111	\N	f	f
+1710	94				1	1		0	32	922	112	\N	f	f
+1711	94				1	1		0	32	923	113	\N	f	f
+1712	95				1	1		0	32	924	114	\N	f	f
+1713	96				1	1		0	32	925	115	\N	f	f
+1714	96				1	1		0	32	926	116	\N	f	f
 \.
 
 
@@ -12643,7 +13156,7 @@ COPY public.oc_qrtz_triggers (trigger_name, trigger_group, job_name, job_group, 
 --
 
 COPY public.openclinica_version (id, name, build_number, version, update_timestamp) FROM stdin;
-39		\N	0	2024-03-05 15:47:35.48
+23		\N	0	2024-03-07 13:22:26.288
 \.
 
 
@@ -12659,7 +13172,7 @@ COPY public.privilege (priv_id, priv_name, priv_desc) FROM stdin;
 -- Data for Name: protocol_deviation; Type: TABLE DATA; Schema: public; Owner: clinica
 --
 
-COPY public.protocol_deviation (protocol_deviation_id, label, protocol_deviation_severity_id, description, study_id) FROM stdin;
+COPY public.protocol_deviation (protocol_deviation_id, label, protocol_deviation_severity_id, description, study_id, item_a_1, item_a_2, item_a_3, item_a_4, item_a_5, item_a_6, item_a_7, item_a_7_1, item_a_8, item_b_1, item_b_2, item_b_3, item_b_4, item_b_5, item_b_6, item_b_7, item_b_8, item_b_9, item_b_10, item_b_11, item_b_12, item_b_13, item_b_14, item_b_15, item_b_16, item_b_17, item_b_18, item_c_1_1, item_c_1_2, item_c_1_3, item_c_1_4, item_c_1_5, item_c_1_6, item_c_1_7, item_c_1_8, item_c_1_9, item_c_1_10, item_c_2, item_d_1_a, item_d_1_b, item_e_1_a, item_e_1_b, item_e_1_c, item_e_1_d, item_f_1, item_f_2, item_f_3, item_g_1, item_g_2_1, item_g_2_2, item_g_2_3, item_g_2_4, item_g_3, item_g_4, item_g_5, item_g_6, item_g_6_1_a, item_g_6_1_b, item_g_6_1_c, item_g_6_2_a, item_g_6_2_b, item_g_6_2_c, item_g_6_3_a, item_g_6_3_b, item_g_6_3_c, item_g_6_4_a, item_g_6_4_b, item_g_6_4_c, item_g_7, item_g_8, item_g_9) FROM stdin;
 \.
 
 
@@ -13149,79 +13662,156 @@ COPY public.response_set (response_set_id, response_type_id, label, options_text
 445	2	textarea	text	text	30
 446	1	text	text	text	31
 447	5	YN	Yes - Participant has been enrolled in the study,No - Participant has NOT been enrolled in the study	Y,N	31
-448	3	Estimated	Estimated	ESTIMATE	31
-449	3	NA	NA (E.g.\\, participant > 18)	NA	31
-450	5	cm, in	cm, in	cm,in	31
-451	5	kg,lbs	kg,lbs	kg,lbs	31
-452	5	Yes,No	Yes,No	Y,N	31
-453	2	textarea	text	text	31
-454	5	arm	Regimen 1 (BMZRb), Regimen 2 (BMZD), Regimen 3 (HRZE)	BMZRb, BMZD, HRZE	31
-455	5	Sex	Male,Female	M,F	31
-456	6	Place	[select place of birth],BENIN REPUBLIC,HAITI,SOUTH AFRICA,UGANDA,UNITED STATES,VIETNAM,AFGHANISTAN,ALAND ISLANDS,ALBANIA,ALGERIA,AMERICAN SAMOA,ANDORRA,ANGOLA,ANGUILLA,ANTARCTICA,ANTIGUA AND BARBUDA,ARGENTINA,ARMENIA,ARUBA,AUSTRALIA,AUSTRIA,AZERBAIJAN,BAHAMAS,BAHRAIN,BANGLADESH,BARBADOS,BELARUS,BELGIUM,BELIZE,BERMUDA,BHUTAN,BOLIVIA,BOSNIA-HERZEGOVINA,BOTSWANA,BOUVET ISLAND,BRAZIL,BRITISH INDIAN OCEAN TERRITORY,BRUNEI,BULGARIA,BURKINA FASO,BURUNDI,CAMBODIA,CAMEROON,CANADA,CAPE VERDE,CAYMAN ISLANDS,CENTRAL AFRICAN REPUBLIC,CHAD,CHILE,CHINA,CHRISTMAS ISLAND,COCOS (KEELING) ISLANDS,COLOMBIA,COMOROS,CONGO,COOK ISLANDS,COSTA RICA,COTE D'IVOIRE,CROATIA,CUBA,CYPRUS,CZECH REPUBLIC,DEMOCRATIC REPUBLIC OF THE CONGO,DENMARK,DJIBOUTI,DOMINICA,DOMINICAN REPUBLIC,ECUADOR,EGYPT,EL SALVADOR,EQUATORIAL GUINEA,ERITREA,ESTONIA,ETHIOPIA,FALKLAND ISLANDS,FAROE ISLANDS,FIJI,FINLAND,FRANCE,FRENCH GUIANA,FRENCH POLYNESIA,FRENCH SOUTHERN TERRITORIES,GABON,GAMBIA,GEORGIA,GERMANY,GHANA,GIBRALTAR,GREECE,GREENLAND,GRENADA,GUADELOUPE,GUAM,GUATEMALA,GUERNSEY,GUINEA,GUINEA-BISSAU,GUYANA,HEARD ISLAND AND MCDONALD ISLANDS,HONDURAS,HONG KONG,HUNGARY,ICELAND,INDIA,INDONESIA,IRAN,IRAQ,IRELAND,ISLE OF MAN,ISRAEL,ITALY,JAMAICA,JAPAN,JERSEY,JORDAN,KAZAKHSTAN,KENYA,KIRIBATI,KUWAIT,KYRGYZSTAN,LAO PEOPLE'S DEMOCRATIC REPUBLIC,LATVIA,LEBANON,LESOTHO,LIBERIA,LIBYAN ARAB JAMAHIRIYA,LIECHTENSTEIN,LITHUANIA,LUXEMBOURG,MACAO,MADAGASCAR,MALAWI,MALAYSIA,MALDIVES,MALI,MALTA,MARSHALL ISLANDS,MARTINIQUE,MAURITANIA,MAURITIUS,MAYOTTE,MEXICO,MICRONESIA FEDERATED STATES OF,MOLDOVA REPUBLIC OF,MONACO,MONGOLIA,MONTENEGRO,MONTSERRAT,MOROCCO,MOZAMBIQUE,MYANMAR,NAMIBIA,NAURU,NEPAL,NETHERLANDS,NETHERLANDS ANTILLES,NEW CALEDONIA,NEW ZEALAND,NICARAGUA,NIGER,NIGERIA,NIUE,NORFOLK ISLAND,NORTH KOREA,NORTHERN MARIANA ISLANDS,NORWAY,OMAN,PAKISTAN,PALAU,PALESTINIAN TERRITORY OCCUPIED,PANAMA,PAPUA NEW GUINEA,PARAGUAY,PERU,PHILIPPINES,PITCAIRN,POLAND,PORTUGAL,PUERTO RICO,QATAR,REPUBLIC OF MACEDONIA,REUNION,ROMANIA,RUSSIAN FEDERATION,RWANDA,SAINT BARTHELEMY,SAINT HELENA,SAINT KITTS AND NEVIS,SAINT LUCIA,SAINT MARTIN FRENCH,SAINT PIERRE AND MIQUELON,SAINT VINCENT AND THE GRENADINES,SAMOA,SAN MARINO,SAO TOME AND PRINCIPE,SAUDI ARABIA,SENEGAL,SERBIA,SEYCHELLES,SIERRA LEONE,SINGAPORE,SLOVAKIA,SLOVENIA,SOLOMON ISLANDS,SOMALIA,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS,SOUTH KOREA,SPAIN,SRI LANKA,SUDAN,SURINAME,SVALBARD AND JAN MAYEN,SWAZILAND,SWEDEN,SWITZERLAND,SYRIAN ARAB REPUBLIC,TAIWAN,TAJIKISTAN,TANZANIA UNITED REPUBLIC OF,THAILAND,TIMOR-LESTE,TOGO,TOKELAU,TONGA,TRINIDAD AND TOBAGO,TUNISIA,TURKEY,TURKMENISTAN,TURKS AND CAICOS ISLANDS,TUVALU,UKRAINE,UNITED ARAB EMIRATES,UNITED KINGDOM,UNITED STATES MINOR OUTLYING ISLANDS,URUGUAY,UZBEKISTAN,VANUATU,VATICAN CITY STATE,VENEZUELA,VIRGIN ISLANDS BRITISH,VIRGIN ISLANDS U.S.,WALLIS AND FUTUNA,WESTERN SAHARA,YEMEN,ZAMBIA,ZIMBABWE	,BEN,HTI,ZAF,UGA,USA,VNM,AFG,ALA,ALB,DZA,ASM,AND,AGO,AIA,ATA,ATG,ARG,ARM,ABW,AUS,AUT,AZE,BHS,BHR,BGD,BRB,BLR,BEL,BLZ,BMU,BTN,BOL,BIH,BWA,BVT,BRA,IOT,BRN,BGR,BFA,BDI,KHM,CMR,CAN,CPV,CYM,CAF,TCD,CHL,CHN,CXR,CCK,COL,COM,COG,COK,CRI,CIV,HRV,CUB,CYP,CZE,COD,DNK,DJI,DMA,DOM,ECU,EGY,SLV,GNQ,ERI,EST,ETH,FLK,FRO,FJI,FIN,FRA,GUF,PYF,ATF,GAB,GMB,GEO,DEU,GHA,GIB,GRC,GRL,GRD,GLP,GUM,GTM,GGY,GIN,GNB,GUY,HMD,HND,HKG,HUN,ISL,IND,IDN,IRN,IRQ,IRL,IMN,ISR,ITA,JAM,JPN,JEY,JOR,KAZ,KEN,KIR,KWT,KGZ,LAO,LVA,LBN,LSO,LBR,LBY,LIE,LTU,LUX,MAC,MDG,MWI,MYS,MDV,MLI,MLT,MHL,MTQ,MRT,MUS,MYT,MEX,FSM,MDA,MCO,MNG,MNE,MSR,MAR,MOZ,MMR,NAM,NRU,NPL,NLD,ANT,NCL,NZL,NIC,NER,NGA,NIU,NFK,PRK,MNP,NOR,OMN,PAK,PLW,PSE,PAN,PNG,PRY,PER,PHL,PCN,POL,PRT,PRI,QAT,MKD,REU,ROU,RUS,RWA,BLM,SHN,KNA,LCA,MAF,SPM,VCT,WSM,SMR,STP,SAU,SEN,SRB,SYC,SLE,SGP,SVK,SVN,SLB,SOM,SGS,KOR,ESP,LKA,SDN,SUR,SJM,SWZ,SWE,CHE,SYR,TWN,TJK,TZA,THA,TLS,TGO,TKL,TON,TTO,TUN,TUR,TKM,TCA,TUV,UKR,ARE,GBR,UMI,URY,UZB,VUT,VAT,VEN,VGB,VIR,WLF,ESH,YEM,ZMB,ZWE	31
-457	5	Ethnicity	Hispanic or Latino,Not Hispanic or Latino,Not Reported	HISPANIC OR LATINO,NOT HISPANIC OR LATINO,NOT REPORTED	31
-458	3	race	American Indian or Alaska Native,Black or African American,White,Asian,Native Hawaiian or Other…,Other	AMERICAN INDIAN OR ALASKA NATIVE,BLACK OR AFRICAN AMERICAN,WHITE,ASIAN,NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER,OTHER	31
-459	3	racenr	Not reported	NOT REPORTED	31
-460	5	homeless	Yes,No,Unknown	Y,N,U	31
-461	5	idu	Yes,No,Unknown	Y,N,U	31
-462	5	nidu	Yes,No,Unknown	Y,N,U	31
-463	5	corrfa	Yes,No,Unknown	Y,N,U	31
-464	5	alcohol	Yes,No,Unknown	Y,N,U	31
-465	5	mental	Yes,No,Unknown	Y,N,U	31
-466	5	past	Yes,No,Unknown	Y,N,U	31
-467	5	tabacco	Never,Current,Former	NEVER,CURRENT,FORMER	31
-468	3	duration	Duration Unknown	U	31
-469	5	Unit	Days,Weeks,Months,Years	DAYS,WEEKS,MONTHS,YEARS	31
-470	5	Number	Less than 10 cigarettes,10-20 cigarettes,More than 20 cigarettes,Don't know	LESS THAN 10 CIGARETTES,10-20 CIGARETTES,MORE THAN 20 CIGARETTES,DON'T KNOW	31
-471	3	smoking	Duration Unknown	U	31
-472	5	lblscorresn	60,70,80,90,100	60,70,80,90,100	31
-473	5	treated	Yes,No,Unknown	Y,N,U	31
-474	3	Estimd	Estimated	ESTIMATED	31
-475	5	prescribed	Yes,No,Unknown	Y,N,U	31
-476	5	extrapulmonary	Yes,No,Unknown	Y,N,U	31
-477	3	organ	Blood and Lymphatic System Disorders,Cardiac Disorders,Endocrine Disorders,Gastrointestinal Disorders,Hepatobiliary Disorders,Musculoskeletal and Connective Tissue Disorders,Nervous System Disorders,Renal and Urinary Disorders,Reproductive System and Breast Disorders,Respiratory Thoracic and Mediastinal Disorders,Skin and Subcutaneous Tissue Disorders	BLOOD AND LYMPHATIC SYSTEM DISORDERS,CARDIAC DISORDERS,ENDOCRINE DISORDERS,GASTROINTESTINAL DISORDERS,HEPATOBILIARY DISORDERS,MUSCULOSKELETAL AND CONNECTIVE TISSUE DISORDERS,NERVOUS SYSTEM DISORDERS,RENAL AND URINARY DISORDERS,REPRODUCTIVE SYSTEM AND BREAST DISORDERS,RESPIRATORY THORACIC AND MEDIASTINAL DISORDERS,SKIN AND SUBCUTANEOUS TISSUE DISORDERS	31
-478	5	liver disease	Yes,No,Unknown	Y,N,U	31
-479	5	hepatitisa	Yes,No,Unknown	Y,N,U	31
-480	5	hepatitisb	Yes,No,Unknown	Y,N,U	31
-481	5	hepatitisT	Yes,No,Unknown	Y,N,U	31
-482	5	hepatitisD	Yes,No,Unknown	Y,N,U	31
-483	5	other	Yes,No,Unknown	Y,N,U	31
-484	5	diabetes	Yes,No,Unknown	Y,N,U	31
-485	5	type	Type I,Type II,Unknown	DIABI,DIABII,DIABUNK	31
-486	5	diagyrest	Estimated,Unknown	ESTIMATED,UNKNOWN	31
-487	5	radioa	Yes,No (self-reported),Unknown	Y,N,U	31
-488	5	radio	Yes,No,Unknown	Y,N,U	31
-489	5	peripheral	Yes,No,Unknown	Y,N,U	31
-490	5	cancer	Yes,No,Unknown	Y,N,U	31
-491	5	cardiac	Yes,No,Unknown	Y,N,U	31
-492	5	hivna	Yes - participant is HIV-positiv, Not applicable - participant is HIV-negative	Y,NA	31
-493	5	mhest	Estimated,Unknown	ESTIMATED,UNKNOWN	31
-494	5	CD4	Yes,No,Unknown	Y,N,U	31
-495	5	antiretroviral	Yes,No,Unknown	Y,N,U	31
-496	3	martest	Estimated	ESTIMATED	31
-497	5	startdate	Yes,No,Unknown	Y,N,U	31
-498	5	nocondwho	No WHO Clinical Stage 4 Condition, Yes - WHO Clinical Stage 4 Condition reported	N,Y	31
-499	6	whoterm	[select],American Trypanososmiasis Reactivation (Meningoencephalitis Or Myocarditis),Atypical Disseminated Leishmaniasis,Candidiasis Of Bronchi Trachea Or Lungs,Candidiasis Esophageal,Cardiomyopathy Symptomatic HIV-Associated,Cervical Cancer Invasive,Cryptococcosis Extrapulmonary. Including Meningitis,Cryptosporidiosis Chronic Intestinal With Diarrhea (>1 Months Duration),Cytomegalovirus Infection (Retinitis Or Infection Of Other Organs),Cytomegalovirus Retinitis (With Loss Of Vision),Encephalopathy HIV-Related,Herpes Simplex Infection Chronic (Orolabial Genital Or Anorectal Site For > 1 Month Or Visceral Herpes At Any Site,HIV Wasting Syndrome,Isosporiasis Chronic Intestinal (>1 Months Duration),Kaposi’S Sarcoma,Lymphoma Primary Of Brain,Lymphoma (Cerebral Or B-Cell Non-Hodgkin Including Burkitt’S And Immunoblastic),Mycobacterium Avium Complex Or M. Kansasii Disseminated Or Extrapulmonary,Mycobacterium Other Species Or Unidentified Species Disseminated Or Extrapulmonary,Mycobacterium Tuberculosis Extrapulmonary,Mycosis Disseminated ,Nephropathy Symptomatic HIV-Associated,Pneumocystis Pneumonia,Pneumonia Bacterial Recurrent Severe,Progressive Multifocal Leukoencephalopathy,Salmonella Bacteremia Recurrent Nontyphoidal,Toxoplasmosis Of Brain Or CNS	,AMERICAN TRYPANOSOSMIASIS REACTIVATION (MENINGOENCEPHALITIS OR MYOCARDITIS),ATYPICAL DISSEMINATED LEISHMANIASIS,CANDIDIASIS OF BRONCHI TRACHEA OR LUNGS,CANDIDIASIS ESOPHAGEAL,CARDIOMYOPATHY SYMPTOMATIC HIV-ASSOCIATED,CERVICAL CANCER INVASIVE,CRYPTOCOCCOSIS EXTRAPULMONARY. INCLUDING MENINGITIS,CRYPTOSPORIDIOSIS CHRONIC INTESTINAL WITH DIARRHEA (>1 MONTHS DURATION),CYTOMEGALOVIRUS INFECTION (RETINITIS OR INFECTION OF OTHER ORGANS),CYTOMEGALOVIRUS RETINITIS (WITH LOSS OF VISION),ENCEPHALOPATHY HIV-RELATED,HERPES SIMPLEX INFECTION CHRONIC (OROLABIAL GENITAL OR ANORECTAL SITE FOR > 1 MONTH OR VISCERAL HERPES AT ANY SITE,HIV WASTING SYNDROME,ISOSPORIASIS CHRONIC INTESTINAL (>1 MONTHS DURATION),KAPOSI’S SARCOMA,LYMPHOMA PRIMARY OF BRAIN,LYMPHOMA (CEREBRAL OR B-CELL NON-HODGKIN INCLUDING BURKITT’S AND IMMUNOBLASTIC),MYCOBACTERIUM AVIUM COMPLEX OR M. KANSASII DISSEMINATED OR EXTRAPULMONARY,MYCOBACTERIUM OTHER SPECIES OR UNIDENTIFIED SPECIES DISSEMINATED OR EXTRAPULMONARY,MYCOBACTERIUM TUBERCULOSIS EXTRAPULMONARY,MYCOSIS DISSEMINATED ,NEPHROPATHY SYMPTOMATIC HIV-ASSOCIATED,PNEUMOCYSTIS PNEUMONIA,PNEUMONIA BACTERIAL RECURRENT SEVERE,PROGRESSIVE MULTIFOCAL LEUKOENCEPHALOPATHY,SALMONELLA BACTEREMIA RECURRENT NONTYPHOIDAL,TOXOPLASMOSIS OF BRAIN OR CNS	31
-500	6	monthwho	[select],JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC	,JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC	31
-501	5	additionala	Yes,No	Y,N	31
-502	5	additionalb	Yes,No,Unknown	Y,N,U	31
-503	5	SexNE	Male,Female,Unknown	M,F,U	31
-504	3	brthcondlblNE	Estimated, Not Reported	ESTIMATE,NOT REPORTED	31
-505	6	PlaceNE	[Select Place of Birth],ARUBA,AFGHANISTAN,ANGOLA,ANGUILLA,ALAND ISLANDS,ALBANIA,ANDORRA,NETHERLANDS ANTILLES,UNITED ARAB EMIRATES,ARGENTINA,ARMENIA,AMERICAN SAMOA,ANTARCTICA,FRENCH SOUTHERN TERRITORIES,ANTIGUA AND BARBUDA,AUSTRALIA,AUSTRIA,AZERBAIJAN,BURUNDI,BELGIUM,BENIN REPUBLIC,BURKINA FASO,BANGLADESH,BULGARIA,BAHRAIN,BAHAMAS,BOSNIA-HERZEGOVINA,SAINT BARTHELEMY,BELARUS,BELIZE,BERMUDA,BOLIVIA,BRAZIL,BARBADOS,BRUNEI,BHUTAN,BOUVET ISLAND,BOTSWANA,CENTRAL AFRICAN REPUBLIC,CANADA,COCOS (KEELING) ISLANDS,SWITZERLAND,CHILE,CHINA,COTE D'IVOIRE,CAMEROON,DEMOCRATIC REPUBLIC OF THE CONGO,CONGO,COOK ISLANDS,COLOMBIA,COMOROS,CAPE VERDE,COSTA RICA,CUBA,CHRISTMAS ISLAND,CAYMAN ISLANDS,CYPRUS,CZECH REPUBLIC,GERMANY,DJIBOUTI,DOMINICA,DENMARK,DOMINICAN REPUBLIC,ALGERIA,ECUADOR,EGYPT,ERITREA,WESTERN SAHARA,SPAIN,ESTONIA,ETHIOPIA,FINLAND,FIJI,FALKLAND ISLANDS,FRANCE,FAROE ISLANDS,MICRONESIA FEDERATED STATES OF,GABON,UNITED KINGDOM,GEORGIA,GUERNSEY,GHANA,GIBRALTAR,GUINEA,GUADELOUPE,GAMBIA,GUINEA-BISSAU,EQUATORIAL GUINEA,GREECE,GRENADA,GREENLAND,GUATEMALA,FRENCH GUIANA,GUAM,GUYANA,HONG KONG,HEARD ISLAND AND MCDONALD ISLANDS,HONDURAS,CROATIA,HAITI,HUNGARY,INDONESIA,INDIA,ISLE OF MAN,BRITISH INDIAN OCEAN TERRITORY,IRELAND,IRAN,IRAQ,ICELAND,ISRAEL,ITALY,JAMAICA,JORDAN,JAPAN,JERSEY,KAZAKHSTAN,KENYA,KYRGYZSTAN,CAMBODIA,KIRIBATI,SAINT KITTS AND NEVIS,SOUTH KOREA,KUWAIT,LAO PEOPLES DEMOCRATIC REPUBLIC,LEBANON,LIBERIA,LIBYAN ARAB JAMAHIRIYA,SAINT LUCIA,LIECHTENSTEIN,SRI LANKA,LESOTHO,LITHUANIA,LUXEMBOURG,LATVIA,MACAO,SAINT MARTIN FRENCH,MOROCCO,MONACO,MOLDOVA REPUBLIC OF,MADAGASCAR,MALDIVES,MEXICO,MARSHALL ISLANDS,REPUBLIC OF MACEDONIA,MALI,MALTA,MYANMAR,MONTENEGRO,MONGOLIA,NORTHERN MARIANA ISLANDS,MOZAMBIQUE,MAURITANIA,MONTSERRAT,MARTINIQUE,MAURITIUS,MALAWI,MALAYSIA,MAYOTTE,NAMIBIA,NEW CALEDONIA,NIGER,NORFOLK ISLAND,NIGERIA,NICARAGUA,NIUE,NETHERLANDS,NORWAY,NEPAL,NAURU,NEW ZEALAND,OMAN,PAKISTAN,PANAMA,PITCAIRN,PERU,PHILIPPINES,PALAU,PAPUA NEW GUINEA,POLAND,PUERTO RICO,NORTH KOREA,PORTUGAL,PARAGUAY,PALESTINIAN TERRITORY OCCUPIED,FRENCH POLYNESIA,QATAR,REUNION,ROMANIA,RUSSIAN FEDERATION,RWANDA,SAUDI ARABIA,SERBIA,SUDAN,SENEGAL,SINGAPORE,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS,SAINT HELENA,SVALBARD AND JAN MAYEN,SOLOMON ISLANDS,SIERRA LEONE,EL SALVADOR,SAN MARINO,SOMALIA,SAINT PIERRE AND MIQUELON,SAO TOME AND PRINCIPE,SURINAME,SLOVAKIA,SLOVENIA,SWEDEN,SWAZILAND,SEYCHELLES,SYRIAN ARAB REPUBLIC,TURKS AND CAICOS ISLANDS,CHAD,TOGO,THAILAND,TAJIKISTAN,TOKELAU,TURKMENISTAN,TIMOR-LESTE,TONGA,TRINIDAD AND TOBAGO,TUNISIA,TURKEY,TUVALU,TAIWAN,TANZANIA UNITED REPUBLIC OF,UGANDA,UKRAINE,UNITED STATES MINOR OUTLYING ISLANDS,URUGUAY,UNITED STATES,UZBEKISTAN,VATICAN CITY STATE,SAINT VINCENT AND THE GRENADINES,VENEZUELA,VIRGIN ISLANDS BRITISH,VIRGIN ISLANDS U.S.,VIETNAM,VANUATU,WALLIS AND FUTUNA,SAMOA,YEMEN,SOUTH AFRICA,ZAMBIA,ZIMBABWE	,ABW,AFG,AGO,AIA,ALA,ALB,AND,ANT,ARE,ARG,ARM,ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,CCK,CHE,CHL,CHN,CIV,CMR,COD,COG,COK,COL,COM,CPV,CRI,CUB,CXR,CYM,CYP,CZE,DEU,DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,HTI,HUN,IDN,IND,IMN,IOT,IRL,IRN,IRQ,ISL,ISR,ITA,JAM,JOR,JPN,JEY,KAZ,KEN,KGZ,KHM,KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,RWA,SAU,SRB,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,SMR,SOM,SPM,STP,SUR,SVK,SVN,SWE,SWZ,SYC,SYR,TCA,TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE	31
-506	3	brthctryndNE	Unknown, Not Reported	Unknown,NOT REPORTED	31
-507	5	EthnicityNE	Hispanic or Latino,Not Hispanic or Latino,Not Reported	HISPANIC OR LATINO,NOT HISPANIC OR LATINO,NOT REPORTED	31
-508	3	raceNE	American Indian or Alaska Native,Black or African American,White,Asian,Native Hawaiian or other Pacific Islander,Other	AMERICAN INDIAN OR ALASKA NATIVE,BLACK OR AFRICAN AMERICAN,WHITE,ASIAN,NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER,OTHER	31
-509	3	nrlablNE	Not Reported	NOT REPORTED	31
-510	5	reason	Patient does not meet eligibility criteria (Skip to Section C),Patient declines to participate (Make notes in the "NOTES" box below then continue to Section D),Site decides not to enroll patient (Skip to Section E)	PATIENT DOES NOT MEET ELIGIBILITY CRITERIA,PATIENT DECLINES TO PARTICIPATE,SITE DECIDES NOT TO ENROLL PATIENT	31
-511	3	reasona	No evidence of pulmonary tuberculosis with or without suspected or proven concomitant extrapulmonary tuberculosis outside the central nervous system or bones,No acid-fast bacilli (AFB) seen in an expectorated sputum specimen at least 1+ (WHO/IUATLD criteria) AND no positive GeneXpert (or GeneXpert Ultra) for M. tuberculosis  , Age <12 years,No documentation of negative HIV status within the past 3 months prior to enrollment nor documentation confirming HIV infection,No written informed consent/assent,Karnofsky score < 60,No verifiable address or residence location that is readily accessible for visiting\\, and/or no willingness to inform the study team of any change of address during the treatment and follow-up period,Person of childbearing potential who does not agree to practice a reliable method of contraception (barrier method or non-hormonal intrauterine device) or abstain from sexual activity that could lead to pregnancy while receiving study drug treatment and for 30 days after stopping study treatment,Pregnant or breast-feeding,More than 5 days of tuberculosis treatment in the previous 6 months, Unable to take oral medications, Hypersensitivity or previous intolerance to any of the study drugs , Current or planned use of medications that have unacceptable drug-drug interactions with any of the study drugs during study treatment , Suspected or proven central nervous system tuberculosis, Suspected or proven bone tuberculosis, Screening ECG with QTcF >450 for men or >470 for women, Clinically significant ECG abnormality in the opinion of the site investigator\\, including but not limited to second or third degree atrioventricular (AV) block\\, prolongation of the QRS complex over 120 ms (in both male and female participants)\\, or clinically important arrhythmia, Current clinically relevant cardiovascular disorder in the opinion of the site investigator\\, including but not limited to heart failure\\, coronary heart disease\\, arrhythmia\\, or Tachyarrhythmia, Known family history of Long QT Syndrome in a first-degree relative (i.e.\\, parent\\, offspring\\, or sibling) , History of aortic aneurysm or dissection, Hepatic cirrhosis or other serious liver disease , Other medical conditions\\, that\\, in the investigator’s judgment\\, make study participation not in the individual’s best interest	NOPULMTB,NOAFB,UNDERAGE,HIVDOC,NOCONSENT,LOWKPS,NOADDRESS,CONTRACEPTION,PREG,PREVTREAT,ORALMED,HYPER,INTERACT,CNSTB,BONETB,QTCF,ABNECG,CARDIODIS,HISQT,AORTIC,LIVERDIS,OTHERCOND	31
-512	3	reasonhiv	No current use of dolutegravir-based ART\\, or inability or non-willingness to start or transition to a dolutegravir-based antiretroviral therapy regimen, CD4 T cell count <100 cells/mm3 based on testing performed at or within 30 days prior to study enrollment	DOLUTEGRAVIR,LOWCD4	31
-513	3	reasoncat	Serum or plasma alanine aminotransferase >3 times the upper limit of normal, Serum or plasma total bilirubin >2.5 times the upper limit of normal , Serum creatinine >2 times the upper limit of normal, Platelet count <75\\,000 cells/mm3, Absolute neutrophil count <1\\,000 cells/mm3, Serum or plasma potassium <3.5 meq/L, Weight <40.0 kg , Known or suspected resistance to isoniazid or rifamycins (by phenotypic or molecular test), Previous treatment with any drug or combination of drugs known to have activity against M. tuberculosis (e.g. isoniazid\\, rifamycins\\, pyrazinamide\\, ethambutol\\, fluoroquinolones\\, etc.) for more than five days in the thirty days prior to enrollment , Previously enrolled in this study or currently enrolled in another therapeutic clinical trial that\\, in the investigator’s judgment\\, would compromise study integrity or participant safety, Current or planned incarceration or other involuntary detention	AMINOTRANS,BILIRUBIN,CREATININE,PLATELET,NEUTROPHIL,POTASSIUM,UNDERWEIGHT,RESISTANCE,PREVTREAT,PREVENROL,INCARCERATION	31
-514	3	components	a. Distrust or fear of research,b. Undergoing randomization	DISTMED,RAND	31
-515	3	componentstu	a. Effectiveness of study medication(s), b. Side effects of study medication, c. Interaction of study medication with other prescribed medications (including contraceptives) or effect on other medical problems , d. Desire to take approved medications / alternate regimen , e. Duration of treatment / Frequency of dosing / Number of pills per dose , f. Recommendation to avoid alcohol or recreational drugs while on study medication , g. Undergoing additional diagnostic tests for study purposes (including blood draw(s) and HIV test)..., h. The number and/or location of study visits is not convenient , i. The number and/or location of DOT visits is not convenient In: Clinic DOT, j. The number and/or location of DOT visits is not convenient In: Outreach DOT	EFF,MEDSIDE,MEDINT,ALTTRX,DUR,DISPALC,BLOOD,NUMVIS,DOTCLN,DOTOUT	31
-516	3	componentsdif	a. Study will interfere with work\\, school\\, family\\, or other life commitments  , b. Too busy or stressed to participate in a study , c. Study participation will result in a loss of income , d. Inconvenience / costs associated with transportation\\, travel\\, or parking , e. Plans to move or travel (for work or pleasure) , f. Study will negatively impact immigration status	INTFLIFE,BUSY,INCO,TRANS,MOVTRAV,IMG	31
-517	3	componentstopi	a. Family member\\, spouse/partner\\, friend discourages study enrollment , b. Boss / teacher not likely to support missed work / school due to study commitments , c. Personal physician has concerns related to patient’s participation in study , d. Stigmatization related to TB diagnosis or taking TB medication	FAMILY,CONRESP,MDCON,STIGMA	31
-518	3	componentsmis	a. Length and/or complexity of informed consent form, b. Patient cited other health problems / feels too ill to participate in a study , c. Patient expressed a TB-specific misperception or belief that contributed to the decision to decline study enrollment	CONSENT,TOOILL,BELIEF	31
-519	3	nesunklbl	Reason Unknown	CCUNK	31
-520	3	decidescomp	1. Patient's work\\, school\\, family or life commitments may hinder study participation , 2. Psychiatric\\, cognitive (e.g.\\, reasoning\\, thought processes)\\, or behavioral (e.g.\\, substance abuse\\, belligerence) factors are likely to affect ability to provide consent and/or adherence to the study protocol , 3. Patient’s immigration status may affect adherence to the study protocol, 4. Inconclusive diagnostic test results and/orclinical presentation of TB, 5. Communications/Language barriers:  Staff do not speak patient's language/Patient is unable to understand available interpreter., 6. Communications/Language barriers: Written materials/informed consent form not available in patient's language., 7. Communications/Language barriers: Although the language employed during the informed consent process is understod\\, the patient does not understand study.	LIFCOM,PSYCOG,SIT,INCLAB,LANGBAR,MATLANG,UNDSTDY	31
+448	6	Siteid	9,25,26,30,45,52,63,64A,67,74,75,76,77	9,25,26,30,45,52,63,64A,67,74,75,76,77	31
+449	3	Estimated	Estimated	ESTIMATE	31
+450	3	NA	NA (E.g.\\, participant > 18)	NA	31
+451	5	cm, in	cm, in	cm,in	31
+452	5	kg,lbs	kg,lbs	kg,lbs	31
+453	5	Yes,No	Yes,No	Y,N	31
+454	2	textarea	text	text	31
+455	5	arm	Regimen 1 (BMZRb), Regimen 2 (BMZD), Regimen 3 (HRZE)	BMZRb, BMZD, HRZE	31
+456	5	Sex	Male,Female	M,F	31
+457	6	Place	[select place of birth],BENIN REPUBLIC,HAITI,SOUTH AFRICA,UGANDA,UNITED STATES,VIETNAM,AFGHANISTAN,ALAND ISLANDS,ALBANIA,ALGERIA,AMERICAN SAMOA,ANDORRA,ANGOLA,ANGUILLA,ANTARCTICA,ANTIGUA AND BARBUDA,ARGENTINA,ARMENIA,ARUBA,AUSTRALIA,AUSTRIA,AZERBAIJAN,BAHAMAS,BAHRAIN,BANGLADESH,BARBADOS,BELARUS,BELGIUM,BELIZE,BERMUDA,BHUTAN,BOLIVIA,BOSNIA-HERZEGOVINA,BOTSWANA,BOUVET ISLAND,BRAZIL,BRITISH INDIAN OCEAN TERRITORY,BRUNEI,BULGARIA,BURKINA FASO,BURUNDI,CAMBODIA,CAMEROON,CANADA,CAPE VERDE,CAYMAN ISLANDS,CENTRAL AFRICAN REPUBLIC,CHAD,CHILE,CHINA,CHRISTMAS ISLAND,COCOS (KEELING) ISLANDS,COLOMBIA,COMOROS,CONGO,COOK ISLANDS,COSTA RICA,COTE D'IVOIRE,CROATIA,CUBA,CYPRUS,CZECH REPUBLIC,DEMOCRATIC REPUBLIC OF THE CONGO,DENMARK,DJIBOUTI,DOMINICA,DOMINICAN REPUBLIC,ECUADOR,EGYPT,EL SALVADOR,EQUATORIAL GUINEA,ERITREA,ESTONIA,ETHIOPIA,FALKLAND ISLANDS,FAROE ISLANDS,FIJI,FINLAND,FRANCE,FRENCH GUIANA,FRENCH POLYNESIA,FRENCH SOUTHERN TERRITORIES,GABON,GAMBIA,GEORGIA,GERMANY,GHANA,GIBRALTAR,GREECE,GREENLAND,GRENADA,GUADELOUPE,GUAM,GUATEMALA,GUERNSEY,GUINEA,GUINEA-BISSAU,GUYANA,HEARD ISLAND AND MCDONALD ISLANDS,HONDURAS,HONG KONG,HUNGARY,ICELAND,INDIA,INDONESIA,IRAN,IRAQ,IRELAND,ISLE OF MAN,ISRAEL,ITALY,JAMAICA,JAPAN,JERSEY,JORDAN,KAZAKHSTAN,KENYA,KIRIBATI,KUWAIT,KYRGYZSTAN,LAO PEOPLE'S DEMOCRATIC REPUBLIC,LATVIA,LEBANON,LESOTHO,LIBERIA,LIBYAN ARAB JAMAHIRIYA,LIECHTENSTEIN,LITHUANIA,LUXEMBOURG,MACAO,MADAGASCAR,MALAWI,MALAYSIA,MALDIVES,MALI,MALTA,MARSHALL ISLANDS,MARTINIQUE,MAURITANIA,MAURITIUS,MAYOTTE,MEXICO,MICRONESIA FEDERATED STATES OF,MOLDOVA REPUBLIC OF,MONACO,MONGOLIA,MONTENEGRO,MONTSERRAT,MOROCCO,MOZAMBIQUE,MYANMAR,NAMIBIA,NAURU,NEPAL,NETHERLANDS,NETHERLANDS ANTILLES,NEW CALEDONIA,NEW ZEALAND,NICARAGUA,NIGER,NIGERIA,NIUE,NORFOLK ISLAND,NORTH KOREA,NORTHERN MARIANA ISLANDS,NORWAY,OMAN,PAKISTAN,PALAU,PALESTINIAN TERRITORY OCCUPIED,PANAMA,PAPUA NEW GUINEA,PARAGUAY,PERU,PHILIPPINES,PITCAIRN,POLAND,PORTUGAL,PUERTO RICO,QATAR,REPUBLIC OF MACEDONIA,REUNION,ROMANIA,RUSSIAN FEDERATION,RWANDA,SAINT BARTHELEMY,SAINT HELENA,SAINT KITTS AND NEVIS,SAINT LUCIA,SAINT MARTIN FRENCH,SAINT PIERRE AND MIQUELON,SAINT VINCENT AND THE GRENADINES,SAMOA,SAN MARINO,SAO TOME AND PRINCIPE,SAUDI ARABIA,SENEGAL,SERBIA,SEYCHELLES,SIERRA LEONE,SINGAPORE,SLOVAKIA,SLOVENIA,SOLOMON ISLANDS,SOMALIA,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS,SOUTH KOREA,SPAIN,SRI LANKA,SUDAN,SURINAME,SVALBARD AND JAN MAYEN,SWAZILAND,SWEDEN,SWITZERLAND,SYRIAN ARAB REPUBLIC,TAIWAN,TAJIKISTAN,TANZANIA UNITED REPUBLIC OF,THAILAND,TIMOR-LESTE,TOGO,TOKELAU,TONGA,TRINIDAD AND TOBAGO,TUNISIA,TURKEY,TURKMENISTAN,TURKS AND CAICOS ISLANDS,TUVALU,UKRAINE,UNITED ARAB EMIRATES,UNITED KINGDOM,UNITED STATES MINOR OUTLYING ISLANDS,URUGUAY,UZBEKISTAN,VANUATU,VATICAN CITY STATE,VENEZUELA,VIRGIN ISLANDS BRITISH,VIRGIN ISLANDS U.S.,WALLIS AND FUTUNA,WESTERN SAHARA,YEMEN,ZAMBIA,ZIMBABWE	,BEN,HTI,ZAF,UGA,USA,VNM,AFG,ALA,ALB,DZA,ASM,AND,AGO,AIA,ATA,ATG,ARG,ARM,ABW,AUS,AUT,AZE,BHS,BHR,BGD,BRB,BLR,BEL,BLZ,BMU,BTN,BOL,BIH,BWA,BVT,BRA,IOT,BRN,BGR,BFA,BDI,KHM,CMR,CAN,CPV,CYM,CAF,TCD,CHL,CHN,CXR,CCK,COL,COM,COG,COK,CRI,CIV,HRV,CUB,CYP,CZE,COD,DNK,DJI,DMA,DOM,ECU,EGY,SLV,GNQ,ERI,EST,ETH,FLK,FRO,FJI,FIN,FRA,GUF,PYF,ATF,GAB,GMB,GEO,DEU,GHA,GIB,GRC,GRL,GRD,GLP,GUM,GTM,GGY,GIN,GNB,GUY,HMD,HND,HKG,HUN,ISL,IND,IDN,IRN,IRQ,IRL,IMN,ISR,ITA,JAM,JPN,JEY,JOR,KAZ,KEN,KIR,KWT,KGZ,LAO,LVA,LBN,LSO,LBR,LBY,LIE,LTU,LUX,MAC,MDG,MWI,MYS,MDV,MLI,MLT,MHL,MTQ,MRT,MUS,MYT,MEX,FSM,MDA,MCO,MNG,MNE,MSR,MAR,MOZ,MMR,NAM,NRU,NPL,NLD,ANT,NCL,NZL,NIC,NER,NGA,NIU,NFK,PRK,MNP,NOR,OMN,PAK,PLW,PSE,PAN,PNG,PRY,PER,PHL,PCN,POL,PRT,PRI,QAT,MKD,REU,ROU,RUS,RWA,BLM,SHN,KNA,LCA,MAF,SPM,VCT,WSM,SMR,STP,SAU,SEN,SRB,SYC,SLE,SGP,SVK,SVN,SLB,SOM,SGS,KOR,ESP,LKA,SDN,SUR,SJM,SWZ,SWE,CHE,SYR,TWN,TJK,TZA,THA,TLS,TGO,TKL,TON,TTO,TUN,TUR,TKM,TCA,TUV,UKR,ARE,GBR,UMI,URY,UZB,VUT,VAT,VEN,VGB,VIR,WLF,ESH,YEM,ZMB,ZWE	31
+458	5	Ethnicity	Hispanic or Latino,Not Hispanic or Latino,Not Reported	HISPANIC OR LATINO,NOT HISPANIC OR LATINO,NOT REPORTED	31
+459	3	race	American Indian or Alaska Native,Black or African American,White,Asian,Native Hawaiian or Other…,Other	AMERICAN INDIAN OR ALASKA NATIVE,BLACK OR AFRICAN AMERICAN,WHITE,ASIAN,NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER,OTHER	31
+460	3	racenr	Not reported	NOT REPORTED	31
+461	5	homeless	Yes,No,Unknown	Y,N,U	31
+462	5	idu	Yes,No,Unknown	Y,N,U	31
+463	5	nidu	Yes,No,Unknown	Y,N,U	31
+464	5	corrfa	Yes,No,Unknown	Y,N,U	31
+465	5	alcohol	Yes,No,Unknown	Y,N,U	31
+466	5	mental	Yes,No,Unknown	Y,N,U	31
+467	5	past	Yes,No,Unknown	Y,N,U	31
+468	5	tabacco	Never,Current,Former	NEVER,CURRENT,FORMER	31
+469	3	duration	Duration Unknown	U	31
+470	5	Unit	Days,Weeks,Months,Years	DAYS,WEEKS,MONTHS,YEARS	31
+471	5	Number	Less than 10 cigarettes,10-20 cigarettes,More than 20 cigarettes,Don't know	LESS THAN 10 CIGARETTES,10-20 CIGARETTES,MORE THAN 20 CIGARETTES,DON'T KNOW	31
+472	3	smoking	Duration Unknown	U	31
+473	5	lblscorresn	60,70,80,90,100	60,70,80,90,100	31
+474	5	treated	Yes,No,Unknown	Y,N,U	31
+475	3	Estimd	Estimated	ESTIMATED	31
+476	5	prescribed	Yes,No,Unknown	Y,N,U	31
+477	5	extrapulmonary	Yes,No,Unknown	Y,N,U	31
+478	3	organ	Blood and Lymphatic System Disorders,Cardiac Disorders,Endocrine Disorders,Gastrointestinal Disorders,Hepatobiliary Disorders,Musculoskeletal and Connective Tissue Disorders,Nervous System Disorders,Renal and Urinary Disorders,Reproductive System and Breast Disorders,Respiratory Thoracic and Mediastinal Disorders,Skin and Subcutaneous Tissue Disorders	BLOOD AND LYMPHATIC SYSTEM DISORDERS,CARDIAC DISORDERS,ENDOCRINE DISORDERS,GASTROINTESTINAL DISORDERS,HEPATOBILIARY DISORDERS,MUSCULOSKELETAL AND CONNECTIVE TISSUE DISORDERS,NERVOUS SYSTEM DISORDERS,RENAL AND URINARY DISORDERS,REPRODUCTIVE SYSTEM AND BREAST DISORDERS,RESPIRATORY THORACIC AND MEDIASTINAL DISORDERS,SKIN AND SUBCUTANEOUS TISSUE DISORDERS	31
+479	5	liver disease	Yes,No,Unknown	Y,N,U	31
+480	5	hepatitisa	Yes,No,Unknown	Y,N,U	31
+481	5	hepatitisb	Yes,No,Unknown	Y,N,U	31
+482	5	hepatitisT	Yes,No,Unknown	Y,N,U	31
+483	5	hepatitisD	Yes,No,Unknown	Y,N,U	31
+484	5	other	Yes,No,Unknown	Y,N,U	31
+485	5	diabetes	Yes,No,Unknown	Y,N,U	31
+486	5	type	Type I,Type II,Unknown	DIABI,DIABII,DIABUNK	31
+487	5	diagyrest	Estimated,Unknown	ESTIMATED,UNKNOWN	31
+488	5	radioa	Yes,No (self-reported),Unknown	Y,N,U	31
+489	5	radio	Yes,No,Unknown	Y,N,U	31
+490	5	peripheral	Yes,No,Unknown	Y,N,U	31
+491	5	cancer	Yes,No,Unknown	Y,N,U	31
+492	5	cardiac	Yes,No,Unknown	Y,N,U	31
+493	5	hivna	Yes - participant is HIV-positiv, Not applicable - participant is HIV-negative	Y,NA	31
+494	5	mhest	Estimated,Unknown	ESTIMATED,UNKNOWN	31
+495	5	CD4	Yes,No,Unknown	Y,N,U	31
+496	5	antiretroviral	Yes,No,Unknown	Y,N,U	31
+497	3	martest	Estimated	ESTIMATED	31
+498	5	startdate	Yes,No,Unknown	Y,N,U	31
+499	5	nocondwho	No WHO Clinical Stage 4 Condition, Yes - WHO Clinical Stage 4 Condition reported	N,Y	31
+500	6	whoterm	[select],American Trypanososmiasis Reactivation (Meningoencephalitis Or Myocarditis),Atypical Disseminated Leishmaniasis,Candidiasis Of Bronchi Trachea Or Lungs,Candidiasis Esophageal,Cardiomyopathy Symptomatic HIV-Associated,Cervical Cancer Invasive,Cryptococcosis Extrapulmonary. Including Meningitis,Cryptosporidiosis Chronic Intestinal With Diarrhea (>1 Months Duration),Cytomegalovirus Infection (Retinitis Or Infection Of Other Organs),Cytomegalovirus Retinitis (With Loss Of Vision),Encephalopathy HIV-Related,Herpes Simplex Infection Chronic (Orolabial Genital Or Anorectal Site For > 1 Month Or Visceral Herpes At Any Site,HIV Wasting Syndrome,Isosporiasis Chronic Intestinal (>1 Months Duration),Kaposi’S Sarcoma,Lymphoma Primary Of Brain,Lymphoma (Cerebral Or B-Cell Non-Hodgkin Including Burkitt’S And Immunoblastic),Mycobacterium Avium Complex Or M. Kansasii Disseminated Or Extrapulmonary,Mycobacterium Other Species Or Unidentified Species Disseminated Or Extrapulmonary,Mycobacterium Tuberculosis Extrapulmonary,Mycosis Disseminated ,Nephropathy Symptomatic HIV-Associated,Pneumocystis Pneumonia,Pneumonia Bacterial Recurrent Severe,Progressive Multifocal Leukoencephalopathy,Salmonella Bacteremia Recurrent Nontyphoidal,Toxoplasmosis Of Brain Or CNS	,AMERICAN TRYPANOSOSMIASIS REACTIVATION (MENINGOENCEPHALITIS OR MYOCARDITIS),ATYPICAL DISSEMINATED LEISHMANIASIS,CANDIDIASIS OF BRONCHI TRACHEA OR LUNGS,CANDIDIASIS ESOPHAGEAL,CARDIOMYOPATHY SYMPTOMATIC HIV-ASSOCIATED,CERVICAL CANCER INVASIVE,CRYPTOCOCCOSIS EXTRAPULMONARY. INCLUDING MENINGITIS,CRYPTOSPORIDIOSIS CHRONIC INTESTINAL WITH DIARRHEA (>1 MONTHS DURATION),CYTOMEGALOVIRUS INFECTION (RETINITIS OR INFECTION OF OTHER ORGANS),CYTOMEGALOVIRUS RETINITIS (WITH LOSS OF VISION),ENCEPHALOPATHY HIV-RELATED,HERPES SIMPLEX INFECTION CHRONIC (OROLABIAL GENITAL OR ANORECTAL SITE FOR > 1 MONTH OR VISCERAL HERPES AT ANY SITE,HIV WASTING SYNDROME,ISOSPORIASIS CHRONIC INTESTINAL (>1 MONTHS DURATION),KAPOSI’S SARCOMA,LYMPHOMA PRIMARY OF BRAIN,LYMPHOMA (CEREBRAL OR B-CELL NON-HODGKIN INCLUDING BURKITT’S AND IMMUNOBLASTIC),MYCOBACTERIUM AVIUM COMPLEX OR M. KANSASII DISSEMINATED OR EXTRAPULMONARY,MYCOBACTERIUM OTHER SPECIES OR UNIDENTIFIED SPECIES DISSEMINATED OR EXTRAPULMONARY,MYCOBACTERIUM TUBERCULOSIS EXTRAPULMONARY,MYCOSIS DISSEMINATED ,NEPHROPATHY SYMPTOMATIC HIV-ASSOCIATED,PNEUMOCYSTIS PNEUMONIA,PNEUMONIA BACTERIAL RECURRENT SEVERE,PROGRESSIVE MULTIFOCAL LEUKOENCEPHALOPATHY,SALMONELLA BACTEREMIA RECURRENT NONTYPHOIDAL,TOXOPLASMOSIS OF BRAIN OR CNS	31
+501	6	monthwho	[select],JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC	,JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC	31
+502	5	additionala	Yes,No	Y,N	31
+503	5	additionalb	Yes,No,Unknown	Y,N,U	31
+504	5	SexNE	Male,Female,Unknown	M,F,U	31
+505	3	brthcondlblNE	Estimated, Not Reported	ESTIMATE,NOT REPORTED	31
+506	6	PlaceNE	[Select Place of Birth],ARUBA,AFGHANISTAN,ANGOLA,ANGUILLA,ALAND ISLANDS,ALBANIA,ANDORRA,NETHERLANDS ANTILLES,UNITED ARAB EMIRATES,ARGENTINA,ARMENIA,AMERICAN SAMOA,ANTARCTICA,FRENCH SOUTHERN TERRITORIES,ANTIGUA AND BARBUDA,AUSTRALIA,AUSTRIA,AZERBAIJAN,BURUNDI,BELGIUM,BENIN REPUBLIC,BURKINA FASO,BANGLADESH,BULGARIA,BAHRAIN,BAHAMAS,BOSNIA-HERZEGOVINA,SAINT BARTHELEMY,BELARUS,BELIZE,BERMUDA,BOLIVIA,BRAZIL,BARBADOS,BRUNEI,BHUTAN,BOUVET ISLAND,BOTSWANA,CENTRAL AFRICAN REPUBLIC,CANADA,COCOS (KEELING) ISLANDS,SWITZERLAND,CHILE,CHINA,COTE D'IVOIRE,CAMEROON,DEMOCRATIC REPUBLIC OF THE CONGO,CONGO,COOK ISLANDS,COLOMBIA,COMOROS,CAPE VERDE,COSTA RICA,CUBA,CHRISTMAS ISLAND,CAYMAN ISLANDS,CYPRUS,CZECH REPUBLIC,GERMANY,DJIBOUTI,DOMINICA,DENMARK,DOMINICAN REPUBLIC,ALGERIA,ECUADOR,EGYPT,ERITREA,WESTERN SAHARA,SPAIN,ESTONIA,ETHIOPIA,FINLAND,FIJI,FALKLAND ISLANDS,FRANCE,FAROE ISLANDS,MICRONESIA FEDERATED STATES OF,GABON,UNITED KINGDOM,GEORGIA,GUERNSEY,GHANA,GIBRALTAR,GUINEA,GUADELOUPE,GAMBIA,GUINEA-BISSAU,EQUATORIAL GUINEA,GREECE,GRENADA,GREENLAND,GUATEMALA,FRENCH GUIANA,GUAM,GUYANA,HONG KONG,HEARD ISLAND AND MCDONALD ISLANDS,HONDURAS,CROATIA,HAITI,HUNGARY,INDONESIA,INDIA,ISLE OF MAN,BRITISH INDIAN OCEAN TERRITORY,IRELAND,IRAN,IRAQ,ICELAND,ISRAEL,ITALY,JAMAICA,JORDAN,JAPAN,JERSEY,KAZAKHSTAN,KENYA,KYRGYZSTAN,CAMBODIA,KIRIBATI,SAINT KITTS AND NEVIS,SOUTH KOREA,KUWAIT,LAO PEOPLES DEMOCRATIC REPUBLIC,LEBANON,LIBERIA,LIBYAN ARAB JAMAHIRIYA,SAINT LUCIA,LIECHTENSTEIN,SRI LANKA,LESOTHO,LITHUANIA,LUXEMBOURG,LATVIA,MACAO,SAINT MARTIN FRENCH,MOROCCO,MONACO,MOLDOVA REPUBLIC OF,MADAGASCAR,MALDIVES,MEXICO,MARSHALL ISLANDS,REPUBLIC OF MACEDONIA,MALI,MALTA,MYANMAR,MONTENEGRO,MONGOLIA,NORTHERN MARIANA ISLANDS,MOZAMBIQUE,MAURITANIA,MONTSERRAT,MARTINIQUE,MAURITIUS,MALAWI,MALAYSIA,MAYOTTE,NAMIBIA,NEW CALEDONIA,NIGER,NORFOLK ISLAND,NIGERIA,NICARAGUA,NIUE,NETHERLANDS,NORWAY,NEPAL,NAURU,NEW ZEALAND,OMAN,PAKISTAN,PANAMA,PITCAIRN,PERU,PHILIPPINES,PALAU,PAPUA NEW GUINEA,POLAND,PUERTO RICO,NORTH KOREA,PORTUGAL,PARAGUAY,PALESTINIAN TERRITORY OCCUPIED,FRENCH POLYNESIA,QATAR,REUNION,ROMANIA,RUSSIAN FEDERATION,RWANDA,SAUDI ARABIA,SERBIA,SUDAN,SENEGAL,SINGAPORE,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS,SAINT HELENA,SVALBARD AND JAN MAYEN,SOLOMON ISLANDS,SIERRA LEONE,EL SALVADOR,SAN MARINO,SOMALIA,SAINT PIERRE AND MIQUELON,SAO TOME AND PRINCIPE,SURINAME,SLOVAKIA,SLOVENIA,SWEDEN,SWAZILAND,SEYCHELLES,SYRIAN ARAB REPUBLIC,TURKS AND CAICOS ISLANDS,CHAD,TOGO,THAILAND,TAJIKISTAN,TOKELAU,TURKMENISTAN,TIMOR-LESTE,TONGA,TRINIDAD AND TOBAGO,TUNISIA,TURKEY,TUVALU,TAIWAN,TANZANIA UNITED REPUBLIC OF,UGANDA,UKRAINE,UNITED STATES MINOR OUTLYING ISLANDS,URUGUAY,UNITED STATES,UZBEKISTAN,VATICAN CITY STATE,SAINT VINCENT AND THE GRENADINES,VENEZUELA,VIRGIN ISLANDS BRITISH,VIRGIN ISLANDS U.S.,VIETNAM,VANUATU,WALLIS AND FUTUNA,SAMOA,YEMEN,SOUTH AFRICA,ZAMBIA,ZIMBABWE	,ABW,AFG,AGO,AIA,ALA,ALB,AND,ANT,ARE,ARG,ARM,ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,CCK,CHE,CHL,CHN,CIV,CMR,COD,COG,COK,COL,COM,CPV,CRI,CUB,CXR,CYM,CYP,CZE,DEU,DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,HTI,HUN,IDN,IND,IMN,IOT,IRL,IRN,IRQ,ISL,ISR,ITA,JAM,JOR,JPN,JEY,KAZ,KEN,KGZ,KHM,KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,RWA,SAU,SRB,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,SMR,SOM,SPM,STP,SUR,SVK,SVN,SWE,SWZ,SYC,SYR,TCA,TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE	31
+507	3	brthctryndNE	Unknown, Not Reported	Unknown,NOT REPORTED	31
+508	5	EthnicityNE	Hispanic or Latino,Not Hispanic or Latino,Not Reported	HISPANIC OR LATINO,NOT HISPANIC OR LATINO,NOT REPORTED	31
+509	3	raceNE	American Indian or Alaska Native,Black or African American,White,Asian,Native Hawaiian or other Pacific Islander,Other	AMERICAN INDIAN OR ALASKA NATIVE,BLACK OR AFRICAN AMERICAN,WHITE,ASIAN,NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER,OTHER	31
+510	3	nrlablNE	Not Reported	NOT REPORTED	31
+511	5	reason	Patient does not meet eligibility criteria (Skip to Section C),Patient declines to participate (Make notes in the "NOTES" box below then continue to Section D),Site decides not to enroll patient (Skip to Section E)	PATIENT DOES NOT MEET ELIGIBILITY CRITERIA,PATIENT DECLINES TO PARTICIPATE,SITE DECIDES NOT TO ENROLL PATIENT	31
+512	3	reasona	No evidence of pulmonary tuberculosis with or without suspected or proven concomitant extrapulmonary tuberculosis outside the central nervous system or bones,No acid-fast bacilli (AFB) seen in an expectorated sputum specimen at least 1+ (WHO/IUATLD criteria) AND no positive GeneXpert (or GeneXpert Ultra) for M. tuberculosis  , Age <12 years,No documentation of negative HIV status within the past 3 months prior to enrollment nor documentation confirming HIV infection,No written informed consent/assent,Karnofsky score < 60,No verifiable address or residence location that is readily accessible for visiting\\, and/or no willingness to inform the study team of any change of address during the treatment and follow-up period,Person of childbearing potential who does not agree to practice a reliable method of contraception (barrier method or non-hormonal intrauterine device) or abstain from sexual activity that could lead to pregnancy while receiving study drug treatment and for 30 days after stopping study treatment,Pregnant or breast-feeding,More than 5 days of tuberculosis treatment in the previous 6 months, Unable to take oral medications, Hypersensitivity or previous intolerance to any of the study drugs , Current or planned use of medications that have unacceptable drug-drug interactions with any of the study drugs during study treatment , Suspected or proven central nervous system tuberculosis, Suspected or proven bone tuberculosis, Screening ECG with QTcF >450 for men or >470 for women, Clinically significant ECG abnormality in the opinion of the site investigator\\, including but not limited to second or third degree atrioventricular (AV) block\\, prolongation of the QRS complex over 120 ms (in both male and female participants)\\, or clinically important arrhythmia, Current clinically relevant cardiovascular disorder in the opinion of the site investigator\\, including but not limited to heart failure\\, coronary heart disease\\, arrhythmia\\, or Tachyarrhythmia, Known family history of Long QT Syndrome in a first-degree relative (i.e.\\, parent\\, offspring\\, or sibling) , History of aortic aneurysm or dissection, Hepatic cirrhosis or other serious liver disease , Other medical conditions\\, that\\, in the investigator’s judgment\\, make study participation not in the individual’s best interest	NOPULMTB,NOAFB,UNDERAGE,HIVDOC,NOCONSENT,LOWKPS,NOADDRESS,CONTRACEPTION,PREG,PREVTREAT,ORALMED,HYPER,INTERACT,CNSTB,BONETB,QTCF,ABNECG,CARDIODIS,HISQT,AORTIC,LIVERDIS,OTHERCOND	31
+513	3	reasonhiv	No current use of dolutegravir-based ART\\, or inability or non-willingness to start or transition to a dolutegravir-based antiretroviral therapy regimen, CD4 T cell count <100 cells/mm3 based on testing performed at or within 30 days prior to study enrollment	DOLUTEGRAVIR,LOWCD4	31
+514	3	reasoncat	Serum or plasma alanine aminotransferase >3 times the upper limit of normal, Serum or plasma total bilirubin >2.5 times the upper limit of normal , Serum creatinine >2 times the upper limit of normal, Platelet count <75\\,000 cells/mm3, Absolute neutrophil count <1\\,000 cells/mm3, Serum or plasma potassium <3.5 meq/L, Weight <40.0 kg , Known or suspected resistance to isoniazid or rifamycins (by phenotypic or molecular test), Previous treatment with any drug or combination of drugs known to have activity against M. tuberculosis (e.g. isoniazid\\, rifamycins\\, pyrazinamide\\, ethambutol\\, fluoroquinolones\\, etc.) for more than five days in the thirty days prior to enrollment , Previously enrolled in this study or currently enrolled in another therapeutic clinical trial that\\, in the investigator’s judgment\\, would compromise study integrity or participant safety, Current or planned incarceration or other involuntary detention	AMINOTRANS,BILIRUBIN,CREATININE,PLATELET,NEUTROPHIL,POTASSIUM,UNDERWEIGHT,RESISTANCE,PREVTREAT,PREVENROL,INCARCERATION	31
+515	3	components	a. Distrust or fear of research,b. Undergoing randomization	DISTMED,RAND	31
+516	3	componentstu	a. Effectiveness of study medication(s), b. Side effects of study medication, c. Interaction of study medication with other prescribed medications (including contraceptives) or effect on other medical problems , d. Desire to take approved medications / alternate regimen , e. Duration of treatment / Frequency of dosing / Number of pills per dose , f. Recommendation to avoid alcohol or recreational drugs while on study medication , g. Undergoing additional diagnostic tests for study purposes (including blood draw(s) and HIV test)..., h. The number and/or location of study visits is not convenient , i. The number and/or location of DOT visits is not convenient In: Clinic DOT, j. The number and/or location of DOT visits is not convenient In: Outreach DOT	EFF,MEDSIDE,MEDINT,ALTTRX,DUR,DISPALC,BLOOD,NUMVIS,DOTCLN,DOTOUT	31
+517	3	componentsdif	a. Study will interfere with work\\, school\\, family\\, or other life commitments  , b. Too busy or stressed to participate in a study , c. Study participation will result in a loss of income , d. Inconvenience / costs associated with transportation\\, travel\\, or parking , e. Plans to move or travel (for work or pleasure) , f. Study will negatively impact immigration status	INTFLIFE,BUSY,INCO,TRANS,MOVTRAV,IMG	31
+518	3	componentstopi	a. Family member\\, spouse/partner\\, friend discourages study enrollment , b. Boss / teacher not likely to support missed work / school due to study commitments , c. Personal physician has concerns related to patient’s participation in study , d. Stigmatization related to TB diagnosis or taking TB medication	FAMILY,CONRESP,MDCON,STIGMA	31
+519	3	componentsmis	a. Length and/or complexity of informed consent form, b. Patient cited other health problems / feels too ill to participate in a study , c. Patient expressed a TB-specific misperception or belief that contributed to the decision to decline study enrollment	CONSENT,TOOILL,BELIEF	31
+520	3	nesunklbl	Reason Unknown	CCUNK	31
+521	3	decidescomp	1. Patient's work\\, school\\, family or life commitments may hinder study participation , 2. Psychiatric\\, cognitive (e.g.\\, reasoning\\, thought processes)\\, or behavioral (e.g.\\, substance abuse\\, belligerence) factors are likely to affect ability to provide consent and/or adherence to the study protocol , 3. Patient’s immigration status may affect adherence to the study protocol, 4. Inconclusive diagnostic test results and/orclinical presentation of TB, 5. Communications/Language barriers:  Staff do not speak patient's language/Patient is unable to understand available interpreter., 6. Communications/Language barriers: Written materials/informed consent form not available in patient's language., 7. Communications/Language barriers: Although the language employed during the informed consent process is understod\\, the patient does not understand study.	LIFCOM,PSYCOG,SIT,INCLAB,LANGBAR,MATLANG,UNDSTDY	31
+522	1	text	text	text	32
+523	5	YN	Yes - Participant has been enrolled in the study,No - Participant has NOT been enrolled in the study	Y,N	32
+524	6	Siteid	9,25,26,30,45,52,63,64A,67,74,75,76,77	9,25,26,30,45,52,63,64A,67,74,75,76,77	32
+525	3	Estimated	Estimated	ESTIMATE	32
+526	3	NA	NA (E.g.\\, participant > 18)	NA	32
+527	5	cm, in	cm, in	cm,in	32
+528	5	kg,lbs	kg,lbs	kg,lbs	32
+529	5	Yes,No	Yes,No	Y,N	32
+530	2	textarea	text	text	32
+531	5	arm	Regimen 1 (BMZRb), Regimen 2 (BMZD), Regimen 3 (HRZE)	BMZRb, BMZD, HRZE	32
+532	5	Sex	Male,Female	M,F	32
+533	6	Place	[select place of birth],BENIN REPUBLIC,HAITI,SOUTH AFRICA,UGANDA,UNITED STATES,VIETNAM,AFGHANISTAN,ALAND ISLANDS,ALBANIA,ALGERIA,AMERICAN SAMOA,ANDORRA,ANGOLA,ANGUILLA,ANTARCTICA,ANTIGUA AND BARBUDA,ARGENTINA,ARMENIA,ARUBA,AUSTRALIA,AUSTRIA,AZERBAIJAN,BAHAMAS,BAHRAIN,BANGLADESH,BARBADOS,BELARUS,BELGIUM,BELIZE,BERMUDA,BHUTAN,BOLIVIA,BOSNIA-HERZEGOVINA,BOTSWANA,BOUVET ISLAND,BRAZIL,BRITISH INDIAN OCEAN TERRITORY,BRUNEI,BULGARIA,BURKINA FASO,BURUNDI,CAMBODIA,CAMEROON,CANADA,CAPE VERDE,CAYMAN ISLANDS,CENTRAL AFRICAN REPUBLIC,CHAD,CHILE,CHINA,CHRISTMAS ISLAND,COCOS (KEELING) ISLANDS,COLOMBIA,COMOROS,CONGO,COOK ISLANDS,COSTA RICA,COTE D'IVOIRE,CROATIA,CUBA,CYPRUS,CZECH REPUBLIC,DEMOCRATIC REPUBLIC OF THE CONGO,DENMARK,DJIBOUTI,DOMINICA,DOMINICAN REPUBLIC,ECUADOR,EGYPT,EL SALVADOR,EQUATORIAL GUINEA,ERITREA,ESTONIA,ETHIOPIA,FALKLAND ISLANDS,FAROE ISLANDS,FIJI,FINLAND,FRANCE,FRENCH GUIANA,FRENCH POLYNESIA,FRENCH SOUTHERN TERRITORIES,GABON,GAMBIA,GEORGIA,GERMANY,GHANA,GIBRALTAR,GREECE,GREENLAND,GRENADA,GUADELOUPE,GUAM,GUATEMALA,GUERNSEY,GUINEA,GUINEA-BISSAU,GUYANA,HEARD ISLAND AND MCDONALD ISLANDS,HONDURAS,HONG KONG,HUNGARY,ICELAND,INDIA,INDONESIA,IRAN,IRAQ,IRELAND,ISLE OF MAN,ISRAEL,ITALY,JAMAICA,JAPAN,JERSEY,JORDAN,KAZAKHSTAN,KENYA,KIRIBATI,KUWAIT,KYRGYZSTAN,LAO PEOPLE'S DEMOCRATIC REPUBLIC,LATVIA,LEBANON,LESOTHO,LIBERIA,LIBYAN ARAB JAMAHIRIYA,LIECHTENSTEIN,LITHUANIA,LUXEMBOURG,MACAO,MADAGASCAR,MALAWI,MALAYSIA,MALDIVES,MALI,MALTA,MARSHALL ISLANDS,MARTINIQUE,MAURITANIA,MAURITIUS,MAYOTTE,MEXICO,MICRONESIA FEDERATED STATES OF,MOLDOVA REPUBLIC OF,MONACO,MONGOLIA,MONTENEGRO,MONTSERRAT,MOROCCO,MOZAMBIQUE,MYANMAR,NAMIBIA,NAURU,NEPAL,NETHERLANDS,NETHERLANDS ANTILLES,NEW CALEDONIA,NEW ZEALAND,NICARAGUA,NIGER,NIGERIA,NIUE,NORFOLK ISLAND,NORTH KOREA,NORTHERN MARIANA ISLANDS,NORWAY,OMAN,PAKISTAN,PALAU,PALESTINIAN TERRITORY OCCUPIED,PANAMA,PAPUA NEW GUINEA,PARAGUAY,PERU,PHILIPPINES,PITCAIRN,POLAND,PORTUGAL,PUERTO RICO,QATAR,REPUBLIC OF MACEDONIA,REUNION,ROMANIA,RUSSIAN FEDERATION,RWANDA,SAINT BARTHELEMY,SAINT HELENA,SAINT KITTS AND NEVIS,SAINT LUCIA,SAINT MARTIN FRENCH,SAINT PIERRE AND MIQUELON,SAINT VINCENT AND THE GRENADINES,SAMOA,SAN MARINO,SAO TOME AND PRINCIPE,SAUDI ARABIA,SENEGAL,SERBIA,SEYCHELLES,SIERRA LEONE,SINGAPORE,SLOVAKIA,SLOVENIA,SOLOMON ISLANDS,SOMALIA,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS,SOUTH KOREA,SPAIN,SRI LANKA,SUDAN,SURINAME,SVALBARD AND JAN MAYEN,SWAZILAND,SWEDEN,SWITZERLAND,SYRIAN ARAB REPUBLIC,TAIWAN,TAJIKISTAN,TANZANIA UNITED REPUBLIC OF,THAILAND,TIMOR-LESTE,TOGO,TOKELAU,TONGA,TRINIDAD AND TOBAGO,TUNISIA,TURKEY,TURKMENISTAN,TURKS AND CAICOS ISLANDS,TUVALU,UKRAINE,UNITED ARAB EMIRATES,UNITED KINGDOM,UNITED STATES MINOR OUTLYING ISLANDS,URUGUAY,UZBEKISTAN,VANUATU,VATICAN CITY STATE,VENEZUELA,VIRGIN ISLANDS BRITISH,VIRGIN ISLANDS U.S.,WALLIS AND FUTUNA,WESTERN SAHARA,YEMEN,ZAMBIA,ZIMBABWE	,BEN,HTI,ZAF,UGA,USA,VNM,AFG,ALA,ALB,DZA,ASM,AND,AGO,AIA,ATA,ATG,ARG,ARM,ABW,AUS,AUT,AZE,BHS,BHR,BGD,BRB,BLR,BEL,BLZ,BMU,BTN,BOL,BIH,BWA,BVT,BRA,IOT,BRN,BGR,BFA,BDI,KHM,CMR,CAN,CPV,CYM,CAF,TCD,CHL,CHN,CXR,CCK,COL,COM,COG,COK,CRI,CIV,HRV,CUB,CYP,CZE,COD,DNK,DJI,DMA,DOM,ECU,EGY,SLV,GNQ,ERI,EST,ETH,FLK,FRO,FJI,FIN,FRA,GUF,PYF,ATF,GAB,GMB,GEO,DEU,GHA,GIB,GRC,GRL,GRD,GLP,GUM,GTM,GGY,GIN,GNB,GUY,HMD,HND,HKG,HUN,ISL,IND,IDN,IRN,IRQ,IRL,IMN,ISR,ITA,JAM,JPN,JEY,JOR,KAZ,KEN,KIR,KWT,KGZ,LAO,LVA,LBN,LSO,LBR,LBY,LIE,LTU,LUX,MAC,MDG,MWI,MYS,MDV,MLI,MLT,MHL,MTQ,MRT,MUS,MYT,MEX,FSM,MDA,MCO,MNG,MNE,MSR,MAR,MOZ,MMR,NAM,NRU,NPL,NLD,ANT,NCL,NZL,NIC,NER,NGA,NIU,NFK,PRK,MNP,NOR,OMN,PAK,PLW,PSE,PAN,PNG,PRY,PER,PHL,PCN,POL,PRT,PRI,QAT,MKD,REU,ROU,RUS,RWA,BLM,SHN,KNA,LCA,MAF,SPM,VCT,WSM,SMR,STP,SAU,SEN,SRB,SYC,SLE,SGP,SVK,SVN,SLB,SOM,SGS,KOR,ESP,LKA,SDN,SUR,SJM,SWZ,SWE,CHE,SYR,TWN,TJK,TZA,THA,TLS,TGO,TKL,TON,TTO,TUN,TUR,TKM,TCA,TUV,UKR,ARE,GBR,UMI,URY,UZB,VUT,VAT,VEN,VGB,VIR,WLF,ESH,YEM,ZMB,ZWE	32
+534	5	Ethnicity	Hispanic or Latino,Not Hispanic or Latino,Not Reported	HISPANIC OR LATINO,NOT HISPANIC OR LATINO,NOT REPORTED	32
+535	3	race	American Indian or Alaska Native,Black or African American,White,Asian,Native Hawaiian or Other…,Other	AMERICAN INDIAN OR ALASKA NATIVE,BLACK OR AFRICAN AMERICAN,WHITE,ASIAN,NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER,OTHER	32
+536	3	racenr	Not reported	NOT REPORTED	32
+537	5	homeless	Yes,No,Unknown	Y,N,U	32
+538	5	idu	Yes,No,Unknown	Y,N,U	32
+539	5	nidu	Yes,No,Unknown	Y,N,U	32
+540	5	corrfa	Yes,No,Unknown	Y,N,U	32
+541	5	alcohol	Yes,No,Unknown	Y,N,U	32
+542	5	mental	Yes,No,Unknown	Y,N,U	32
+543	5	past	Yes,No,Unknown	Y,N,U	32
+544	5	tabacco	Never,Current,Former	NEVER,CURRENT,FORMER	32
+545	3	duration	Duration Unknown	U	32
+546	5	Unit	Days,Weeks,Months,Years	DAYS,WEEKS,MONTHS,YEARS	32
+547	5	Number	Less than 10 cigarettes,10-20 cigarettes,More than 20 cigarettes,Don't know	LESS THAN 10 CIGARETTES,10-20 CIGARETTES,MORE THAN 20 CIGARETTES,DON'T KNOW	32
+548	3	smoking	Duration Unknown	U	32
+549	5	lblscorresn	60,70,80,90,100	60,70,80,90,100	32
+550	5	treated	Yes,No,Unknown	Y,N,U	32
+551	3	Estimd	Estimated	ESTIMATED	32
+552	5	prescribed	Yes,No,Unknown	Y,N,U	32
+553	5	extrapulmonary	Yes,No,Unknown	Y,N,U	32
+554	3	organ	Blood and Lymphatic System Disorders,Cardiac Disorders,Endocrine Disorders,Gastrointestinal Disorders,Hepatobiliary Disorders,Musculoskeletal and Connective Tissue Disorders,Nervous System Disorders,Renal and Urinary Disorders,Reproductive System and Breast Disorders,Respiratory Thoracic and Mediastinal Disorders,Skin and Subcutaneous Tissue Disorders	BLOOD AND LYMPHATIC SYSTEM DISORDERS,CARDIAC DISORDERS,ENDOCRINE DISORDERS,GASTROINTESTINAL DISORDERS,HEPATOBILIARY DISORDERS,MUSCULOSKELETAL AND CONNECTIVE TISSUE DISORDERS,NERVOUS SYSTEM DISORDERS,RENAL AND URINARY DISORDERS,REPRODUCTIVE SYSTEM AND BREAST DISORDERS,RESPIRATORY THORACIC AND MEDIASTINAL DISORDERS,SKIN AND SUBCUTANEOUS TISSUE DISORDERS	32
+555	5	liver disease	Yes,No,Unknown	Y,N,U	32
+556	5	hepatitisa	Yes,No,Unknown	Y,N,U	32
+557	5	hepatitisb	Yes,No,Unknown	Y,N,U	32
+558	5	hepatitisT	Yes,No,Unknown	Y,N,U	32
+559	5	hepatitisD	Yes,No,Unknown	Y,N,U	32
+560	5	other	Yes,No,Unknown	Y,N,U	32
+561	5	diabetes	Yes,No,Unknown	Y,N,U	32
+562	5	type	Type I,Type II,Unknown	DIABI,DIABII,DIABUNK	32
+563	5	diagyrest	Estimated,Unknown	ESTIMATED,UNKNOWN	32
+564	5	radioa	Yes,No (self-reported),Unknown	Y,N,U	32
+565	5	radio	Yes,No,Unknown	Y,N,U	32
+566	5	peripheral	Yes,No,Unknown	Y,N,U	32
+567	5	cancer	Yes,No,Unknown	Y,N,U	32
+568	5	cardiac	Yes,No,Unknown	Y,N,U	32
+569	5	hivna	Yes - participant is HIV-positiv, Not applicable - participant is HIV-negative	Y,NA	32
+570	5	mhest	Estimated,Unknown	ESTIMATED,UNKNOWN	32
+571	5	CD4	Yes,No,Unknown	Y,N,U	32
+572	5	antiretroviral	Yes,No,Unknown	Y,N,U	32
+573	3	martest	Estimated	ESTIMATED	32
+574	5	startdate	Yes,No,Unknown	Y,N,U	32
+575	5	nocondwho	No WHO Clinical Stage 4 Condition, Yes - WHO Clinical Stage 4 Condition reported	N,Y	32
+576	6	whoterm	[select],American Trypanososmiasis Reactivation (Meningoencephalitis Or Myocarditis),Atypical Disseminated Leishmaniasis,Candidiasis Of Bronchi Trachea Or Lungs,Candidiasis Esophageal,Cardiomyopathy Symptomatic HIV-Associated,Cervical Cancer Invasive,Cryptococcosis Extrapulmonary. Including Meningitis,Cryptosporidiosis Chronic Intestinal With Diarrhea (>1 Months Duration),Cytomegalovirus Infection (Retinitis Or Infection Of Other Organs),Cytomegalovirus Retinitis (With Loss Of Vision),Encephalopathy HIV-Related,Herpes Simplex Infection Chronic (Orolabial Genital Or Anorectal Site For > 1 Month Or Visceral Herpes At Any Site,HIV Wasting Syndrome,Isosporiasis Chronic Intestinal (>1 Months Duration),Kaposi’S Sarcoma,Lymphoma Primary Of Brain,Lymphoma (Cerebral Or B-Cell Non-Hodgkin Including Burkitt’S And Immunoblastic),Mycobacterium Avium Complex Or M. Kansasii Disseminated Or Extrapulmonary,Mycobacterium Other Species Or Unidentified Species Disseminated Or Extrapulmonary,Mycobacterium Tuberculosis Extrapulmonary,Mycosis Disseminated ,Nephropathy Symptomatic HIV-Associated,Pneumocystis Pneumonia,Pneumonia Bacterial Recurrent Severe,Progressive Multifocal Leukoencephalopathy,Salmonella Bacteremia Recurrent Nontyphoidal,Toxoplasmosis Of Brain Or CNS	,AMERICAN TRYPANOSOSMIASIS REACTIVATION (MENINGOENCEPHALITIS OR MYOCARDITIS),ATYPICAL DISSEMINATED LEISHMANIASIS,CANDIDIASIS OF BRONCHI TRACHEA OR LUNGS,CANDIDIASIS ESOPHAGEAL,CARDIOMYOPATHY SYMPTOMATIC HIV-ASSOCIATED,CERVICAL CANCER INVASIVE,CRYPTOCOCCOSIS EXTRAPULMONARY. INCLUDING MENINGITIS,CRYPTOSPORIDIOSIS CHRONIC INTESTINAL WITH DIARRHEA (>1 MONTHS DURATION),CYTOMEGALOVIRUS INFECTION (RETINITIS OR INFECTION OF OTHER ORGANS),CYTOMEGALOVIRUS RETINITIS (WITH LOSS OF VISION),ENCEPHALOPATHY HIV-RELATED,HERPES SIMPLEX INFECTION CHRONIC (OROLABIAL GENITAL OR ANORECTAL SITE FOR > 1 MONTH OR VISCERAL HERPES AT ANY SITE,HIV WASTING SYNDROME,ISOSPORIASIS CHRONIC INTESTINAL (>1 MONTHS DURATION),KAPOSI’S SARCOMA,LYMPHOMA PRIMARY OF BRAIN,LYMPHOMA (CEREBRAL OR B-CELL NON-HODGKIN INCLUDING BURKITT’S AND IMMUNOBLASTIC),MYCOBACTERIUM AVIUM COMPLEX OR M. KANSASII DISSEMINATED OR EXTRAPULMONARY,MYCOBACTERIUM OTHER SPECIES OR UNIDENTIFIED SPECIES DISSEMINATED OR EXTRAPULMONARY,MYCOBACTERIUM TUBERCULOSIS EXTRAPULMONARY,MYCOSIS DISSEMINATED ,NEPHROPATHY SYMPTOMATIC HIV-ASSOCIATED,PNEUMOCYSTIS PNEUMONIA,PNEUMONIA BACTERIAL RECURRENT SEVERE,PROGRESSIVE MULTIFOCAL LEUKOENCEPHALOPATHY,SALMONELLA BACTEREMIA RECURRENT NONTYPHOIDAL,TOXOPLASMOSIS OF BRAIN OR CNS	32
+577	6	monthwho	[select],JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC	,JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC	32
+578	5	additionala	Yes,No	Y,N	32
+579	5	additionalb	Yes,No,Unknown	Y,N,U	32
+580	5	SexNE	Male,Female,Unknown	M,F,U	32
+581	3	brthcondlblNE	Estimated, Not Reported	ESTIMATE,NOT REPORTED	32
+582	6	PlaceNE	[Select Place of Birth],ARUBA,AFGHANISTAN,ANGOLA,ANGUILLA,ALAND ISLANDS,ALBANIA,ANDORRA,NETHERLANDS ANTILLES,UNITED ARAB EMIRATES,ARGENTINA,ARMENIA,AMERICAN SAMOA,ANTARCTICA,FRENCH SOUTHERN TERRITORIES,ANTIGUA AND BARBUDA,AUSTRALIA,AUSTRIA,AZERBAIJAN,BURUNDI,BELGIUM,BENIN REPUBLIC,BURKINA FASO,BANGLADESH,BULGARIA,BAHRAIN,BAHAMAS,BOSNIA-HERZEGOVINA,SAINT BARTHELEMY,BELARUS,BELIZE,BERMUDA,BOLIVIA,BRAZIL,BARBADOS,BRUNEI,BHUTAN,BOUVET ISLAND,BOTSWANA,CENTRAL AFRICAN REPUBLIC,CANADA,COCOS (KEELING) ISLANDS,SWITZERLAND,CHILE,CHINA,COTE D'IVOIRE,CAMEROON,DEMOCRATIC REPUBLIC OF THE CONGO,CONGO,COOK ISLANDS,COLOMBIA,COMOROS,CAPE VERDE,COSTA RICA,CUBA,CHRISTMAS ISLAND,CAYMAN ISLANDS,CYPRUS,CZECH REPUBLIC,GERMANY,DJIBOUTI,DOMINICA,DENMARK,DOMINICAN REPUBLIC,ALGERIA,ECUADOR,EGYPT,ERITREA,WESTERN SAHARA,SPAIN,ESTONIA,ETHIOPIA,FINLAND,FIJI,FALKLAND ISLANDS,FRANCE,FAROE ISLANDS,MICRONESIA FEDERATED STATES OF,GABON,UNITED KINGDOM,GEORGIA,GUERNSEY,GHANA,GIBRALTAR,GUINEA,GUADELOUPE,GAMBIA,GUINEA-BISSAU,EQUATORIAL GUINEA,GREECE,GRENADA,GREENLAND,GUATEMALA,FRENCH GUIANA,GUAM,GUYANA,HONG KONG,HEARD ISLAND AND MCDONALD ISLANDS,HONDURAS,CROATIA,HAITI,HUNGARY,INDONESIA,INDIA,ISLE OF MAN,BRITISH INDIAN OCEAN TERRITORY,IRELAND,IRAN,IRAQ,ICELAND,ISRAEL,ITALY,JAMAICA,JORDAN,JAPAN,JERSEY,KAZAKHSTAN,KENYA,KYRGYZSTAN,CAMBODIA,KIRIBATI,SAINT KITTS AND NEVIS,SOUTH KOREA,KUWAIT,LAO PEOPLES DEMOCRATIC REPUBLIC,LEBANON,LIBERIA,LIBYAN ARAB JAMAHIRIYA,SAINT LUCIA,LIECHTENSTEIN,SRI LANKA,LESOTHO,LITHUANIA,LUXEMBOURG,LATVIA,MACAO,SAINT MARTIN FRENCH,MOROCCO,MONACO,MOLDOVA REPUBLIC OF,MADAGASCAR,MALDIVES,MEXICO,MARSHALL ISLANDS,REPUBLIC OF MACEDONIA,MALI,MALTA,MYANMAR,MONTENEGRO,MONGOLIA,NORTHERN MARIANA ISLANDS,MOZAMBIQUE,MAURITANIA,MONTSERRAT,MARTINIQUE,MAURITIUS,MALAWI,MALAYSIA,MAYOTTE,NAMIBIA,NEW CALEDONIA,NIGER,NORFOLK ISLAND,NIGERIA,NICARAGUA,NIUE,NETHERLANDS,NORWAY,NEPAL,NAURU,NEW ZEALAND,OMAN,PAKISTAN,PANAMA,PITCAIRN,PERU,PHILIPPINES,PALAU,PAPUA NEW GUINEA,POLAND,PUERTO RICO,NORTH KOREA,PORTUGAL,PARAGUAY,PALESTINIAN TERRITORY OCCUPIED,FRENCH POLYNESIA,QATAR,REUNION,ROMANIA,RUSSIAN FEDERATION,RWANDA,SAUDI ARABIA,SERBIA,SUDAN,SENEGAL,SINGAPORE,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS,SAINT HELENA,SVALBARD AND JAN MAYEN,SOLOMON ISLANDS,SIERRA LEONE,EL SALVADOR,SAN MARINO,SOMALIA,SAINT PIERRE AND MIQUELON,SAO TOME AND PRINCIPE,SURINAME,SLOVAKIA,SLOVENIA,SWEDEN,SWAZILAND,SEYCHELLES,SYRIAN ARAB REPUBLIC,TURKS AND CAICOS ISLANDS,CHAD,TOGO,THAILAND,TAJIKISTAN,TOKELAU,TURKMENISTAN,TIMOR-LESTE,TONGA,TRINIDAD AND TOBAGO,TUNISIA,TURKEY,TUVALU,TAIWAN,TANZANIA UNITED REPUBLIC OF,UGANDA,UKRAINE,UNITED STATES MINOR OUTLYING ISLANDS,URUGUAY,UNITED STATES,UZBEKISTAN,VATICAN CITY STATE,SAINT VINCENT AND THE GRENADINES,VENEZUELA,VIRGIN ISLANDS BRITISH,VIRGIN ISLANDS U.S.,VIETNAM,VANUATU,WALLIS AND FUTUNA,SAMOA,YEMEN,SOUTH AFRICA,ZAMBIA,ZIMBABWE	,ABW,AFG,AGO,AIA,ALA,ALB,AND,ANT,ARE,ARG,ARM,ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,CCK,CHE,CHL,CHN,CIV,CMR,COD,COG,COK,COL,COM,CPV,CRI,CUB,CXR,CYM,CYP,CZE,DEU,DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,HTI,HUN,IDN,IND,IMN,IOT,IRL,IRN,IRQ,ISL,ISR,ITA,JAM,JOR,JPN,JEY,KAZ,KEN,KGZ,KHM,KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,RWA,SAU,SRB,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,SMR,SOM,SPM,STP,SUR,SVK,SVN,SWE,SWZ,SYC,SYR,TCA,TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE	32
+583	3	brthctryndNE	Unknown, Not Reported	Unknown,NOT REPORTED	32
+584	5	EthnicityNE	Hispanic or Latino,Not Hispanic or Latino,Not Reported	HISPANIC OR LATINO,NOT HISPANIC OR LATINO,NOT REPORTED	32
+585	3	raceNE	American Indian or Alaska Native,Black or African American,White,Asian,Native Hawaiian or other Pacific Islander,Other	AMERICAN INDIAN OR ALASKA NATIVE,BLACK OR AFRICAN AMERICAN,WHITE,ASIAN,NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER,OTHER	32
+586	3	nrlablNE	Not Reported	NOT REPORTED	32
+587	5	reason	Patient does not meet eligibility criteria (Skip to Section C),Patient declines to participate (Make notes in the "NOTES" box below then continue to Section D),Site decides not to enroll patient (Skip to Section E)	PATIENT DOES NOT MEET ELIGIBILITY CRITERIA,PATIENT DECLINES TO PARTICIPATE,SITE DECIDES NOT TO ENROLL PATIENT	32
+588	3	reasona	No evidence of pulmonary tuberculosis with or without suspected or proven concomitant extrapulmonary tuberculosis outside the central nervous system or bones,No acid-fast bacilli (AFB) seen in an expectorated sputum specimen at least 1+ (WHO/IUATLD criteria) AND no positive GeneXpert (or GeneXpert Ultra) for M. tuberculosis  , Age <12 years,No documentation of negative HIV status within the past 3 months prior to enrollment nor documentation confirming HIV infection,No written informed consent/assent,Karnofsky score < 60,No verifiable address or residence location that is readily accessible for visiting\\, and/or no willingness to inform the study team of any change of address during the treatment and follow-up period,Person of childbearing potential who does not agree to practice a reliable method of contraception (barrier method or non-hormonal intrauterine device) or abstain from sexual activity that could lead to pregnancy while receiving study drug treatment and for 30 days after stopping study treatment,Pregnant or breast-feeding,More than 5 days of tuberculosis treatment in the previous 6 months, Unable to take oral medications, Hypersensitivity or previous intolerance to any of the study drugs , Current or planned use of medications that have unacceptable drug-drug interactions with any of the study drugs during study treatment , Suspected or proven central nervous system tuberculosis, Suspected or proven bone tuberculosis, Screening ECG with QTcF >450 for men or >470 for women, Clinically significant ECG abnormality in the opinion of the site investigator\\, including but not limited to second or third degree atrioventricular (AV) block\\, prolongation of the QRS complex over 120 ms (in both male and female participants)\\, or clinically important arrhythmia, Current clinically relevant cardiovascular disorder in the opinion of the site investigator\\, including but not limited to heart failure\\, coronary heart disease\\, arrhythmia\\, or Tachyarrhythmia, Known family history of Long QT Syndrome in a first-degree relative (i.e.\\, parent\\, offspring\\, or sibling) , History of aortic aneurysm or dissection, Hepatic cirrhosis or other serious liver disease , Other medical conditions\\, that\\, in the investigator’s judgment\\, make study participation not in the individual’s best interest	NOPULMTB,NOAFB,UNDERAGE,HIVDOC,NOCONSENT,LOWKPS,NOADDRESS,CONTRACEPTION,PREG,PREVTREAT,ORALMED,HYPER,INTERACT,CNSTB,BONETB,QTCF,ABNECG,CARDIODIS,HISQT,AORTIC,LIVERDIS,OTHERCOND	32
+589	3	reasonhiv	No current use of dolutegravir-based ART\\, or inability or non-willingness to start or transition to a dolutegravir-based antiretroviral therapy regimen, CD4 T cell count <100 cells/mm3 based on testing performed at or within 30 days prior to study enrollment	DOLUTEGRAVIR,LOWCD4	32
+590	3	reasoncat	Serum or plasma alanine aminotransferase >3 times the upper limit of normal, Serum or plasma total bilirubin >2.5 times the upper limit of normal , Serum creatinine >2 times the upper limit of normal, Platelet count <75\\,000 cells/mm3, Absolute neutrophil count <1\\,000 cells/mm3, Serum or plasma potassium <3.5 meq/L, Weight <40.0 kg , Known or suspected resistance to isoniazid or rifamycins (by phenotypic or molecular test), Previous treatment with any drug or combination of drugs known to have activity against M. tuberculosis (e.g. isoniazid\\, rifamycins\\, pyrazinamide\\, ethambutol\\, fluoroquinolones\\, etc.) for more than five days in the thirty days prior to enrollment , Previously enrolled in this study or currently enrolled in another therapeutic clinical trial that\\, in the investigator’s judgment\\, would compromise study integrity or participant safety, Current or planned incarceration or other involuntary detention	AMINOTRANS,BILIRUBIN,CREATININE,PLATELET,NEUTROPHIL,POTASSIUM,UNDERWEIGHT,RESISTANCE,PREVTREAT,PREVENROL,INCARCERATION	32
+591	3	components	a. Distrust or fear of research,b. Undergoing randomization	DISTMED,RAND	32
+592	3	componentstu	a. Effectiveness of study medication(s), b. Side effects of study medication, c. Interaction of study medication with other prescribed medications (including contraceptives) or effect on other medical problems , d. Desire to take approved medications / alternate regimen , e. Duration of treatment / Frequency of dosing / Number of pills per dose , f. Recommendation to avoid alcohol or recreational drugs while on study medication , g. Undergoing additional diagnostic tests for study purposes (including blood draw(s) and HIV test)..., h. The number and/or location of study visits is not convenient , i. The number and/or location of DOT visits is not convenient In: Clinic DOT, j. The number and/or location of DOT visits is not convenient In: Outreach DOT	EFF,MEDSIDE,MEDINT,ALTTRX,DUR,DISPALC,BLOOD,NUMVIS,DOTCLN,DOTOUT	32
+593	3	componentsdif	a. Study will interfere with work\\, school\\, family\\, or other life commitments  , b. Too busy or stressed to participate in a study , c. Study participation will result in a loss of income , d. Inconvenience / costs associated with transportation\\, travel\\, or parking , e. Plans to move or travel (for work or pleasure) , f. Study will negatively impact immigration status	INTFLIFE,BUSY,INCO,TRANS,MOVTRAV,IMG	32
+594	3	componentstopi	a. Family member\\, spouse/partner\\, friend discourages study enrollment , b. Boss / teacher not likely to support missed work / school due to study commitments , c. Personal physician has concerns related to patient’s participation in study , d. Stigmatization related to TB diagnosis or taking TB medication	FAMILY,CONRESP,MDCON,STIGMA	32
+595	3	componentsmis	a. Length and/or complexity of informed consent form, b. Patient cited other health problems / feels too ill to participate in a study , c. Patient expressed a TB-specific misperception or belief that contributed to the decision to decline study enrollment	CONSENT,TOOILL,BELIEF	32
+596	3	nesunklbl	Reason Unknown	CCUNK	32
+597	3	decidescomp	1. Patient's work\\, school\\, family or life commitments may hinder study participation , 2. Psychiatric\\, cognitive (e.g.\\, reasoning\\, thought processes)\\, or behavioral (e.g.\\, substance abuse\\, belligerence) factors are likely to affect ability to provide consent and/or adherence to the study protocol , 3. Patient’s immigration status may affect adherence to the study protocol, 4. Inconclusive diagnostic test results and/orclinical presentation of TB, 5. Communications/Language barriers:  Staff do not speak patient's language/Patient is unable to understand available interpreter., 6. Communications/Language barriers: Written materials/informed consent form not available in patient's language., 7. Communications/Language barriers: Although the language employed during the informed consent process is understod\\, the patient does not understand study.	LIFCOM,PSYCOG,SIT,INCLAB,LANGBAR,MATLANG,UNDSTDY	32
 \.
 
 
@@ -13301,7 +13891,6 @@ COPY public.rule (id, name, description, oc_oid, enabled, rule_expression_id, ow
 43	Rash localized Grade cannot be blank	Rule to check if Rash localized Grade is blank	ERROR_SSCETOXGRF_ISBLANK	f	55	\N	2024-02-02	\N	\N	1	0	3
 44	Itching (pruritus) generalized cannot be blank	Rule to check if Itching (pruritus) generalized is blank	ERROR_SSCEOCCURG_ISBLANK	f	56	\N	2024-02-02	\N	\N	1	0	3
 45	Itching (pruritus) generalized Grade cannot be blank	Rule to check if Itching (pruritus) generalized Grade is blank	ERROR_SSCETOXGRG_ISBLANK	f	57	\N	2024-02-02	\N	\N	1	0	3
-227	show/hide time last meal	Rule to show/hide time last meal.	TS_SH_03	f	428	\N	2024-02-02	\N	\N	1	0	3
 46	Itching (pruritus) localized cannot be blank	Rule to check if Itching (pruritus) localized is blank	ERROR_SSCEOCCURH_ISBLANK	f	58	\N	2024-02-02	\N	\N	1	0	3
 47	Itching (pruritus) localized Grade cannot be blank	Rule to check if Itching (pruritus) localized Grade is blank	ERROR_SSCETOXGRH_ISBLANK	f	59	\N	2024-02-02	\N	\N	1	0	3
 48	Hives (urticaria) cannot be blank	Rule to check if Hives (urticaria) is blank	ERROR_SSCEOCCURI_ISBLANK	f	60	\N	2024-02-02	\N	\N	1	0	3
@@ -13483,6 +14072,7 @@ COPY public.rule (id, name, description, oc_oid, enabled, rule_expression_id, ow
 224	Date Treatment Evaluation Form Completed cannot be future date	Rule to check if Date Treatment Evaluation Form Completed is future date	ERROR_TXTREATMENTEVALDATE_ISFUTURE	f	418	\N	2024-02-02	\N	\N	1	0	3
 225	show/hide food record	Rule to show/hide food record	TS_SH_01	f	426	\N	2024-02-02	\N	\N	1	0	3
 226	show/hide date last meal	Rule to show/hide date last meal.	TS_SH_02	f	427	\N	2024-02-02	\N	\N	1	0	3
+227	show/hide time last meal	Rule to show/hide time last meal.	TS_SH_03	f	428	\N	2024-02-02	\N	\N	1	0	3
 228	show/hide last meal estimated	Rule to show/hide last meal estimated.	TS_SH_04	f	429	\N	2024-02-02	\N	\N	1	0	3
 229	show/hide TSPK Cryovial Label No	Rule to show/hide TSPK Cryovial Label No	PK_SH_01	f	431	\N	2024-02-02	2024-02-02	\N	1	1	3
 230	show/hide IPK Cryovial Label No	Rule to show/hide date IPK Cryovial Label No.	PK_SH_02	f	432	\N	2024-02-02	2024-02-02	\N	1	1	3
@@ -13506,6 +14096,27 @@ COPY public.rule (id, name, description, oc_oid, enabled, rule_expression_id, ow
 248	Date of weight cannot be more than 7d prior	Rule to check if Date of weight is more than 7d prior	ERROR_ENDATEWEIGHT_GT7DAYSBEFORE	f	451	\N	2024-02-02	\N	\N	1	0	3
 249	Date of chest X-Ray more than 21 days prior	Rule to check if Date of chest X-Ray more than 21 days prior	ERROR_ENDATECHEST_GT21DAYSBEFORE	f	452	\N	2024-02-02	\N	\N	1	0	3
 250	Study start date than 3 days after	Rule to check if Study start date than 3 days after	ERROR_ENDATEASSENT_GT3DAYSAFTER	f	453	\N	2024-02-02	\N	\N	1	0	3
+251	show or hide EN section A-F	Rule to show/hide EN section A-F	BL_EN_SH_01	f	464	\N	2024-03-07	\N	\N	1	0	3
+252	show or hide Treatment AssignmenT	Rule to show/hide Treatment Assignment	BL_EN_SH_02	f	465	\N	2024-03-07	\N	\N	1	0	3
+253	show/hide list of family mental health history	Rule to show/hide list of family mental health history	BL_HX_SH_01	f	467	\N	2024-03-07	\N	\N	1	0	3
+254	show/hide list of personal mental health history	Rule to show/hide list of personal mental health history.	BL_HX_SH_02	f	468	\N	2024-03-07	\N	\N	1	0	3
+255	show/hide list of tromatic events	Rule to show/hide list of tromatic events.	BL_HX_SH_03	f	469	\N	2024-03-07	\N	\N	1	0	3
+256	show/hide list mental changes by meds	Rule to show/hide list mental changes by meds	BL_HX_SH_04	f	470	\N	2024-03-07	\N	\N	1	0	3
+257	show/hide duration of tobacco use unknown	Rule to show/hide duration of tobacco use unknown	BL_HX_SH_06	f	471	\N	2024-03-07	\N	\N	1	0	3
+258	show/hide duration of tobacco use unit	Rule to show/hide duration of tobacco use unit	BL_HX_SH_07	f	472	\N	2024-03-07	\N	\N	1	0	3
+259	show/hide duration of tobacco use	Rule to show/hide duration of tobacco use	BL_HX_SH_08	f	473	\N	2024-03-07	\N	\N	1	0	3
+260	show/hide number of cigarettes per day	Rule to show/hide number of cigarettes per day	BL_HX_SH_09	f	474	\N	2024-03-07	\N	\N	1	0	3
+261	show/hide extrapulmonary TB sites unknown	Rule to show/hide time since participant quit smoking unknown	BL_HX_SH_10	f	475	\N	2024-03-07	\N	\N	1	0	3
+262	show/hide time unit since participant quit smoking	Rule to show/hide time unit since participant quit smoking	BL_HX_SH_11	f	476	\N	2024-03-07	\N	\N	1	0	3
+263	show/hide time since participant quit smoking	Rule to show/hide time since participant quit smoking	BL_HX_SH_12	f	477	\N	2024-03-07	\N	\N	1	0	3
+264	show or hide HX section A	Rule to show/hide HX section A	BL_HX_SH_13	f	478	\N	2024-03-07	\N	\N	1	0	3
+265	show or hide HX section B	Rule to show/hide HX section B	BL_HX_SH_14	f	479	\N	2024-03-07	\N	\N	1	0	3
+266	show or hide HX section C	Rule to show/hide HX section C	BL_HX_SH_15	f	480	\N	2024-03-07	\N	\N	1	0	3
+267	show or hide HX section D	Rule to show/hide HX section D	BL_HX_SH_16	f	481	\N	2024-03-07	\N	\N	1	0	3
+268	show or hide HX section E	Rule to show/hide HX section E	BL_HX_SH_17	f	482	\N	2024-03-07	\N	\N	1	0	3
+269	show or hide HX other concomitant diagnoses	Rule to show/hide HX other concomitant diagnoses	BL_HX_SH_18	f	483	\N	2024-03-07	\N	\N	1	0	3
+270	show or hide HX system organ class	Rule to show/hide HX system organ class	BL_HX_SH_19	f	484	\N	2024-03-07	\N	\N	1	0	3
+271	show or hide HX WHO Stage 4	Rule to show/hide HX WHO Stage 4	BL_HX_SH_20	f	485	\N	2024-03-07	\N	\N	1	0	3
 \.
 
 
@@ -13783,6 +14394,48 @@ COPY public.rule_action (id, rule_set_rule_id, action_type, expression_evaluates
 267	252	1	t	[Warning] If participant is less than 18 years old NA should not be checked. "NA" will be removed when the page is saved again.	\N	\N	2024-02-02	\N	\N	1	0	267	\N	\N
 268	252	4	t	\N	\N	\N	2024-02-02	\N	\N	1	0	268	\N	\N
 269	253	1	t	[Error] Scheduled study start date must be on or no more than three days after the enrollment date.	\N	\N	2024-02-02	\N	\N	1	0	269	\N	\N
+274	256	3	t	List family past mental health diagnoses.	\N	\N	2024-03-07	\N	\N	1	0	274	\N	\N
+275	256	5	f		\N	\N	2024-03-07	\N	\N	1	0	275	\N	\N
+276	257	3	t	List personal past mental health diagnoses.	\N	\N	2024-03-07	\N	\N	1	0	276	\N	\N
+277	257	5	f		\N	\N	2024-03-07	\N	\N	1	0	277	\N	\N
+278	258	3	t	List past personal experience of traumatic event(s).	\N	\N	2024-03-07	\N	\N	1	0	278	\N	\N
+279	258	5	f		\N	\N	2024-03-07	\N	\N	1	0	279	\N	\N
+280	259	3	t	List unintended mental status changes induced by specific medications or substances.	\N	\N	2024-03-07	\N	\N	1	0	280	\N	\N
+281	259	5	f		\N	\N	2024-03-07	\N	\N	1	0	281	\N	\N
+282	260	3	t	Add total duration of tobacco use.	\N	\N	2024-03-07	\N	\N	1	0	282	\N	\N
+283	260	5	f		\N	\N	2024-03-07	\N	\N	1	0	283	\N	\N
+285	261	5	f		\N	\N	2024-03-07	\N	\N	1	0	285	\N	\N
+270	254	3	t	Complete Enrollment Form.	\N	\N	2024-03-07	\N	\N	1	1	270	\N	\N
+271	254	5	f		\N	\N	2024-03-07	\N	\N	1	1	271	\N	\N
+272	255	3	t	Treatment Assignment	\N	\N	2024-03-07	\N	\N	1	1	272	\N	\N
+273	255	5	f		\N	\N	2024-03-07	\N	\N	1	1	273	\N	\N
+284	261	3	t	Add unit of duration of tobacco use.	\N	\N	2024-03-07	\N	\N	1	0	284	\N	\N
+286	262	3	t	Add total duration of tobacco use.	\N	\N	2024-03-07	\N	\N	1	0	286	\N	\N
+287	262	5	f		\N	\N	2024-03-07	\N	\N	1	0	287	\N	\N
+288	263	3	t	Add number of cigarettes currently or formerly smoked per day	\N	\N	2024-03-07	\N	\N	1	0	288	\N	\N
+289	263	5	f		\N	\N	2024-03-07	\N	\N	1	0	289	\N	\N
+290	264	3	t	Add time since participant quit smoking.	\N	\N	2024-03-07	\N	\N	1	0	290	\N	\N
+291	264	5	f		\N	\N	2024-03-07	\N	\N	1	0	291	\N	\N
+292	265	3	t	Add unit for time since participant quit smoking.	\N	\N	2024-03-07	\N	\N	1	0	292	\N	\N
+293	265	5	f		\N	\N	2024-03-07	\N	\N	1	0	293	\N	\N
+294	266	3	t	Add time since participant quit smoking.	\N	\N	2024-03-07	\N	\N	1	0	294	\N	\N
+295	266	5	f		\N	\N	2024-03-07	\N	\N	1	0	295	\N	\N
+296	267	3	t	Specify the system organ class for each extrapulmonary site.	\N	\N	2024-03-07	\N	\N	1	0	296	\N	\N
+297	267	5	f		\N	\N	2024-03-07	\N	\N	1	0	297	\N	\N
+298	268	3	t	Specify WHO Clinical Stage 4 Condition(s).	\N	\N	2024-03-07	\N	\N	1	0	298	\N	\N
+299	268	5	f		\N	\N	2024-03-07	\N	\N	1	0	299	\N	\N
+300	269	3	t	Complete History Form section A	\N	\N	2024-03-07	\N	\N	1	0	300	\N	\N
+301	269	5	f		\N	\N	2024-03-07	\N	\N	1	0	301	\N	\N
+302	270	3	t	Complete History Form section B	\N	\N	2024-03-07	\N	\N	1	0	302	\N	\N
+303	270	5	f		\N	\N	2024-03-07	\N	\N	1	0	303	\N	\N
+304	271	3	t	Complete History Form section C	\N	\N	2024-03-07	\N	\N	1	0	304	\N	\N
+305	271	5	f		\N	\N	2024-03-07	\N	\N	1	0	305	\N	\N
+306	272	3	t	Complete History Form section D	\N	\N	2024-03-07	\N	\N	1	0	306	\N	\N
+307	272	5	f		\N	\N	2024-03-07	\N	\N	1	0	307	\N	\N
+308	273	3	t	Complete History Form section E	\N	\N	2024-03-07	\N	\N	1	0	308	\N	\N
+309	273	5	f		\N	\N	2024-03-07	\N	\N	1	0	309	\N	\N
+310	274	3	t	List other concomitant diagnoses	\N	\N	2024-03-07	\N	\N	1	0	310	\N	\N
+311	274	5	f		\N	\N	2024-03-07	\N	\N	1	0	311	\N	\N
 \.
 
 
@@ -13811,6 +14464,10 @@ COPY public.rule_action_property (id, rule_action_id, oc_oid, value, version, ru
 18	238	I_38_TS_MLSTTIMB	\N	0	\N	\N
 19	239	I_38_TS_MLTMCONDB	\N	0	\N	\N
 20	240	I_38_TS_MLTMCONDB	\N	0	\N	\N
+31	270	IG_38_BL_EN	\N	1	\N	\N
+32	271	IG_38_BL_EN	\N	1	\N	\N
+33	272	IG_38_BL_XD	\N	1	\N	\N
+34	273	IG_38_BL_XD	\N	1	\N	\N
 21	241	IG_38_PK_C	\N	1	\N	\N
 22	242	IG_38_PK_C	\N	1	\N	\N
 23	243	IG_38_PK_D	\N	1	\N	\N
@@ -13821,6 +14478,44 @@ COPY public.rule_action_property (id, rule_action_id, oc_oid, value, version, ru
 28	248	IG_38_PK_D	\N	0	\N	\N
 29	252	I_38_EN_BRTHDAT	1900-01-01	0	\N	\N
 30	268	I_38_EN_DSDECOD	null	0	\N	\N
+35	274	IG_38_BL_FAM	\N	0	\N	\N
+36	275	IG_38_BL_FAM	\N	0	\N	\N
+37	276	IG_38_BL_SELF	\N	0	\N	\N
+38	277	IG_38_BL_SELF	\N	0	\N	\N
+39	278	IG_38_BL_TRAUMA	\N	0	\N	\N
+40	279	IG_38_BL_TRAUMA	\N	0	\N	\N
+41	280	IG_38_BL_CHANGE	\N	0	\N	\N
+42	281	IG_38_BL_CHANGE	\N	0	\N	\N
+43	282	I_38_BL_SUCDURC	\N	0	\N	\N
+44	283	I_38_BL_SUCDURC	\N	0	\N	\N
+45	284	I_38_BL_SUCDURU	\N	0	\N	\N
+46	285	I_38_BL_SUCDURU	\N	0	\N	\N
+47	286	I_38_BL_SUCDURN	\N	0	\N	\N
+48	287	I_38_BL_SUCDURN	\N	0	\N	\N
+49	288	I_38_BL_SUDSTXT	\N	0	\N	\N
+50	289	I_38_BL_SUDSTXT	\N	0	\N	\N
+51	290	I_38_BL_SUQDURC	\N	0	\N	\N
+52	291	I_38_BL_SUQDURC	\N	0	\N	\N
+53	292	I_38_BL_SUQDURU	\N	0	\N	\N
+54	293	I_38_BL_SUQDURU	\N	0	\N	\N
+55	294	I_38_BL_SUQDURN	\N	0	\N	\N
+56	295	I_38_BL_SUQDURN	\N	0	\N	\N
+57	296	IG_38_BL_BODSYS	\N	0	\N	\N
+58	297	IG_38_BL_BODSYS	\N	0	\N	\N
+59	298	IG_38_BL_WHO	\N	0	\N	\N
+60	299	IG_38_BL_WHO	\N	0	\N	\N
+61	300	IG_38_BL_HXA	\N	0	\N	\N
+62	301	IG_38_BL_HXA	\N	0	\N	\N
+63	302	IG_38_BL_HXB	\N	0	\N	\N
+64	303	IG_38_BL_HXB	\N	0	\N	\N
+65	304	IG_38_BL_HXC	\N	0	\N	\N
+66	305	IG_38_BL_HXC	\N	0	\N	\N
+67	306	IG_38_BL_HXD	\N	0	\N	\N
+68	307	IG_38_BL_HXD	\N	0	\N	\N
+69	308	IG_38_BL_HXE	\N	0	\N	\N
+70	309	IG_38_BL_HXE	\N	0	\N	\N
+71	310	IG_38_BL_OTHERCA	\N	0	\N	\N
+72	311	IG_38_BL_OTHERCA	\N	0	\N	\N
 \.
 
 
@@ -14098,6 +14793,48 @@ COPY public.rule_action_run (id, administrative_data_entry, initial_data_entry, 
 267	t	t	t	f	t	0	\N	\N	\N	\N	\N	\N
 268	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
 269	t	t	t	f	t	0	\N	\N	\N	\N	\N	\N
+274	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+275	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+276	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+277	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+278	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+279	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+280	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+281	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+282	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+283	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+284	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+285	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+286	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+287	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+288	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+289	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+290	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+291	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+292	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+293	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+294	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+295	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+296	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+297	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+298	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+299	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+300	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+301	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+302	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+303	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+304	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+305	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+306	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+307	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+270	t	t	t	f	f	1	\N	\N	\N	\N	\N	\N
+271	t	t	t	f	f	1	\N	\N	\N	\N	\N	\N
+272	t	t	t	f	f	1	\N	\N	\N	\N	\N	\N
+308	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+309	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+310	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+311	t	t	t	f	f	0	\N	\N	\N	\N	\N	\N
+273	t	t	t	f	f	1	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -14109,6 +14846,7 @@ COPY public.rule_action_run_log (id, action_type, item_data_id, value, rule_oc_o
 1	1	123	N	ERROR_TXCLINICALEVALUATIONS_ISNO	0
 2	1	269	08-Jan-2024	ERROR_ENDATEASSENT_GT14DAYSBEFORE	0
 3	1	268	08-Jan-2024	ERROR_ENDATEPARTOLEG_GT14DAYSBEFORE	0
+4	1	505	100	ERROR_ENHEIGHTIN_NOTTYPICAL	0
 \.
 
 
@@ -14588,6 +15326,35 @@ COPY public.rule_expression (id, value, context, owner_id, date_created, date_up
 461	I_38_EN_DSSTDATB	1	\N	2024-02-02	\N	\N	1	0
 462	I_38_EN_DSDECOD	1	\N	2024-02-02	\N	\N	1	0
 463	I_38_EN_XDSTDAT	1	\N	2024-02-02	\N	\N	1	0
+464	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+465	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+467	(I_38_BL_MHOCCURFAM eq "Y")	1	\N	2024-03-07	\N	\N	1	0
+468	(I_38_BL_MHOCCURSELF eq "Y")	1	\N	2024-03-07	\N	\N	1	0
+469	(I_38_BL_MHOCCURTRAUMA eq "Y")	1	\N	2024-03-07	\N	\N	1	0
+470	(I_38_BL_MHOCCURCHANGE eq "Y")	1	\N	2024-03-07	\N	\N	1	0
+471	(I_38_BL_SUNCF eq "CURRENT" or I_38_BL_SUNCF eq "FORMER")	1	\N	2024-03-07	\N	\N	1	0
+472	(I_38_BL_SUNCF eq "CURRENT" or I_38_BL_SUNCF eq "FORMER")	1	\N	2024-03-07	\N	\N	1	0
+473	(I_38_BL_SUNCF eq "CURRENT" or I_38_BL_SUNCF eq "FORMER")	1	\N	2024-03-07	\N	\N	1	0
+474	(I_38_BL_SUNCF eq "CURRENT" or I_38_BL_SUNCF eq "FORMER")	1	\N	2024-03-07	\N	\N	1	0
+475	(I_38_BL_SUNCF eq "FORMER")	1	\N	2024-03-07	\N	\N	1	0
+476	(I_38_BL_SUNCF eq "FORMER")	1	\N	2024-03-07	\N	\N	1	0
+477	(I_38_BL_SUNCF eq "FORMER")	1	\N	2024-03-07	\N	\N	1	0
+478	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+479	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+480	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+481	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+482	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+483	I_38_BL_STATUS eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+484	I_38_BL_MHOCCUREXTRATB eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+466	I_38_BL_STATUS	1	\N	2024-03-07	\N	\N	1	1
+485	I_38_BL_MHWHO4COND eq "Y"	1	\N	2024-03-07	\N	\N	1	0
+486	I_38_BL_MHOCCURFAM	1	\N	2024-03-07	\N	\N	1	0
+487	I_38_BL_MHOCCURSELF	1	\N	2024-03-07	\N	\N	1	0
+488	I_38_BL_MHOCCURTRAUMA	1	\N	2024-03-07	\N	\N	1	0
+489	I_38_BL_MHOCCURCHANGE	1	\N	2024-03-07	\N	\N	1	0
+490	I_38_BL_SUNCF	1	\N	2024-03-07	\N	\N	1	0
+491	I_38_BL_MHOCCUREXTRATB	1	\N	2024-03-07	\N	\N	1	0
+492	I_38_BL_MHWHO4COND	1	\N	2024-03-07	\N	\N	1	0
 \.
 
 
@@ -14809,6 +15576,14 @@ COPY public.rule_set (id, rule_expression_id, study_event_definition_id, crf_id,
 211	461	\N	\N	\N	3	\N	2024-02-02	\N	\N	1	0	652	\N	f	\N
 212	462	\N	\N	\N	3	\N	2024-02-02	\N	\N	1	0	653	\N	f	\N
 213	463	\N	\N	\N	3	\N	2024-02-02	\N	\N	1	0	661	\N	f	\N
+215	486	\N	\N	\N	3	\N	2024-03-07	\N	\N	1	0	844	\N	f	\N
+216	487	\N	\N	\N	3	\N	2024-03-07	\N	\N	1	0	846	\N	f	\N
+217	488	\N	\N	\N	3	\N	2024-03-07	\N	\N	1	0	848	\N	f	\N
+218	489	\N	\N	\N	3	\N	2024-03-07	\N	\N	1	0	850	\N	f	\N
+219	490	\N	\N	\N	3	\N	2024-03-07	\N	\N	1	0	852	\N	f	\N
+220	491	\N	\N	\N	3	\N	2024-03-07	\N	\N	1	0	865	\N	f	\N
+221	492	\N	\N	\N	3	\N	2024-03-07	\N	\N	1	0	893	\N	f	\N
+214	466	\N	\N	\N	3	\N	2024-03-07	2024-03-07	\N	1	1	812	\N	f	\N
 \.
 
 
@@ -15078,6 +15853,27 @@ COPY public.rule_set_rule (id, rule_set_id, rule_id, owner_id, date_created, dat
 251	211	246	\N	2024-02-02	\N	\N	1	0
 252	212	247	\N	2024-02-02	\N	\N	1	0
 253	213	250	\N	2024-02-02	\N	\N	1	0
+256	215	253	\N	2024-03-07	\N	\N	1	0
+257	216	254	\N	2024-03-07	\N	\N	1	0
+258	217	255	\N	2024-03-07	\N	\N	1	0
+259	218	256	\N	2024-03-07	\N	\N	1	0
+260	219	257	\N	2024-03-07	\N	\N	1	0
+261	219	258	\N	2024-03-07	\N	\N	1	0
+262	219	259	\N	2024-03-07	\N	\N	1	0
+263	219	260	\N	2024-03-07	\N	\N	1	0
+264	219	261	\N	2024-03-07	\N	\N	1	0
+265	219	262	\N	2024-03-07	\N	\N	1	0
+266	219	263	\N	2024-03-07	\N	\N	1	0
+267	220	270	\N	2024-03-07	\N	\N	1	0
+268	221	271	\N	2024-03-07	\N	\N	1	0
+254	214	251	\N	2024-03-07	\N	\N	1	1
+255	214	252	\N	2024-03-07	\N	\N	1	1
+269	214	264	\N	2024-03-07	\N	\N	1	0
+270	214	265	\N	2024-03-07	\N	\N	1	0
+271	214	266	\N	2024-03-07	\N	\N	1	0
+272	214	267	\N	2024-03-07	\N	\N	1	0
+273	214	268	\N	2024-03-07	\N	\N	1	0
+274	214	269	\N	2024-03-07	\N	\N	1	0
 \.
 
 
@@ -15412,33 +16208,60 @@ COPY public.scd_item_metadata (id, scd_item_form_metadata_id, control_item_form_
 316	1396	1394	BECATFTR	FTRDESTRY	Only complete this question if the participant withdrew consent.	\N
 317	1402	1401	VISIT	UNS	Date of Visit	\N
 318	1471	1470	ZNTERMMB	Y	Question is not applicable - please remove answer.	\N
-319	1509	1507	RACE	OTHER	Data is no longer applicable. Please remove.	\N
-320	1533	1532	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
-321	1534	1532	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
-322	1535	1532	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
-323	1537	1536	MHOCCUREXTRATB	Y	Data is no longer applicable. Please remove.	\N
-324	1539	1538	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
-325	1540	1538	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
-326	1541	1538	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
-327	1542	1538	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
-328	1543	1538	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
-329	1545	1544	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
-330	1546	1544	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
-331	1547	1544	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
-332	1548	1544	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
-333	1549	1544	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
-334	1552	1551	MHOCCURCANCER	Y	Data is no longer applicable. Please remove.	\N
-335	1554	1553	MHOCCURCARDIAC	Y	Data is no longer applicable. Please remove.	\N
-336	1557	1556	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
-337	1558	1556	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
-338	1559	1556	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
-339	1560	1556	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
-340	1561	1560	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
-341	1562	1560	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
-342	1563	1560	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
-343	1564	1556	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
-344	1582	1580	RACENE	OTHER	[Warning] Data is no longer relevant. Please remove.	\N
-345	1586	1585	NESCATMAIN	OTHERCOND	[Warning] Data is no longer relevant	\N
+319	1510	1508	RACE	OTHER	Data is no longer applicable. Please remove.	\N
+320	1534	1533	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
+321	1535	1533	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
+322	1536	1533	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
+323	1538	1537	MHOCCUREXTRATB	Y	Data is no longer applicable. Please remove.	\N
+324	1540	1539	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+325	1541	1539	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+326	1542	1539	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+327	1543	1539	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+328	1544	1539	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+329	1546	1545	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+330	1547	1545	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+331	1548	1545	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+332	1549	1545	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+333	1550	1545	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+334	1553	1552	MHOCCURCANCER	Y	Data is no longer applicable. Please remove.	\N
+335	1555	1554	MHOCCURCARDIAC	Y	Data is no longer applicable. Please remove.	\N
+336	1558	1557	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+337	1559	1557	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+338	1560	1557	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+339	1561	1557	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+340	1562	1561	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
+341	1563	1561	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
+342	1564	1561	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
+343	1565	1557	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+344	1583	1581	RACENE	OTHER	[Warning] Data is no longer relevant. Please remove.	\N
+345	1587	1586	NESCATMAIN	OTHERCOND	[Warning] Data is no longer relevant	\N
+346	1626	1624	RACE	OTHER	Data is no longer applicable. Please remove.	\N
+347	1650	1649	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
+348	1651	1649	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
+349	1652	1649	MHOCCURPRIORTX	Y	Data is no longer applicable. Please remove.	\N
+350	1654	1653	MHOCCUREXTRATB	Y	Data is no longer applicable. Please remove.	\N
+351	1656	1655	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+352	1657	1655	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+353	1658	1655	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+354	1659	1655	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+355	1660	1655	MHTERMLIVER	Y	Data is no longer applicable. Please remove.	\N
+356	1662	1661	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+357	1663	1661	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+358	1664	1661	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+359	1665	1661	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+360	1666	1661	MHSCATDIAB	Y	Data is no longer applicable. Please remove.	\N
+361	1669	1668	MHOCCURCANCER	Y	Data is no longer applicable. Please remove.	\N
+362	1671	1670	MHOCCURCARDIAC	Y	Data is no longer applicable. Please remove.	\N
+363	1674	1673	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+364	1675	1673	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+365	1676	1673	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+366	1677	1673	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+367	1678	1677	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
+368	1679	1677	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
+369	1680	1677	MHTERMART	Y	Data is no longer applicable. Please remove.	\N
+370	1681	1673	MHCATHIVPOSNA	Y	Data is no longer applicable. Please remove.	\N
+371	1699	1697	RACENE	OTHER	[Warning] Data is no longer relevant. Please remove.	\N
+372	1703	1702	NESCATMAIN	OTHERCOND	[Warning] Data is no longer relevant	\N
 \.
 
 
@@ -15523,6 +16346,7 @@ COPY public.section (section_id, crf_version_id, status_id, label, title, subtit
 73	18	1	Management	Management of Adverse Event		This form must be completed when a participant has a reportable adverse event (AE) any time during the study treatment or follow-up. <b>Only one (1) diagnosis, sign or symptom can be reported per AE Form.</b>  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b><p>In the event that the AE led to, or is a death, a Notification of Death Form must also be completed.  Whether the AE has resolved, an AE Follow-up Form (AF) must be completed within 45 days of the date of onset. If the AE has not resolved, continue to update the existing AF Form via the LibreClinica EDC system whenever there is a change in status, or every 45 days, until the AE has resolved, or the study has ended.  In the event of a pregnancy, submit an AF Form when the outcome of pregnancy is known.  For additional instructions, refer to the Study 38 Manual of Operating Procedures.</p>		2	0	2024-02-24	\N	1	\N	0
 74	18	1	Comments	Comments		This form must be completed when a participant has a reportable adverse event (AE) any time during the study treatment or follow-up. <b>Only one (1) diagnosis, sign or symptom can be reported per AE Form.</b>  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b><p>In the event that the AE led to, or is a death, a Notification of Death Form must also be completed.  Whether the AE has resolved, an AE Follow-up Form (AF) must be completed within 45 days of the date of onset. If the AE has not resolved, continue to update the existing AF Form via the LibreClinica EDC system whenever there is a change in status, or every 45 days, until the AE has resolved, or the study has ended.  In the event of a pregnancy, submit an AF Form when the outcome of pregnancy is known.  For additional instructions, refer to the Study 38 Manual of Operating Procedures.</p>		3	0	2024-02-24	\N	1	\N	0
 88	20	1	Other	Other Clinical Evaluations, Comments and Form completion		Complete this form if new clinical evaluation results are available at any visit.  Record all dates in the following format: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>.		5	0	2024-02-24	\N	1	\N	0
+144	32	1	History-A-Participant	History Form - Section A		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		4	0	2024-03-06	\N	1	\N	0
 75	18	1	Pregnancy	Pregnancy-Specific Information		This form must be completed when a participant has a reportable adverse event (AE) any time during the study treatment or follow-up. <b>Only one (1) diagnosis, sign or symptom can be reported per AE Form.</b>  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b><p>In the event that the AE led to, or is a death, a Notification of Death Form must also be completed.  Whether the AE has resolved, an AE Follow-up Form (AF) must be completed within 45 days of the date of onset. If the AE has not resolved, continue to update the existing AF Form via the LibreClinica EDC system whenever there is a change in status, or every 45 days, until the AE has resolved, or the study has ended.  In the event of a pregnancy, submit an AF Form when the outcome of pregnancy is known.  For additional instructions, refer to the Study 38 Manual of Operating Procedures.</p>		4	0	2024-02-24	\N	1	\N	0
 76	18	1	Completion	Form Completion		This form must be completed when a participant has a reportable adverse event (AE) any time during the study treatment or follow-up. <b>Only one (1) diagnosis, sign or symptom can be reported per AE Form.</b>  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b><p>In the event that the AE led to, or is a death, a Notification of Death Form must also be completed.  Whether the AE has resolved, an AE Follow-up Form (AF) must be completed within 45 days of the date of onset. If the AE has not resolved, continue to update the existing AF Form via the LibreClinica EDC system whenever there is a change in status, or every 45 days, until the AE has resolved, or the study has ended.  In the event of a pregnancy, submit an AF Form when the outcome of pregnancy is known.  For additional instructions, refer to the Study 38 Manual of Operating Procedures.</p>		5	0	2024-02-24	\N	1	\N	0
 77	18	1	Safety Officer	CDC Safety Officer Review		This form must be completed when a participant has a reportable adverse event (AE) any time during the study treatment or follow-up. <b>Only one (1) diagnosis, sign or symptom can be reported per AE Form.</b>  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b><p>In the event that the AE led to, or is a death, a Notification of Death Form must also be completed.  Whether the AE has resolved, an AE Follow-up Form (AF) must be completed within 45 days of the date of onset. If the AE has not resolved, continue to update the existing AF Form via the LibreClinica EDC system whenever there is a change in status, or every 45 days, until the AE has resolved, or the study has ended.  In the event of a pregnancy, submit an AF Form when the outcome of pregnancy is known.  For additional instructions, refer to the Study 38 Manual of Operating Procedures.</p>		6	0	2024-02-24	\N	1	\N	0
@@ -15548,6 +16372,7 @@ COPY public.section (section_id, crf_version_id, status_id, label, title, subtit
 99	25	1	Ingested	Food and Alcohol Ingested		<ul>\n<li>Complete this form if TB drug intensive PK specimens are collected.</li>\n<li>Record all dates in the following format: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.</li>\n<li>Record all times in 24 hour format <strong>(e.g., 7 AM is recorded as 07:00 and 10 PM is recorded as 22:00)</strong>.</li>\n</ul>		3	0	2024-02-24	\N	1	\N	0
 100	25	1	Sampling	PK Sampling		Store 4 cryovials of plasma at each sampling point. <br/>\n<ul>\n  <li>Specimens must be frozen at -70°C within 2 hours of collection.</li>\n <li>Keep cryovials with plasma in a slurry of ice and water prior to placement in freezer.</li>\n <li>If samples cannot be placed in a -70°C or lower freezer within 2 hours of collection, freeze on dry ice for up to 12 hours. If stored on dry ice and not transferred to a -70°C freezer in ≤ 2 hours from collection, indicate “Yes” in “Blood collection to -70°C freezer time > 2 hrs” column and provide a comment in Section G. </li>\n <li> Record sampling information pre-dose (t-1), and at\n    <ul>\n      <li> 1 hour, 2 hours, 4 hours, 6 hours, 8-12 hours, and 24 hours post reference dose.  </li>\n    </ul>\n  </li>\n</ul>\n<style type="text/css">.aka_text_block{width:35px;text-align:left;}</style>		4	0	2024-02-24	\N	1	\N	0
 101	25	1	Cryovial	Cryovial Label Numbers		<ul>\n<li>Complete this form if TB drug intensive PK specimens are collected.</li>\n<li>Record all dates in the following format: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.</li>\n<li>Record all times in 24 hour format <strong>(e.g., 7 AM is recorded as 07:00 and 10 PM is recorded as 22:00)</strong>.</li>\n</ul>\n<style type="text/css">.aka_text_block{width:35px;text-align:left;}</style>		5	0	2024-02-24	\N	1	\N	0
+143	32	1	Treatment	Treatment Assignment				3	0	2024-03-06	\N	1	\N	0
 102	25	1	Completion	Form Completion		<ul>\n<li>Complete this form if TB drug intensive PK specimens are collected.</li>\n<li>Record all dates in the following format: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.</li>\n<li>Record all times in 24 hour format <strong>(e.g., 7 AM is recorded as 07:00 and 10 PM is recorded as 22:00)</strong>.</li>\n</ul>		6	0	2024-02-24	\N	1	\N	0
 103	26	1	Shipping	PK Shipping Form for TB Drug Sparse PK and Intensive PK specimens		<ul>\n<li>Record all dates in the following format: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.</li>\n<li>Record all times in 24 hour format <strong>(e.g., 7 AM is recorded as 0700 and 10 PM is recorded as 2200)</strong>.</li>\n</ul>		1	0	2024-02-24	\N	1	\N	0
 104	26	1	Cryovial A	TB Drug Sparse PK Cryovial Label Numbers		<script  type="text/javascript" language="JavaScript"> \nvar cssRules;\nfor (var S = 0; S < document.styleSheets.length; S++){\n if (document.styleSheets[S]['rules']){\n  cssRules = 'rules';\n }\n if (document.styleSheets[S]['cssRules']){\n  cssRules = 'cssRules';\n }\n for (var R = 0; R < document.styleSheets[S][cssRules].length; R++){\n  if (document.styleSheets[S][cssRules][R].selectorText == ".aka_text_block"){\n   document.styleSheets[S][cssRules][R].style["width"] = "3em";\n   document.styleSheets[S][cssRules][R].style["textAlign"] = "left";\n  }\n }\n}\n</script>\nReport the TBTC Label Numbers exactly as written on the labels affixed to the aliquot cryovials. When this section is complete, skip to Section E.		2	0	2024-02-24	\N	1	\N	0
@@ -15574,19 +16399,30 @@ COPY public.section (section_id, crf_version_id, status_id, label, title, subtit
 125	30	1	Visit	Treatment Evaluation Form		Complete this form at each study evaluation during TB treatment. Record all dates in the following format: DD-MMM-YYYY <b> (e.g., 01-JAN-2021) </b>. Verify participant locator information and document any changes on the site’s locator form.\n\n<ul>\n<li> Visits at Weeks 1,2,3,4,6,8,10,12,14,17 and 22 must be &pm; 3 days of scheduled visit </li>\n<li> Visit at Week 26 must be &pm;7 days of scheduled visit </li>\n<p><li> Visits at Weeks 22 and 26: \n  <ul>\n     <li>Complete the Treatment Evaluation (TX) form for participats taking regimen 3 (RHZE/RH) only</li>\n     <li>Complete the Follow-up Evaluation (FU) form for participants taking regimens 1 and 2 (2BMZRb/2BMRb or 2BMZD/2BMD)</li>\n  </ul>\n</li></p>\n\n</ul>		1	0	2024-02-24	\N	1	\N	0
 126	30	1	Evaluation	Evaluation and Study Treatment Status		Complete this form at each study evaluation during TB treatment. Record all dates in the following format: DD-MMM-YYYY <b> (e.g., 01-JAN-2021) </b>. Verify participant locator information and document any changes on the site’s locator form.\n<style type="text/css">.aka_text_block{width:20px;text-align:left;}</style>\n\n<ul>\n<li> Visits at Weeks 1,2,3,4,6,8,10,12,14,17 and 22 must be &pm; 3 days of scheduled visit </li>\n<li> Visit at Week 26 must be &pm;7 days of scheduled visit </li>\n<p><li> Visits at Weeks 22 and 26: \n  <ul>\n     <li>Complete the Treatment Evaluation (TX) form for participats taking regimen 3 (RHZE/RH) only</li>\n     <li>Complete the Follow-up Evaluation (FU) form for participants taking regimens 1 and 2 (2BMZRb/2BMRb or 2BMZD/2BMD)</li>\n  </ul>\n</li></p>\n\n</ul>		2	0	2024-02-24	\N	1	\N	0
 127	30	1	Completion	Comments and Form completion		Complete this form at each study evaluation during TB treatment. Record all dates in the following format: DD-MMM-YYYY <b> (e.g., 01-JAN-2021) </b>. Verify participant locator information and document any changes on the site’s locator form.\n\n<ul>\n<li> Visits at Weeks 1,2,3,4,6,8,10,12,14,17 and 22 must be &pm; 3 days of scheduled visit </li>\n<li> Visit at Week 26 must be &pm;7 days of scheduled visit </li>\n<p><li> Visits at Weeks 22 and 26: \n  <ul>\n     <li>Complete the Treatment Evaluation (TX) form for participats taking regimen 3 (RHZE/RH) only</li>\n     <li>Complete the Follow-up Evaluation (FU) form for participants taking regimens 1 and 2 (2BMZRb/2BMRb or 2BMZD/2BMD)</li>\n  </ul>\n</li></p>\n\n</ul>		3	0	2024-02-24	\N	1	\N	0
-128	31	1	Status	Participant Status				1	0	2024-03-05	\N	1	\N	0
-129	31	1	Enrollment	Enrollment Form		Complete this form if participant has met all eligibility criteria and provided consent to the study.  Record all dates in the following format: DD-MMM-YYYY <b> (e.g., 01-JAN-2022) </b>.  <p>A Participant ID will be generated after submission of this form.</p>		2	0	2024-03-05	\N	1	\N	0
-130	31	1	Treatment	Treatment Assignment				3	0	2024-03-05	\N	1	\N	0
-131	31	1	History-A-Participant	History Form - Section A		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		4	0	2024-03-05	\N	1	\N	0
-132	31	1	History-B-Tuberculosis	History Form - Section B		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		5	0	2024-03-05	\N	1	\N	0
-133	31	1	History-C-Concomitant	History Form - Section C		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		6	0	2024-03-05	\N	1	\N	0
-134	31	1	History-D-HIV	History Form - Section D		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		7	0	2024-03-05	\N	1	\N	0
-135	31	1	History-E/F-Additional	History Form - Section E/F		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		8	0	2024-03-05	\N	1	\N	0
-136	31	1	NonEnroll-A-Patient	Non-Enrollment Form - Section A		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		9	0	2024-03-05	\N	1	\N	0
-137	31	1	NonEnrol-B-Reason	Non-Enrollment Form - Section B		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		10	0	2024-03-05	\N	1	\N	0
-138	31	1	NonEnroll-C-Eligibility	Non-Enrollment Form - Section C		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		11	0	2024-03-05	\N	1	\N	0
-139	31	1	NonEnroll-D-Declined	Non-Enrollment Form - Section D		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		12	0	2024-03-05	\N	1	\N	0
-140	31	1	NonEnroll-E-Site	Non-Enrollment Form - Section E/F		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		13	0	2024-03-05	\N	1	\N	0
+128	31	1	Status	Participant Status				1	0	2024-03-06	\N	1	\N	0
+129	31	1	Enrollment	Enrollment Form		Complete this form if participant has met all eligibility criteria and provided consent to the study.  Record all dates in the following format: DD-MMM-YYYY <b> (e.g., 01-JAN-2022) </b>.  <p>A Participant ID will be generated after submission of this form.</p>		2	0	2024-03-06	\N	1	\N	0
+130	31	1	Treatment	Treatment Assignment				3	0	2024-03-06	\N	1	\N	0
+131	31	1	History-A-Participant	History Form - Section A		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		4	0	2024-03-06	\N	1	\N	0
+132	31	1	History-B-Tuberculosis	History Form - Section B		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		5	0	2024-03-06	\N	1	\N	0
+133	31	1	History-C-Concomitant	History Form - Section C		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		6	0	2024-03-06	\N	1	\N	0
+134	31	1	History-D-HIV	History Form - Section D		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		7	0	2024-03-06	\N	1	\N	0
+135	31	1	History-E/F-Additional	History Form - Section E/F		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		8	0	2024-03-06	\N	1	\N	0
+136	31	1	NonEnroll-A-Patient	Non-Enrollment Form - Section A		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		9	0	2024-03-06	\N	1	\N	0
+137	31	1	NonEnrol-B-Reason	Non-Enrollment Form - Section B		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		10	0	2024-03-06	\N	1	\N	0
+138	31	1	NonEnroll-C-Eligibility	Non-Enrollment Form - Section C		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		11	0	2024-03-06	\N	1	\N	0
+139	31	1	NonEnroll-D-Declined	Non-Enrollment Form - Section D		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		12	0	2024-03-06	\N	1	\N	0
+140	31	1	NonEnroll-E-Site	Non-Enrollment Form - Section E/F		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		13	0	2024-03-06	\N	1	\N	0
+141	32	1	Status	Participant Status				1	0	2024-03-06	\N	1	\N	0
+142	32	1	Enrollment	Enrollment Form		Complete this form if participant has met all eligibility criteria and provided consent to the study.  Record all dates in the following format: DD-MMM-YYYY <b> (e.g., 01-JAN-2022) </b>.  <p>A Participant ID will be generated after submission of this form.</p>		2	0	2024-03-06	\N	1	\N	0
+145	32	1	History-B-Tuberculosis	History Form - Section B		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		5	0	2024-03-06	\N	1	\N	0
+146	32	1	History-C-Concomitant	History Form - Section C		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		6	0	2024-03-06	\N	1	\N	0
+147	32	1	History-D-HIV	History Form - Section D		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		7	0	2024-03-06	\N	1	\N	0
+148	32	1	History-E/F-Additional	History Form - Section E/F		Complete this form after participant has enrolled.  Use the following format for dates: DD-MMM-YYYY <b>(e.g., 01-JAN-2021)</b>. Refer to the Study 38 MOOP <em>(Section TBD)</em> for detailed instructions for form completion.		8	0	2024-03-06	\N	1	\N	0
+149	32	1	NonEnroll-A-Patient	Non-Enrollment Form - Section A		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		9	0	2024-03-06	\N	1	\N	0
+150	32	1	NonEnrol-B-Reason	Non-Enrollment Form - Section B		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		10	0	2024-03-06	\N	1	\N	0
+151	32	1	NonEnroll-C-Eligibility	Non-Enrollment Form - Section C		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		11	0	2024-03-06	\N	1	\N	0
+152	32	1	NonEnroll-D-Declined	Non-Enrollment Form - Section D		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		12	0	2024-03-06	\N	1	\N	0
+153	32	1	NonEnroll-E-Site	Non-Enrollment Form - Section E/F		Complete this form for individuals who completed screening but not enrolled. Use the following format for dates: DD-MMM-YYYY <strong>(e.g., 01-JAN-2021)</strong>.		13	0	2024-03-06	\N	1	\N	0
 \.
 
 
@@ -15615,24 +16451,24 @@ COPY public.status (status_id, name, description) FROM stdin;
 
 COPY public.study (study_id, parent_study_id, unique_identifier, secondary_identifier, name, summary, date_planned_start, date_planned_end, date_created, date_updated, owner_id, update_id, type_id, status_id, principal_investigator, facility_name, facility_city, facility_state, facility_zip, facility_country, facility_recruitment_status, facility_contact_name, facility_contact_degree, facility_contact_phone, facility_contact_email, protocol_type, protocol_description, protocol_date_verification, phase, expected_total_enrollment, sponsor, collaborators, medline_identifier, url, url_description, conditions, keywords, eligibility, gender, age_max, age_min, healthy_volunteer_accepted, purpose, allocation, masking, control, assignment, endpoint, interventions, duration, selection, timing, official_title, results_reference, oc_oid, old_status_id, mail_notification, contact_email) FROM stdin;
 1	\N	default-study	default-study	Default Study		2006-10-23	2006-10-23	2006-10-23	2006-10-23	1	\N	1	1	default											observational		2006-10-23	default	0	default								both			f	Natural History							longitudinal	Convenience Sample	Retrospective		f	S_DEFAULTS1	1	DISABLED	\N
-5	3	25 (Pending)		25	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 25 PI (Pending)	CAB-V: Montreal site (Lead site): Located at the McGill University Health Centre (MUHC) tertiary hospital	Montreal			Canada								\N		99999	n_a								both			f												f	S_25PENDIN	1	DISABLED	\N
-6	3	26 (Pending)		26	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 26 PI (Pending)	26 Seattle & King County TB Control Program	Seattle			USA								\N		99999	n_a								both			f												f	S_26PENDIN	1	DISABLED	\N
-3	\N	7406	7406	CRUSH-TB	NEEDS TO BE SHORTENED	2025-02-03	\N	2024-02-02	2024-02-03	1	1	2	1	Ekaterina V Kurbatova, MD, PhD, MPH											interventional	NEEDS TO BE SHORTENED	\N	n_a	9999999	Centers for Disease Control and Prevention	Tuberculosis Trials Consortium							both			f	treatment										Phase 2C Clinical Trial of Novel, Short-course Regimens for the Treatment of Pulmonary Tuberculosis: CRUSH-TB (Combination Regimens for Shortening TB Treatment)	f	S_7406	1	DISABLED	\N
-7	3	30 (Pending)		30	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 30 PI (Pending)	30 Kampala, Uganda	Kampala			Uganda								\N		99999	n_a								both			f												f	S_30PENDIN	1	DISABLED	\N
-8	3	45 (Pending)		45	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 45 PI (Pending)	45 Les Centres Gheskio (INLR) CRS, Port-au-Prince, Haiti	Port-au-Prince			Haiti								\N		99999	n_a								both			f												f	S_45PENDIN	1	DISABLED	\N
-9	3	52 (Pending)		52	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 52 PI (Pending)	52 CAB-V. Vancouver British Columbia (BC) Centre for Disease Control (BCCDC)	Vancouver			Canada								\N		99999	n_a								both			f												f	S_52PENDIN	1	DISABLED	\N
-14	3	75 (Pending)		75	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 75 PI (Pending)	75 CAB-V. Ho Chi Minh City, Vietnam - Phoi Viet Respiratory Centre	Ho Chi Minh City			Vietnam								\N		99999	n_a								both			f												f	S_75PENDIN	1	DISABLED	\N
-20	3	22 (Pending)		22	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 22 PI (Pending)	22 Denver Health and Hospitals												\N		99999	n_a								both			f												f	S_22PENDIN	1	DISABLED	\N
-11	3	64A (Pending)	7406	64A	NEEDS TO BE SHORTENED	2023-11-21	2026-12-31	2024-02-03	2024-02-03	3	1	2	1	Joseph Burzynski, MD	64A New York City Department of Health and Mental Hygiene- Bureau of Tuberculosis Control	Jackson Heights	New York	11372	USA		Kin Fong H Pun	PhD		kpun@health.nyc.gov			2023-03-02		45	n_a								both			f												f	S_64APENDI	1	DISABLED	\N
-19	3	99 (Pending)		99	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 99 PI (Pending)	99 CAB-V. Edmonton TB Clinic (ETBC)												\N		99999	n_a								both			f												f	S_99PENDIN	1	DISABLED	\N
-17	3	33 (Pending)		33	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 33 PI (Pending)	33 Stellenbosch University, Cape Town, South Africa (DTTC)												\N		99999	n_a								both			f												f	S_33PENDIN	1	DISABLED	\N
-15	3	76 (Pending)		76	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 76 PI (Pending)	76 CAB-V. Can Tho Province, Vietnam - Thot Not District TB Unit	Can Tho			Vietnam								\N		99999	n_a								both			f												f	S_76PENDIN	1	DISABLED	\N
-12	3	67 (Pending)		67	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 67 PI (Pending)	67 GHESKIO (IMIS) Port Au Prince, Haiti	Port-au-Prince			Haiti								\N		99999	n_a								both			f												f	S_67PENDIN	1	DISABLED	\N
-10	3	63 (Pending)		63	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 63 PI (Pending)	63 VA San Antonio, Texas	San Antonio			USA								\N		99999	n_a								both			f												f	S_63PENDIN	1	DISABLED	\N
-13	3	74 (Pending)		74	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 74 PI (Pending)	74 CAB-V. Ho Chi Minh City, Vietnam - District 6 TB Unit	Ho Chi Minh City			Vietnam								\N		99999	n_a								both			f												f	S_74PENDIN	1	DISABLED	\N
-16	3	77 (Pending)		77	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 77 PI (Pending)	77 CAB-V. Centre National Hospitalier Universitaire de Pneumo-Phtisiologie de Cotonou	Cotonou			Benin								\N		99999	n_a								both			f												f	S_77PENDIN	1	DISABLED	\N
-18	3	64 (Pending)		64	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 64 PI (Pending)	64 Brooklyn Campus of the VA NY Harbor Healthcare System												\N		99999	n_a								both			f												f	S_64PENDIN	1	DISABLED	\N
-4	3	9 (Pending)		9	NEEDS TO BE SHORTENED.	\N	\N	2024-02-03	2024-02-03	3	1	2	1	Site 9 PI (Pending)	9 UCTLI/MUSC/BARC	Capetown			South Africa								\N		99999	n_a								both			f												f	S_9PENDING	1	DISABLED	\N
+6	3	26 (Pending)		26	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 26 PI (Pending)	26 Seattle & King County TB Control Program	Seattle			USA								\N		99999	n_a								both			f												f	S_26PENDIN	1	DISABLED	\N
+3	\N	7406	7406	CRUSH-TB	NEEDS TO BE SHORTENED	2025-02-03	\N	2024-02-02	2024-02-29	1	1	2	1	Ekaterina V Kurbatova, MD, PhD, MPH											interventional	NEEDS TO BE SHORTENED	\N	n_a	9999999	Centers for Disease Control and Prevention	Tuberculosis Trials Consortium							both			f	treatment										Phase 2C Clinical Trial of Novel, Short-course Regimens for the Treatment of Pulmonary Tuberculosis: CRUSH-TB (Combination Regimens for Shortening TB Treatment)	f	S_7406	1	DISABLED	\N
+7	3	30 (Pending)		30	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 30 PI (Pending)	30 Kampala, Uganda	Kampala			Uganda								\N		99999	n_a								both			f												f	S_30PENDIN	1	DISABLED	\N
+5	3	25 (Pending)		25	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 25 PI (Pending)	CAB-V: Montreal site (Lead site): Located at the McGill University Health Centre (MUHC) tertiary hospital	Montreal			Canada								\N		99999	n_a								both			f												f	S_25PENDIN	1	DISABLED	\N
+8	3	45 (Pending)		45	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 45 PI (Pending)	45 Les Centres Gheskio (INLR) CRS, Port-au-Prince, Haiti	Port-au-Prince			Haiti								\N		99999	n_a								both			f												f	S_45PENDIN	1	DISABLED	\N
+9	3	52 (Pending)		52	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 52 PI (Pending)	52 CAB-V. Vancouver British Columbia (BC) Centre for Disease Control (BCCDC)	Vancouver			Canada								\N		99999	n_a								both			f												f	S_52PENDIN	1	DISABLED	\N
+19	3	99 (Pending)		99	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 99 PI (Pending)	99 CAB-V. Edmonton TB Clinic (ETBC)												\N		99999	n_a								both			f												f	S_99PENDIN	1	DISABLED	\N
+20	3	22 (Pending)		22	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 22 PI (Pending)	22 Denver Health and Hospitals												\N		99999	n_a								both			f												f	S_22PENDIN	1	DISABLED	\N
+11	3	64A (Pending)	7406	64A	NEEDS TO BE SHORTENED	2023-11-21	2026-12-31	2024-02-03	2024-02-29	3	1	2	1	Joseph Burzynski, MD	64A New York City Department of Health and Mental Hygiene- Bureau of Tuberculosis Control	Jackson Heights	New York	11372	USA		Kin Fong H Pun	PhD		kpun@health.nyc.gov			2023-03-02		45	n_a								both			f												f	S_64APENDI	1	DISABLED	\N
+17	3	33 (Pending)		33	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 33 PI (Pending)	33 Stellenbosch University, Cape Town, South Africa (DTTC)												\N		99999	n_a								both			f												f	S_33PENDIN	1	DISABLED	\N
+15	3	76 (Pending)		76	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 76 PI (Pending)	76 CAB-V. Can Tho Province, Vietnam - Thot Not District TB Unit	Can Tho			Vietnam								\N		99999	n_a								both			f												f	S_76PENDIN	1	DISABLED	\N
+12	3	67 (Pending)		67	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 67 PI (Pending)	67 GHESKIO (IMIS) Port Au Prince, Haiti	Port-au-Prince			Haiti								\N		99999	n_a								both			f												f	S_67PENDIN	1	DISABLED	\N
+10	3	63 (Pending)		63	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 63 PI (Pending)	63 VA San Antonio, Texas	San Antonio			USA								\N		99999	n_a								both			f												f	S_63PENDIN	1	DISABLED	\N
+16	3	77 (Pending)		77	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 77 PI (Pending)	77 CAB-V. Centre National Hospitalier Universitaire de Pneumo-Phtisiologie de Cotonou	Cotonou			Benin								\N		99999	n_a								both			f												f	S_77PENDIN	1	DISABLED	\N
+13	3	74 (Pending)		74	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 74 PI (Pending)	74 CAB-V. Ho Chi Minh City, Vietnam - District 6 TB Unit	Ho Chi Minh City			Vietnam								\N		99999	n_a								both			f												f	S_74PENDIN	1	DISABLED	\N
+4	3	9 (Pending)		9	NEEDS TO BE SHORTENED.	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 9 PI (Pending)	9 UCTLI/MUSC/BARC	Capetown			South Africa								\N		99999	n_a								both			f												f	S_9PENDING	1	DISABLED	\N
+18	3	64 (Pending)		64	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 64 PI (Pending)	64 Brooklyn Campus of the VA NY Harbor Healthcare System												\N		99999	n_a								both			f												f	S_64PENDIN	1	DISABLED	\N
+14	3	75 (Pending)		75	NEEDS TO BE SHORTENED	\N	\N	2024-02-03	2024-02-29	3	1	2	1	Site 75 PI (Pending)	75 CAB-V. Ho Chi Minh City, Vietnam - Phoi Viet Respiratory Centre	Ho Chi Minh City			Vietnam								\N		99999	n_a								both			f												f	S_75PENDIN	1	DISABLED	\N
 \.
 
 
@@ -15641,12 +16477,9 @@ COPY public.study (study_id, parent_study_id, unique_identifier, secondary_ident
 --
 
 COPY public.study_event (study_event_id, study_event_definition_id, study_subject_id, location, sample_ordinal, date_start, date_end, owner_id, status_id, date_created, date_updated, update_id, subject_event_status_id, start_time_flag, end_time_flag) FROM stdin;
-40	15	33		1	2024-03-01 12:00:00	2025-03-01 12:00:00	1	1	2024-03-01 16:52:02.664928+00	\N	\N	1	f	f
-41	15	34		1	2024-03-01 12:00:00	2025-03-01 12:00:00	1	1	2024-03-01 16:52:36.898915+00	2024-03-01 16:52:49.307632+00	1	3	f	f
-42	15	36		1	2024-03-01 00:00:00	2024-03-01 00:00:00	1	1	2024-03-01 17:12:20.512881+00	\N	\N	1	f	f
-43	15	39		1	2024-03-01 00:00:00	2024-03-01 00:00:00	1	1	2024-03-01 21:52:14.192194+00	\N	\N	1	f	f
-44	15	43		1	2024-03-05 12:00:00	\N	1	1	2024-03-05 12:18:12.612311+00	2024-03-05 12:18:24.217563+00	1	3	f	f
-45	15	2		1	2024-03-05 12:00:00	\N	1	1	2024-03-05 12:21:46.750282+00	2024-03-05 12:21:51.066602+00	1	3	f	f
+51	41	39		1	2024-03-07 12:00:00	\N	1	1	2024-03-07 01:13:00.528431+00	2024-03-07 01:13:06.741634+00	1	3	f	f
+52	15	39		1	2024-03-07 12:00:00	\N	1	1	2024-03-07 01:14:14.172618+00	2024-03-07 01:16:48.297505+00	1	3	f	f
+53	41	40		1	2024-03-07 12:00:00	\N	1	1	2024-03-07 08:56:34.795443+00	2024-03-07 08:58:52.273138+00	1	3	f	f
 \.
 
 
@@ -15655,33 +16488,33 @@ COPY public.study_event (study_event_id, study_event_definition_id, study_subjec
 --
 
 COPY public.study_event_definition (study_event_definition_id, study_id, name, description, repeating, type, category, owner_id, status_id, date_created, date_updated, update_id, ordinal, oc_oid) FROM stdin;
-31	3	W06		f	scheduled		1	1	2024-02-24	2024-03-05	1	7	SE_W06
-40	3	Med Log		t	scheduled		1	1	2024-02-24	2024-03-05	0	27	SE_MEDLOG
-39	3	AE		t	unscheduled		1	1	2024-02-24	2024-03-05	0	26	SE_AE
-19	3	W04		f	scheduled		1	1	2024-02-24	2024-03-05	1	6	SE_W04
-38	3	PPTR		t	unscheduled		1	1	2024-02-24	2024-03-05	0	25	SE_PPTR
-37	3	UNS		t	unscheduled		1	1	2024-02-24	2024-03-05	0	24	SE_UNS
-18	3	W03		f	scheduled		1	1	2024-02-24	2024-03-05	1	5	SE_W03
-36	3	EOFFTT		f	scheduled		1	1	2024-02-24	2024-03-05	0	23	SE_EOFFTT
-35	3	EONTT		t	scheduled		1	1	2024-02-24	2024-03-05	0	22	SE_EONTT
-17	3	W02		f	scheduled		1	1	2024-02-24	2024-03-05	1	4	SE_W02
-34	3	FC		t	unscheduled		1	1	2024-02-24	2024-03-05	0	21	SE_FC
-33	3	TC		t	unscheduled		1	1	2024-02-24	2024-03-05	0	20	SE_TC
-16	3	W01		f	scheduled		1	1	2024-02-24	2024-03-05	1	3	SE_W01
-32	3	W78		f	scheduled		1	1	2024-02-24	2024-03-05	0	19	SE_W78
-30	3	W65		f	scheduled		1	1	2024-02-24	2024-03-05	0	18	SE_W65
-15	3	BL		f	scheduled		1	1	2024-02-24	2024-03-05	1	2	SE_BL
-29	3	W52		f	scheduled		1	1	2024-02-24	2024-03-05	1	17	SE_W52
-41	3	EN		f	scheduled		1	1	2024-03-05	2024-03-05	1	1	SE_EN
-28	3	W39		f	scheduled		1	1	2024-02-24	2024-03-05	0	16	SE_W39
-27	3	W26		f	scheduled		1	1	2024-02-24	2024-03-05	0	15	SE_W26
-26	3	W22		f	scheduled		1	1	2024-02-24	2024-03-05	0	14	SE_W22
-25	3	W17		f	scheduled		1	1	2024-02-24	2024-03-05	1	13	SE_W17
-24	3	W14		f	scheduled		1	1	2024-02-24	2024-03-05	1	12	SE_W14
-23	3	W12		f	scheduled		1	1	2024-02-24	2024-03-05	1	11	SE_W12
-22	3	W10		f	scheduled		1	1	2024-02-24	2024-03-05	1	10	SE_W10
-21	3	W08		f	scheduled		1	1	2024-02-24	2024-03-05	1	9	SE_W08
-20	3	X		f	scheduled		1	5	2024-02-24	2024-03-05	1	8	SE_W05
+27	3	W26		f	scheduled		1	1	2024-02-24	2024-03-06	0	15	SE_W26
+26	3	W22		f	scheduled		1	1	2024-02-24	2024-03-06	0	14	SE_W22
+25	3	W17		f	scheduled		1	1	2024-02-24	2024-03-06	0	13	SE_W17
+24	3	W14		f	scheduled		1	1	2024-02-24	2024-03-06	0	12	SE_W14
+23	3	W12		f	scheduled		1	1	2024-02-24	2024-03-06	0	11	SE_W12
+22	3	W10		f	scheduled		1	1	2024-02-24	2024-03-06	0	10	SE_W10
+40	3	Med Log		t	scheduled		1	1	2024-02-24	2024-03-06	0	27	SE_MEDLOG
+21	3	W08		f	scheduled		1	1	2024-02-24	2024-03-06	0	9	SE_W08
+39	3	AE		t	unscheduled		1	1	2024-02-24	2024-03-06	0	26	SE_AE
+38	3	PPTR		t	unscheduled		1	1	2024-02-24	2024-03-06	0	25	SE_PPTR
+20	3	X		f	scheduled		1	5	2024-02-24	2024-03-06	1	8	SE_W05
+37	3	UNS		t	unscheduled		1	1	2024-02-24	2024-03-06	0	24	SE_UNS
+36	3	EOFFTT		f	scheduled		1	1	2024-02-24	2024-03-06	0	23	SE_EOFFTT
+31	3	W06		f	scheduled		1	1	2024-02-24	2024-03-06	0	7	SE_W06
+35	3	EONTT		t	scheduled		1	1	2024-02-24	2024-03-06	0	22	SE_EONTT
+34	3	FC		t	unscheduled		1	1	2024-02-24	2024-03-06	0	21	SE_FC
+19	3	W04		f	scheduled		1	1	2024-02-24	2024-03-06	1	6	SE_W04
+33	3	TC		t	unscheduled		1	1	2024-02-24	2024-03-06	0	20	SE_TC
+32	3	W78		f	scheduled		1	1	2024-02-24	2024-03-06	0	19	SE_W78
+18	3	W03		f	scheduled		1	1	2024-02-24	2024-03-06	0	5	SE_W03
+30	3	W65		f	scheduled		1	1	2024-02-24	2024-03-06	0	18	SE_W65
+29	3	W52		f	scheduled		1	1	2024-02-24	2024-03-06	1	17	SE_W52
+28	3	W39		f	scheduled		1	1	2024-02-24	2024-03-06	0	16	SE_W39
+17	3	W02		f	scheduled		1	1	2024-02-24	2024-03-06	0	4	SE_W02
+16	3	W01		f	scheduled		1	1	2024-02-24	2024-03-06	0	3	SE_W01
+41	3	EN		f	scheduled		1	1	2024-03-06	2024-03-06	0	1	SE_EN
+15	3	BL		f	scheduled		1	1	2024-02-24	2024-03-06	1	2	SE_BL
 \.
 
 
@@ -15700,7 +16533,7 @@ COPY public.study_group (study_group_id, name, description, study_group_class_id
 --
 
 COPY public.study_group_class (study_group_class_id, name, study_id, owner_id, date_created, group_class_type_id, status_id, date_updated, update_id, subject_assignment) FROM stdin;
-1	EN STAT	3	1	2024-03-03	4	5	2024-03-04	1	Required
+1	Enrollment state	3	1	2024-02-29	4	1	\N	\N	Required
 \.
 
 
@@ -15757,25 +16590,14 @@ COPY public.study_parameter_value (study_parameter_value_id, study_id, value, pa
 14	1	false	secondaryLabelViewable
 5	1	yes	interviewerNameRequired
 8	1	yes	interviewDateRequired
-11	9	3	collectDob
-12	9	false	genderRequired
-13	10	3	collectDob
-14	10	false	genderRequired
-29	18	3	collectDob
-30	18	false	genderRequired
-15	11	3	collectDob
-16	11	false	genderRequired
 17	12	3	collectDob
 18	12	false	genderRequired
 19	13	3	collectDob
 20	13	false	genderRequired
+21	14	3	collectDob
+22	14	false	genderRequired
+23	15	3	collectDob
 24	15	false	genderRequired
-25	16	3	collectDob
-26	16	false	genderRequired
-1	4	3	collectDob
-2	4	false	genderRequired
-31	19	3	collectDob
-32	19	false	genderRequired
 35	3	3	collectDob
 36	3	true	discrepancyManagement
 37	3	false	genderRequired
@@ -15820,7 +16642,7 @@ COPY public.study_parameter_value (study_parameter_value_id, study_id, value, pa
 76	16	true	interviewDateEditable
 77	4	true	interviewDateEditable
 78	19	true	interviewDateEditable
-79	3	auto non-editable	subjectIdGeneration
+79	3	manual	subjectIdGeneration
 80	3		subjectIdPrefixSuffix
 81	3	true	personIdShownOnCRF
 82	3	false	secondaryLabelViewable
@@ -15838,9 +16660,20 @@ COPY public.study_parameter_value (study_parameter_value_id, study_id, value, pa
 28	17	false	genderRequired
 9	8	3	collectDob
 10	8	false	genderRequired
-21	14	3	collectDob
-22	14	false	genderRequired
-23	15	3	collectDob
+11	9	3	collectDob
+12	9	false	genderRequired
+13	10	3	collectDob
+14	10	false	genderRequired
+29	18	3	collectDob
+30	18	false	genderRequired
+15	11	3	collectDob
+16	11	false	genderRequired
+25	16	3	collectDob
+26	16	false	genderRequired
+1	4	3	collectDob
+2	4	false	genderRequired
+31	19	3	collectDob
+32	19	false	genderRequired
 \.
 
 
@@ -15849,50 +16682,8 @@ COPY public.study_parameter_value (study_parameter_value_id, study_id, value, pa
 --
 
 COPY public.study_subject (study_subject_id, label, secondary_label, subject_id, study_id, status_id, enrollment_date, date_created, date_updated, owner_id, update_id, oc_oid, time_zone) FROM stdin;
-1	03022024034116	38-30-00001	1	3	1	2024-02-03	2024-02-03 03:41:33.278528+00	2024-02-03 03:43:28.726723+00	1	0	SS_03022024	
-2	03022024034337		2	3	1	2024-02-03	2024-02-03 03:46:14.357191+00	\N	1	\N	SS_03022024_9745	
-3	03022024034620		3	3	1	2024-02-03	2024-02-03 03:47:13.274099+00	\N	1	\N	SS_03022024_4551	
-4	03022024034717		4	3	1	2024-02-03	2024-02-03 03:47:27.798454+00	\N	1	\N	SS_03022024_4838	
-5	03022024034731		5	3	1	2024-02-03	2024-02-03 03:47:41.256636+00	\N	1	\N	SS_03022024_7317	
-7	03022024034947	38-30-00007	7	20	1	2024-02-03	2024-02-03 03:49:58.833203+00	2024-02-03 03:51:20.063178+00	1	0	SS_03022024_3623	
-8	03022024035235	38-30-00008	8	3	1	2024-02-03	2024-02-03 04:00:58.433572+00	2024-02-03 12:49:54.107347+00	1	0	SS_03022024_9576	
-9	05022024184003		9	3	1	2024-02-05	2024-02-05 18:40:35.148118+00	\N	2	\N	SS_05022024	
-10	05022024184840	38-30-00010	10	3	1	2024-02-05	2024-02-05 18:49:00.615718+00	2024-02-05 18:51:32.301746+00	2	0	SS_05022024_2472	
-11	05022024185439		11	3	1	2024-02-05	2024-02-05 18:55:35.515775+00	\N	2	\N	SS_05022024_9841	
-12	05022024192233	38-30-00012	12	3	1	2024-02-05	2024-02-05 19:22:49.693336+00	2024-02-05 19:24:47.906714+00	2	0	SS_05022024_8787	
-13	05022024202816		13	3	1	2024-02-05	2024-02-05 20:29:33.963173+00	\N	4	\N	SS_05022024_2960	
-14	06022024044542	38-30-00014	14	3	1	2024-02-06	2024-02-06 04:45:56.751727+00	2024-02-06 05:06:08.568569+00	1	0	SS_06022024	
-15	07022024040820	38-9-00015	15	3	1	2024-02-07	2024-02-07 04:08:38.276178+00	2024-02-07 04:18:08.438992+00	1	0	SS_07022024	
-16	07022024042127	38-30-00016	16	3	1	2024-02-07	2024-02-07 04:21:40.660378+00	2024-02-07 04:23:04.45876+00	1	0	SS_07022024_7287	
-17	07022024162735	38-63-00017	17	3	1	2024-02-07	2024-02-07 16:28:16.140158+00	2024-02-07 16:30:42.285983+00	1	0	SS_07022024_335	
-18	08022024041341	38-9-00018	18	3	1	2024-02-08	2024-02-08 04:13:47.13353+00	2024-02-08 04:15:03.771211+00	1	0	SS_08022024	
-19	08022024195346		19	3	1	2024-02-08	2024-02-08 19:53:52.293799+00	\N	1	\N	SS_08022024_373	
-20	09022024035625		20	3	1	2024-02-09	2024-02-09 03:56:30.934161+00	\N	1	\N	SS_09022024	
-21	09022024045341	38-9-00021	21	3	1	2024-02-09	2024-02-09 04:53:49.657367+00	2024-02-09 04:55:27.427801+00	1	0	SS_09022024_5438	
-22	09022024054509		22	3	1	2024-02-09	2024-02-09 05:45:13.760669+00	\N	1	\N	SS_09022024_2372	
-23	09022024054517	38-9-00023	23	3	1	2024-02-09	2024-02-09 05:45:22.651803+00	2024-02-09 05:46:32.233487+00	1	0	SS_09022024_3042	
-6	03022024034850	38-9-00006	6	3	1	2024-02-03	2024-02-03 03:49:01.607857+00	2024-02-09 21:58:25.041756+00	1	0	SS_03022024_1350	
-24	09022024220502		24	3	1	2024-02-09	2024-02-09 22:05:27.198199+00	\N	2	\N	SS_09022024_6238	
-25	10022024033934	38-9-00025	25	3	1	2024-02-10	2024-02-10 03:40:48.355169+00	2024-02-10 03:42:09.534774+00	1	0	SS_10022024	
-26	10022024040921	38-9-00026	26	3	1	2024-02-10	2024-02-10 04:09:32.335349+00	2024-02-10 04:11:09.008452+00	1	0	SS_10022024_402	
-27	11022024041746	38-9-00027	27	3	1	2024-02-11	2024-02-11 04:17:59.524573+00	2024-02-11 04:19:48.157447+00	1	0	SS_11022024	
-28	13022024042507	38-9-00028	28	3	1	2024-02-13	2024-02-13 04:25:15.244518+00	2024-02-13 04:26:30.33371+00	1	0	SS_13022024	
-29	14022024023334	38-9-00029	29	3	1	2024-02-14	2024-02-14 02:33:50.880414+00	2024-02-14 02:35:45.843962+00	1	0	SS_14022024	
-30	14022024043341	38-9-00030	30	3	1	2024-02-14	2024-02-14 04:33:58.283354+00	2024-02-14 04:35:13.671191+00	1	0	SS_14022024_7746	
-31	16022024045317	38-9-00031	31	3	1	2024-02-16	2024-02-16 04:53:33.820357+00	2024-02-16 04:57:57.281173+00	1	0	SS_16022024	
-32	21022024042041	38-9-00032	32	3	1	2024-02-21	2024-02-21 04:20:47.994757+00	2024-02-21 04:22:37.370811+00	1	0	SS_21022024	
-33	01032024165051	38-30-0033	33	3	1	2024-03-01	2024-03-01 16:51:30.104389+00	\N	1	\N	SS_01032024	
-34	01032024165210	38-30-0034	34	3	1	2024-03-01	2024-03-01 16:52:16.885808+00	\N	1	\N	SS_01032024_4138	
-35	01032024165343	38-30-0035	35	3	1	2024-03-01	2024-03-01 16:53:58.389539+00	\N	1	\N	SS_01032024_8241	
-36	01032024171209	38-30-0036	36	3	1	2024-03-01	2024-03-01 17:12:20.491367+00	\N	1	\N	SS_01032024_5209	
-37	01032024171717	38-30-0037	37	13	1	2024-03-01	2024-03-01 17:17:23.201802+00	\N	9	\N	SS_01032024_1172	
-38	01032024180037	38-30-0038	38	3	1	2024-03-01	2024-03-01 18:00:46.423052+00	\N	1	\N	SS_01032024_6224	
-39	01032024215146	38-30-0039	39	3	1	2024-03-01	2024-03-01 21:52:14.17359+00	\N	1	\N	SS_01032024_9281	
-40	03032024165148	38-30-0040	40	3	1	2024-03-03	2024-03-03 16:51:57.488533+00	\N	1	\N	SS_03032024	
-41	03032024165305	38-30-0041	41	3	1	2024-03-03	2024-03-03 16:55:23.68687+00	\N	1	\N	SS_03032024_6034	
-42	03032024170045	38-30-0042	42	3	1	2024-03-03	2024-03-03 17:09:45.900192+00	\N	1	\N	SS_03032024_7253	
-43	38-00-EN00030		43	3	1	2024-03-05	2024-03-05 12:10:52.637649+00	\N	1	\N	SS_3800EN00	
-44	38-00-N00030		44	3	1	2024-03-05	2024-03-05 12:13:02.431543+00	\N	1	\N	SS_3800N000	
+39	38-9-00039	38-9-00039	39	3	1	2024-03-07	2024-03-07 01:12:19.656262+00	2024-03-07 01:16:48.277246+00	1	0	SS_00P00001	
+40	38-09-00040	38-09-00040	40	3	1	2024-03-07	2024-03-07 08:53:16.910599+00	2024-03-07 08:58:52.257311+00	1	0	SS_00P00002	
 \.
 
 
@@ -15921,9 +16712,8 @@ director	3	1	1	2024-02-02	\N	\N	Claire_Sadowski
 director	3	1	1	2024-02-02	\N	\N	Francois_Egbuonu
 director	3	1	1	2024-02-02	\N	\N	Jessica_Brown
 director	3	1	1	2024-02-02	\N	\N	Kit_Whitworth
-admin	\N	1	3	2024-02-03	2024-02-03	3	AlagantUSER
-admin	\N	1	2	2024-02-09	2024-02-09	2	Kia_Bryant
-Data Specialist	13	1	1	2024-03-01	\N	\N	lucioric
+admin	\N	1	3	2024-02-28	2024-02-28	3	AlagantUSER
+admin	\N	1	2	2024-02-29	2024-02-29	2	Kia_Bryant
 \.
 
 
@@ -15932,50 +16722,8 @@ Data Specialist	13	1	1	2024-03-01	\N	\N	lucioric
 --
 
 COPY public.subject (subject_id, father_id, mother_id, status_id, date_of_birth, gender, unique_identifier, date_created, owner_id, date_updated, update_id, dob_collected) FROM stdin;
-1	\N	\N	1	\N	m		2024-02-03 03:41:33.259936+00	1	\N	\N	f
-2	\N	\N	1	\N	f		2024-02-03 03:46:14.338373+00	1	\N	\N	f
-3	\N	\N	1	\N	m		2024-02-03 03:47:13.256978+00	1	\N	\N	f
-4	\N	\N	1	\N	f		2024-02-03 03:47:27.780307+00	1	\N	\N	f
-5	\N	\N	1	\N	f		2024-02-03 03:47:41.238243+00	1	\N	\N	f
-6	\N	\N	1	\N	m		2024-02-03 03:49:01.588917+00	1	\N	\N	f
-7	\N	\N	1	\N	m		2024-02-03 03:49:58.816128+00	1	\N	\N	f
-8	\N	\N	1	\N	\N		2024-02-03 04:00:58.415045+00	1	\N	\N	f
-9	\N	\N	1	\N	f		2024-02-05 18:40:35.136475+00	2	\N	\N	f
-10	\N	\N	1	\N	f		2024-02-05 18:49:00.59773+00	2	\N	\N	f
-11	\N	\N	1	\N	f		2024-02-05 18:55:35.498032+00	2	\N	\N	f
-12	\N	\N	1	\N	m		2024-02-05 19:22:49.675305+00	2	\N	\N	f
-13	\N	\N	1	\N	m		2024-02-05 20:29:33.945062+00	4	\N	\N	f
-14	\N	\N	1	\N	m		2024-02-06 04:45:56.724+00	1	\N	\N	f
-15	\N	\N	1	\N	f		2024-02-07 04:08:38.261305+00	1	\N	\N	f
-16	\N	\N	1	\N	m		2024-02-07 04:21:40.641678+00	1	\N	\N	f
-17	\N	\N	1	\N	f		2024-02-07 16:28:16.117622+00	1	\N	\N	f
-18	\N	\N	1	\N	m		2024-02-08 04:13:47.120201+00	1	\N	\N	f
-19	\N	\N	1	\N	m		2024-02-08 19:53:52.273524+00	1	\N	\N	f
-20	\N	\N	1	\N	m		2024-02-09 03:56:30.907386+00	1	\N	\N	f
-21	\N	\N	1	\N	m		2024-02-09 04:53:49.62462+00	1	\N	\N	f
-22	\N	\N	1	\N	f		2024-02-09 05:45:13.74063+00	1	\N	\N	f
-23	\N	\N	1	\N	f		2024-02-09 05:45:22.634239+00	1	\N	\N	f
-24	\N	\N	1	\N	f		2024-02-09 22:05:27.178865+00	2	\N	\N	f
-25	\N	\N	1	\N	m		2024-02-10 03:40:48.342146+00	1	\N	\N	f
-26	\N	\N	1	\N	m		2024-02-10 04:09:32.293322+00	1	\N	\N	f
-27	\N	\N	1	\N	m		2024-02-11 04:17:58.736603+00	1	\N	\N	f
-28	\N	\N	1	\N	f		2024-02-13 04:25:15.209443+00	1	\N	\N	f
-29	\N	\N	1	\N	m		2024-02-14 02:33:50.852352+00	1	\N	\N	f
-30	\N	\N	1	\N	m		2024-02-14 04:33:58.250513+00	1	\N	\N	f
-31	\N	\N	1	\N	m		2024-02-16 04:53:33.775141+00	1	\N	\N	f
-32	\N	\N	1	\N	f		2024-02-21 04:20:47.958783+00	1	\N	\N	f
-33	\N	\N	1	\N	m		2024-03-01 16:51:30.075642+00	1	\N	\N	f
-34	\N	\N	1	\N	\N		2024-03-01 16:52:16.864814+00	1	\N	\N	f
-35	\N	\N	1	\N	\N		2024-03-01 16:53:58.37186+00	1	\N	\N	f
-36	\N	\N	1	\N	m		2024-03-01 17:12:20.470284+00	1	\N	\N	f
-37	\N	\N	1	\N	m		2024-03-01 17:17:23.183111+00	9	\N	\N	f
-38	\N	\N	1	\N	\N		2024-03-01 18:00:46.404618+00	1	\N	\N	f
-39	\N	\N	1	\N	m		2024-03-01 21:52:14.155758+00	1	\N	\N	f
-40	\N	\N	1	\N	\N		2024-03-03 16:51:57.466331+00	1	\N	\N	f
-41	\N	\N	1	\N	\N		2024-03-03 16:55:23.668706+00	1	\N	\N	f
-42	\N	\N	1	\N	\N		2024-03-03 17:09:45.882221+00	1	\N	\N	f
-43	\N	\N	1	\N	m		2024-03-05 12:10:52.613289+00	1	\N	\N	f
-44	\N	\N	1	\N	m		2024-03-05 12:13:02.417722+00	1	\N	\N	f
+39	\N	\N	1	\N	m		2024-03-07 01:12:19.605862+00	1	\N	\N	f
+40	\N	\N	1	\N	m		2024-03-07 08:53:16.881372+00	1	\N	\N	f
 \.
 
 
@@ -16000,6 +16748,8 @@ COPY public.subject_event_status (subject_event_status_id, name, description) FR
 --
 
 COPY public.subject_group_map (subject_group_map_id, study_group_class_id, study_subject_id, study_group_id, status_id, owner_id, date_created, date_updated, update_id, notes) FROM stdin;
+2	1	39	1	1	1	2024-03-07	\N	\N	
+3	1	40	1	1	1	2024-03-07	\N	\N	
 \.
 
 
@@ -16051,28 +16801,12 @@ COPY public.usage_statistics_data (id, param_key, param_value, update_timestamp,
 31	oc_start_time	2024-02-16 04:41:54.144	2024-02-16 04:41:54.144	0
 32	oc_stop_time	2024-02-21 03:45:30.725	2024-02-21 03:45:30.725	0
 33	oc_start_time	2024-02-21 03:51:34.138	2024-02-21 03:51:34.138	0
-34	oc_start_time	2024-03-01 15:46:29.767	2024-03-01 15:46:29.767	0
-35	oc_start_time	2024-03-02 04:02:25.778	2024-03-02 04:02:25.778	0
-36	oc_start_time	2024-03-02 04:17:01.954	2024-03-02 04:17:01.954	0
-37	oc_start_time	2024-03-02 05:47:35.023	2024-03-02 05:47:35.023	0
-38	oc_start_time	2024-03-02 05:55:56.266	2024-03-02 05:55:56.266	0
-39	oc_start_time	2024-03-02 15:14:02.028	2024-03-02 15:14:02.028	0
-40	oc_start_time	2024-03-03 20:53:11.299	2024-03-03 20:53:11.299	0
-41	oc_start_time	2024-03-04 00:22:34.146	2024-03-04 00:22:34.146	0
-42	oc_start_time	2024-03-04 00:30:48.222	2024-03-04 00:30:48.222	0
-43	oc_start_time	2024-03-04 17:04:36.006	2024-03-04 17:04:36.006	0
-44	oc_start_time	2024-03-04 18:32:05.289	2024-03-04 18:32:05.289	0
-45	oc_start_time	2024-03-04 18:44:17.131	2024-03-04 18:44:17.131	0
-46	oc_start_time	2024-03-04 18:59:36.953	2024-03-04 18:59:36.953	0
-47	oc_start_time	2024-03-04 19:08:14.525	2024-03-04 19:08:14.525	0
-48	oc_start_time	2024-03-04 20:56:41.174	2024-03-04 20:56:41.174	0
-49	oc_start_time	2024-03-04 22:11:19.34	2024-03-04 22:11:19.34	0
-50	oc_start_time	2024-03-04 23:06:39.117	2024-03-04 23:06:39.117	0
-51	oc_start_time	2024-03-04 23:42:00.573	2024-03-04 23:42:00.573	0
-52	oc_start_time	2024-03-05 00:33:34.16	2024-03-05 00:33:34.16	0
-53	oc_start_time	2024-03-05 03:10:35.821	2024-03-05 03:10:35.821	0
-54	oc_start_time	2024-03-05 14:33:10.406	2024-03-05 14:33:10.406	0
-55	oc_start_time	2024-03-05 15:47:35.631	2024-03-05 15:47:35.631	0
+34	oc_start_time	2024-03-02 04:39:48.814	2024-03-02 04:39:48.814	0
+35	oc_start_time	2024-03-02 04:54:10.649	2024-03-02 04:54:10.649	0
+36	oc_start_time	2024-03-02 05:25:35.231	2024-03-02 05:25:35.231	0
+37	oc_start_time	2024-03-07 00:55:23.347	2024-03-07 00:55:23.347	0
+38	oc_start_time	2024-03-07 04:45:18.626	2024-03-07 04:45:18.626	0
+39	oc_start_time	2024-03-07 13:22:26.594	2024-03-07 13:22:26.594	0
 \.
 
 
@@ -16081,15 +16815,14 @@ COPY public.usage_statistics_data (id, param_key, param_value, update_timestamp,
 --
 
 COPY public.user_account (user_id, user_name, passwd, first_name, last_name, email, active_study, institutional_affiliation, status_id, owner_id, date_created, date_updated, date_lastvisit, passwd_timestamp, passwd_challenge_question, passwd_challenge_answer, phone, user_type_id, update_id, enabled, account_non_locked, lock_counter, run_webservices, access_code, time_zone, enable_api_key, api_key, authtype, authsecret) FROM stdin;
+3	AlagantUSER	{rWuKg5ZpDX+NfhUOuc2lqO3GfZdvsAEeB9U/9VVrz7U=}b6c595d12f74bb7730ae7f89aeceedf9cfd663ad	User	Alagant	nilluser@nillmail.com	3	Alagant	1	1	2024-02-02	2024-02-28	2024-02-28 03:57:41.007	2024-02-28				1	3	t	t	0	f	\N	\N	t	a0c230f4385b47d2b289acca48e86633	STANDARD	
+2	Kia_Bryant	{dOAZbVdHln3TsIl9qHn1pLHU6DkOM93FLkbMkduqHJ0=}33308da3196e91e8ae2271ee3c646f4c9f17e4c2	Kia	Bryant	hwp4@cdc.gov	3	CDC	1	1	2024-02-02	2024-02-29	2024-02-29 14:46:27.536	2024-02-29				1	2	t	t	0	f	\N	\N	t	67bc41ed660748989abbb53ec2994bae	STANDARD	
 5	Claire_Sadowski	{0jPGqpnDrP4PfRbBRu8O0K/Pf0PaphXgbYPYLibqgVg=}3d0dc8d5e548fc560ff5c608f9c77e071bc347e5	Claire	Sadowski	oes1@cdc.gov	3	CDC	1	1	2024-02-02	2024-02-06	2024-02-06 23:22:41.696	2024-02-06				2	5	t	t	0	f	\N	\N	t	82d38cb25c1f401b8ac8e339641bbb57	STANDARD	
 4	Melissa_Fagley	{DmTPhudDroYACjjFtzpujtxUd2iWkEufLpo8Y139NYg=}0cca001888e2aa821b32781277c7f2479fea1206	Melissa	Fagley	muf9@cdc.gov	3	CDC	1	1	2024-02-02	2024-02-09	2024-02-09 23:09:07.254	2024-02-09				2	4	t	t	0	f	\N	\N	t	27bc85e7b35440a28d5dccd6c73156bc	STANDARD	
-3	AlagantUSER	{rWuKg5ZpDX+NfhUOuc2lqO3GfZdvsAEeB9U/9VVrz7U=}b6c595d12f74bb7730ae7f89aeceedf9cfd663ad	User	Alagant	nilluser@nillmail.com	3	Alagant	1	1	2024-02-02	2024-02-03	2024-02-03 03:06:58.65	2024-02-03				1	3	t	t	0	f	\N	\N	t	a0c230f4385b47d2b289acca48e86633	STANDARD	
 6	Francois_Egbuonu	{/rlPwgUciJ626WKdCdkcgRDrm9GSjyaEwY2TIt6sghA=}747527bc897e5d560af29d05c53cd10c79a93f00	Francois	Egbuonu	tqt9@cdc.gov	3	CDC	1	1	2024-02-02	2024-02-06	2024-02-06 23:23:15.779	2024-02-06				2	6	t	t	0	f	\N	\N	t	d53f498b20ea43608c8abe0130d408db	STANDARD	
 7	Jessica_Brown	{AYzHeh12ryHvqf4zA7OVKVhObjS+YlGUFTdLhjOSphE=}18f65d1c624ef0f4a544054c378b732bbea600b3	Jessica	Brown	ord4@cdc.gov	3	CDC	1	1	2024-02-02	2024-02-06	2024-02-06 23:23:45.71	2024-02-06				2	7	t	t	0	f	\N	\N	t	46c7588e732a471090d042c6e8be3a6e	STANDARD	
 8	Kit_Whitworth	{Kii1DHYv2e0B5O39rzpKnFWJ2K5IxFtP9tRvPempgOk=}184cdd18108b439a54e93040a5a71d259348e6ea	Kit	Whitworth	wcw2@cdc.gov	3	CDC	1	1	2024-02-02	2024-02-09	2024-02-09 23:11:56.708	2024-02-09				2	8	t	t	0	f	\N	\N	t	4bfcef59ce8949899cc734a7e8a35c7e	STANDARD	
-2	Kia_Bryant	{dOAZbVdHln3TsIl9qHn1pLHU6DkOM93FLkbMkduqHJ0=}33308da3196e91e8ae2271ee3c646f4c9f17e4c2	Kia	Bryant	hwp4@cdc.gov	3	CDC	1	1	2024-02-02	2024-02-09	2024-02-09 22:03:04.69	2024-02-09				1	2	t	t	0	f	\N	\N	t	67bc41ed660748989abbb53ec2994bae	STANDARD	
-1	root	{FnISEFpeF2jR+dvr2FI8/LS7wY71571AwjndM4gkzYs=}7d6aa7c0d7a25db30d6dd20c691fcb4d8b911f33	Root	User	openclinica_admin@example.com	3	Akaza Research	1	1	\N	2024-03-05	2024-03-05 15:56:53.518	2024-03-05	Favorite Animal	dog	617 621 8585	3	1	t	t	0	f	\N	\N	f	\N	STANDARD	
-9	lucioric	17a7b1ca853c34f207cc94dc2514c6386a90a6c3	Lucio	Montero	lucioric2000@hotmail.com	13	Alagant	1	1	2024-03-01	2024-03-01	2024-03-01 17:16:23.624	2024-03-01				3	9	t	t	0	t	\N	\N	t	7c387458e3b343e2b299b645b0bc8067	STANDARD	
+1	root	{FnISEFpeF2jR+dvr2FI8/LS7wY71571AwjndM4gkzYs=}7d6aa7c0d7a25db30d6dd20c691fcb4d8b911f33	Root	User	openclinica_admin@example.com	3	Akaza Research	1	1	\N	2024-03-07	2024-03-07 10:01:47.193	2024-03-07	Favorite Animal	dog	617 621 8585	3	1	t	t	0	f	\N	\N	f	\N	STANDARD	
 \.
 
 
@@ -17720,6 +18453,123 @@ COPY public.versioning_map (crf_version_id, item_id) FROM stdin;
 31	923
 31	924
 31	925
+31	926
+32	811
+32	812
+32	813
+32	814
+32	815
+32	816
+32	817
+32	818
+32	819
+32	820
+32	821
+32	822
+32	823
+32	824
+32	825
+32	826
+32	827
+32	828
+32	829
+32	830
+32	831
+32	832
+32	833
+32	834
+32	835
+32	836
+32	837
+32	838
+32	839
+32	840
+32	841
+32	842
+32	843
+32	844
+32	845
+32	846
+32	847
+32	848
+32	849
+32	850
+32	851
+32	852
+32	853
+32	854
+32	855
+32	856
+32	857
+32	858
+32	859
+32	860
+32	861
+32	862
+32	863
+32	864
+32	865
+32	866
+32	867
+32	868
+32	869
+32	870
+32	871
+32	872
+32	873
+32	874
+32	875
+32	876
+32	877
+32	878
+32	879
+32	880
+32	881
+32	882
+32	883
+32	884
+32	885
+32	886
+32	887
+32	888
+32	889
+32	890
+32	891
+32	892
+32	893
+32	894
+32	895
+32	896
+32	897
+32	898
+32	899
+32	900
+32	901
+32	902
+32	903
+32	904
+32	905
+32	906
+32	907
+32	908
+32	909
+32	910
+32	911
+32	912
+32	913
+32	914
+32	915
+32	916
+32	917
+32	918
+32	919
+32	920
+32	921
+32	922
+32	923
+32	924
+32	925
+32	926
 \.
 
 
@@ -17741,7 +18591,7 @@ SELECT pg_catalog.setval('public.audit_event_audit_id_seq', 1, false);
 -- Name: audit_log_event_audit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.audit_log_event_audit_id_seq', 1103, true);
+SELECT pg_catalog.setval('public.audit_log_event_audit_id_seq', 1287, true);
 
 
 --
@@ -17755,14 +18605,14 @@ SELECT pg_catalog.setval('public.audit_log_event_type_audit_log_event_type_id_se
 -- Name: audit_user_login_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.audit_user_login_id_seq', 67, true);
+SELECT pg_catalog.setval('public.audit_user_login_id_seq', 62, true);
 
 
 --
 -- Name: authorities_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.authorities_id_seq', 9, true);
+SELECT pg_catalog.setval('public.authorities_id_seq', 8, true);
 
 
 --
@@ -17790,7 +18640,7 @@ SELECT pg_catalog.setval('public.crf_crf_id_seq', 18, true);
 -- Name: crf_version_crf_version_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.crf_version_crf_version_id_seq', 31, true);
+SELECT pg_catalog.setval('public.crf_version_crf_version_id_seq', 32, true);
 
 
 --
@@ -17867,7 +18717,7 @@ SELECT pg_catalog.setval('public.decision_condition_decision_condition_id_seq', 
 -- Name: discrepancy_note_discrepancy_note_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.discrepancy_note_discrepancy_note_id_seq', 8, true);
+SELECT pg_catalog.setval('public.discrepancy_note_discrepancy_note_id_seq', 10, true);
 
 
 --
@@ -17888,14 +18738,14 @@ SELECT pg_catalog.setval('public.dyn_item_form_metadata_id_seq', 3, true);
 -- Name: dyn_item_group_metadata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.dyn_item_group_metadata_id_seq', 5, true);
+SELECT pg_catalog.setval('public.dyn_item_group_metadata_id_seq', 86, true);
 
 
 --
 -- Name: event_crf_event_crf_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.event_crf_event_crf_id_seq', 32, true);
+SELECT pg_catalog.setval('public.event_crf_event_crf_id_seq', 37, true);
 
 
 --
@@ -17916,7 +18766,7 @@ SELECT pg_catalog.setval('public.event_crf_flag_workflow_id_seq', 1, false);
 -- Name: event_definition_crf_event_definition_crf_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.event_definition_crf_event_definition_crf_id_seq', 112, true);
+SELECT pg_catalog.setval('public.event_definition_crf_event_definition_crf_id_seq', 110, true);
 
 
 --
@@ -17972,7 +18822,7 @@ SELECT pg_catalog.setval('public.item_data_flag_workflow_id_seq', 1, false);
 -- Name: item_data_item_data_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.item_data_item_data_id_seq', 497, true);
+SELECT pg_catalog.setval('public.item_data_item_data_id_seq', 589, true);
 
 
 --
@@ -17986,7 +18836,7 @@ SELECT pg_catalog.setval('public.item_data_type_item_data_type_id_seq', 1, false
 -- Name: item_form_metadata_item_form_metadata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.item_form_metadata_item_form_metadata_id_seq', 1597, true);
+SELECT pg_catalog.setval('public.item_form_metadata_item_form_metadata_id_seq', 1714, true);
 
 
 --
@@ -18000,14 +18850,14 @@ SELECT pg_catalog.setval('public.item_group_item_group_id_seq', 96, true);
 -- Name: item_group_metadata_item_group_metadata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.item_group_metadata_item_group_metadata_id_seq', 1597, true);
+SELECT pg_catalog.setval('public.item_group_metadata_item_group_metadata_id_seq', 1714, true);
 
 
 --
 -- Name: item_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.item_item_id_seq', 925, true);
+SELECT pg_catalog.setval('public.item_item_id_seq', 926, true);
 
 
 --
@@ -18035,7 +18885,7 @@ SELECT pg_catalog.setval('public.null_value_type_null_value_type_id_seq', 1, fal
 -- Name: openclinica_version_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.openclinica_version_id_seq', 39, true);
+SELECT pg_catalog.setval('public.openclinica_version_id_seq', 23, true);
 
 
 --
@@ -18077,7 +18927,7 @@ SELECT pg_catalog.setval('public.resolution_status_resolution_status_id_seq', 1,
 -- Name: response_set_response_set_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.response_set_response_set_id_seq', 520, true);
+SELECT pg_catalog.setval('public.response_set_response_set_id_seq', 597, true);
 
 
 --
@@ -18091,28 +18941,28 @@ SELECT pg_catalog.setval('public.response_type_response_type_id_seq', 1, false);
 -- Name: rule_action_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_action_id_seq', 269, true);
+SELECT pg_catalog.setval('public.rule_action_id_seq', 311, true);
 
 
 --
 -- Name: rule_action_property_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_action_property_id_seq', 30, true);
+SELECT pg_catalog.setval('public.rule_action_property_id_seq', 72, true);
 
 
 --
 -- Name: rule_action_run_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_action_run_id_seq', 269, true);
+SELECT pg_catalog.setval('public.rule_action_run_id_seq', 311, true);
 
 
 --
 -- Name: rule_action_run_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_action_run_log_id_seq', 3, true);
+SELECT pg_catalog.setval('public.rule_action_run_log_id_seq', 4, true);
 
 
 --
@@ -18126,14 +18976,14 @@ SELECT pg_catalog.setval('public.rule_action_stratification_factor_id_seq', 1, f
 -- Name: rule_expression_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_expression_id_seq', 463, true);
+SELECT pg_catalog.setval('public.rule_expression_id_seq', 492, true);
 
 
 --
 -- Name: rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_id_seq', 250, true);
+SELECT pg_catalog.setval('public.rule_id_seq', 271, true);
 
 
 --
@@ -18147,7 +18997,7 @@ SELECT pg_catalog.setval('public.rule_set_audit_id_seq', 1, false);
 -- Name: rule_set_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_set_id_seq', 213, true);
+SELECT pg_catalog.setval('public.rule_set_id_seq', 221, true);
 
 
 --
@@ -18161,21 +19011,21 @@ SELECT pg_catalog.setval('public.rule_set_rule_audit_id_seq', 1, false);
 -- Name: rule_set_rule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.rule_set_rule_id_seq', 253, true);
+SELECT pg_catalog.setval('public.rule_set_rule_id_seq', 274, true);
 
 
 --
 -- Name: scd_item_metadata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.scd_item_metadata_id_seq', 345, true);
+SELECT pg_catalog.setval('public.scd_item_metadata_id_seq', 372, true);
 
 
 --
 -- Name: section_section_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.section_section_id_seq', 140, true);
+SELECT pg_catalog.setval('public.section_section_id_seq', 153, true);
 
 
 --
@@ -18196,7 +19046,7 @@ SELECT pg_catalog.setval('public.study_event_definition_study_event_definition_i
 -- Name: study_event_study_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.study_event_study_event_id_seq', 45, true);
+SELECT pg_catalog.setval('public.study_event_study_event_id_seq', 53, true);
 
 
 --
@@ -18245,7 +19095,7 @@ SELECT pg_catalog.setval('public.study_study_id_seq', 20, true);
 -- Name: study_subject_study_subject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.study_subject_study_subject_id_seq', 44, true);
+SELECT pg_catalog.setval('public.study_subject_study_subject_id_seq', 40, true);
 
 
 --
@@ -18266,14 +19116,14 @@ SELECT pg_catalog.setval('public.subject_event_status_subject_event_status_id_se
 -- Name: subject_group_map_subject_group_map_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.subject_group_map_subject_group_map_id_seq', 1, false);
+SELECT pg_catalog.setval('public.subject_group_map_subject_group_map_id_seq', 3, true);
 
 
 --
 -- Name: subject_subject_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.subject_subject_id_seq', 44, true);
+SELECT pg_catalog.setval('public.subject_subject_id_seq', 40, true);
 
 
 --
@@ -18287,14 +19137,14 @@ SELECT pg_catalog.setval('public.tag_id_seq', 1, false);
 -- Name: usage_statistics_data_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.usage_statistics_data_id_seq', 55, true);
+SELECT pg_catalog.setval('public.usage_statistics_data_id_seq', 39, true);
 
 
 --
 -- Name: user_account_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clinica
 --
 
-SELECT pg_catalog.setval('public.user_account_user_id_seq', 9, true);
+SELECT pg_catalog.setval('public.user_account_user_id_seq', 8, true);
 
 
 --
@@ -20447,10 +21297,24 @@ CREATE TRIGGER study_event_insert_update AFTER UPDATE ON public.study_event FOR 
 
 
 --
+-- Name: study_subject study_subject_insert_updare; Type: TRIGGER; Schema: public; Owner: clinica
+--
+
+CREATE TRIGGER study_subject_insert_updare AFTER INSERT OR UPDATE ON public.study_subject FOR EACH ROW EXECUTE FUNCTION public.study_subject_trigger();
+
+
+--
 -- Name: subject_group_map subject_group_map_insert_update; Type: TRIGGER; Schema: public; Owner: clinica
 --
 
 CREATE TRIGGER subject_group_map_insert_update AFTER INSERT OR UPDATE ON public.subject_group_map FOR EACH ROW EXECUTE FUNCTION public.subject_group_assignment_trigger();
+
+
+--
+-- Name: study_subject trigger_actualizar_pid; Type: TRIGGER; Schema: public; Owner: clinica
+--
+
+CREATE TRIGGER trigger_actualizar_pid AFTER INSERT ON public.study_subject FOR EACH ROW EXECUTE FUNCTION public.actualizar_pid();
 
 
 --
