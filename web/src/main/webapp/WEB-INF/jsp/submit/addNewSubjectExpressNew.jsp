@@ -92,13 +92,17 @@
                       <input type="hidden" name="label" value="" id="studySubjectIdHidden">
                      </c:when>
                      <c:otherwise>
-                       <input onfocus="this.select()" type="text" name="label" value="<c:out value="${label}"/>" class="formfieldXL">
+                       <input onfocus="this.select()" onchange="validationStudySubjectId()" onkeyup="validationStudySubjectId()"
+                              id="studySubjectIdText" type="text" name="label" value="<c:out value="${label}"/>" class="formfieldXL">
                      </c:otherwise>
                     </c:choose>
                     </div></td>
                     <td>*</td>
                 </tr>
-                <tr><td colspan="2"><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="label"/></jsp:include></td></tr>  
+                <tr><td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="label"/></jsp:include>
+                    <div id="spanAlert-Validation" class="alert" style="display: none;">Please correct the Study Subject Id</div>
+                </td></tr>
             </table>
         </td>
     </tr>
@@ -408,7 +412,7 @@
     </c:choose>
     <tr>
         <td colspan="2" align="center">
-        <input type="submit" name="addSubject" value="<fmt:message key="add2" bundle="${resword}"/>" class="button" />
+        <input type="submit" name="addSubject" id="add" value="<fmt:message key="add2" bundle="${resword}"/>" class="button" />
         &nbsp;
         <input type="button" id="cancel" name="cancel" value="   <fmt:message key="cancel" bundle="${resword}"/>" class="button"/>
 
@@ -426,14 +430,14 @@
     function handleSelection() {
         var selectedValue = document.getElementById("enrollmentTypeSelection").value;
 
-        var countOfStudySubjectsAtStudyOrSite = JSON.stringify( <%= study.getCountOfStudySubjectsAtStudyOrSite() %> );
+        var nextCountOfStudySubjectsAtStudyOrSite = JSON.stringify( <%= study.getNextCountOfStudySubjectsAtStudyOrSite() %> );
         var siteIdentifier = JSON.stringify( <%= study.getSiteIdOfStudy() %> );
 
-        countOfStudySubjectsAtStudyOrSite = countOfStudySubjectsAtStudyOrSite.padStart(5, "0");
+        nextCountOfStudySubjectsAtStudyOrSite = nextCountOfStudySubjectsAtStudyOrSite.padStart(5, "0");
         siteIdentifier = siteIdentifier.padStart(2, "0");
 
-        var studySubjectIdEnrollment = "38-" + siteIdentifier+ "-EN" + countOfStudySubjectsAtStudyOrSite;
-        var studySubjectIdNonEnrollment = "38-" + siteIdentifier + "-N" + countOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdEnrollment = siteIdentifier + "-P" + nextCountOfStudySubjectsAtStudyOrSite;
+        var studySubjectIdNonEnrollment = "38-" + siteIdentifier + "-N" + nextCountOfStudySubjectsAtStudyOrSite;
 
         switch (selectedValue) {
             case "EN":
@@ -446,6 +450,53 @@
                 break;
             default:
                 document.getElementById("studySubjectId").value = "";
+                break;
+        }
+    }
+
+    function validationStudySubjectId() {
+        console.log("validationStudySubjectId")
+
+        var selectedValue = document.getElementById("enrollmentTypeSelection").value;
+        var studySubjectIdValue = document.getElementById("studySubjectIdText").value;
+        var errorMessageValidationDiv = document.getElementById("spanAlert-Validation");
+        var submitBottom = document.getElementById("add");
+
+        var siteIdentifier = JSON.stringify( <%= study.getSiteIdOfStudy() %> );
+        siteIdentifier = siteIdentifier.padStart(2, "0");
+
+        var regexStudySubjectIdEnrollment = new RegExp("^" + siteIdentifier + "-P\\d{5}$");
+        var regexStudySubjectIdNonEnrollment = new RegExp("^38-" + siteIdentifier + "-N\\d{5}$");
+
+        console.log(siteIdentifier)
+        console.log(studySubjectIdValue)
+        console.log(regexStudySubjectIdEnrollment)
+        console.log(regexStudySubjectIdNonEnrollment)
+
+        switch (selectedValue) {
+            case "EN":
+                if (regexStudySubjectIdEnrollment.test(studySubjectIdValue)) {
+                    console.log("Match EN")
+                    errorMessageValidationDiv.style.display = "none";
+                    submitBottom.disabled = false;
+                } else {
+                    console.log("Not Match EN")
+                    errorMessageValidationDiv.style.display = "block";
+                    submitBottom.disabled = true;
+                }
+                break;
+            case "NE":
+                if (regexStudySubjectIdNonEnrollment.test(studySubjectIdValue)) {
+                    console.log("Match NE")
+                    errorMessageValidationDiv.style.display = "none";
+                    submitBottom.disabled = false;
+                } else {
+                    console.log("Not Match NE")
+                    errorMessageValidationDiv.style.display = "block";
+                    submitBottom.disabled = true;
+                }
+                break;
+            default:
                 break;
         }
     }

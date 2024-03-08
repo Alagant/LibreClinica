@@ -171,6 +171,7 @@ public class AddNewSubjectServlet extends SecureController {
         // tbh
         StudyParameterValueBean checkPersonId = spvdao.findByHandleAndStudy(parentStudyId, "subjectPersonIdRequired");
         currentStudy.getStudyParameterConfig().setSubjectPersonIdRequired(checkPersonId.getValue());
+        currentStudy.setCountOfStudySubjectsAtStudyOrSite(ssd.getCountofStudySubjectsAtStudyOrSite(currentStudy));
         // end fix for 1750, tbh 10 2007
 
         if (!fp.isSubmitted()) {
@@ -879,7 +880,7 @@ public class AddNewSubjectServlet extends SecureController {
 
 
                 se.setSampleOrdinal(sedao.getMaxSampleOrdinal(sed, s) + 1);
-                if("BL".equalsIgnoreCase(sed.getName())){
+                if("EN".equalsIgnoreCase(sed.getName()) || "BL".equalsIgnoreCase(sed.getName())){
                     sedao.create(se);
                 }
 
