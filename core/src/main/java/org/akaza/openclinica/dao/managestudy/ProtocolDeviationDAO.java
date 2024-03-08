@@ -13,6 +13,7 @@ import java.sql.Types;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBean> {
@@ -42,12 +43,86 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
     public ProtocolDeviationBean getEntityFromHashMap(HashMap<String, Object> hm) {
         ProtocolDeviationBean eb = new ProtocolDeviationBean();
         //super.setEntityAuditInformation(eb, hm);
+        eb.setId((Integer) hm.get("protocol_deviation_id"));
         eb.setProtocolDeviationId((Integer) hm.get("protocol_deviation_id"));
         eb.setLabel((String) hm.get("label"));
-        //eb.setDescription((String) hm.get("description"));
-        //eb.setSeverityId((Integer) hm.get("protocol_deviation_severity_id"));
-        //eb.setSeverityLabel((String) hm.get("protocol_deviation_severity_label"));
         eb.setStudyId((Integer) hm.get("study_id"));
+        eb.setItemA1((Short)hm.get("item_a_1"));
+        eb.setItemA2((Short)hm.get("item_a_2"));
+        eb.setItemA3((Date) hm.get("item_a_3"));
+        eb.setItemA4((Date) hm.get("item_a_4"));
+        eb.setItemA5((Date) hm.get("item_a_5"));
+        eb.setItemA6((Short) hm.get("item_a_6"));
+        eb.setItemA7((Short) hm.get("item_a_7"));
+        eb.setItemA7_1((Date) hm.get("item_a_7_1"));
+
+        eb.setItemB1((Short) hm.get("item_b_1"));
+        eb.setItemB2((Short) hm.get("item_b_2"));
+        eb.setItemB3((Short) hm.get("item_b_3"));
+        eb.setItemB4((Short) hm.get("item_b_4"));
+        eb.setItemB5((Short) hm.get("item_b_5"));
+        eb.setItemB6((Short) hm.get("item_b_6"));
+        eb.setItemB7((Short) hm.get("item_b_7"));
+        eb.setItemB8((Short) hm.get("item_b_8"));
+        eb.setItemB9((Short) hm.get("item_b_9"));
+        eb.setItemB10((Short) hm.get("item_b_10"));
+        eb.setItemB11((Short) hm.get("item_b_11"));
+        eb.setItemB12((Short) hm.get("item_b_12"));
+        eb.setItemB13((Short) hm.get("item_b_13"));
+        eb.setItemB14((Short) hm.get("item_b_14"));
+        eb.setItemB15((Short) hm.get("item_b_15"));
+        eb.setItemB16((Short) hm.get("item_b_16"));
+        eb.setItemB17((Short) hm.get("item_b_17"));
+        eb.setItemB18((Short) hm.get("item_b_18"));
+
+        eb.setItemC1_1((Short) hm.get("item_c_1_1"));
+        eb.setItemC1_2((Short) hm.get("item_c_1_2"));
+        eb.setItemC1_3((Short) hm.get("item_c_1_3"));
+        eb.setItemC1_4((Short) hm.get("item_c_1_4"));
+        eb.setItemC1_5((Short) hm.get("item_c_1_5"));
+        eb.setItemC1_6((Short) hm.get("item_c_1_6"));
+        eb.setItemC1_7((Short) hm.get("item_c_1_7"));
+        eb.setItemC1_8((Short) hm.get("item_c_1_8"));
+        eb.setItemC1_9((Short) hm.get("item_c_1_9"));
+        eb.setItemC1_10((String) hm.get("item_c_1_10"));
+        eb.setItemC2((String) hm.get("item_c_2"));
+
+        eb.setItemD1_A((Date) hm.get("item_d_1_a"));
+        eb.setItemD1_B((String) hm.get("item_d_1_b"));
+
+        eb.setItemE1((String) hm.get("item_e1"));
+        eb.setItemE2((String) hm.get("item_e2"));
+        eb.setItemE3((String) hm.get("item_e3"));
+        eb.setItemE4((String) hm.get("item_e4"));
+
+        eb.setItemF1((String) hm.get("item_f_1"));
+        eb.setItemF2((String) hm.get("item_f_2"));
+        eb.setItemF3((Date) hm.get("item_f_3"));
+
+        eb.setItemG1((Short) hm.get("item_g_1"));
+        eb.setItemG2_1((Short) hm.get("item_g_2_1"));
+        eb.setItemG2_2((Short) hm.get("item_g_2_2"));
+        eb.setItemG2_3((Short) hm.get("item_g_2_3"));
+        eb.setItemG2_4((Short) hm.get("item_g_2_4"));
+        eb.setItemG3((Short) hm.get("item_g_3"));
+        eb.setItemG4((Short) hm.get("item_g_4"));
+        eb.setItemG5((Short) hm.get("item_g_5"));
+        eb.setItemG6((Date) hm.get("item_g_6"));
+        eb.setItemG6_1_A((String) hm.get("item_g_6_1_a"));
+        eb.setItemG6_1_B((Short) hm.get("item_g_6_1_b"));
+        eb.setItemG6_1_C((String) hm.get("item_g_6_1_c"));
+        eb.setItemG6_2_A((String) hm.get("item_g_6_2_a"));
+        eb.setItemG6_2_B((Short) hm.get("item_g_6_2_b"));
+        eb.setItemG6_2_C((String) hm.get("item_g_6_2_c"));
+        eb.setItemG6_3_A((String) hm.get("item_g_6_3_a"));
+        eb.setItemG6_3_B((Short) hm.get("item_g_6_3_b"));
+        eb.setItemG6_3_C((String) hm.get("item_g_6_3_c"));
+        eb.setItemG6_4_A((String) hm.get("item_g_6_4_a"));
+        eb.setItemG6_4_B((Short) hm.get("item_g_6_4_b"));
+        eb.setItemG6_4_C((String) hm.get("item_g_6_4_c"));
+        eb.setItemG7((String) hm.get("item_g_7"));
+        eb.setItemG8((String) hm.get("item_g_8"));
+        eb.setItemG9((String) hm.get("item_g_9"));
 
         return eb;
     }
