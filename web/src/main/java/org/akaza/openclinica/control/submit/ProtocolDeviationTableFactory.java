@@ -49,7 +49,7 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         getColumnNamesMap();
         ArrayList<String> columnNamesList = new ArrayList<String>();
         columnNamesList.add("protocolDeviation.label");
-        columnNamesList.add("protocolDeviation.severityLabel");
+        //columnNamesList.add("protocolDeviation.severityLabel");
     }
 
     public void configureTableFacadeCustomView(TableFacade tableFacade, HttpServletRequest request) {
@@ -59,7 +59,7 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
     private void getColumnNamesMap() {
         ArrayList<String> columnNamesList = new ArrayList<String>();
         columnNamesList.add("protocolDeviation.label");
-        columnNamesList.add("protocolDeviation.severityLabel");
+        //columnNamesList.add("protocolDeviation.severityLabel");
         columnNamesList.add("actions");
         columnNames = columnNamesList.toArray(columnNames);
     }
@@ -73,8 +73,8 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
         int index = 0;
         configureColumn(row.getColumn(columnNames[index]), "PDID", null, null);
         ++index;
-        configureColumn(row.getColumn(columnNames[index]), "Severity", null, null);
-        ++index;
+        /*configureColumn(row.getColumn(columnNames[index]), "Severity", null, null);
+        ++index;*/
 
         //configureColumn(row.getColumn(columnNames[index]), "Actions", null, null);
         ++index;
@@ -119,8 +119,8 @@ public class ProtocolDeviationTableFactory extends AbstractTableFactory {
             HashMap<Object, Object> theItem = new HashMap<Object, Object>();
             theItem.put("protocolDeviation.id", pdb.getProtocolDeviationId());
             theItem.put("protocolDeviation.label", pdb.getLabel());
-            theItem.put("protocolDeviation.severityLabel", pdb.getSeverityLabel());
-            theItem.put("protocolDeviation.description", pdb.getDescription());
+            /*theItem.put("protocolDeviation.severityLabel", pdb.getSeverityLabel());
+            theItem.put("protocolDeviation.description", pdb.getDescription());*/
             theItems.add(theItem);
         }
 

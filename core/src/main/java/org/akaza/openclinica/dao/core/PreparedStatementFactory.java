@@ -84,6 +84,9 @@ public class PreparedStatementFactory {
                 } else if ("java.lang.Integer".equals(objType)) {
                     Integer objIntParam = (Integer) objParam;
                     ps.setInt(order.intValue(), objIntParam.intValue());
+                } else if ("java.lang.Short".equals(objType)) {
+                    Short objIntParam = (Short) objParam;
+                    ps.setShort(order.intValue(), objIntParam.shortValue());
                 } else if ("java.util.Date".equals(objType)) {
                     java.util.Date objTempDate = (java.util.Date) objParam;
                     java.sql.Date objDateParam = new java.sql.Date(objTempDate.getTime());
