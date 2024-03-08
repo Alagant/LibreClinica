@@ -89,6 +89,8 @@ public class ListSiteServlet extends SecureController {
             session.setAttribute("inactive_site", fp.getString("inactive_site"));
             request.setAttribute("active_site", fp.getString("active_site"));
             request.setAttribute("inactive_site", fp.getString("inactive_site"));
+            System.out.println("atsite");
+            System.out.println(session.getAttribute("inactive_site"));
             if (fActive && !fInactive) {
                 allStudyRows.removeIf(row -> row.getBean().getStatus().getName().equals("available"));
             } else if (!fActive && fInactive) {

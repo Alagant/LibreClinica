@@ -14,6 +14,7 @@
 <c:set var="outerFormName" value="${param.outerFormName}" />
 <c:set var="active_site" value="${param.active_site}" />
 <c:set var="inactive_site" value="${param.inactive_site}" />
+<c:set var="test_var" value="test_value" />
 <c:choose>
 	<c:when test='${(outerFormName != null) && (outerFormName != "")}'><c:set var="searchFormDisplayed" value="${0}"/></c:when>
 	<c:otherwise><c:set var="searchFormDisplayed" value="${1}"/></c:otherwise>
@@ -123,10 +124,10 @@
 				</tr>
 				<tr>
 					<td valign="top" style="min-width: 100px;">
-						<input type="checkbox" name="active_site" value="<%= request.getAttribute("test_attr") %>" /><% session.setAttribute("test_attr", "yes"); %>Active site as <%= session.getAttribute("active_site") %>
+						<input type="checkbox" name="active_site" <% if(session.getAttribute("inactive_site").equals("on")){out.println("checked");} %> /><% session.setAttribute("test_attr", "yes"); %>Active site as <%= session.getAttribute("inactive_site") %>  asp <c:out value="test hi ${inactive_site} after"/>
 					</td>
 					<td valign="top">
-			    		<input type="checkbox" name="inactive_site" />Inactive site
+			    		<input type="checkbox" name="inactive_site" <% if(session.getAttribute("inactive_site").equals("on")){out.println("checked");} %>/>Inactive site
 					</td>
 				</tr>
 			</table>
