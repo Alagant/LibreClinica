@@ -124,10 +124,10 @@
 				</tr>
 				<tr>
 					<td valign="top" style="min-width: 100px;">
-						<input type="checkbox" name="active_site" <% if(session.getAttribute("inactive_site").equals("on")){out.println("checked");} %> /><% session.setAttribute("test_attr", "yes"); %>Active site as <%= session.getAttribute("inactive_site") %>  asp <c:out value="test hi ${inactive_site} after"/>
+						<input type="checkbox" name="active_site" <% if(request.getAttribute("active_site")!=null && request.getAttribute("active_site").equals("on")){out.println("checked");} %> />Active site
 					</td>
 					<td valign="top">
-			    		<input type="checkbox" name="inactive_site" <% if(session.getAttribute("inactive_site").equals("on")){out.println("checked");} %>/>Inactive site
+			    		<input type="checkbox" name="inactive_site" <% if(request.getAttribute("inactive_site")!=null && request.getAttribute("inactive_site").equals("on")){out.println("checked");} %>/>Inactive site
 					</td>
 				</tr>
 			</table>
