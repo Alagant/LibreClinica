@@ -147,4 +147,14 @@
 		<dropColumn tableName="protocol_deviation"
 					columnName="description"/>
 	</changeSet>
+	<changeSet id="6" author="dx31">
+		<renameColumn tableName="protocol_deviation"
+					  oldColumnName="item_e_1_a" newColumnName="item_e1"/>
+		<renameColumn tableName="protocol_deviation"
+					  oldColumnName="item_e_1_b" newColumnName="item_e2"/>
+		<renameColumn tableName="protocol_deviation"
+					  oldColumnName="item_e_1_c" newColumnName="item_e3"/>
+		<renameColumn tableName="protocol_deviation"
+					  oldColumnName="item_e_1_d" newColumnName="item_e4"/>
+	</changeSet>
 </databaseChangeLog>

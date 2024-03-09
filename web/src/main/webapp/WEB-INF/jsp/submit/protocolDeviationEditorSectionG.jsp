@@ -52,77 +52,88 @@
     <li>
         <strong>Date CRB became aware of the incident</strong>
         <div class="detail">
-        <label><input type="text" name="item_g_6">
+            <label><input type="text" name="item_g_6"></label>
         </div>
     </li>
     <li>
-        <table>
-            <thead>
-                <tr>
-                    <th>Invalid email notification</th>
-                    <th>Submision of CDC HRPO form 1254</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        To study officer:
-                        <input type="text" name="item_g_6_1_a">
-                        <label><input type="checkbox" name="item_g_6_1_b"> Not applicable</label>
-                    </td>
-                    <td>
-                        <input type="text" name="item_g_6_1_c">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Study officer to branch chief:
-                        <input type="text" name="item_g_6_2_a">
-                        <label><input type="checkbox" name="item_g_6_2_b"> Not applicable</label>
-                    </td>
-                    <td>
-                        <input type="text" name="item_g_6_2_c">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Branch chief to ADS:
-                        <input type="text" name="item_6_3_a">
-                        <label><input type="checkbox" name="item_g_6_3_b"> Not applicable</label>
-                    </td>
-                    <td>
-                        <input type="text" name="item_g_6_3_c">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        ADS to HRPO:
-                        <input type="text" name="item_6_4_a">
-                        <label><input type="checkbox" name="item_g_6_4_b"> Not applicable</label>
-                    </td>
-                    <td>
-                        <input type="text" name="item_g_6_4_c">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <li>
-            <span class="question">HRPO Action Number:</span>
-                <div class="detail">
-                    <input type="text" name="item_g_7">
-                </div>
-        </li>
-        <li>
-            <span class="question">HRPO Assigned Incident Number:</span>
+        <div class="detail">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Invalid email notification</th>
+                        <th>Submision of CDC HRPO form 1254</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            To study officer:
+                            <input type="text" name="item_g_6_1_a">
+                            <div>
+                                <label><input type="checkbox" name="item_g_6_1_b" value="1"> Not applicable</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="item_g_6_1_c">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Study officer to branch chief:
+                            <input type="text" name="item_g_6_2_a">
+                            <div>
+                                <label><input type="checkbox" name="item_g_6_2_b" value="1"> Not applicable</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="item_g_6_2_c">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Branch chief to ADS:
+                            <input type="text" name="item_g_6_3_a">
+                            <div>
+                                <label><input type="checkbox" name="item_g_6_3_b" value="1"> Not applicable</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="item_g_6_3_c">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ADS to HRPO:
+                            <input type="text" name="item_g_6_4_a">
+                            <div>
+                                <label><input type="checkbox" name="item_g_6_4_b" value="1"> Not applicable</label>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="text" name="item_g_6_4_c">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </li>
+    <li>
+        <span class="question">HRPO Action Number:</span>
             <div class="detail">
-                    <input type="text" name="item_g_8">
+                <input type="text" name="item_g_7">
             </div>
-        </li>
-        <li>
-            <span class="question">Comments by CDC</span>
-            <div class="detail">
-                <textarea name="item_g_9"></textarea>
-            </div>
-        </li>
+    </li>
+    <li>
+        <span class="question">HRPO Assigned Incident Number:</span>
+        <div class="detail">
+                <input type="text" name="item_g_8">
+        </div>
+    </li>
+    <li>
+        <span class="question">Comments by CDC</span>
+        <div class="detail">
+            <textarea name="item_g_9"></textarea>
+        </div>
+    </li>
     </ol>
 </div>

@@ -63,6 +63,86 @@
                 url: "${pageContext.request.contextPath}/ProtocolDeviations?action=get&pdid="+
                         protocolId,
                 success: function(response) {
+                    jQuery('input[name="protocol_deviation_id"]').val(response.protocolDeviationId);
+                    jQuery('input[name="item_a_1"][value="'+response.itemA1+'"]').prop('checked', true);
+                    jQuery('input[name="item_a_2"][value="'+response.itemA2+'"]').prop('checked', true);
+                    jQuery('input[name="item_a_3"]').val(response.itemA3);
+                    jQuery('input[name="item_a_4"]').val(response.itemA4);
+                    jQuery('input[name="item_a_5"]').val(response.itemA5);
+                    jQuery('input[name="item_a_6"][value="'+response.itemA6+'"]').prop('checked', true);
+                    jQuery('input[name="item_a_7"][value="'+response.itemA7+'"]').prop('checked', true);
+                    jQuery('input[name="item_a_7_1"]').val(response.itemA7_1);
+                    jQuery('input[name="item_a_8"][value="'+response.itemA8+'"]').prop('checked', true);
+
+                    jQuery('input[name="item_b_1"][value="'+response.itemB1+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_2"][value="'+response.itemB2+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_3"][value="'+response.itemB3+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_4"][value="'+response.itemB4+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_5"][value="'+response.itemB5+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_6"][value="'+response.itemB6+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_7"][value="'+response.itemB7+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_8"][value="'+response.itemB8+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_9"][value="'+response.itemB9+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_10"][value="'+response.itemB10+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_11"][value="'+response.itemB11+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_12"][value="'+response.itemB12+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_13"][value="'+response.itemB13+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_14"][value="'+response.itemB14+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_15"][value="'+response.itemB15+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_16"][value="'+response.itemB16+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_17"][value="'+response.itemB17+'"]').prop('checked', true);
+                    jQuery('input[name="item_b_18"][value="'+response.itemB18+'"]').prop('checked', true);
+
+                    jQuery('input[name="item_c_1_1"]').prop('checked', response.itemC1_1);
+                    jQuery('input[name="item_c_1_2"]').prop('checked', response.itemC1_2);
+                    jQuery('input[name="item_c_1_3"]').prop('checked', response.itemC1_3);
+                    jQuery('input[name="item_c_1_4"]').prop('checked', response.itemC1_4);
+                    jQuery('input[name="item_c_1_5"]').prop('checked', response.itemC1_5);
+                    jQuery('input[name="item_c_1_6"]').prop('checked', response.itemC1_6);
+                    jQuery('input[name="item_c_1_7"]').prop('checked', response.itemC1_7);
+                    jQuery('input[name="item_c_1_8"]').prop('checked', response.itemC1_8);
+                    jQuery('input[name="item_c_1_9"]').prop('checked', response.itemC1_9);
+                    jQuery('input[name="item_c_1_10"]').val(response.itemC1_10);
+                    jQuery('textarea[name="item_c_2"]').val(response.itemC2);
+
+                    jQuery('input[name="item_d_1_a"]').val(response.itemD1_A);
+                    jQuery('textarea[name="item_d_1_b"]').val(response.itemD2_B);
+
+                    jQuery('textarea[name="item_e_1"]').val(response.itemE1);
+                    jQuery('textarea[name="item_e_2"]').val(response.itemE2);
+                    jQuery('textarea[name="item_e_3"]').val(response.itemE3);
+                    jQuery('textarea[name="item_e_4"]').val(response.itemE4);
+
+                    jQuery('input[name="item_f_1"]').val(response.itemF1);
+                    jQuery('input[name="item_f_2"]').val(response.itemF2);
+                    jQuery('input[name="item_f_3"]').val(response.itemF3);
+
+                    jQuery('input[name="item_g_1"][value="'+response.itemG1+'"]').prop('checked', true);
+                    jQuery('input[name="item_g_2_1"]').prop('checked', response.itemG2_1);
+                    jQuery('input[name="item_g_2_2"]').prop('checked', response.itemG2_2);
+                    jQuery('input[name="item_g_2_3"]').prop('checked', response.itemG2_3);
+                    jQuery('input[name="item_g_2_4"]').prop('checked', response.itemG2_4);
+                    jQuery('input[name="item_g_3"][value="'+response.itemG3+'"]').prop('checked', true);
+                    jQuery('input[name="item_g_4"][value="'+response.itemG4+'"]').prop('checked', true);
+                    jQuery('input[name="item_g_5"][value="'+response.itemG5+'"]').prop('checked', true);
+                    jQuery('input[name="item_g_6"]').val(response.itemG6);
+                    jQuery('input[name="item_g_6_1_a"]').val(response.itemG6_1_A);
+                    jQuery('input[name="item_g_6_1_b"]').prop('checked', response.itemG6_1_B);
+                    jQuery('input[name="item_g_6_1_c"]').val(response.itemG6_1_C);
+                    jQuery('input[name="item_g_6_2_a"]').val(response.itemG6_2_A);
+                    jQuery('input[name="item_g_6_2_b"]').prop('checked', response.itemG6_2_B);
+                    jQuery('input[name="item_g_6_2_c"]').val(response.itemG6_2_C);
+                    jQuery('input[name="item_g_6_3_a"]').val(response.itemG6_3_A);
+                    jQuery('input[name="item_g_6_3_b"]').prop('checked', response.itemG6_3_B);
+                    jQuery('input[name="item_g_6_3_c"]').val(response.itemG6_3_C);
+                    jQuery('input[name="item_g_6_4_a"]').val(response.itemG6_4_A);
+                    jQuery('input[name="item_g_6_4_b"]').prop('checked', response.itemG6_4_B);
+                    jQuery('input[name="item_g_6_4_c"]').val(response.itemG6_4_C);
+                    jQuery('input[name="item_g_7"]').val(response.itemG7);
+                    jQuery('input[name="item_g_8"]').val(response.itemG8);
+                    jQuery('textarea[name="item_g_9"]').val(response.itemG9);
+
+
                     jQuery('#subjects-added').html('');
                     (response?.subjects || []).forEach((x,i) => {
                         jQuery('#subjects-added').append('<div class="protocol-deviation-subject">'+

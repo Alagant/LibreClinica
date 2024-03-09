@@ -66,6 +66,7 @@
     <h1 id="title-editor">New Protocol Deviation</h1>
     <form method="post" onsubmit="return validateForm()"
           action="${pageContext.request.contextPath}/ProtocolDeviations">
+        <input type="hidden" name="protocol_deviation_id"/>
         <c:import url="../submit/protocolDeviationEditorSectionA.jsp">
         </c:import>
         <c:import url="../submit/protocolDeviationEditorSectionB.jsp">

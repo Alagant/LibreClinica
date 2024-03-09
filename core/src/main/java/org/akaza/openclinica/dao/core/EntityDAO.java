@@ -592,6 +592,12 @@ public abstract class EntityDAO<B> implements DAOInterface<B> {
                             cellValues.put(column, 0);
                         }
                         break;
+                    case TypeNames.SHORT:
+                        cellValues.put(column, rs.getShort(columnIndex));
+                        if (rs.wasNull()) {
+                            cellValues.put(column, 0);
+                        }
+                        break;
                     case TypeNames.LONG:
                         cellValues.put(column, rs.getLong(columnIndex));
                         if (rs.wasNull()) {
