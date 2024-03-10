@@ -33,6 +33,17 @@
         location.href = '${pageContext.request.contextPath}/ListStudySubjects?'+ parameterString;
     }
 
+    function dateToString(date) {
+        if(!date || date < 0) return '';
+        date = new Date(date);
+        const nameOfMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dic'];
+        let retval = date.getDate();
+        if(retval<10) retval = '0' + retval;
+        retval += '-' + nameOfMonths[date.getMonth()] + '-' + date.getFullYear();
+        return retval;
+    }
+
     jQuery(document).ready(function() {
         jQuery("#add-subject").click(()=> {
             var newSubject = jQuery("#new-subject").val();
@@ -63,15 +74,19 @@
                 url: "${pageContext.request.contextPath}/ProtocolDeviations?action=get&pdid="+
                         protocolId,
                 success: function(response) {
+                    let d = new Date(response.itemA3);
+                    console.log(d);
+
+
                     jQuery('input[name="protocol_deviation_id"]').val(response.protocolDeviationId);
                     jQuery('input[name="item_a_1"][value="'+response.itemA1+'"]').prop('checked', true);
                     jQuery('input[name="item_a_2"][value="'+response.itemA2+'"]').prop('checked', true);
-                    jQuery('input[name="item_a_3"]').val(response.itemA3);
-                    jQuery('input[name="item_a_4"]').val(response.itemA4);
-                    jQuery('input[name="item_a_5"]').val(response.itemA5);
+                    jQuery('input[name="item_a_3"]').val(dateToString(response.itemA3));
+                    jQuery('input[name="item_a_4"]').val(dateToString(response.itemA4));
+                    jQuery('input[name="item_a_5"]').val(dateToString(response.itemA5));
                     jQuery('input[name="item_a_6"][value="'+response.itemA6+'"]').prop('checked', true);
                     jQuery('input[name="item_a_7"][value="'+response.itemA7+'"]').prop('checked', true);
-                    jQuery('input[name="item_a_7_1"]').val(response.itemA7_1);
+                    jQuery('input[name="item_a_7_1"]').val(dateToString(response.itemA7_1));
                     jQuery('input[name="item_a_8"][value="'+response.itemA8+'"]').prop('checked', true);
 
                     jQuery('input[name="item_b_1"][value="'+response.itemB1+'"]').prop('checked', true);
@@ -105,7 +120,7 @@
                     jQuery('input[name="item_c_1_10"]').val(response.itemC1_10);
                     jQuery('textarea[name="item_c_2"]').val(response.itemC2);
 
-                    jQuery('input[name="item_d_1_a"]').val(response.itemD1_A);
+                    jQuery('input[name="item_d_1_a"]').val(dateToString(response.itemD1_A));
                     jQuery('textarea[name="item_d_1_b"]').val(response.itemD2_B);
 
                     jQuery('textarea[name="item_e_1"]').val(response.itemE1);
@@ -115,7 +130,7 @@
 
                     jQuery('input[name="item_f_1"]').val(response.itemF1);
                     jQuery('input[name="item_f_2"]').val(response.itemF2);
-                    jQuery('input[name="item_f_3"]').val(response.itemF3);
+                    jQuery('input[name="item_f_3"]').val(dateToString(response.itemF3));
 
                     jQuery('input[name="item_g_1"][value="'+response.itemG1+'"]').prop('checked', true);
                     jQuery('input[name="item_g_2_1"]').prop('checked', response.itemG2_1);
@@ -125,7 +140,7 @@
                     jQuery('input[name="item_g_3"][value="'+response.itemG3+'"]').prop('checked', true);
                     jQuery('input[name="item_g_4"][value="'+response.itemG4+'"]').prop('checked', true);
                     jQuery('input[name="item_g_5"][value="'+response.itemG5+'"]').prop('checked', true);
-                    jQuery('input[name="item_g_6"]').val(response.itemG6);
+                    jQuery('input[name="item_g_6"]').val(dateToString(response.itemG6));
                     jQuery('input[name="item_g_6_1_a"]').val(response.itemG6_1_A);
                     jQuery('input[name="item_g_6_1_b"]').prop('checked', response.itemG6_1_B);
                     jQuery('input[name="item_g_6_1_c"]').val(response.itemG6_1_C);

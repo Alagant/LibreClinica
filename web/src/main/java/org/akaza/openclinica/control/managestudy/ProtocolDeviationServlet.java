@@ -15,7 +15,12 @@ import org.springframework.http.MediaType;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProtocolDeviationServlet extends SecureController {
     private ProtocolDeviationSeverityDAO protocolDeviationSeverityDAO;
@@ -44,6 +49,24 @@ public class ProtocolDeviationServlet extends SecureController {
         return retval;
     }
 
+    private Date dateValueOrNull(String field) {
+        Date retval = null;
+        if(request.getParameter(field) == null) return null;
+
+        SimpleDateFormat dateTimeFormatter =
+                new SimpleDateFormat("dd-MMM-yyyy", Locale.US);
+        try {
+            retval = dateTimeFormatter.parse(request.getParameter(field));
+        }
+        catch (ParseException ex) {
+            //ignore the error, we'll return null at the next statement
+        }
+
+        return retval;
+    }
+
+
+
     private ProtocolDeviationSubjectDAO getProtocolDeviationSubjectDAO() {
         if(protocolDeviationSubjectDAO == null)
             protocolDeviationSubjectDAO = new ProtocolDeviationSubjectDAO(sm.getDataSource());
@@ -56,10 +79,9 @@ public class ProtocolDeviationServlet extends SecureController {
 
         int protocolDeviationId = -1;
         try {
-            if(request.getParameter("protocol_deviation_id") != null)
-                protocolDeviationId = Integer.parseInt(
-                        request.getParameter("protocol_deviation_id")
-                );
+            String stringProtocolDeviationId = request.getParameter("protocol_deviation_id");
+            if(stringProtocolDeviationId != null && !stringProtocolDeviationId.isEmpty())
+                protocolDeviationId = Integer.parseInt(stringProtocolDeviationId);
         }
         catch(NumberFormatException ex) {
             addPageMessage("Protocol deviation id not found or it has an incorrect format");
@@ -76,12 +98,12 @@ public class ProtocolDeviationServlet extends SecureController {
         //Populate data {{{
         pdb.setItemA1(shortValueOrZero("item_a_1"));
         pdb.setItemA2(shortValueOrZero("item_a_2"));
-        //pdb.setItemA3(shortValueOrZero("item_a_3")));
-        //pdb.setItemA4(shortValueOrZero("item_a_4")));
-        //pdb.setItemA5(shortValueOrZero("item_a_5")));
+        pdb.setItemA3(dateValueOrNull("item_a_3"));
+        pdb.setItemA4(dateValueOrNull("item_a_4"));
+        pdb.setItemA5(dateValueOrNull("item_a_5"));
         pdb.setItemA6(shortValueOrZero("item_a_6"));
         pdb.setItemA7(shortValueOrZero("item_a_7"));
-        //pdb.setItemA7_1(shortValueOrZero("item_a_7_1")));
+        pdb.setItemA7_1(dateValueOrNull("item_a_7_1"));
         pdb.setItemA8(shortValueOrZero("item_a_8"));
         pdb.setItemB1(shortValueOrZero("item_b_1"));
         pdb.setItemB2(shortValueOrZero("item_b_2"));
@@ -115,6 +137,7 @@ public class ProtocolDeviationServlet extends SecureController {
         pdb.setItemC1_10(request.getParameter("item_c_1_10"));
         pdb.setItemC2(request.getParameter("item_c_2"));
         //pdb.setItemD1_A(request.getParameter("item_d_1_a"));
+        pdb.setItemD1_A(dateValueOrNull("item_d_1_a"));
         pdb.setItemD1_B(request.getParameter("item_d_1_b"));
         pdb.setItemE1(request.getParameter("item_e_1"));
         pdb.setItemE2(request.getParameter("item_e_2"));
@@ -123,6 +146,8 @@ public class ProtocolDeviationServlet extends SecureController {
         pdb.setItemF1(request.getParameter("item_f_1"));
         pdb.setItemF2(request.getParameter("item_f_2"));
         //pdb.setItemF3(request.getParameter("item_f_3"));
+        pdb.setItemF3(dateValueOrNull("item_f_3"));
+
         pdb.setItemG1(shortValueOrZero("item_g_1"));
         pdb.setItemG2_1(shortValueOrZero("item_g_2_1"));
         pdb.setItemG2_2(shortValueOrZero("item_g_2_2"));
@@ -132,6 +157,7 @@ public class ProtocolDeviationServlet extends SecureController {
         pdb.setItemG4(shortValueOrZero("item_g_4"));
         pdb.setItemG5(shortValueOrZero("item_g_5"));
         //pdb.setItemG6(request.getParameter("item_g_6"));
+        pdb.setItemG6(dateValueOrNull("item_g_6"));
         pdb.setItemG6_1_A(request.getParameter("item_g_6_1_a"));
         pdb.setItemG6_1_B(shortValueOrZero("item_g_6_1_b"));
         pdb.setItemG6_1_C(request.getParameter("item_g_6_1_c"));
@@ -155,23 +181,26 @@ public class ProtocolDeviationServlet extends SecureController {
         if(pdb.getId()<1) {
             pdb = protocolDeviationDAO.create(pdb);
 
-            //add subjects to the protocol deviation
-            for(String s: subjectsId) {
-                int subjectId = Integer.parseInt(s);
-                ProtocolDeviationSubjectBean pdsb = protocolDeviationSubjectDAO
-                        .findSubjectById(pdb.getProtocolDeviationId(), subjectId);
-                if(pdsb == null || pdsb.getId()<1) {
-                    pdsb = new ProtocolDeviationSubjectBean();
-                    pdsb.setProtocolDeviationId(pdb.getProtocolDeviationId());
-                    pdsb.setSubjectId(subjectId);
-                    protocolDeviationSubjectDAO.create(pdsb);
-                }
-            }
+
         }
         else {
             protocolDeviationDAO.update(pdb);
         }
 
+        //add subjects to the protocol deviation
+        if(subjectsId == null) return;
+        
+        for(String s: subjectsId) {
+            int subjectId = Integer.parseInt(s);
+            ProtocolDeviationSubjectBean pdsb = protocolDeviationSubjectDAO
+                    .findSubjectById(pdb.getProtocolDeviationId(), subjectId);
+            if(pdsb == null || pdsb.getId()<1) {
+                pdsb = new ProtocolDeviationSubjectBean();
+                pdsb.setProtocolDeviationId(pdb.getProtocolDeviationId());
+                pdsb.setSubjectId(subjectId);
+                protocolDeviationSubjectDAO.create(pdsb);
+            }
+        }
 
     }
     @Override
@@ -219,10 +248,10 @@ public class ProtocolDeviationServlet extends SecureController {
         PrintWriter printWriter = response.getWriter();;
         ProtocolDeviationBean protocolDeviationBean =
                 getProtocolDeviationDAO().findByPKAndStudy(id, currentStudy);
-        protocolDeviationBean.setSubjects(
+        ArrayList<ProtocolDeviationSubjectBean> subjects =
                 getProtocolDeviationSubjectDAO()
-                        .findByProtocolDeviation(protocolDeviationBean.getId())
-        );
+                        .findByProtocolDeviation(protocolDeviationBean.getId());
+        protocolDeviationBean.setSubjects(subjects);
 
         response.setHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();

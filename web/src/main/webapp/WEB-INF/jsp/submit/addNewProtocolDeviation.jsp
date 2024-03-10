@@ -6,6 +6,9 @@
 <fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 <div class="add_new_subject_div form-standard" style="display: flex; flex-direction: column; padding: 10px; row-gap: 10px;">
     <style scoped>
+        div.calendar {
+            z-index: 2000;
+        }
         #protocol-deviation-editor h1 {
             display: block;
             color: var(--lightblue-d20);
@@ -89,6 +92,7 @@
             </div>
             <div class="formlabel" style="">
                 <select class="formfield" id="new-subject">
+                    <option value="">(Select a participant)</option>
                     <c:forEach var="p" items="${subjects}">
                         <option value="${p.id}">
                                 ${p.label}
