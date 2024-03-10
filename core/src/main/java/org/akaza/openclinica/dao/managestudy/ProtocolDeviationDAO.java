@@ -253,82 +253,6 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
         variables.put(2, pdb.getStudyId());
         populateVariablesAndNullVars(pdb, variables, nullVars, 3);
 
-        /*
-        variables.put(3, pdb.getItemA1());
-        variables.put(4, pdb.getItemA2());
-
-        variables.put(5, null); nullVars.put(5, Types.DATE);  // item_a_3
-        variables.put(6, null); nullVars.put(6, Types.DATE); // item_a_4
-        variables.put(7, null); nullVars.put(7, Types.DATE); // item_a_5
-        variables.put(8, pdb.getItemA6());
-        variables.put(9, pdb.getItemA7());
-        variables.put(10, null); nullVars.put(10, Types.DATE); // item_a_7_1
-        variables.put(11, pdb.getItemA8());
-        variables.put(12, pdb.getItemB1());
-        variables.put(13, pdb.getItemB2());
-        variables.put(14, pdb.getItemB3());
-        variables.put(15, pdb.getItemB4());
-        variables.put(16, pdb.getItemB5());
-        variables.put(17, pdb.getItemB6());
-        variables.put(18, pdb.getItemB7());
-        variables.put(19, pdb.getItemB8());
-        variables.put(20, pdb.getItemB9());
-        variables.put(21, pdb.getItemB10());
-        variables.put(22, pdb.getItemB11());
-        variables.put(23, pdb.getItemB12());
-        variables.put(24, pdb.getItemB13());
-        variables.put(25, pdb.getItemB14());
-        variables.put(26, pdb.getItemB15());
-        variables.put(27, pdb.getItemB16());
-        variables.put(28, pdb.getItemB17());
-        variables.put(29, pdb.getItemB18());
-        variables.put(30, pdb.getItemC1_1());
-        variables.put(31, pdb.getItemC1_2());
-        variables.put(32, pdb.getItemC1_3());
-        variables.put(33, pdb.getItemC1_4());
-        variables.put(34, pdb.getItemC1_5());
-        variables.put(35, pdb.getItemC1_6());
-        variables.put(36, pdb.getItemC1_7());
-        variables.put(37, pdb.getItemC1_8());
-        variables.put(38, pdb.getItemC1_9());
-        variables.put(39, pdb.getItemC1_10());
-        variables.put(40, pdb.getItemC2());
-        variables.put(41, null); nullVars.put(41, Types.DATE); //variables.put(42, pdb.getItemD1_A());
-        variables.put(42, pdb.getItemD1_B());
-        variables.put(43, pdb.getItemE1());
-        variables.put(44, pdb.getItemE2());
-        variables.put(45, pdb.getItemE3());
-        variables.put(46, pdb.getItemE4());
-
-        variables.put(47, pdb.getItemF1()); //nullVars.put(47, Types.DATE); // item_f_1
-        variables.put(48, pdb.getItemF2()); //nullVars.put(48, Types.DATE); // item_f_2
-        variables.put(49, null); nullVars.put(49, Types.DATE); // item_f_3
-        variables.put(50, pdb.getItemG1());
-        variables.put(51, pdb.getItemG2_1());
-        variables.put(52, pdb.getItemG2_2());
-        variables.put(53, pdb.getItemG2_3());
-        variables.put(54, pdb.getItemG2_4());
-        variables.put(55, pdb.getItemG3());
-        variables.put(56, pdb.getItemG4());
-        variables.put(57, pdb.getItemG5());
-        variables.put(58, null); nullVars.put(58, Types.DATE); // item_g_6
-        variables.put(59, pdb.getItemG6_1_A());
-        variables.put(60, pdb.getItemG6_1_B());
-        variables.put(61, pdb.getItemG6_1_C());
-        variables.put(62, pdb.getItemG6_2_A());
-        variables.put(63, pdb.getItemG6_2_B());
-        variables.put(64, pdb.getItemG6_2_C());
-        variables.put(65, pdb.getItemG6_3_A());
-        variables.put(66, pdb.getItemG6_3_B());
-        variables.put(67, pdb.getItemG6_3_C());
-        variables.put(68, pdb.getItemG6_4_A());
-        variables.put(69, pdb.getItemG6_4_B());
-        variables.put(70, pdb.getItemG6_4_C());
-        variables.put(71, pdb.getItemG7());
-        variables.put(72, pdb.getItemG8());
-        variables.put(73, pdb.getItemG9());
-        */
-
         executeUpdateWithPK(digester.getQuery("createProtocolDeviation"), variables, nullVars);
         if (isQuerySuccessful()) {
             pdb.setProtocolDeviationId(getLatestPK());
@@ -342,94 +266,7 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
         HashMap<Integer, Integer> nullVars = new HashMap<>();
 
         int startPosition = populateVariablesAndNullVars(pdb, variables, nullVars, 1);
-
-        /*
-        variables.put(1, pdb.getItemA1());
-        variables.put(2, pdb.getItemA2());
-
-        if(pdb.getItemA3()== null) nullVars.put(3, Types.DATE);
-        variables.put(3, pdb.getItemA3());// nullVars.put(3, Types.DATE);  // item_a_3
-        if(pdb.getItemA4()== null) nullVars.put(4, Types.DATE);
-        variables.put(4, pdb.getItemA4()); // nullVars.put(4, Types.DATE); // item_a_4
-        if(pdb.getItemA5()== null) nullVars.put(5, Types.DATE);
-        variables.put(5, pdb.getItemA5()); // nullVars.put(5, Types.DATE); // item_a_5
-        variables.put(6, pdb.getItemA6());
-        variables.put(7, pdb.getItemA7());
-        //variables.put(8, null); nullVars.put(8, Types.DATE); // item_a_7_1
-        if(pdb.getItemA7_1()== null) nullVars.put(8, Types.DATE);
-        variables.put(8, pdb.getItemA7_1());
-        variables.put(9, pdb.getItemA8());
-        variables.put(10, pdb.getItemB1());
-        variables.put(11, pdb.getItemB2());
-        variables.put(12, pdb.getItemB3());
-        variables.put(13, pdb.getItemB4());
-        variables.put(14, pdb.getItemB5());
-        variables.put(15, pdb.getItemB6());
-        variables.put(16, pdb.getItemB7());
-        variables.put(17, pdb.getItemB8());
-        variables.put(18, pdb.getItemB9());
-        variables.put(19, pdb.getItemB10());
-        variables.put(20, pdb.getItemB11());
-        variables.put(21, pdb.getItemB12());
-        variables.put(22, pdb.getItemB13());
-        variables.put(23, pdb.getItemB14());
-        variables.put(24, pdb.getItemB15());
-        variables.put(25, pdb.getItemB16());
-        variables.put(26, pdb.getItemB17());
-        variables.put(27, pdb.getItemB18());
-        variables.put(28, pdb.getItemC1_1());
-        variables.put(29, pdb.getItemC1_2());
-        variables.put(30, pdb.getItemC1_3());
-        variables.put(31, pdb.getItemC1_4());
-        variables.put(32, pdb.getItemC1_5());
-        variables.put(33, pdb.getItemC1_6());
-        variables.put(34, pdb.getItemC1_7());
-        variables.put(35, pdb.getItemC1_8());
-        variables.put(36, pdb.getItemC1_9());
-        variables.put(37, pdb.getItemC1_10());
-        variables.put(38, pdb.getItemC2());
-        //variables.put(39, null); nullVars.put(39, Types.DATE); //variables.put(42, pdb.getItemD1_A());
-        if(pdb.getItemD1_A() == null) nullVars.put(39, Types.DATE);
-        variables.put(39, pdb.getItemD1_A());
-        variables.put(40, pdb.getItemD1_B());
-        variables.put(41, pdb.getItemE1());
-        variables.put(42, pdb.getItemE2());
-        variables.put(43, pdb.getItemE3());
-        variables.put(44, pdb.getItemE4());
-
-
-        variables.put(45, pdb.getItemF1()); //nullVars.put(45, Types.DATE); // item_f_1
-        variables.put(46, pdb.getItemF2()); //nullVars.put(46, Types.DATE); // item_f_2
-        if(pdb.getItemF3() == null) nullVars.put(47, Types.DATE);
-        variables.put(47, pdb.getItemF3());
-        variables.put(48, pdb.getItemG1());
-        variables.put(49, pdb.getItemG2_1());
-        variables.put(50, pdb.getItemG2_2());
-        variables.put(51, pdb.getItemG2_3());
-        variables.put(52, pdb.getItemG2_4());
-        variables.put(53, pdb.getItemG3());
-        variables.put(54, pdb.getItemG4());
-        variables.put(55, pdb.getItemG5());
-        if(pdb.getItemG6() == null) nullVars.put(56, Types.DATE);
-        variables.put(56, pdb.getItemG6()); // nullVars.put(56, Types.DATE); // item_g_6
-        variables.put(57, pdb.getItemG6_1_A());
-        variables.put(58, pdb.getItemG6_1_B());
-        variables.put(59, pdb.getItemG6_1_C());
-        variables.put(60, pdb.getItemG6_2_A());
-        variables.put(61, pdb.getItemG6_2_B());
-        variables.put(62, pdb.getItemG6_2_C());
-        variables.put(63, pdb.getItemG6_3_A());
-        variables.put(64, pdb.getItemG6_3_B());
-        variables.put(65, pdb.getItemG6_3_C());
-        variables.put(66, pdb.getItemG6_4_A());
-        variables.put(67, pdb.getItemG6_4_B());
-        variables.put(68, pdb.getItemG6_4_C());
-        variables.put(69, pdb.getItemG7());
-        variables.put(70, pdb.getItemG8());
-        variables.put(71, pdb.getItemG9());
-        */
         variables.put(startPosition+1, pdb.getId());
-
 
         executeUpdateWithPK(digester.getQuery("updateProtocolDeviation"), variables, nullVars);
 
@@ -523,15 +360,7 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
         setTypeExpected(72, TypeNames.STRING);
         setTypeExpected(73, TypeNames.STRING);
         setTypeExpected(74, TypeNames.STRING);
-        /*setTypeExpected(75, TypeNames.STRING);
-        setTypeExpected(76, TypeNames.STRING);*/
 
-
-
-        /*this.setTypeExpected(3, TypeNames.STRING);
-        this.setTypeExpected(4, TypeNames.INT);
-        this.setTypeExpected(5, TypeNames.STRING);
-        this.setTypeExpected(6, TypeNames.INT);*/
     }
 
     public ArrayList<ProtocolDeviationBean> findByStudy(int studyId) {

@@ -4,7 +4,7 @@
 
 <fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
-<div class="add_new_subject_div form-standard" style="display: flex; flex-direction: column; padding: 10px; row-gap: 10px;">
+<div class="protocol_deviation_editor_popup form-standard" style="display: flex; flex-direction: column; padding: 10px; row-gap: 10px;">
     <style scoped>
         div.calendar {
             z-index: 2000;
@@ -102,10 +102,12 @@
                 <button type="button" class="button" id="add-subject">Add</button>
             </div>
         </div>
+        <%--
         <div style="display: flex;">
             <div class="formlabel" style="width: 120px;">Text to search</div>
             <div><input type="text"></div>
         </div>
+        --%>
 
         <div style="height: 240px;" id="subjects-added" class="protocol-deviation-subject-container">
 

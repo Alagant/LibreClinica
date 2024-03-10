@@ -2198,3 +2198,11 @@ frm_msg{
     font-size: 11px;
     color: #4D4D4D;
 }
+
+.protocol_deviation_editor_popup {
+    text-align: left;
+    width: 100%;
+    height: 550px;
+    overflow: scroll;
+    background: #FFFFFF;
+}
