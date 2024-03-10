@@ -52,7 +52,14 @@
     <li>
         <strong>Date CRB became aware of the incident</strong>
         <div class="detail">
-            <label><input type="text" name="item_g_6"></label>
+            <label><input type="text" name="item_g_6" id="item_g_6"></label>
+            <a href="#">
+                <img src="images/bt_Calendar.gif" title="" border="0" id="item_g_6-trigger" />
+            </a>
+            <script type="text/javascript">
+                Calendar.setup({inputField  : "item_g_6", ifFormat: "%d-%b-%Y",
+                    button: "item_g_6-trigger" });
+            </script>
         </div>
     </li>
     <li>

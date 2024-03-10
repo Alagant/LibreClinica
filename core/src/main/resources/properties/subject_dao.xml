@@ -122,17 +122,8 @@
 	</query>
 	<query>
 		<name>findSubjectsByProtocolDeviationId</name>
-		<sql>SELECT protocol_deviation_id,
-			"label", study_id, item_a_1, item_a_2, COALESCE(item_a_3, CAST('1900-1-1' AS DATE)), COALESCE(item_a_4, CAST('1900-1-1' AS DATE)),
-				COALESCE(item_a_5, CAST('1900-1-1') AS DATE), item_a_6, item_a_7, /* 1 - 9*/
-			COALESCE(item_a_7_1, CAST('1900-1-1') AS DATE), item_a_8, item_b_1, item_b_2, item_b_3, item_b_4, item_b_5, item_b_6, item_b_7, item_b_8, /* 10 - 19 */
-			item_b_9, item_b_10, item_b_11, item_b_12, item_b_13, item_b_14, item_b_15, item_b_16, item_b_17, item_b_18, /* 20 - 29 */
-			item_c_1_1, item_c_1_2, item_c_1_3, item_c_1_4, item_c_1_5, item_c_1_6, item_c_1_7, item_c_1_8, item_c_1_9, item_c_1_10, /* 30 - 39 */
-			item_c_2, COALESCE(item_d_1_a, CAST('1900-1-1') AS DATE), item_d_1_b, item_e1, item_e2, item_e3, item_e4, item_f_1, item_f_2,
-				COALESCE(item_f_3, CAST('1990-1-1' AS DATE)), /* 40 - 49*/
-			item_g_1, item_g_2_1, item_g_2_2, item_g_2_3, item_g_2_4, item_g_3, item_g_4, item_g_5, COALESCE(item_g_6 AS CAST('1900-1-1') AS DATE), item_g_6_1_a, /* 50 - 59 */
-			item_g_6_1_b, item_g_6_1_c, item_g_6_2_a, item_g_6_2_b, item_g_6_2_c, item_g_6_3_a, item_g_6_3_b, item_g_6_3_c, /* 60 - 67 */
-			item_g_6_4_a, item_g_6_4_b, item_g_6_4_c, item_g_7, item_g_8, item_g_9
+		<sql>SELECT pds.id, pds.protocol_deviation_id, pds.subject_id,
+			ss.label, ss.secondary_label
 			FROM protocol_deviation_subject pds INNER JOIN study_subject ss ON
 			pds.subject_id = ss.study_subject_id
 			WHERE protocol_deviation_id = ?
