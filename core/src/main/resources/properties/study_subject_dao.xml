@@ -110,6 +110,22 @@
                     AND (ST.study_id=? or ST.parent_study_id=?)
         </sql>
     </query>
+	<query>
+		<name>getWithFilterAndSortByEnrollment</name>
+		<sql>SELECT DISTINCT(ss.*), ST.unique_identifier,
+			CASE
+				WHEN SS.label ~ '^\d{2}-P\d{5}$' THEN 1
+				WHEN SS.label ~ '^\d{2}-\d{2}-E\d{5}$' THEN 2
+				WHEN SS.label ~ '^\d{2}-\d{2}-N\d{5}$' THEN 3
+				ELSE 4
+			END AS sort_order_by_enrollment
+			FROM study_subject ss LEFT JOIN study_event se ON ss.study_subject_id = se.study_subject_id,STUDY ST,SUBJECT S
+			WHERE
+				SS.SUBJECT_ID=S.SUBJECT_ID
+				AND SS.study_id = ST.study_id
+				AND (ST.study_id=? or ST.parent_study_id=?)
+		</sql>
+	</query>
     <query>
         <name>getCountWithFilterListDiscNotes</name>
         <sql><![CDATA[SELECT COUNT( DISTINCT  SS.study_subject_id)

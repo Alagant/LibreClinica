@@ -387,17 +387,21 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         setTypesExpected();
         // type for Study unique_identifier from StudySubject getWithFilterAndSort query
         setTypeExpected(14, TypeNames.STRING);
+        // type for sort_order_by_enrollment from sorting getWithFilterAndSortByEnrollment query
+        setTypeExpected(15, TypeNames.INT);
         
         String partialSql;
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
-        String sql = digester.getQuery("getWithFilterAndSort");
+        //String sql = digester.getQuery("getWithFilterAndSort");
+        String sql = digester.getQuery("getWithFilterAndSortByEnrollment");
         sql = sql + filter.execute("");
         // Order by Clause for the defect id 0005480
 
         partialSql = sort.execute("");
         sql = sql + partialSql;
         if (partialSql.equals("")) {
-            sql = sql + "  ORDER BY SS.label LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+            // sql = sql + "  ORDER BY SS.label LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+            sql = sql + "  ORDER BY sort_order_by_enrollment LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
         } else {
             sql = sql + " LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
         }
