@@ -321,7 +321,7 @@ public class CreateNewStudyEventServlet extends SecureController {
                 if(studySubject.getSecondaryLabel().isEmpty()) {
                     //Validator.addError(errors, INPUT_STUDY_SUBJECT, "Study Subject is not enrolled. Enroll subject from subject matrix.");
                     if(!definition.getName().isEmpty()){
-                        Validator.addError(errors, INPUT_STUDY_EVENT_DEFINITION, "Only the EN event can be scheduled for new subjects.");
+                        Validator.addError(errors, INPUT_STUDY_EVENT_DEFINITION, "Only the EN event can be scheduled for NEW or NON-ENROLLED subjects.");
                     }
                 }
             }
@@ -339,7 +339,7 @@ public class CreateNewStudyEventServlet extends SecureController {
                         if("EN".equalsIgnoreCase(definition.getName())){
                             if(studySubject.getSecondaryLabel().isEmpty()) {
                                 if(!sedb.getName().isEmpty()){
-                                    Validator.addError(errors, INPUT_STUDY_EVENT_DEFINITION_SCHEDULED[i], "Only the EN event can be scheduled for new subjects.");
+                                    Validator.addError(errors, INPUT_STUDY_EVENT_DEFINITION_SCHEDULED[i], "Only the EN event can be scheduled for NEW or NON-ENROLLED subjects.");
                                 }
                             }
 
