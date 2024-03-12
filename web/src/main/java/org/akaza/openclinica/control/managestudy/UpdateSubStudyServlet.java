@@ -181,6 +181,18 @@ public class UpdateSubStudyServlet extends SecureController {
         if (fp.getString("description").trim().length() > 255) {
             Validator.addError(errors, "description", resexception.getString("maximum_lenght_brief_summary_255"));
         }
+        if (fp.getString("facAddress1").trim().length() > 200) {
+            Validator.addError(errors, "facAddress1", resexception.getString("maximum_length_facility_adddress_1_100"));
+        }
+        if (fp.getString("facAddress2").trim().length() > 200) {
+            Validator.addError(errors, "facAddress2", resexception.getString("maximum_length_facility_adddress_2_100"));
+        }
+        if (fp.getString("facAddress3").trim().length() > 200) {
+            Validator.addError(errors, "facAddress3", resexception.getString("maximum_length_facility_adddress_3_100"));
+        }
+        if (fp.getString("facAddress4").trim().length() > 200) {
+            Validator.addError(errors, "facAddress4", resexception.getString("maximum_length_facility_adddress_4_100"));
+        }
         if (fp.getString("prinInvestigator").trim().length() > 255) {
             Validator.addError(errors, "prinInvestigator", resexception.getString("maximum_lenght_principal_investigator_255"));
         }
@@ -285,6 +297,10 @@ public class UpdateSubStudyServlet extends SecureController {
         study.setFacilityCity(fp.getString("facCity"));
         study.setFacilityContactDegree(fp.getString("facConDrgree"));
         study.setFacilityName(fp.getString("facName"));
+        study.setFacilityAddress1(fp.getString("facAddress1"));
+        study.setFacilityAddress2(fp.getString("facAddress2"));
+        study.setFacilityAddress3(fp.getString("facAddress3"));
+        study.setFacilityAddress4(fp.getString("facAddress4"));
         study.setFacilityContactEmail(fp.getString("facConEmail"));
         study.setFacilityContactPhone(fp.getString("facConPhone"));
         study.setFacilityContactName(fp.getString("facConName"));
