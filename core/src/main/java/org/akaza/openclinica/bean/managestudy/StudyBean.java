@@ -64,6 +64,10 @@ public class StudyBean extends AuditableEntityBean {
 
     private String principalInvestigator = "";
     private String facilityName = "";
+    private String facilityAddress1 = "";
+    private String facilityAddress2 = "";
+    private String facilityAddress3 = "";
+    private String facilityAddress4 = "";
     private String facilityCity = "";
     private String facilityState = "";
     private String facilityZip = "";
@@ -472,6 +476,66 @@ public class StudyBean extends AuditableEntityBean {
     }
 
     /**
+     * @return Returns the facilityAddress1.
+     */
+    public String getFacilityAddress1() {
+        return facilityAddress1;
+    }
+
+    /**
+     * @param facilityAddress1
+     *            The facilityAddress1 to set.
+     */
+    public void setFacilityAddress1(String facilityAddress1) {
+        this.facilityAddress1 = facilityAddress1;
+    }
+
+    /**
+     * @return Returns the facilityAddress2.
+     */
+    public String getFacilityAddress2() {
+        return facilityAddress2;
+    }
+
+    /**
+     * @param facilityAddress2
+     *            The facilityAddress2 to set.
+     */
+    public void setFacilityAddress2(String facilityAddress2) {
+        this.facilityAddress2 = facilityAddress2;
+    }
+
+    /**
+     * @return Returns the facilityAddress3.
+     */
+    public String getFacilityAddress3() {
+        return facilityAddress3;
+    }
+
+    /**
+     * @param facilityAddress3
+     *            The facilityAddress1 to set.
+     */
+    public void setFacilityAddress3(String facilityAddress3) {
+        this.facilityAddress3 = facilityAddress3;
+    }
+
+    /**
+     * @return Returns the facilityAddress4.
+     */
+    public String getFacilityAddress4() {
+        return facilityAddress4;
+    }
+
+    /**
+     * @param facilityAddress4
+     *            The facilityAddress4 to set.
+     */
+    public void setFacilityAddress4(String facilityAddress4) {
+        this.facilityAddress1 = facilityAddress4;
+    }
+
+    /**
      * @return Returns the facilityCity.
      */
     public String getFacilityCity() {
@@ -485,7 +549,6 @@ public class StudyBean extends AuditableEntityBean {
     public void setFacilityCity(String facilityCity) {
         this.facilityCity = facilityCity;
     }
-
     /**
      * @return Returns the facilityContactDegree.
      */
