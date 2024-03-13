@@ -266,9 +266,15 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         } else {
             variables.put(25, sb.getContactEmail());
         }
-        
+
+        //Facility address
+        variables.put(26, sb.getFacilityAddress1());// facility address line 1
+        variables.put(27, sb.getFacilityAddress2());// facility address line 1
+        variables.put(28, sb.getFacilityAddress3());// facility address line 1
+        variables.put(29, sb.getFacilityAddress4());// facility address line 1
+
         // SQL Update where
-        variables.put(26, sb.getId());// study id
+        variables.put(30, sb.getId());// study id
         
         this.executeUpdate(digester.getQuery("updateStepOne"), variables, nullVars);
         return sb;
