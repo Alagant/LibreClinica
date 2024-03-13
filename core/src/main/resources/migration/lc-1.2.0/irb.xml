@@ -17,6 +17,9 @@
             <column name="version1_protocol_date" type="DATE">
                 <constraints nullable="false" />
             </column>
+            <column name="protocol_officer" type="VARCHAR(20)">
+                <constraints nullable="false" />
+            </column>
             <column name="submitted_cdc_irb" type="DATE">
                 <constraints nullable="false" />
             </column>
@@ -26,6 +29,103 @@
             <column name="cdc_irb_expiration_date" type="DATE">
                 <constraints nullable="false" />
             </column>
+        </createTable>
+        <createTable tableName="irb_site">
+            <column autoIncrement="true" name="irb_site_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="site_id" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="version_number" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="site_relies_on_cdc_irb" type="BOOL">
+                <constraints nullable="false" />
+            </column>
+            <column name="is_1572" type="BOOL">
+                <constraints nullable="false" />
+            </column>
+            <column name="cdc_irb_protocol_version_date" type="DATE">
+                <constraints nullable="false" />
+            </column>
+            <column name="local_irb_approved_protocol" type="DATE">
+                <constraints nullable="false" />
+            </column>
+            <column name="cdc_received_local_documents" type="DATE">
+                <constraints nullable="false" />
+            </column>
+            <column name="site_consent_package_send_to_cdc_irb" type="DATE">
+                <constraints nullable="false" />
+            </column>
+            <column name="initial_cdc_irb_approval" type="DATE">
+            </column>
+            <column name="crb_approval_to_enroll" type="DATE">
+            </column>
+            <column name="irb_approval" type="DATE">
+            </column>
+            <column name="expiration_date" type="DATE">
+            </column>
+            <column name="active" type="BOOL">
+            </column>
+            <column name="comments" type="VARCHAR(3000)"/>
+        </createTable>
+        <createTable tableName="irb_protocol_action_type">
+            <column autoIncrement="true" name="irb_protocol_action_type_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="label" type="VARCHAR(40)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="1"/>
+            <column name="label" value="New protocol"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="2"/>
+            <column name="label" value="Ammendment to protocol"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="3"/>
+            <column name="label" value="Ammendment to consent"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="4"/>
+            <column name="label" value="Ammendment to protocol and consent"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="5"/>
+            <column name="label" value="Continuation"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="6"/>
+            <column name="label" value="Incident"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="7"/>
+            <column name="label" value="Suspension"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="8"/>
+            <column name="label" value="Closure"/>
+        </insert>
+        <insert tableName="irb_protocol_action_type">
+            <column name="irb_protocol_action_type_id" valueNumeric="9"/>
+            <column name="label" value="Enrollment paused"/>
+        </insert>
+        <createTable tableName="irb_protocol_action_history">
+            <column autoIncrement="true" name="irb_protocol_action_history_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="irb_protocol_action_type_id" type="INT"/>
+            <column name="version_date" type="DATE"/>
+            <column name="version_number" type="INT"/>
+            <column name="site_submitted_to_local_irb" type="DATE"/>
+            <column name="local_irb_approval" type="DATE"/>
+            <column name="received_docs_from_sites" type="DATE"/>
+            <column name="package_sent_to_cdc_irb" type="DATE"/>
+            <column name="cdc_approval" type="DATE"/>
         </createTable>
         <!--
         <insert tableName="protocol_deviation_severity">
