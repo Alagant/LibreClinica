@@ -532,7 +532,7 @@ public class StudyBean extends AuditableEntityBean {
      *            The facilityAddress4 to set.
      */
     public void setFacilityAddress4(String facilityAddress4) {
-        this.facilityAddress1 = facilityAddress4;
+        this.facilityAddress4 = facilityAddress4;
     }
 
     /**
