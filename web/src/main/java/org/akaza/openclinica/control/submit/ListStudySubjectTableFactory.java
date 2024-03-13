@@ -167,7 +167,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
                     new SubjectGroupClassDroplistFilterEditor(studyGroupClass), true, false);
         }
         // study event definition columns
-        for (int i = index + studyGroupClasses.size(); i < columnNames.length - 2; i++) {
+        for (int i = index + studyGroupClasses.size(); i < columnNames.length - 1; i++) {
             StudyEventDefinitionBean studyEventDefinition = studyEventDefinitions.get(i - (index + studyGroupClasses.size()));
             configureColumn(row.getColumn(columnNames[i]), studyEventDefinition.getName(), new StudyEventDefinitionMapCellEditor(),
                     new SubjectEventStatusDroplistFilterEditor(), true, false);

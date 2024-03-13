@@ -1,7 +1,6 @@
 package org.akaza.openclinica.bean.managestudy;
 
 import org.akaza.openclinica.bean.core.EntityBean;
-import org.akaza.openclinica.domain.managestudy.ProtocolDeviationSubject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,10 +53,10 @@ public class ProtocolDeviationBean extends EntityBean {
     private String itemC2;
     private Date itemD1_A;
     private String itemD1_B;
-    private String itemE1_A;
-    private String itemE1_B;
-    private String itemE1_C;
-    private String itemE1_D;
+    private String itemE1;
+    private String itemE2;
+    private String itemE3;
+    private String itemE4;
     private String itemF1;
     private String itemF2;
     private Date itemF3;
@@ -433,36 +432,36 @@ public class ProtocolDeviationBean extends EntityBean {
         this.itemD1_B = itemD1_B;
     }
 
-    public String getItemE1_A() {
-        return itemE1_A;
+    public String getItemE1() {
+        return itemE1;
     }
 
-    public void setItemE1_A(String itemE1_A) {
-        this.itemE1_A = itemE1_A;
+    public void setItemE1(String itemE1) {
+        this.itemE1 = itemE1;
     }
 
-    public String getItemE1_B() {
-        return itemE1_B;
+    public String getItemE2() {
+        return itemE2;
     }
 
-    public void setItemE1_B(String itemE1_B) {
-        this.itemE1_B = itemE1_B;
+    public void setItemE2(String itemE2) {
+        this.itemE2 = itemE2;
     }
 
-    public String getItemE1_C() {
-        return itemE1_C;
+    public String getItemE3() {
+        return itemE3;
     }
 
-    public void setItemE1_C(String itemE1_C) {
-        this.itemE1_C = itemE1_C;
+    public void setItemE3(String itemE3) {
+        this.itemE3 = itemE3;
     }
 
-    public String getItemE1_D() {
-        return itemE1_D;
+    public String getItemE4() {
+        return itemE4;
     }
 
-    public void setItemE1_D(String itemE1_D) {
-        this.itemE1_D = itemE1_D;
+    public void setItemE4(String itemE4) {
+        this.itemE4 = itemE4;
     }
 
     public String getItemF1() {

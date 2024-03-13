@@ -24,7 +24,14 @@
             <span class="question">
                 Date the incident occurred:
                 <div class="detail">
-                  <input type="text" name="item_a_3"/>
+                    <input type="text" name="item_a_3" id="item_a_3"/>
+                    <a href="#">
+                        <img src="images/bt_Calendar.gif" title="" border="0" id="item_a_3-trigger" />
+                        <script type="text/javascript">
+                            Calendar.setup({inputField  : "item_a_3", ifFormat: "%d-%b-%Y",
+                                button: "item_a_3-trigger" });
+                        </script>
+                    </a>
                 </div>
             </span>
         </li>
@@ -32,7 +39,14 @@
             <span class="question">
                 Date site staff became aware of the incident:
                 <div class="detail">
-                    <input type="text" name="item_a_4"/>
+                    <input type="text" name="item_a_4" id="item_a_4"/>
+                    <a href="#">
+                        <img src="images/bt_Calendar.gif" title="" border="0" id="item_a_4-trigger" />
+                        <script type="text/javascript">
+                            Calendar.setup({inputField  : "item_a_4", ifFormat: "%d-%b-%Y",
+                                button: "item_a_4-trigger" });
+                        </script>
+                    </a>
                 </div>
             </span>
         </li>
@@ -40,7 +54,14 @@
             <span class="question">
                 Date of first communication with the clinical Research Branch about the incident:
                 <div class="detail">
-                    <input type="text" name="item_a_5"/>
+                    <input type="text" name="item_a_5" id="item_a_5"/>
+                    <a href="#">
+                        <img src="images/bt_Calendar.gif" title="" border="0" id="item_a_5-trigger" />
+                        <script type="text/javascript">
+                            Calendar.setup({inputField  : "item_a_5", ifFormat: "%d-%b-%Y",
+                                button: "item_a_5-trigger" });
+                        </script>
+                    </a>
                 </div>
             </span>
         </li>
@@ -80,8 +101,16 @@
                 <label><input type="radio" name="item_a_7" value="0">No</label>
                 <div>
                     a. Date when site staff reported incident to the participant
-                    <input type="text" name="item_a_7_1"/>
-
+                    <div>
+                        <input type="text" id="item_a_7_1" name="item_a_7_1"/>
+                        <a href="#">
+                            <img src="images/bt_Calendar.gif" title="" border="0" id="item_a_7_1-trigger" />
+                            <script type="text/javascript">
+                                Calendar.setup({inputField  : "item_a_7_1", ifFormat: "%d-%b-%Y",
+                                    button: "item_a_7_1-trigger" });
+                            </script>
+                        </a>
+                    </div>
                 </div>
             </div>
         </li>

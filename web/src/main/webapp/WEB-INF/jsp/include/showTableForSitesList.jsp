@@ -12,8 +12,7 @@
 <jsp:useBean scope="request" id="table" class="org.akaza.openclinica.web.bean.EntityBeanTable" />
 <c:set var="rowURL" value="${param.rowURL}" />
 <c:set var="outerFormName" value="${param.outerFormName}" />
-<c:set var="active_site" value="${param.active_site}" />
-<c:set var="inactive_site" value="${param.inactive_site}" />
+<c:set var="test_var" value="test_value" />
 <c:choose>
 	<c:when test='${(outerFormName != null) && (outerFormName != "")}'><c:set var="searchFormDisplayed" value="${0}"/></c:when>
 	<c:otherwise><c:set var="searchFormDisplayed" value="${1}"/></c:otherwise>
@@ -123,10 +122,10 @@
 				</tr>
 				<tr>
 					<td valign="top" style="min-width: 100px;">
-						<input type="checkbox" name="active_site" value="<%= request.getAttribute("test_attr") %>" /><% session.setAttribute("test_attr", "yes"); %>Active site as <%= session.getAttribute("active_site") %>
+						<input type="checkbox" name="active_site"<c:choose><c:when test="${(active_site=='on')}">checked</c:when></c:choose>>Active site
 					</td>
 					<td valign="top">
-			    		<input type="checkbox" name="inactive_site" />Inactive site
+			    		<input type="checkbox" name="inactive_site" <c:choose><c:when test="${inactive_site=='on'}">checked</c:when></c:choose>>Inactive site
 					</td>
 				</tr>
 			</table>
