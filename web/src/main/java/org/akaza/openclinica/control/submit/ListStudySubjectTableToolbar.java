@@ -52,8 +52,8 @@ public class ListStudySubjectTableToolbar extends DefaultToolbar {
         }
         addToolbarItem(ToolbarItemType.SEPARATOR);
         addToolbarItem(createCustomItem(new ProtocolDeviationItem()));
-        addToolbarItem(ToolbarItemType.SEPARATOR);
-        addToolbarItem(createCustomItem(new NoEnrollmentItem()));
+        //addToolbarItem(ToolbarItemType.SEPARATOR);
+        //addToolbarItem(createCustomItem(new NoEnrollmentItem()));
     }
 
     private ToolbarItem createCustomItem(AbstractItem item) {
