@@ -27,6 +27,7 @@
 <c:set var="yob" value="" />
 <c:set var="groupId" value="${0}" />
 <c:set var="studyEventDefinition" value=""/>
+<c:set var="studyEventDefinitionID" value=""/>
 <c:set var="location" value=""/>
 
 <c:forEach var="presetValue" items="${presetValues}">
@@ -61,6 +62,9 @@
 	<c:if test='${presetValue.key == "studyEventDefinition"}'>
 		<c:set var="studyEventDefinition" value="${presetValue.value}" />
 	</c:if>
+    <c:if test='${presetValue.key == "studyEventDefinitionID"}'>
+        <c:set var="studyEventDefinitionID" value="${presetValue.value}" />
+    </c:if>
 	<c:if test='${presetValue.key == "location"}'>
 		<c:set var="location" value="${presetValue.value}" />
 	</c:if>
@@ -162,11 +166,6 @@
                 </td>
                     <td><span class="formlabel">*</span></td>
                 </tr>
-                <%--
-                <tr>
-                    <td colspan="2"><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="studyEventDefinition"/></jsp:include></td>
-                </tr>
-                --%>
             </table>
         </td>
     </tr>
@@ -326,10 +325,10 @@
             <table>
                 <tr><td>
                     <div class="formfieldM_BG">
-                        <select name="studyEventDefinition" class="formfieldM">
+                        <select name="studyEventDefinitionID" class="formfieldM">
                             <option value="">-<fmt:message key="select" bundle="${resword}"/>-</option>
                             <c:forEach var="event" items="${allDefsArray}">
-                                <option <c:if test="${studyEventDefinition == event.id}">SELECTED</c:if> value="<c:out value="${event.id}"/>"><c:out value="${event.name}" />
+                                <option <c:if test="${studyEventDefinitionID == event.id}">SELECTED</c:if> value="<c:out value="${event.id}"/>"><c:out value="${event.name}" />
                                 </option>
                             </c:forEach>
                         </select>
@@ -338,7 +337,7 @@
                     <td><span class="formlabel">*</span></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="studyEventDefinition"/></jsp:include></td>
+                    <td colspan="2"><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="studyEventDefinitionID"/></jsp:include></td>
                 </tr>
 
             </table>
