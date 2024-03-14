@@ -169,6 +169,19 @@
   <c:out value="${siteToView.facilityName}"/>&nbsp;
   </td></tr>
 
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${siteToView.facilityAddress1}"/>&nbsp;
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${siteToView.facilityAddress2}"/>&nbsp;
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_3" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${siteToView.facilityAddress3}"/>&nbsp;
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_4" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${siteToView.facilityAddress4}"/>&nbsp;
+  </td></tr>
+
   <tr valign="top"><td class="table_header_column"><fmt:message key="facility_city" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${siteToView.facilityCity}"/>&nbsp;
   </td></tr>
