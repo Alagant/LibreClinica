@@ -106,15 +106,28 @@
   
   <tr valign="top"><td class="table_header_column"><fmt:message key="expected_total_enrollment" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.expectedTotalEnrollment}"/>
-  </td></tr> 
+  </td></tr>
   
   <tr valign="top"><td class="table_header_column"><fmt:message key="facility_name" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.facilityName}"/>
-  </td></tr> 
-  
+  </td></tr>
+
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress1}"/>
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress2}"/>
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_3" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress3}"/>
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_4" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress4}"/>
+  </td></tr>
+
   <tr valign="top"><td class="table_header_column"><fmt:message key="facility_city" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.facilityCity}"/>
-  </td></tr> 
+  </td></tr>
   
   <tr valign="top"><td class="table_header_column"><fmt:message key="facility_state_province" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.facilityState}"/>
@@ -533,7 +546,7 @@
           <c:set var="summary" value="submissionUrl${num}"/>
           <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="${summary}"/></jsp:include>
                                  <br />
-				<c:choose>
+                <c:choose>
                   <c:when test="${edc.allowAnonymousSubmission == true && def.repeating == true  && edc.offline == true}">
                 <fmt:message key="offline" bundle="${resword}"/>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
                     <input type="checkbox" name="offline<c:out value="${count}"/>" value="yes" disabled checked>
@@ -543,7 +556,9 @@
                     <input type="checkbox" name="offline<c:out value="${count}"/>" value="yes" disabled>
                   </c:when>
                 </c:choose>
-          
+
+
+
         </td>
      </c:when>
             <c:otherwise>

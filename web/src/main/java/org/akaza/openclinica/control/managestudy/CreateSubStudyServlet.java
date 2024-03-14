@@ -107,6 +107,10 @@ public class CreateSubStudyServlet extends SecureController {
                 newStudy.setParentStudyId(currentStudy.getId());
                 // get default facility info from property file
                 newStudy.setFacilityName(SQLInitServlet.getField(CreateStudyServlet.FAC_NAME));
+                newStudy.setFacilityAddress1(SQLInitServlet.getField(CreateStudyServlet.FAC_ADDRESS_1));
+                newStudy.setFacilityAddress2(SQLInitServlet.getField(CreateStudyServlet.FAC_ADDRESS_2));
+                newStudy.setFacilityAddress3(SQLInitServlet.getField(CreateStudyServlet.FAC_ADDRESS_3));
+                newStudy.setFacilityAddress4(SQLInitServlet.getField(CreateStudyServlet.FAC_ADDRESS_4));
                 newStudy.setFacilityCity(SQLInitServlet.getField(CreateStudyServlet.FAC_CITY));
                 newStudy.setFacilityState(SQLInitServlet.getField(CreateStudyServlet.FAC_STATE));
                 newStudy.setFacilityCountry(SQLInitServlet.getField(CreateStudyServlet.FAC_COUNTRY));
@@ -261,6 +265,10 @@ public class CreateSubStudyServlet extends SecureController {
         v.addValidation("secondProId", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         v.addValidation("facName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         v.addValidation("facCity", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        v.addValidation("facAddress1", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
+        v.addValidation("facAddress2", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
+        v.addValidation("facAddress3", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
+        v.addValidation("facAddress4", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
         v.addValidation("facState", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
         v.addValidation("facZip", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
         v.addValidation("facCountry", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
@@ -385,6 +393,10 @@ public class CreateSubStudyServlet extends SecureController {
         study.setFacilityCity(fp.getString("facCity"));
         study.setFacilityContactDegree(fp.getString("facConDrgree"));
         study.setFacilityName(fp.getString("facName"));
+        study.setFacilityAddress1(fp.getString("facAddress1"));
+        study.setFacilityAddress2(fp.getString("facAddress2"));
+        study.setFacilityAddress3(fp.getString("facAddress3"));
+        study.setFacilityAddress4(fp.getString("facAddress4"));
         study.setFacilityContactEmail(fp.getString("facConEmail"));
         study.setFacilityContactPhone(fp.getString("facConPhone"));
         study.setFacilityContactName(fp.getString("facConName"));
