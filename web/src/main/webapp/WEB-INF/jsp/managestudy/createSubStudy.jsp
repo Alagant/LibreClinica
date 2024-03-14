@@ -218,8 +218,24 @@ function updateThis(multiSelEle, count) {
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_name" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facName" value="<c:out value="${newStudy.facilityName}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facName"/></jsp:include>
-  </td></tr> 
-  
+  </td></tr>
+
+  <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="facAddress1" value="<c:out value="${newStudy.facilityAddress1}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress1"/></jsp:include>
+  </td></tr>
+  <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="facAddress2" value="<c:out value="${newStudy.facilityAddress2}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress2"/></jsp:include>
+  </td></tr>
+  <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_3" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="facAddress3" value="<c:out value="${newStudy.facilityAddress3}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress3"/></jsp:include>
+  </td></tr>
+  <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_4" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="facAddress4" value="<c:out value="${newStudy.facilityAddress4}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress4"/></jsp:include>
+  </td></tr>
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_city" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facCity" value="<c:out value="${newStudy.facilityCity}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCity"/></jsp:include>

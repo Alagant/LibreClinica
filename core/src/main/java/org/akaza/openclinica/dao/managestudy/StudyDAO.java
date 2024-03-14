@@ -269,9 +269,9 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
 
         //Facility address
         variables.put(26, sb.getFacilityAddress1());// facility address line 1
-        variables.put(27, sb.getFacilityAddress2());// facility address line 1
-        variables.put(28, sb.getFacilityAddress3());// facility address line 1
-        variables.put(29, sb.getFacilityAddress4());// facility address line 1
+        variables.put(27, sb.getFacilityAddress2());// facility address line 2
+        variables.put(28, sb.getFacilityAddress3());// facility address line 3
+        variables.put(29, sb.getFacilityAddress4());// facility address line 4
 
         // SQL Update where
         variables.put(30, sb.getId());// study id
@@ -382,6 +382,12 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         } else {
             variables.put(26, sb.getContactEmail());
         }
+
+        //Facility address
+        variables.put(26, sb.getFacilityAddress1());// facility address line 1
+        variables.put(27, sb.getFacilityAddress2());// facility address line 2
+        variables.put(28, sb.getFacilityAddress3());// facility address line 3
+        variables.put(29, sb.getFacilityAddress4());// facility address line 4
 
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);
