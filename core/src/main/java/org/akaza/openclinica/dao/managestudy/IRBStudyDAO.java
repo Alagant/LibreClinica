@@ -111,6 +111,7 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
     }
 
     @Override
+<<<<<<< HEAD
     protected void setDigesterName() {
         digesterName = SQLFactory.getInstance().DAO_IRB;
     }
@@ -137,5 +138,9 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
         HashMap<Integer, Object> parameters = new HashMap<>();
         parameters.put(1, currentStudy.getId());
         return this.executeFindByPKQuery("findIRBStudyByStudyId", parameters);
+=======
+    public void setTypesExpected() {
+
+>>>>>>> da3cffa30 (Study IRB)
     }
 }

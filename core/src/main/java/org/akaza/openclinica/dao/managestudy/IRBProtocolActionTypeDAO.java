@@ -3,6 +3,7 @@ package org.akaza.openclinica.dao.managestudy;
 import org.akaza.openclinica.bean.core.EntityBean;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationBean;
+import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.SQLFactory;
@@ -21,7 +22,6 @@ public class IRBProtocolActionTypeDAO extends AuditableEntityDAO<IRBProtocolActi
     }
 
     private void setQueryNames() {
-
     }
 
     @Override
