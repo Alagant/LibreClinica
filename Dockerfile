@@ -19,7 +19,7 @@ RUN rm -rf /root/.m2/*
 #installs using Maven
 COPY . .
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/core/src/main/resources/org/akaza/openclinica/datainfo.properties
-COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/datainfo.properties
+COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/web/src/main/resources/org/akaza/openclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/ws/src/main/filters/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /libreclinica/datainfo.properties
 COPY docker/datainfo_docker_${ENVIRONMENT}.properties /usr/local/tomcat/libreclinica.config/datainfo.properties
