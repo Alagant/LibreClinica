@@ -108,10 +108,6 @@ public class AddNewSubjectServlet extends SecureController {
     public static final String EDIT_DOB = "editDob";
 
     public static final String EXISTING_SUB_SHOWN = "existingSubShown";
-
-    
-
-    public static final String STUDY_EVENT_DEFINITION = "studyEventDefinition";
     public static final String STUDY_EVENT_DEFINITION_ID = "studyEventDefinitionID";
     public static final String LOCATION = "location";
 
@@ -443,7 +439,7 @@ public class AddNewSubjectServlet extends SecureController {
                 fp.addPresetValue(INPUT_SECONDARY_LABEL, fp.getString(INPUT_SECONDARY_LABEL));
                 fp.addPresetValue(INPUT_ENROLLMENT_DATE, fp.getString(INPUT_ENROLLMENT_DATE));
                 fp.addPresetValue(INPUT_EVENT_START_DATE, fp.getString(INPUT_EVENT_START_DATE));
-                fp.addPresetValue(STUDY_EVENT_DEFINITION, fp.getInt(STUDY_EVENT_DEFINITION));
+                fp.addPresetValue(STUDY_EVENT_DEFINITION_ID, fp.getInt(STUDY_EVENT_DEFINITION_ID));
                 fp.addPresetValue(LOCATION, fp.getString(LOCATION));
 
 

@@ -64,6 +64,9 @@
 	<c:if test='${presetValue.key == "studyEventDefinitionID"}'>
 		<c:set var="studyEventDefinitionID" value="${presetValue.value}" />
 	</c:if>
+    <c:if test='${presetValue.key == "studyEventDefinitionID"}'>
+        <c:set var="studyEventDefinitionID" value="${presetValue.value}" />
+    </c:if>
 	<c:if test='${presetValue.key == "location"}'>
 		<c:set var="location" value="${presetValue.value}" />
 	</c:if>

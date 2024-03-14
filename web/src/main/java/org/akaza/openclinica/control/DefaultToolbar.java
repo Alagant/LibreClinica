@@ -78,7 +78,7 @@ public class DefaultToolbar extends AbstractToolbar {
         @Override
         public String enabled() {
             HtmlBuilder html = new HtmlBuilder();
-            html.a().href("#").end().append("Show No Enrollment").aEnd();
+            html.a().href("#").end().append("Show No Enrollment Subjects").aEnd();
             return html.toString();
         }
     }
