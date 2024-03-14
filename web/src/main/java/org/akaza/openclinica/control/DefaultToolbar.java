@@ -68,6 +68,20 @@ public class DefaultToolbar extends AbstractToolbar {
             return html.toString();
         }
     }
+    public class NoEnrollmentItem extends AbstractItem {
+
+        @Override
+        public String disabled() {
+            return null;
+        }
+
+        @Override
+        public String enabled() {
+            HtmlBuilder html = new HtmlBuilder();
+            html.a().href("#").end().append("Show No Enrollment Subjects").aEnd();
+            return html.toString();
+        }
+    }
     public class NewHiddenItem extends AbstractItem {
 
         @Override
