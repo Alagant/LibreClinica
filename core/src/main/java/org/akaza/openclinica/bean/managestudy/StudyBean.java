@@ -46,6 +46,7 @@ public class StudyBean extends AuditableEntityBean {
     private String identifier = "";
     private String secondaryIdentifier = "";
     private String subSite ="";
+    private String contractNumber = "";
     private String summary = "";// need to be removed
 
     private Date datePlannedStart;
@@ -79,6 +80,10 @@ public class StudyBean extends AuditableEntityBean {
 
     private String locationType = null;
     private Boolean active = null;
+
+    private String fwaInstitution = "";
+    private String fwaName = "";
+    private Date fwaExpirationDate = null;
     private String facilityRecruitmentStatus = "";
     private String facilityContactName = "";
     private String facilityContactDegree = "";
@@ -1334,5 +1339,37 @@ public class StudyBean extends AuditableEntityBean {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getContractNumber() {
+        return contractNumber;
+    }
+
+    public void setContractNumber(String contractNumber) {
+        this.contractNumber = contractNumber;
+    }
+
+    public String getFwaInstitution() {
+        return fwaInstitution;
+    }
+
+    public void setFwaInstitution(String fwaInstitution) {
+        this.fwaInstitution = fwaInstitution;
+    }
+
+    public String getFwaName() {
+        return fwaName;
+    }
+
+    public void setFwaName(String fwaName) {
+        this.fwaName = fwaName;
+    }
+
+    public Date getFwaExpirationDate() {
+        return fwaExpirationDate;
+    }
+
+    public void setFwaExpirationDate(Date fwaExpirationDate) {
+        this.fwaExpirationDate = fwaExpirationDate;
     }
 }

@@ -281,8 +281,17 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(28, sb.getFacilityAddress3());// facility address line 3
         variables.put(29, sb.getFacilityAddress4());// facility address line 4
 
+        //Sub site, contracts, location type, active, fwa institution, fwa name, fwa expiration date
+        variables.put(30, sb.getSubSite());// sub_site
+        variables.put(31, sb.getContractNumber());// contract_number
+        variables.put(32, sb.getLocationType());// location_type
+        variables.put(33, sb.getActive());// active
+        variables.put(34, sb.getFwaInstitution());// fwa_institution
+        variables.put(35, sb.getFwaName());// fwa_name
+        variables.put(36, sb.getFwaExpirationDate());// fwa_expiration_date
+
         // SQL Update where
-        variables.put(30, sb.getId());// study id
+        variables.put(37, sb.getId());// study id
         
         this.executeUpdate(digester.getQuery("updateStepOne"), variables, nullVars);
         return sb;
@@ -396,6 +405,14 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(28, sb.getFacilityAddress2());// facility address line 2
         variables.put(29, sb.getFacilityAddress3());// facility address line 3
         variables.put(30, sb.getFacilityAddress4());// facility address line 4
+
+        variables.put(31, sb.getSubSite());// sub_site
+        variables.put(32, sb.getContractNumber());// contract_number
+        variables.put(33, sb.getLocationType());// location_type
+        variables.put(34, sb.getActive());// active
+        variables.put(35, sb.getFwaInstitution());// fwa_institution
+        variables.put(36, sb.getFwaName());// fwa_name
+        variables.put(37, sb.getFwaExpirationDate());// fwa_expiration_date
 
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);
