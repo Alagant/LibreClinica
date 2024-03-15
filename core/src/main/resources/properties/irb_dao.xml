@@ -17,6 +17,17 @@
             WHERE irb_study_id=?
         </sql>
     </query>
+    <query>
+        <name>findIRBSiteBySiteId</name>
+        <sql>
+            SELECT irb_site_id, site_id, version_number, site_relies_on_cdc_irb, is_1572,
+            cdc_irb_protocol_version_date, local_irb_approved_protocol, cdc_received_local_documents,
+            site_consent_package_send_to_cdc_irb, initial_cdc_irb_approval, crb_approval_to_enroll,
+            irb_approval, expiration_date, active, "comments"
+            FROM public.irb_site
+            WHERE site_id=?
+        </sql>
+    </query>
 
 
 </queries>

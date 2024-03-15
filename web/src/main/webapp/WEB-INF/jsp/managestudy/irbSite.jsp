@@ -50,7 +50,62 @@
 <jsp:useBean scope='request' id='crf' class='org.akaza.openclinica.bean.admin.CRFBean'/>
 
 
-<h1><span class="title_manage"><fmt:message key="view_subjects_in" bundle="${restext}"/> <c:out value="${study.name}"/></span></h1>
+<h1><span class="title_manage">IRB Site Definition</span></h1>
+<div class="form-standard">
+    <form action="${pageContext.request.contextPath}/IrbStudy" method="post">
+        <div class="form-item">
+            <label>Version number</label>
+            <input name="version_number" value="${irbStudyBean.cdcIrbProtocolNumber}"/>
+        </div>
+        <div class="form-item">
+            <label>Sites relies on CDC IRB</label>
+            <input name="site_relies_on_cdc_irb" type="checkbox"
+                   value="${irbStudyBean.siteReliesOnCdcIrb?'checked':''}"/>
+        </div>
+        <div class="form-item">
+            <label>1572</label>
+            <input name="is_1572" type="checkbox"
+                   value="${irbStudyBean.is1572?'checked':''}"/>
+        </div>
+        <div class="form-item">
+            <label>CDC IRB protocol version date</label>
+            <input name="cdc_irb_protocol_version_date" value="${irbStudyBean.cdcProtocolVersionDate}"/>
+        </div>
+        <div class="form-item">
+            <label>Local IRB approved protocol</label>
+            <input name="local_irb_approved_protocol" value="${irbStudyBean.localIrbApprovedProtocol}"/>
+        </div>
+        <div class="form-item">
+            <label>CDC received local documents</label>
+            <input name="cdc_received_local_documents" value="${irbStudyBean.cdcReceivedLocalDocuments}"/>
+        </div>
+        <div class="form-item">
+            <label>Site consent package send to CDC IRB</label>
+            <input name="site_consent_package_send_to_cdc_irb" value="${irbStudyBean.siteConsentPackageSendToCdcIrb}"/>
+        </div>
+        <div class="form-item">
+            <label>Initial CDC IRB approval</label>
+            <input name="initial_cdc_irb_approval" value="${irbStudyBean.initialCdcIrbApproval}"/>
+        </div>
+        <div class="form-item">
+            <label>CRB approval to enroll</label>
+            <input name="crb_approval_to_enroll" value="${irbStudyBean.crbApprovalToEnroll}"/>
+        </div>
+        <div class="form-item">
+            <label>IRB approval</label>
+            <input name="irb_approval" value="${irbStudyBean.irbApproval}"/>
+        </div>
+        <div class="form-item">
+            <label>Expiration date</label>
+            <input name="expiration_date" value="${irbStudyBean.expirationDate}"/>
+        </div>
+        <div class="form-item">
+            <label>Active</label>
+            <input name="active" type="checkbox"
+                   value="${irbStudyBean.active?'checked':''}"/>
+        </div>
+        <button class="button" type="submit">Submit</button>
+    </form>
 
 <%-- Work here --%>
 

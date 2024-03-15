@@ -52,7 +52,7 @@
 
 <h1>IRB Study</h1>
 <div class="form-standard">
-<form action="${pageContext.request.contextPath}" method="post">
+<form action="${pageContext.request.contextPath}/IrbStudy" method="post">
     <div class="form-item">
         <label>Protocol number</label>
         <input name="cdc_irb_protocol_number" value="${irbStudyBean.cdcIrbProtocolNumber}"/>
