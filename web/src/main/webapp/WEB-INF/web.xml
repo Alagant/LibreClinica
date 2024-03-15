@@ -398,6 +398,20 @@
         <servlet-class>org.akaza.openclinica.control.managestudy.ProtocolDeviationServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>IrbStudyServlet</servlet-name>
+        <display-name>IrbStudyServlet</display-name>
+        <description>Servlet for IRB Study</description>
+        <servlet-class>org.akaza.openclinica.control.managestudy.IRBStudyServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>IrbSiteServlet</servlet-name>
+        <display-name>IrbSiteServlet</display-name>
+        <description>Servlet for IRB Site</description>
+        <servlet-class>org.akaza.openclinica.control.managestudy.IRBSiteServlet</servlet-class>
+    </servlet>
+
     <!--    <servlet>
             <servlet-name>EnterpriseServlet</servlet-name>
             <display-name>EnterpriseServlet</display-name>
@@ -2221,6 +2235,17 @@
     <servlet-mapping>
         <servlet-name>ProtocolDeviationServlet</servlet-name>
         <url-pattern>/ProtocolDeviations</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>IrbStudyServlet</servlet-name>
+        <url-pattern>/IrbStudy</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>IrbSiteServlet</servlet-name>
+        <url-pattern>/IrbSite</url-pattern>
     </servlet-mapping>
 
     <!-- just for testing purposes -->
