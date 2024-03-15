@@ -15,6 +15,7 @@ public class IRBSiteBean extends EntityBean {
     private Date localIrbApprovedProtocolDate;
     private Date cdcReceivedLocalDocuments;
     private Date siteConsentPackageSendToCdcIrb;
+    private Date initialCdcIrbApproval;
     private Date crbApprovalToEnroll;
     private Date irbApproval;
     private Date expirationDate;
@@ -91,6 +92,14 @@ public class IRBSiteBean extends EntityBean {
 
     public void setSiteConsentPackageSendToCdcIrb(Date siteConsentPackageSendToCdcIrb) {
         this.siteConsentPackageSendToCdcIrb = siteConsentPackageSendToCdcIrb;
+    }
+
+    public Date getInitialCdcIrbApproval() {
+        return initialCdcIrbApproval;
+    }
+
+    public void setInitialCdcIrbApproval(Date initialCdcIrbApproval) {
+        this.initialCdcIrbApproval = initialCdcIrbApproval;
     }
 
     public Date getCrbApprovalToEnroll() {
