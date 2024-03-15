@@ -159,10 +159,6 @@ function updateThis(multiSelEle, count) {
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="secondProId"/></jsp:include>
   </td></tr>
 
-  <tr valign="top"><td class="formlabel"><fmt:message key="sub_site" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="subSite" value="<c:out value="${newStudy.subSite}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="subSite"/></jsp:include></td><td></td></tr>
-
   <tr valign="top"><td class="formlabel"><fmt:message key="principal_investigator" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="prinInvestigator" value="<c:out value="${newStudy.principalInvestigator}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="prinInvestigator"/></jsp:include></td><td> *</td></tr> 
@@ -260,27 +256,8 @@ function updateThis(multiSelEle, count) {
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCountry"/></jsp:include>
   </td></tr>
 
-  <tr valign="top"><td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <select multiple name="consortiumName" value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
-  <option value="TBTC">TBTC</option>
-  <option value="ACTG">ACTG</option>
-  <!--option value="TBESC">TBESC</option-->
-  <!--option value="ACTG">ACTG</option-->
-  </select></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="consortiumName"/></jsp:include></td><td></td></tr>
 
-  <tr valign="top"><td class="formlabel"><fmt:message key="location_type" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="locationType" value="<c:out value="${newStudy.locationType}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="locationType"/></jsp:include>
-  </td></tr>
-
-  <tr valign="top"><td class="formlabel"><fmt:message key="active_label" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="active" value="<c:out value="${newStudy.active}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="active"/></jsp:include>
-  </td></tr>
-
-
-	<tr valign="top"><td class="formlabel"><fmt:message key="facility_contact_name" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <tr valign="top"><td class="formlabel"><fmt:message key="facility_contact_name" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facConName" value="<c:out value="${newStudy.facilityContactName}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facConName"/></jsp:include>
   </td></tr>   

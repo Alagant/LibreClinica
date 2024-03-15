@@ -75,7 +75,7 @@ public class StudyBean extends AuditableEntityBean {
     private String facilityZip = "";
     private String facilityCountry = "";
 
-    private List consortiumNames = null;
+    private List<String> consortiumNames = null;
 
     private String locationType = null;
     private Boolean active = null;
