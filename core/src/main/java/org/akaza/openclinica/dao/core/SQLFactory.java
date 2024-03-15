@@ -188,6 +188,7 @@ public class SQLFactory {
             fileList.put(this.DAO_RULESETRULE_AUDIT, "rulesetrule_audit_dao.xml");            
 
             fileList.put(this.DAO_ODM_EXTRACT, "odm_extract_dao.xml");
+            fileList.put(this.DAO_IRB, "irb_dao.xml");
 
         } else { // should be postgres, but what if the file is gone?
             // throw an exception here, ssachs
