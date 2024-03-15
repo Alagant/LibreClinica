@@ -72,6 +72,7 @@ public class SQLFactory {
     public final String DAO_SUBJECTTRANSFER = "subjecttransfer";
     // YW, 05-2008, for odm extract
     public final String DAO_ODM_EXTRACT = "odm_extract";
+    public final String DAO_IRB = "irb";
 
     // EhCacheManagerFactoryBean cacheManagerBean = new EhCacheManagerFactoryBean();
     // cacheManagerBean.setConfigLocation= (new org.springframework.core.io.FileSystemResource("classpath:org/akaza/openclinica/ehcache.xml") );

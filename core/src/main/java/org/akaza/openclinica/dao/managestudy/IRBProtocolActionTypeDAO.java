@@ -3,7 +3,10 @@ package org.akaza.openclinica.dao.managestudy;
 import org.akaza.openclinica.bean.core.EntityBean;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
 import org.akaza.openclinica.bean.managestudy.ProtocolDeviationBean;
+import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
+import org.akaza.openclinica.dao.core.SQLFactory;
+import org.akaza.openclinica.dao.core.TypeNames;
 import org.akaza.openclinica.exception.OpenClinicaException;
 
 import javax.sql.DataSource;
@@ -18,11 +21,16 @@ public class IRBProtocolActionTypeDAO extends AuditableEntityDAO<IRBProtocolActi
     }
 
     private void setQueryNames() {
+
     }
 
     @Override
     public IRBProtocolActionTypeBean getEntityFromHashMap(HashMap<String, Object> hm) {
-        return null;
+        IRBProtocolActionTypeBean retval = new IRBProtocolActionTypeBean();
+        retval.setIrbProtocolDeviationActionTypeId((Integer)hm.get("protocol_deviation_action_type_id"));
+        retval.setLabel((String)hm.get("label"));
+
+        return retval;
     }
 
     @Override
@@ -32,12 +40,19 @@ public class IRBProtocolActionTypeDAO extends AuditableEntityDAO<IRBProtocolActi
 
     @Override
     public ArrayList<IRBProtocolActionTypeBean> findAll() throws OpenClinicaException {
-        return null;
+        HashMap<Integer, Object> parameters = new HashMap<>();
+
+        return this.executeFindAllQuery("findAllProtocolActionTypes", parameters);
     }
 
     @Override
     public EntityBean findByPK(int id) throws OpenClinicaException {
-        return null;
+        throw new RuntimeException();
+    }
+
+    @Override
+    public IRBProtocolActionTypeBean findByPKAndStudy(int id, StudyBean study) {
+        return super.findByPKAndStudy(id, study);
     }
 
     @Override
@@ -62,16 +77,18 @@ public class IRBProtocolActionTypeDAO extends AuditableEntityDAO<IRBProtocolActi
 
     @Override
     public void setTypesExpected() {
-
+        this.unsetTypeExpected();
+        setTypeExpected(1, TypeNames.INT);
+        setTypeExpected(2, TypeNames.STRING);
     }
 
     @Override
     protected void setDigesterName() {
-
+        digesterName = SQLFactory.getInstance().DAO_IRB;
     }
 
     @Override
     public IRBProtocolActionTypeBean emptyBean() {
-        return null;
+        return new IRBProtocolActionTypeBean();
     }
 }
