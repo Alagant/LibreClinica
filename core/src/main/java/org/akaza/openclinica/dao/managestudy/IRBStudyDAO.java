@@ -2,6 +2,7 @@ package org.akaza.openclinica.dao.managestudy;
 
 import org.akaza.openclinica.bean.core.EntityBean;
 import org.akaza.openclinica.bean.managestudy.IRBStudyBean;
+import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.dao.core.TypeNames;
@@ -132,4 +133,9 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
         return new IRBStudyBean();
     }
 
+    public IRBStudyBean findByStudy(StudyBean currentStudy) {
+        HashMap<Integer, Object> parameters = new HashMap<>();
+        parameters.put(1, currentStudy.getId());
+        return this.executeFindByPKQuery("findIRBStudyByStudyId", parameters);
+    }
 }
