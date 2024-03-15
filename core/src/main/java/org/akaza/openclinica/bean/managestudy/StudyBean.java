@@ -12,6 +12,7 @@ import static org.akaza.openclinica.domain.managestudy.MailNotificationType.ENAB
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.StringTokenizer;
+import java.util.List;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +45,7 @@ public class StudyBean extends AuditableEntityBean {
     private String officialTitle = "";
     private String identifier = "";
     private String secondaryIdentifier = "";
+    private String subSite ="";
     private String summary = "";// need to be removed
 
     private Date datePlannedStart;
@@ -72,6 +74,11 @@ public class StudyBean extends AuditableEntityBean {
     private String facilityState = "";
     private String facilityZip = "";
     private String facilityCountry = "";
+
+    private List consortiumNames = null;
+
+    private String locationType = null;
+    private Boolean active = null;
     private String facilityRecruitmentStatus = "";
     private String facilityContactName = "";
     private String facilityContactDegree = "";
@@ -295,10 +302,6 @@ public class StudyBean extends AuditableEntityBean {
         return collaborators;
     }
 
-    /**
-     * @param collaborators
-     *            The collaborators to set.
-     */
     public void setSchemaName(String schemaName) {
         this.schemaName = schemaName;
     }
@@ -1299,5 +1302,37 @@ public class StudyBean extends AuditableEntityBean {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
         return now.format(formatter);
+    }
+
+    public String getSubSite() {
+        return subSite;
+    }
+
+    public void setSubSite(String subSite) {
+        this.subSite = subSite;
+    }
+
+    public List getConsortiumNames() {
+        return consortiumNames;
+    }
+
+    public void setConsortiumNames(List consortiumNames) {
+        this.consortiumNames = consortiumNames;
+    }
+
+    public String getLocationType() {
+        return locationType;
+    }
+
+    public void setLocationType(String locationType) {
+        this.locationType = locationType;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
