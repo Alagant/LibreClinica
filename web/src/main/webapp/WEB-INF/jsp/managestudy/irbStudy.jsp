@@ -50,7 +50,37 @@
 <jsp:useBean scope='request' id='crf' class='org.akaza.openclinica.bean.admin.CRFBean'/>
 
 
-<h1><span class="title_manage"><fmt:message key="view_subjects_in" bundle="${restext}"/> <c:out value="${study.name}"/></span></h1>
+<h1>IRB Study</h1>
+<div class="form-standard">
+<form action="${pageContext.request.contextPath}" method="post">
+    <div class="form-item">
+        <label>Protocol number</label>
+        <input name="cdc_irb_protocol_number" value="${irbStudyBean.cdcIrbProtocolNumber}"/>
+    </div>
+    <div class="form-item">
+        <label>Version 1 protocol date</label>
+        <input name="version1_protocol_date">
+    </div>
+    <div class="form-item">
+        <label>Protocol officer</label>
+        <input name="protocol_officer">
+    </div>
+    <div class="form-item">
+        <label>Submitted CDC IRB</label>
+        <input name="submitted_cdc_irb">
+    </div>
+    <div class="form-item">
+        <label>Approval by CDC IRB</label>
+        <input name="approval_by_cdc_irb">
+    </div>
+    <div class="form-item">
+        <label>CDC IRB expiration date</label>
+        <input name="cdc_irb_expiration_date">
+    </div>
+    <button class="button" type="submit">Submit</button>
+</form>
+</div>
+
 
 <%-- Work here --%>
 
