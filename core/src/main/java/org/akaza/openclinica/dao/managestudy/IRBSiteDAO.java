@@ -156,4 +156,9 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         digesterName = SQLFactory.getInstance().DAO_IRB;
     }
 
+    public IRBSiteBean findBySiteId(String siteId) {
+        HashMap<Integer, Object> parameters = new HashMap<>();
+        parameters.put(1, siteId);
+        return this.executeFindByPKQuery("findIRBSiteBySiteId", parameters);
+    }
 }
