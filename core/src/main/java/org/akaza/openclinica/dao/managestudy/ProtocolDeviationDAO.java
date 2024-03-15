@@ -24,7 +24,7 @@ public class ProtocolDeviationDAO extends AuditableEntityDAO<ProtocolDeviationBe
     }
 
     protected void setQueryNames() {
-        findByPKAndStudyName = "findProtocolDeviationByIdAndStudy";
+            findByPKAndStudyName = "findProtocolDeviationByIdAndStudy";
         getCurrentPKName = "getCurrentProtocolDeviationPrimaryKey";
     }
 

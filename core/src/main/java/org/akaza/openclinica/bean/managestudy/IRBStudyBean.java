@@ -47,11 +47,11 @@ public class IRBStudyBean extends EntityBean {
         this.version1ProtocolDate = version1ProtocolDate;
     }
 
-    public String getProtocol_officer() {
+    public String getProtocolOfficer() {
         return protocol_officer;
     }
 
-    public void setProtocol_officer(String protocol_officer) {
+    public void setProtocolOfficer(String protocol_officer) {
         this.protocol_officer = protocol_officer;
     }
 

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<queries>
+    <query>
+        <name>findAllProtocolActionTypes</name>
+        <sql>
+            SELECT irb_protocol_action_type_id, label
+            FROM irb_protocol_action_type
+            ORDER BY 1
+        </sql>
+    </query>
+
+</queries>
