@@ -1518,7 +1518,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                     //Send data to dmm server
 
                     String apiUrl = CoreResources.getField("dmm.url") + "/subject_api";
-                    //"https://drugmanagementmodule.azurewebsites.net/subject_api";
+                    //"https://dmm-qa.alagant.com/subject_api";
                     //String apiUrl = "http://localhost:3001/api/sites";
                     System.out.println("API URL: "+apiUrl);
                     try {
@@ -2189,7 +2189,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     errorsMessage.add("The subject already exists in DMM database");
                                     // Configure the HTTP connection
                                     String pidUrl = CoreResources.getField("dmm.url") + "/subjectpid/" +
-                                            /*"https://drugmanagementmodule.azurewebsites.net/subjectpid/" +*/
+                                            /*"https://dmm-qa.alagant.com/subjectpid/" +*/
                                             enrollmentData.getSubjectID().trim();
                                     System.out.println(pidUrl);
                                     URL urlPid = new URL(pidUrl);
