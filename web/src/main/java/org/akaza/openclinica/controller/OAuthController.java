@@ -58,7 +58,7 @@ public class OAuthController {
     }
     @RequestMapping("/oauth")
     public String oauth(HttpServletRequest request, HttpServletResponse response/*ModelMap modelMap*/) {
-        String oauth_server = CoreResources.getField("oauth.url"); // "https://cdcoauthmockup.azurewebsites.net";
+        String oauth_server = CoreResources.getField("oauth.url"); // "https://cdcoauth.alagant.com";
         String self_url = request.getRequestURL().toString().replace(request.getRequestURI(),"");
         String oauth_redirect_uri = self_url + "/pages/login/login";
 
