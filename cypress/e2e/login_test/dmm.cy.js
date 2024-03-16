@@ -15,8 +15,8 @@ describe('Load page', () => {
         cy.url().should('include', 'http://localhost:8080/LibreClinica/MainMenu')
         cy.contains('Welcome to')
         cy.contains('Drug Management').click()
-        cy.origin('cdcoauthmockup2.azurewebsites.net', () => {
-            cy.url().should('contain', 'cdcoauthmockup2.azurewebsites.net')
+        cy.origin('cdcoauth2.alagant.com', () => {
+            cy.url().should('contain', 'cdcoauth2.alagant.com')
             cy.contains('OAuth Login')
             cy.get('[id="username"]').should('exist').type('test')
             cy.get('[id="password"]').should('exist').type(`${"test"}{enter}`)
