@@ -54,58 +54,112 @@
 <div class="form-standard">
     <form action="${pageContext.request.contextPath}/IrbSite" method="post">
         <input type="hidden" name="siteId" value="${siteId}"/>
-        <div class="form-item">
-            <label>Version number</label>
-            <input name="version_number" value="${irbSiteBean.versionNumber}"/>
-        </div>
-        <div class="form-item">
-            <label>Sites relies on CDC IRB</label>
-            <input name="site_relies_on_cdc_irb" type="checkbox"
-                   value="${irbSiteBean.siteReliesOnCdcIrb?'checked':''}"/>
-        </div>
-        <div class="form-item">
-            <label>1572</label>
-            <input name="is_1572" type="checkbox"
-                   value="${irbSiteBean.is1572?'checked':''}"/>
-        </div>
-        <div class="form-item">
-            <label>CDC IRB protocol version date</label>
-            <input name="cdc_irb_protocol_version_date" value="${irbSiteBean.cdcIrbProtocolVersionDate}"/>
-        </div>
-        <div class="form-item">
-            <label>Local IRB approved protocol</label>
-            <input name="local_irb_approved_protocol" value="${irbSiteBean.localIrbApprovedProtocol}"/>
-        </div>
-        <div class="form-item">
-            <label>CDC received local documents</label>
-            <input name="cdc_received_local_documents" value="${irbSiteBean.cdcReceivedLocalDocuments}"/>
-        </div>
-        <div class="form-item">
-            <label>Site consent package send to CDC IRB</label>
-            <input name="site_consent_package_send_to_cdc_irb" value="${irbSiteBean.siteConsentPackageSendToCdcIrb}"/>
-        </div>
-        <div class="form-item">
-            <label>Initial CDC IRB approval</label>
-            <input name="initial_cdc_irb_approval" value="${irbSiteBean.initialCdcIrbApproval}"/>
-        </div>
-        <div class="form-item">
-            <label>CRB approval to enroll</label>
-            <input name="crb_approval_to_enroll" value="${irbSiteBean.crbApprovalToEnroll}"/>
-        </div>
-        <div class="form-item">
-            <label>IRB approval</label>
-            <input name="irb_approval" value="${irbSiteBean.irbApproval}"/>
-        </div>
-        <div class="form-item">
-            <label>Expiration date</label>
-            <input name="expiration_date" value="${irbSiteBean.expirationDate}"/>
-        </div>
-        <div class="form-item">
-            <label>Active</label>
-            <input name="active" type="checkbox"
-                   value="${irbSiteBean.active?'checked':''}"/>
-        </div>
-        <button class="button" type="submit">Submit</button>
+        <table>
+            <tr>
+                <td align="right"><label>Version number</label></td>
+                <td><input name="version_number" value="${irbSiteBean.versionNumber}"/></td>
+            </tr>
+            <tr>
+                <td align="right"><input name="site_relies_on_cdc_irb" type="checkbox" value="1"
+                           ${irbSiteBean.siteReliesOnCdcIrb?'checked':''}/>
+                </td>
+                <td><label>Sites relies on CDC IRB</label></td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <input name="is_1572" type="checkbox" value="1"
+                           ${irbSiteBean.is1572?'checked':''} />
+                </td>
+                <td><label>1572</label></td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>CDC IRB protocol version date</label>
+                </td>
+                <td>
+                    <input name="cdc_irb_protocol_version_date" value="${irbSiteBean.cdcIrbProtocolVersionDate}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>Local IRB approved protocol</label>
+                </td>
+                <td>
+                    <input name="local_irb_approved_protocol" value="${irbSiteBean.localIrbApprovedProtocol}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>CDC received local documents</label>
+                </td>
+                <td>
+                    <input name="cdc_received_local_documents" value="${irbSiteBean.cdcReceivedLocalDocuments}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>Site consent package send to CDC IRB</label>
+                </td>
+                <td>
+                    <input name="site_consent_package_send_to_cdc_irb" value="${irbSiteBean.siteConsentPackageSendToCdcIrb}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>Initial CDC IRB approval</label>
+                </td>
+                <td>
+                    <input name="initial_cdc_irb_approval" value="${irbSiteBean.initialCdcIrbApproval}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>CRB approval to enroll</label>
+                </td>
+                <td>
+                    <input name="crb_approval_to_enroll" value="${irbSiteBean.crbApprovalToEnroll}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>IRB approval</label>
+                </td>
+                <td>
+                    <input name="irb_approval" value="${irbSiteBean.irbApproval}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>Expiration date</label>
+                </td>
+                <td>
+                    <input name="expiration_date" value="${irbSiteBean.expirationDate}"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <input name="active" type="checkbox" value="1"
+                           ${irbSiteBean.active?'checked':''}/>
+                </td>
+                <td>
+                    <label>Active</label>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    <label>Comments</label>
+                </td>
+                <td>
+                    <textarea>
+                        ${irbSiteBean.comments}
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><button class="button" type="submit">Submit</button></td>
+            </tr>
+        </table>
     </form>
 
 <%-- Work here --%>
