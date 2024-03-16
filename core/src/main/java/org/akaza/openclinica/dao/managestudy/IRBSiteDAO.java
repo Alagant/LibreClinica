@@ -9,6 +9,7 @@ import org.akaza.openclinica.dao.core.TypeNames;
 import org.akaza.openclinica.exception.OpenClinicaException;
 
 import javax.sql.DataSource;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,14 +21,16 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         setQueryNames();
     }
 
+    private void setQueryNames() {
+        getCurrentPKName = "getCurrentIRBSitePrimaryKey";
+    }
+
     @Override
     public IRBSiteBean emptyBean() {
         return new IRBSiteBean();
     }
 
-    private void setQueryNames() {
 
-    }
 
     @Override
     public IRBSiteBean getEntityFromHashMap(HashMap<String, Object> hm) {
@@ -74,20 +77,27 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
                                              int startIndex) {
         int retval = startIndex;
 
-        variables.put(retval++, eb.getIrbSiteId());
-        variables.put(retval++, eb.getSiteId());
         variables.put(retval++, eb.getVersionNumber());
         variables.put(retval++, eb.isSiteReliesOnCdcIrb());
         variables.put(retval++, eb.isIs1572());
+        if(eb.getCdcIrbProtocolVersionDate()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getCdcIrbProtocolVersionDate());
+        if(eb.getLocalIrbApprovedProtocolDate()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getLocalIrbApprovedProtocolDate());
+        if(eb.getCdcReceivedLocalDocuments()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getCdcReceivedLocalDocuments());
+        if(eb.getSiteConsentPackageSendToCdcIrb()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getSiteConsentPackageSendToCdcIrb());
+        if(eb.getInitialCdcIrbApproval()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getInitialCdcIrbApproval());
+        if(eb.getCrbApprovalToEnroll()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getCrbApprovalToEnroll());
+        if(eb.getIrbApproval()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getIrbApproval());
+        if(eb.getExpirationDate()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getExpirationDate());
         variables.put(retval++, eb.isActive());
+        if(eb.getComments()==null) nullVars.put(retval, TypeNames.STRING);
         variables.put(retval, eb.getComments());
 
         return retval;
@@ -97,7 +107,8 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         HashMap<Integer, Object> variables = new HashMap<>();
         HashMap<Integer, Integer> nullVars = new HashMap<>();
 
-        int position = populateVariablesAndNullVars(eb, variables, nullVars, 1);
+        variables.put(1, eb.getIrbSiteId());
+        int position = populateVariablesAndNullVars(eb, variables, nullVars, 2);
 
         executeUpdateWithPK(digester.getQuery("createIRBSite"), variables, nullVars);
         if (isQuerySuccessful()) {
