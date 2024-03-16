@@ -2,9 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-<fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
+<fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 <c:set var="dteFormat"><fmt:message key="date_format_string" bundle="${resformat}"/></c:set>
 
 <jsp:include page="../include/managestudy-header.jsp"/>
@@ -38,6 +37,12 @@
 		</td>
   </tr>
 <jsp:include page="../include/sideInfo.jsp"/>
+
+<jsp:useBean scope='session' id='study' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
+<jsp:useBean scope='session' id='newStudy' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
+<jsp:useBean scope='session' id='definitions' class='java.util.ArrayList'/>
+<jsp:useBean scope='session' id='sdvOptions' class='java.util.ArrayList'/>
+
 <script language="JavaScript">
     function leftnavExpand(strLeftNavRowElementName){
       var objLeftNavRowElement;
@@ -56,10 +61,6 @@
       }
  </script>
 
-<jsp:useBean scope='session' id='study' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
-<jsp:useBean scope='session' id='newStudy' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
-<jsp:useBean scope='session' id='definitions' class='java.util.ArrayList'/>
-<jsp:useBean scope='session' id='sdvOptions' class='java.util.ArrayList'/>
 <h1><span class="title_manage">
 <fmt:message key="confirm_site" bundle="${resword}"/> 
 </span></h1>
@@ -105,15 +106,28 @@
   
   <tr valign="top"><td class="table_header_column"><fmt:message key="expected_total_enrollment" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.expectedTotalEnrollment}"/>
-  </td></tr> 
+  </td></tr>
   
   <tr valign="top"><td class="table_header_column"><fmt:message key="facility_name" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.facilityName}"/>
-  </td></tr> 
-  
+  </td></tr>
+
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress1}"/>
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress2}"/>
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_3" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress3}"/>
+  </td></tr>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_address_4" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.facilityAddress4}"/>
+  </td></tr>
+
   <tr valign="top"><td class="table_header_column"><fmt:message key="facility_city" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.facilityCity}"/>
-  </td></tr> 
+  </td></tr>
   
   <tr valign="top"><td class="table_header_column"><fmt:message key="facility_state_province" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.facilityState}"/>
@@ -337,15 +351,12 @@
 		  </tr>
      </c:otherwise>
    </c:choose>
-   
   </c:forEach>
-
-
 </table>
 </div>
 </div></div></div></div></div></div></div></div>
 
-</div> 
+</div>
 
  <div class="table_title_Manage"><fmt:message key="update_site_event_definitions" bundle="${resword}"/></div>
 <c:set var="defCount" value="0"/>
@@ -498,8 +509,7 @@
         	</select>
 		    </td>
 		</tr>
-		
-		<c:choose>
+<c:choose>
     <c:when test="${participateFormStatus == 'enabled' && edc.participantForm == true}">
 
 				<tr valign="top">		
@@ -530,15 +540,13 @@
             </c:otherwise>
         </c:choose>
     </td>
-    
-    
-                <td class="table_cell" colspan="6">
+            <td class="table_cell" colspan="6">
         <fmt:message key="submission_url" bundle="${resword}"/>:  ${participantUrl}
                 <input type="text"  name="submissionUrl<c:out value="${num}"/>" value="${edc.submissionUrl}"/>
           <c:set var="summary" value="submissionUrl${num}"/>
           <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="${summary}"/></jsp:include>
-                                                           <br />                     
-                 <c:choose>
+                                 <br />
+                <c:choose>
                   <c:when test="${edc.allowAnonymousSubmission == true && def.repeating == true  && edc.offline == true}">
                 <fmt:message key="offline" bundle="${resword}"/>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
                     <input type="checkbox" name="offline<c:out value="${count}"/>" value="yes" disabled checked>
@@ -548,17 +556,17 @@
                     <input type="checkbox" name="offline<c:out value="${count}"/>" value="yes" disabled>
                   </c:when>
                 </c:choose>
-          
+
+
+
         </td>
-    
-     </c:when>  
+     </c:when>
             <c:otherwise>
         <td class="table_cell" colspan="8"> </td>
             </c:otherwise>
  </c:choose>
   
 </tr>		
-		
 		
 		<c:set var="count" value="${count+1}"/>
 		</c:if>
@@ -574,8 +582,7 @@
 <br><br>
 
 
-    
-<table border="0" cellpadding="0" cellspacing="0">    
+<table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
 <form action="CreateSubStudy" method="post">
@@ -701,6 +708,7 @@
 	</td>
    </tr>
 </table>
+
 
 <!-- END WORKFLOW BOX -->
 <jsp:include page="../include/footer.jsp"/>

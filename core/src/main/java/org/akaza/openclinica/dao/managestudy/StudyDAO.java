@@ -174,6 +174,11 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         this.setTypeExpected(56, TypeNames.INT);
         this.setTypeExpected(57, TypeNames.STRING); // e-mail notification
         this.setTypeExpected(58, TypeNames.STRING); // contact e-mail
+        // Facility Address (4 lines)
+        this.setTypeExpected(59, TypeNames.STRING); // facility_address_1
+        this.setTypeExpected(60, TypeNames.STRING); // facility_address_2
+        this.setTypeExpected(61, TypeNames.STRING); // facility_address_3
+        this.setTypeExpected(62, TypeNames.STRING); // facility_address_4
     }
 
     /**
@@ -261,9 +266,15 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         } else {
             variables.put(25, sb.getContactEmail());
         }
-        
+
+        //Facility address
+        variables.put(26, sb.getFacilityAddress1());// facility address line 1
+        variables.put(27, sb.getFacilityAddress2());// facility address line 2
+        variables.put(28, sb.getFacilityAddress3());// facility address line 3
+        variables.put(29, sb.getFacilityAddress4());// facility address line 4
+
         // SQL Update where
-        variables.put(26, sb.getId());// study id
+        variables.put(30, sb.getId());// study id
         
         this.executeUpdate(digester.getQuery("updateStepOne"), variables, nullVars);
         return sb;
@@ -371,6 +382,12 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         } else {
             variables.put(26, sb.getContactEmail());
         }
+
+        //Facility address
+        variables.put(27, sb.getFacilityAddress1());// facility address line 1
+        variables.put(28, sb.getFacilityAddress2());// facility address line 2
+        variables.put(29, sb.getFacilityAddress3());// facility address line 3
+        variables.put(30, sb.getFacilityAddress4());// facility address line 4
 
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);
@@ -596,6 +613,10 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         eb.setOldStatus(Status.get(oldStatusId));
         eb.setMailNotification(((String) hm.get("mail_notification")));
         eb.setContactEmail(((String) hm.get("contact_email")));
+        eb.setFacilityAddress1((String) hm.get("facility_address_1"));
+        eb.setFacilityAddress2((String) hm.get("facility_address_2"));
+        eb.setFacilityAddress3((String) hm.get("facility_address_3"));
+        eb.setFacilityAddress4((String) hm.get("facility_address_4"));
         return eb;
     }
 
