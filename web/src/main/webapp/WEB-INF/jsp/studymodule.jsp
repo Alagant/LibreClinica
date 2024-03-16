@@ -536,9 +536,9 @@
             <td>
                 <c:url var="irbStudyUrl" value="/IrbStudy"/>
                 <a href="${irbStudyUrl}">
-                    <img src="../images/create_new.gif" border="0"
-                         alt="<fmt:message key="add2" bundle="${resword}"/>"
-                         title="<fmt:message key="add2" bundle="${resword}"/>"/></a>
+                    <img src="../images/bt_Details.gif" border="0"
+                         alt="<fmt:message key="view" bundle="${resword}"/>"
+                         title="<fmt:message key="view" bundle="${resword}"/>"/></a>
             </td>
         </tr>
       </tbody>

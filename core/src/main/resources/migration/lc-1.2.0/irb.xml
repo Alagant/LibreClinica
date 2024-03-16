@@ -15,19 +15,19 @@
                 <constraints nullable="false" />
             </column>
             <column name="version1_protocol_date" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="protocol_officer" type="VARCHAR(20)">
                 <constraints nullable="false" />
             </column>
             <column name="submitted_cdc_irb" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="approval_by_cdc_irb" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="cdc_irb_expiration_date" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
         </createTable>
         <createTable tableName="irb_site">
@@ -47,16 +47,16 @@
                 <constraints nullable="false" />
             </column>
             <column name="cdc_irb_protocol_version_date" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="local_irb_approved_protocol" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="cdc_received_local_documents" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="site_consent_package_send_to_cdc_irb" type="DATE">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="initial_cdc_irb_approval" type="DATE">
             </column>

@@ -9,6 +9,7 @@ import org.akaza.openclinica.dao.core.TypeNames;
 import org.akaza.openclinica.exception.OpenClinicaException;
 
 import javax.sql.DataSource;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
     }
 
     private void setQueryNames() {
-
+        getCurrentPKName = "getCurrentIRBStudyPrimaryKey";
     }
 
 
@@ -62,12 +63,16 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
                                              HashMap<Integer, Integer> nullVars,
                                              int startIndex) {
         int retval = startIndex;
-        variables.put(retval++, eb.getStudyId());
         variables.put(retval++, eb.getCdcIrbProtocolNumber());
+        if(eb.getVersion1ProtocolDate()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getVersion1ProtocolDate());
+        if(eb.getProtocolOfficer()==null) nullVars.put(retval, TypeNames.STRING);
         variables.put(retval++, eb.getProtocolOfficer());
+        if(eb.getSubmittedCdcIrb()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getSubmittedCdcIrb());
+        if(eb.getApprovalByCdcIrb()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getApprovalByCdcIrb());
+        if(eb.getCdcIrbExpirationDate()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval, eb.getCdcIrbExpirationDate());
 
         return retval;
@@ -78,7 +83,9 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
         HashMap<Integer, Object> variables = new HashMap<>();
         HashMap<Integer, Integer> nullVars = new HashMap<>();
 
-        int position = populateVariablesAndNullVars(eb, variables, nullVars, 1);
+
+        variables.put(1, eb.getStudyId());
+        int position = populateVariablesAndNullVars(eb, variables, nullVars, 2);
 
         executeUpdateWithPK(digester.getQuery("createIRBStudy"), variables, nullVars);
         if (isQuerySuccessful()) {
