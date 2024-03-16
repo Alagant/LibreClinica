@@ -2,7 +2,6 @@ package org.akaza.openclinica.dao.managestudy;
 
 import org.akaza.openclinica.bean.core.EntityBean;
 import org.akaza.openclinica.bean.managestudy.IRBSiteBean;
-import org.akaza.openclinica.bean.managestudy.IRBStudyBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.dao.core.TypeNames;
@@ -41,7 +40,7 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         retval.setSiteReliesOnCdcIrb((Boolean) hm.get("site_relies_on_cdc_irb"));
         retval.setIs1572((Boolean) hm.get("is_1572"));
         retval.setCdcIrbProtocolVersionDate((Date) hm.get("cdc_irb_protocol_version_date"));
-        retval.setLocalIrbApprovedProtocolDate((Date) hm.get("local_irb_approved_protocol_date"));
+        retval.setLocalIrbApprovedProtocol((Date) hm.get("local_irb_approved_protocol"));
         retval.setCdcReceivedLocalDocuments((Date) hm.get("cdc_received_local_documents"));
         retval.setSiteConsentPackageSendToCdcIrb((Date) hm.get("site_consent_package_send_to_cdc_irb"));
         retval.setInitialCdcIrbApproval((Date) hm.get("initial_cdc_irb_approval"));
@@ -82,8 +81,8 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         variables.put(retval++, eb.isIs1572());
         if(eb.getCdcIrbProtocolVersionDate()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getCdcIrbProtocolVersionDate());
-        if(eb.getLocalIrbApprovedProtocolDate()==null) nullVars.put(retval, Types.DATE);
-        variables.put(retval++, eb.getLocalIrbApprovedProtocolDate());
+        if(eb.getLocalIrbApprovedProtocol()==null) nullVars.put(retval, Types.DATE);
+        variables.put(retval++, eb.getLocalIrbApprovedProtocol());
         if(eb.getCdcReceivedLocalDocuments()==null) nullVars.put(retval, Types.DATE);
         variables.put(retval++, eb.getCdcReceivedLocalDocuments());
         if(eb.getSiteConsentPackageSendToCdcIrb()==null) nullVars.put(retval, Types.DATE);
@@ -107,7 +106,7 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         HashMap<Integer, Object> variables = new HashMap<>();
         HashMap<Integer, Integer> nullVars = new HashMap<>();
 
-        variables.put(1, eb.getIrbSiteId());
+        variables.put(1, eb.getSiteId());
         int position = populateVariablesAndNullVars(eb, variables, nullVars, 2);
 
         executeUpdateWithPK(digester.getQuery("createIRBSite"), variables, nullVars);
@@ -125,7 +124,7 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         int position = populateVariablesAndNullVars(eb, variables, nullVars, 1);
         variables.put(position+1, eb.getIrbSiteId());
 
-        executeUpdateWithPK(digester.getQuery("updateIRBStudy"), variables, nullVars);
+        executeUpdateWithPK(digester.getQuery("updateIRBSite"), variables, nullVars);
 
         return eb;
     }
@@ -149,8 +148,6 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         setTypeExpected(3, TypeNames.INT);
         setTypeExpected(4, TypeNames.BOOL);
         setTypeExpected(5, TypeNames.BOOL);
-        setTypeExpected(5, TypeNames.BOOL);
-        setTypeExpected(5, TypeNames.DATE);
         setTypeExpected(6, TypeNames.DATE);
         setTypeExpected(7, TypeNames.DATE);
         setTypeExpected(8, TypeNames.DATE);
@@ -158,8 +155,9 @@ public class IRBSiteDAO extends AuditableEntityDAO<IRBSiteBean> {
         setTypeExpected(10, TypeNames.DATE);
         setTypeExpected(11, TypeNames.DATE);
         setTypeExpected(12, TypeNames.DATE);
-        setTypeExpected(13, TypeNames.BOOL);
-        setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(13, TypeNames.DATE);
+        setTypeExpected(14, TypeNames.BOOL);
+        setTypeExpected(15, TypeNames.STRING);
     }
 
     @Override

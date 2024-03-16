@@ -21,10 +21,16 @@
         <name>findIRBSiteBySiteId</name>
         <sql>
             SELECT irb_site_id, site_id, version_number, site_relies_on_cdc_irb, is_1572,
-            cdc_irb_protocol_version_date, local_irb_approved_protocol, cdc_received_local_documents,
-            site_consent_package_send_to_cdc_irb, initial_cdc_irb_approval, crb_approval_to_enroll,
-            irb_approval, expiration_date, active, "comments"
-            FROM public.irb_site
+            COALESCE(cdc_irb_protocol_version_date, CAST('1900-1-1' AS DATE)) cdc_irb_protocol_version_date,
+            COALESCE(local_irb_approved_protocol, CAST('1900-1-1' AS DATE)) local_irb_approved_protocol,
+            COALESCE(cdc_received_local_documents, CAST('1900-1-1' AS DATE)) cdc_received_local_documents,
+            COALESCE(site_consent_package_send_to_cdc_irb, CAST('1900-1-1' AS DATE)) site_consent_package_send_to_cdc_irb,
+            COALESCE(initial_cdc_irb_approval, CAST('1900-1-1' AS DATE)) initial_cdc_irb_approval,
+            COALESCE(crb_approval_to_enroll, CAST('1900-1-1' AS DATE)) crb_approval_to_enroll,
+            COALESCE(irb_approval, CAST('1900-1-1' AS DATE)) irb_approval,
+            COALESCE(expiration_date, CAST('1900-1-1' AS DATE)) expiration_date,
+            active, "comments"
+            FROM irb_site
             WHERE site_id=?
         </sql>
     </query>

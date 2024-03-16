@@ -1,10 +1,8 @@
 package org.akaza.openclinica.control.managestudy;
 
 import org.akaza.openclinica.bean.managestudy.IRBSiteBean;
-import org.akaza.openclinica.bean.managestudy.IRBStudyBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.dao.managestudy.IRBSiteDAO;
-import org.akaza.openclinica.dao.managestudy.IRBStudyDAO;
 import org.akaza.openclinica.exception.OpenClinicaException;
 import org.akaza.openclinica.view.Page;
 import org.akaza.openclinica.web.InsufficientPermissionException;
@@ -49,16 +47,14 @@ public class IRBSiteServlet extends SecureController {
         int siteId = Integer.parseInt(stringSiteId);
 
         IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
-        if(irbSiteBean == null) {
-            irbSiteBean = new IRBSiteBean();
-            irbSiteBean.setSiteId(siteId);
-        }
+        if(irbSiteBean == null) irbSiteBean = new IRBSiteBean();
+        if(irbSiteBean.getIrbSiteId()<1) irbSiteBean.setSiteId(siteId);
 
         irbSiteBean.setVersionNumber(intValueOrZero("version_number"));
         irbSiteBean.setSiteReliesOnCdcIrb(intValueOrZero("version_number")==1);
         irbSiteBean.setIs1572(intValueOrZero("is_1572")==1);
         irbSiteBean.setCdcIrbProtocolVersionDate(dateValueOrNull("cdc_irb_protocol_version_date"));
-        irbSiteBean.setLocalIrbApprovedProtocolDate(dateValueOrNull("local_irb_approved_protocol"));
+        irbSiteBean.setLocalIrbApprovedProtocol(dateValueOrNull("local_irb_approved_protocol"));
         irbSiteBean.setCdcReceivedLocalDocuments(dateValueOrNull("cdc_received_local_documents"));
         irbSiteBean.setSiteConsentPackageSendToCdcIrb(dateValueOrNull("site_consent_package_send_to_cdc_irb"));
         irbSiteBean.setInitialCdcIrbApproval(dateValueOrNull("initial_cdc_irb_approval"));
