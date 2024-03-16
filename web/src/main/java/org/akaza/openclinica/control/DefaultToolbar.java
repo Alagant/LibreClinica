@@ -79,7 +79,7 @@ public class DefaultToolbar extends AbstractToolbar {
         public String enabled() {
             HtmlBuilder html = new HtmlBuilder();
             html.input().type("checkbox").id("showNoEnrollment").end();
-            html.label().forAttr("showNoEnrollment").end().append("Show No Enrollment").labelEnd();
+            html.label().forAttr("showNoEnrollment").style("color: var(--lightblue);").end().append("Show No Enrollment").labelEnd();
             return html.toString();
         }
     }
