@@ -14,6 +14,7 @@
  */
 package org.akaza.openclinica.control.submit;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -86,6 +87,8 @@ public class ListStudySubjectsServlet extends SecureController {
     protected void processRequest() throws Exception {
         getCrfLocker().unlockAllForUser(ub.getId());
         FormProcessor fp = new FormProcessor(request);
+        System.out.println("showNoEnrollment: ");
+        String showNoEnrollment = request.getParameter("enrollment");
         if(fp.getString("showMoreLink").equals("")){
             showMoreLink = true;
         }else {
@@ -120,15 +123,16 @@ public class ListStudySubjectsServlet extends SecureController {
                 request.setAttribute("id", new Integer(studySubject.getId()).toString());
                 forwardPage(Page.VIEW_STUDY_SUBJECT_SERVLET);
             } else {
-                createTable();
+                createTable(showNoEnrollment);
             }
         } else {
-            createTable();
+            createTable(showNoEnrollment);
+
         }
 
     }
 
-    private void createTable() {
+    private void createTable(String showNoEnrollment) {
 
         ListStudySubjectTableFactory factory = new ListStudySubjectTableFactory(showMoreLink);
         factory.setStudyEventDefinitionDao(getStudyEventDefinitionDao());
@@ -187,6 +191,9 @@ public class ListStudySubjectsServlet extends SecureController {
     public StudySubjectDAO getStudySubjectDAO() {
         studySubjectDAO = this.studySubjectDAO == null ? new StudySubjectDAO(sm.getDataSource()) : studySubjectDAO;
         return studySubjectDAO;
+    }
+    public ArrayList<StudySubjectBean> getNoEnrollmentSubjects() {
+        return this.studySubjectDAO.getNoEnrollment();
     }
 
     public StudyGroupClassDAO getStudyGroupClassDAO() {

@@ -1,3 +1,7 @@
+<%
+    String showNoEnrollment = request.getParameter("enrollment");
+    request.setAttribute("showNoEnrollment", showNoEnrollment);
+%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -94,4 +98,42 @@
     <c:if test="${showOverlay}">
         jQuery.blockUI({ message: jQuery('#addSubjectForm'), css:{left: "300px", top:"10px" } });
     </c:if>
+</script>
+
+<script type="text/javascript">
+    let showNoEnrollment = false;
+    let btnShowNoEnrollment = document.getElementById('showNoEnrollment');
+    btnShowNoEnrollment.addEventListener('change', function (e) {
+        showNoEnrollment = e.target.checked;
+        console.log(showNoEnrollment);
+        if (showNoEnrollment) {
+            let tabla = document.getElementById('findSubjects');
+            if (tabla) {
+                let tbody = tabla.querySelector('tbody.tbody');
+                if (tbody) {
+                    let filas = tbody.getElementsByTagName('tr');
+                    let patronRegex = /\d{2}-\d{2}-N\d{5}/;
+                    for (let i = 0; i < filas.length; i++) {
+                        let fila = filas[i];
+                        let celdaSubjectID = fila.cells[0];
+                        if (!patronRegex.test(celdaSubjectID.textContent)) {
+                            fila.style.display = 'none';
+                        }
+                    }
+                }
+            }
+        }else{
+            let tabla = document.getElementById('findSubjects');
+            if (tabla) {
+                let tbody = tabla.querySelector('tbody.tbody');
+                if (tbody) {
+                    let filas = tbody.getElementsByTagName('tr');
+                    for (let i = 0; i < filas.length; i++) {
+                        let fila = filas[i];
+                        fila.style.display = 'table-row';
+                    }
+                }
+            }
+        }
+    });
 </script>
