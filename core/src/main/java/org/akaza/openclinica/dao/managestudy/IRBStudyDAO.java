@@ -15,8 +15,6 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
-
-
     public IRBStudyDAO(DataSource ds) {
         super(ds);
         setDigesterName();

@@ -35,7 +35,7 @@
     <query>
         <name>createIRBStudy</name>
         <sql>
-            INSERT INTO public.irb_study
+            INSERT INTO irb_study
             (study_id, cdc_irb_protocol_number, version1_protocol_date, protocol_officer, submitted_cdc_irb,
             approval_by_cdc_irb, cdc_irb_expiration_date)
             VALUES(?, ?, ?, ?, ?, ?, ?);
@@ -43,11 +43,43 @@
     </query>
     <query>
         <name>updateIRBStudy</name>
-        <sql>UPDATE public.irb_study
+        <sql>UPDATE irb_study
             SET cdc_irb_protocol_number=?, version1_protocol_date=?,
             protocol_officer=?, submitted_cdc_irb=?,
             approval_by_cdc_irb=?, cdc_irb_expiration_date=?
             WHERE irb_study_id=?;
         </sql>
     </query>
+    <query>
+        <name>createIRBSite</name>
+        <sql>
+            INSERT INTO irb_site
+            (site_id, version_number, site_relies_on_cdc_irb, is_1572,
+            cdc_irb_protocol_version_date, local_irb_approved_protocol, cdc_received_local_documents,
+            site_consent_package_send_to_cdc_irb, initial_cdc_irb_approval, crb_approval_to_enroll,
+            irb_approval, expiration_date, active, "comments")
+            VALUES(?, ?, ?, ?,
+            ?, ?, ?,
+            ?, ?, ?,
+            ?, ?, ?, ?);
+        </sql>
+    </query>
+    <query>
+        <name>getCurrentIRBSitePrimaryKey</name>
+        <sql>SELECT currval('irb_site_irb_site_id_seq') AS key</sql>
+    </query>
+    <query>
+        <name>updateIRBSite</name>
+        <sql>
+            UPDATE irb_site
+            SET version_number=?, site_relies_on_cdc_irb=?, is_1572=?, cdc_irb_protocol_version_date=?,
+            local_irb_approved_protocol=?, cdc_received_local_documents=?, site_consent_package_send_to_cdc_irb=?,
+            initial_cdc_irb_approval=?, crb_approval_to_enroll=?, irb_approval=?, expiration_date=?,
+            active=?, "comments"=?
+            WHERE irb_site_id=?;
+        </sql>
+    </query>
+
+
+
 </queries>
