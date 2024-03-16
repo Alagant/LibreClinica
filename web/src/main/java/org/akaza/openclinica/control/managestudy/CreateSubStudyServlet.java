@@ -19,10 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.akaza.openclinica.bean.admin.CRFBean;
@@ -119,6 +116,15 @@ public class CreateSubStudyServlet extends SecureController {
                 newStudy.setFacilityContactName(SQLInitServlet.getField(CreateStudyServlet.FAC_CONTACT_NAME));
                 newStudy.setFacilityContactPhone(SQLInitServlet.getField(CreateStudyServlet.FAC_CONTACT_PHONE));
                 newStudy.setFacilityZip(SQLInitServlet.getField(CreateStudyServlet.FAC_ZIP));
+
+                newStudy.setSubSite(SQLInitServlet.getField(CreateStudyServlet.SUB_SITE));
+                newStudy.setContractNumber(SQLInitServlet.getField(CreateStudyServlet.CONTRACT_NUMBER));
+                newStudy.setLocationType(SQLInitServlet.getField(CreateStudyServlet.LOCATION_TYPE));
+                Object active = SQLInitServlet.getField(CreateStudyServlet.ACTIVE);
+                //newStudy.setActive(SQLInitServlet.getField(CreateStudyServlet.ACTIVE));
+                newStudy.setFwaInstitution(SQLInitServlet.getField(CreateStudyServlet.FWA_INSTITUTION));
+                newStudy.setFwaName(SQLInitServlet.getField(CreateStudyServlet.FWA_NAME));
+                //newStudy.setFwaExpirationDate(SQLInitServlet.getField(CreateStudyServlet.FWA_EXPIRATION_DATE));
 
                 List<StudyParamsConfig> parentConfigs = currentStudy.getStudyParameters();
                 // logger.info("parentConfigs size:" + parentConfigs.size());
@@ -277,7 +283,14 @@ public class CreateSubStudyServlet extends SecureController {
         v.addValidation("facConPhone", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         v.addValidation("facConEmail", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
 
-    //    errors = v.validate();
+        v.addValidation("subSite", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 3);
+        v.addValidation("contractNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
+        v.addValidation("consortiumName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+        v.addValidation("locationType", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 14);
+        v.addValidation("fwaInstitution", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 200);
+        v.addValidation("fwaName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+
+   //    errors = v.validate();
 
         // >> tbh
  /*       StudyDAO studyDAO = new StudyDAO(sm.getDataSource());
@@ -406,6 +419,16 @@ public class CreateSubStudyServlet extends SecureController {
         study.setFacilityState(fp.getString("facState"));
         study.setFacilityZip(fp.getString("facZip"));
         study.setStatus(Status.get(fp.getInt("statusId")));
+
+        study.setSubSite(fp.getString("subSite"));
+        study.setContractNumber(fp.getString("contractNumber"));
+        study.setConsortiumNames(Arrays.asList(fp.getString("consortiumName").split("[,]")));
+        study.setActive(fp.getBoolean("active"));
+        study.setLocationType(fp.getString("locationType"));
+        study.setFwaInstitution(fp.getString("fwaInstitution"));
+        study.setFwaName(fp.getString("fwaName"));
+        study.setFwaExpirationDate(fp.getDate("fwaExpirationDate"));
+
 
         ArrayList<StudyParamsConfig> parameters = study.getStudyParameters();
 

@@ -64,7 +64,16 @@ public class CreateStudyServlet extends SecureController {
     public static final String FAC_ADDRESS_1 = "FacAddress1";
     public static final String FAC_ADDRESS_2 = "FacAddress2";
     public static final String FAC_ADDRESS_3 = "FacAddress3";
-    public static final String FAC_ADDRESS_4 = "FacAddress3";
+    public static final String FAC_ADDRESS_4 = "FacAddress4";
+
+    public static final String SUB_SITE = "SubSite";
+    public static final String CONTRACT_NUMBER = "ContractNumber";
+    public static final String LOCATION_TYPE = "LocationType";
+    public static final String ACTIVE = "Active";
+    public static final String FWA_INSTITUTION = "FwaInstitution";
+    public static final String FWA_NAME = "FwaName";
+    public static final String FWA_EXPIRATION_DATE = "FwaExpirationDate";
+
 
     public static final String FAC_CITY = "FacCity";
 
