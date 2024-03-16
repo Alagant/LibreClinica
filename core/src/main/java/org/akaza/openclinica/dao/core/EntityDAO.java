@@ -765,7 +765,7 @@ public abstract class EntityDAO<B> implements DAOInterface<B> {
         } else {
         	answer = emptyBean();
         	String msg = "found no object for query '%s'"; 
-            logger.debug(String.format(msg,  sql));
+                logger.debug(String.format(msg,  sql));
         }
 
         return answer;

@@ -52,8 +52,8 @@
 
 <h1><span class="title_manage">IRB Site Definition</span></h1>
 <div class="form-standard">
-    <form action="${pageContext.request.contextPath}/IrbStudy" method="post">
-        <input type="hidden" name="study_id" value="{siteId}"/>
+    <form action="${pageContext.request.contextPath}/IrbSite" method="post">
+        <input type="hidden" name="siteId" value="${siteId}"/>
         <div class="form-item">
             <label>Version number</label>
             <input name="version_number" value="${irbStudyBean.cdcIrbProtocolNumber}"/>
