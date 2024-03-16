@@ -26,19 +26,20 @@ public class IRBSiteServlet extends SecureController {
     protected void processRequest() throws Exception {
         if(request.getMethod().compareToIgnoreCase("POST")==0) {
             createOrUpdateIRBSiteBean();
-            return;
-        }
-
-        String siteId = request.getParameter("siteId");
-        if(siteId==null || siteId.isEmpty()) {
-            addPageMessage("Invalid site id");
             forwardPage(Page.VIEW_STUDY);
             return;
         }
 
+        String stringSiteId = request.getParameter("siteId");
+        if(stringSiteId==null || stringSiteId.isEmpty()) {
+            addPageMessage("Invalid site id");
+            forwardPage(Page.VIEW_STUDY);
+            return;
+        }
+        int siteId = Integer.parseInt(stringSiteId);
 
 
-        IRBSiteBean irbSiteBean = irbSiteDAO.findBySiteId(siteId);
+        IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
         request.setAttribute("siteId", siteId);
         request.setAttribute("irbSiteBean", irbSiteBean);
         forwardPage(Page.IRB_SITE);
@@ -47,7 +48,7 @@ public class IRBSiteServlet extends SecureController {
         String stringSiteId = request.getParameter("siteId");
         int siteId = Integer.parseInt(stringSiteId);
 
-        IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(stringSiteId);
+        IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
         if(irbSiteBean == null) {
             irbSiteBean = new IRBSiteBean();
             irbSiteBean.setSiteId(siteId);
