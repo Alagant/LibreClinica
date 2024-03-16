@@ -12,7 +12,7 @@ public class IRBSiteBean extends EntityBean {
     private boolean siteReliesOnCdcIrb;
     private boolean is1572;
     private Date cdcIrbProtocolVersionDate;
-    private Date localIrbApprovedProtocolDate;
+    private Date localIrbApprovedProtocol;
     private Date cdcReceivedLocalDocuments;
     private Date siteConsentPackageSendToCdcIrb;
     private Date initialCdcIrbApproval;
@@ -70,12 +70,12 @@ public class IRBSiteBean extends EntityBean {
         this.cdcIrbProtocolVersionDate = cdcIrbProtocolVersionDate;
     }
 
-    public Date getLocalIrbApprovedProtocolDate() {
-        return localIrbApprovedProtocolDate;
+    public Date getLocalIrbApprovedProtocol() {
+        return localIrbApprovedProtocol;
     }
 
-    public void setLocalIrbApprovedProtocolDate(Date localIrbApprovedProtocolDate) {
-        this.localIrbApprovedProtocolDate = localIrbApprovedProtocolDate;
+    public void setLocalIrbApprovedProtocol(Date localIrbApprovedProtocol) {
+        this.localIrbApprovedProtocol = localIrbApprovedProtocol;
     }
 
     public Date getCdcReceivedLocalDocuments() {
