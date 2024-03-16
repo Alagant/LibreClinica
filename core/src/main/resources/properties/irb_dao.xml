@@ -28,6 +28,26 @@
             WHERE site_id=?
         </sql>
     </query>
-
-
+    <query>
+        <name>getCurrentIRBStudyPrimaryKey</name>
+        <sql>SELECT currval('irb_study_irb_study_id_seq') AS key</sql>
+    </query>
+    <query>
+        <name>createIRBStudy</name>
+        <sql>
+            INSERT INTO public.irb_study
+            (study_id, cdc_irb_protocol_number, version1_protocol_date, protocol_officer, submitted_cdc_irb,
+            approval_by_cdc_irb, cdc_irb_expiration_date)
+            VALUES(?, ?, ?, ?, ?, ?, ?);
+        </sql>
+    </query>
+    <query>
+        <name>updateIRBStudy</name>
+        <sql>UPDATE public.irb_study
+            SET cdc_irb_protocol_number=?, version1_protocol_date=?,
+            protocol_officer=?, submitted_cdc_irb=?,
+            approval_by_cdc_irb=?, cdc_irb_expiration_date=?
+            WHERE irb_study_id=?;
+        </sql>
+    </query>
 </queries>
