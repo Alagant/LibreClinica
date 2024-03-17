@@ -123,7 +123,7 @@ public class CreateSubStudyServlet extends SecureController {
                 Object active = SQLInitServlet.getField(CreateStudyServlet.ACTIVE);
                 //newStudy.setActive(SQLInitServlet.getField(CreateStudyServlet.ACTIVE));
                 newStudy.setFwaInstitution(SQLInitServlet.getField(CreateStudyServlet.FWA_INSTITUTION));
-                newStudy.setFwaName(SQLInitServlet.getField(CreateStudyServlet.FWA_NAME));
+                newStudy.setFwaNumber(SQLInitServlet.getField(CreateStudyServlet.FWA_NAME));
                 //newStudy.setFwaExpirationDate(SQLInitServlet.getField(CreateStudyServlet.FWA_EXPIRATION_DATE));
 
                 List<StudyParamsConfig> parentConfigs = currentStudy.getStudyParameters();
@@ -250,7 +250,7 @@ public class CreateSubStudyServlet extends SecureController {
         // >> tbh
         // v.addValidation("description", Validator.NO_BLANKS);
         // << tbh, #3943, 07/2009
-        v.addValidation("prinInvestigator", Validator.NO_BLANKS);
+        //v.addValidation("prinInvestigator", Validator.NO_BLANKS);
         String startDate = fp.getString(INPUT_START_DATE);
 		if (!(startDate == null || startDate.trim().isEmpty())) {
             v.addValidation(INPUT_START_DATE, Validator.IS_A_DATE);
@@ -259,10 +259,10 @@ public class CreateSubStudyServlet extends SecureController {
 		if (!(endDate == null || endDate.trim().isEmpty())) {
             v.addValidation(INPUT_END_DATE, Validator.IS_A_DATE);
         }
-        String contactEmail = fp.getString("facConEmail");
-		if (!(contactEmail == null || contactEmail.trim().isEmpty())) {
-            v.addValidation("facConEmail", Validator.IS_A_EMAIL);
-        }
+        //String contactEmail = fp.getString("facConEmail");
+		//if (!(contactEmail == null || contactEmail.trim().isEmpty())) {
+        //    v.addValidation("facConEmail", Validator.IS_A_EMAIL);
+        //}
         String verDate = fp.getString(INPUT_VER_DATE);
 		if (!(verDate == null || verDate.trim().isEmpty())) {
             v.addValidation(INPUT_VER_DATE, Validator.IS_A_DATE);
@@ -278,14 +278,14 @@ public class CreateSubStudyServlet extends SecureController {
         v.addValidation("facState", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
         v.addValidation("facZip", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
         v.addValidation("facCountry", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
-        v.addValidation("facConName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
-        v.addValidation("facConDegree", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
-        v.addValidation("facConPhone", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
-        v.addValidation("facConEmail", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConDegree", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConPhone", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConEmail", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
 
         v.addValidation("subSite", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 3);
         v.addValidation("contractNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
-        v.addValidation("consortiumName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+        v.addValidation("consortiumName", Validator.NO_BLANKS_SET, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
         v.addValidation("locationType", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 14);
         v.addValidation("fwaInstitution", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 200);
         v.addValidation("fwaName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
@@ -412,8 +412,8 @@ public class CreateSubStudyServlet extends SecureController {
         study.setFacilityAddress4(fp.getString("facAddress4"));
         study.setFacilityContactEmail(fp.getString("facConEmail"));
         study.setFacilityContactPhone(fp.getString("facConPhone"));
-        study.setFacilityContactName(fp.getString("facConName"));
-        study.setFacilityContactDegree(fp.getString("facConDegree"));
+        //study.setFacilityContactName(fp.getString("facConName"));
+        //study.setFacilityContactDegree(fp.getString("facConDegree"));
         study.setFacilityCountry(fp.getString("facCountry"));
         // study.setFacilityRecruitmentStatus(fp.getString("facRecStatus"));
         study.setFacilityState(fp.getString("facState"));
@@ -426,7 +426,7 @@ public class CreateSubStudyServlet extends SecureController {
         study.setActive(fp.getBoolean("active"));
         study.setLocationType(fp.getString("locationType"));
         study.setFwaInstitution(fp.getString("fwaInstitution"));
-        study.setFwaName(fp.getString("fwaName"));
+        study.setFwaNumber(fp.getString("fwaName"));
         study.setFwaExpirationDate(fp.getDate("fwaExpirationDate"));
 
 

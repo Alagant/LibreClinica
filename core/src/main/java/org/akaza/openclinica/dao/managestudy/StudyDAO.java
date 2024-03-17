@@ -22,7 +22,6 @@ import org.akaza.openclinica.bean.core.Status;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.bean.managestudy.StudyType;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
-import org.akaza.openclinica.dao.core.CoreResources;
 import org.akaza.openclinica.dao.core.DAODigester;
 import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.dao.core.TypeNames;
@@ -287,7 +286,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(32, sb.getLocationType());// location_type
         variables.put(33, sb.getActive());// active
         variables.put(34, sb.getFwaInstitution());// fwa_institution
-        variables.put(35, sb.getFwaName());// fwa_name
+        variables.put(35, sb.getFwaNumber());// fwa_name
         variables.put(36, sb.getFwaExpirationDate());// fwa_expiration_date
 
         // SQL Update where
@@ -411,7 +410,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(33, sb.getLocationType());// location_type
         variables.put(34, sb.getActive());// active
         variables.put(35, sb.getFwaInstitution());// fwa_institution
-        variables.put(36, sb.getFwaName());// fwa_name
+        variables.put(36, sb.getFwaNumber());// fwa_name
         variables.put(37, sb.getFwaExpirationDate());// fwa_expiration_date
 
         // replace this with the owner id

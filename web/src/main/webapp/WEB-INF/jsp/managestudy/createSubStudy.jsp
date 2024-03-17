@@ -276,7 +276,14 @@ function updateThis(multiSelEle, count) {
   <input type="checkbox" name="active" <c:if test="${newStudy.active}">checked</c:if>/></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="active"/></jsp:include>
   </td></tr>
-
+  <tr><h2>Federal wide assurance (FWA)</h2></tr>
+  <tr valign="top"><td class="formlabel"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="fwaInstitution" value="<c:out value="${newStudy.fwaInstitution}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaInstitution"/></jsp:include>
+  <tr valign="top"><td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="fwaNumber" value="<c:out value="${newStudy.fwaNumber}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaNumber"/></jsp:include>
+  </td></tr>
 
 
    <c:choose>

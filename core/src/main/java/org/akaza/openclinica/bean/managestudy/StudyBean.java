@@ -82,7 +82,7 @@ public class StudyBean extends AuditableEntityBean {
     private Boolean active = null;
 
     private String fwaInstitution = "";
-    private String fwaName = "";
+    private String fwaNumber = "";
     private Date fwaExpirationDate = null;
     private String facilityRecruitmentStatus = "";
     private String facilityContactName = "";
@@ -1357,12 +1357,12 @@ public class StudyBean extends AuditableEntityBean {
         this.fwaInstitution = fwaInstitution;
     }
 
-    public String getFwaName() {
-        return fwaName;
+    public String getFwaNumber() {
+        return fwaNumber;
     }
 
-    public void setFwaName(String fwaName) {
-        this.fwaName = fwaName;
+    public void setFwaNumber(String fwaNumber) {
+        this.fwaNumber = fwaNumber;
     }
 
     public Date getFwaExpirationDate() {
