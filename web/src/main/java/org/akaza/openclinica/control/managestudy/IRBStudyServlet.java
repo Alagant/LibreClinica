@@ -1,8 +1,11 @@
 package org.akaza.openclinica.control.managestudy;
 
+import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryBean;
+import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
 import org.akaza.openclinica.bean.managestudy.IRBSiteBean;
 import org.akaza.openclinica.bean.managestudy.IRBStudyBean;
 import org.akaza.openclinica.control.core.SecureController;
+import org.akaza.openclinica.dao.managestudy.IRBProtocolActionTypeDAO;
 import org.akaza.openclinica.dao.managestudy.IRBSiteDAO;
 import org.akaza.openclinica.dao.managestudy.IRBStudyDAO;
 import org.akaza.openclinica.exception.OpenClinicaException;
@@ -11,6 +14,7 @@ import org.akaza.openclinica.web.InsufficientPermissionException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -29,6 +33,7 @@ public class IRBStudyServlet extends SecureController {
             response.sendRedirect(request.getContextPath() + Page.MANAGE_STUDY_MODULE.getFileName());
             return;
         }
+
 
         IRBStudyBean irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
         request.setAttribute("irbStudyBean", irbStudyBean);

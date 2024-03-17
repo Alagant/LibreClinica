@@ -161,9 +161,7 @@
             </tr>
         </table>
     </form>
-
-<%-- Work here --%>
-
+    <jsp:include page="./irbProtocolActions.jsp"/>
 
 
 <jsp:include page="../include/footer.jsp"/>

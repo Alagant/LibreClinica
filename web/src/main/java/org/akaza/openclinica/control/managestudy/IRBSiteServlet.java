@@ -1,7 +1,9 @@
 package org.akaza.openclinica.control.managestudy;
 
+import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
 import org.akaza.openclinica.bean.managestudy.IRBSiteBean;
 import org.akaza.openclinica.control.core.SecureController;
+import org.akaza.openclinica.dao.managestudy.IRBProtocolActionTypeDAO;
 import org.akaza.openclinica.dao.managestudy.IRBSiteDAO;
 import org.akaza.openclinica.exception.OpenClinicaException;
 import org.akaza.openclinica.view.Page;
@@ -9,6 +11,7 @@ import org.akaza.openclinica.web.InsufficientPermissionException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -35,11 +38,15 @@ public class IRBSiteServlet extends SecureController {
             return;
         }
         int siteId = Integer.parseInt(stringSiteId);
-
+        IRBProtocolActionTypeDAO protocolActionTypeDAO =
+                new IRBProtocolActionTypeDAO(sm.getDataSource());
+        ArrayList<IRBProtocolActionTypeBean> protocolActionsTypes =
+                protocolActionTypeDAO.findAll();
 
         IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
         request.setAttribute("siteId", siteId);
         request.setAttribute("irbSiteBean", irbSiteBean);
+        request.setAttribute("protocolActionTypes", protocolActionsTypes);
         forwardPage(Page.IRB_SITE);
     }
     private void createOrUpdateIRBSiteBean() throws NumberFormatException, OpenClinicaException {
