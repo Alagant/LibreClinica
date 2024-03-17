@@ -49,6 +49,7 @@
 <c:set var="startDate" value="" />
 <c:set var="endDate" value="" />
 <c:set var="protocolDateVerification" value="" />
+<c:set var="fwaExpiryDate" value="" />
 
 <c:forEach var="presetValue" items="${presetValues}">
 	<c:if test='${presetValue.key == "startDate"}'>
@@ -58,8 +59,11 @@
 		<c:set var="endDate" value="${presetValue.value}" />
 	</c:if>
 	<c:if test='${presetValue.key == "protocolDateVerification"}'>
-		<c:set var="protocolDateVerification" value="${presetValue.value}" />	
-	</c:if>	
+		<c:set var="protocolDateVerification" value="${presetValue.value}" />
+	</c:if>
+	<c:if test='${presetValue.key == "fwaExpiryDate"}'>
+		<c:set var="fwaExpiryDate" value="${presetValue.value}" />
+	</c:if>
 </c:forEach>
 <script type="text/JavaScript" language="JavaScript">
   <!--
@@ -284,9 +288,22 @@ function updateThis(multiSelEle, count) {
   <input type="text" name="fwaNumber" value="<c:out value="${newStudy.fwaNumber}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaNumber"/></jsp:include>
   </td></tr>
+<tr>
+	<td><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+	<input type="text" name="fwaExpiryDate" value="<c:out value="${fwaExpiryDate}" />" class="formfieldXL" id="FWAExpDateField"></div>
+	<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="protocolDateVerification"/></jsp:include></td>
+	<td><A HREF="#" >
+		<img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="fwaExpDateTrigger"/>
+		<script type="text/javascript">
+			Calendar.setup({inputField  : "FWAExpDateField", ifFormat    : "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button      : "fwaExpDateTrigger" });
+		</script>
 
+	</a>
 
-   <c:choose>
+	</td>
+</tr>
+
+	<c:choose>
     <c:when test="${newStudy.parentStudyId == 0}">
        <c:set var="key" value="study_system_status"/>
     </c:when>

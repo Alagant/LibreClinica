@@ -71,7 +71,7 @@ public class CreateStudyServlet extends SecureController {
     public static final String LOCATION_TYPE = "LocationType";
     public static final String ACTIVE = "Active";
     public static final String FWA_INSTITUTION = "FwaInstitution";
-    public static final String FWA_NAME = "FwaName";
+    public static final String FWA_NUMBER = "FwaNumber";
     public static final String FWA_EXPIRATION_DATE = "FwaExpirationDate";
 
 

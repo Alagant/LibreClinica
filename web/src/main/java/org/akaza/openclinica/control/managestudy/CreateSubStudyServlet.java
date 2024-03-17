@@ -123,7 +123,7 @@ public class CreateSubStudyServlet extends SecureController {
                 Object active = SQLInitServlet.getField(CreateStudyServlet.ACTIVE);
                 //newStudy.setActive(SQLInitServlet.getField(CreateStudyServlet.ACTIVE));
                 newStudy.setFwaInstitution(SQLInitServlet.getField(CreateStudyServlet.FWA_INSTITUTION));
-                newStudy.setFwaNumber(SQLInitServlet.getField(CreateStudyServlet.FWA_NAME));
+                newStudy.setFwaNumber(SQLInitServlet.getField(CreateStudyServlet.FWA_NUMBER));
                 //newStudy.setFwaExpirationDate(SQLInitServlet.getField(CreateStudyServlet.FWA_EXPIRATION_DATE));
 
                 List<StudyParamsConfig> parentConfigs = currentStudy.getStudyParameters();
@@ -288,7 +288,7 @@ public class CreateSubStudyServlet extends SecureController {
         v.addValidation("consortiumName", Validator.NO_BLANKS_SET, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
         v.addValidation("locationType", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 14);
         v.addValidation("fwaInstitution", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 200);
-        v.addValidation("fwaName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+        v.addValidation("fwaNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
 
    //    errors = v.validate();
 
@@ -426,7 +426,7 @@ public class CreateSubStudyServlet extends SecureController {
         study.setActive(fp.getBoolean("active"));
         study.setLocationType(fp.getString("locationType"));
         study.setFwaInstitution(fp.getString("fwaInstitution"));
-        study.setFwaNumber(fp.getString("fwaName"));
+        study.setFwaNumber(fp.getString("fwaNumber"));
         study.setFwaExpirationDate(fp.getDate("fwaExpirationDate"));
 
 
