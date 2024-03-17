@@ -7,7 +7,7 @@ describe('Enrollment form', () => {
         cy.visit('http://localhost:8080/LibreClinica/pages/login/login')
         cy.url().should('include', 'http://localhost:8080/LibreClinica/pages/login/login')
         cy.get('a:contains("OAuth")').should('exist').click()
-        cy.origin('cdcoauthmockup.azurewebsites.net', () => {
+        cy.origin('cdcoauth.alagant.com', () => {
             cy.get('[id="username"]').should('exist').type('test')
             cy.get('[id="password"]').should('exist').type('test')
             cy.get('button').should('exist').click()
@@ -20,7 +20,7 @@ describe('Enrollment form', () => {
          */
         /*
         cy.contains("Drug Management").click()
-        cy.origin("https://drugmanagementmodule.azurewebsites.net", () => {
+        cy.origin("https://dmm-qa.alagant.com", () => {
             console.clear()
             cy.get('[href="/subjects"]').should("exist").click()
             cy.get("div.main-content table tbody tr").should("exist")
@@ -64,7 +64,7 @@ describe('Enrollment form', () => {
         cy.contains("Save and Assign Study Event").click()
 
         cy.contains("Drug Management").click()
-        cy.origin("https://drugmanagementmodule.azurewebsites.net", () => {
+        cy.origin("https://dmm-qa.alagant.com", () => {
             console.clear()
             cy.get('[href="/randomize"]').should("exist").click()
             cy.get('button[type="submit"]').should("exist").click()
