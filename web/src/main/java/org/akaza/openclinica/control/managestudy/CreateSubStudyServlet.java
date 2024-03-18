@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.akaza.openclinica.bean.admin.CRFBean;
@@ -728,6 +729,19 @@ public class CreateSubStudyServlet extends SecureController {
         session.setAttribute("changed", changes);
         return seds;
     }
+    
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
 
     private void submitSiteEventDefinitions(StudyBean site) throws MalformedURLException {
         StudyParameterValueDAO spvdao = new StudyParameterValueDAO(sm.getDataSource());    
@@ -768,6 +782,7 @@ public class CreateSubStudyServlet extends SecureController {
             String apiUrl = "http://localhost:3000/api/sites";
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "LC-"+getSaltString());
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setDoOutput(true);

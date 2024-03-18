@@ -19,9 +19,22 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.TreeMap;
 
 public class AppointmentServlet extends SecureController {
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
     @Override
     protected void processRequest() throws Exception {
         int subjectId = 0;
@@ -55,6 +68,8 @@ public class AppointmentServlet extends SecureController {
                     studySubjectBean.getSubjectId();
             URL url = new URL(appointments_url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "LC-"+getSaltString());
+            
             int responseCode = connection.getResponseCode();
             if(responseCode == HttpURLConnection.HTTP_OK) {
                 ObjectMapper objectMapper = new ObjectMapper();
