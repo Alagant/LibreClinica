@@ -35,6 +35,7 @@ public class IRBProtocolActionHistoryBean extends EntityBean {
         this.irbProtocolActionTypeId = irbProtocolActionTypeId;
     }
 
+<<<<<<< HEAD
     public int getIrbSiteId() {
         return irbSiteId;
     }
@@ -51,6 +52,8 @@ public class IRBProtocolActionHistoryBean extends EntityBean {
         this.label = label;
     }
 
+=======
+>>>>>>> 667f8b70533dce751e251033a65be3abe3f9cc8c
     public Date getVersionDate() {
         return versionDate;
     }
