@@ -280,7 +280,7 @@ function updateThis(multiSelEle, count) {
   <input type="checkbox" name="active" <c:if test="${newStudy.active}">checked</c:if>/></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="active"/></jsp:include>
   </td></tr>
-  <tr><h2>Federal wide assurance (FWA)</h2></tr>
+  <tr><td><h2>Federal wide assurance (FWA)</h2></td></tr>
   <tr valign="top"><td class="formlabel"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="fwaInstitution" value="<c:out value="${newStudy.fwaInstitution}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaInstitution"/></jsp:include>
@@ -288,14 +288,14 @@ function updateThis(multiSelEle, count) {
   <input type="text" name="fwaNumber" value="<c:out value="${newStudy.fwaNumber}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaNumber"/></jsp:include>
   </td></tr>
-<tr>
-	<td><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <tr valign="top">
+	<td class="formlabel"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
 	<input type="text" name="fwaExpiryDate" value="<c:out value="${fwaExpiryDate}" />" class="formfieldXL" id="FWAExpDateField"></div>
 	<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaExpiryDate"/></jsp:include></td>
 	<td><A HREF="#" >
 		<img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="fwaExpDateTrigger"/>
 		<script type="text/javascript">
-			Calendar.setup({inputField  : "FWAExpDateField", ifFormat    : "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button      : "fwaExpDateTrigger" });
+			Calendar.setup({inputField  : "fwaExpirationDateField", ifFormat    : "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button      : "fwaExpDateTrigger" });
 		</script>
 
 	</a>

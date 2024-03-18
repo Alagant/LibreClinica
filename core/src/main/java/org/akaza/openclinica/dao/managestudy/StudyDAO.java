@@ -411,7 +411,11 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(34, sb.getActive());// active
         variables.put(35, sb.getFwaInstitution());// fwa_institution
         variables.put(36, sb.getFwaNumber());// fwa_name
-        variables.put(37, sb.getFwaExpirationDate());// fwa_expiration_date
+        Date fwaExpDate = sb.getFwaExpirationDate();
+        variables.put(37, fwaExpDate);// fwa_expiration_date
+        if (fwaExpDate== null) {
+            nullVars.put(37, Types.DATE);
+        }
 
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);
