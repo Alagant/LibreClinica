@@ -211,6 +211,11 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         return executeFindAllQuery(queryName, variables);
     }
 
+    public ArrayList<StudySubjectBean> getNoEnrollment() {
+        String queryName = "getNoEnrollment";
+        return executeFindAllQuery(queryName);
+    }
+
     public ArrayList<StudySubjectBean> findAllActiveByStudyOrderByLabel(StudyBean sb) {
     	String queryName = "findAllActiveByStudyOrderByLabel";
         HashMap<Integer, Object> variables = variables(sb.getId(), sb.getId());
@@ -563,6 +568,29 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
             studySubjects.add(studySubjectBean);
         }
         
+        return studySubjects;
+    }
+
+    public ArrayList<StudySubjectBean> getWithFilterAndSortAndNoEnrollment(StudyBean currentStudy, StudyAuditLogFilter filter, StudyAuditLogSort sort, int rowStart, int rowEnd) {
+        setTypesExpected();
+        this.setTypeExpected(14, TypeNames.DATE);
+        this.setTypeExpected(15, TypeNames.STRING);
+        this.setTypeExpected(16, TypeNames.STRING);
+
+        HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
+        String sql = digester.getQuery("getWithFilterAndSortAuditLogNoEnrrollment");
+        sql = sql + filter.execute("");
+
+        sql = sql + sort.execute("");
+        sql = sql + " LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+
+        ArrayList<HashMap<String, Object>> rows = this.select(sql, variables);
+        ArrayList<StudySubjectBean> studySubjects = new ArrayList<>();
+        for (HashMap<String, Object> hm : rows) {
+            StudySubjectBean studySubjectBean = this.getEntityFromHashMap(hm);
+            studySubjects.add(studySubjectBean);
+        }
+
         return studySubjects;
     }
 
