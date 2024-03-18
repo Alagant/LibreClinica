@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -316,6 +317,20 @@ public abstract class DataEntryServlet extends CoreSecureController {
         LOGGER.trace(message);
     }
 
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }    
+    
+    
     @SuppressWarnings("unlikely-arg-type")
 	@Override
     protected  void processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -1530,6 +1545,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                         // Configure the HTTP connection
                         URL url = new URL(apiUrl);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestProperty("User-Agent", "LC-"+getSaltString());
                         connection.setRequestMethod("POST");
                         connection.setRequestProperty("Content-Type", "application/json");
                         connection.setDoOutput(true);
@@ -2194,6 +2210,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     System.out.println(pidUrl);
                                     URL urlPid = new URL(pidUrl);
                                     HttpURLConnection connectionPid = (HttpURLConnection) urlPid.openConnection();
+                                    connectionPid.setRequestProperty("User-Agent", "LC-"+getSaltString());
                                     connectionPid.setRequestMethod("GET");
                                     // Check the response code
                                     responseCode = connectionPid.getResponseCode();
