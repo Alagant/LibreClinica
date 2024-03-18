@@ -9,6 +9,8 @@ public class IRBProtocolActionHistoryBean extends EntityBean {
 
     private int irbProtocolActionHistoryId;
     private int irbProtocolActionTypeId;
+    private int irbSiteId;
+    private String label;
     private Date versionDate;
     private int versionNumber;
     private Date siteSubmittedToLocalIrb;
@@ -31,6 +33,22 @@ public class IRBProtocolActionHistoryBean extends EntityBean {
 
     public void setIrbProtocolActionTypeId(int irbProtocolActionTypeId) {
         this.irbProtocolActionTypeId = irbProtocolActionTypeId;
+    }
+
+    public int getIrbSiteId() {
+        return irbSiteId;
+    }
+
+    public void setIrbSiteId(int irbSiteId) {
+        this.irbSiteId = irbSiteId;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public Date getVersionDate() {

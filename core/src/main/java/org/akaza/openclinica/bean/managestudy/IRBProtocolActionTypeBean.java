@@ -4,13 +4,15 @@ import org.akaza.openclinica.bean.core.EntityBean;
 
 public class IRBProtocolActionTypeBean extends EntityBean {
     private static final long serialVersionUID = -8498550403423118479L;
+    private int protocolActionTypeId;
+    private String label;
 
-    public int getIrbProtocolDeviationActionTypeId() {
-        return irbProtocolDeviationActionTypeId;
+    public int getProtocolActionTypeId() {
+        return protocolActionTypeId;
     }
 
-    public void setIrbProtocolDeviationActionTypeId(int irbProtocolDeviationActionTypeId) {
-        this.irbProtocolDeviationActionTypeId = irbProtocolDeviationActionTypeId;
+    public void setProtocolActionTypeId(int protocolActionTypeId) {
+        this.protocolActionTypeId = protocolActionTypeId;
     }
 
     public String getLabel() {
@@ -20,7 +22,4 @@ public class IRBProtocolActionTypeBean extends EntityBean {
     public void setLabel(String label) {
         this.label = label;
     }
-
-    private int irbProtocolDeviationActionTypeId;
-    private String label;
 }

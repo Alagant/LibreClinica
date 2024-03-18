@@ -2,10 +2,8 @@ package org.akaza.openclinica.dao.managestudy;
 
 import org.akaza.openclinica.bean.core.EntityBean;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
-import org.akaza.openclinica.bean.managestudy.ProtocolDeviationBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
-import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.dao.core.TypeNames;
 import org.akaza.openclinica.exception.OpenClinicaException;
@@ -27,7 +25,7 @@ public class IRBProtocolActionTypeDAO extends AuditableEntityDAO<IRBProtocolActi
     @Override
     public IRBProtocolActionTypeBean getEntityFromHashMap(HashMap<String, Object> hm) {
         IRBProtocolActionTypeBean retval = new IRBProtocolActionTypeBean();
-        retval.setIrbProtocolDeviationActionTypeId((Integer)hm.get("protocol_deviation_action_type_id"));
+        retval.setProtocolActionTypeId((Integer)hm.get("irb_protocol_action_type_id"));
         retval.setLabel((String)hm.get("label"));
 
         return retval;

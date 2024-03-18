@@ -1,14 +1,17 @@
 package org.akaza.openclinica.control.managestudy;
 
+import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryBean;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
 import org.akaza.openclinica.bean.managestudy.IRBSiteBean;
 import org.akaza.openclinica.control.core.SecureController;
+import org.akaza.openclinica.dao.managestudy.IRBProtocolActionHistoryDAO;
 import org.akaza.openclinica.dao.managestudy.IRBProtocolActionTypeDAO;
 import org.akaza.openclinica.dao.managestudy.IRBSiteDAO;
 import org.akaza.openclinica.exception.OpenClinicaException;
 import org.akaza.openclinica.view.Page;
 import org.akaza.openclinica.web.InsufficientPermissionException;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,15 +20,84 @@ import java.util.Locale;
 
 public class IRBSiteServlet extends SecureController {
     private IRBSiteDAO irbSiteDAO;
+    private IRBProtocolActionHistoryDAO irbProtocolActionHistoryDAO;
 
     private IRBSiteDAO getIRBSiteDAO() {
         if(irbSiteDAO==null) irbSiteDAO = new IRBSiteDAO(sm.getDataSource());
 
         return irbSiteDAO;
     }
+
+    private IRBProtocolActionHistoryDAO getIRBProtocolActionHistoryDAO() {
+        if(irbProtocolActionHistoryDAO==null)
+            irbProtocolActionHistoryDAO = new IRBProtocolActionHistoryDAO(sm.getDataSource());
+
+        return irbProtocolActionHistoryDAO;
+    }
+
+    private void createOrUpdateActionHistory() throws NumberFormatException, OpenClinicaException {
+        String stringSiteId = request.getParameter("siteId");
+        int siteId = Integer.parseInt(stringSiteId);
+        IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
+        if(irbSiteBean.getIrbSiteId()<1) {
+            irbSiteBean.setSiteId(siteId);
+            irbSiteBean.setIs1572(false);
+            irbSiteBean.setActive(true);
+            irbSiteBean = getIRBSiteDAO().create(irbSiteBean);
+        }
+        String stringProtocolActionHistoryId =
+                request.getParameter("protocolActionHistoryId");
+        int protocolActionHistoryId = -1;
+        try {
+            protocolActionHistoryId = Integer.parseInt(stringProtocolActionHistoryId);
+        }
+        catch (NumberFormatException ex) {
+            //Don't do anything.
+        }
+        IRBProtocolActionHistoryBean irbProtocolActionHistoryBean = null;
+        if(protocolActionHistoryId>0) {
+            irbProtocolActionHistoryBean =
+                    (IRBProtocolActionHistoryBean) getIRBProtocolActionHistoryDAO()
+                    .findByPK(protocolActionHistoryId);
+        }
+        if(irbProtocolActionHistoryBean == null)
+            irbProtocolActionHistoryBean = new IRBProtocolActionHistoryBean();
+        //if(irbProtocolActionHistoryBean.getir)
+
+        irbProtocolActionHistoryBean.setIrbSiteId(siteId);
+        irbProtocolActionHistoryBean.setIrbProtocolActionTypeId(
+                intValueOrZero("protocol_action_type_id"));
+        irbProtocolActionHistoryBean.setVersionDate(dateValueOrNull("version_date"));
+        irbProtocolActionHistoryBean.setVersionNumber(intValueOrZero("version_number"));
+        irbProtocolActionHistoryBean.setSiteSubmittedToLocalIrb(
+                dateValueOrNull("site_submitted_to_local_irb"));
+        irbProtocolActionHistoryBean.setLocalIrbApproval(
+                dateValueOrNull("local_irb_approval"));
+        irbProtocolActionHistoryBean.setReceivedDocsFromSites(
+                dateValueOrNull("received_docs_from_sites"));
+        irbProtocolActionHistoryBean.setPackageSentToCdcIrb(
+                dateValueOrNull("package_sent_to_cdc_irb"));
+        irbProtocolActionHistoryBean.setCdcApproval(
+                dateValueOrNull("cdc_approval"));
+
+        if(irbProtocolActionHistoryBean.getIrbProtocolActionHistoryId()<1)
+            getIRBProtocolActionHistoryDAO()
+                    .create(irbProtocolActionHistoryBean);
+        else
+            getIRBProtocolActionHistoryDAO()
+                    .update(irbProtocolActionHistoryBean);
+    }
+
     @Override
     protected void processRequest() throws Exception {
         if(request.getMethod().compareToIgnoreCase("POST")==0) {
+            if(request.getParameter("action") != null &&
+                (request.getParameter("action").compareToIgnoreCase("saveProtocolActionEditor")==0)) {
+                createOrUpdateActionHistory();
+                forwardPage(Page.VIEW_STUDY);
+                return;
+            }
+
             createOrUpdateIRBSiteBean();
             forwardPage(Page.VIEW_STUDY);
             return;
@@ -42,11 +114,14 @@ public class IRBSiteServlet extends SecureController {
                 new IRBProtocolActionTypeDAO(sm.getDataSource());
         ArrayList<IRBProtocolActionTypeBean> protocolActionsTypes =
                 protocolActionTypeDAO.findAll();
+        ArrayList<IRBProtocolActionHistoryBean> protocolActionHistory =
+                getIRBProtocolActionHistoryDAO().findBySiteId(siteId);
 
         IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
         request.setAttribute("siteId", siteId);
         request.setAttribute("irbSiteBean", irbSiteBean);
         request.setAttribute("protocolActionTypes", protocolActionsTypes);
+        request.setAttribute("protocolActionHistory", protocolActionHistory);
         forwardPage(Page.IRB_SITE);
     }
     private void createOrUpdateIRBSiteBean() throws NumberFormatException, OpenClinicaException {
@@ -101,9 +176,14 @@ public class IRBSiteServlet extends SecureController {
 
     private int intValueOrZero(String field) {
         int retval = 0;
-        if(request.getParameter(field)!= null) {
-            retval = Integer.parseInt(request.getParameter(field));
+        try {
+            if(request.getParameter(field)!= null) {
+                retval = Integer.parseInt(request.getParameter(field));
+            }
+        } catch(NumberFormatException ex) {
+            //
         }
+
 
         return retval;
     }

@@ -39,6 +39,10 @@
         <sql>SELECT currval('irb_study_irb_study_id_seq') AS key</sql>
     </query>
     <query>
+        <name>getCurrentIRBProtocolActionPrimaryKey</name>
+        <sql>SELECT currval('irb_protocol_action_history_irb_protocol_action_history_id_seq') AS key</sql>
+    </query>
+    <query>
         <name>createIRBStudy</name>
         <sql>
             INSERT INTO irb_study
@@ -85,6 +89,43 @@
             WHERE irb_site_id=?;
         </sql>
     </query>
+    <query>
+        <name>createProtocolActionHistory</name>
+        <sql>INSERT INTO public.irb_protocol_action_history
+            (irb_site_id, irb_protocol_action_type_id, version_date, version_number,
+             site_submitted_to_local_irb, local_irb_approval, received_docs_from_sites, package_sent_to_cdc_irb,
+             cdc_approval)
+            VALUES(?, ?, ?, ?,
+                ?, ?, ?, ?, ?)</sql>
+    </query>
+    <query>
+        <name>getCurrentIRBProtocolActionPrimaryKey</name>
+        <sql>SELECT currval('irb_protocol_action_history_irb_protocol_action_history_id_seq') AS key</sql>
+    </query>
+    <query>
+        <name>updateProtocolActionHistory</name>
+        <sql>UPDATE irb_protocol_action_history
+            SET irb_protocol_action_type_id=?, version_date=?, version_number=?,
+            site_submitted_to_local_irb=?, local_irb_approval=?, received_docs_from_sites=?,
+            package_sent_to_cdc_irb=?, cdc_approval=?
+            WHERE irb_protocol_action_history_id=?
+        </sql>
+    </query>
+    <query>
+        <name>findAllProtocolActionHistoryBySite</name>
+        <sql>
+            SELECT iah.irb_protocol_action_history_id,
+            iah.irb_protocol_action_type_id,
+            pat."label",
+            version_date, version_number, site_submitted_to_local_irb,
+            local_irb_approval, received_docs_from_sites,
+            package_sent_to_cdc_irb, cdc_approval
+            FROM irb_protocol_action_history iah INNER JOIN irb_protocol_action_type pat ON
+            iah.irb_protocol_action_type_id = pat.irb_protocol_action_type_id
+            WHERE iah.irb_site_id = ?;
+        </sql>
+    </query>
+
 
 
 

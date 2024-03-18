@@ -10,7 +10,7 @@
 <script>
     jQuery(document).ready(function () {
         jQuery("#protocol-action-open").click(() => {
-            jQuery.blockUI({ message: jQuery('#protocol-action-editor'), css:{left: "300px", top:"10px" } });
+            jQuery.blockUI({ message: jQuery('#protocol-action-editor'), css:{left: "300px", top:"10px", width: "400px" } });
         });
         jQuery('button.close-editor').click(function() {
             jQuery.unblockUI();
@@ -39,9 +39,18 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="c" items="protocolActions">
+        <c:forEach var="c" items="${protocolActionHistory}">
             <tr>
-
+                <td>${c.label}</td>
+                <td>${c.versionDate}</td>
+                <td>${c.versionNumber}</td>
+                <td>${c.siteSubmittedToLocalIrb}</td>
+                <td>${c.localIrbApproval}</td>
+                <td>${c.receivedDocsFromSites}</td>
+                <td>${c.packageSentToCdcIrb}</td>
+                <td>${c.cdcApproval}</td>
+                <td></td>
+                <td></td>
             </tr>
         </c:forEach>
     </tbody>
