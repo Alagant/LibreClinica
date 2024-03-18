@@ -79,7 +79,7 @@ public class StudyBean extends AuditableEntityBean {
     private List<String> consortiumNames = null;
 
     private String locationType = null;
-    private Boolean active = null;
+    //private Boolean active = null;
 
     private String fwaInstitution = "";
     private String fwaNumber = "";
@@ -1335,10 +1335,6 @@ public class StudyBean extends AuditableEntityBean {
 
     public Boolean getActive() {
         return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 
     public String getContractNumber() {

@@ -291,7 +291,7 @@ function updateThis(multiSelEle, count) {
 <tr>
 	<td><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
 	<input type="text" name="fwaExpiryDate" value="<c:out value="${fwaExpiryDate}" />" class="formfieldXL" id="FWAExpDateField"></div>
-	<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="protocolDateVerification"/></jsp:include></td>
+	<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaExpiryDate"/></jsp:include></td>
 	<td><A HREF="#" >
 		<img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="fwaExpDateTrigger"/>
 		<script type="text/javascript">

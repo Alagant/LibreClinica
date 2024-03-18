@@ -120,8 +120,9 @@ public class CreateSubStudyServlet extends SecureController {
                 newStudy.setSubSite(SQLInitServlet.getField(CreateStudyServlet.SUB_SITE));
                 newStudy.setContractNumber(SQLInitServlet.getField(CreateStudyServlet.CONTRACT_NUMBER));
                 newStudy.setLocationType(SQLInitServlet.getField(CreateStudyServlet.LOCATION_TYPE));
-                Object active = SQLInitServlet.getField(CreateStudyServlet.ACTIVE);
-                //newStudy.setActive(SQLInitServlet.getField(CreateStudyServlet.ACTIVE));
+                String active = SQLInitServlet.getField(CreateStudyServlet.ACTIVE);
+                newStudy.setActive(active.equals("true"));
+                //now, active is not set, then is left as null
                 newStudy.setFwaInstitution(SQLInitServlet.getField(CreateStudyServlet.FWA_INSTITUTION));
                 newStudy.setFwaNumber(SQLInitServlet.getField(CreateStudyServlet.FWA_NUMBER));
                 //newStudy.setFwaExpirationDate(SQLInitServlet.getField(CreateStudyServlet.FWA_EXPIRATION_DATE));
@@ -423,7 +424,7 @@ public class CreateSubStudyServlet extends SecureController {
         study.setSubSite(fp.getString("subSite"));
         study.setContractNumber(fp.getString("contractNumber"));
         study.setConsortiumNames(Arrays.asList(fp.getString("consortiumName").split("[,]")));
-        study.setActive(fp.getBoolean("active"));
+        study.setActive(fp.getString("active").equals("on"));
         study.setLocationType(fp.getString("locationType"));
         study.setFwaInstitution(fp.getString("fwaInstitution"));
         study.setFwaNumber(fp.getString("fwaNumber"));
