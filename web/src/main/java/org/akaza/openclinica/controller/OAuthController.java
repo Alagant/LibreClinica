@@ -2,6 +2,7 @@ package org.akaza.openclinica.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.io.CharStreams;
 import org.akaza.openclinica.bean.login.StudyUserRoleBean;
 import org.akaza.openclinica.bean.login.UserAccountBean;
 import org.akaza.openclinica.control.core.SecureController;
@@ -25,15 +26,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.akaza.openclinica.web.filter.OpenClinicaUsernamePasswordAuthenticationFilter.*;
 
@@ -56,6 +55,20 @@ public class OAuthController {
         this.securityManager = securityManager;
         this.authenticationManager = authenticationManager;
     }
+
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
+
     @RequestMapping("/oauth")
     public String oauth(HttpServletRequest request, HttpServletResponse response/*ModelMap modelMap*/) {
         String oauth_server = CoreResources.getField("oauth.url"); // "https://cdcoauth.alagant.com";
@@ -76,12 +89,13 @@ public class OAuthController {
             String oauth_token_url = CoreResources.getField("oauth.tokenUrl"); /* oauth_base_url + "/token";*/
             URL url = new URL(oauth_token_url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "LC-"+getSaltString());
             //connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Authorization", "Basic " +
-                    Base64.getEncoder().encodeToString( (oauth_client_id+":"+oauth_client_secret).getBytes() )
-            );
+            String bheader = Base64.getEncoder().encodeToString( (oauth_client_id+":"+oauth_client_secret).getBytes());
+            connection.setRequestProperty("Authorization", "Basic " + bheader );
+
             StringBuilder sbRequest = new StringBuilder("grant_type=authorization_code");
             sbRequest.append("&code="+oauth_code);
             sbRequest.append("&client_id="+oauth_client_id);
@@ -106,9 +120,15 @@ public class OAuthController {
                 access_token = jsonNode.get("access_token").asText();
                 connection.disconnect();
             }
+            else {
+                InputStreamReader isr = new InputStreamReader(connection.getErrorStream(), "utf-8");
+                String responseError = new BufferedReader(isr).lines().collect(Collectors.joining("\n"));
+                logger.info(responseError);
+            }
 
 
             connection = (HttpURLConnection) new URL( CoreResources.getField("oauth.userInfoUrl") ).openConnection();
+            connection.setRequestProperty("User-Agent", "LC-"+getSaltString());
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Authorization", "Bearer " + access_token);
             connection.setDoOutput(true);
