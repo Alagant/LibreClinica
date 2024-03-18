@@ -305,6 +305,10 @@
 </div>
 </div>
 <br>
+    <h1>IRB Study Definition</h1>
+    <div style="margin-bottom: 20px;">
+        <a href="${pageContext.request.contextPath}/IrbSite?siteId=${siteToView.id}">Open IRB Site</a>
+    </div>
 
 	<div class="table_title_Manage" style="width:300px;float:left"><fmt:message key="view_site_event_definitions" bundle="${resword}"/></div>
 <div style="float:left;width:8%">

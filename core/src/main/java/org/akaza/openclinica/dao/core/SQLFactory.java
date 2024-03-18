@@ -72,6 +72,7 @@ public class SQLFactory {
     public final String DAO_SUBJECTTRANSFER = "subjecttransfer";
     // YW, 05-2008, for odm extract
     public final String DAO_ODM_EXTRACT = "odm_extract";
+    public final String DAO_IRB = "irb";
 
     // EhCacheManagerFactoryBean cacheManagerBean = new EhCacheManagerFactoryBean();
     // cacheManagerBean.setConfigLocation= (new org.springframework.core.io.FileSystemResource("classpath:org/akaza/openclinica/ehcache.xml") );
@@ -187,6 +188,7 @@ public class SQLFactory {
             fileList.put(this.DAO_RULESETRULE_AUDIT, "rulesetrule_audit_dao.xml");            
 
             fileList.put(this.DAO_ODM_EXTRACT, "odm_extract_dao.xml");
+            fileList.put(this.DAO_IRB, "irb_dao.xml");
 
         } else { // should be postgres, but what if the file is gone?
             // throw an exception here, ssachs
