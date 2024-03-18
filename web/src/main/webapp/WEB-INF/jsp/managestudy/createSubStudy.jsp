@@ -49,6 +49,7 @@
 <c:set var="startDate" value="" />
 <c:set var="endDate" value="" />
 <c:set var="protocolDateVerification" value="" />
+<c:set var="fwaExpiryDate" value="" />
 
 <c:forEach var="presetValue" items="${presetValues}">
 	<c:if test='${presetValue.key == "startDate"}'>
@@ -58,8 +59,11 @@
 		<c:set var="endDate" value="${presetValue.value}" />
 	</c:if>
 	<c:if test='${presetValue.key == "protocolDateVerification"}'>
-		<c:set var="protocolDateVerification" value="${presetValue.value}" />	
-	</c:if>	
+		<c:set var="protocolDateVerification" value="${presetValue.value}" />
+	</c:if>
+	<c:if test='${presetValue.key == "fwaExpiryDate"}'>
+		<c:set var="fwaExpiryDate" value="${presetValue.value}" />
+	</c:if>
 </c:forEach>
 <script type="text/JavaScript" language="JavaScript">
   <!--
@@ -150,22 +154,23 @@ function updateThis(multiSelEle, count) {
   <input type="text" name="name" value="<c:out value="${newStudy.name}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="name"/></jsp:include></td><td> *</td></tr>
   
-  <tr valign="top"><td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId'); return false;"><b><fmt:message key="unique_protocol_ID" bundle="${resword}"/></b>:</td><td><div class="formfieldXL_BG">
+	<tr valign="top"><td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId'); return false;"><b><fmt:message key="unique_protocol_ID" bundle="${resword}"/></b>:</a></td><td><div class="formfieldXL_BG">
   <input type="text" name="uniqueProId" value="<c:out value="${newStudy.identifier}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="uniqueProId"/></jsp:include></td><td> *</td></tr>
-  
-  <tr valign="top"><td class="formlabel"><b><fmt:message key="secondary_IDs" bundle="${resword}"/></b><br>(<fmt:message key="separate_by_commas" bundle="${resword}"/>):</td><td>
+
+  <tr valign="top"><td class="formlabel"><fmt:message key="sub_site" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="subSite" value="<c:out value="${newStudy.subSite}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="subSite"/></jsp:include></td><td></td></tr>
+
+	<tr valign="top"><td class="formlabel"><b><fmt:message key="secondary_IDs" bundle="${resword}"/></b><br>(<fmt:message key="separate_by_commas" bundle="${resword}"/>):</td><td>
   <div class="formtextareaXL4_BG"><textarea class="formtextareaXL4" name="secondProId" rows="4" cols="50"><c:out value="${newStudy.secondaryIdentifier}"/></textarea></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="secondProId"/></jsp:include>
-  </td></tr>  
-   
-  <tr valign="top"><td class="formlabel"><fmt:message key="principal_investigator" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="prinInvestigator" value="<c:out value="${newStudy.principalInvestigator}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="prinInvestigator"/></jsp:include></td><td> *</td></tr> 
-  
-  <tr valign="top"><td class="formlabel"><fmt:message key="brief_summary" bundle="${resword}"/>:</td><td><div class="formtextareaXL4_BG">
-  <textarea class="formtextareaXL4" name="description" rows="4" cols="50"><c:out value="${newStudy.summary}"/></textarea></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="description"/></jsp:include></td><td></td></tr>
+  </td></tr>
+
+  <tr valign="top"><td class="formlabel"><fmt:message key="contract_number" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="contractNumber" value="<c:out value="${newStudy.contractNumber}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="contractNumber"/></jsp:include></td><td></td></tr>
+
 
   <tr valign="top"><td class="formlabel">
   	<fmt:message key="protocol_verification" bundle="${resword}"/>:
@@ -254,29 +259,51 @@ function updateThis(multiSelEle, count) {
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facCountry" value="<c:out value="${newStudy.facilityCountry}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCountry"/></jsp:include>
-  </td></tr> 
-  
-  
-  <tr valign="top"><td class="formlabel"><fmt:message key="facility_contact_name" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="facConName" value="<c:out value="${newStudy.facilityContactName}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facConName"/></jsp:include>
-  </td></tr>   
-  
-  <tr valign="top"><td class="formlabel"><fmt:message key="facility_contact_degree" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="facConDegree" value="<c:out value="${newStudy.facilityContactDegree}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facConDegree"/></jsp:include>
-  </td></tr> 
-  
-  <tr valign="top"><td class="formlabel"><fmt:message key="facility_contact_phone" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="facConPhone" value="<c:out value="${newStudy.facilityContactPhone}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facConPhone"/></jsp:include>
-  </td></tr>    
-  
-  <tr valign="top"><td class="formlabel"><fmt:message key="facility_contact_email" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-  <input type="text" name="facConEmail" value="<c:out value="${newStudy.facilityContactEmail}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facConEmail"/></jsp:include></td></tr>  
-  
-   <c:choose>
+  </td></tr>
+
+  <tr valign="top"><td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <select multiple name="consortiumName" value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
+  <option value="TBTC">TBTC</option>
+  <option value="ACTG">ACTG</option>
+  <!--option value="TBESC">TBESC</option-->
+  <!--option value="ACTG">ACTG</option-->
+  </select></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="consortiumName"/></jsp:include></td><td></td></tr>
+
+  <tr valign="top"><td class="formlabel"><fmt:message key="location_type" bundle="${resword}"/>:</td><td>
+	  <input type="radio" name="locationType" <c:if test="${newStudy.locationType}=='domestic'">checked</c:if> value="domestic" id="domestic"/><label for="domestic">domestic</label>
+	  <input type="radio" name="locationType" <c:if test="${newStudy.locationType}=='international'">checked</c:if>value="international" id="international"/><label for="international">International</label>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="locationType"/></jsp:include>
+  </td></tr>
+
+  <tr valign="top"><td class="formlabel"><fmt:message key="active_label" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="checkbox" name="active" <c:if test="${newStudy.active}">checked</c:if>/></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="active"/></jsp:include>
+  </td></tr>
+  <tr><td><h2>Federal wide assurance (FWA)</h2></td></tr>
+  <tr valign="top"><td class="formlabel"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="fwaInstitution" value="<c:out value="${newStudy.fwaInstitution}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaInstitution"/></jsp:include>
+  <tr valign="top"><td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+  <input type="text" name="fwaNumber" value="<c:out value="${newStudy.fwaNumber}"/>" class="formfieldXL"></div>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaNumber"/></jsp:include>
+  </td></tr>
+  <tr valign="top">
+	<td class="formlabel"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+	<input type="text" name="fwaExpiryDate" value="<c:out value="${fwaExpiryDate}" />" class="formfieldXL" id="FWAExpDateField"></div>
+	<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaExpiryDate"/></jsp:include></td>
+	<td><A HREF="#" >
+		<img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="fwaExpDateTrigger"/>
+		<script type="text/javascript">
+			Calendar.setup({inputField  : "fwaExpirationDateField", ifFormat    : "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button      : "fwaExpDateTrigger" });
+		</script>
+
+	</a>
+
+	</td>
+</tr>
+
+	<c:choose>
     <c:when test="${newStudy.parentStudyId == 0}">
        <c:set var="key" value="study_system_status"/>
     </c:when>
@@ -521,7 +548,7 @@ function updateThis(multiSelEle, count) {
 	</c:when>
 	<c:otherwise>
 	&nbsp&nbsp&nbsp&nbsp<b><a href="javascript:leftnavExpand('sed<c:out value="${defCount}"/>');">
-    <img id="excl_sed<c:out value="${defCount}"/>" src="images/bt_Expand.gif" border="0"> <c:out value="${def.name}"/></b></a>
+    <img id="excl_sed<c:out value="${defCount}"/>" src="images/bt_Expand.gif" border="0"> <c:out value="${def.name}"/></a></b>
 	</c:otherwise>
 	</c:choose>
 		<c:choose>
