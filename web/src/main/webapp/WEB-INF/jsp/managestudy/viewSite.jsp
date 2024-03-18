@@ -130,6 +130,10 @@
   <c:out value="${siteToView.name}"/>
   </td></tr>
 
+    <tr valign="top"><td class="table_header_column"><fmt:message key="sub_site" bundle="${resword}"/>:</td><td class="table_cell">
+        <c:out value="${siteToView.subSite}"/>
+    </td></tr>
+
   <tr valign="top"><td class="table_header_column"><fmt:message key="unique_protocol_ID" bundle="${resword}"/>: </td><td class="table_cell">
   <c:out value="${siteToView.identifier}"/>
   </td></tr>
@@ -138,16 +142,11 @@
    <c:out value="${siteToView.secondaryIdentifier}"/>
    </td></tr>
 
-    <tr valign="top"><td class="table_header_column"><fmt:message key="OID" bundle="${resword}"/>:</td><td class="table_cell">
-   <c:out value="${siteToView.oid}"/>
-   </td></tr>
-
-  <tr valign="top"><td class="table_header_column"><fmt:message key="principal_investigator" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${siteToView.principalInvestigator}"/>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="contract_number" bundle="${resword}"/>:</td><td class="table_cell">
+    <c:out value="${siteToView.contractNumber}"/>
   </td></tr>
-
-  <tr valign="top"><td class="table_header_column"><fmt:message key="brief_summary" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${siteToView.summary}"/>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="OID" bundle="${resword}"/>:</td><td class="table_cell">
+    <c:out value="${siteToView.oid}"/>
   </td></tr>
 
   <tr valign="top"><td class="table_header_column"><fmt:message key="protocol_verification" bundle="${resword}"/>:</td><td class="table_cell">
@@ -198,23 +197,31 @@
   <c:out value="${siteToView.facilityCountry}"/>&nbsp;
   </td></tr>
 
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_name" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${siteToView.facilityContactName}"/>&nbsp;
-  </td></tr>
+    <tr valign="top"><td class="table_header_column"><fmt:message key="consortium_name" bundle="${resword}"/>:</td><td class="table_cell">
+        <c:out value="${siteToView.consortiumNames}"/>
+    </td></tr>
 
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_degree" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${siteToView.facilityContactDegree}"/>&nbsp;
-  </td></tr>
+    <tr valign="top"><td class="table_header_column"><fmt:message key="location_type" bundle="${resword}"/>:</td><td class="table_cell">
+        <c:out value="${siteToView.locationType}"/>
+    </td></tr>
 
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_phone" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${siteToView.facilityContactPhone}"/>&nbsp;
- </td></tr>
+    <tr valign="top"><td class="table_header_column"><fmt:message key="active_label" bundle="${resword}"/>:</td><td class="table_cell">
+        <c:out value="${siteToView.active}"/>
+    </td></tr>
 
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_email" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${siteToView.facilityContactEmail}"/>&nbsp;
-  </td></tr>
+    <tr valign="top"><td class="table_header_column"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td><td class="table_cell">
+        <c:out value="${siteToView.fwaInstitution}"/>
+    </td></tr>
 
-  <tr valign="top"><td class="table_header_column"><fmt:message key="status" bundle="${resword}"/>:</td><td class="table_cell">
+    <tr valign="top"><td class="table_header_column"><fmt:message key="FWA_number" bundle="${resword}"/>:</td><td class="table_cell">
+        <c:out value="${siteToView.fwaNumber}"/>
+    </td></tr>
+
+    <tr valign="top"><td class="table_header_column"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td class="table_cell">
+        <c:out value="${siteToView.fwaExpirationDate}"/>
+    </td></tr>
+
+    <tr valign="top"><td class="table_header_column"><fmt:message key="status" bundle="${resword}"/>:</td><td class="table_cell">
    <c:choose>
     <c:when test="${siteToView.status.locked}">
         <strong><c:out value="${siteToView.status.name}"/></strong>

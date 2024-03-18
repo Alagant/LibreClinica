@@ -84,13 +84,9 @@
    <c:out value="${newStudy.secondaryIdentifier}"/>
    </td></tr>  
    
-  <tr valign="top"><td class="table_header_column"><fmt:message key="principal_investigator" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${newStudy.principalInvestigator}"/>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="contract_number" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.contractNumber}"/>
   </td></tr> 
-  
-  <tr valign="top"><td class="table_header_column"><fmt:message key="brief_summary" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${newStudy.summary}"/>
-  </td></tr>
   
   <tr valign="top"><td class="table_header_column"><fmt:message key="protocol_verification" bundle="${resword}"/>:</td><td class="table_cell">
   <fmt:formatDate value="${newStudy.protocolDateVerification}" pattern="${dteFormat}"/>
@@ -145,23 +141,30 @@
   <c:out value="${newStudy.facilityRecruitmentStatus}"/>
  </td></tr>  -->
   
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_name" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${newStudy.facilityContactName}"/>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="consortium_name" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.consortiumNames}"/>
   </td></tr>   
   
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_degree" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${newStudy.facilityContactDegree}"/>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="location_type" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.locationType}"/>
   </td></tr> 
   
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_phone" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${newStudy.facilityContactPhone}"/>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="active_label" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.active}"/>
  </td></tr>       
   
-  <tr valign="top"><td class="table_header_column"><fmt:message key="facility_contact_email" bundle="${resword}"/>:</td><td class="table_cell">
-  <c:out value="${newStudy.facilityContactEmail}"/>
-  </td></tr>  
-  
-   <c:choose>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.fwaInstitution}"/>
+  </td></tr>
+
+  <tr valign="top"><td class="table_header_column"><fmt:message key="FWA_number" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.fwaNumber}"/>
+  </td></tr>
+
+  <tr valign="top"><td class="table_header_column"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.fwaExpirationDate}"/>
+  </td></tr>
+	<c:choose>
     <c:when test="${newStudy.parentStudyId == 0}">
        <c:set var="key" value="study_system_status"/>
     </c:when>
