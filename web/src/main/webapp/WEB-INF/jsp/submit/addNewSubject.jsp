@@ -449,8 +449,8 @@
 	function handleSelection() {
 		var selectedValue = document.getElementById("enrollmentTypeSelection").value;
 
-		var nextCountOfStudySubjectsAtStudyOrSite = JSON.stringify( <%= study.getNextCountOfStudySubjectsAtStudyOrSite() %> );
-		var siteIdentifier = JSON.stringify( <%= study.getSiteIdOfStudy() %> );
+		var nextCountOfStudySubjectsAtStudyOrSite = "<%=study.getNextCountOfStudySubjectsAtStudyOrSite()%>";
+		var siteIdentifier = "<%=study.getSiteIdOfStudy()%>";
 
 		nextCountOfStudySubjectsAtStudyOrSite = nextCountOfStudySubjectsAtStudyOrSite.padStart(5, "0");
 		siteIdentifier = siteIdentifier.padStart(2, "0");
@@ -474,14 +474,12 @@
 	}
 
 	function validationStudySubjectId() {
-		console.log("validationStudySubjectId")
-
 		var selectedValue = document.getElementById("enrollmentTypeSelection").value;
 		var studySubjectIdValue = document.getElementById("studySubjectIdText").value;
 		var errorMessageValidationDiv = document.getElementById("spanAlert-Validation");
 		var submitBottom = document.getElementById("add");
 
-		var siteIdentifier = JSON.stringify( <%= study.getSiteIdOfStudy() %> );
+		var siteIdentifier = "<%=study.getSiteIdOfStudy()%>";
 		siteIdentifier = siteIdentifier.padStart(2, "0");
 
 		var regexStudySubjectIdEnrollment = new RegExp("^" + siteIdentifier + "-P\\d{5}$");
@@ -495,22 +493,18 @@
 		switch (selectedValue) {
 			case "EN":
 				if (regexStudySubjectIdEnrollment.test(studySubjectIdValue)) {
-					console.log("Match EN")
 					errorMessageValidationDiv.style.display = "none";
 					submitBottom.disabled = false;
 				} else {
-					console.log("Not Match EN")
 					errorMessageValidationDiv.style.display = "block";
 					submitBottom.disabled = true;
 				}
 				break;
 			case "NE":
 				if (regexStudySubjectIdNonEnrollment.test(studySubjectIdValue)) {
-					console.log("Match NE")
 					errorMessageValidationDiv.style.display = "none";
 					submitBottom.disabled = false;
 				} else {
-					console.log("Not Match NE")
 					errorMessageValidationDiv.style.display = "block";
 					submitBottom.disabled = true;
 				}

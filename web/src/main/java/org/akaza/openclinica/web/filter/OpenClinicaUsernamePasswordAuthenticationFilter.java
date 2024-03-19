@@ -123,6 +123,19 @@ public class OpenClinicaUsernamePasswordAuthenticationFilter extends AbstractAut
     public void setMailNotificationService(MailNotificationService mailNotificationService) {
         this.mailNotificationService = mailNotificationService;
     }
+    
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }    
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -230,6 +243,7 @@ public class OpenClinicaUsernamePasswordAuthenticationFilter extends AbstractAut
             credentials.put("password", password);
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "LC-"+getSaltString());
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setDoOutput(true);
