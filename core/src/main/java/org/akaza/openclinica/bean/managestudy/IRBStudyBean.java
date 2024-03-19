@@ -10,7 +10,7 @@ public class IRBStudyBean extends EntityBean {
     private int studyId;
     private String cdcIrbProtocolNumber;
     private Date version1ProtocolDate;
-    private String protocol_officer;
+    private String protocolOfficer;
     private Date submittedCdcIrb;
     private Date approvalByCdcIrb;
     private Date cdcIrbExpirationDate;
@@ -48,11 +48,11 @@ public class IRBStudyBean extends EntityBean {
     }
 
     public String getProtocolOfficer() {
-        return protocol_officer;
+        return protocolOfficer;
     }
 
     public void setProtocolOfficer(String protocol_officer) {
-        this.protocol_officer = protocol_officer;
+        this.protocolOfficer = protocol_officer;
     }
 
     public Date getSubmittedCdcIrb() {
