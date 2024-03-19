@@ -109,7 +109,7 @@
                         <td>
                             <div class="formfieldXL_BG">
                                 <%--<input name="cdc_irb_protocol_number" class="formfieldM" value="${irbStudyBean.cdcIrbProtocolNumber}"/>--%>
-                                <input name="cdc_irb_protocol_number" class="formfieldM" value=""/>
+                                <input name="cdc_irb_protocol_number" class="formfieldM" value="${presetValues['cdc_irb_protocol_number']}"/>
                             </div>
                         </td>
                         <td>*</td>
@@ -132,13 +132,20 @@
                         <td>
                             <div class="formfieldXL_BG">
                                 <%--<input name="version1_protocol_date" value="${irbStudyBean.version1ProtocolDate}"/>--%>
-                                <input onfocus="this.select()" type="text" name="version1_protocol_date" value="<c:out value="${version1_protocol_date}" />" class="formfieldM" id="version1ProtocolDateField" />
+                                <input onfocus="this.select()" type="text" name="version1_protocol_date"
+                                       value="${presetValues['version1_protocol_date']}"
+                                    class="formfieldM" id="version1ProtocolDateField" />
                             </div>
                         </td>
                         <td>
                             <a href="#">
-                                <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="version1ProtocolDateTrigger" />
-                                <script type="text/javascript">Calendar.setup({inputField: "version1ProtocolDateField", ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button: "version1ProtocolDateTrigger", customPX: 300, customPY: 10 }); </script>
+                                <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                                     title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="version1ProtocolDateTrigger" />
+                                <script type="text/javascript">
+                                    Calendar.setup({inputField: "version1ProtocolDateField",
+                                        ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                                        button: "version1ProtocolDateTrigger", customPX: 300, customPY: 10 });
+                                </script>
                             </a> *
                         </td>
                     </tr>
@@ -160,7 +167,7 @@
                         <td>
                             <div class="formfieldXL_BG">
                                 <%--<input name="protocol_officer" value="${irbStudyBean.protocol_officer}"/>--%>
-                                <input name="protocol_officer" class="formfieldM" value=""/>
+                                <input name="protocol_officer" class="formfieldM" value="${presetValues['protocol_officer']}"/>
                             </div>
                         </td>
                         <td>*</td>
@@ -182,7 +189,8 @@
                     <tr>
                         <td>
                             <div class="formfieldXL_BG">
-                                <input onfocus="this.select()" type="text" name="submitted_cdc_irb" value="" class="formfieldM" id="submittedCdcIrbField" />
+                                <input onfocus="this.select()" type="text" name="submitted_cdc_irb" value="${presetValues['submitted_cdc_irb']}"
+                                       class="formfieldM" id="submittedCdcIrbField" />
                             </div>
                         </td>
                         <td>
@@ -209,7 +217,8 @@
                     <tr>
                         <td>
                             <div class="formfieldXL_BG">
-                                <input onfocus="this.select()" type="text" name="approval_by_cdc_irb" value="" class="formfieldM" id="approvalByCdcIrbField" />
+                                <input onfocus="this.select()" type="text" name="approval_by_cdc_irb" value="${presetValues['approval_by_cdc_irb']}"
+                                       class="formfieldM" id="approvalByCdcIrbField" />
                             </div>
                         </td>
                         <td>
@@ -236,7 +245,8 @@
                     <tr>
                         <td>
                             <div class="formfieldXL_BG">
-                                <input onfocus="this.select()" type="text" name="cdc_irb_expiration_date" value="" class="formfieldM" id="cdcIrbExpirationDateField" />
+                                <input onfocus="this.select()" type="text" name="cdc_irb_expiration_date" value="${presetValues['cdc_irb_expiration_date']}"
+                                       class="formfieldM" id="cdcIrbExpirationDateField" />
                             </div>
                         </td>
                         <td>

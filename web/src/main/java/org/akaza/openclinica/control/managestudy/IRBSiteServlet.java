@@ -118,6 +118,10 @@ public class IRBSiteServlet extends SecureController {
                 getIRBProtocolActionHistoryDAO().findBySiteId(siteId);
 
         IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
+
+        SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy");
+        if(irbSiteBean.getCdcIrbProtocolVersionDate()!= null)
+            request.setAttribute("cdcIrbProtocolVersionDate", sdf.format(irbSiteBean.getCdcIrbProtocolVersionDate()));
         request.setAttribute("siteId", siteId);
         request.setAttribute("irbSiteBean", irbSiteBean);
         request.setAttribute("protocolActionTypes", protocolActionsTypes);
