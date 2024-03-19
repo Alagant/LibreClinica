@@ -37,6 +37,17 @@ public class IRBStudyServlet extends SecureController {
 
         IRBStudyBean irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
         request.setAttribute("irbStudyBean", irbStudyBean);
+        SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy");
+
+        if(irbStudyBean.getVersion1ProtocolDate()!=null)
+            request.setAttribute("version1ProtocolDate", sdf.format(irbStudyBean.getVersion1ProtocolDate()));
+        if(irbStudyBean.getSubmittedCdcIrb()!=null)
+            request.setAttribute("submittedCdcIrb", sdf.format(irbStudyBean.getSubmittedCdcIrb()));
+        if(irbStudyBean.getApprovalByCdcIrb()!=null)
+            request.setAttribute("approvalByCdcIrb", sdf.format(irbStudyBean.getApprovalByCdcIrb()));
+        if(irbStudyBean.getCdcIrbExpirationDate()!=null)
+            request.setAttribute("cdcIrbExpirationDate", sdf.format(irbStudyBean.getCdcIrbExpirationDate()));
+
         forwardPage(Page.IRB_STUDY);
     }
 

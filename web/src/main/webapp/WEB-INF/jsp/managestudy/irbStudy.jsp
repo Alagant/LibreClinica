@@ -1,3 +1,10 @@
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="org.akaza.openclinica.bean.managestudy.IRBStudyBean" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.text.Format" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="org.joda.time.DateTime" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -51,6 +58,10 @@
 
 
 <h1>IRB Study</h1>
+${x}
+${irbStudyBean.getApprovalByCdcIrb()}
+${irbStudyBean.getApprovalByCdcIrb().getClass()}
+${approvalByCdcIrb}
 <div class="form-standard">
     <form action="${pageContext.request.contextPath}/IrbStudy" method="post">
         <table>
@@ -61,7 +72,7 @@
             <tr>
                 <td><label>Version 1 protocol date</label></td>
                 <td>
-                    <input name="version1_protocol_date" id="version1_protocol_date" value="${irbStudyBean.version1ProtocolDate}">
+                    <input name="version1_protocol_date" id="version1_protocol_date" value="${version1ProtocolDate}">
                     <a href="#">
                         <img src="images/bt_Calendar.gif" title="" border="0" id="version1_protocol_date-trigger" />
                     </a>
@@ -78,7 +89,7 @@
             <tr>
                 <td><label>Submitted CDC IRB</label></td>
                 <td>
-                    <input name="submitted_cdc_irb" id="submitted_cdc_irb" value="${irbStudyBean.submittedCdcIrb}">
+                    <input name="submitted_cdc_irb" id="submitted_cdc_irb" value="${submittedCdcIrb}">
                     <a href="#">
                         <img src="images/bt_Calendar.gif" title="" border="0" id="submitted_cdc_irb-trigger" />
                     </a>
@@ -91,7 +102,7 @@
             <tr>
                 <td><label>Approval by CDC IRB</label></td>
                 <td>
-                    <input name="approval_by_cdc_irb" id="approval_by_cdc_irb" value="${irbStudyBean.approvalByCdcIrb}">
+                    <input name="approval_by_cdc_irb" id="approval_by_cdc_irb" value="${approvalByCdcIrb}">
                     <a href="#">
                         <img src="images/bt_Calendar.gif" title="" border="0" id="approval_by_cdc_irb-trigger" />
                     </a>
@@ -104,7 +115,7 @@
             <tr>
                 <td><label>CDC IRB expiration date</label></td>
                 <td>
-                    <input name="cdc_irb_expiration_date" id="cdc_irb_expiration_date" value="${irbStudyBean.cdcIrbExpirationDate}">
+                    <input name="cdc_irb_expiration_date" id="cdc_irb_expiration_date" value="${cdcIrbExpirationDate}">
                     <a href="#">
                         <img src="images/bt_Calendar.gif" title="" border="0" id="cdc_irb_expiration_date-trigger" />
                     </a>
