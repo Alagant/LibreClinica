@@ -68,6 +68,7 @@ public class CreateSubStudyServlet extends SecureController {
     public static final String INPUT_VER_DATE = "protocolDateVerification";
     public static final String INPUT_START_DATE = "startDate";
     public static final String INPUT_END_DATE = "endDate";
+    public static final String FWA_EXPIRATION_DATE = "fwaExpirationDate";
 
     /**
      *
@@ -191,6 +192,12 @@ public class CreateSubStudyServlet extends SecureController {
                 } catch (ParseException pe) {
                     fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
                 }
+                try {
+                    local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+                } catch (ParseException pe) {
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
+                }
                 // >> tbh
                 setPresetValues(fp.getPresetValues());
 
@@ -224,6 +231,12 @@ public class CreateSubStudyServlet extends SecureController {
                     fp.addPresetValue(INPUT_VER_DATE, local_df.format(newStudy.getProtocolDateVerification()));
                 } catch (Exception pe) {
                     fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
+                }
+                try {
+                    local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+                } catch (ParseException pe) {
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
                 }
                 setPresetValues(fp.getPresetValues());
                 request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
@@ -347,7 +360,13 @@ public class CreateSubStudyServlet extends SecureController {
             } catch (ParseException pe) {
                 fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
             }
-            setPresetValues(fp.getPresetValues());
+            try {
+                local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+                fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+            } catch (ParseException pe) {
+                fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
+            }
+        setPresetValues(fp.getPresetValues());
             logger.info("has validation errors");
             request.setAttribute("formMessages", errors);
             // request.setAttribute("facRecruitStatusMap",
@@ -736,6 +755,12 @@ public class CreateSubStudyServlet extends SecureController {
                fp.addPresetValue(INPUT_VER_DATE, local_df.format(fp.getDate(INPUT_VER_DATE)));
            } catch (ParseException pe) {
                fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
+           }
+           try {
+               local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+               fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+           } catch (ParseException pe) {
+               fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
            }*/
             //        setPresetValues(fp.getPresetValues());
             logger.info("has validation errors");
