@@ -65,21 +65,22 @@ function updateThis(multiSelEle, count) {
 		}
 	}
 }
-    function leftnavExpand(strLeftNavRowElementName){
-      var objLeftNavRowElement;
 
-      objLeftNavRowElement = MM_findObj(strLeftNavRowElementName);
-      if (objLeftNavRowElement != null) {
-        if (objLeftNavRowElement.style) { objLeftNavRowElement = objLeftNavRowElement.style; }
-          objLeftNavRowElement.display = (objLeftNavRowElement.display == "none" ) ? "" : "none";
-          objExCl = MM_findObj("excl_"+strLeftNavRowElementName);
-          if(objLeftNavRowElement.display == "none"){
-              objExCl.src = "images/bt_Expand.gif";
-          }else{
-              objExCl.src = "images/bt_Collapse.gif";
+      function leftnavExpand(strLeftNavRowElementName){
+        var objLeftNavRowElement;
+
+        objLeftNavRowElement = MM_findObj(strLeftNavRowElementName);
+        if (objLeftNavRowElement != null) {
+          if (objLeftNavRowElement.style) { objLeftNavRowElement = objLeftNavRowElement.style; }
+            objLeftNavRowElement.display = (objLeftNavRowElement.display == "none" ) ? "" : "none";
+            objExCl = MM_findObj("excl_"+strLeftNavRowElementName);
+            if(objLeftNavRowElement.display == "none"){
+                objExCl.src = "images/bt_Expand.gif";
+            }else{
+                objExCl.src = "images/bt_Collapse.gif";
+            }
           }
         }
-      }
 </script>
 
 <h1><span class="title_manage">
@@ -91,8 +92,8 @@ function updateThis(multiSelEle, count) {
 <form action="UpdateSubStudy" method="post">
 <input type="hidden" name="action" value="confirm">
 
- <div class="table_title_Manage"><a href="javascript:leftnavExpand('siteProperties');">
-     <img id="excl_siteProperties" src="images/bt_Collapse.gif" border="0"> <fmt:message key="update_site_properties" bundle="${resword}"/> </a></div>
+<div class="table_title_Manage"><a href="javascript:leftnavExpand('siteProperties');">
+    <img id="excl_siteProperties" src="images/bt_Collapse.gif" border="0"> <fmt:message key="update_site_properties" bundle="${resword}"/> </a></div>
 
 <c:choose>
 <c:when test="${messages == null}">
@@ -103,7 +104,7 @@ function updateThis(multiSelEle, count) {
 </c:otherwise>
 </c:choose>
 <!-- These DIVs define shaded box borders -->
- <div style="width: 100%">
+<div style="width: 100%">
 <div class="box_T"><div class="box_L"><div class="box_R"><div class="box_B"><div class="box_TL"><div class="box_TR"><div class="box_BL"><div class="box_BR">
 
 <div class="textbox_center">
@@ -124,15 +125,11 @@ function updateThis(multiSelEle, count) {
   <input type="text" name="subSite" value="<c:out value="${newStudy.subSite}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="subSite"/></jsp:include></td><td></td></tr>
 
-
-  <tr valign="top"><td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds'); return false;"><b><fmt:message key="secondary_IDs" bundle="${resword}"/></b>:</a><br>(<fmt:message key="separate_by_commas" bundle="${resword}"/>)</td>
+	<tr valign="top"><td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds'); return false;"><b><fmt:message key="secondary_IDs" bundle="${resword}"/></b>:</a><br>(<fmt:message key="separate_by_commas" bundle="${resword}"/>)</td>
   <td><div class="formtextareaXL4_BG">
    <textarea class="formtextareaXL4" name="secondProId" rows="4" cols="50"><c:out value="${newStudy.secondaryIdentifier}"/></textarea></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="secondProId" value="facName"/></jsp:include>
   </td></tr>
-
-
-
 
 	<tr valign="top"><td class="formlabel"><fmt:message key="contract_number" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
 		<input type="text" name="contractNumber" value="<c:out value="${newStudy.contractNumber}"/>" class="formfieldXL"></div>
@@ -193,67 +190,48 @@ function updateThis(multiSelEle, count) {
   </td><td class="formlabel">*</td></tr>
 
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_name" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facName" value="<c:out value="${newStudy.facilityName}"/>"  class="formfieldXL"></div>
+  <div class="formfieldXL_BG"><input type="text" name="facName" value="<c:out value="${newStudy.facilityName}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facName"/></jsp:include>
   </td></tr>
 
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facAddress1" value="<c:out value="${newStudy.facilityAddress1}"/>"  class="formfieldXL"></div>
+  <div class="formfieldXL_BG"><input type="text" name="facAddress1" value="<c:out value="${newStudy.facilityAddress1}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress1"/></jsp:include>
   </td></tr>
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facAddress2" value="<c:out value="${newStudy.facilityAddress2}"/>"  class="formfieldXL"></div>
+  <div class="formfieldXL_BG"><input type="text" name="facAddress2" value="<c:out value="${newStudy.facilityAddress2}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress2"/></jsp:include>
   </td></tr>
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_3" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facAddress3" value="<c:out value="${newStudy.facilityAddress3}"/>"  class="formfieldXL"></div>
+  <div class="formfieldXL_BG"><input type="text" name="facAddress3" value="<c:out value="${newStudy.facilityAddress3}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress3"/></jsp:include>
   </td></tr>
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_4" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facAddress4" value="<c:out value="${newStudy.facilityAddress4}"/>"  class="formfieldXL"></div>
+  <div class="formfieldXL_BG"><input type="text" name="facAddress4" value="<c:out value="${newStudy.facilityAddress4}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress4"/></jsp:include>
   </td></tr>
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_city" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facCity" value="<c:out value="${newStudy.facilityCity}"/>"  class="formfieldXL"></div>
+  <div class="formfieldXL_BG"><input type="text" name="facCity" value="<c:out value="${newStudy.facilityCity}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCity"/></jsp:include>
   </td></tr>
 
 	<tr valign="top"><td class="formlabel"><fmt:message key="facility_state_province" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facState" value="<c:out value="${newStudy.facilityState}"/>"  class="formfieldXL">
+  <div class="formfieldXL_BG"><input type="text" name="facState" value="<c:out value="${newStudy.facilityState}"/>" class="formfieldXL">
   </div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facState"/></jsp:include>
   </td></tr>
 
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_ZIP" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facZip" value="<c:out value="${newStudy.facilityZip}"/>"  class="formfieldXL">
+  <div class="formfieldXL_BG"><input type="text" name="facZip" value="<c:out value="${newStudy.facilityZip}"/>" class="formfieldXL">
   </div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facZip"/></jsp:include>
   </td></tr>
 
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td><td>
-  <div class="formfieldXL_BG"><input type="text" name="facCountry" value="<c:out value="${newStudy.facilityCountry}"/>"  class="formfieldXL">
+  <div class="formfieldXL_BG"><input type="text" name="facCountry" value="<c:out value="${newStudy.facilityCountry}"/>" class="formfieldXL">
   </div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCountry"/></jsp:include>
   </td></tr>
-
- <!-- <tr valign="top"><td class="formlabel"><fmt:message key="facility_recruitment_status" bundle="${resword}"/>:</td><td>
-  <c:set var="facStatus" value="${newStudy.facilityRecruitmentStatus}"/>
-  <select name="facRecStatus">
-    <option value="">-<fmt:message key="select" bundle="${resword}"/>-</option>
-   <c:forEach var="recStatus" items="${facRecruitStatusMap}">
-       <c:choose>
-        <c:when test="${facStatus == recStatus.key}">
-         <option value="<c:out value="${recStatus.key}"/>" selected><c:out value="${recStatus.value}"/>
-        </c:when>
-        <c:otherwise>
-         <option value="<c:out value="${recStatus.key}"/>"><c:out value="${recStatus.value}"/>
-        </c:otherwise>
-       </c:choose>
-    </c:forEach>
-  </select>
-
-  </div></td></tr>
-  -->
 
    <tr valign="top"><td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
 		<select multiple name="consortiumName" value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
@@ -309,7 +287,27 @@ function updateThis(multiSelEle, count) {
 
   <tr valign="top"><td class="formlabel"><fmt:message key="${key}" bundle="${resword}"/>:</td><td>
 
-   <c:set var="dis" value="${parentStudy.name!='' && !parentStudy.status.available}"/>
+		<!-- <tr valign="top"><td class="formlabel"><fmt:message key="facility_recruitment_status" bundle="${resword}"/>:</td><td>
+  <c:set var="facStatus" value="${newStudy.facilityRecruitmentStatus}"/>
+  <select name="facRecStatus">
+    <option value="">-<fmt:message key="select" bundle="${resword}"/>-</option>
+   <c:forEach var="recStatus" items="${facRecruitStatusMap}">
+       <c:choose>
+        <c:when test="${facStatus == recStatus.key}">
+         <option value="<c:out value="${recStatus.key}"/>" selected><c:out value="${recStatus.value}"/>
+        </c:when>
+        <c:otherwise>
+         <option value="<c:out value="${recStatus.key}"/>"><c:out value="${recStatus.value}"/>
+        </c:otherwise>
+       </c:choose>
+    </c:forEach>
+  </select>
+
+  </div></td></tr>
+  -->
+
+
+		<c:set var="dis" value="${parentStudy.name!='' && !parentStudy.status.available}"/>
    <c:set var="status1" value="${newStudy.status.id}"/>
    <div class="formfieldM_BG"><select name="statusId" class="formfieldM" <c:if test="${dis}">disabled="true" </c:if>>
       <c:forEach var="status" items="${statuses}">
@@ -533,10 +531,9 @@ function updateThis(multiSelEle, count) {
      </c:otherwise>
    </c:choose>
   </c:forEach>
-
 </table>
 </div>
-  </div></div></div></div></div></div></div></div>
+</div></div></div></div></div></div></div></div>
 </div>
   </div>
 <br>
@@ -554,7 +551,6 @@ function updateThis(multiSelEle, count) {
     <img id="excl_sed<c:out value="${defCount}"/>" src="images/bt_Expand.gif" border="0"> <c:out value="${def.name}"/></b></a>
 	</c:otherwise>
 	</c:choose>
-	
 	<c:choose>
 	<c:when test="${def.populated ==true}">
     	<div id="sed<c:out value="${defCount}"/>" style="display: all">
@@ -707,8 +703,7 @@ function updateThis(multiSelEle, count) {
         	</select>
 		    </td>
 		</tr>
-
-   <c:choose>
+<c:choose>
     <c:when test="${participateFormStatus == 'enabled' && edc.participantForm == true}">
 
 				<tr valign="top">		
@@ -738,6 +733,7 @@ function updateThis(multiSelEle, count) {
                 <input type="checkbox" disabled name="allowAnonymousSubmission<c:out value="${num}"/>" value="yes">
             </c:otherwise>
         </c:choose>
+    </td>
             <td class="table_cell" colspan="6">
         <fmt:message key="submission_url" bundle="${resword}"/>:  ${participantUrl}
                 <input type="text"  name="submissionUrl<c:out value="${num}"/>" value="${edc.submissionUrl}"/>
@@ -763,7 +759,7 @@ function updateThis(multiSelEle, count) {
  </c:choose>
   
 </tr>
-				
+
 		<c:set var="count" value="${count+1}"/>
 		</c:if>
 		<tr><td class="table_divider" colspan="8">&nbsp;</td></tr>

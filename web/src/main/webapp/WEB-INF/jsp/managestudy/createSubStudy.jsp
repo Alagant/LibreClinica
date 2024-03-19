@@ -65,6 +65,7 @@
 		<c:set var="fwaExpiryDate" value="${presetValue.value}" />
 	</c:if>
 </c:forEach>
+
 <script type="text/JavaScript" language="JavaScript">
   <!--
  function myCancel() {
@@ -129,7 +130,8 @@ function updateThis(multiSelEle, count) {
         }
 </script>
 
-<h1><span class="title_manage"><fmt:message key="create_a_new_site" bundle="${resword}"/></span></h1>
+<h1><span class="title_manage">
+	<fmt:message key="create_a_new_site" bundle="${resword}"/></span></h1>
 
 <form action="CreateSubStudy" method="post">
 * <fmt:message key="indicates_required_field" bundle="${resword}"/><br>
@@ -203,12 +205,9 @@ function updateThis(multiSelEle, count) {
       <script type="text/javascript">
       Calendar.setup({inputField  : "startDateField", ifFormat    : "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button      : "startDateTrigger" });
       </script>
-
   </a>
+  </td></tr>
 
-  </td>
-  </tr>
-  
   <tr valign="top"><td class="formlabel"><fmt:message key="estimated_completion_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="endDate" value="<c:out value="${endDate}" />" class="formfieldXL" id="endDateField"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="endDate"/></jsp:include></td>
@@ -251,17 +250,17 @@ function updateThis(multiSelEle, count) {
   <input type="text" name="facCity" value="<c:out value="${newStudy.facilityCity}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCity"/></jsp:include>
   </td></tr> 
-  
+
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_state_province" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facState" value="<c:out value="${newStudy.facilityState}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facState"/></jsp:include>
   </td></tr> 
-  
+
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_ZIP" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facZip" value="<c:out value="${newStudy.facilityZip}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facZip"/></jsp:include>
   </td></tr>
-  
+
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facCountry" value="<c:out value="${newStudy.facilityCountry}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCountry"/></jsp:include>
@@ -359,11 +358,11 @@ function updateThis(multiSelEle, count) {
             <input type="radio" name="collectDob" value="2"><fmt:message key="only_year_of_birth" bundle="${resword}"/>
             <input type="radio" checked name="collectDob" value="3"><fmt:message key="not_used" bundle="${resword}"/>
          </c:otherwise>
-      </c:choose>  
+      </c:choose>
       </td></tr>
-   
+
    </c:when>
-    
+
    <c:when test="${config.parameter.handle=='discrepancyManagement'}">
 		  <tr valign="top"><td class="formlabel"><fmt:message key="allow_discrepancy_management" bundle="${resword}"/>:</td><td>
 		   <c:choose>
@@ -379,8 +378,8 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	</c:when>
-	
-	<c:when test="${config.parameter.handle=='genderRequired'}">	  
+
+	<c:when test="${config.parameter.handle=='genderRequired'}">
 		  <tr valign="top"><td class="formlabel"><fmt:message key="gender_required" bundle="${resword}"/>:</td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value == false}">
@@ -395,7 +394,7 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	</c:when>	  
-    <c:when test="${config.parameter.handle=='subjectPersonIdRequired'}">		
+    <c:when test="${config.parameter.handle=='subjectPersonIdRequired'}">
 		  <tr valign="top"><td class="formlabel"><fmt:message key="subject_person_ID_required" bundle="${resword}"/>:</td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value == 'required'}">
@@ -417,7 +416,7 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	</c:when>
-	<c:when test="${config.parameter.handle=='subjectIdGeneration'}">	  
+	<c:when test="${config.parameter.handle=='subjectIdGeneration'}">
 		   <tr valign="top"><td class="formlabel"><fmt:message key="how_to_generate_the_study_subject_ID" bundle="${resword}"/>:</td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value == 'manual'}">
@@ -446,7 +445,7 @@ function updateThis(multiSelEle, count) {
 		    <input type="radio" checked name="subjectIdPrefixSuffix" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" name="subjectIdPrefixSuffix" value="false"><fmt:message key="no" bundle="${resword}"/>
 		   
-		   </c:when>    
+		   </c:when>
 		   <c:otherwise>
 		    <input type="radio" name="subjectIdPrefixSuffix" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" checked name="subjectIdPrefixSuffix" value="false"><fmt:message key="no" bundle="${resword}"/>
@@ -486,11 +485,11 @@ function updateThis(multiSelEle, count) {
 		   <c:when test="${config.value.value== 'true'}">
 		    <input type="radio" checked name="interviewerNameEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" name="interviewerNameEditable" value="false"><fmt:message key="no" bundle="${resword}"/>
-		   
-		   </c:when>    
+
+		   </c:when>
 		   <c:otherwise>
 		    <input type="radio" name="interviewerNameEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
-		    <input type="radio" checked name="interviewerNameEditable" value="false"><fmt:message key="no" bundle="${resword}"/>   
+		    <input type="radio" checked name="interviewerNameEditable" value="false"><fmt:message key="no" bundle="${resword}"/>
 		   </c:otherwise>
 		  </c:choose>
 		  </td>
@@ -503,7 +502,7 @@ function updateThis(multiSelEle, count) {
               <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
 		  </td>
 		  </tr>
-    </c:when>		  
+    </c:when>
 	<c:when test="${config.parameter.handle=='interviewDateDefault'}">	  
 		  <tr valign="top"><td class="formlabel"><fmt:message key="interviewer_date_default_as_blank" bundle="${resword}"/></td><td>
               <c:choose>
@@ -520,14 +519,14 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	 </c:when>
-	 <c:otherwise>	  
+	 <c:otherwise>
 		  <tr valign="top"><td class="formlabel"><fmt:message key="interviewer_date_editable" bundle="${resword}"/></td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value== 'true'}">
 		    <input type="radio" checked name="interviewDateEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" name="interviewDateEditable" value="false"><fmt:message key="no" bundle="${resword}"/>
-		   
-		   </c:when>    
+
+		   </c:when>
 		   <c:otherwise>
 		    <input type="radio" name="interviewDateEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" checked name="interviewDateEditable" value="false"><fmt:message key="no" bundle="${resword}"/>   
@@ -541,7 +540,6 @@ function updateThis(multiSelEle, count) {
 </table>
 </div>
 </div></div></div></div></div></div></div></div>
-
 </div>
 
  <div class="table_title_Manage"><fmt:message key="update_site_event_definitions" bundle="${resword}"/></div>
@@ -745,7 +743,7 @@ function updateThis(multiSelEle, count) {
                 <input type="text"  name="submissionUrl<c:out value="${num}"/>" value="${edc.submissionUrl}"/>
           <c:set var="summary" value="submissionUrl${num}"/>
           <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="${summary}"/></jsp:include>
-                                 <br />
+                          <br />
                 <c:choose>
                   <c:when test="${edc.allowAnonymousSubmission == true && def.repeating == true  && edc.offline == true}">
                 <fmt:message key="offline" bundle="${resword}"/>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
@@ -757,8 +755,6 @@ function updateThis(multiSelEle, count) {
                   </c:when>
                 </c:choose>
           
-       
-       
         </td>
      </c:when>  
             <c:otherwise>
@@ -766,7 +762,7 @@ function updateThis(multiSelEle, count) {
             </c:otherwise>
  </c:choose>
   
-</tr>		
+</tr>
 		
 		<c:set var="count" value="${count+1}"/>
 		</c:if>
@@ -780,8 +776,6 @@ function updateThis(multiSelEle, count) {
 </c:forEach>
 
 <br><br>
-
-
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
@@ -790,7 +784,6 @@ function updateThis(multiSelEle, count) {
 <td><input type="button" name="Cancel" id="cancel" value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_long" onClick="javascript:myCancel();"/></td></td>
 </tr>
 </table>
-
 </form>
 <DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
 <br><br>
