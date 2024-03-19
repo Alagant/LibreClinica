@@ -9,7 +9,6 @@ import org.akaza.openclinica.dao.core.TypeNames;
 import org.akaza.openclinica.exception.OpenClinicaException;
 
 import javax.sql.DataSource;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +29,7 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
         IRBStudyBean retval = new IRBStudyBean();
         retval.setIrbStudyId((Integer) hm.get("irb_study_id"));
         retval.setStudyId((Integer) hm.get("study_id"));
+        retval.setVersion1ProtocolDate((Date) hm.get("version1_protocol_date"));
         retval.setCdcIrbProtocolNumber((String) hm.get("cdc_irb_protocol_number"));
         retval.setProtocolOfficer((String) hm.get("protocol_officer"));
         retval.setSubmittedCdcIrb((Date) hm.get("submitted_cdc_irb"));
@@ -61,15 +61,15 @@ public class IRBStudyDAO extends AuditableEntityDAO<IRBStudyBean> {
                                              int startIndex) {
         int retval = startIndex;
         variables.put(retval++, eb.getCdcIrbProtocolNumber());
-        if(eb.getVersion1ProtocolDate()==null) nullVars.put(retval, Types.DATE);
+        if(eb.getVersion1ProtocolDate()==null) nullVars.put(retval, TypeNames.DATE);
         variables.put(retval++, eb.getVersion1ProtocolDate());
         if(eb.getProtocolOfficer()==null) nullVars.put(retval, TypeNames.STRING);
         variables.put(retval++, eb.getProtocolOfficer());
-        if(eb.getSubmittedCdcIrb()==null) nullVars.put(retval, Types.DATE);
+        if(eb.getSubmittedCdcIrb()==null) nullVars.put(retval, TypeNames.DATE);
         variables.put(retval++, eb.getSubmittedCdcIrb());
-        if(eb.getApprovalByCdcIrb()==null) nullVars.put(retval, Types.DATE);
+        if(eb.getApprovalByCdcIrb()==null) nullVars.put(retval, TypeNames.DATE);
         variables.put(retval++, eb.getApprovalByCdcIrb());
-        if(eb.getCdcIrbExpirationDate()==null) nullVars.put(retval, Types.DATE);
+        if(eb.getCdcIrbExpirationDate()==null) nullVars.put(retval, TypeNames.DATE);
         variables.put(retval, eb.getCdcIrbExpirationDate());
 
         return retval;

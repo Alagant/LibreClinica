@@ -13,8 +13,8 @@
         <sql>
             SELECT irb_study_id, study_id, cdc_irb_protocol_number, version1_protocol_date,
             protocol_officer, submitted_cdc_irb, approval_by_cdc_irb, cdc_irb_expiration_date
-            FROM public.irb_study
-            WHERE irb_study_id=?
+            FROM irb_study
+            WHERE study_id=?
         </sql>
     </query>
     <query>
