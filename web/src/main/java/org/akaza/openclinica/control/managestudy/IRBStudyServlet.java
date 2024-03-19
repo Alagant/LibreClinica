@@ -1,5 +1,6 @@
 package org.akaza.openclinica.control.managestudy;
 
+import javassist.Loader;
 import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryBean;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
@@ -28,17 +29,11 @@ import java.util.HashMap;
 
 public class IRBStudyServlet extends SecureController {
     private IRBStudyDAO irbStudyDAO;
-
     public static final String INPUT_CDC_IRB_PROTOCOL_NUMBER = "cdc_irb_protocol_number";
-
     public static final String INPUT_VERSION1_PROTOCOL_DATE = "version1_protocol_date";
-
     public static final String INPUT_PROTOCOL_OFFICER = "protocol_officer";
-
     public static final String INPUT_SUBMITTED_CDC_IRB = "submitted_cdc_irb";
-
     public static final String INPUT_APPROVAL_BY_CDC_IRB = "approval_by_cdc_irb";
-
     public static final String INPUT_CDC_IRB_EXPIRATION_DATE = "cdc_irb_expiration_date";
 
 
@@ -49,15 +44,21 @@ public class IRBStudyServlet extends SecureController {
     }
     @Override
     protected void processRequest() throws Exception {
+        IRBStudyBean irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
+        if(irbStudyBean == null) irbStudyBean = new IRBStudyBean();
+        if(irbStudyBean.getIrbStudyId()<1) irbStudyBean.setStudyId(currentStudy.getId());
+
 
         FormProcessor fp = new FormProcessor(request);
 
         System.out.println("processRequest - fp.isSubmitted()" + fp.isSubmitted());
         if(fp.isSubmitted()) {
-
-            IRBStudyBean irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
-            if(irbStudyBean == null) irbStudyBean = new IRBStudyBean();
-            if(irbStudyBean.getIrbStudyId()<1) irbStudyBean.setStudyId(currentStudy.getId());
+            irbStudyBean.setCdcIrbProtocolNumber(request.getParameter(INPUT_CDC_IRB_PROTOCOL_NUMBER));
+            irbStudyBean.setVersion1ProtocolDate(dateValueOrNull(INPUT_VERSION1_PROTOCOL_DATE));
+            irbStudyBean.setProtocolOfficer(request.getParameter(INPUT_PROTOCOL_OFFICER));
+            irbStudyBean.setSubmittedCdcIrb(dateValueOrNull(INPUT_SUBMITTED_CDC_IRB));
+            irbStudyBean.setApprovalByCdcIrb(dateValueOrNull(INPUT_APPROVAL_BY_CDC_IRB));
+            irbStudyBean.setCdcIrbExpirationDate(dateValueOrNull(INPUT_CDC_IRB_EXPIRATION_DATE));
 
             FormDiscrepancyNotes discNotes;
 
@@ -69,12 +70,14 @@ public class IRBStudyServlet extends SecureController {
             DiscrepancyValidator v = new DiscrepancyValidator(request, discNotes);
 
             v.addValidation(INPUT_CDC_IRB_PROTOCOL_NUMBER, Validator.NO_BLANKS);
-            v.addValidation(INPUT_CDC_IRB_PROTOCOL_NUMBER, Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 5);
+            v.addValidation(INPUT_CDC_IRB_PROTOCOL_NUMBER, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 5);
             v.addValidation(INPUT_VERSION1_PROTOCOL_DATE, Validator.NO_BLANKS);
             v.addValidation(INPUT_VERSION1_PROTOCOL_DATE, Validator.IS_A_DATE);
             v.addValidation(INPUT_VERSION1_PROTOCOL_DATE, Validator.DATE_IN_PAST);
             v.addValidation(INPUT_PROTOCOL_OFFICER, Validator.NO_BLANKS);
-            v.addValidation(INPUT_PROTOCOL_OFFICER, Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
+            v.addValidation(INPUT_PROTOCOL_OFFICER, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
            //  v.addValidation(INPUT_SUBMITTED_CDC_IRB, Validator.NO_BLANKS);
             v.addValidation(INPUT_SUBMITTED_CDC_IRB, Validator.IS_A_DATE);
             v.addValidation(INPUT_SUBMITTED_CDC_IRB, Validator.DATE_IN_PAST);
@@ -93,34 +96,41 @@ public class IRBStudyServlet extends SecureController {
                 setInputMessages(errors);
                 fp.addPresetValue(INPUT_CDC_IRB_PROTOCOL_NUMBER, label);
                 setPresetValues(fp.getPresetValues());
-
-            } else {
-                irbStudyBean.setCdcIrbProtocolNumber(request.getParameter("cdc_irb_protocol_number"));
-                irbStudyBean.setVersion1ProtocolDate(dateValueOrNull("version1_protocol_date"));
-                irbStudyBean.setProtocolOfficer(request.getParameter("protocol_officer"));
-                irbStudyBean.setSubmittedCdcIrb(dateValueOrNull("submitted_cdc_irb"));
-                irbStudyBean.setApprovalByCdcIrb(dateValueOrNull("approval_by_cdc_irb"));
-                irbStudyBean.setCdcIrbExpirationDate(dateValueOrNull("cdc_irb_expiration_date"));
-
-                if(irbStudyBean.getIrbStudyId()<1) {
-                    getIRBStudyDAO().create(irbStudyBean);
-                } else {
-                    getIRBStudyDAO().update(irbStudyBean);
-                }
+                addPageMessage("Validation errors were found when saving the IRB Study data");
+                forwardPage(Page.IRB_STUDY);
+                return;
             }
 
-        } else {
-
-            IRBStudyBean irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
-            request.setAttribute("irbStudyBean", irbStudyBean);
-
-            Date today = new Date(System.currentTimeMillis());
-            String todayFormatted = local_df.format(today);
-            fp.addPresetValue(INPUT_VERSION1_PROTOCOL_DATE, todayFormatted);
-
-            setPresetValues(fp.getPresetValues());
-
+            if(irbStudyBean.getIrbStudyId()<1) {
+                irbStudyBean = getIRBStudyDAO().create(irbStudyBean);
+            } else {
+                irbStudyBean = getIRBStudyDAO().update(irbStudyBean);
+            }
+            //At this point the irb Study Bean has been successfully stored
+            addPageMessage("IRB Study saved");
+            forwardPage(Page.MANAGE_STUDY_MODULE);
+            return;
         }
+
+
+        request.setAttribute("irbStudyBean", irbStudyBean);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+        fp.addPresetValue(INPUT_CDC_IRB_PROTOCOL_NUMBER, irbStudyBean.getCdcIrbProtocolNumber());
+        fp.addPresetValue(INPUT_VERSION1_PROTOCOL_DATE,
+                irbStudyBean.getVersion1ProtocolDate()!= null?
+                        sdf.format(irbStudyBean.getVersion1ProtocolDate()): "");
+        fp.addPresetValue(INPUT_PROTOCOL_OFFICER, irbStudyBean.getProtocolOfficer());
+        fp.addPresetValue(INPUT_SUBMITTED_CDC_IRB,
+                irbStudyBean.getSubmittedCdcIrb()!= null?
+                        sdf.format(irbStudyBean.getSubmittedCdcIrb()): "");
+        fp.addPresetValue(INPUT_APPROVAL_BY_CDC_IRB,
+                irbStudyBean.getApprovalByCdcIrb()!= null?
+                        sdf.format(irbStudyBean.getApprovalByCdcIrb()): "");
+        fp.addPresetValue(INPUT_CDC_IRB_EXPIRATION_DATE,
+                irbStudyBean.getApprovalByCdcIrb()!= null?
+                        sdf.format(irbStudyBean.getCdcIrbExpirationDate()): "");
+
+        setPresetValues(fp.getPresetValues());
 
         forwardPage(Page.IRB_STUDY);
     }
