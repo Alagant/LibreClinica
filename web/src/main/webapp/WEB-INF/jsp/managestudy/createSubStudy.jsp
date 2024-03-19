@@ -171,7 +171,13 @@ function updateThis(multiSelEle, count) {
   <input type="text" name="contractNumber" value="<c:out value="${newStudy.contractNumber}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="contractNumber"/></jsp:include></td><td></td></tr>
 
-
+  <tr valign="top"><td class="table_header_column"><fmt:message key="contract_type" bundle="${resword}"/>:</td><td class="table_cell">
+		<select name="contractType">
+			<option value="Depot"><fmt:message key="contract_type_depot" bundle="${resword}"/><c:if test="${newStudy.contractType=='Depot'}">checked</c:if></option>
+			<option value="Site"><fmt:message key="contract_type_site" bundle="${resword}"/><c:if test="${newStudy.contractType=='Site'}">checked</c:if></option>
+			<option value="External Partners"><fmt:message key="contract_type_external_partners" bundle="${resword}"/><c:if test="${newStudy.contractType=='External Partners'}">checked</c:if></option>
+		</select>
+  </td></tr>
   <tr valign="top"><td class="formlabel">
   	<fmt:message key="protocol_verification" bundle="${resword}"/>:
   </td><td><div class="formfieldXL_BG">
