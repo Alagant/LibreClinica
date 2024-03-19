@@ -86,9 +86,13 @@
    
   <tr valign="top"><td class="table_header_column"><fmt:message key="contract_number" bundle="${resword}"/>:</td><td class="table_cell">
   <c:out value="${newStudy.contractNumber}"/>
-  </td></tr> 
-  
-  <tr valign="top"><td class="table_header_column"><fmt:message key="protocol_verification" bundle="${resword}"/>:</td><td class="table_cell">
+  </td></tr>
+
+  <tr valign="top"><td class="table_header_column"><fmt:message key="contract_type" bundle="${resword}"/>:</td><td class="table_cell">
+  <c:out value="${newStudy.contractType}"/>
+  </td></tr>
+
+	<tr valign="top"><td class="table_header_column"><fmt:message key="protocol_verification" bundle="${resword}"/>:</td><td class="table_cell">
   <fmt:formatDate value="${newStudy.protocolDateVerification}" pattern="${dteFormat}"/>
   </td></tr> 
 

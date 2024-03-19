@@ -28,6 +28,14 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="2" author="lucioric2000">
+        <comment>Site module updates-adding site_type</comment>
+        <addColumn tableName="study">
+            <column name="site_type" type="VARCHAR(17)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
 
 
 </databaseChangeLog>

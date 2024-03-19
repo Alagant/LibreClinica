@@ -40,16 +40,16 @@
 <jsp:useBean scope='session' id='study' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
 <jsp:useBean scope='session' id='newStudy' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
 <jsp:useBean scope='session' id='userBean' class='org.akaza.openclinica.bean.login.UserAccountBean'/>
+<jsp:useBean scope="request" id="facRecruitStatusMap" class="java.util.HashMap"/>
 <jsp:useBean scope='session' id='definitions' class='java.util.ArrayList'/>
 <jsp:useBean scope='session' id='sdvOptions' class='java.util.ArrayList'/>
-<jsp:useBean scope="request" id="facRecruitStatusMap" class="java.util.HashMap"/>
 <jsp:useBean scope="request" id="statuses" class="java.util.ArrayList"/>
 <jsp:useBean scope="request" id="presetValues" class="java.util.HashMap"/>
 
 <c:set var="startDate" value="" />
 <c:set var="endDate" value="" />
 <c:set var="protocolDateVerification" value="" />
-<c:set var="fwaExpiryDate" value="" />
+<c:set var="fwaExpirationDate" value="" />
 
 <c:forEach var="presetValue" items="${presetValues}">
 	<c:if test='${presetValue.key == "startDate"}'>
@@ -61,10 +61,11 @@
 	<c:if test='${presetValue.key == "protocolDateVerification"}'>
 		<c:set var="protocolDateVerification" value="${presetValue.value}" />
 	</c:if>
-	<c:if test='${presetValue.key == "fwaExpiryDate"}'>
-		<c:set var="fwaExpiryDate" value="${presetValue.value}" />
+	<c:if test='${presetValue.key == "fwaExpirationDate"}'>
+		<c:set var="fwaExpirationDate" value="${presetValue.value}" />
 	</c:if>
 </c:forEach>
+
 <script type="text/JavaScript" language="JavaScript">
   <!--
  function myCancel() {
@@ -129,7 +130,8 @@ function updateThis(multiSelEle, count) {
         }
 </script>
 
-<h1><span class="title_manage"><fmt:message key="create_a_new_site" bundle="${resword}"/></span></h1>
+<h1><span class="title_manage">
+	<fmt:message key="create_a_new_site" bundle="${resword}"/></span></h1>
 
 <form action="CreateSubStudy" method="post">
 * <fmt:message key="indicates_required_field" bundle="${resword}"/><br>
@@ -169,9 +171,15 @@ function updateThis(multiSelEle, count) {
 
   <tr valign="top"><td class="formlabel"><fmt:message key="contract_number" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="contractNumber" value="<c:out value="${newStudy.contractNumber}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="contractNumber"/></jsp:include></td><td></td></tr>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="contractNumber"/></jsp:include><td class="formlabel">* required for TBTC sites<td></td></tr>
 
-
+  <tr valign="top"><td class="table_header_column"><fmt:message key="contract_type" bundle="${resword}"/>:</td><td class="table_cell">
+		<select name="contractType">
+			<option value="Depot"><fmt:message key="contract_type_depot" bundle="${resword}"/><c:if test="${newStudy.contractType=='Depot'}">checked</c:if></option>
+			<option value="Site"><fmt:message key="contract_type_site" bundle="${resword}"/><c:if test="${newStudy.contractType=='Site'}">checked</c:if></option>
+			<option value="External Partners"><fmt:message key="contract_type_external_partners" bundle="${resword}"/><c:if test="${newStudy.contractType=='External Partners'}">checked</c:if></option>
+		</select>
+  </td></tr>
   <tr valign="top"><td class="formlabel">
   	<fmt:message key="protocol_verification" bundle="${resword}"/>:
   </td><td><div class="formfieldXL_BG">
@@ -197,12 +205,9 @@ function updateThis(multiSelEle, count) {
       <script type="text/javascript">
       Calendar.setup({inputField  : "startDateField", ifFormat    : "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button      : "startDateTrigger" });
       </script>
-
   </a>
+  </td></tr>
 
-  </td>
-  </tr>
-  
   <tr valign="top"><td class="formlabel"><fmt:message key="estimated_completion_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="endDate" value="<c:out value="${endDate}" />" class="formfieldXL" id="endDateField"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="endDate"/></jsp:include></td>
@@ -227,7 +232,7 @@ function updateThis(multiSelEle, count) {
 
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facAddress1" value="<c:out value="${newStudy.facilityAddress1}"/>" class="formfieldXL"></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress1"/></jsp:include>
+		<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facAddress1"/></jsp:include></td><td class="formlabel">*
   </td></tr>
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facAddress2" value="<c:out value="${newStudy.facilityAddress2}"/>" class="formfieldXL"></div>
@@ -245,17 +250,17 @@ function updateThis(multiSelEle, count) {
   <input type="text" name="facCity" value="<c:out value="${newStudy.facilityCity}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCity"/></jsp:include>
   </td></tr> 
-  
+
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_state_province" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facState" value="<c:out value="${newStudy.facilityState}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facState"/></jsp:include>
   </td></tr> 
-  
+
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_ZIP" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facZip" value="<c:out value="${newStudy.facilityZip}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facZip"/></jsp:include>
   </td></tr>
-  
+
   <tr valign="top"><td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="facCountry" value="<c:out value="${newStudy.facilityCountry}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="facCountry"/></jsp:include>
@@ -268,13 +273,13 @@ function updateThis(multiSelEle, count) {
   <!--option value="TBESC">TBESC</option-->
   <!--option value="ACTG">ACTG</option-->
   </select></div>
-  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="consortiumName"/></jsp:include></td><td></td></tr>
+  <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="consortiumName"/></jsp:include></td><td class="formlabel">*</td></tr>
 
   <tr valign="top"><td class="formlabel"><fmt:message key="location_type" bundle="${resword}"/>:</td><td>
 	  <input type="radio" name="locationType" <c:if test="${newStudy.locationType}=='domestic'">checked</c:if> value="domestic" id="domestic"/><label for="domestic">domestic</label>
 	  <input type="radio" name="locationType" <c:if test="${newStudy.locationType}=='international'">checked</c:if>value="international" id="international"/><label for="international">International</label>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="locationType"/></jsp:include>
-  </td></tr>
+  </td><td class="formlabel">*</td></tr>
 
   <tr valign="top"><td class="formlabel"><fmt:message key="active_label" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="checkbox" name="active" <c:if test="${newStudy.active}">checked</c:if>/></div>
@@ -284,23 +289,22 @@ function updateThis(multiSelEle, count) {
   <tr valign="top"><td class="formlabel"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="fwaInstitution" value="<c:out value="${newStudy.fwaInstitution}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaInstitution"/></jsp:include>
-  <tr valign="top"><td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
+	</td><td class="formlabel">*</td></tr>
+	<tr valign="top"><td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
   <input type="text" name="fwaNumber" value="<c:out value="${newStudy.fwaNumber}"/>" class="formfieldXL"></div>
   <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaNumber"/></jsp:include>
-  </td></tr>
-  <tr valign="top">
+	</td><td class="formlabel">*</td></tr>
+	<tr valign="top">
 	<td class="formlabel"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td><td><div class="formfieldXL_BG">
-	<input type="text" name="fwaExpiryDate" value="<c:out value="${fwaExpiryDate}" />" class="formfieldXL" id="FWAExpDateField"></div>
-	<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaExpiryDate"/></jsp:include></td>
+	<input type="text" name="fwaExpirationDate" value="<c:out value="${fwaExpirationDate}" />" class="formfieldXL" id="fwaExpirationDateField"></div>
+	<jsp:include page="../showMessage.jsp"><jsp:param name="key" value="fwaExpirationDate"/></jsp:include></td>
 	<td><A HREF="#" >
 		<img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="fwaExpDateTrigger"/>
 		<script type="text/javascript">
 			Calendar.setup({inputField  : "fwaExpirationDateField", ifFormat    : "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button      : "fwaExpDateTrigger" });
 		</script>
 
-	</a>
-
-	</td>
+	</a>*</td>
 </tr>
 
 	<c:choose>
@@ -353,11 +357,11 @@ function updateThis(multiSelEle, count) {
             <input type="radio" name="collectDob" value="2"><fmt:message key="only_year_of_birth" bundle="${resword}"/>
             <input type="radio" checked name="collectDob" value="3"><fmt:message key="not_used" bundle="${resword}"/>
          </c:otherwise>
-      </c:choose>  
+      </c:choose>
       </td></tr>
-   
+
    </c:when>
-    
+
    <c:when test="${config.parameter.handle=='discrepancyManagement'}">
 		  <tr valign="top"><td class="formlabel"><fmt:message key="allow_discrepancy_management" bundle="${resword}"/>:</td><td>
 		   <c:choose>
@@ -373,8 +377,8 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	</c:when>
-	
-	<c:when test="${config.parameter.handle=='genderRequired'}">	  
+
+	<c:when test="${config.parameter.handle=='genderRequired'}">
 		  <tr valign="top"><td class="formlabel"><fmt:message key="gender_required" bundle="${resword}"/>:</td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value == false}">
@@ -389,7 +393,7 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	</c:when>	  
-    <c:when test="${config.parameter.handle=='subjectPersonIdRequired'}">		
+    <c:when test="${config.parameter.handle=='subjectPersonIdRequired'}">
 		  <tr valign="top"><td class="formlabel"><fmt:message key="subject_person_ID_required" bundle="${resword}"/>:</td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value == 'required'}">
@@ -411,7 +415,7 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	</c:when>
-	<c:when test="${config.parameter.handle=='subjectIdGeneration'}">	  
+	<c:when test="${config.parameter.handle=='subjectIdGeneration'}">
 		   <tr valign="top"><td class="formlabel"><fmt:message key="how_to_generate_the_study_subject_ID" bundle="${resword}"/>:</td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value == 'manual'}">
@@ -440,7 +444,7 @@ function updateThis(multiSelEle, count) {
 		    <input type="radio" checked name="subjectIdPrefixSuffix" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" name="subjectIdPrefixSuffix" value="false"><fmt:message key="no" bundle="${resword}"/>
 		   
-		   </c:when>    
+		   </c:when>
 		   <c:otherwise>
 		    <input type="radio" name="subjectIdPrefixSuffix" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" checked name="subjectIdPrefixSuffix" value="false"><fmt:message key="no" bundle="${resword}"/>
@@ -480,11 +484,11 @@ function updateThis(multiSelEle, count) {
 		   <c:when test="${config.value.value== 'true'}">
 		    <input type="radio" checked name="interviewerNameEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" name="interviewerNameEditable" value="false"><fmt:message key="no" bundle="${resword}"/>
-		   
-		   </c:when>    
+
+		   </c:when>
 		   <c:otherwise>
 		    <input type="radio" name="interviewerNameEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
-		    <input type="radio" checked name="interviewerNameEditable" value="false"><fmt:message key="no" bundle="${resword}"/>   
+		    <input type="radio" checked name="interviewerNameEditable" value="false"><fmt:message key="no" bundle="${resword}"/>
 		   </c:otherwise>
 		  </c:choose>
 		  </td>
@@ -497,7 +501,7 @@ function updateThis(multiSelEle, count) {
               <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
 		  </td>
 		  </tr>
-    </c:when>		  
+    </c:when>
 	<c:when test="${config.parameter.handle=='interviewDateDefault'}">	  
 		  <tr valign="top"><td class="formlabel"><fmt:message key="interviewer_date_default_as_blank" bundle="${resword}"/></td><td>
               <c:choose>
@@ -514,14 +518,14 @@ function updateThis(multiSelEle, count) {
 		  </td>
 		  </tr>
 	 </c:when>
-	 <c:otherwise>	  
+	 <c:otherwise>
 		  <tr valign="top"><td class="formlabel"><fmt:message key="interviewer_date_editable" bundle="${resword}"/></td><td>
 		   <c:choose>
 		   <c:when test="${config.value.value== 'true'}">
 		    <input type="radio" checked name="interviewDateEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" name="interviewDateEditable" value="false"><fmt:message key="no" bundle="${resword}"/>
-		   
-		   </c:when>    
+
+		   </c:when>
 		   <c:otherwise>
 		    <input type="radio" name="interviewDateEditable" value="true"><fmt:message key="yes" bundle="${resword}"/>
 		    <input type="radio" checked name="interviewDateEditable" value="false"><fmt:message key="no" bundle="${resword}"/>   
@@ -535,7 +539,6 @@ function updateThis(multiSelEle, count) {
 </table>
 </div>
 </div></div></div></div></div></div></div></div>
-
 </div>
 
  <div class="table_title_Manage"><fmt:message key="update_site_event_definitions" bundle="${resword}"/></div>
@@ -739,7 +742,7 @@ function updateThis(multiSelEle, count) {
                 <input type="text"  name="submissionUrl<c:out value="${num}"/>" value="${edc.submissionUrl}"/>
           <c:set var="summary" value="submissionUrl${num}"/>
           <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="${summary}"/></jsp:include>
-                                 <br />
+                          <br />
                 <c:choose>
                   <c:when test="${edc.allowAnonymousSubmission == true && def.repeating == true  && edc.offline == true}">
                 <fmt:message key="offline" bundle="${resword}"/>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
@@ -751,8 +754,6 @@ function updateThis(multiSelEle, count) {
                   </c:when>
                 </c:choose>
           
-       
-       
         </td>
      </c:when>  
             <c:otherwise>
@@ -760,7 +761,7 @@ function updateThis(multiSelEle, count) {
             </c:otherwise>
  </c:choose>
   
-</tr>		
+</tr>
 		
 		<c:set var="count" value="${count+1}"/>
 		</c:if>
@@ -774,8 +775,6 @@ function updateThis(multiSelEle, count) {
 </c:forEach>
 
 <br><br>
-
-
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td>
@@ -784,7 +783,6 @@ function updateThis(multiSelEle, count) {
 <td><input type="button" name="Cancel" id="cancel" value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_long" onClick="javascript:myCancel();"/></td></td>
 </tr>
 </table>
-
 </form>
 <DIV ID="testdiv1" STYLE="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></DIV>
 <br><br>
