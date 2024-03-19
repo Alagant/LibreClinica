@@ -51,6 +51,7 @@ public class UpdateSubStudyServlet extends SecureController {
     public static final String INPUT_START_DATE = "startDate";
     public static final String INPUT_VER_DATE = "protocolDateVerification";
     public static final String INPUT_END_DATE = "endDate";
+    public static final String FWA_EXPIRATION_DATE = "fwaExpirationDate";
     public static StudyBean parentStudy;
 
     /**
@@ -97,6 +98,10 @@ public class UpdateSubStudyServlet extends SecureController {
             }
             if (study.getProtocolDateVerification() != null) {
                 fp.addPresetValue(INPUT_VER_DATE, local_df.format(study.getProtocolDateVerification()));
+            }
+            if (study.getFwaExpirationDate() != null) {
+                fp.addPresetValue(UpdateSubStudyServlet.FWA_EXPIRATION_DATE,
+                        local_df.format(study.getFwaExpirationDate()));
             }
 
             setPresetValues(fp.getPresetValues());
@@ -252,6 +257,10 @@ public class UpdateSubStudyServlet extends SecureController {
             } catch (ParseException pe) {
                 fp.addPresetValue(INPUT_END_DATE, fp.getString(INPUT_END_DATE));
             }
+			if (study.getFwaExpirationDate() != null) {
+				fp.addPresetValue(UpdateSubStudyServlet.FWA_EXPIRATION_DATE,
+						local_df.format(study.getFwaExpirationDate()));
+			}
             */
             setPresetValues(fp.getPresetValues());
             request.setAttribute("formMessages", errors);

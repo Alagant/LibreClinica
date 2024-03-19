@@ -138,6 +138,10 @@ public class InitUpdateSubStudyServlet extends SecureController {
 				fp.addPresetValue(UpdateSubStudyServlet.INPUT_VER_DATE,
 						local_df.format(study.getProtocolDateVerification()));
 			}
+			if (study.getFwaExpirationDate() != null) {
+				fp.addPresetValue(UpdateSubStudyServlet.FWA_EXPIRATION_DATE,
+						local_df.format(study.getFwaExpirationDate()));
+			}
 			setPresetValues(fp.getPresetValues());
 
 			forwardPage(Page.UPDATE_SUB_STUDY);
