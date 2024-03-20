@@ -1,10 +1,4 @@
-<%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="org.akaza.openclinica.bean.managestudy.IRBStudyBean" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.text.Format" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="org.joda.time.DateTime" %>
+
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>

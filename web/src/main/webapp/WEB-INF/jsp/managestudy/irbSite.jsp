@@ -3,9 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
+
 <fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.notes" var="restext"/>
-
+<fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 
 <jsp:include page="../include/submit-header.jsp"/>
 <!-- move the alert message to the sidebar-->
@@ -65,10 +66,22 @@
         <table>
             <tr>
                 <td align="right"><label>Version number</label></td>
-                <td><input name="version_number" value="${irbSiteBean.versionNumber}"/></td>
+                <td>
+                    <input name="version_number" id="version_number" value="${irbSiteBean.versionNumber}"/>
+                    <%--
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="version_number-trigger" />
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "version_number",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "version_number-trigger", customPX: 300, customPY: 10 });
+                    </script>
+                    --%>
+                </td>
             </tr>
             <tr>
-                <td align="right"><input name="site_relies_on_cdc_irb" type="checkbox" value="1"
+                <td align="right">
+                    <input name="site_relies_on_cdc_irb" type="checkbox" value="1"
                            ${irbSiteBean.siteReliesOnCdcIrb?'checked':''}/>
                 </td>
                 <td><label>Sites relies on CDC IRB</label></td>
@@ -85,7 +98,17 @@
                     <label>CDC IRB protocol version date</label>
                 </td>
                 <td>
-                    <input name="cdc_irb_protocol_version_date" value="${irbSiteBean.cdcIrbProtocolVersionDate}"/>
+                    <input name="cdc_irb_protocol_version_date" id="cdc_irb_protocol_version_date"
+                           value="${irbSiteBean.cdcIrbProtocolVersionDate}"/>
+
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="cdc_irb_protocol_version_date-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "cdc_irb_protocol_version_date",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "cdc_irb_protocol_version_date-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -93,7 +116,16 @@
                     <label>Local IRB approved protocol</label>
                 </td>
                 <td>
-                    <input name="local_irb_approved_protocol" value="${irbSiteBean.localIrbApprovedProtocol}"/>
+                    <input name="local_irb_approved_protocol" id="local_irb_approved_protocol"
+                           value="${irbSiteBean.localIrbApprovedProtocol}"/>
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="local_irb_approved_protocol-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "local_irb_approved_protocol",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "local_irb_approved_protocol-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -101,7 +133,17 @@
                     <label>CDC received local documents</label>
                 </td>
                 <td>
-                    <input name="cdc_received_local_documents" value="${irbSiteBean.cdcReceivedLocalDocuments}"/>
+                    <input name="cdc_received_local_documents"
+                           id="cdc_received_local_documents"
+                           value="${irbSiteBean.cdcReceivedLocalDocuments}"/>
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="cdc_received_local_documents-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "cdc_received_local_documents",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "cdc_received_local_documents-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -109,7 +151,17 @@
                     <label>Site consent package send to CDC IRB</label>
                 </td>
                 <td>
-                    <input name="site_consent_package_send_to_cdc_irb" value="${irbSiteBean.siteConsentPackageSendToCdcIrb}"/>
+                    <input name="site_consent_package_send_to_cdc_irb"
+                           id="site_consent_package_send_to_cdc_irb"
+                           value="${irbSiteBean.siteConsentPackageSendToCdcIrb}"/>
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="site_consent_package_send_to_cdc_irb-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "site_consent_package_send_to_cdc_irb",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "site_consent_package_send_to_cdc_irb-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -117,7 +169,17 @@
                     <label>Initial CDC IRB approval</label>
                 </td>
                 <td>
-                    <input name="initial_cdc_irb_approval" value="${irbSiteBean.initialCdcIrbApproval}"/>
+                    <input name="initial_cdc_irb_approval"
+                           id="initial_cdc_irb_approval"
+                           value="${irbSiteBean.initialCdcIrbApproval}"/>
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="initial_cdc_irb_approval-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "initial_cdc_irb_approval",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "initial_cdc_irb_approval-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -125,7 +187,17 @@
                     <label>CRB approval to enroll</label>
                 </td>
                 <td>
-                    <input name="crb_approval_to_enroll" value="${irbSiteBean.crbApprovalToEnroll}"/>
+                    <input name="crb_approval_to_enroll"
+                           id="crb_approval_to_enroll"
+                           value="${irbSiteBean.crbApprovalToEnroll}"/>
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="crb_approval_to_enroll-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "crb_approval_to_enroll",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "crb_approval_to_enroll-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -133,7 +205,15 @@
                     <label>IRB approval</label>
                 </td>
                 <td>
-                    <input name="irb_approval" value="${irbSiteBean.irbApproval}"/>
+                    <input name="irb_approval" id="irb_approval" value="${irbSiteBean.irbApproval}"/>
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="irb_approval-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "irb_approval",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "irb_approval-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
@@ -141,7 +221,16 @@
                     <label>Expiration date</label>
                 </td>
                 <td>
-                    <input name="expiration_date" value="${irbSiteBean.expirationDate}"/>
+                    <input name="expiration_date" id="expiration_date"
+                           value="${irbSiteBean.expirationDate}"/>
+                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         title="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                         border="0" id="expiration_date-trigger" /> *
+                    <script type="text/javascript">
+                        Calendar.setup({inputField: "expiration_date",
+                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                            button: "expiration_date-trigger", customPX: 300, customPY: 10 });
+                    </script>
                 </td>
             </tr>
             <tr>
