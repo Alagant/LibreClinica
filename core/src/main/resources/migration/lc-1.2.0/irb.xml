@@ -128,6 +128,150 @@
             <column name="package_sent_to_cdc_irb" type="DATE"/>
             <column name="cdc_approval" type="DATE"/>
         </createTable>
+        <createTable tableName="irb_protocol_action_history_parameter">
+            <column autoIncrement="true" name="irb_protocol_action_history_parameter_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="action" type="VARCHAR(40)">
+                <constraints nullable="false" />
+            </column>
+            <column name="cdc_irb_protocol_version_date" type="BOOL"/>
+            <column name="version" type="BOOL"/>
+            <column name="site_submitted_to_local_irb" type="BOOL"/>
+            <column name="local_irb_approval" type="BOOL"/>
+            <column name="site_sends_docs_to_crb" type="BOOL"/>
+            <column name="package_sent_to_cdc_irb" type="BOOL"/>
+            <column name="cdc_approval_acknowledgment" type="BOOL"/>
+            <column name="enrollment_pause_date" type="BOOL"/>
+            <column name="enrollment_re_started_date" type="BOOL"/>
+            <column name="reason_for_enrollment_pause" type="BOOL"/>
+        </createTable>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="1"/>
+            <column name="action" value="New Protocol"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="true"/>
+            <column name="version" valueBoolean="true"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="true"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="true"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="2"/>
+            <column name="action" value="Amendment to Protocol"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="true"/>
+            <column name="version" valueBoolean="true"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="true"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="true"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="3"/>
+            <column name="action" value="Amendment to Consent"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="true"/>
+            <column name="version" valueBoolean="true"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="true"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="true"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="4"/>
+            <column name="action" value="Amendment to Protocol &amp; Consent"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="true"/>
+            <column name="version" valueBoolean="true"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="true"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="true"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="5"/>
+            <column name="action" value="Continuation"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="false"/>
+            <column name="version" valueBoolean="false"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="false"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="false"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="6"/>
+            <column name="action" value="Incident"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="false"/>
+            <column name="version" valueBoolean="false"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="true"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="true"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="7"/>
+            <column name="action" value="Suspension"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="false"/>
+            <column name="version" valueBoolean="false"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="true"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="true"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="8"/>
+            <column name="action" value="Closure"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="false"/>
+            <column name="version" valueBoolean="false"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="true"/>
+            <column name="local_irb_approval" valueBoolean="true"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="true"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="true"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="true"/>
+            <column name="enrollment_pause_date" valueBoolean=""/>
+            <column name="enrollment_re_started_date" valueBoolean=""/>
+            <column name="reason_for_enrollment_pause" valueBoolean=""/>
+        </insert>
+        <insert tableName="irb_protocol_action_history_parameter">
+            <column name="irb_protocol_action_history_parameter_id" valueNumeric="9"/>
+            <column name="action" value="Enrollment Paused"/>
+            <column name="cdc_irb_protocol_version_date" valueBoolean="false"/>
+            <column name="version" valueBoolean="false"/>
+            <column name="site_submitted_to_local_irb" valueBoolean="false"/>
+            <column name="local_irb_approval" valueBoolean="false"/>
+            <column name="site_sends_docs_to_crb" valueBoolean="false"/>
+            <column name="package_sent_to_cdc_irb" valueBoolean="false"/>
+            <column name="cdc_approval_acknowledgment" valueBoolean="false"/>
+            <column name="enrollment_pause_date" valueBoolean="true"/>
+            <column name="enrollment_re_started_date" valueBoolean="true"/>
+            <column name="reason_for_enrollment_pause" valueBoolean="true"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>
