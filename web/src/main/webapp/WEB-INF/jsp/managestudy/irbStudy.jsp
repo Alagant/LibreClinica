@@ -135,18 +135,19 @@
                                 <input onfocus="this.select()" type="text" name="version1_protocol_date"
                                        value="${presetValues['version1_protocol_date']}"
                                     class="formfieldM" id="version1ProtocolDateField" />
+                                <a href="#">
+                                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                                         title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="version1ProtocolDateTrigger" />
+                                    <script type="text/javascript">
+                                        Calendar.setup({inputField: "version1ProtocolDateField",
+                                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                                            button: "version1ProtocolDateTrigger", customPX: 300, customPY: 10 });
+                                    </script>
+                                </a> *
                             </div>
                         </td>
-                        <td>
-                            <a href="#">
-                                <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                                     title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="version1ProtocolDateTrigger" />
-                                <script type="text/javascript">
-                                    Calendar.setup({inputField: "version1ProtocolDateField",
-                                        ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                                        button: "version1ProtocolDateTrigger", customPX: 300, customPY: 10 });
-                                </script>
-                            </a> *
+                        <td align="left">
+
                         </td>
                     </tr>
                     <tr>
@@ -191,18 +192,19 @@
                             <div class="formfieldXL_BG">
                                 <input onfocus="this.select()" type="text" name="submitted_cdc_irb" value="${presetValues['submitted_cdc_irb']}"
                                        class="formfieldM" id="submittedCdcIrbField" />
+                                <a href="#">
+                                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="submittedCdcIrbTrigger" />
+                                    <script type="text/javascript">Calendar.setup({inputField: "submittedCdcIrbField", ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button: "submittedCdcIrbTrigger", customPX: 300, customPY: 10 }); </script>
+                                </a> *
                             </div>
                         </td>
-                        <td>
-                            <a href="#">
-                                <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="submittedCdcIrbTrigger" />
-                                <script type="text/javascript">Calendar.setup({inputField: "submittedCdcIrbField", ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button: "submittedCdcIrbTrigger", customPX: 300, customPY: 10 }); </script>
-                            </a> *
+                        <td align="left">
+
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="version1_protocol_date"/></jsp:include>
+                            <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="submitted_cdc_irb"/></jsp:include>
                         </td>
                     </tr>
                 </table>
@@ -219,13 +221,14 @@
                             <div class="formfieldXL_BG">
                                 <input onfocus="this.select()" type="text" name="approval_by_cdc_irb" value="${presetValues['approval_by_cdc_irb']}"
                                        class="formfieldM" id="approvalByCdcIrbField" />
+                                <a href="#">
+                                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="approvalByCdcIrbTrigger" />
+                                    <script type="text/javascript">Calendar.setup({inputField: "approvalByCdcIrbField", ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button: "approvalByCdcIrbTrigger", customPX: 300, customPY: 10 }); </script>
+                                </a> *
                             </div>
                         </td>
-                        <td>
-                            <a href="#">
-                                <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="approvalByCdcIrbTrigger" />
-                                <script type="text/javascript">Calendar.setup({inputField: "approvalByCdcIrbField", ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button: "approvalByCdcIrbTrigger", customPX: 300, customPY: 10 }); </script>
-                            </a> *
+                        <td align="left">
+
                         </td>
                     </tr>
                     <tr>
@@ -247,13 +250,14 @@
                             <div class="formfieldXL_BG">
                                 <input onfocus="this.select()" type="text" name="cdc_irb_expiration_date" value="${presetValues['cdc_irb_expiration_date']}"
                                        class="formfieldM" id="cdcIrbExpirationDateField" />
+                                <a href="#">
+                                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="cdcIrbExpirationDateTrigger" />
+                                    <script type="text/javascript">Calendar.setup({inputField: "cdcIrbExpirationDateField", ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button: "cdcIrbExpirationDateTrigger", customPX: 300, customPY: 10 }); </script>
+                                </a> *
                             </div>
                         </td>
                         <td>
-                            <a href="#">
-                                <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>" title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="cdcIrbExpirationDateTrigger" />
-                                <script type="text/javascript">Calendar.setup({inputField: "cdcIrbExpirationDateField", ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>", button: "cdcIrbExpirationDateTrigger", customPX: 300, customPY: 10 }); </script>
-                            </a> *
+
                         </td>
                     </tr>
                     <tr>
