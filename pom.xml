@@ -903,6 +903,26 @@
 					</configuration>
 				</plugin>
 				<plugin>
+					<!--start with basic information to get Liquibase plugin:
+                    include <groupId>, <artifactID>, and <version> elements-->
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>4.26.0</version>
+					<configuration>
+						<!--set values for Liquibase properties and settings
+                        for example, the location of a properties file to use-->
+						<propertyFile>src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
+					</configuration>
+					<dependencies>
+						<!--set up any dependencies for Liquibase to function in your
+                        environment for example, a database-specific plugin-->
+						<dependency>
+							<groupId>org.postgresql</groupId>
+							<artifactId>postgresql</artifactId>
+							<version>42.6.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>				<plugin>
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-plugin</artifactId>
 					<version>1.9.1.0</version>
