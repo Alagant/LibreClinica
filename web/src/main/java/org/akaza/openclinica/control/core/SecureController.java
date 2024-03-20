@@ -19,15 +19,9 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -61,6 +55,7 @@ import org.akaza.openclinica.bean.submit.EventCRFBean;
 import org.akaza.openclinica.bean.submit.ItemBean;
 import org.akaza.openclinica.bean.submit.ItemDataBean;
 import org.akaza.openclinica.control.SpringServletAccess;
+import org.akaza.openclinica.control.form.FormProcessor;
 import org.akaza.openclinica.core.CRFLocker;
 import org.akaza.openclinica.core.EmailEngine;
 import org.akaza.openclinica.core.SessionManager;
@@ -253,6 +248,15 @@ public abstract class SecureController extends HttpServlet implements SingleThre
 
     protected void setPresetValues(HashMap<String, Object> presetValues) {
         request.setAttribute(PRESET_VALUES, presetValues);
+    }
+
+    protected FormProcessor setPresetValuesFromRequest(FormProcessor fp) {
+        Map<String, String[]> map = request.getParameterMap();
+        for(String key: map.keySet()) {
+            fp.addPresetValue(key, request.getParameter(key));
+        }
+
+        return fp;
     }
 
     protected void setTable(EntityBeanTable table) {

@@ -53,12 +53,6 @@ public class IRBStudyServlet extends SecureController {
 
         System.out.println("processRequest - fp.isSubmitted()" + fp.isSubmitted());
         if(fp.isSubmitted()) {
-            irbStudyBean.setCdcIrbProtocolNumber(request.getParameter(INPUT_CDC_IRB_PROTOCOL_NUMBER));
-            irbStudyBean.setVersion1ProtocolDate(dateValueOrNull(INPUT_VERSION1_PROTOCOL_DATE));
-            irbStudyBean.setProtocolOfficer(request.getParameter(INPUT_PROTOCOL_OFFICER));
-            irbStudyBean.setSubmittedCdcIrb(dateValueOrNull(INPUT_SUBMITTED_CDC_IRB));
-            irbStudyBean.setApprovalByCdcIrb(dateValueOrNull(INPUT_APPROVAL_BY_CDC_IRB));
-            irbStudyBean.setCdcIrbExpirationDate(dateValueOrNull(INPUT_CDC_IRB_EXPIRATION_DATE));
 
             FormDiscrepancyNotes discNotes;
 
@@ -74,7 +68,7 @@ public class IRBStudyServlet extends SecureController {
                     NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 5);
             v.addValidation(INPUT_VERSION1_PROTOCOL_DATE, Validator.NO_BLANKS);
             v.addValidation(INPUT_VERSION1_PROTOCOL_DATE, Validator.IS_A_DATE);
-            v.addValidation(INPUT_VERSION1_PROTOCOL_DATE, Validator.DATE_IN_PAST);
+            //v.addValidation(INPUT_VERSION1_PROTOCOL_DATE, Validator.DATE_IN_PAST);
             v.addValidation(INPUT_PROTOCOL_OFFICER, Validator.NO_BLANKS);
             v.addValidation(INPUT_PROTOCOL_OFFICER, Validator.LENGTH_NUMERIC_COMPARISON,
                     NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
@@ -83,10 +77,10 @@ public class IRBStudyServlet extends SecureController {
             v.addValidation(INPUT_SUBMITTED_CDC_IRB, Validator.DATE_IN_PAST);
             // v.addValidation(INPUT_APPROVAL_BY_CDC_IRB, Validator.NO_BLANKS);
             v.addValidation(INPUT_APPROVAL_BY_CDC_IRB, Validator.IS_A_DATE);
-            v.addValidation(INPUT_APPROVAL_BY_CDC_IRB, Validator.DATE_IN_PAST);
+            //v.addValidation(INPUT_APPROVAL_BY_CDC_IRB, Validator.DATE_IN_PAST);
             // v.addValidation(INPUT_CDC_IRB_EXPIRATION_DATE, Validator.NO_BLANKS);
             v.addValidation(INPUT_CDC_IRB_EXPIRATION_DATE, Validator.IS_A_DATE);
-            v.addValidation(INPUT_CDC_IRB_EXPIRATION_DATE, Validator.DATE_IN_PAST);
+            //v.addValidation(INPUT_CDC_IRB_EXPIRATION_DATE, Validator.DATE_IN_PAST);
 
             HashMap<String, ArrayList<String>> errors = v.validate();
 
@@ -94,12 +88,25 @@ public class IRBStudyServlet extends SecureController {
 
             if (!errors.isEmpty()) {
                 setInputMessages(errors);
-                fp.addPresetValue(INPUT_CDC_IRB_PROTOCOL_NUMBER, label);
+                //fp.addPresetValue(INPUT_CDC_IRB_PROTOCOL_NUMBER, label);
+                //setPresetValues(fp.getPresetValues());
+                fp.clearPresetValues();
+                setPresetValuesFromRequest(fp);
                 setPresetValues(fp.getPresetValues());
+                //setPresetValues((HashMap<String, Object>)request.getParameterMap());
+
                 addPageMessage("Validation errors were found when saving the IRB Study data");
                 forwardPage(Page.IRB_STUDY);
+
+
                 return;
             }
+            irbStudyBean.setCdcIrbProtocolNumber(request.getParameter(INPUT_CDC_IRB_PROTOCOL_NUMBER));
+            irbStudyBean.setVersion1ProtocolDate(dateValueOrNull(INPUT_VERSION1_PROTOCOL_DATE));
+            irbStudyBean.setProtocolOfficer(request.getParameter(INPUT_PROTOCOL_OFFICER));
+            irbStudyBean.setSubmittedCdcIrb(dateValueOrNull(INPUT_SUBMITTED_CDC_IRB));
+            irbStudyBean.setApprovalByCdcIrb(dateValueOrNull(INPUT_APPROVAL_BY_CDC_IRB));
+            irbStudyBean.setCdcIrbExpirationDate(dateValueOrNull(INPUT_CDC_IRB_EXPIRATION_DATE));
 
             if(irbStudyBean.getIrbStudyId()<1) {
                 irbStudyBean = getIRBStudyDAO().create(irbStudyBean);
@@ -108,7 +115,7 @@ public class IRBStudyServlet extends SecureController {
             }
             //At this point the irb Study Bean has been successfully stored
             addPageMessage("IRB Study saved");
-            forwardPage(Page.MANAGE_STUDY_MODULE);
+            response.sendRedirect(request.getContextPath() + Page.MANAGE_STUDY_MODULE.getFileName());
             return;
         }
 
