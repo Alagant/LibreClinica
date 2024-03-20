@@ -52,6 +52,14 @@
 
 <h1><span class="title_manage">IRB Site Definition</span></h1>
 <div class="form-standard">
+    <style type="text/css" scoped>
+        table tbody tr td:nth-child(2) {
+        text-align: left;
+        }
+        table tfoot tr td:nth-child(2) {
+        text-align: left;
+        }
+    </style>
     <form action="${pageContext.request.contextPath}/IrbSite" method="post">
         <input type="hidden" name="siteId" value="${siteId}"/>
         <table>

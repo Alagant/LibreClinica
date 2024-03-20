@@ -68,6 +68,7 @@ public class CreateSubStudyServlet extends SecureController {
     public static final String INPUT_VER_DATE = "protocolDateVerification";
     public static final String INPUT_START_DATE = "startDate";
     public static final String INPUT_END_DATE = "endDate";
+    public static final String FWA_EXPIRATION_DATE = "fwaExpirationDate";
 
     /**
      *
@@ -191,6 +192,12 @@ public class CreateSubStudyServlet extends SecureController {
                 } catch (ParseException pe) {
                     fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
                 }
+                try {
+                    local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+                } catch (ParseException pe) {
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
+                }
                 // >> tbh
                 setPresetValues(fp.getPresetValues());
 
@@ -224,6 +231,12 @@ public class CreateSubStudyServlet extends SecureController {
                     fp.addPresetValue(INPUT_VER_DATE, local_df.format(newStudy.getProtocolDateVerification()));
                 } catch (Exception pe) {
                     fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
+                }
+                try {
+                    local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+                } catch (ParseException pe) {
+                    fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
                 }
                 setPresetValues(fp.getPresetValues());
                 request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
@@ -271,11 +284,11 @@ public class CreateSubStudyServlet extends SecureController {
         // v.addValidation("statusId", Validator.IS_VALID_TERM);
         v.addValidation("secondProId", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         v.addValidation("facName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
-        v.addValidation("facCity", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         v.addValidation("facAddress1", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
         v.addValidation("facAddress2", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
         v.addValidation("facAddress3", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
         v.addValidation("facAddress4", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 100);
+        v.addValidation("facCity", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         v.addValidation("facState", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
         v.addValidation("facZip", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
         v.addValidation("facCountry", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
@@ -284,12 +297,18 @@ public class CreateSubStudyServlet extends SecureController {
         //v.addValidation("facConPhone", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         //v.addValidation("facConEmail", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
 
+        v.addValidation("facAddress1", Validator.NO_BLANKS);
         v.addValidation("subSite", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 3);
         v.addValidation("contractNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
         v.addValidation("consortiumName", Validator.NO_BLANKS_SET, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+        v.addValidation("consortiumName", Validator.NO_BLANKS);
         v.addValidation("locationType", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 14);
+        v.addValidation("locationType", Validator.NO_BLANKS);
         v.addValidation("fwaInstitution", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 200);
+        v.addValidation("fwaInstitution", Validator.NO_BLANKS);
         v.addValidation("fwaNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+        v.addValidation("fwaNumber", Validator.NO_BLANKS);
+        v.addValidation("fwaExpiryDate", Validator.IS_A_DATE);
 
         //    errors = v.validate();
 
@@ -347,7 +366,13 @@ public class CreateSubStudyServlet extends SecureController {
             } catch (ParseException pe) {
                 fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
             }
-            setPresetValues(fp.getPresetValues());
+            try {
+                local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+                fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+            } catch (ParseException pe) {
+                fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
+            }
+        setPresetValues(fp.getPresetValues());
             logger.info("has validation errors");
             request.setAttribute("formMessages", errors);
             // request.setAttribute("facRecruitStatusMap",
@@ -736,6 +761,12 @@ public class CreateSubStudyServlet extends SecureController {
                fp.addPresetValue(INPUT_VER_DATE, local_df.format(fp.getDate(INPUT_VER_DATE)));
            } catch (ParseException pe) {
                fp.addPresetValue(INPUT_VER_DATE, fp.getString(INPUT_VER_DATE));
+           }
+           try {
+               local_df.parse(fp.getString(FWA_EXPIRATION_DATE));
+               fp.addPresetValue(FWA_EXPIRATION_DATE, local_df.format(fp.getDate(FWA_EXPIRATION_DATE)));
+           } catch (ParseException pe) {
+               fp.addPresetValue(FWA_EXPIRATION_DATE, fp.getString(FWA_EXPIRATION_DATE));
            }*/
             //        setPresetValues(fp.getPresetValues());
             logger.info("has validation errors");

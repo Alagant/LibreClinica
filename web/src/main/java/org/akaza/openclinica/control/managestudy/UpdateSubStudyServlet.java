@@ -51,6 +51,7 @@ public class UpdateSubStudyServlet extends SecureController {
     public static final String INPUT_START_DATE = "startDate";
     public static final String INPUT_VER_DATE = "protocolDateVerification";
     public static final String INPUT_END_DATE = "endDate";
+    public static final String FWA_EXPIRATION_DATE = "fwaExpirationDate";
     public static StudyBean parentStudy;
 
     /**
@@ -98,6 +99,10 @@ public class UpdateSubStudyServlet extends SecureController {
             if (study.getProtocolDateVerification() != null) {
                 fp.addPresetValue(INPUT_VER_DATE, local_df.format(study.getProtocolDateVerification()));
             }
+            if (study.getFwaExpirationDate() != null) {
+                fp.addPresetValue(UpdateSubStudyServlet.FWA_EXPIRATION_DATE,
+                        local_df.format(study.getFwaExpirationDate()));
+            }
 
             setPresetValues(fp.getPresetValues());
             forwardPage(Page.UPDATE_SUB_STUDY);
@@ -122,12 +127,14 @@ public class UpdateSubStudyServlet extends SecureController {
     private void confirmStudy() throws Exception {
         Validator v = new Validator(request);
         FormProcessor fp = new FormProcessor(request);
+
         v.addValidation("name", Validator.NO_BLANKS);
         v.addValidation("uniqueProId", Validator.NO_BLANKS);
+
         // >> tbh
         // v.addValidation("description", Validator.NO_BLANKS);
         // << tbh, #3943, 07/2009
-        v.addValidation("prinInvestigator", Validator.NO_BLANKS);
+        //v.addValidation("prinInvestigator", Validator.NO_BLANKS);
         String startDate = fp.getString(INPUT_START_DATE);
 		if (!(startDate == null || startDate.trim().isEmpty())) {
             v.addValidation(INPUT_START_DATE, Validator.IS_A_DATE);
@@ -136,13 +143,13 @@ public class UpdateSubStudyServlet extends SecureController {
 		if (!(endDate == null || endDate.trim().isEmpty())) {
             v.addValidation(INPUT_END_DATE, Validator.IS_A_DATE);
         }
+        //String contactEmail = fp.getString("facConEmail");
+		//if (!(contactEmail == null || contactEmail.trim().isEmpty())) {
+        //    v.addValidation("facConEmail", Validator.IS_A_EMAIL);
+        //}
         String verDate = fp.getString(INPUT_VER_DATE);
-		if (!(verDate == null || verDate.trim().isEmpty())) {
+        if (!(verDate == null || verDate.trim().isEmpty())) {
             v.addValidation(INPUT_VER_DATE, Validator.IS_A_DATE);
-        }
-        String contactEmail = fp.getString("facConEmail");
-		if (!(contactEmail == null || contactEmail.trim().isEmpty())) {
-            v.addValidation("facConEmail", Validator.IS_A_EMAIL);
         }
         // v.addValidation("statusId", Validator.IS_VALID_TERM);
         v.addValidation("secondProId", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
@@ -155,11 +162,23 @@ public class UpdateSubStudyServlet extends SecureController {
         v.addValidation("facState", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
         v.addValidation("facZip", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
         v.addValidation("facCountry", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 64);
-        v.addValidation("facConName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
-        v.addValidation("facConDegree", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
-        v.addValidation("facConPhone", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
-        v.addValidation("facConEmail", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConDegree", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConPhone", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
+        //v.addValidation("facConEmail", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
 
+        v.addValidation("facAddress1", Validator.NO_BLANKS);
+        v.addValidation("subSite", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 3);
+        v.addValidation("contractNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 20);
+        v.addValidation("consortiumName", Validator.NO_BLANKS_SET, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+        v.addValidation("consortiumName", Validator.NO_BLANKS);
+        v.addValidation("locationType", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 14);
+        v.addValidation("locationType", Validator.NO_BLANKS);
+        v.addValidation("fwaInstitution", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 200);
+        v.addValidation("fwaInstitution", Validator.NO_BLANKS);
+        v.addValidation("fwaNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
+        v.addValidation("fwaNumber", Validator.NO_BLANKS);
+        v.addValidation("fwaExpiryDate", Validator.IS_A_DATE);
         errors = v.validate();
 
         // >> tbh
@@ -252,6 +271,10 @@ public class UpdateSubStudyServlet extends SecureController {
             } catch (ParseException pe) {
                 fp.addPresetValue(INPUT_END_DATE, fp.getString(INPUT_END_DATE));
             }
+			if (study.getFwaExpirationDate() != null) {
+				fp.addPresetValue(UpdateSubStudyServlet.FWA_EXPIRATION_DATE,
+						local_df.format(study.getFwaExpirationDate()));
+			}
             */
             setPresetValues(fp.getPresetValues());
             request.setAttribute("formMessages", errors);

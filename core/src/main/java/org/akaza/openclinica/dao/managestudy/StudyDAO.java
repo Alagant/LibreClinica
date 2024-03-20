@@ -186,6 +186,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         this.setTypeExpected(67, TypeNames.STRING); // fwa_institution
         this.setTypeExpected(68, TypeNames.STRING); // fwa_name
         this.setTypeExpected(69, TypeNames.DATE); // fwa_expiration_date
+        this.setTypeExpected(70, TypeNames.STRING); // site_type
     }
 
     /**
@@ -288,9 +289,10 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(34, sb.getFwaInstitution());// fwa_institution
         variables.put(35, sb.getFwaNumber());// fwa_name
         variables.put(36, sb.getFwaExpirationDate());// fwa_expiration_date
+        variables.put(37, sb.getContractType());// contract_type
 
         // SQL Update where
-        variables.put(37, sb.getId());// study id
+        variables.put(38, sb.getId());// study id
         
         this.executeUpdate(digester.getQuery("updateStepOne"), variables, nullVars);
         return sb;
@@ -416,6 +418,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         if (fwaExpDate== null) {
             nullVars.put(37, Types.DATE);
         }
+        variables.put(38, sb.getContractType());// contract_type
 
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);

@@ -47,6 +47,7 @@ public class StudyBean extends AuditableEntityBean {
     private String secondaryIdentifier = "";
     private String subSite ="";
     private String contractNumber = "";
+    private String contractType = "";
     private String summary = "";// need to be removed
 
     private Date datePlannedStart;
@@ -1367,5 +1368,13 @@ public class StudyBean extends AuditableEntityBean {
 
     public void setFwaExpirationDate(Date fwaExpirationDate) {
         this.fwaExpirationDate = fwaExpirationDate;
+    }
+
+    public String getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(String contractType) {
+        this.contractType = contractType;
     }
 }
