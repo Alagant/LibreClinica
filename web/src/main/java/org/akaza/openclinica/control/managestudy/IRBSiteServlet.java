@@ -162,7 +162,8 @@ public class IRBSiteServlet extends SecureController {
         ArrayList<IRBProtocolActionHistoryBean> protocolActionHistory =
                 getIRBProtocolActionHistoryDAO().findBySiteId(siteId);
         request.setAttribute("protocolActionTypes", protocolActionsTypes);
-            request.setAttribute("protocolActionHistory", getIrbProtocolActionHistoryParameter().findAll());
+            request.setAttribute("protocolActionHistoryParameter", getIrbProtocolActionHistoryParameter().findAll());
+            request.setAttribute("protocolActionHistory", getIRBProtocolActionHistoryDAO().findBySiteId(siteId));
         request.setAttribute("siteId", siteId);
 
         IRBSiteBean irbSiteBean;
