@@ -18,6 +18,9 @@ public class IRBProtocolActionHistoryBean extends EntityBean {
     private Date receivedDocsFromSites;
     private Date packageSentToCdcIrb;
     private Date cdcApproval;
+    private Date enrollmentPauseDate;
+    private Date enrollmentRestartedDate;
+    private String reasonForEnrollmentPaused;
 
     public int getIrbProtocolActionHistoryId() {
         return irbProtocolActionHistoryId;
@@ -105,5 +108,29 @@ public class IRBProtocolActionHistoryBean extends EntityBean {
 
     public void setCdcApproval(Date cdcApproval) {
         this.cdcApproval = cdcApproval;
+    }
+
+    public Date getEnrollmentPauseDate() {
+        return enrollmentPauseDate;
+    }
+
+    public void setEnrollmentPauseDate(Date enrollmentPauseDate) {
+        this.enrollmentPauseDate = enrollmentPauseDate;
+    }
+
+    public Date getEnrollmentRestartedDate() {
+        return enrollmentRestartedDate;
+    }
+
+    public void setEnrollmentRestartedDate(Date enrollmentRestartedDate) {
+        this.enrollmentRestartedDate = enrollmentRestartedDate;
+    }
+
+    public String getReasonForEnrollmentPaused() {
+        return reasonForEnrollmentPaused;
+    }
+
+    public void setReasonForEnrollmentPaused(String reasonForEnrollmentPaused) {
+        this.reasonForEnrollmentPaused = reasonForEnrollmentPaused;
     }
 }

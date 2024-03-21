@@ -114,6 +114,12 @@ public class IRBSiteServlet extends SecureController {
                 dateValueOrNull("package_sent_to_cdc_irb"));
         irbProtocolActionHistoryBean.setCdcApproval(
                 dateValueOrNull("cdc_approval"));
+        irbProtocolActionHistoryBean.setEnrollmentPauseDate(
+                dateValueOrNull("enrollment_pause_date"));
+        irbProtocolActionHistoryBean.setEnrollmentRestartedDate(
+                dateValueOrNull("enrollment_restarted_date"));
+        irbProtocolActionHistoryBean.setReasonForEnrollmentPaused(
+                request.getParameter("reason_for_enrollment_paused"));
 
         if(irbProtocolActionHistoryBean.getIrbProtocolActionHistoryId()<1)
             getIRBProtocolActionHistoryDAO()
