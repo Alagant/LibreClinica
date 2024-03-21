@@ -46,6 +46,8 @@
 <jsp:useBean scope='session' id='definitions' class='java.util.ArrayList'/>
 <jsp:useBean scope='session' id='sdvOptions' class='java.util.ArrayList'/>
 <jsp:useBean scope="request" id="statuses" class="java.util.ArrayList"/>
+<jsp:useBean scope="request" id="laboratories" class="java.util.ArrayList"/>
+<jsp:useBean scope="request" id="countries" class="java.util.ArrayList"/>
 <jsp:useBean scope="request" id="presetValues" class="java.util.HashMap"/>
 
 <c:set var="startDate" value=""/>
@@ -451,13 +453,12 @@
 
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td>
-                            <td>
-                              <div class="formfieldXL_BG">
-                                <input type="text" name="facCountry"
-                                       value="<c:out value="${newStudy.facilityCountry}"/>" class="formfieldXL"></div>
-                              <jsp:include page="../showMessage.jsp">
-                                <jsp:param name="key" value="facCountry"/>
-                              </jsp:include>
+                            <td class="table_cell">
+                              <select name="facCountry">
+                                <c:forEach var="country" items="${countries}">
+                                  <option value="<c:out value="${country.sysid}"/>" <c:if test="${country.displayname.equals(newStudy.facilityCountry)}">checked</c:if>><c:out value="${country.displayname}"/></option>
+                                </c:forEach>
+                              </select>
                             </td>
                           </tr>
 
@@ -560,6 +561,18 @@
                             </a>*
                             </td>
                           </tr>
+
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
+                            <td class="table_cell">
+                              <select name="laboratory">
+                                <c:forEach var="lab" items="${laboratories}">
+                                  <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
+                                </c:forEach>
+                               </select>
+                            </td>
+                          </tr>
+
 
                           <c:choose>
                             <c:when test="${newStudy.parentStudyId == 0}">

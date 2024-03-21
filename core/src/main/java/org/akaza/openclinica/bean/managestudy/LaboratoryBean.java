@@ -26,7 +26,7 @@ public class LaboratoryBean extends AuditableEntityBean {
     private String city = null;
     private String country = null;
     private String zipPostal = null;
-    private String activeLab = null;
+    private Boolean activeLab = null;
     private List labTypes = null;
 
     public int getLabId() {
@@ -93,11 +93,11 @@ public class LaboratoryBean extends AuditableEntityBean {
         this.zipPostal = zipPostal;
     }
 
-    public String getActiveLab() {
+    public Boolean getActiveLab() {
         return activeLab;
     }
 
-    public void setActiveLab(String activeLab) {
+    public void setActiveLab(Boolean activeLab) {
         this.activeLab = activeLab;
     }
 

@@ -46,6 +46,8 @@ public class SQLFactory {
 
     // public final String DAO_DATAVIEW = "dataview_dao";
 
+    public final String DAO_COUNTRY = "country";
+    public final String DAO_LABORATORY = "laboratory";
     public final String DAO_ITEM = "item";
     public final String DAO_ITEMDATA = "item_data";
     public final String DAO_ITEMFORMMETADATA = "item_form_metadata";
@@ -161,6 +163,8 @@ public class SQLFactory {
             fileList.put(this.DAO_STUDYSUBJECT, "study_subject_dao.xml");
             fileList.put(this.DAO_SUBJECT, "subject_dao.xml");
             fileList.put(this.DAO_SUBJECTGROUPMAP, "subject_group_map_dao.xml");
+            fileList.put(this.DAO_LABORATORY, "laboratory_dao.xml");
+            fileList.put(this.DAO_COUNTRY, "country_dao.xml");
             fileList.put(this.DAO_EVENTDEFINITIONCRF, "event_definition_crf_dao.xml");
             fileList.put(this.DAO_AUDITEVENT, "audit_event_dao.xml");
             fileList.put(this.DAO_AUDIT, "audit_dao.xml");

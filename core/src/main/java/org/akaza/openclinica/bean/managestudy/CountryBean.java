@@ -37,7 +37,7 @@ public class CountryBean extends AuditableEntityBean {
     private int sysid = 0;
     private String code = null;
     private String displayname = null;
-    private String sortorder = null;
+    private int sortorder = 0;
 
     public int getSysid() {
         return sysid;
@@ -63,11 +63,11 @@ public class CountryBean extends AuditableEntityBean {
         this.displayname = displayname;
     }
 
-    public String getSortorder() {
+    public int getSortorder() {
         return sortorder;
     }
 
-    public void setSortorder(String sortorder) {
+    public void setSortorder(int sortorder) {
         this.sortorder = sortorder;
     }
 }
