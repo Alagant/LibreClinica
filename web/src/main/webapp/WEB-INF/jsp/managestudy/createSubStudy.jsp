@@ -441,8 +441,8 @@
 
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td>
-                            <td class="table_cell">
-                              <div class="formfieldXL_BG">
+                            <td class="table_cell select-option">
+                              <div class="formfieldXL_BG select-autosize">
                                 <select name="facCountry">
                                   <c:forEach var="country" items="${countries}">
                                     <option value="<c:out value="${country.sysid}"/>" <c:if test="${country.displayname.equals(newStudy.facilityCountry)}">checked</c:if>><c:out value="${country.displayname}"/></option>
@@ -558,7 +558,7 @@
 
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
-                            <td class="table_cell">
+                            <td class="table_cell select-autosize">
                               <select name="laboratory">
                                 <c:forEach var="lab" items="${laboratories}">
                                   <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
