@@ -2,9 +2,11 @@ package org.akaza.openclinica.control.managestudy;
 
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryBean;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
+import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryParameterBean;
 import org.akaza.openclinica.bean.managestudy.IRBSiteBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.dao.managestudy.IRBProtocolActionHistoryDAO;
+import org.akaza.openclinica.dao.managestudy.IRBProtocolActionHistoryParameterDAO;
 import org.akaza.openclinica.dao.managestudy.IRBProtocolActionTypeDAO;
 import org.akaza.openclinica.dao.managestudy.IRBSiteDAO;
 import org.akaza.openclinica.exception.OpenClinicaException;
@@ -21,6 +23,8 @@ import java.util.Locale;
 public class IRBSiteServlet extends SecureController {
     private IRBSiteDAO irbSiteDAO;
     private IRBProtocolActionHistoryDAO irbProtocolActionHistoryDAO;
+
+    private IRBProtocolActionHistoryParameterDAO irbProtocolActionHistoryParameterDAO;
 
     private IRBSiteDAO getIRBSiteDAO() {
         if(irbSiteDAO==null) irbSiteDAO = new IRBSiteDAO(sm.getDataSource());
@@ -114,8 +118,13 @@ public class IRBSiteServlet extends SecureController {
                 new IRBProtocolActionTypeDAO(sm.getDataSource());
         ArrayList<IRBProtocolActionTypeBean> protocolActionsTypes =
                 protocolActionTypeDAO.findAll();
+        IRBProtocolActionHistoryParameterDAO protocolActionHistoryParameterDAO =
+                new IRBProtocolActionHistoryParameterDAO(sm.getDataSource());
+        ArrayList<IRBProtocolActionHistoryParameterBean> protocolActionsTHistoryParameter =
+                protocolActionHistoryParameterDAO.findAll();
         ArrayList<IRBProtocolActionHistoryBean> protocolActionHistory =
                 getIRBProtocolActionHistoryDAO().findBySiteId(siteId);
+
 
         IRBSiteBean irbSiteBean = getIRBSiteDAO().findBySiteId(siteId);
 
@@ -125,6 +134,7 @@ public class IRBSiteServlet extends SecureController {
         request.setAttribute("siteId", siteId);
         request.setAttribute("irbSiteBean", irbSiteBean);
         request.setAttribute("protocolActionTypes", protocolActionsTypes);
+        request.setAttribute("protocolActionHistoryParameter", protocolActionsTHistoryParameter);
         request.setAttribute("protocolActionHistory", protocolActionHistory);
         forwardPage(Page.IRB_SITE);
     }

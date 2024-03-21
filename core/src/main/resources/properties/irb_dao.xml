@@ -9,10 +9,10 @@
         </sql>
     </query>
     <query>
-        <name>findAllProtocolActionParameter</name>
+        <name>findAllProtocolActionHistoryParameter</name>
         <sql>
             SELECT *
-            FROM irb_protocol_action_parameter
+            FROM irb_protocol_action_history_parameter
             ORDER BY 1
         </sql>
     </query>
