@@ -127,6 +127,9 @@
             <column name="received_docs_from_sites" type="DATE"/>
             <column name="package_sent_to_cdc_irb" type="DATE"/>
             <column name="cdc_approval" type="DATE"/>
+            <column name="enrollment_pause_date" type="DATE"/>
+            <column name="enrollment_restarted_date" type="DATE"/>
+            <column name="reason_for_enrollment_paused" type="VARCHAR(120)"/>
         </createTable>
         <createTable tableName="irb_protocol_action_history_parameter">
             <column autoIncrement="true" name="irb_protocol_action_history_parameter_id" type="int">

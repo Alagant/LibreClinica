@@ -39,6 +39,9 @@ public class IRBProtocolActionHistoryDAO extends AuditableEntityDAO<IRBProtocolA
         protocolActionHistoryBean.setReceivedDocsFromSites( (Date) hm.get("received_docs_from_sites"));
         protocolActionHistoryBean.setPackageSentToCdcIrb( (Date) hm.get("package_sent_to_cdc_irb"));
         protocolActionHistoryBean.setCdcApproval( (Date) hm.get("cdc_approval"));
+        protocolActionHistoryBean.setEnrollmentPauseDate( (Date) hm.get("enrollment_pause_date"));
+        protocolActionHistoryBean.setEnrollmentRestartedDate( (Date) hm.get("enrollment_restarted_date"));
+        protocolActionHistoryBean.setReasonForEnrollmentPaused( (String) hm.get("reason_for_enrollment_paused"));
 
         return protocolActionHistoryBean;
     }
@@ -135,6 +138,9 @@ public class IRBProtocolActionHistoryDAO extends AuditableEntityDAO<IRBProtocolA
         setTypeExpected(8, TypeNames.DATE);
         setTypeExpected(9, TypeNames.DATE);
         setTypeExpected(10, TypeNames.DATE);
+        setTypeExpected(11, TypeNames.DATE);
+        setTypeExpected(12, TypeNames.DATE);
+        setTypeExpected(13, TypeNames.STRING);
     }
 
     @Override
