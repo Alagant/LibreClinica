@@ -204,7 +204,6 @@ public class CreateSubStudyServlet extends SecureController {
                 session.setAttribute("definitions", this.initDefinitions(newStudy));
                 request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
                 request.setAttribute("statuses", Status.toActiveArrayList());
-                //List laboratories = LaboratoryBean.getLaboratories(sm.getDataSource());
                 LaboratoryDAO laboratoryDAO = new LaboratoryDAO(sm.getDataSource());
                 List laboratories = laboratoryDAO.findAll();
                 request.setAttribute("laboratories", laboratories);
@@ -247,6 +246,12 @@ public class CreateSubStudyServlet extends SecureController {
                 setPresetValues(fp.getPresetValues());
                 request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
                 request.setAttribute("statuses", Status.toActiveArrayList());
+                LaboratoryDAO laboratoryDAO = new LaboratoryDAO(sm.getDataSource());
+                List laboratories = laboratoryDAO.findAll();
+                request.setAttribute("laboratories", laboratories);
+                CountryDAO countryDAO = new CountryDAO(sm.getDataSource());
+                List countries = countryDAO.findAll();
+                request.setAttribute("countries", countries);
 
                 forwardPage(Page.CREATE_SUB_STUDY);
             } else if ("submit".equalsIgnoreCase(action)) {

@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.core.Role;
@@ -27,7 +28,9 @@ import org.akaza.openclinica.bean.submit.CRFVersionBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.control.form.FormProcessor;
 import org.akaza.openclinica.control.form.Validator;
+import org.akaza.openclinica.dao.managestudy.CountryDAO;
 import org.akaza.openclinica.dao.managestudy.EventDefinitionCRFDAO;
+import org.akaza.openclinica.dao.managestudy.LaboratoryDAO;
 import org.akaza.openclinica.dao.managestudy.StudyDAO;
 import org.akaza.openclinica.dao.service.StudyParameterValueDAO;
 import org.akaza.openclinica.dao.submit.CRFVersionDAO;
@@ -88,6 +91,12 @@ public class UpdateSubStudyServlet extends SecureController {
         if (action == null || action.trim().isEmpty()) {
             request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
             request.setAttribute("statuses", Status.toStudyUpdateMembersList());
+            LaboratoryDAO laboratoryDAO = new LaboratoryDAO(sm.getDataSource());
+            List laboratories = laboratoryDAO.findAll();
+            request.setAttribute("laboratories", laboratories);
+            CountryDAO countryDAO = new CountryDAO(sm.getDataSource());
+            List countries = countryDAO.findAll();
+            request.setAttribute("countries", countries);
             FormProcessor fp = new FormProcessor(request);
             logger.info("start date:" + study.getDatePlannedEnd());
             if (study.getDatePlannedEnd() != null) {
@@ -280,6 +289,12 @@ public class UpdateSubStudyServlet extends SecureController {
             request.setAttribute("formMessages", errors);
             request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
             request.setAttribute("statuses", Status.toStudyUpdateMembersList());
+            LaboratoryDAO laboratoryDAO = new LaboratoryDAO(sm.getDataSource());
+            List laboratories = laboratoryDAO.findAll();
+            request.setAttribute("laboratories", laboratories);
+            CountryDAO countryDAO = new CountryDAO(sm.getDataSource());
+            List countries = countryDAO.findAll();
+            request.setAttribute("countries", countries);
             forwardPage(Page.UPDATE_SUB_STUDY);
         }
 
@@ -384,7 +399,7 @@ public class UpdateSubStudyServlet extends SecureController {
         StudyParameterValueDAO spvdao = new StudyParameterValueDAO(sm.getDataSource());    
         String participateFormStatus = spvdao.findByHandleAndStudy(parentStudyBean.getId(), "participantPortal").getValue();
         if (participateFormStatus.equals("enabled")) 	baseUrl();
-      request.setAttribute("participateFormStatus",participateFormStatus );
+        request.setAttribute("participateFormStatus",participateFormStatus );
 
         
         for (StudyEventDefinitionBean sed : seds) {
