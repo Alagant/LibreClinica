@@ -56,6 +56,13 @@ public class IRBSiteServlet extends SecureController {
         return irbSiteDAO;
     }
 
+    private IRBProtocolActionHistoryParameterDAO getIrbProtocolActionHistoryParameter() {
+        if(irbProtocolActionHistoryParameterDAO == null)
+            irbProtocolActionHistoryParameterDAO = new IRBProtocolActionHistoryParameterDAO(sm.getDataSource());
+
+        return irbProtocolActionHistoryParameterDAO;
+    }
+
     private IRBProtocolActionHistoryDAO getIRBProtocolActionHistoryDAO() {
         if(irbProtocolActionHistoryDAO==null)
             irbProtocolActionHistoryDAO = new IRBProtocolActionHistoryDAO(sm.getDataSource());
@@ -155,7 +162,7 @@ public class IRBSiteServlet extends SecureController {
         ArrayList<IRBProtocolActionHistoryBean> protocolActionHistory =
                 getIRBProtocolActionHistoryDAO().findBySiteId(siteId);
         request.setAttribute("protocolActionTypes", protocolActionsTypes);
-        request.setAttribute("protocolActionHistory", protocolActionHistory);
+            request.setAttribute("protocolActionHistory", getIrbProtocolActionHistoryParameter().findAll());
         request.setAttribute("siteId", siteId);
 
         IRBSiteBean irbSiteBean;
