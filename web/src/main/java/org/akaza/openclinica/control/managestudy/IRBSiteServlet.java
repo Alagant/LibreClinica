@@ -3,6 +3,7 @@ package org.akaza.openclinica.control.managestudy;
 import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryBean;
 import org.akaza.openclinica.bean.managestudy.IRBProtocolActionTypeBean;
+import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryParameterBean;
 import org.akaza.openclinica.bean.managestudy.IRBSiteBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.control.form.DiscrepancyValidator;
@@ -11,6 +12,7 @@ import org.akaza.openclinica.control.form.FormProcessor;
 import org.akaza.openclinica.control.form.Validator;
 import org.akaza.openclinica.control.submit.AddNewSubjectServlet;
 import org.akaza.openclinica.dao.managestudy.IRBProtocolActionHistoryDAO;
+import org.akaza.openclinica.dao.managestudy.IRBProtocolActionHistoryParameterDAO;
 import org.akaza.openclinica.dao.managestudy.IRBProtocolActionTypeDAO;
 import org.akaza.openclinica.dao.managestudy.IRBSiteDAO;
 import org.akaza.openclinica.exception.OpenClinicaException;
@@ -45,6 +47,8 @@ public class IRBSiteServlet extends SecureController {
 
 
     private IRBProtocolActionHistoryDAO irbProtocolActionHistoryDAO;
+
+    private IRBProtocolActionHistoryParameterDAO irbProtocolActionHistoryParameterDAO;
 
     private IRBSiteDAO getIRBSiteDAO() {
         if(irbSiteDAO==null) irbSiteDAO = new IRBSiteDAO(sm.getDataSource());
@@ -175,7 +179,7 @@ public class IRBSiteServlet extends SecureController {
                 forwardPage(Page.IRB_SITE);
                 return;
             }
-            irbSiteBean = createOrUpdateIRBSiteBean(fp);
+            irbSiteBean = createOrUpdateIRBSiteBean();
             forwardPage(Page.STUDY_LIST_SERVLET);
             return;
         }
@@ -210,9 +214,7 @@ public class IRBSiteServlet extends SecureController {
 
         forwardPage(Page.IRB_SITE);
     }
-    private IRBSiteBean createOrUpdateIRBSiteBean(FormProcessor fp)
-            throws NumberFormatException, OpenClinicaException {
-
+    private IRBSiteBean createOrUpdateIRBSiteBean() throws NumberFormatException, OpenClinicaException {
         String stringSiteId = request.getParameter("siteId");
         int siteId = Integer.parseInt(stringSiteId);
 
