@@ -34,6 +34,7 @@
             <th>Received docs from sites</th>
             <th>Package sent to CDC IRB</th>
             <th>CDC Approval/ Acknowledgment</th>
+            <th>Enrollment Pause Date</th>
             <th>Enrollment Restarted Date</th>
             <th>Reason for enrollment paused</th>
         </tr>
@@ -49,8 +50,9 @@
                 <td>${c.receivedDocsFromSites}</td>
                 <td>${c.packageSentToCdcIrb}</td>
                 <td>${c.cdcApproval}</td>
-                <td></td>
-                <td></td>
+                <td>${c.enrollmentPauseDate}</td>
+                <td>${c.enrollmentRestartedDate}</td>
+                <td>${c.reasonForEnrollmentPaused}</td>
             </tr>
         </c:forEach>
     </tbody>
