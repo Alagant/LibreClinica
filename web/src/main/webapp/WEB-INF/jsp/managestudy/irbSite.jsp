@@ -21,6 +21,7 @@
 <script type="text/javascript" language="JavaScript" src="includes/jmesa/jquery.blockUI.js"></script>
 
 <script type="text/javascript" language="JavaScript" src="includes/jmesa/jquery-migrate-1.1.1.js"></script>
+<c:set var="siteId" value='${request.getAttribute("siteId")}'/>
 
 <tr id="sidebar_Instructions_open" style="display: none">
     <td class="sidebar_tab">
@@ -62,36 +63,42 @@
         }
     </style>
     <form action="${pageContext.request.contextPath}/IrbSite" method="post">
-        <input type="hidden" name="siteId" value="${siteId}"/>
+        <input type="hidden" name="siteId" value="${presetValues['siteId']}"/>
         <table>
             <tr>
                 <td align="right"><label>Version number</label></td>
                 <td>
-                    <input name="version_number" id="version_number" value="${irbSiteBean.versionNumber}"/>
-                    <%--
-                    <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0" id="version_number-trigger" />
-                    <script type="text/javascript">
-                        Calendar.setup({inputField: "version_number",
-                            ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "version_number-trigger", customPX: 300, customPY: 10 });
-                    </script>
-                    --%>
+                    <input name="version_number" id="version_number" value="${presetValues['version_number']}"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="version_number"/></jsp:include>
                 </td>
             </tr>
             <tr>
                 <td align="right">
                     <input name="site_relies_on_cdc_irb" type="checkbox" value="1"
-                           ${irbSiteBean.siteReliesOnCdcIrb?'checked':''}/>
+                           ${preset_values['site_relies_on_cdc_irb']?'checked':''}/>
                 </td>
                 <td><label>Sites relies on CDC IRB</label></td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="site_relies_on_cdc_irb"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <input name="is_1572" type="checkbox" value="1"
-                           ${irbSiteBean.is1572?'checked':''} />
+                    ${preset_values['is_1572']?'checked':''} />
                 </td>
                 <td><label>1572</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="is_1572"/></jsp:include>
+                </td>
             </tr>
             <tr>
                 <td align="right">
@@ -99,7 +106,7 @@
                 </td>
                 <td>
                     <input name="cdc_irb_protocol_version_date" id="cdc_irb_protocol_version_date"
-                           value="${irbSiteBean.cdcIrbProtocolVersionDate}"/>
+                           value="${presetValues['cdc_irb_protocol_version_date']}"/>
 
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
@@ -112,12 +119,17 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="cdc_irb_protocol_version_date"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Local IRB approved protocol</label>
                 </td>
                 <td>
                     <input name="local_irb_approved_protocol" id="local_irb_approved_protocol"
-                           value="${irbSiteBean.localIrbApprovedProtocol}"/>
+                           value="${presetValues['local_irb_approved_protocol']}"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="local_irb_approved_protocol-trigger" /> *
@@ -129,13 +141,18 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="local_irb_approved_protocol"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>CDC received local documents</label>
                 </td>
                 <td>
                     <input name="cdc_received_local_documents"
                            id="cdc_received_local_documents"
-                           value="${irbSiteBean.cdcReceivedLocalDocuments}"/>
+                           value="${presetValues['cdc_received_local_documents']}"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="cdc_received_local_documents-trigger" /> *
@@ -147,13 +164,18 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="cdc_received_local_documents"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Site consent package send to CDC IRB</label>
                 </td>
                 <td>
                     <input name="site_consent_package_send_to_cdc_irb"
                            id="site_consent_package_send_to_cdc_irb"
-                           value="${irbSiteBean.siteConsentPackageSendToCdcIrb}"/>
+                           value="${presetValues['site_consent_package_send_to_cdc_irb']}"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="site_consent_package_send_to_cdc_irb-trigger" /> *
@@ -165,13 +187,18 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="site_consent_package_send_to_cdc_irb"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Initial CDC IRB approval</label>
                 </td>
                 <td>
                     <input name="initial_cdc_irb_approval"
                            id="initial_cdc_irb_approval"
-                           value="${irbSiteBean.initialCdcIrbApproval}"/>
+                           value="${presetValues['initial_cdc_irb_approval']}"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="initial_cdc_irb_approval-trigger" /> *
@@ -183,13 +210,18 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="initial_cdc_irb_approval"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>CRB approval to enroll</label>
                 </td>
                 <td>
                     <input name="crb_approval_to_enroll"
                            id="crb_approval_to_enroll"
-                           value="${irbSiteBean.crbApprovalToEnroll}"/>
+                           value="${presetValues['crb_approval_to_enroll']}"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="crb_approval_to_enroll-trigger" /> *
@@ -201,11 +233,16 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="crb_approval_to_enroll"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>IRB approval</label>
                 </td>
                 <td>
-                    <input name="irb_approval" id="irb_approval" value="${irbSiteBean.irbApproval}"/>
+                    <input name="irb_approval" id="irb_approval" value="${presetValues['irb_approval']}"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="irb_approval-trigger" /> *
@@ -217,12 +254,17 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="irb_approval"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Expiration date</label>
                 </td>
                 <td>
                     <input name="expiration_date" id="expiration_date"
-                           value="${irbSiteBean.expirationDate}"/>
+                           value="${presetValues['expiration_date']}"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="expiration_date-trigger" /> *
@@ -234,12 +276,21 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="expiration_date"/></jsp:include>
+                </td>
+            </tr>
+            <tr>
                 <td align="right">
-                    <input name="active" type="checkbox" value="1"
-                           ${irbSiteBean.active?'checked':''}/>
+                    <input name="active" type="checkbox" value="1" ${preset_values['active']?'checked':''} />
                 </td>
                 <td>
                     <label>Active</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="active"/></jsp:include>
                 </td>
             </tr>
             <tr>
@@ -247,9 +298,14 @@
                     <label>Comments</label>
                 </td>
                 <td>
-                    <textarea>
-                        ${irbSiteBean.comments}
+                    <textarea name="comments" id="comments">
+                        ${presetValues['comments']}
                     </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <jsp:include page="../showMessage.jsp"><jsp:param name="key" value="comments"/></jsp:include>
                 </td>
             </tr>
             <tr>
