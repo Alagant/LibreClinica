@@ -54,6 +54,43 @@
         </createTable>
         <sqlFile encoding="UTF-8" path="countries.sql" relativeToChangelogFile="true"/>
     </changeSet>
-
-
+    <changeSet id="4" author="lucioric2000">
+        <comment>Adds a table with laboratories for study 38</comment>
+        <createTable tableName="laboratories">
+            <column name="labId" type="INT">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="labName" type="VARCHAR(200)">
+                <constraints nullable="false" />
+            </column>
+            <column name="address1" type="VARCHAR(200)">
+                <constraints nullable="true" />
+            </column>
+            <column name="address2" type="VARCHAR(200)">
+                <constraints nullable="true" />
+            </column>
+            <column name="stateProvinceRegion" type="VARCHAR(100)">
+                <constraints nullable="true" />
+            </column>
+            <column name="city" type="VARCHAR(100)">
+                <constraints nullable="true" />
+            </column>
+            <column name="country" type="VARCHAR(100)">
+                <constraints nullable="true" />
+            </column>
+            <column name="zipPostal" type="VARCHAR(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="activeLab" type="BOOLEAN">
+                <constraints nullable="true" />
+            </column>
+            <column name="labTypes" type="VARCHAR(80)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="lucioric2000">
+        <comment>Adds data to a table with laboratories for study 38</comment>
+        <sqlFile encoding="UTF-8" path="laboratories.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
