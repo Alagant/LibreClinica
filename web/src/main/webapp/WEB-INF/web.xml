@@ -412,6 +412,13 @@
         <servlet-class>org.akaza.openclinica.control.managestudy.IRBSiteServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>IrbStudyNotificationServlet</servlet-name>
+        <display-name>IrbStudyNotificationServlet</display-name>
+        <description>Servlet for IRB Study</description>
+        <servlet-class>org.akaza.openclinica.control.managestudy.IRBStudyNotificationServlet</servlet-class>
+    </servlet>
+
     <!--    <servlet>
             <servlet-name>EnterpriseServlet</servlet-name>
             <display-name>EnterpriseServlet</display-name>
