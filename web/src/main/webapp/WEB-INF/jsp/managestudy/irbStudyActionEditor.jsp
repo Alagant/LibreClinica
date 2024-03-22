@@ -164,18 +164,10 @@
   </table>
 </form>
 <script>
-  jQuery("#studyActionHistoryParameterSelection").change(e => {
-    /*
-     data-effective-date="${c.effectiveDate}"
-                    data-hrpo-action="${c.hrpoAction}"
-                    data-version-date="${c.versionDate}"
-                    data-submission-to-cdc-irb="${c.submissionToCdcIrb}"
-                    data-cdc-irb-approval="${c.cdcIrbApproval}"
-                    data-notification-sent-to-sites="${c.notificationSentToSites}"
-    * */
+  function enableFieldsByActionParameter() {
     const option = jQuery('#studyActionHistoryParameterSelection option[value="'+
-                      jQuery("#studyActionHistoryParameterSelection").val() + '"]'
-                  );
+            jQuery("#studyActionHistoryParameterSelection").val() + '"]'
+    );
 
     console.log(option);
     jQuery('#effective_date').attr('disabled', 'disabled');
@@ -190,7 +182,7 @@
     console.log(jQuery(option).data('effective-date'));
 
     if(jQuery(option).data('effective-date'))
-        jQuery('#effective_date').removeAttr('disabled');
+      jQuery('#effective_date').removeAttr('disabled');
 
     if(jQuery(option).data('hrpo-action'))
       jQuery('#hrpo_action').removeAttr('disabled');
@@ -210,6 +202,9 @@
     if(jQuery(option).data('notification-sent-to-sites'))
       jQuery('#notification_sent_to_sites').removeAttr('disabled');
 
+  }
 
+  jQuery("#studyActionHistoryParameterSelection").change(e => {
+    enableFieldsByActionParameter();
   });
 </script>

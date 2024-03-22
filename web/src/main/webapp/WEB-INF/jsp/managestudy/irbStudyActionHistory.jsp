@@ -13,7 +13,8 @@
 
         jQuery('#study-action-open').click(function () {
             jQuery("#studyActionHistoryParameterSelection").val('');
-            jQuery('#study-action-editor input[type="text"]').val();
+            jQuery('#study-action-editor input[type="text"]').val('');
+            enableFieldsByActionParameter();
 
             jQuery.blockUI({
                 message: jQuery('#study-action-editor'),
@@ -33,6 +34,7 @@
             jQuery('input[name="submission_to_cdc_irb"]').val(jQuery(tr).find('td:nth-child(6)').text());
             jQuery('input[name="cdc_irb_approval"]').val(jQuery(tr).find('td:nth-child(7)').text());
             jQuery('input[name="notification_sent_to_sites"]').val(jQuery(tr).find('td:nth-child(8)').text());
+            enableFieldsByActionParameter();
 
             jQuery.blockUI({
                 message: jQuery('#study-action-editor'),
@@ -42,7 +44,7 @@
 
         });
 
-        jQuery('a.close-editor').click(function() {
+        jQuery('.close-editor').click(function() {
             jQuery.unblockUI();
             return false;
         });
