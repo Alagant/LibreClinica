@@ -521,6 +521,10 @@
                               </td>
                             </tr>
 
+
+
+
+
                             <tr valign="top">
                               <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
                               <td class="table_cell select-autosize">
