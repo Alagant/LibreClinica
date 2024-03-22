@@ -410,7 +410,7 @@
 			</plugin>
 			<plugin>
 				<configuration>
-					<propertyFile>src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
+					<propertyFile>../core/src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
 					<username>clinica</username>
 					<password>clinica</password>
 					<url>jdbc:postgresql://localhost:5432/libreclinica</url>

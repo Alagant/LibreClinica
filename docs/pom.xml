@@ -34,7 +34,7 @@
 		<plugins>
 			<plugin>
 				<configuration>
-					<propertyFile>datainfo.properties</propertyFile>
+					<propertyFile>../core/src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
 				</configuration>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
