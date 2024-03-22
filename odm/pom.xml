@@ -28,10 +28,10 @@
         <plugins>
             <plugin>
                 <configuration>
-                    <!--propertyFile>${project.basedir}\src\main\resources\org\akaza\openclinica\datainfo.properties</propertyFile-->
+                    <propertyFile>../core/src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
                     <username>clinica</username>
                     <password>clinica</password>
-                    <url>jdbc:postgresql://localhost:5432/libreclinica</url>
+                    <!--url>jdbc:postgresql://localhost:5432/libreclinica</url-->
                 </configuration>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
