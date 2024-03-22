@@ -1,7 +1,7 @@
 package org.akaza.openclinica.dao.managestudy;
 
 import org.akaza.openclinica.bean.core.EntityBean;
-import org.akaza.openclinica.bean.managestudy.IRBProtocolActionHistoryParameterBean;
+import org.akaza.openclinica.bean.managestudy.IRBStudyActionHistoryParameterBean;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.SQLFactory;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class IRBProtocolActionHistoryParameterDAO extends AuditableEntityDAO<IRBProtocolActionHistoryParameterBean> {
-    public IRBProtocolActionHistoryParameterDAO(DataSource ds) {
+public class IRBStudyActionHistoryParameterDAO extends AuditableEntityDAO<IRBStudyActionHistoryParameterBean> {
+    public IRBStudyActionHistoryParameterDAO(DataSource ds) {
         super(ds);
         setDigesterName();
         setQueryNames();
@@ -25,17 +25,18 @@ public class IRBProtocolActionHistoryParameterDAO extends AuditableEntityDAO<IRB
     }
 
     @Override
-    public IRBProtocolActionHistoryParameterBean getEntityFromHashMap(HashMap<String, Object> hm) {
-        IRBProtocolActionHistoryParameterBean retval = new IRBProtocolActionHistoryParameterBean();
-        retval.setIrbProtocolActionHistoryParameterId((Integer)hm.get("irb_protocol_action_history_parameter_id"));
+    public IRBStudyActionHistoryParameterBean getEntityFromHashMap(HashMap<String, Object> hm) {
+        IRBStudyActionHistoryParameterBean retval = new IRBStudyActionHistoryParameterBean();
+
+        retval.setIrbStudyActionHistoryParameterId((Integer)hm.get("irb_study_action_history_parameter_id"));
         retval.setAction((String)hm.get("action"));
-        retval.setCdcIrbProtocolVersionDate((Boolean)hm.get("cdc_irb_protocol_version_date"));
-        retval.setVersion((Boolean)hm.get("version"));
-        retval.setSiteSubmittedToLocalIrb((Boolean)hm.get("site_submitted_to_local_irb"));
-        retval.setLocalIrbApproval((Boolean)hm.get("local_irb_approval"));
-        retval.setSiteSendsDocsToCrb((Boolean)hm.get("site_sends_docs_to_crb"));
-        retval.setPackageSentToCdcIrb((Boolean)hm.get("package_sent_to_cdc_irb"));
-        retval.setCdcApprovalAcknowledgment((Boolean)hm.get("cdc_approval_acknowledgment"));
+        retval.setEffectiveDate((Boolean)hm.get("effective_date"));
+        retval.setHrpoAction((Boolean)hm.get("hrpo_action"));
+        retval.setVersionNumber((Boolean)hm.get("version_number"));
+        retval.setVersionDate((Boolean)hm.get("version_date"));
+        retval.setSubmissionToCdcIrb((Boolean)hm.get("submission_to_cdc_irb"));
+        retval.setCdcIrbApproval((Boolean)hm.get("cdc_irb_approval"));
+        retval.setNotificationSentToSites((Boolean)hm.get("notification_sent_to_sites"));
         retval.setEnrollmentPauseDate((Boolean)hm.get("enrollment_pause_date"));
         retval.setEnrollmentReStartedDate((Boolean)hm.get("enrollment_re_started_date"));
         retval.setReasonForEnrollmentPause((Boolean)hm.get("reason_for_enrollment_pause"));
@@ -44,12 +45,12 @@ public class IRBProtocolActionHistoryParameterDAO extends AuditableEntityDAO<IRB
     }
 
     @Override
-    public ArrayList<IRBProtocolActionHistoryParameterBean> findAll(String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) throws OpenClinicaException {
+    public ArrayList<IRBStudyActionHistoryParameterBean> findAll(String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) throws OpenClinicaException {
         return null;
     }
 
     @Override
-    public ArrayList<IRBProtocolActionHistoryParameterBean> findAll() throws OpenClinicaException {
+    public ArrayList<IRBStudyActionHistoryParameterBean> findAll() throws OpenClinicaException {
         HashMap<Integer, Object> parameters = new HashMap<>();
 
         return this.executeFindAllQuery("findAllProtocolActionHistoryParameter", parameters);
@@ -61,27 +62,27 @@ public class IRBProtocolActionHistoryParameterDAO extends AuditableEntityDAO<IRB
     }
 
     @Override
-    public IRBProtocolActionHistoryParameterBean findByPKAndStudy(int id, StudyBean study) {
+    public IRBStudyActionHistoryParameterBean findByPKAndStudy(int id, StudyBean study) {
         return super.findByPKAndStudy(id, study);
     }
 
     @Override
-    public IRBProtocolActionHistoryParameterBean create(IRBProtocolActionHistoryParameterBean eb) throws OpenClinicaException {
+    public IRBStudyActionHistoryParameterBean create(IRBStudyActionHistoryParameterBean eb) throws OpenClinicaException {
         return null;
     }
 
     @Override
-    public IRBProtocolActionHistoryParameterBean update(IRBProtocolActionHistoryParameterBean eb) throws OpenClinicaException {
+    public IRBStudyActionHistoryParameterBean update(IRBStudyActionHistoryParameterBean eb) throws OpenClinicaException {
         return null;
     }
 
     @Override
-    public ArrayList<IRBProtocolActionHistoryParameterBean> findAllByPermission(Object objCurrentUser, int intActionType, String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) throws OpenClinicaException {
+    public ArrayList<IRBStudyActionHistoryParameterBean> findAllByPermission(Object objCurrentUser, int intActionType, String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) throws OpenClinicaException {
         return null;
     }
 
     @Override
-    public ArrayList<IRBProtocolActionHistoryParameterBean> findAllByPermission(Object objCurrentUser, int intActionType) throws OpenClinicaException {
+    public ArrayList<IRBStudyActionHistoryParameterBean> findAllByPermission(Object objCurrentUser, int intActionType) throws OpenClinicaException {
         return null;
     }
 
@@ -108,7 +109,7 @@ public class IRBProtocolActionHistoryParameterDAO extends AuditableEntityDAO<IRB
     }
 
     @Override
-    public IRBProtocolActionHistoryParameterBean emptyBean() {
-        return new IRBProtocolActionHistoryParameterBean();
+    public IRBStudyActionHistoryParameterBean emptyBean() {
+        return new IRBStudyActionHistoryParameterBean();
     }
 }
