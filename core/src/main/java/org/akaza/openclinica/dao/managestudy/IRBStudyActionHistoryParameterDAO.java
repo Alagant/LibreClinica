@@ -53,7 +53,7 @@ public class IRBStudyActionHistoryParameterDAO extends AuditableEntityDAO<IRBStu
     public ArrayList<IRBStudyActionHistoryParameterBean> findAll() throws OpenClinicaException {
         HashMap<Integer, Object> parameters = new HashMap<>();
 
-        return this.executeFindAllQuery("findAllProtocolActionHistoryParameter", parameters);
+        return this.executeFindAllQuery("findAllIrbStudyActionHistoryParameter", parameters);
     }
 
     @Override
