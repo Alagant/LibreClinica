@@ -941,7 +941,7 @@
 					<artifactId>liquibase-plugin</artifactId>
 					<version>1.9.1.0</version>
 					<configuration>
-						<url>jdbc:postgresql://clinica:clinica@localhost:5432/libreclinica</url>
+						<!--url>jdbc:postgresql://clinica:clinica@localhost:5432/libreclinica</url-->
 						<propertyFile>${config.file}</propertyFile>
 					</configuration>
 				</plugin>
