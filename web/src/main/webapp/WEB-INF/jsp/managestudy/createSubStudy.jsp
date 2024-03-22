@@ -239,14 +239,14 @@
                           </tr>
 
                           <tr valign="top">
-                            <td class="table_header_column"><fmt:message key="contract_type" bundle="${resword}"/>:</td>
+                            <td class="table_header_column"><fmt:message key="site_type" bundle="${resword}"/>:</td>
                             <td class="table_cell">
                               <select name="siteType">
-                                <option value="Depot"><fmt:message key="contract_type_depot" bundle="${resword}"/><c:if
+                                <option value="Depot"><fmt:message key="site_type_depot" bundle="${resword}"/><c:if
                                     test="${newStudy.siteType=='Depot'}">checked</c:if></option>
-                                <option value="Site"><fmt:message key="contract_type_site" bundle="${resword}"/><c:if
+                                <option value="Site"><fmt:message key="site_type_site" bundle="${resword}"/><c:if
                                     test="${newStudy.siteType=='Site'}">checked</c:if></option>
-                                <option value="External Partners"><fmt:message key="contract_type_external_partners"
+                                <option value="External Partners"><fmt:message key="site_type_external_partners"
                                                                                bundle="${resword}"/><c:if
                                     test="${newStudy.siteType=='External Partners'}">checked</c:if></option>
                               </select>
