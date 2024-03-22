@@ -1,6 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="studyActionHistory" scope="request" type="java.util.List"/>
+<div>
+    <style type="text/css" scoped>
+        #table-history tbody tr:nth-child(odd) td {
+            background: var(--gray-l40);
+        }
+    </style>
 <script>
     jQuery(document).ready(function () {
 
@@ -47,7 +53,7 @@
     <jsp:include page="./irbStudyActionEditor.jsp"/>
 </div>
 <h2>Study action history</h2>
-<table>
+<table id="table-history">
     <thead>
     <tr>
         <th>Action</th>
@@ -87,3 +93,4 @@
     </tr>
     </tfoot>
 </table>
+</div>
