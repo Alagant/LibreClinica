@@ -33,6 +33,23 @@
 	<build>
 		<plugins>
 			<plugin>
+				<configuration>
+					<propertyFile>datainfo.properties</propertyFile>
+				</configuration>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>4.26.0</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>42.2.26</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
