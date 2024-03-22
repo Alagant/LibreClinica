@@ -31,7 +31,7 @@
                     <propertyFile>../core/src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
                     <username>clinica</username>
                     <password>clinica</password>
-                    <url>jdbc:postgresql://localhost:5432/libreclinica</url>
+                    <url>jdbc:postgresql://postgres:5432/libreclinica</url>
                 </configuration>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
