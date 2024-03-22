@@ -93,4 +93,25 @@
         <comment>Adds data to a table with laboratories for study 38</comment>
         <sqlFile encoding="UTF-8" path="laboratories.sql" relativeToChangelogFile="true"/>
     </changeSet>
-</databaseChangeLog>
+    <changeSet id="6" author="lucioric2000">
+        <comment>Creates a Foreign key to laboratory in the sites database</comment>
+        <addColumn tableName="study">
+            <column name="laboratory_id" type="INT">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint  baseColumnNames="laboratory_id"
+                                  baseTableCatalogName="cat"
+                                  baseTableName="study"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_study_laboratory"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="SET NULL"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="labId"
+                                  referencedTableCatalogName="cat"
+                                  referencedTableName="laboratories"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet></databaseChangeLog>

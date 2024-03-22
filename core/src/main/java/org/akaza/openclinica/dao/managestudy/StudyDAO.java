@@ -187,6 +187,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         this.setTypeExpected(68, TypeNames.STRING); // fwa_name
         this.setTypeExpected(69, TypeNames.DATE); // fwa_expiration_date
         this.setTypeExpected(70, TypeNames.STRING); // site_type
+        this.setTypeExpected(71, TypeNames.STRING); // laboratory_id
     }
 
     /**
