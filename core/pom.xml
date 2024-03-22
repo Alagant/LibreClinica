@@ -258,6 +258,7 @@
 					<username>clinica</username>
 					<password>clinica</password>
 					<url>jdbc:postgresql://postgres:5432/libreclinica</url>
+					<changeLogFile>src/main/resources/migration/lc-1.2.0/irb.xml</changeLogFile>
 				</configuration>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
