@@ -34,6 +34,9 @@
             jQuery('input[name="submission_to_cdc_irb"]').val(jQuery(tr).find('td:nth-child(6)').text());
             jQuery('input[name="cdc_irb_approval"]').val(jQuery(tr).find('td:nth-child(7)').text());
             jQuery('input[name="notification_sent_to_sites"]').val(jQuery(tr).find('td:nth-child(8)').text());
+            jQuery('input[name="enrollment_pause_date"]').val(jQuery(tr).find('td:nth-child(9)').text());
+            jQuery('input[name="enrollment_re_started_date"]').val(jQuery(tr).find('td:nth-child(10)').text());
+            jQuery('input[name="reason_for_enrollment_pause"]').val(jQuery(tr).find('td:nth-child(11)').text());
             enableFieldsByActionParameter();
 
             jQuery.blockUI({
@@ -66,6 +69,9 @@
         <th>Package sent to CDC IRB</th>
         <th>CDC IRB Approval/Memo</th>
         <th>Memo notification sent to sites</th>
+        <th>Enrollment pause date</th>
+        <th>Rnrollment restarted date</th>
+        <th>Reason for enrollment pause</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -81,6 +87,9 @@
                 <td>${h['submissionToCdcIrb']}</td>
                 <td>${h['cdcIrbApproval']}</td>
                 <td>${h['notificationSentToSites']}</td>
+                <td>${h['enrollmentPauseDate']}</td>
+                <td>${h['enrollmentReStartedDate']}</td>
+                <td>${h['reasonForEnrollmentPause']}</td>
                 <td>
                     <a href="#" class="update-history">Edit</a>
                 </td>

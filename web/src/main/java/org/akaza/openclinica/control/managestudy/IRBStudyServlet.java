@@ -27,6 +27,7 @@ public class IRBStudyServlet extends SecureController {
     private IRBStudyDAO irbStudyDAO;
     private IRBStudyActionHistoryDAO irbStudyActionHistoryDAO;
     private IRBStudyActionHistoryParameterDAO irbStudyActionHistoryParameterDAO;
+    private ArrayList<IRBStudyActionHistoryParameterBean> irbStudyActionHistoryParameter;
     public static final String INPUT_CDC_IRB_PROTOCOL_NUMBER = "cdc_irb_protocol_number";
     public static final String INPUT_VERSION1_PROTOCOL_DATE = "version1_protocol_date";
     public static final String INPUT_PROTOCOL_OFFICER = "protocol_officer";
@@ -44,6 +45,9 @@ public class IRBStudyServlet extends SecureController {
     public static final String INPUT_H_SUBMISSION_TO_CDC_IRB = "submission_to_cdc_irb";
     public static final String INPUT_H_CDC_IRB_APPROVAL = "cdc_irb_approval";
     public static final String INPUT_H_NOTIFICATION_SENT_TO_SITES = "notification_sent_to_sites";
+    public static final String INPUT_H_ENROLLMENT_PAUSE_DATE = "enrollment_pause_date";
+    public static final String INPUT_H_ENROLLMENT_RE_STARTED_DATE = "enrollment_re_started_date";
+    public static final String INPUT_H_REASON_FOR_ENROLLMENT_PAUSE = "reason_for_enrollment_pause";
 
 
     private IRBStudyDAO getIRBStudyDAO() {
@@ -140,6 +144,94 @@ public class IRBStudyServlet extends SecureController {
         return v.validate();
     }
 
+    private HashMap<String, ArrayList<String>> validateIrbStudyActionHistoryRequest() {
+        FormDiscrepancyNotes discNotes;
+
+        discNotes = (FormDiscrepancyNotes) session.getAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+        if (discNotes == null) {
+            discNotes = new FormDiscrepancyNotes();
+            session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+        }
+        DiscrepancyValidator v = new DiscrepancyValidator(request, discNotes);
+
+        String stringStudyActionHistoryType =
+                request.getParameter(INPUT_H_PROTOCOL_ACTION_TYPE);
+        int studyActionHistoryType = -1;
+        try {
+            studyActionHistoryType = Integer.parseInt(stringStudyActionHistoryType);
+        }
+        catch (NumberFormatException ex) {
+            //Don't do anything.
+        }
+        studyActionHistoryType--;
+        System.out.println("validateIrbStudyActionHistoryRequest: " + stringStudyActionHistoryType);
+        System.out.println("validateIrbStudyActionHistoryRequest: " + studyActionHistoryType);
+        System.out.println("validateIrbStudyActionHistoryRequest: " + irbStudyActionHistoryParameter.get(studyActionHistoryType).getAction());
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getEffectiveDate()) {
+            v.addValidation(INPUT_H_EFFECTIVE_DATE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_EFFECTIVE_DATE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_EFFECTIVE_DATE, Validator.DATE_IN_PAST);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getHrpoAction()) {
+            v.addValidation(INPUT_H_HRPO_ACTION, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_HRPO_ACTION, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 3);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getVersionNumber()) {
+            v.addValidation(INPUT_H_VERSION_NUMBER, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_VERSION_NUMBER, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 4);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getVersionDate()) {
+            v.addValidation(INPUT_H_VERSION_DATE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_VERSION_DATE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_VERSION_DATE, Validator.DATE_IN_PAST);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getSubmissionToCdcIrb()) {
+            v.addValidation(INPUT_H_SUBMISSION_TO_CDC_IRB, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_SUBMISSION_TO_CDC_IRB, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_SUBMISSION_TO_CDC_IRB, Validator.DATE_IN_PAST);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getCdcIrbApproval()) {
+            v.addValidation(INPUT_H_CDC_IRB_APPROVAL, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_CDC_IRB_APPROVAL, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_CDC_IRB_APPROVAL, Validator.DATE_IN_PAST);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getNotificationSentToSites()) {
+            v.addValidation(INPUT_H_CDC_IRB_APPROVAL, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_CDC_IRB_APPROVAL, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_CDC_IRB_APPROVAL, Validator.DATE_IN_PAST);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getEnrollmentPauseDate()) {
+            v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.DATE_IN_PAST);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getEnrollmentReStartedDate()) {
+            v.addValidation(INPUT_H_ENROLLMENT_RE_STARTED_DATE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_ENROLLMENT_RE_STARTED_DATE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_ENROLLMENT_RE_STARTED_DATE, Validator.DATE_IN_PAST);
+        }
+
+        if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getReasonForEnrollmentPause()) {
+            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.DATE_IN_PAST);
+        }
+
+        return v.validate();
+    }
+
+
     private ArrayList<HashMap<String, String>> getStudyActionHistory() {
         Locale locale = LocaleResolver.getLocale(request);
         SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);
@@ -173,8 +265,7 @@ public class IRBStudyServlet extends SecureController {
         Locale locale = LocaleResolver.getLocale(request);
         SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);
 
-        ArrayList<IRBStudyActionHistoryParameterBean> protocolActionsTypes =
-                getIrbStudyActionHistoryParameterDAO().findAll();
+        irbStudyActionHistoryParameter = getIrbStudyActionHistoryParameterDAO().findAll();
         /*
         ArrayList<IRBStudyActionHistoryBean> studyActionHistory =
                 getIRBStudyActionHistoryDAO().findByStudyId(currentStudy.getId());
@@ -182,7 +273,7 @@ public class IRBStudyServlet extends SecureController {
         ArrayList<HashMap<String, String>> studyActionHistoryFormatted = new ArrayList<>();
          */
 
-        request.setAttribute("protocolActionHistoryParameter", protocolActionsTypes);
+        request.setAttribute("protocolActionHistoryParameter", irbStudyActionHistoryParameter);
         //request.setAttribute("studyActionHistory", studyActionHistory);
         request.setAttribute("studyActionHistory", getStudyActionHistory());
 
@@ -194,6 +285,19 @@ public class IRBStudyServlet extends SecureController {
         if(request.getMethod().compareToIgnoreCase("POST")==0) {
             if(request.getParameter("action") != null &&
                     (request.getParameter("action").compareToIgnoreCase("saveStudyActionEditor")==0)) {
+                HashMap<String, ArrayList<String>> errors = validateIrbStudyActionHistoryRequest();
+
+                if (!errors.isEmpty()) {
+                    setInputMessages(errors);
+                    fp.clearPresetValues();
+                    setPresetValuesFromRequest(fp);
+                    setPresetValues(fp.getPresetValues());
+
+                    // addPageMessage("Validation errors were found when saving the IRB Study data");
+                    forwardPage(Page.IRB_STUDY);
+                    return;
+                }
+
                 createOrUpdateActionHistory();
                 request.setAttribute("studyActionHistory", getStudyActionHistory());
                 forwardPage(Page.IRB_STUDY);

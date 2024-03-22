@@ -16,6 +16,9 @@ public class IRBStudyActionHistoryBean extends EntityBean {
     private Date submissionToCdcIrb;
     private Date cdcIrbApproval;
     private Date notificationSentToSites;
+    private Date enrollmentPauseDate;
+    private Date enrollmentReStartedDate;
+    private String reasonForEnrollmentPause;
 
     public int getIrbStudyActionHistoryId() {
         return irbStudyActionHistoryId;
@@ -103,5 +106,29 @@ public class IRBStudyActionHistoryBean extends EntityBean {
 
     public void setNotificationSentToSites(Date notificationSentToSites) {
         this.notificationSentToSites = notificationSentToSites;
+    }
+
+    public Date getEnrollmentPauseDate() {
+        return enrollmentPauseDate;
+    }
+
+    public void setEnrollmentPauseDate(Date enrollmentPauseDate) {
+        this.enrollmentPauseDate = enrollmentPauseDate;
+    }
+
+    public Date getEnrollmentReStartedDate() {
+        return enrollmentReStartedDate;
+    }
+
+    public void setEnrollmentReStartedDate(Date enrollmentReStartedDate) {
+        this.enrollmentReStartedDate = enrollmentReStartedDate;
+    }
+
+    public String getReasonForEnrollmentPause() {
+        return reasonForEnrollmentPause;
+    }
+
+    public void setReasonForEnrollmentPause(String reasonForEnrollmentPause) {
+        this.reasonForEnrollmentPause = reasonForEnrollmentPause;
     }
 }

@@ -294,6 +294,9 @@
             <column name="submission_to_cdc_irb" type="DATE"/>
             <column name="cdc_irb_approval" type="DATE"/>
             <column name="notification_sent_to_sites" type="DATE"/>
+            <column name="enrollment_pause_date" type="DATE"/>
+            <column name="enrollment_re_started_date" type="DATE"/>
+            <column name="reason_for_enrollment_pause" type="VARCHAR(120)"/>
         </createTable>
         <createTable tableName="irb_study_action_history_parameter">
             <column autoIncrement="true" name="irb_study_action_history_parameter_id" type="int">

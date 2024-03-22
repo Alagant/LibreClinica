@@ -38,6 +38,9 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
         retval.setSubmissionToCdcIrb((Date) hm.get("submission_to_cdc_irb"));
         retval.setCdcIrbApproval((Date) hm.get("cdc_irb_approval"));
         retval.setNotificationSentToSites((Date) hm.get("notification_sent_to_sites"));
+        retval.setEnrollmentPauseDate((Date) hm.get("enrollment_pause_date"));
+        retval.setEnrollmentReStartedDate((Date) hm.get("enrollment_re_started_date"));
+        retval.setReasonForEnrollmentPause((String) hm.get("reason_for_enrollment_pause"));
 
         return retval;
     }
@@ -76,7 +79,12 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
         if(eb.getCdcIrbApproval()==null) nullVars.put(retval, TypeNames.DATE);
         variables.put(retval++, eb.getCdcIrbApproval());
         if(eb.getNotificationSentToSites()==null) nullVars.put(retval, TypeNames.DATE);
-        variables.put(retval, eb.getNotificationSentToSites());
+        variables.put(retval++, eb.getNotificationSentToSites());
+        if(eb.getEnrollmentPauseDate()==null) nullVars.put(retval, TypeNames.DATE);
+        variables.put(retval++, eb.getNotificationSentToSites());
+        if(eb.getEnrollmentReStartedDate()==null) nullVars.put(retval, TypeNames.DATE);
+        variables.put(retval++, eb.getEnrollmentReStartedDate());
+        variables.put(retval, eb.getReasonForEnrollmentPause());
 
         return retval;
     }
@@ -134,6 +142,9 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
         setTypeExpected(9, TypeNames.DATE);
         setTypeExpected(10, TypeNames.DATE);
         setTypeExpected(11, TypeNames.DATE);
+        setTypeExpected(12, TypeNames.DATE);
+        setTypeExpected(13, TypeNames.DATE);
+        setTypeExpected(14, TypeNames.STRING);
     }
 
     @Override
