@@ -163,6 +163,7 @@ public class IRBSiteServlet extends SecureController {
         int siteId = Integer.parseInt(stringSiteId);
         IRBProtocolActionTypeDAO protocolActionTypeDAO =
                 new IRBProtocolActionTypeDAO(sm.getDataSource());
+
         ArrayList<IRBProtocolActionTypeBean> protocolActionsTypes =
                 protocolActionTypeDAO.findAll();
         ArrayList<IRBProtocolActionHistoryBean> protocolActionHistory =

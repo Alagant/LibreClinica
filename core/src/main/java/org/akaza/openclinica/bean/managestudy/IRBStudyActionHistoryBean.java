@@ -8,6 +8,7 @@ public class IRBStudyActionHistoryBean extends EntityBean {
     private int irbStudyActionHistoryId;
     private int studyId;
     private int irbProtocolActionTypeId;
+    private String actionLabel;
     private Date effectiveDate;
     private int hrpoAction;
     private int versionNumber;
@@ -34,6 +35,14 @@ public class IRBStudyActionHistoryBean extends EntityBean {
 
     public int getIrbProtocolActionTypeId() {
         return irbProtocolActionTypeId;
+    }
+
+    public String getActionLabel() {
+        return actionLabel;
+    }
+
+    public void setActionLabel(String actionLabel) {
+        this.actionLabel = actionLabel;
     }
 
     public void setIrbProtocolActionTypeId(int irbProtocolActionTypeId) {

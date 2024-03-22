@@ -29,15 +29,15 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
         IRBStudyActionHistoryBean retval = new IRBStudyActionHistoryBean();
         retval.setIrbStudyActionHistoryId((Integer) hm.get("irb_study_action_history_id"));
         retval.setStudyId((Integer) hm.get("study_id"));
-        retval.setStudyId((Integer) hm.get("study_id"));
         retval.setIrbProtocolActionTypeId((Integer) hm.get("irb_protocol_action_type_id"));
+        retval.setActionLabel((String) hm.get("action"));
         retval.setEffectiveDate((Date) hm.get("effective_date"));
         retval.setHrpoAction((int) hm.get("hrpo_action"));
         retval.setVersionNumber((int) hm.get("version_number"));
         retval.setVersionDate((Date) hm.get("version_date"));
-        retval.setSubmissionToCdcIrb((Date) hm.get("submissionToCdcIrb"));
+        retval.setSubmissionToCdcIrb((Date) hm.get("submission_to_cdc_irb"));
         retval.setCdcIrbApproval((Date) hm.get("cdc_irb_approval"));
-        retval.setNotificationSentToSites((Date) hm.get("notificationSentToSites"));
+        retval.setNotificationSentToSites((Date) hm.get("notification_sent_to_sites"));
 
         return retval;
     }
@@ -143,5 +143,11 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
     @Override
     public IRBStudyActionHistoryBean emptyBean() {
         return new IRBStudyActionHistoryBean();
+    }
+
+    public ArrayList<IRBStudyActionHistoryBean> findByStudyId(int studyId) {
+        HashMap<Integer, Object> parameters = new HashMap<>();
+        parameters.put(1, studyId);
+        return this.executeFindAllQuery("findIRBStudyActionHistoryByStudyId", parameters);
     }
 }
