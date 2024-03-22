@@ -18,10 +18,10 @@
             <tr>
                 <td align="right"><label>Action:</label></td>
                 <td>
-                    <select name="protocol_action_type_id" class="formfield">
-                        <c:forEach var="c" items="${protocolActionTypes}">
-                            <option value="${c.protocolActionTypeId}">
-                                ${c.label}
+                    <select name="protocol_action_type_id" id="protocolActionHistoryParameterSelection" class="formfield">
+                        <c:forEach var="c" items="${protocolActionHistoryParameter}">
+                            <option value="${c.irbProtocolActionHistoryParameterId}">
+                                ${c.action}
                             </option>
                         </c:forEach>
                     </select>

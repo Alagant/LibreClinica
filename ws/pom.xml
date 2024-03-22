@@ -239,6 +239,23 @@
 	</dependencies>
     <build>
         <plugins>
+            <plugin>
+                <configuration>
+                    <propertyFile>../core/src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
+                </configuration>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.26.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.2.26</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+
+            </plugin>
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>

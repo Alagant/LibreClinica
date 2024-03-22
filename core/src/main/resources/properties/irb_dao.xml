@@ -9,6 +9,22 @@
         </sql>
     </query>
     <query>
+        <name>findAllProtocolActionHistoryParameter</name>
+        <sql>
+            SELECT *
+            FROM irb_protocol_action_history_parameter
+            ORDER BY 1
+        </sql>
+    </query>
+    <query>
+        <name>findAllIrbStudyActionHistoryParameter</name>
+        <sql>
+            SELECT *
+            FROM irb_study_action_history_parameter
+            ORDER BY 1
+        </sql>
+    </query>
+    <query>
         <name>findIRBStudyByStudyId</name>
         <sql>
             SELECT irb_study_id, study_id, cdc_irb_protocol_number, version1_protocol_date,
