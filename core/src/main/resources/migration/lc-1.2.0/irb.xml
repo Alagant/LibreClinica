@@ -276,13 +276,17 @@
             <column name="reason_for_enrollment_pause" valueBoolean="true"/>
         </insert>
     </changeSet>
-    <changeSet id="7" author="dx31">
+    <changeSet id="8" author="dx31">
         <createTable tableName="irb_study_action_history">
             <column autoIncrement="true" name="irb_study_action_history_id" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="study_id" type="INT"/>
-            <column name="irb_protocol_action_type_id" type="INT"/>
+            <column name="study_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="irb_protocol_action_type_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
             <column name="effective_date" type="DATE"/>
             <column name="hrpo_action" type="INT"/>
             <column name="version_number" type="INT"/>

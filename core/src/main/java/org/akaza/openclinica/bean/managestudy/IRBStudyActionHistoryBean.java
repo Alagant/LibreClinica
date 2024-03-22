@@ -9,8 +9,8 @@ public class IRBStudyActionHistoryBean extends EntityBean {
     private int studyId;
     private int irbProtocolActionTypeId;
     private Date effectiveDate;
-    private Date hrpoAction;
-    private Date versionNumber;
+    private int hrpoAction;
+    private int versionNumber;
     private Date versionDate;
     private Date submissionToCdcIrb;
     private Date cdcIrbApproval;
@@ -48,19 +48,19 @@ public class IRBStudyActionHistoryBean extends EntityBean {
         this.effectiveDate = effectiveDate;
     }
 
-    public Date getHrpoAction() {
+    public int getHrpoAction() {
         return hrpoAction;
     }
 
-    public void setHrpoAction(Date hrpoAction) {
+    public void setHrpoAction(int hrpoAction) {
         this.hrpoAction = hrpoAction;
     }
 
-    public Date getVersionNumber() {
+    public int getVersionNumber() {
         return versionNumber;
     }
 
-    public void setVersionNumber(Date versionNumber) {
+    public void setVersionNumber(int versionNumber) {
         this.versionNumber = versionNumber;
     }
 
