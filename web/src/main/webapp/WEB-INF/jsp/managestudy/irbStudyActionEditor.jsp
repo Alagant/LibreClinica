@@ -29,7 +29,7 @@
   <input type="hidden" name="studyId" value="${studyId}"/>
   <input type="hidden" name="study_action_history_id">
   <input type="hidden" name="action" value="saveStudyActionEditor">
-  <table>
+  <table class="table-history-editor">
     <tbody>
     <tr>
       <td align="right"><label>Action:</label></td>
@@ -169,7 +169,8 @@
             jQuery("#studyActionHistoryParameterSelection").val() + '"]'
     );
 
-    console.log(option);
+
+    jQuery('#study-action-editor .table-history-editor img').css('display', 'none');
     jQuery('#effective_date').attr('disabled', 'disabled');
     jQuery('#hrpo_action').attr('disabled', 'disabled');
     jQuery('#version_date').attr('disabled', 'disabled');
@@ -181,26 +182,40 @@
 
     console.log(jQuery(option).data('effective-date'));
 
-    if(jQuery(option).data('effective-date'))
+    if(jQuery(option).data('effective-date')) {
       jQuery('#effective_date').removeAttr('disabled');
+      jQuery('#effective_date-trigger').removeAttr('disabled');
+    }
 
-    if(jQuery(option).data('hrpo-action'))
+    if(jQuery(option).data('hrpo-action')) {
       jQuery('#hrpo_action').removeAttr('disabled');
+      jQuery('#hrpo_action-trigger').css('display', 'initial');
+    }
 
-    if(jQuery(option).data('version-date'))
+    if(jQuery(option).data('version-date')) {
       jQuery('#version_date').removeAttr('disabled');
+      jQuery('#version_date-trigger').css('display', 'initial');
+    }
 
-    if(jQuery(option).data('version-number'))
+    if(jQuery(option).data('version-number')) {
       jQuery('#version_number').removeAttr('disabled');
+      jQuery('#version_number-trigger').css('display', 'initial');
+    }
 
-    if(jQuery(option).data('submission-to-cdc-irb'))
+    if(jQuery(option).data('submission-to-cdc-irb')) {
       jQuery('#submission_to_cdc_irb').removeAttr('disabled');
+      jQuery('#submission_to_cdc_irb-trigger').css('display', 'initial');
+    }
 
-    if(jQuery(option).data('cdc-irb-approval'))
+    if(jQuery(option).data('cdc-irb-approval')) {
       jQuery('#cdc_irb_approval').removeAttr('disabled');
+      jQuery('#cdc_irb_approval-trigger').css('display', 'initial');
+    }
 
-    if(jQuery(option).data('notification-sent-to-sites'))
+    if(jQuery(option).data('notification-sent-to-sites')) {
       jQuery('#notification_sent_to_sites').removeAttr('disabled');
+      jQuery('#notification_sent_to_sites-trigger').css('display', 'initial');
+    }
 
   }
 
