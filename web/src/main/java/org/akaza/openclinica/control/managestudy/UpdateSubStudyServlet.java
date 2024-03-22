@@ -11,10 +11,7 @@ import static org.akaza.openclinica.core.util.ClassCastHelper.asArrayList;
 import static org.akaza.openclinica.core.util.ClassCastHelper.asHashMap;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.core.Role;
@@ -349,6 +346,17 @@ public class UpdateSubStudyServlet extends SecureController {
         study.setFacilityZip(fp.getString("facZip"));
         // study.setStatusId(fp.getInt("statusId"));
         study.setStatus(Status.get(fp.getInt("statusId")));
+
+        study.setFwaInstitution(fp.getString("fwaInstitution"));
+        study.setFwaNumber(fp.getString("fwaNumber"));
+        study.setFwaExpirationDate(fp.getDate("fwaExpirationDate"));
+        study.setSubSite(fp.getString("subSite"));
+        study.setContractNumber(fp.getString("contractNumber"));
+        study.setContractType(fp.getString("contractType"));
+        study.setConsortiumNames(fp.getStringArray("consortiumName"));
+        study.setLocationType(fp.getString("locationType"));
+        study.setActive(fp.getString("active").equals("on"));
+        study.setLabId(fp.getInt("labId"));
         // YW 10-12-2007 <<
         study.getStudyParameterConfig().setInterviewerNameRequired(fp.getString("interviewerNameRequired"));
         study.getStudyParameterConfig().setInterviewerNameDefault(fp.getString("interviewerNameDefault"));

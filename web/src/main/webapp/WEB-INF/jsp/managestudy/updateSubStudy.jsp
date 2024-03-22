@@ -207,13 +207,13 @@
                               <td class="table_cell">
                                 <div class="formfieldXL_BG">
                                   <select name="contractType">
-                                    <option value="Depot"><fmt:message key="contract_type_depot" bundle="${resword}"/><c:if
-                                        test="${newStudy.contractType=='Depot'}">checked</c:if></option>
-                                    <option value="Site"><fmt:message key="contract_type_site" bundle="${resword}"/><c:if
-                                        test="${newStudy.contractType=='Site'}">checked</c:if></option>
-                                    <option value="External Partners"><fmt:message key="contract_type_external_partners"
-                                                                                   bundle="${resword}"/><c:if
-                                        test="${newStudy.contractType=='External Partners'}">checked</c:if></option>
+                                    <option value="Depot" <c:if
+                                        test="${newStudy.contractType=='Depot'}">checked</c:if>><fmt:message key="contract_type_depot" bundle="${resword}"/></option>
+                                    <option value="Site" <c:if
+                                        test="${newStudy.contractType=='Site'}">checked</c:if>><fmt:message key="contract_type_site" bundle="${resword}"/></option>
+                                    <option value="External Partners" <c:if
+                                        test="${newStudy.contractType=='External Partners'}">checked</c:if>><fmt:message key="contract_type_external_partners"
+                                                                                   bundle="${resword}"/></option>
                                   </select>
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="contractNumber"/>
@@ -528,14 +528,14 @@
                             <tr valign="top">
                               <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
                               <td class="table_cell select-autosize">
-                                <select name="laboratory">
+                                <select name="labId">
                                   <c:forEach var="lab" items="${laboratories}">
-                                    <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
+                                  <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/><c:if test="${newStudy.labId==lab.labId}">checked</c:if></option>
                                   </c:forEach>
                                 </select>
                               </td>
                               <jsp:include page="../showMessage.jsp">
-                                <jsp:param name="key" value="laboratory"/>
+                                <jsp:param name="key" value="labId"/>
                               </jsp:include>
                             </tr>
 
