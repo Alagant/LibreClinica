@@ -27,6 +27,7 @@ import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.core.Role;
 import org.akaza.openclinica.bean.core.Status;
 import org.akaza.openclinica.bean.managestudy.EventDefinitionCRFBean;
+import org.akaza.openclinica.bean.managestudy.LaboratoryBean;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.bean.managestudy.StudyEventDefinitionBean;
 import org.akaza.openclinica.bean.service.StudyParameterValueBean;
@@ -38,9 +39,7 @@ import org.akaza.openclinica.control.form.FormProcessor;
 import org.akaza.openclinica.control.form.Validator;
 import org.akaza.openclinica.control.submit.SiteJson;
 import org.akaza.openclinica.dao.admin.CRFDAO;
-import org.akaza.openclinica.dao.managestudy.EventDefinitionCRFDAO;
-import org.akaza.openclinica.dao.managestudy.StudyDAO;
-import org.akaza.openclinica.dao.managestudy.StudyEventDefinitionDAO;
+import org.akaza.openclinica.dao.managestudy.*;
 import org.akaza.openclinica.dao.service.StudyParameterValueDAO;
 import org.akaza.openclinica.dao.submit.CRFVersionDAO;
 import org.akaza.openclinica.domain.SourceDataVerification;
@@ -205,6 +204,12 @@ public class CreateSubStudyServlet extends SecureController {
                 session.setAttribute("definitions", this.initDefinitions(newStudy));
                 request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
                 request.setAttribute("statuses", Status.toActiveArrayList());
+                LaboratoryDAO laboratoryDAO = new LaboratoryDAO(sm.getDataSource());
+                List laboratories = laboratoryDAO.findAll();
+                request.setAttribute("laboratories", laboratories);
+                CountryDAO countryDAO = new CountryDAO(sm.getDataSource());
+                List countries = countryDAO.findAll();
+                request.setAttribute("countries", countries);
                 forwardPage(Page.CREATE_SUB_STUDY);
             }
 
@@ -241,6 +246,12 @@ public class CreateSubStudyServlet extends SecureController {
                 setPresetValues(fp.getPresetValues());
                 request.setAttribute("facRecruitStatusMap", CreateStudyServlet.facRecruitStatusMap);
                 request.setAttribute("statuses", Status.toActiveArrayList());
+                LaboratoryDAO laboratoryDAO = new LaboratoryDAO(sm.getDataSource());
+                List laboratories = laboratoryDAO.findAll();
+                request.setAttribute("laboratories", laboratories);
+                CountryDAO countryDAO = new CountryDAO(sm.getDataSource());
+                List countries = countryDAO.findAll();
+                request.setAttribute("countries", countries);
 
                 forwardPage(Page.CREATE_SUB_STUDY);
             } else if ("submit".equalsIgnoreCase(action)) {
