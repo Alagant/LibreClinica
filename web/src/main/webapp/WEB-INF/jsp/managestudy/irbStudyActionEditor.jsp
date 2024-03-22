@@ -27,7 +27,7 @@
     }
   </style>
   <input type="hidden" name="studyId" value="${studyId}"/>
-  <input type="hidden" name="studyActionHistoryId">
+  <input type="hidden" name="study_action_history_id">
   <input type="hidden" name="action" value="saveStudyActionEditor">
   <table>
     <tbody>

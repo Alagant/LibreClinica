@@ -140,23 +140,18 @@ public class IRBStudyServlet extends SecureController {
         return v.validate();
     }
 
-
-    @Override
-    protected void processRequest() throws Exception {
-        FormProcessor fp = new FormProcessor(request);
+    private ArrayList<HashMap<String, String>> getStudyActionHistory() {
         Locale locale = LocaleResolver.getLocale(request);
         SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);
 
-        ArrayList<IRBStudyActionHistoryParameterBean> protocolActionsTypes =
-                getIrbStudyActionHistoryParameterDAO().findAll();
         ArrayList<IRBStudyActionHistoryBean> studyActionHistory =
                 getIRBStudyActionHistoryDAO().findByStudyId(currentStudy.getId());
-
         ArrayList<HashMap<String, String>> studyActionHistoryFormatted = new ArrayList<>();
 
         for(IRBStudyActionHistoryBean sb: studyActionHistory) {
             HashMap<String, String> row = new HashMap<>();
             row.put("id", Integer.toString(sb.getIrbStudyActionHistoryId()));
+            row.put("actionTypeId", Integer.toString(sb.getIrbProtocolActionTypeId()));
             row.put("actionLabel", sb.getActionLabel());
             row.put("effectiveDate", sb.getEffectiveDate()!=null? sdf.format(sb.getEffectiveDate()):"");
             row.put("hrpoAction", sb.getHrpoAction()>0? Integer.toString(sb.getHrpoAction()):"");
@@ -168,9 +163,28 @@ public class IRBStudyServlet extends SecureController {
             studyActionHistoryFormatted.add(row);
         }
 
+        return studyActionHistoryFormatted;
+    }
+
+
+    @Override
+    protected void processRequest() throws Exception {
+        FormProcessor fp = new FormProcessor(request);
+        Locale locale = LocaleResolver.getLocale(request);
+        SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);
+
+        ArrayList<IRBStudyActionHistoryParameterBean> protocolActionsTypes =
+                getIrbStudyActionHistoryParameterDAO().findAll();
+        /*
+        ArrayList<IRBStudyActionHistoryBean> studyActionHistory =
+                getIRBStudyActionHistoryDAO().findByStudyId(currentStudy.getId());
+
+        ArrayList<HashMap<String, String>> studyActionHistoryFormatted = new ArrayList<>();
+         */
+
         request.setAttribute("protocolActionHistoryParameter", protocolActionsTypes);
         //request.setAttribute("studyActionHistory", studyActionHistory);
-        request.setAttribute("studyActionHistory", studyActionHistoryFormatted);
+        request.setAttribute("studyActionHistory", getStudyActionHistory());
 
         request.setAttribute("studyId", currentStudy.getId());
 
@@ -181,6 +195,7 @@ public class IRBStudyServlet extends SecureController {
             if(request.getParameter("action") != null &&
                     (request.getParameter("action").compareToIgnoreCase("saveStudyActionEditor")==0)) {
                 createOrUpdateActionHistory();
+                request.setAttribute("studyActionHistory", getStudyActionHistory());
                 forwardPage(Page.IRB_STUDY);
                 return;
             }

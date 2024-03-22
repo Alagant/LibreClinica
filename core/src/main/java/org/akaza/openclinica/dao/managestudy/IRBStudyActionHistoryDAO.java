@@ -55,6 +55,7 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
     @Override
     public EntityBean findByPK(int id) throws OpenClinicaException {
         HashMap<Integer, Object> parameters = new HashMap<>();
+        parameters.put(1, id);
         return this.executeFindByPKQuery("findIRBStudyActionHistoryById", parameters);
     }
 
@@ -75,7 +76,7 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
         if(eb.getCdcIrbApproval()==null) nullVars.put(retval, TypeNames.DATE);
         variables.put(retval++, eb.getCdcIrbApproval());
         if(eb.getNotificationSentToSites()==null) nullVars.put(retval, TypeNames.DATE);
-        variables.put(retval++, eb.getNotificationSentToSites());
+        variables.put(retval, eb.getNotificationSentToSites());
 
         return retval;
     }
@@ -101,7 +102,7 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
         HashMap<Integer, Object> variables = new HashMap<>();
         HashMap<Integer, Integer> nullVars = new HashMap<>();
 
-        int position = populateVariablesAndNullVars(eb, variables, nullVars, 2);
+        int position = populateVariablesAndNullVars(eb, variables, nullVars, 1);
         variables.put(position+1, eb.getIrbStudyActionHistoryId());
 
         executeUpdateWithPK(digester.getQuery("updateIRBStudyActionHistory"), variables, nullVars);

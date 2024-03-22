@@ -3,13 +3,40 @@
 <jsp:useBean id="studyActionHistory" scope="request" type="java.util.List"/>
 <script>
     jQuery(document).ready(function () {
+
+
         jQuery('#study-action-open').click(function () {
+            jQuery("#studyActionHistoryParameterSelection").val('');
+            jQuery('#study-action-editor input[type="text"]').val();
+
             jQuery.blockUI({
                 message: jQuery('#study-action-editor'),
                 css:{left: "300px", top:"10px", width: "400px" }
             });
         });
-        jQuery('button.close-editor').click(function() {
+        jQuery('a.update-history').click(function (e) {
+            const tr = jQuery(e.currentTarget).closest('tr');
+            jQuery("#studyActionHistoryParameterSelection").val(jQuery(tr).data('action-type'));
+            jQuery('input[name="study_action_history_id"]').val(jQuery(tr).data('id'));
+
+
+            jQuery('input[name="effective_date"]').val(jQuery(tr).find('td:nth-child(2)').text());
+            jQuery('input[name="hrpo_action"]').val(jQuery(tr).find('td:nth-child(3)').text());
+            jQuery('input[name="version_number"]').val(jQuery(tr).find('td:nth-child(4)').text());
+            jQuery('input[name="version_date"]').val(jQuery(tr).find('td:nth-child(5)').text());
+            jQuery('input[name="submission_to_cdc_irb"]').val(jQuery(tr).find('td:nth-child(6)').text());
+            jQuery('input[name="cdc_irb_approval"]').val(jQuery(tr).find('td:nth-child(7)').text());
+            jQuery('input[name="notification_sent_to_sites"]').val(jQuery(tr).find('td:nth-child(8)').text());
+
+            jQuery.blockUI({
+                message: jQuery('#study-action-editor'),
+                css:{left: "300px", top:"10px", width: "400px" }
+            });
+            //jQuery('input[name="studyActionHistoryParameterSelection"]').val(jQuery(tr).data('id'));
+
+        });
+
+        jQuery('a.close-editor').click(function() {
             jQuery.unblockUI();
             return false;
         });
@@ -31,12 +58,13 @@
         <th>Package sent to CDC IRB</th>
         <th>CDC IRB Approval/Memo</th>
         <th>Memo notification sent to sites</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
 
         <c:forEach var="h" items="${studyActionHistory}">
-            <tr>
+            <tr data-id="${h['id']}" data-action-type="${h['actionTypeId']}">
                 <td>${h['actionLabel']}</td>
                 <td>${h['effectiveDate']}</td>
                 <td>${h['hrpoAction']}</td>
@@ -45,6 +73,9 @@
                 <td>${h['submissionToCdcIrb']}</td>
                 <td>${h['cdcIrbApproval']}</td>
                 <td>${h['notificationSentToSites']}</td>
+                <td>
+                    <a href="#" class="update-history">Edit</a>
+                </td>
             </tr>
         </c:forEach>
     </tbody>
