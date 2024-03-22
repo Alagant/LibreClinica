@@ -352,11 +352,11 @@ public class UpdateSubStudyServlet extends SecureController {
         study.setFwaExpirationDate(fp.getDate("fwaExpirationDate"));
         study.setSubSite(fp.getString("subSite"));
         study.setContractNumber(fp.getString("contractNumber"));
-        study.setContractType(fp.getString("contractType"));
+        study.setSiteType(fp.getString("siteType"));
         study.setConsortiumNames(fp.getStringArray("consortiumName"));
         study.setLocationType(fp.getString("locationType"));
         study.setActive(fp.getString("active").equals("on"));
-        study.setLabId(fp.getInt("labId"));
+        study.setLaboratoryId(fp.getInt("laboratoryId"));
         // YW 10-12-2007 <<
         study.getStudyParameterConfig().setInterviewerNameRequired(fp.getString("interviewerNameRequired"));
         study.getStudyParameterConfig().setInterviewerNameDefault(fp.getString("interviewerNameDefault"));

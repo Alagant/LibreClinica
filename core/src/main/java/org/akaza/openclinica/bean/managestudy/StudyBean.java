@@ -47,7 +47,7 @@ public class StudyBean extends AuditableEntityBean {
     private String secondaryIdentifier = "";
     private String subSite ="";
     private String contractNumber = "";
-    private String contractType = "";
+    private String siteType = "";
     private String summary = "";// need to be removed
 
     private Date datePlannedStart;
@@ -85,7 +85,7 @@ public class StudyBean extends AuditableEntityBean {
     private String fwaInstitution = "";
     private String fwaNumber = "";
     private Date fwaExpirationDate = null;
-    private int labId = 0;
+    private int laboratoryId = 0;
     private String facilityRecruitmentStatus = "";
     private String facilityContactName = "";
     private String facilityContactDegree = "";
@@ -1371,19 +1371,19 @@ public class StudyBean extends AuditableEntityBean {
         this.fwaExpirationDate = fwaExpirationDate;
     }
 
-    public String getContractType() {
-        return contractType;
+    public String getSiteType() {
+        return siteType;
     }
 
-    public void setContractType(String contractType) {
-        this.contractType = contractType;
+    public void setSiteType(String siteType) {
+        this.siteType = siteType;
     }
 
-    public int getLabId() {
-        return labId;
+    public int getLaboratoryId() {
+        return laboratoryId;
     }
 
-    public void setLabId(int labId) {
-        this.labId = labId;
+    public void setLaboratoryId(int laboratoryId) {
+        this.laboratoryId = laboratoryId;
     }
 }

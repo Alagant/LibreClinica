@@ -114,4 +114,15 @@
                                   referencedTableName="laboratories"
                                   referencedTableSchemaName="public"
                                   validate="true"/>
-    </changeSet></databaseChangeLog>
+    </changeSet>
+    <changeSet id="7" author="lucioric2000">
+        <renameColumn  catalogName="cat"
+                       columnDataType="VARCHAR(50)"
+                       newColumnName="fwa_number"
+                       oldColumnName="fwa_name"
+                       remarks="FWA number"
+                       schemaName="public"
+                       tableName="study"/>
+    </changeSet>
+
+</databaseChangeLog>
