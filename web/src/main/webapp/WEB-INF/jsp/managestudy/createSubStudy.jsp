@@ -241,15 +241,16 @@
                           <tr valign="top">
                             <td class="table_header_column"><fmt:message key="site_type" bundle="${resword}"/>:</td>
                             <td class="table_cell">
-                              <select name="siteType">
-                                <option value="Depot"><fmt:message key="site_type_depot" bundle="${resword}"/><c:if
-                                    test="${newStudy.siteType=='Depot'}">checked</c:if></option>
-                                <option value="Site"><fmt:message key="site_type_site" bundle="${resword}"/><c:if
-                                    test="${newStudy.siteType=='Site'}">checked</c:if></option>
-                                <option value="External Partners"><fmt:message key="site_type_external_partners"
-                                                                               bundle="${resword}"/><c:if
-                                    test="${newStudy.siteType=='External Partners'}">checked</c:if></option>
-                              </select>
+                              <div class="formfieldXL_BG">
+                                <select name="siteType">
+                                  <option value="Depot" <c:if
+                                      test="${newStudy.siteType=='Depot'}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
+                                  <option value="Site" <c:if
+                                      test="${newStudy.siteType=='Site'}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
+                                  <option value="External Partners" <c:if
+                                      test="${newStudy.siteType=='External Partners'}">selected</c:if>><fmt:message key="site_type_external_partners"
+                                                                                                                    bundle="${resword}"/></option>
+                                </select>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="contractNumber"/>
                               </jsp:include>                            </td>
@@ -445,7 +446,7 @@
                               <div class="formfieldXL_BG select-autosize">
                                 <select name="facCountry">
                                   <c:forEach var="country" items="${countries}">
-                                    <option value="<c:out value="${country.sysid}"/>" <c:if test="${country.displayname.equals(newStudy.facilityCountry)}">checked</c:if>><c:out value="${country.displayname}"/></option>
+                                    <option value="<c:out value="${country.displayname}"/>" <c:if test="${country.displayname.equals(newStudy.facilityCountry)}">selected</c:if>><c:out value="${country.displayname}"/></option>
                                   </c:forEach>
                                 </select>
                               </div>
@@ -461,10 +462,10 @@
                               <div class="formfieldXL_BG">
                                 <select multiple name="consortiumName"
                                         value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
-                                  <option value="TBTC">TBTC</option>
-                                  <option value="ACTG">ACTG</option>
-                                  <!--option value="TBESC">TBESC</option-->
-                                  <!--option value="ACTG">ACTG</option-->
+                                  <option value="TBTC" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">selected</c:if>>TBTC</option>
+                                  <option value="ACTG" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">selected</c:if>>ACTG</option>
+                                  <option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBTC</option>
+                                  <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>ACTG</option>
                                 </select></div>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="consortiumName"/>
@@ -533,7 +534,7 @@
                             <td>
                               <div class="formfieldXL_BG">
                                 <input type="text" name="fwaExpirationDate"
-                                       value="<c:out value="${fwaExpirationDate}" />" class="formfieldXL"
+                                       value="<c:out value="${newStudy.fwaExpirationDate}" />" class="formfieldXL"
                                        id="fwaExpirationDateField"></div>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="fwaExpirationDate"/>
@@ -559,14 +560,14 @@
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
                             <td class="table_cell select-autosize">
-                              <select name="laboratory">
+                              <select name="laboratoryId">
                                 <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
                                </select>
                             </td>
                             <jsp:include page="../showMessage.jsp">
-                              <jsp:param name="key" value="laboratory"/>
+                              <jsp:param name="key" value="laboratoryId"/>
                             </jsp:include>
                           </tr>
 
