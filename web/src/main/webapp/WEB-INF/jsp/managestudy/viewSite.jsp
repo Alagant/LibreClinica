@@ -146,8 +146,8 @@
     <c:out value="${siteToView.contractNumber}"/>
   </td></tr>
 
-  <tr valign="top"><td class="table_header_column"><fmt:message key="contract_type" bundle="${resword}"/>:</td><td class="table_cell">
-    <c:out value="${siteToView.contractType}"/>
+  <tr valign="top"><td class="table_header_column"><fmt:message key="site_type" bundle="${resword}"/>:</td><td class="table_cell">
+    <c:out value="${siteToView.siteType}"/>
   </td></tr>
 
 
