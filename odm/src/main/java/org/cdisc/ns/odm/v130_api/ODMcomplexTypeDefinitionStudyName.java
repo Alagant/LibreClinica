@@ -6,7 +6,7 @@
 //
 
 
-package org.cdisc.ns.odm.v130_api_dos;
+package org.cdisc.ns.odm.v130_api;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
