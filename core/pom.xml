@@ -255,10 +255,10 @@
 			<plugin>
 				<configuration>
 					<propertyFile>src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
-					<username>clinica</username>
+					<!--username>clinica</username>
 					<password>clinica</password>
 					<url>jdbc:postgresql://localhost:5432/libreclinica</url>
-					<changeLogFile>src/main/resources/migration/lc-1.2.0/irb.xml</changeLogFile>
+					<changeLogFile>src/main/resources/migration/lc-1.2.0/irb.xml</changeLogFile-->
 				</configuration>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
