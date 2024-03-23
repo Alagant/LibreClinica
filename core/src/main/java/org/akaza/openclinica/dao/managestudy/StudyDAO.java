@@ -184,9 +184,10 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         this.setTypeExpected(65, TypeNames.STRING); // location_type
         this.setTypeExpected(66, TypeNames.BOOL); // active
         this.setTypeExpected(67, TypeNames.STRING); // fwa_institution
-        this.setTypeExpected(68, TypeNames.STRING); // fwa_name
+        this.setTypeExpected(68, TypeNames.STRING); // fwa_number
         this.setTypeExpected(69, TypeNames.DATE); // fwa_expiration_date
         this.setTypeExpected(70, TypeNames.STRING); // site_type
+        this.setTypeExpected(71, TypeNames.INT); // laboratory_id
     }
 
     /**
@@ -287,12 +288,15 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(32, sb.getLocationType());// location_type
         variables.put(33, sb.getActive());// active
         variables.put(34, sb.getFwaInstitution());// fwa_institution
-        variables.put(35, sb.getFwaNumber());// fwa_name
+        variables.put(35, sb.getFwaNumber());// fwa_number
         variables.put(36, sb.getFwaExpirationDate());// fwa_expiration_date
-        variables.put(37, sb.getContractType());// contract_type
+        variables.put(37, sb.getSiteType());// site_type
+        variables.put(38, sb.getLaboratoryId());// laboratory_id
+
+
 
         // SQL Update where
-        variables.put(38, sb.getId());// study id
+        variables.put(39, sb.getId());// study id
         
         this.executeUpdate(digester.getQuery("updateStepOne"), variables, nullVars);
         return sb;
@@ -412,13 +416,14 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(33, sb.getLocationType());// location_type
         variables.put(34, sb.getActive());// active
         variables.put(35, sb.getFwaInstitution());// fwa_institution
-        variables.put(36, sb.getFwaNumber());// fwa_name
+        variables.put(36, sb.getFwaNumber());// fwa_number
         Date fwaExpDate = sb.getFwaExpirationDate();
         variables.put(37, fwaExpDate);// fwa_expiration_date
         if (fwaExpDate== null) {
             nullVars.put(37, Types.DATE);
         }
-        variables.put(38, sb.getContractType());// contract_type
+        variables.put(38, sb.getSiteType());// site_type
+        variables.put(39, sb.getLaboratoryId());// laboratory_id
 
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);
@@ -648,6 +653,18 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         eb.setFacilityAddress2((String) hm.get("facility_address_2"));
         eb.setFacilityAddress3((String) hm.get("facility_address_3"));
         eb.setFacilityAddress4((String) hm.get("facility_address_4"));
+
+        eb.setSubSite((String) hm.get("sub_site"));
+        eb.setContractNumber((String) hm.get("contract_number"));
+
+        eb.setLocationType((String) hm.get("location_type"));
+        eb.setActive((Boolean) hm.get("active"));
+        eb.setFwaInstitution((String) hm.get("fwa_institution"));
+        eb.setFwaNumber((String) hm.get("fwa_number"));
+        eb.setFwaExpirationDate((Date) hm.get("fwa_expiration_date"));
+        eb.setSiteType((String) hm.get("site_type"));
+        eb.setLaboratoryId((Integer) hm.get("laboratory_id"));
+
         return eb;
     }
 

@@ -319,7 +319,7 @@ public class CreateSubStudyServlet extends SecureController {
         v.addValidation("fwaInstitution", Validator.NO_BLANKS);
         v.addValidation("fwaNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
         v.addValidation("fwaNumber", Validator.NO_BLANKS);
-        v.addValidation("fwaExpiryDate", Validator.IS_A_DATE);
+        v.addValidation("fwaExpirationDate", Validator.IS_A_DATE);
 
         //    errors = v.validate();
 
