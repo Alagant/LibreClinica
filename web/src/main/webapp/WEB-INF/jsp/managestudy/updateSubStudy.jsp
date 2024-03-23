@@ -208,9 +208,9 @@
                                 <div class="formfieldXL_BG">
                                   <select name="siteType">
                                     <option value="Depot" <c:if
-                                        test="${newStudy.siteType=='Depot'}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
+                                        test="${newStudy.siteType.equals('Depot')}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
                                     <option value="Site" <c:if
-                                        test="${newStudy.siteType=='Site'}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
+                                        test="${newStudy.siteType.equals('Site')}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
                                     <option value="External Partners" <c:if
                                         test="${newStudy.siteType=='External Partners'}">selected</c:if>><fmt:message key="site_type_external_partners"
                                                                                                                      bundle="${resword}"/></option>

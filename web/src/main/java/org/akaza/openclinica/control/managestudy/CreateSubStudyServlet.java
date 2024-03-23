@@ -459,12 +459,14 @@ public class CreateSubStudyServlet extends SecureController {
 
         study.setSubSite(fp.getString("subSite"));
         study.setContractNumber(fp.getString("contractNumber"));
-        study.setConsortiumNames(Arrays.asList(fp.getString("consortiumName").split("[,]")));
+        study.setConsortiumNames(fp.getStringArray("consortiumName"));
         study.setActive(fp.getString("active").equals("on"));
         study.setLocationType(fp.getString("locationType"));
         study.setFwaInstitution(fp.getString("fwaInstitution"));
         study.setFwaNumber(fp.getString("fwaNumber"));
         study.setFwaExpirationDate(fp.getDate("fwaExpirationDate"));
+        study.setLaboratoryId(fp.getInt("laboratoryId"));
+        study.setSiteType(fp.getString("siteType"));
 
 
         ArrayList<StudyParamsConfig> parameters = study.getStudyParameters();
