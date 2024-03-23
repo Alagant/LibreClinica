@@ -10,11 +10,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-        <!--dependency>
+        <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
             <version>${jakarta-xml-api.version}</version>
-        </dependency-->
+        </dependency>
         <!-- Postgres JDBC driver -->
         <dependency>
             <groupId>org.postgresql</groupId>
