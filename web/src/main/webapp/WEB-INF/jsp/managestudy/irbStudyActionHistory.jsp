@@ -99,7 +99,7 @@
         <th>CDC IRB Approval/Memo</th>
         <th>Memo notification sent to sites</th>
         <th>Enrollment pause date</th>
-        <th>Rnrollment restarted date</th>
+        <th>Enrollment restarted date</th>
         <th>Reason for enrollment pause</th>
         <th>Actions</th>
     </tr>
