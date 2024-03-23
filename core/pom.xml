@@ -253,6 +253,18 @@
 				<artifactId>liquibase-plugin</artifactId>
 			</plugin>
 			<plugin>
+				<configuration>
+					<propertyFile>src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
+					<username>clinica</username>
+					<password>clinica</password>
+					<url>jdbc:postgresql://postgres:5432/libreclinica</url>
+					<changeLogFile>src/main/resources/migration/lc-1.2.0/irb.xml</changeLogFile>
+				</configuration>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>4.26.0</version>
+			</plugin>
+			<plugin>
 				<groupId>org.zeroturnaround</groupId>
 				<artifactId>jrebel-maven-plugin</artifactId>
 			</plugin>

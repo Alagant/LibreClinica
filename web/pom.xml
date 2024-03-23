@@ -379,7 +379,7 @@
 						<ignoredUnusedDeclaredDependency> org.libreclinica:LibreClinica-docs</ignoredUnusedDeclaredDependency>
 					</ignoredUnusedDeclaredDependencies>
 		        </configuration>
-		      </plugin>
+		    </plugin>
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -407,6 +407,17 @@
 						</overlay>
 					</overlays>
 				</configuration>
+			</plugin>
+			<plugin>
+				<configuration>
+					<propertyFile>../core/src/main/resources/org/akaza/openclinica/datainfo.properties</propertyFile>
+					<username>clinica</username>
+					<password>clinica</password>
+					<!--url>jdbc:postgresql://localhost:5432/libreclinica</url-->
+				</configuration>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>4.26.0</version>
 			</plugin>
 		</plugins>
 		<pluginManagement>

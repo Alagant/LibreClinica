@@ -2206,3 +2206,9 @@ frm_msg{
     overflow: scroll;
     background: #FFFFFF;
 }
+
+.select-autosize select {
+    width:200px; }
+
+.select-autosize select:focus {
+    width:auto; }
