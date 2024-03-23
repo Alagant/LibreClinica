@@ -146,7 +146,8 @@ public class SQLFactory {
                 cacheManager = new CacheManager(resourceLoader.getResource("classpath:org/akaza/openclinica/ehcache.xml").getInputStream());
             }
         } catch (CacheException | IOException e) {
-            e.printStackTrace();
+            cacheManager = CacheManager.create();
+            //e.printStackTrace();
         }
         EhCacheWrapper<String, ArrayList<HashMap<String, Object>>> ehCache = new EhCacheWrapper<>("com.akaza.openclinica.dao.core.DAOCache",cacheManager);
         
