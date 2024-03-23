@@ -1,3 +1,4 @@
+<jsp:useBean id="openEditorOnStartup" scope="request" type="java.lang.Boolean"/>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -90,7 +91,15 @@
 
 <h1><fmt:message key="irb_study" bundle="${resword}"/></h1>
 <div class="form-standard">
-<form name="irbStudyForm" action="${pageContext.request.contextPath}/IrbStudy" method="post">
+    <style type="text/css" scoped>
+        /*table tbody tr td:nth-child(2) {
+            text-align: left;
+        }
+        table tfoot tr td:nth-child(2) {
+            text-align: left;
+        }*/
+    </style>
+    <form name="irbStudyForm" action="${pageContext.request.contextPath}/IrbStudy" method="post">
     <jsp:include page="../include/showSubmitted.jsp" />
     <table>
         <tr>
@@ -272,7 +281,7 @@
     </table>
 </form>
 </div>
-
+<jsp:include page="./irbStudyActionHistory.jsp"/>
 
 <%-- Work here --%>
 

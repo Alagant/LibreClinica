@@ -141,8 +141,58 @@
             WHERE iah.irb_site_id = ?;
         </sql>
     </query>
-
-
-
-
+    <query>
+        <name>createIRBStudyActionHistory</name>
+        <sql>
+            INSERT INTO irb_study_action_history
+            (study_id, irb_protocol_action_type_id, effective_date,
+            hrpo_action, version_number, version_date, submission_to_cdc_irb, cdc_irb_approval,
+            notification_sent_to_sites, enrollment_pause_date, enrollment_re_started_date,
+            reason_for_enrollment_pause)
+            VALUES(?, ?, ?,
+                ?, ?, ?, ?, ?,
+                ?, ?, ?,
+                ?);
+        </sql>
+    </query>
+    <query>
+        <name>getCurrentIRBStudyActionPrimaryKey</name>
+        <sql>
+            SELECT currval('irb_study_action_history_irb_study_action_history_id_seq') AS key
+        </sql>
+    </query>
+    <query>
+        <name>updateIRBStudyActionHistory</name>
+        <sql>
+            UPDATE public.irb_study_action_history
+            SET irb_protocol_action_type_id=?, effective_date=?, hrpo_action=?, version_number=?,
+                version_date=?, submission_to_cdc_irb=?, cdc_irb_approval=?, notification_sent_to_sites=?,
+                enrollment_pause_date=?, enrollment_re_started_date=?, reason_for_enrollment_pause=?
+            WHERE irb_study_action_history_id=?;
+        </sql>
+    </query>
+    <query>
+        <name>findIRBStudyActionHistoryById</name>
+        <sql>
+            SELECT H.irb_study_action_history_id, H.study_id, H.irb_protocol_action_type_id,
+            HP."action",  H.effective_date, H.hrpo_action, H.version_number, H.version_date,
+            H.submission_to_cdc_irb, H.cdc_irb_approval, H.notification_sent_to_sites,
+            H.enrollment_pause_date, H.enrollment_re_started_date, H.reason_for_enrollment_pause
+            FROM public.irb_study_action_history H INNER JOIN irb_study_action_history_parameter HP ON
+                H.irb_protocol_action_type_id = HP.irb_study_action_history_parameter_id
+            WHERE irb_study_action_history_id=?
+        </sql>
+    </query>
+    <query>
+        <name>findIRBStudyActionHistoryByStudyId</name>
+        <sql>
+            SELECT H.irb_study_action_history_id, H.study_id, H.irb_protocol_action_type_id,
+            HP."action",  H.effective_date, H.hrpo_action, H.version_number, H.version_date,
+            H.submission_to_cdc_irb, H.cdc_irb_approval, H.notification_sent_to_sites,
+            H.enrollment_pause_date, H.enrollment_re_started_date, H.reason_for_enrollment_pause
+            FROM public.irb_study_action_history H INNER JOIN irb_study_action_history_parameter HP ON
+            H.irb_protocol_action_type_id = HP.irb_study_action_history_parameter_id
+            WHERE study_id=?
+        </sql>
+    </query>
 </queries>

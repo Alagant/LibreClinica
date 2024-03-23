@@ -8,13 +8,17 @@ public class IRBStudyActionHistoryBean extends EntityBean {
     private int irbStudyActionHistoryId;
     private int studyId;
     private int irbProtocolActionTypeId;
+    private String actionLabel;
     private Date effectiveDate;
-    private Date hrpoAction;
-    private Date versionNumber;
+    private int hrpoAction;
+    private int versionNumber;
     private Date versionDate;
     private Date submissionToCdcIrb;
     private Date cdcIrbApproval;
     private Date notificationSentToSites;
+    private Date enrollmentPauseDate;
+    private Date enrollmentReStartedDate;
+    private String reasonForEnrollmentPause;
 
     public int getIrbStudyActionHistoryId() {
         return irbStudyActionHistoryId;
@@ -36,6 +40,14 @@ public class IRBStudyActionHistoryBean extends EntityBean {
         return irbProtocolActionTypeId;
     }
 
+    public String getActionLabel() {
+        return actionLabel;
+    }
+
+    public void setActionLabel(String actionLabel) {
+        this.actionLabel = actionLabel;
+    }
+
     public void setIrbProtocolActionTypeId(int irbProtocolActionTypeId) {
         this.irbProtocolActionTypeId = irbProtocolActionTypeId;
     }
@@ -48,19 +60,19 @@ public class IRBStudyActionHistoryBean extends EntityBean {
         this.effectiveDate = effectiveDate;
     }
 
-    public Date getHrpoAction() {
+    public int getHrpoAction() {
         return hrpoAction;
     }
 
-    public void setHrpoAction(Date hrpoAction) {
+    public void setHrpoAction(int hrpoAction) {
         this.hrpoAction = hrpoAction;
     }
 
-    public Date getVersionNumber() {
+    public int getVersionNumber() {
         return versionNumber;
     }
 
-    public void setVersionNumber(Date versionNumber) {
+    public void setVersionNumber(int versionNumber) {
         this.versionNumber = versionNumber;
     }
 
@@ -94,5 +106,29 @@ public class IRBStudyActionHistoryBean extends EntityBean {
 
     public void setNotificationSentToSites(Date notificationSentToSites) {
         this.notificationSentToSites = notificationSentToSites;
+    }
+
+    public Date getEnrollmentPauseDate() {
+        return enrollmentPauseDate;
+    }
+
+    public void setEnrollmentPauseDate(Date enrollmentPauseDate) {
+        this.enrollmentPauseDate = enrollmentPauseDate;
+    }
+
+    public Date getEnrollmentReStartedDate() {
+        return enrollmentReStartedDate;
+    }
+
+    public void setEnrollmentReStartedDate(Date enrollmentReStartedDate) {
+        this.enrollmentReStartedDate = enrollmentReStartedDate;
+    }
+
+    public String getReasonForEnrollmentPause() {
+        return reasonForEnrollmentPause;
+    }
+
+    public void setReasonForEnrollmentPause(String reasonForEnrollmentPause) {
+        this.reasonForEnrollmentPause = reasonForEnrollmentPause;
     }
 }
