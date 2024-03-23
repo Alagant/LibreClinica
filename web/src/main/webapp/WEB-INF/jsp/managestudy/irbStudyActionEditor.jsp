@@ -8,6 +8,7 @@
 <fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 
 
+
 <h1 id="title-editor">New Study Action</h1>
 <form method="post" onsubmit="return validateForm()"
       action="${pageContext.request.contextPath}/IrbStudy">
@@ -27,14 +28,14 @@
     }
   </style>
   <input type="hidden" name="studyId" value="${studyId}"/>
-  <input type="hidden" name="study_action_history_id">
+  <input type="hidden" name="h_study_action_history_id">
   <input type="hidden" name="action" value="saveStudyActionEditor">
   <table class="table-history-editor">
     <tbody>
     <tr>
       <td align="right"><label>Action:</label></td>
       <td>
-        <select name="study_action_type_id" id="studyActionHistoryParameterSelection" class="formfield">
+        <select name="h_study_action_type_id" id="studyActionHistoryParameterSelection" class="formfield">
           <option value="">(Select an action)</option>
           <c:forEach var="c" items="${protocolActionHistoryParameter}">
             <option value="${c.irbStudyActionHistoryParameterId}"
@@ -56,140 +57,184 @@
       </td>
     </tr>
     <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_study_action_type_id"/></jsp:include></td>
+    </tr>
+    <tr>
       <td align="right">
         <label>Effective date:</label>
       </td>
       <td>
-        <input type="text" id="effective_date" name="effective_date" class="formfield"/>
+        <input type="text" id="h_effective_date" name="h_effective_date" class="formfield"/>
         <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
              title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-             border="0" id="effective_date-trigger" /> *
+             border="0" id="h_effective_date-trigger" /> *
         <script type="text/javascript">
-          Calendar.setup({inputField: "effective_date",
+          Calendar.setup({inputField: "h_effective_date",
             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-            button: "effective_date-trigger", customPX: 300, customPY: 10 });
+            button: "h_effective_date-trigger", customPX: 300, customPY: 10 });
         </script>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_effective_date"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>HRPO Action:</label>
       </td>
       <td>
-        <input type="text" name="hrpo_action" id="hrpo_action" class="formfield"/>
+        <input type="text" name="h_hrpo_action" id="h_hrpo_action" class="formfield"/>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_hrpo_action"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>Version No:</label>
       </td>
       <td>
-        <input type="text" id="version_number" name="version_number" class="formfield" />
+        <input type="text" id="h_version_number" name="h_version_number" class="formfield" />
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_version_number"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>Version date:</label>
       </td>
       <td>
-        <input type="text" id="version_date" name="version_date" class="formfield"/>
+        <input type="text" id="h_version_date" name="h_version_date" class="formfield"/>
         <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
              title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-             border="0" id="version_date-trigger" /> *
+             border="0" id="h_version_date-trigger" /> *
         <script type="text/javascript">
-          Calendar.setup({inputField: "version_date",
+          Calendar.setup({inputField: "h_version_date",
             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-            button: "version_date-trigger", customPX: 300, customPY: 10 });
+            button: "h_version_date-trigger", customPX: 300, customPY: 10 });
         </script>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_version_date"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>Submission to CDC IRB:</label>
       </td>
       <td>
-        <input type="text" id="submission_to_cdc_irb" name="submission_to_cdc_irb" class="formfield"/>
+        <input type="text" id="h_submission_to_cdc_irb" name="h_submission_to_cdc_irb" class="formfield"/>
         <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
              title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-             border="0" id="submission_to_cdc_irb-trigger" /> *
+             border="0" id="h_submission_to_cdc_irb-trigger" /> *
         <script type="text/javascript">
-          Calendar.setup({inputField: "submission_to_cdc_irb",
+          Calendar.setup({inputField: "h_submission_to_cdc_irb",
             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-            button: "submission_to_cdc_irb-trigger", customPX: 300, customPY: 10 });
+            button: "h_submission_to_cdc_irb-trigger", customPX: 300, customPY: 10 });
         </script>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_submission_to_cdc_irb"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>CDC IRB Approval/memo date:</label>
       </td>
       <td>
-        <input type="text" id="cdc_irb_approval" name="cdc_irb_approval" class="formfield"/>
+        <input type="text" id="h_cdc_irb_approval" name="h_cdc_irb_approval" class="formfield"/>
         <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
              title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-             border="0" id="cdc_irb_approval-trigger" /> *
+             border="0" id="h_cdc_irb_approval-trigger" /> *
         <script type="text/javascript">
-          Calendar.setup({inputField: "cdc_irb_approval",
+          Calendar.setup({inputField: "h_cdc_irb_approval",
             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-            button: "cdc_irb_approval-trigger", customPX: 300, customPY: 10 });
+            button: "h_cdc_irb_approval-trigger", customPX: 300, customPY: 10 });
         </script>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_cdc_irb_approval"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>Memo/notification sent to sites:</label>
       </td>
       <td>
-        <input type="text" id="notification_sent_to_sites" name="notification_sent_to_sites" class="formfield"/>
+        <input type="text" id="h_notification_sent_to_sites" name="h_notification_sent_to_sites" class="formfield"/>
         <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
              title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-             border="0" id="notification_sent_to_sites-trigger" /> *
+             border="0" id="h_notification_sent_to_sites-trigger" /> *
         <script type="text/javascript">
-          Calendar.setup({inputField: "notification_sent_to_sites",
+          Calendar.setup({inputField: "h_notification_sent_to_sites",
             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-            button: "notification_sent_to_sites-trigger", customPX: 300, customPY: 10 });
+            button: "h_notification_sent_to_sites-trigger", customPX: 300, customPY: 10 });
         </script>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_notification_sent_to_sites"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>Enrollment pause date:</label>
       </td>
       <td>
-        <input type="text" id="enrollment_pause_date" name="enrollment_pause_date" class="formfield"/>
+        <input type="text" id="h_enrollment_pause_date" name="h_enrollment_pause_date" class="formfield"/>
         <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
              title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-             border="0" id="enrollment_pause_date-trigger" /> *
+             border="0" id="h_enrollment_pause_date-trigger" /> *
         <script type="text/javascript">
-          Calendar.setup({inputField: "enrollment_pause_date",
+          Calendar.setup({inputField: "h_enrollment_pause_date",
             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-            button: "enrollment_pause_date-trigger", customPX: 300, customPY: 10 });
+            button: "h_enrollment_pause_date-trigger", customPX: 300, customPY: 10 });
         </script>
       </td>
     </tr>
     <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_enrollment_pause_date"/></jsp:include></td>
+    </tr>
+    <tr>
       <td align="right">
-        <label>Enrollment pause date:</label>
+        <label>Enrollment restarted date:</label>
       </td>
       <td>
-        <input type="text" id="enrollment_re_started_date" name="enrollment_re_started_date" class="formfield"/>
+        <input type="text" id="h_enrollment_re_started_date" name="h_enrollment_re_started_date" class="formfield"/>
         <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
              title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-             border="0" id="enrollment_re_started_date-trigger" /> *
+             border="0" id="h_enrollment_re_started_date-trigger" /> *
         <script type="text/javascript">
-          Calendar.setup({inputField: "enrollment_re_started_date",
+          Calendar.setup({inputField: "h_enrollment_re_started_date",
             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-            button: "enrollment_re_started_date-trigger", customPX: 300, customPY: 10 });
+            button: "h_enrollment_re_started_date-trigger", customPX: 300, customPY: 10 });
         </script>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_enrollment_re_started_date"/></jsp:include></td>
     </tr>
     <tr>
       <td align="right">
         <label>Reason for enrollment pause</label>
       </td>
       <td>
-        <input type="text" id="reason_for_enrollment_pause" name="reason_for_enrollment_pause" class="formfield" />
+        <input type="text" id="h_reason_for_enrollment_pause" name="h_reason_for_enrollment_pause" class="formfield" />
       </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_reason_for_enrollment_pause"/></jsp:include></td>
     </tr>
     </tbody>
     <tfoot>
@@ -211,18 +256,16 @@
 
 
     jQuery('#study-action-editor .table-history-editor img').css('display', 'none');
-    jQuery('#effective_date').attr('disabled', 'disabled');
-    jQuery('#hrpo_action').attr('disabled', 'disabled');
-    jQuery('#version_date').attr('disabled', 'disabled');
-    jQuery('#version_number').attr('disabled', 'disabled');
-    jQuery('#submission_to_cdc_irb').attr('disabled', 'disabled');
-    jQuery('#cdc_irb_approval').attr('disabled', 'disabled');
-    jQuery('#notification_sent_to_sites').attr('disabled', 'disabled');
-    jQuery('#enrollment_pause_date').attr('disabled', 'disabled');
-    jQuery('#enrollment_re_started_date').attr('disabled', 'disabled');
-    jQuery('#reason_for_enrollment_pause').attr('disabled', 'disabled');
-
-    console.log(jQuery(option).data('effective-date'));
+    jQuery('#h_effective_date').attr('disabled', 'disabled');
+    jQuery('#h_hrpo_action').attr('disabled', 'disabled');
+    jQuery('#h_version_date').attr('disabled', 'disabled');
+    jQuery('#h_version_number').attr('disabled', 'disabled');
+    jQuery('#h_submission_to_cdc_irb').attr('disabled', 'disabled');
+    jQuery('#h_cdc_irb_approval').attr('disabled', 'disabled');
+    jQuery('#h_notification_sent_to_sites').attr('disabled', 'disabled');
+    jQuery('#h_enrollment_pause_date').attr('disabled', 'disabled');
+    jQuery('#h_enrollment_re_started_date').attr('disabled', 'disabled');
+    jQuery('#h_reason_for_enrollment_pause').attr('disabled', 'disabled');
 
     if (jQuery(option).data('effective-date')) {
       jQuery('#effective_date').removeAttr('disabled');
@@ -230,43 +273,43 @@
     }
 
     if (jQuery(option).data('hrpo-action')) {
-      jQuery('#hrpo_action').removeAttr('disabled');
-      jQuery('#hrpo_action-trigger').css('display', 'initial');
+      jQuery('#h_hrpo_action').removeAttr('disabled');
+      jQuery('#h_hrpo_action-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('version-date')) {
-      jQuery('#version_date').removeAttr('disabled');
-      jQuery('#version_date-trigger').css('display', 'initial');
+      jQuery('#h_version_date').removeAttr('disabled');
+      jQuery('#h_version_date-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('version-number')) {
-      jQuery('#version_number').removeAttr('disabled');
-      jQuery('#version_number-trigger').css('display', 'initial');
+      jQuery('#h_version_number').removeAttr('disabled');
+      jQuery('#h_version_number-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('submission-to-cdc-irb')) {
-      jQuery('#submission_to_cdc_irb').removeAttr('disabled');
-      jQuery('#submission_to_cdc_irb-trigger').css('display', 'initial');
+      jQuery('#h_submission_to_cdc_irb').removeAttr('disabled');
+      jQuery('#h_submission_to_cdc_irb-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('cdc-irb-approval')) {
-      jQuery('#cdc_irb_approval').removeAttr('disabled');
-      jQuery('#cdc_irb_approval-trigger').css('display', 'initial');
+      jQuery('#h_cdc_irb_approval').removeAttr('disabled');
+      jQuery('#h_cdc_irb_approval-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('notification-sent-to-sites')) {
-      jQuery('#notification_sent_to_sites').removeAttr('disabled');
-      jQuery('#notification_sent_to_sites-trigger').css('display', 'initial');
+      jQuery('#h_notification_sent_to_sites').removeAttr('disabled');
+      jQuery('#h_notification_sent_to_sites-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('enrollment-pause-date'))
-      jQuery('#enrollment_pause_date').removeAttr('disabled');
+      jQuery('#h_enrollment_pause_date').removeAttr('disabled');
 
     if (jQuery(option).data('enrollment-re-started-date'))
-      jQuery('#enrollment_re_started_date').removeAttr('disabled');
+      jQuery('#h_enrollment_re_started_date').removeAttr('disabled');
 
     if (jQuery(option).data('reason-for-enrollment-pause'))
-      jQuery('#reason_for_enrollment_pause').removeAttr('disabled');
+      jQuery('#h_reason_for_enrollment_pause').removeAttr('disabled');
   }
 
   jQuery("#studyActionHistoryParameterSelection").change(e => {

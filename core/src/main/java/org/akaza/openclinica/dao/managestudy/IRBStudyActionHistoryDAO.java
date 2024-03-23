@@ -84,6 +84,7 @@ public class IRBStudyActionHistoryDAO extends AuditableEntityDAO<IRBStudyActionH
         variables.put(retval++, eb.getNotificationSentToSites());
         if(eb.getEnrollmentReStartedDate()==null) nullVars.put(retval, TypeNames.DATE);
         variables.put(retval++, eb.getEnrollmentReStartedDate());
+        if(eb.getReasonForEnrollmentPause()==null) nullVars.put(retval, TypeNames.STRING);
         variables.put(retval, eb.getReasonForEnrollmentPause());
 
         return retval;

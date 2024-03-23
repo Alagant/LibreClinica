@@ -36,19 +36,18 @@ public class IRBStudyServlet extends SecureController {
     public static final String INPUT_CDC_IRB_EXPIRATION_DATE = "cdc_irb_expiration_date";
 
 
-    public static final String INPUT_H_STUDY_ACTION_HISTORY_ID = "study_action_history_id";
-    public static final String INPUT_H_PROTOCOL_ACTION_TYPE = "study_action_type_id";
-    public static final String INPUT_H_EFFECTIVE_DATE = "effective_date";
-    public static final String INPUT_H_HRPO_ACTION = "hrpo_action";
-    public static final String INPUT_H_VERSION_NUMBER = "version_number";
-    public static final String INPUT_H_VERSION_DATE = "version_date";
-    public static final String INPUT_H_SUBMISSION_TO_CDC_IRB = "submission_to_cdc_irb";
-    public static final String INPUT_H_CDC_IRB_APPROVAL = "cdc_irb_approval";
-    public static final String INPUT_H_NOTIFICATION_SENT_TO_SITES = "notification_sent_to_sites";
-    public static final String INPUT_H_ENROLLMENT_PAUSE_DATE = "enrollment_pause_date";
-    public static final String INPUT_H_ENROLLMENT_RE_STARTED_DATE = "enrollment_re_started_date";
-    public static final String INPUT_H_REASON_FOR_ENROLLMENT_PAUSE = "reason_for_enrollment_pause";
-
+    public static final String INPUT_H_STUDY_ACTION_HISTORY_ID = "h_study_action_history_id";
+    public static final String INPUT_H_PROTOCOL_ACTION_TYPE = "h_study_action_type_id";
+    public static final String INPUT_H_EFFECTIVE_DATE = "h_effective_date";
+    public static final String INPUT_H_HRPO_ACTION = "h_hrpo_action";
+    public static final String INPUT_H_VERSION_NUMBER = "h_version_number";
+    public static final String INPUT_H_VERSION_DATE = "h_version_date";
+    public static final String INPUT_H_SUBMISSION_TO_CDC_IRB = "h_submission_to_cdc_irb";
+    public static final String INPUT_H_CDC_IRB_APPROVAL = "h_cdc_irb_approval";
+    public static final String INPUT_H_NOTIFICATION_SENT_TO_SITES = "h_notification_sent_to_sites";
+    public static final String INPUT_H_ENROLLMENT_PAUSE_DATE = "h_enrollment_pause_date";
+    public static final String INPUT_H_ENROLLMENT_RE_STARTED_DATE = "h_enrollment_re_started_date";
+    public static final String INPUT_H_REASON_FOR_ENROLLMENT_PAUSE = "h_reason_for_enrollment_pause";
 
     private IRBStudyDAO getIRBStudyDAO() {
         if(irbStudyDAO==null) irbStudyDAO = new IRBStudyDAO(sm.getDataSource());
@@ -68,6 +67,27 @@ public class IRBStudyServlet extends SecureController {
             irbStudyActionHistoryParameterDAO = new IRBStudyActionHistoryParameterDAO(sm.getDataSource());
 
         return irbStudyActionHistoryParameterDAO;
+    }
+
+    private void populateFormProcessorFromStudyBean(FormProcessor fp, IRBStudyBean irbStudyBean) {
+        Locale locale = LocaleResolver.getLocale(request);
+        SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);
+
+        fp.addPresetValue("studyId", currentStudy.getId());
+        fp.addPresetValue(INPUT_CDC_IRB_PROTOCOL_NUMBER, irbStudyBean.getCdcIrbProtocolNumber());
+        fp.addPresetValue(INPUT_VERSION1_PROTOCOL_DATE,
+                irbStudyBean.getVersion1ProtocolDate()!= null?
+                        sdf.format(irbStudyBean.getVersion1ProtocolDate()): "");
+        fp.addPresetValue(INPUT_PROTOCOL_OFFICER, irbStudyBean.getProtocolOfficer());
+        fp.addPresetValue(INPUT_SUBMITTED_CDC_IRB,
+                irbStudyBean.getSubmittedCdcIrb()!= null?
+                        sdf.format(irbStudyBean.getSubmittedCdcIrb()): "");
+        fp.addPresetValue(INPUT_APPROVAL_BY_CDC_IRB,
+                irbStudyBean.getApprovalByCdcIrb()!= null?
+                        sdf.format(irbStudyBean.getApprovalByCdcIrb()): "");
+        fp.addPresetValue(INPUT_CDC_IRB_EXPIRATION_DATE,
+                irbStudyBean.getApprovalByCdcIrb()!= null?
+                        sdf.format(irbStudyBean.getCdcIrbExpirationDate()): "");
     }
 
 
@@ -264,19 +284,12 @@ public class IRBStudyServlet extends SecureController {
         FormProcessor fp = new FormProcessor(request);
         Locale locale = LocaleResolver.getLocale(request);
         SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);
+        request.setAttribute("openEditorOnStartup", false);
 
         irbStudyActionHistoryParameter = getIrbStudyActionHistoryParameterDAO().findAll();
-        /*
-        ArrayList<IRBStudyActionHistoryBean> studyActionHistory =
-                getIRBStudyActionHistoryDAO().findByStudyId(currentStudy.getId());
-
-        ArrayList<HashMap<String, String>> studyActionHistoryFormatted = new ArrayList<>();
-         */
 
         request.setAttribute("protocolActionHistoryParameter", irbStudyActionHistoryParameter);
-        //request.setAttribute("studyActionHistory", studyActionHistory);
         request.setAttribute("studyActionHistory", getStudyActionHistory());
-
         request.setAttribute("studyId", currentStudy.getId());
 
         IRBStudyBean irbStudyBean;
@@ -291,6 +304,13 @@ public class IRBStudyServlet extends SecureController {
                     setInputMessages(errors);
                     fp.clearPresetValues();
                     setPresetValuesFromRequest(fp);
+                    request.setAttribute("openEditorOnStartup", true);
+                    //load current IrbStudyBean, this step is necessary because
+                    //the form for irb study must be also populated
+                    irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
+                    if(irbStudyBean==null) irbStudyBean = getIRBStudyDAO().emptyBean();
+                    populateFormProcessorFromStudyBean(fp, irbStudyBean);
+
                     setPresetValues(fp.getPresetValues());
 
                     // addPageMessage("Validation errors were found when saving the IRB Study data");
@@ -329,23 +349,9 @@ public class IRBStudyServlet extends SecureController {
         irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
         /*Locale locale = LocaleResolver.getLocale(request);
         SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);*/
-        fp.addPresetValue("studyId", currentStudy.getId());
-        request.setAttribute("irbStudyBean", irbStudyBean);
 
-        fp.addPresetValue(INPUT_CDC_IRB_PROTOCOL_NUMBER, irbStudyBean.getCdcIrbProtocolNumber());
-        fp.addPresetValue(INPUT_VERSION1_PROTOCOL_DATE,
-                irbStudyBean.getVersion1ProtocolDate()!= null?
-                        sdf.format(irbStudyBean.getVersion1ProtocolDate()): "");
-        fp.addPresetValue(INPUT_PROTOCOL_OFFICER, irbStudyBean.getProtocolOfficer());
-        fp.addPresetValue(INPUT_SUBMITTED_CDC_IRB,
-                irbStudyBean.getSubmittedCdcIrb()!= null?
-                        sdf.format(irbStudyBean.getSubmittedCdcIrb()): "");
-        fp.addPresetValue(INPUT_APPROVAL_BY_CDC_IRB,
-                irbStudyBean.getApprovalByCdcIrb()!= null?
-                        sdf.format(irbStudyBean.getApprovalByCdcIrb()): "");
-        fp.addPresetValue(INPUT_CDC_IRB_EXPIRATION_DATE,
-                irbStudyBean.getApprovalByCdcIrb()!= null?
-                        sdf.format(irbStudyBean.getCdcIrbExpirationDate()): "");
+        request.setAttribute("irbStudyBean", irbStudyBean);
+        populateFormProcessorFromStudyBean(fp, irbStudyBean);
 
         setPresetValues(fp.getPresetValues());
 
