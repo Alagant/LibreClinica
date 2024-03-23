@@ -10,10 +10,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toCollection;
 
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Stream;
 
 import javax.sql.DataSource;
@@ -188,6 +185,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         this.setTypeExpected(69, TypeNames.DATE); // fwa_expiration_date
         this.setTypeExpected(70, TypeNames.STRING); // site_type
         this.setTypeExpected(71, TypeNames.INT); // laboratory_id
+        this.setTypeExpected(72, TypeNames.STRING); // consortium_name
     }
 
     /**
@@ -292,11 +290,12 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         variables.put(36, sb.getFwaExpirationDate());// fwa_expiration_date
         variables.put(37, sb.getSiteType());// site_type
         variables.put(38, sb.getLaboratoryId());// laboratory_id
+        variables.put(39, String.join(",", sb.getConsortiumNames()));// consortium_name
 
 
 
         // SQL Update where
-        variables.put(39, sb.getId());// study id
+        variables.put(40, sb.getId());// study id
         
         this.executeUpdate(digester.getQuery("updateStepOne"), variables, nullVars);
         return sb;
@@ -424,7 +423,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         }
         variables.put(38, sb.getSiteType());// site_type
         variables.put(39, sb.getLaboratoryId());// laboratory_id
-
+        variables.put(40, String.join(",", sb.getConsortiumNames()));// consortium_name
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);
         return sb;
@@ -664,6 +663,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
         eb.setFwaExpirationDate((Date) hm.get("fwa_expiration_date"));
         eb.setSiteType((String) hm.get("site_type"));
         eb.setLaboratoryId((Integer) hm.get("laboratory_id"));
+        eb.setConsortiumNames(Arrays.asList(((String) hm.get("consortium_names")).split(",")));
 
         return eb;
     }
