@@ -13,7 +13,7 @@
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>${jakarta-xml-api.version}</version>
+            <version>4.0.2</version>
         </dependency>
         <!-- Postgres JDBC driver -->
         <dependency>
