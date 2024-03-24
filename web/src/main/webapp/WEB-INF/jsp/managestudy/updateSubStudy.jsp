@@ -14,11 +14,11 @@
 <jsp:useBean scope='session' id='newStudy' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
 <jsp:useBean scope='session' id='userBean' class='org.akaza.openclinica.bean.login.UserAccountBean'/>
 <jsp:useBean scope="request" id="facRecruitStatusMap" class="java.util.HashMap"/>
-<jsp:useBean scope="request" id="statuses" class="java.util.ArrayList"/>
 <jsp:useBean scope="session" id="parentName" class="java.lang.String"/>
 <jsp:useBean scope='session' id='definitions' class='java.util.ArrayList'/>
 <jsp:useBean scope='session' id='sdvOptions' class='java.util.ArrayList'/>
 <jsp:useBean scope='request' id='messages' class='java.util.HashMap'/>
+<jsp:useBean scope="request" id="statuses" class="java.util.ArrayList"/>
 <jsp:useBean scope="request" id="laboratories" class="java.util.ArrayList"/>
 <jsp:useBean scope="request" id="countries" class="java.util.ArrayList"/>
 <jsp:useBean scope="request" id="presetValues" class="java.util.HashMap"/>
@@ -198,8 +198,8 @@
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="contractNumber"/>
                                 </jsp:include>
-                              </td>
-                              <td>* required for TBTC sites</td>
+                              </td><td>
+                              * required for TBTC sites</td>
                             </tr>
 
                             <tr valign="top">
@@ -428,8 +428,8 @@
                                           value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
                                     <option value="TBTC" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">selected</c:if>>TBTC</option>
                                     <option value="ACTG" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">selected</c:if>>ACTG</option>
-                                    <option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBTC</option>
-                                    <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>ACTG</option>
+                                    <!--option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBESC</option>
+                                    <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>MRC</option-->
                                   </select></div>
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="consortiumName"/>
@@ -498,13 +498,13 @@
                               <td>
                                 <div class="formfieldXL_BG">
                                   <input type="text" name="fwaExpirationDate"
-                                         value="<c:out value="${newStudy.fwaExpirationDate}" />" class="formfieldXL"
+                                         value="<c:out value="${fwaExpirationDate}" />" class="formfieldXL"
                                          id="fwaExpirationDateField"></div>
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="fwaExpirationDate"/>
                                 </jsp:include>
-                              </td>
-                              <td><A HREF="#">
+                                </td><td>
+                                <A HREF="#">
                                 <img src="images/bt_Calendar.gif"
                                      alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                                      title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
@@ -520,10 +520,6 @@
                               </a>*
                               </td>
                             </tr>
-
-
-
-
 
                             <tr valign="top">
                               <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
@@ -857,7 +853,7 @@
                                       <input type="radio" <c:if test="${config.value.value== 'yes'}"> checked </c:if> name="interviewDateRequired" value="yes"><fmt:message key="yes" bundle="${resword}"/>
                                       <input type="radio" <c:if test="${config.value.value== 'no'}"> checked </c:if> name="interviewDateRequired" value="no"><fmt:message key="no" bundle="${resword}"/>
                                       <input type="radio" <c:if test="${config.value.value== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
-                                   </td>
+                                    </td>
                                   </tr>
                                 </c:when>
                                 <c:when test="${config.parameter.handle=='interviewDateDefault'}">
