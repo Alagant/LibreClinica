@@ -551,7 +551,6 @@
                                       ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
                                       button: "fwaExpDateTrigger"
                                   });
-                                  Calendar.
                               </script>
 
                             </a>*
