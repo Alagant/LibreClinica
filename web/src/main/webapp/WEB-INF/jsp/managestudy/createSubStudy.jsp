@@ -464,8 +464,8 @@
                                         value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
                                   <option value="TBTC" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">selected</c:if>>TBTC</option>
                                   <option value="ACTG" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">selected</c:if>>ACTG</option>
-                                  <option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBTC</option>
-                                  <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>ACTG</option>
+                                  <!--option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBESC</option>
+                                  <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>MRC</option-->
                                 </select></div>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="consortiumName"/>
@@ -551,6 +551,7 @@
                                       ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
                                       button: "fwaExpDateTrigger"
                                   });
+                                  Calendar.
                               </script>
 
                             </a>*
@@ -564,7 +565,7 @@
                                 <c:forEach var="lab" items="${laboratories}">
                                   <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
-                               </select>
+                              </select>
                             </td>
                             <jsp:include page="../showMessage.jsp">
                               <jsp:param name="key" value="laboratoryId"/>

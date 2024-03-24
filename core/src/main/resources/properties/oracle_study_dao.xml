@@ -91,8 +91,7 @@
                 FACILITY_RECRUITMENT_STATUS=?, FACILITY_CONTACT_NAME=?,
                 FACILITY_CONTACT_DEGREE=?, FACILITY_CONTACT_PHONE=?,
                 FACILITY_CONTACT_EMAIL=?, STATUS_ID=?,
-                UPDATE_ID=?, DATE_UPDATED=?, OLD_STATUS_ID=?,
-                CONSORTIUM_NAMES=? WHERE STUDY_ID=?</sql>
+                UPDATE_ID=?, DATE_UPDATED=?, OLD_STATUS_ID=? WHERE STUDY_ID=?</sql>
         </query>
         <query>
                 <name>findNextKey</name>
