@@ -124,5 +124,13 @@
                        schemaName="public"
                        tableName="study"/>
     </changeSet>
+    <changeSet id="8" author="lucioric2000">
+        <comment>Added consortium name</comment>
+        <addColumn tableName="study">
+            <column name="consortium_names" type="VARCHAR(50)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>
