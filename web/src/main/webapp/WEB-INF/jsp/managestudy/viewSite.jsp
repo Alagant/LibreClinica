@@ -15,6 +15,7 @@
 <jsp:useBean scope='request' id='definitions' class='java.util.ArrayList'/>
 <jsp:useBean scope='request' id='sdvOptions' class='java.util.ArrayList'/>
 <jsp:useBean scope='request' id='idToSort' class="java.lang.String"/>
+<jsp:useBean scope="request" id="laboratories" class="java.util.ArrayList"/>
 
 
 <c:choose>
@@ -333,6 +334,16 @@
                       </tr>
 
                       <tr valign="top">
+                        <td class="table_header_column"><fmt:message key="laboratory" bundle="${resword}"/>:
+                        </td>
+                        <td class="table_cell">
+                          <c:forEach var="lab" items="${laboratories}">
+                            <c:if test="${siteToView.laboratoryId==lab.labId}"><c:out value="${lab.labName}"/></c:if>
+                          </c:forEach>
+                        </td>
+                      </tr>
+
+                      <tr valign="top">
                         <td class="table_header_column"><fmt:message key="status" bundle="${resword}"/>:</td>
                         <td class="table_cell">
                           <c:choose>
@@ -460,7 +471,6 @@
       title="<fmt:message key="print_all_available_crf" bundle="${resword}"/>" align="left" hspace="6"></a>
 </div>
 <div style="clear:both"></div>
-
 
 <c:set var="defCount" value="0"/>
 <c:forEach var="definition" items="${definitions}">

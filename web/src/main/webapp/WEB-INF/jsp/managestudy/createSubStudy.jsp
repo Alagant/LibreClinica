@@ -539,7 +539,7 @@
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="fwaExpirationDate"/>
                               </jsp:include>
-                            <!--/td><td-->
+                            </td><td>
                             <A HREF="#">
                               <img src="images/bt_Calendar.gif"
                                    alt="<fmt:message key="show_calendar" bundle="${resword}"/>"

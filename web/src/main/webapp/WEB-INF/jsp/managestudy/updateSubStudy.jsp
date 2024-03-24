@@ -503,8 +503,8 @@
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="fwaExpirationDate"/>
                                 </jsp:include>
-                              </td>
-                              <td><A HREF="#">
+                                </td><td>
+                                <A HREF="#">
                                 <img src="images/bt_Calendar.gif"
                                      alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                                      title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"

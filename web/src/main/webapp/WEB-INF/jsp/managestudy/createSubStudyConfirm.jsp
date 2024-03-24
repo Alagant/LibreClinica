@@ -11,7 +11,7 @@
 <jsp:useBean scope='session' id='newStudy' class='org.akaza.openclinica.bean.managestudy.StudyBean'/>
 <jsp:useBean scope='session' id='definitions' class='java.util.ArrayList'/>
 <jsp:useBean scope='session' id='sdvOptions' class='java.util.ArrayList'/>
-
+<jsp:useBean scope="request" id="laboratories" class="java.util.ArrayList"/>
 
 <!-- move the alert message to the sidebar-->
 <jsp:include page="../include/sideAlert.jsp"/>
@@ -268,6 +268,17 @@
                           <c:out value="${newStudy.fwaExpirationDate}"/>
                         </td>
                       </tr>
+
+                      <tr valign="top">
+                        <td class="table_header_column"><fmt:message key="laboratory" bundle="${resword}"/>:
+                        </td>
+                        <td class="table_cell">
+                          <c:forEach var="lab" items="${laboratories}">
+                            <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/>
+                          </c:forEach>
+                        </td>
+                      </tr>
+
                       <c:choose>
                         <c:when test="${newStudy.parentStudyId == 0}">
                           <c:set var="key" value="study_system_status"/>
