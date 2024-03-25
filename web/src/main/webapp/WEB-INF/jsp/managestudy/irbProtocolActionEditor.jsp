@@ -11,6 +11,10 @@
 <form method="post" onsubmit="return validateForm()"
       action="${pageContext.request.contextPath}/IrbSite">
     <style type="text/css" scoped>
+        form {
+            max-height: 200px;
+            overflow: auto;
+        }
         table tbody tr td:nth-child(2) {
             text-align: left;
         }
@@ -204,7 +208,7 @@
                 <td></td>
                 <td>
                     <button type="submit" class="button">Submit</button>
-                    <button type="button" class="button close-edition">Cancel</button>
+                    <button type="button" class="button close-editor">Cancel</button>
                 </td>
             </tr>
         </tfoot>
