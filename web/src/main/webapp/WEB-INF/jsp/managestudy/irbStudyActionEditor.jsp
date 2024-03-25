@@ -269,7 +269,7 @@
 
     if (jQuery(option).data('effective-date')) {
       jQuery('#effective_date').removeAttr('disabled');
-      jQuery('#effective_date-trigger').removeAttr('disabled');
+      jQuery('#effective_date-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('hrpo-action')) {
