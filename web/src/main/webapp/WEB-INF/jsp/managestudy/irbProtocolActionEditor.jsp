@@ -179,7 +179,7 @@
                     <input type="text" id="h_cdc_approval" name="h_cdc_approval" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="cdc_approval-trigger" /> *
+                         border="0" id="h_cdc_approval-trigger" /> *
                     <script type="text/javascript">
                         Calendar.setup({inputField: "h_cdc_approval",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
