@@ -1,4 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<fmt:setBundle basename="org.akaza.openclinica.i18n.words" var="resword"/>
+<fmt:setBundle basename="org.akaza.openclinica.i18n.notes" var="restext"/>
+<fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
+
 <h1 id="title-editor">New Protocol Action</h1>
 <form method="post" onsubmit="return validateForm()"
       action="${pageContext.request.contextPath}/IrbSite">
@@ -9,16 +17,24 @@
         table tfoot tr td:nth-child(2) {
             text-align: left;
         }
+        div.calendar {
+            z-index: 2000;
+        }
+
+
+        input:disabled {
+            background: gray;
+        }
     </style>
     <input type="hidden" name="siteId" value="${siteId}"/>
     <input type="hidden" name="protocolActionHistoryId">
     <input type="hidden" name="action" value="saveProtocolActionEditor">
-    <table>
+    <table class="table-history-editor">
         <tbody>
             <tr>
                 <td align="right"><label>Action:</label></td>
                 <td>
-                    <select name="protocol_action_type_id" id="protocolActionHistoryParameterSelection" class="formfield">
+                    <select name="h_protocol_action_type_id" id="protocolActionHistoryParameterSelection" class="formfield">
                         <c:forEach var="c" items="${protocolActionHistoryParameter}">
                             <option value="${c.irbProtocolActionHistoryParameterId}"
                                     data-cdc-irb-protocol-version-date="${c.cdcIrbProtocolVersionDate}"
@@ -43,14 +59,14 @@
                     <label>CDC IRB protocol version date:</label>
                 </td>
                 <td>
-                    <input type="text" id="version_date" name="version_date" class="formfield"/>
+                    <input type="text" id="h_version_date" name="h_version_date" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="version_date-trigger" /> *
+                         border="0" id="h_version_date-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "version_date",
+                        Calendar.setup({inputField: "h_version_date",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "version_date-trigger", customPX: 300, customPY: 10 });
+                            button: "h_version_date-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -59,7 +75,7 @@
                     <label>Version No:</label>
                 </td>
                 <td>
-                    <input type="text" id="version_number" name="version_number" class="formfield" />
+                    <input type="text" id="h_version_number" name="h_version_number" class="formfield" />
                 </td>
             </tr>
             <tr>
@@ -67,14 +83,14 @@
                     <label>Site submitted to local IRB:</label>
                 </td>
                 <td>
-                    <input type="text" id="site_submitted_to_local_irb" name="site_submitted_to_local_irb" class="formfield"/>
+                    <input type="text" id="h_site_submitted_to_local_irb" name="h_site_submitted_to_local_irb" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="site_submitted_to_local_irb-trigger" /> *
+                         border="0" id="h_site_submitted_to_local_irb-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "site_submitted_to_local_irb",
+                        Calendar.setup({inputField: "h_site_submitted_to_local_irb",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "site_submitted_to_local_irb-trigger", customPX: 300, customPY: 10 });
+                            button: "h_site_submitted_to_local_irb-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -83,14 +99,14 @@
                     <label>Local IRB approval:</label>
                 </td>
                 <td>
-                    <input type="text" id="local_irb_approval" name="local_irb_approval" class="formfield"/>
+                    <input type="text" id="h_local_irb_approval" name="h_local_irb_approval" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="local_irb_approval-trigger" /> *
+                         border="0" id="h_local_irb_approval-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "local_irb_approval",
+                        Calendar.setup({inputField: "h_local_irb_approval",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "local_irb_approval-trigger", customPX: 300, customPY: 10 });
+                            button: "h_local_irb_approval-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -99,14 +115,14 @@
                     <label>Site sends docs to IRB:</label>
                 </td>
                 <td>
-                    <input type="text" id="site_sends_docs_to_irb" name="site_sends_docs_to_irb" class="formfield"/>
+                    <input type="text" id="h_site_sends_docs_to_irb" name="h_site_sends_docs_to_irb" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="site_sends_docs_to_irb-trigger" /> *
+                         border="0" id="h_site_sends_docs_to_irb-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "site_sends_docs_to_irb",
+                        Calendar.setup({inputField: "h_site_sends_docs_to_irb",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "site_sends_docs_to_irb-trigger", customPX: 300, customPY: 10 });
+                            button: "h_site_sends_docs_to_irb-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -115,14 +131,14 @@
                     <label>Package sent to CDC IRB:</label>
                 </td>
                 <td>
-                    <input type="text" id="package_sent_to_cdc_irb" name="package_sent_to_cdc_irb" class="formfield"/>
+                    <input type="text" id="h_package_sent_to_cdc_irb" name="h_package_sent_to_cdc_irb" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="package_sent_to_cdc_irb-trigger" /> *
+                         border="0" id="h_package_sent_to_cdc_irb-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "package_sent_to_cdc_irb",
+                        Calendar.setup({inputField: "h_package_sent_to_cdc_irb",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "package_sent_to_cdc_irb-trigger", customPX: 300, customPY: 10 });
+                            button: "h_package_sent_to_cdc_irb-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -131,14 +147,14 @@
                     <label>CDC Approval/Acknowledgement:</label>
                 </td>
                 <td>
-                    <input type="text" id="cdc_approval" name="cdc_approval" class="formfield"/>
+                    <input type="text" id="h_cdc_approval" name="h_cdc_approval" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          border="0" id="cdc_approval-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "cdc_approval",
+                        Calendar.setup({inputField: "h_cdc_approval",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "cdc_approval-trigger", customPX: 300, customPY: 10 });
+                            button: "h_cdc_approval-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -147,14 +163,14 @@
                     <label>Enrollment pause date:</label>
                 </td>
                 <td>
-                    <input type="text" id="enrollment_pause_date" name="enrollment_pause_date" class="formfield"/>
+                    <input type="text" id="h_enrollment_pause_date" name="h_enrollment_pause_date" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="enrollment_pause_date-trigger" /> *
+                         border="0" id="h_enrollment_pause_date-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "enrollment_pause_date",
+                        Calendar.setup({inputField: "h_enrollment_pause_date",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "enrollment_pause_date-trigger", customPX: 300, customPY: 10 });
+                            button: "h_enrollment_pause_date-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -163,14 +179,14 @@
                     <label>Enrollment restarted date:</label>
                 </td>
                 <td>
-                    <input type="text" id="enrollment_restarted_date" name="enrollment_restarted_date" class="formfield"/>
+                    <input type="text" id="h_enrollment_restarted_date" name="h_enrollment_restarted_date" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="enrollment_restarted_date-trigger" /> *
+                         border="0" id="h_enrollment_restarted_date-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "enrollment_restarted_date",
+                        Calendar.setup({inputField: "h_enrollment_restarted_date",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "enrollment_restarted_date-trigger", customPX: 300, customPY: 10 });
+                            button: "h_enrollment_restarted_date-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -179,7 +195,7 @@
                     <label>Reason for enrollment paused:</label>
                 </td>
                 <td>
-                    <input type="text" id="reason_for_enrollment_paused" name="reason_for_enrollment_paused" class="formfield"/>
+                    <input type="text" id="h_reason_for_enrollment_paused" name="h_reason_for_enrollment_paused" class="formfield"/>
                 </td>
             </tr>
         </tbody>
@@ -201,63 +217,64 @@
         );
 
         jQuery('#protocol-action-editor .table-history-editor img').css('display', 'none');
-        jQuery('#version_date').attr('disabled', 'disabled');
-        jQuery('#version_number').attr('disabled', 'disabled');
-        jQuery('#site_submitted_to_local_irb').attr('disabled', 'disabled');
-        jQuery('#local_irb_approval').attr('disabled', 'disabled');
-        jQuery('#site_sends_docs_to_irb').attr('disabled', 'disabled');
-        jQuery('#package_sent_to_cdc_irb').attr('disabled', 'disabled');
-        jQuery('#cdc_approval').attr('disabled', 'disabled');
-        jQuery('#enrollment_pause_date').attr('disabled', 'disabled');
-        jQuery('#enrollment_restarted_date').attr('disabled', 'disabled');
-        jQuery('#reason_for_enrollment_paused').attr('disabled', 'disabled');
+
+        jQuery('#h_version_date').attr('disabled', 'disabled');
+        jQuery('#h_version_number').attr('disabled', 'disabled');
+        jQuery('#h_site_submitted_to_local_irb').attr('disabled', 'disabled');
+        jQuery('#h_local_irb_approval').attr('disabled', 'disabled');
+        jQuery('#h_site_sends_docs_to_irb').attr('disabled', 'disabled');
+        jQuery('#h_package_sent_to_cdc_irb').attr('disabled', 'disabled');
+        jQuery('#h_cdc_approval').attr('disabled', 'disabled');
+        jQuery('#h_enrollment_pause_date').attr('disabled', 'disabled');
+        jQuery('#h_enrollment_restarted_date').attr('disabled', 'disabled');
+        jQuery('#h_reason_for_enrollment_paused').attr('disabled', 'disabled');
 
         if (jQuery(option).data('cdc-irb-protocol-version-date')) {
-            jQuery('#version_date').removeAttr('disabled');
-            jQuery('#version_date-trigger').removeAttr('disabled');
+            jQuery('#h_version_date').removeAttr('disabled');
+            jQuery('#effective_date-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('version')) {
-            jQuery('#version_number').removeAttr('disabled');
+            jQuery('#h_version_number').removeAttr('disabled');
         }
 
         if (jQuery(option).data('site-submitted-to-local-irb')) {
-            jQuery('#site_submitted_to_local_irb').removeAttr('disabled');
-            jQuery('#site_submitted_to_local_irb-trigger').removeAttr('disabled');
+            jQuery('#h_site_submitted_to_local_irb').removeAttr('disabled');
+            jQuery('#h_site_submitted_to_local_irb-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('local-irb-approval')) {
-            jQuery('#local_irb_approval').removeAttr('disabled');
-            jQuery('#local_irb_approval-trigger').removeAttr('disabled');
+            jQuery('#h_local_irb_approval').removeAttr('disabled');
+            jQuery('#h_local_irb_approval-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('site-sends-docs-to-crb')) {
-            jQuery('#site_sends_docs_to_irb').removeAttr('disabled');
-            jQuery('#site_sends_docs_to_irb-trigger').removeAttr('disabled');
+            jQuery('#h_site_sends_docs_to_irb').removeAttr('disabled');
+            jQuery('#h_site_sends_docs_to_irb-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('package-sent-to-cdc-irb')) {
-            jQuery('#package_sent_to_cdc_irb').removeAttr('disabled');
-            jQuery('#package_sent_to_cdc_irb-trigger').removeAttr('disabled');
+            jQuery('#h_package_sent_to_cdc_irb').removeAttr('disabled');
+            jQuery('#h_package_sent_to_cdc_irb-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('cdc-approval-acknowledgment')) {
-            jQuery('#cdc_approval').removeAttr('disabled');
-            jQuery('#cdc_approval-trigger').removeAttr('disabled');
+            jQuery('#h_cdc_approval').removeAttr('disabled');
+            jQuery('#h_cdc_approval-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('enrollment-pause-date')) {
-            jQuery('#enrollment_pause_date').removeAttr('disabled');
-            jQuery('#enrollment_pause_date-trigger').removeAttr('disabled');
+            jQuery('#h_enrollment_pause_date').removeAttr('disabled');
+            jQuery('#h_enrollment_pause_date-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('enrollment-re-started-date')) {
-            jQuery('#enrollment_restarted_date').removeAttr('disabled');
-            jQuery('#enrollment_restarted_date-trigger').removeAttr('disabled');
+            jQuery('#h_enrollment_restarted_date').removeAttr('disabled');
+            jQuery('#h_enrollment_restarted_date-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('reason-for-enrollment-pause')) {
-            jQuery('#reason_for_enrollment_paused').removeAttr('disabled');
+            jQuery('#h_reason_for_enrollment_paused').removeAttr('disabled');
         }
     }
 
