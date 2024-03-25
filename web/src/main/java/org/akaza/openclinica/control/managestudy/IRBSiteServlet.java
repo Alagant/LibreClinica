@@ -45,6 +45,17 @@ public class IRBSiteServlet extends SecureController {
     private static final String INPUT_ACTIVE  = "active";
     private static final String INPUT_COMMENTS  = "comments";
 
+    private static final String INPUT_H_PROTOCOL_ACTION_TYPE_ID  = "protocol_action_type_id";
+    private static final String INPUT_H_VERSION_DATE  = "version_date";
+    private static final String INPUT_H_VERSION_NUMBER  = "version_number";
+    private static final String INPUT_H_SITE_SUBMITTED_TO_LOCAL_IRB  = "site_submitted_to_local_irb";
+    private static final String INPUT_H_TO_LOCAL_IRB  = "local_irb_approval";
+    private static final String INPUT_H_RECEIVED_DOCS_FROM_SITES  = "received_docs_from_sites";
+    private static final String INPUT_H_PACKAGE_SENT_TO_CDC_IRB  = "package_sent_to_cdc_irb";
+    private static final String INPUT_H_CDC_APPROVAL  = "cdc_approval";
+    private static final String INPUT_H_ENROLLMENT_PAUSE_DATE  = "enrollment_pause_date";
+    private static final String INPUT_H_ENROLLMENT_RESTARTED_DATE  = "enrollment_restarted_date";
+    private static final String INPUT_H_REASON_FOR_ENROLLMENT_PAUSED  = "reason_for_enrollment_paused";
 
     private IRBProtocolActionHistoryDAO irbProtocolActionHistoryDAO;
 
@@ -151,6 +162,34 @@ public class IRBSiteServlet extends SecureController {
 
         return v.validate();
     }
+
+    private HashMap<String, ArrayList<String>> validateProtocolActionHistory() {
+        FormDiscrepancyNotes discNotes;
+
+        discNotes = (FormDiscrepancyNotes) session.getAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME);
+        if (discNotes == null) {
+            discNotes = new FormDiscrepancyNotes();
+            session.setAttribute(AddNewSubjectServlet.FORM_DISCREPANCY_NOTES_NAME, discNotes);
+        }
+        DiscrepancyValidator v = new DiscrepancyValidator(request, discNotes);
+
+        v.addValidation(INPUT_H_VERSION_DATE, Validator.IS_A_DATE);
+        v.addValidation(INPUT_VERSION_NUMBER, Validator.IS_A_NUMBER);
+        v.addValidation(INPUT_H_SITE_SUBMITTED_TO_LOCAL_IRB, Validator.IS_A_DATE);
+        v.addValidation(INPUT_H_TO_LOCAL_IRB, Validator.IS_A_DATE);
+        v.addValidation(INPUT_H_RECEIVED_DOCS_FROM_SITES, Validator.IS_A_DATE);
+        v.addValidation(INPUT_H_PACKAGE_SENT_TO_CDC_IRB, Validator.IS_A_DATE);
+        v.addValidation(INPUT_H_CDC_APPROVAL, Validator.IS_A_DATE);
+        v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.IS_A_DATE);
+        v.addValidation(INPUT_H_ENROLLMENT_RESTARTED_DATE, Validator.IS_A_DATE);
+        //v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSED, Validator.IS_A_DATE);
+
+
+
+
+        return v.validate();
+    }
+
     @Override
     protected void processRequest() throws Exception {
         FormProcessor fp = new FormProcessor(request);
