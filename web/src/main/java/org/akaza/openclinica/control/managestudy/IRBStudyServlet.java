@@ -186,9 +186,6 @@ public class IRBStudyServlet extends SecureController {
             //Don't do anything.
         }
         studyActionHistoryType--;
-        System.out.println("validateIrbStudyActionHistoryRequest: " + stringStudyActionHistoryType);
-        System.out.println("validateIrbStudyActionHistoryRequest: " + studyActionHistoryType);
-        System.out.println("validateIrbStudyActionHistoryRequest: " + irbStudyActionHistoryParameter.get(studyActionHistoryType).getAction());
 
         if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getEffectiveDate()) {
             v.addValidation(INPUT_H_EFFECTIVE_DATE, Validator.NO_BLANKS);
@@ -246,8 +243,8 @@ public class IRBStudyServlet extends SecureController {
 
         if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getReasonForEnrollmentPause()) {
             v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.NO_BLANKS);
-            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.IS_A_DATE);
-            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.DATE_IN_PAST);
+            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 120);
         }
 
         return v.validate();
