@@ -132,5 +132,47 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="9" author="lucioric2000">
+        <comment>Adds a table for correlating sites with laboratories</comment>
+        <createTable tableName="labs_for_site">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="site_id" type="INT">
+                <constraints nullable="false" />
+            </column>
+            <column name="laboratory_id" type="INT">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint  baseColumnNames="laboratory_id"
+                                  baseTableCatalogName="cat"
+                                  baseTableName="labs_for_site"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_site_laboratories"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="labId"
+                                  referencedTableCatalogName="cat"
+                                  referencedTableName="laboratories"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+        <addForeignKeyConstraint  baseColumnNames="site_id"
+                                  baseTableCatalogName="cat"
+                                  baseTableName="labs_for_site"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_site_for_laboratories"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="study_id"
+                                  referencedTableCatalogName="cat"
+                                  referencedTableName="study"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet>
 
 </databaseChangeLog>
