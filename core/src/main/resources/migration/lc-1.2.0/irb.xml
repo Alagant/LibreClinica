@@ -276,5 +276,11 @@
             <column name="reason_for_enrollment_pause" valueBoolean="true"/>
         </insert>
     </changeSet>
-
+    <changeSet id="9" author="dx31">
+        <addColumn tableName="irb_study_action_history">
+            <column name="enrollment_pause_date" type="DATE"></column>
+            <column name="enrollment_re_started_date" type="DATE"></column>
+            <column name="reason_for_enrollment_pause" type="VARCHAR(120)"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
