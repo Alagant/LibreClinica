@@ -92,7 +92,6 @@ public class IRBStudyServlet extends SecureController {
 
 
     private IRBStudyActionHistoryBean createOrUpdateActionHistory() throws NumberFormatException, OpenClinicaException {
-
         String stringStudyActionHistoryId =
                 request.getParameter(INPUT_H_STUDY_ACTION_HISTORY_ID);
         int studyActionHistoryId = -1;
@@ -102,6 +101,9 @@ public class IRBStudyServlet extends SecureController {
         catch (NumberFormatException ex) {
             //Don't do anything.
         }
+
+
+
         IRBStudyActionHistoryBean  irbStudyActionHistoryBean = null;
         if(studyActionHistoryId>0) {
             irbStudyActionHistoryBean = (IRBStudyActionHistoryBean) getIRBStudyActionHistoryDAO()
@@ -347,8 +349,6 @@ public class IRBStudyServlet extends SecureController {
         }
 
         irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
-        /*Locale locale = LocaleResolver.getLocale(request);
-        SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);*/
 
         request.setAttribute("irbStudyBean", irbStudyBean);
         populateFormProcessorFromStudyBean(fp, irbStudyBean);

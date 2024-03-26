@@ -9,23 +9,22 @@
 <script>
     function loadActionHistoryEditor(payload) {
         jQuery("#studyActionHistoryParameterSelection").val(payload.actionType);
-        jQuery('input[name="h_study_action_history_id"]').val(payload.id);
-
-
-        jQuery('input[name="h_effective_date"]').val(payload.effectiveDate);
-        jQuery('input[name="h_hrpo_action"]').val(payload.hrpoAction);
+        jQuery('input[name="h_protocol_action_history_id"]').val(payload.id);
+        jQuery('input[name="h_site_id"]').val(payload.siteId);
         jQuery('input[name="h_version_number"]').val(payload.versionNumber);
         jQuery('input[name="h_version_date"]').val(payload.versionDate);
-        jQuery('input[name="h_submission_to_cdc_irb"]').val(payload.submissionToCdcIrb);
-        jQuery('input[name="h_cdc_irb_approval"]').val(payload.cdcIrbApproval);
-        jQuery('input[name="h_notification_sent_to_sites"]').val(payload.notificationSentToSites);
+        jQuery('input[name="h_site_submitted_to_local_irb"]').val(payload.siteSubmittedToLocalIrb);
+        jQuery('input[name="h_local_irb_approval"]').val(payload.localIrbApproval);
+        jQuery('input[name="h_received_docs_from_sites"]').val(payload.receivedDocsFromSites);
+        jQuery('input[name="h_package_sent_to_cdc_irb"]').val(payload.packageSentToCdcIrb);
+        jQuery('input[name="h_cdc_approval"]').val(payload.cdcApproval);
         jQuery('input[name="h_enrollment_pause_date"]').val(payload.enrollmentPauseDate);
-        jQuery('input[name="h_enrollment_re_started_date"]').val(payload.enrollmentReStartedDate);
+        jQuery('input[name="h_enrollment_restarted_date"]').val(payload.enrollmentReStartedDate);
         jQuery('input[name="h_reason_for_enrollment_pause"]').val(payload.reasonForEnrollmentPause);
         enableFieldsByActionParameter();
 
         jQuery.blockUI({
-            message: jQuery('#study-action-editor'),
+            message: jQuery('#protocol-action-editor'),
             css:{left: "300px", top:"10px", width: "400px" }
         });
     }
@@ -52,13 +51,13 @@
             loadActionHistoryEditor({
                 actionType: jQuery(tr).data('action-type'),
                 id: jQuery(tr).data('id'),
-                effectiveDate: jQuery(tr).find('td:nth-child(2)').text(),
-                hrpoAction: jQuery(tr).find('td:nth-child(3)').text(),
-                versionNumber: jQuery(tr).find('td:nth-child(4)').text(),
-                versionDate: jQuery(tr).find('td:nth-child(5)').text(),
-                submissionToCdcIrb: jQuery(tr).find('td:nth-child(6)').text(),
-                cdcIrbApproval: jQuery(tr).find('td:nth-child(7)').text(),
-                notificationSentToSites: jQuery(tr).find('td:nth-child(8)').text(),
+                versionDate: jQuery(tr).find('td:nth-child(2)').text(),
+                versionNumber: jQuery(tr).find('td:nth-child(3)').text(),
+                siteSubmittedToLocalIrb: jQuery(tr).find('td:nth-child(4)').text(),
+                localIrbApproval: jQuery(tr).find('td:nth-child(5)').text(),
+                receivedDocsFromSites: jQuery(tr).find('td:nth-child(6)').text(),
+                packageSentToCdcIrb: jQuery(tr).find('td:nth-child(7)').text(),
+                cdcIrbApproval: jQuery(tr).find('td:nth-child(8)').text(),
                 enrollmentPauseDate: jQuery(tr).find('td:nth-child(9)').text(),
                 enrollmentReStartedDate: jQuery(tr).find('td:nth-child(10)').text(),
                 reasonForEnrollmentPause: jQuery(tr).find('td:nth-child(11)').text(),
@@ -68,7 +67,7 @@
             enableFieldsByActionParameter();
 
             jQuery.blockUI({
-                message: jQuery('#study-action-editor'),
+                message: jQuery('#protocol-action-editor'),
                 css:{left: "300px", top:"10px", width: "400px" }
             });
             //jQuery('input[name="studyActionHistoryParameterSelection"]').val(jQuery(tr).data('id'));
@@ -121,12 +120,13 @@
             <th>Enrollment Pause Date</th>
             <th>Enrollment Restarted Date</th>
             <th>Reason for enrollment paused</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         <c:forEach var="c" items="${protocolActionHistory}">
-            <tr>
-                <td>${c.label}</td>
+            <tr data-id="${c['id']}" data-action-type="${c['actionTypeId']}">
+                <td>${c.action}</td>
                 <td>${c.versionDate}</td>
                 <td>${c.versionNumber}</td>
                 <td>${c.siteSubmittedToLocalIrb}</td>
@@ -137,6 +137,9 @@
                 <td>${c.enrollmentPauseDate}</td>
                 <td>${c.enrollmentRestartedDate}</td>
                 <td>${c.reasonForEnrollmentPaused}</td>
+                <td>
+                    <a href="#" class="update-history">Edit</a>
+                </td>
             </tr>
         </c:forEach>
     </tbody>
@@ -149,3 +152,25 @@
     </tfoot>
 </table>
 </div>
+<script>
+    <c:if test="${openEditorOnStartup}">
+    jQuery(document).ready(() => {
+        loadActionHistoryEditor({
+            actionType: "${presetValues['h_protocol_action_type_id']}",
+            id: "${presetValues['h_protocol_action_history_id']}",
+            siteId: "${presetValues['h_site_id']}",
+            versionNumber: "${presetValues['h_version_number']}",
+            versionDate: "${presetValues['h_version_date']}",
+            siteSubmittedToLocalIrb: "${presetValues['h_site_submitted_to_local_irb']}",
+            localIrbApproval: "${presetValues['h_local_irb_approval']}",
+            receivedDocsFromSites: "${presetValues['h_received_docs_from_sites']}",
+            //TODO: Missing siteSendsDocsToIrb
+            packageSentToCdcIrb: "${presetValues['h_package_sent_to_cdc_irb']}",
+            cdcApproval: "${presetValues['h_cdc_approval']}",
+            enrollmentPauseDate: "${presetValues['h_enrollment_pause_date']}",
+            enrollmentReStartedDate: "${presetValues['h_enrollment_re_started_date']}",
+            reasonForEnrollmentPause: "${presetValues['h_reason_for_enrollment_pause']}",
+        });
+    });
+    </c:if>
+</script>

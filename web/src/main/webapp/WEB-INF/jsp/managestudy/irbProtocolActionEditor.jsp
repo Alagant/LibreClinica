@@ -11,10 +11,7 @@
 <form method="post" onsubmit="return validateForm()"
       action="${pageContext.request.contextPath}/IrbSite">
     <style type="text/css" scoped>
-        form {
-            max-height: 200px;
-            overflow: auto;
-        }
+
         table tbody tr td:nth-child(2) {
             text-align: left;
         }
@@ -31,7 +28,7 @@
         }
     </style>
     <input type="hidden" name="siteId" value="${siteId}"/>
-    <input type="hidden" name="protocolActionHistoryId">
+    <input type="hidden" name="h_protocol_action_history_id">
     <input type="hidden" name="action" value="saveProtocolActionEditor">
     <table class="table-history-editor">
         <tbody>
@@ -59,6 +56,10 @@
                 </td>
             </tr>
             <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_protocol_action_type_id"/></jsp:include></td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>CDC IRB protocol version date:</label>
                 </td>
@@ -75,12 +76,20 @@
                 </td>
             </tr>
             <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_version_date"/></jsp:include></td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Version No:</label>
                 </td>
                 <td>
                     <input type="text" id="h_version_number" name="h_version_number" class="formfield" />
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_version_number"/></jsp:include></td>
             </tr>
             <tr>
                 <td align="right">
@@ -99,6 +108,10 @@
                 </td>
             </tr>
             <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_site_submitted_to_local_irb"/></jsp:include></td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Local IRB approval:</label>
                 </td>
@@ -113,6 +126,10 @@
                             button: "h_local_irb_approval-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_local_irb_approval"/></jsp:include></td>
             </tr>
             <tr>
                 <td align="right">
@@ -131,6 +148,10 @@
                 </td>
             </tr>
             <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_site_sends_docs_to_irb"/></jsp:include></td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Package sent to CDC IRB:</label>
                 </td>
@@ -145,6 +166,10 @@
                             button: "h_package_sent_to_cdc_irb-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_package_sent_to_cdc_irb"/></jsp:include></td>
             </tr>
             <tr>
                 <td align="right">
@@ -163,6 +188,10 @@
                 </td>
             </tr>
             <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_cdc_approval"/></jsp:include></td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Enrollment pause date:</label>
                 </td>
@@ -177,6 +206,10 @@
                             button: "h_enrollment_pause_date-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_enrollment_pause_date"/></jsp:include></td>
             </tr>
             <tr>
                 <td align="right">
@@ -195,12 +228,20 @@
                 </td>
             </tr>
             <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_enrollment_restarted_date"/></jsp:include></td>
+            </tr>
+            <tr>
                 <td align="right">
                     <label>Reason for enrollment paused:</label>
                 </td>
                 <td>
                     <input type="text" id="h_reason_for_enrollment_paused" name="h_reason_for_enrollment_paused" class="formfield"/>
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><jsp:include page="../showMessage.jsp"><jsp:param name="key" value="h_reason_for_enrollment_paused"/></jsp:include></td>
             </tr>
         </tbody>
         <tfoot>
