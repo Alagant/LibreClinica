@@ -21,7 +21,7 @@
 <script type="text/javascript" language="JavaScript" src="includes/jmesa/jquery.blockUI.js"></script>
 
 <script type="text/javascript" language="JavaScript" src="includes/jmesa/jquery-migrate-1.1.1.js"></script>
-<c:set var="siteId" value='${request.getAttribute("siteId")}'/>
+<jsp:useBean id="siteId" scope="request" type="java.lang.Integer"/>
 
 <tr id="sidebar_Instructions_open" style="display: none">
     <td class="sidebar_tab">
@@ -63,7 +63,7 @@
         }
     </style>
     <form action="${pageContext.request.contextPath}/IrbSite" method="post">
-        <input type="hidden" name="siteId" value="${presetValues['siteId']}"/>
+        <input type="hidden" name="siteId" value="${siteId}"/>
         <table>
             <tr>
                 <td align="right"><label>Version number</label></td>

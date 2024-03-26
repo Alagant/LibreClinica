@@ -30,7 +30,7 @@ public class IRBProtocolActionHistoryDAO extends AuditableEntityDAO<IRBProtocolA
                 (Integer) hm.get("irb_protocol_action_history_id") );
         protocolActionHistoryBean.setIrbProtocolActionTypeId(
                 (Integer) hm.get("irb_protocol_action_type_id") );
-        protocolActionHistoryBean.setLabel((String) hm.get("label"));
+        protocolActionHistoryBean.setAction((String) hm.get("action"));
         protocolActionHistoryBean.setVersionDate( (Date) hm.get("version_date") );
         protocolActionHistoryBean.setVersionNumber((Integer) hm.get("version_number"));
         protocolActionHistoryBean.setSiteSubmittedToLocalIrb(
@@ -58,7 +58,9 @@ public class IRBProtocolActionHistoryDAO extends AuditableEntityDAO<IRBProtocolA
 
     @Override
     public EntityBean findByPK(int id) throws OpenClinicaException {
-        return null;
+        HashMap<Integer, Object> parameters = new HashMap<>();
+        parameters.put(1, id);
+        return this.executeFindByPKQuery("findProtocolActionHistoryById", parameters);
     }
 
     private int populateVariablesAndNullVars(IRBProtocolActionHistoryBean eb,
@@ -107,7 +109,7 @@ public class IRBProtocolActionHistoryDAO extends AuditableEntityDAO<IRBProtocolA
         HashMap<Integer, Integer> nullVars = new HashMap<>();
 
         //variables.put(1, eb.getSiteId());
-        int position = populateVariablesAndNullVars(eb, variables, nullVars, 2);
+        int position = populateVariablesAndNullVars(eb, variables, nullVars, 1);
         variables.put(position+1, eb.getIrbProtocolActionHistoryId());
 
         executeUpdateWithPK(digester.getQuery("updateProtocolActionHistory"), variables, nullVars);
