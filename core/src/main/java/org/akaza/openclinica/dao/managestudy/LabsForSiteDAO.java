@@ -7,30 +7,28 @@
 package org.akaza.openclinica.dao.managestudy;
 
 import org.akaza.openclinica.bean.managestudy.CountryBean;
+import org.akaza.openclinica.bean.managestudy.LabsForSiteBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.DAODigester;
 import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.dao.core.TypeNames;
 
 import javax.sql.DataSource;
-import java.sql.Types;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toCollection;
 
-public class CountryDAO extends AuditableEntityDAO<CountryBean> {
+public class LabsForSiteDAO extends AuditableEntityDAO<LabsForSiteBean> {
 
-    public CountryDAO(DataSource ds) {
+    public LabsForSiteDAO(DataSource ds) {
         super(ds);
         setQueryNames();
     }
 
-    public CountryDAO(DataSource ds, DAODigester digester) {
+    public LabsForSiteDAO(DataSource ds, DAODigester digester) {
         super(ds);
         this.digester = digester;
         setQueryNames();
@@ -38,7 +36,7 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
 
     // This constructor sets up the Locale for JUnit tests; see the locale
     // member variable in EntityDAO, and its initializeI18nStrings() method
-    public CountryDAO(DataSource ds, DAODigester digester, Locale locale) {
+    public LabsForSiteDAO(DataSource ds, DAODigester digester, Locale locale) {
         this(ds, digester);
         this.locale = locale;
     }
@@ -49,21 +47,19 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
 
     @Override
     protected void setDigesterName() {
-        digesterName = SQLFactory.getInstance().DAO_COUNTRY;
+        digesterName = SQLFactory.getInstance().DAO_LABS_FOR_SITE;
     }
 
     @Override
     public void setTypesExpected() {
-        // 1 sysid serial NOT NULL,
-        // 2 code varchar(3),
-        // 3 displayname varchar(50),
-        // 4 sortorder INT,
+        // 1 id serial NOT NULL,
+        // 2 site_id INT NOT NULL,
+        // 3 laboratory_id INT NOT NULL,
 
         this.unsetTypeExpected();
-        this.setTypeExpected(1, TypeNames.INT);// sysid
-        this.setTypeExpected(2, TypeNames.STRING);// code
-        this.setTypeExpected(3, TypeNames.STRING);// displayname
-        this.setTypeExpected(4, TypeNames.INT);// sortorder
+        this.setTypeExpected(1, TypeNames.INT);// id
+        this.setTypeExpected(2, TypeNames.INT);// site_id
+        this.setTypeExpected(3, TypeNames.INT);// laboratory_id
     }
 
     /**
@@ -83,14 +79,14 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
      * getEntityFromHashMap, the method that gets the object from the database query.
      */
     @Override
-    public CountryBean getEntityFromHashMap(HashMap<String, Object> hm) {
-        CountryBean cb = new CountryBean();
+    public LabsForSiteBean getEntityFromHashMap(HashMap<String, Object> hm) {
+        LabsForSiteBean cb = new LabsForSiteBean();
 
         // first set all the strings
-        cb.setSysid((Integer) hm.get("sysid"));
-        cb.setDisplayname((String) hm.get("displayname"));
-        cb.setCode((String) hm.get("code"));
-        cb.setSortorder((Integer) hm.get("sortorder"));
+        cb.setId((Integer) hm.get("id"));
+        cb.setSite_id((Integer) hm.get("site_id"));
+        cb.setLaboratory_id((Integer) hm.get("laboratory_id"));
+
 
 
 
@@ -98,7 +94,7 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
     }
 
     @Override
-    public ArrayList<CountryBean> findAll() {
+    public ArrayList<LabsForSiteBean> findAll() {
         return findAllByLimit(false);
     }
 
@@ -106,10 +102,10 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
      * TODO: NOT IMPLEMENTED
      */
     @Override
-    public ArrayList<CountryBean> findAll(String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) {
+    public ArrayList<LabsForSiteBean> findAll(String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) {
         throw new RuntimeException("Not implemented");
     }
-    public ArrayList<CountryBean> findAllByLimit(boolean isLimited) {
+    public ArrayList<LabsForSiteBean> findAllByLimit(boolean isLimited) {
         this.setTypesExpected();
         String sql;
         if (isLimited) {
@@ -122,13 +118,13 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
     }
 
     @Override
-    public CountryBean findByPK(int ID) {
+    public LabsForSiteBean findByPK(int ID) {
         String queryName = "findByPK";
         HashMap<Integer, Object> variables = variables(ID);
         return executeFindByPKQuery(queryName, variables);
     }
 
-    public CountryBean findByName(String name) {
+    public LabsForSiteBean findByName(String name) {
         String queryName = "findByName";
         HashMap<Integer, Object> variables = variables(name);
         return executeFindByPKQuery(queryName, variables);
@@ -148,28 +144,28 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
     /**
      * TODO: NOT IMPLEMENTED
      */
-    public ArrayList<CountryBean> findAllByPermission(Object objCurrentUser, int intActionType, String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) {
+    public ArrayList<LabsForSiteBean> findAllByPermission(Object objCurrentUser, int intActionType, String strOrderByColumn, boolean blnAscendingSort, String strSearchPhrase) {
         throw new RuntimeException("Not implemented");
     }
 
     /**
      * TODO: NOT IMPLEMENTED
      */
-    public ArrayList<CountryBean> findAllByPermission(Object objCurrentUser, int intActionType) {
+    public ArrayList<LabsForSiteBean> findAllByPermission(Object objCurrentUser, int intActionType) {
         throw new RuntimeException("Not implemented");
     }
 
-    public CountryBean update(CountryBean sb) {
+    public LabsForSiteBean update(LabsForSiteBean sb) {
         throw new RuntimeException("Not implemented");
     }
 
-    public CountryBean create(CountryBean sb) {
+    public LabsForSiteBean create(LabsForSiteBean sb) {
         throw new RuntimeException("Not implemented");
     }
 
 
-    public CountryBean emptyBean() {
-        return new CountryBean();
+    public LabsForSiteBean emptyBean() {
+        return new LabsForSiteBean();
     }
 
 }

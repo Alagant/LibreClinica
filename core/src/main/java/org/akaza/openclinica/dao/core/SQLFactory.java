@@ -47,6 +47,7 @@ public class SQLFactory {
     // public final String DAO_DATAVIEW = "dataview_dao";
 
     public final String DAO_COUNTRY = "country";
+    public final String DAO_LABS_FOR_SITE = "labs_for_site";
     public final String DAO_LABORATORY = "laboratory";
     public final String DAO_ITEM = "item";
     public final String DAO_ITEMDATA = "item_data";
