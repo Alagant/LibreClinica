@@ -1319,11 +1319,11 @@ public class StudyBean extends AuditableEntityBean {
         this.subSite = subSite;
     }
 
-    public List getConsortiumNames() {
+    public List<String> getConsortiumNames() {
         return consortiumNames;
     }
 
-    public void setConsortiumNames(List consortiumNames) {
+    public void setConsortiumNames(List<String> consortiumNames) {
         this.consortiumNames = consortiumNames;
     }
 
@@ -1331,12 +1331,24 @@ public class StudyBean extends AuditableEntityBean {
         return locationType;
     }
 
+    public String getLocationType1Letter() {
+        // Read-only 1-letter property for locationType
+        if (locationType == null || locationType.isEmpty()) {
+            return "";
+        } else {
+            return locationType.substring(0, 1).toUpperCase();
+        }
+    }
     public void setLocationType(String locationType) {
         this.locationType = locationType;
     }
 
     public Boolean getActive() {
         return active;
+    }
+    public String getActiveString() {
+        //Read-only string property for active
+        return active?"Active":"Inactive";
     }
 
     public String getContractNumber() {

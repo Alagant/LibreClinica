@@ -96,8 +96,12 @@ public class ListSiteServlet extends SecureController {
             }
 
             String[] columns =
-                { resword.getString("name"), resword.getString("unique_identifier"), resword.getString("OID"), resword.getString("principal_investigator"),
-                    resword.getString("facility_name"), resword.getString("date_created"), resword.getString("status"), resword.getString("actions") };
+                { resword.getString("name"), resword.getString("unique_identifier"),
+                    resword.getString("OID"), resword.getString("sub_site"),
+                    resword.getString("facility_name"), resword.getString("date_created"),
+                    resword.getString("site_type"), resword.getString("consortium_name"),
+                    resword.getString("location_type_table"),
+                    resword.getString("status"), resword.getString("actions") };
             table.setColumns(new ArrayList<String>(Arrays.asList(columns)));
             table.hideColumnLink(2);
             table.hideColumnLink(6);
