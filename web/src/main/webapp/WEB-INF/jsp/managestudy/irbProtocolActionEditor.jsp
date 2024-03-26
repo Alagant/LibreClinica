@@ -38,11 +38,11 @@
                     <select name="h_protocol_action_type_id" id="protocolActionHistoryParameterSelection" class="formfield">
                         <c:forEach var="c" items="${protocolActionHistoryParameter}">
                             <option value="${c.irbProtocolActionHistoryParameterId}"
-                                    data-cdc-irb-protocol-version-date="${c.cdcIrbProtocolVersionDate}"
+                                    data-version-date="${c.cdcIrbProtocolVersionDate}"
                                     data-version="${c.version}"
                                     data-site-submitted-to-local-irb="${c.siteSubmittedToLocalIrb}"
                                     data-local-irb-approval="${c.localIrbApproval}"
-                                    data-site-sends-docs-to-crb="${c.siteSendsDocsToCrb}"
+                                    data-received-docs-from-sites="${c.siteSendsDocsToCrb}"
                                     data-package-sent-to-cdc-irb="${c.packageSentToCdcIrb}"
                                     data-cdc-approval-acknowledgment="${c.cdcApprovalAcknowledgment}"
                                     data-enrollment-pause-date="${c.enrollmentPauseDate}"
@@ -136,14 +136,14 @@
                     <label>Site sends docs to IRB:</label>
                 </td>
                 <td>
-                    <input type="text" id="h_site_sends_docs_to_irb" name="h_site_sends_docs_to_irb" class="formfield"/>
+                    <input type="text" id="h_received_docs_from_sites" name="h_received_docs_from_sites" class="formfield"/>
                     <img src="images/bt_Calendar.gif" alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                          title="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                         border="0" id="h_site_sends_docs_to_irb-trigger" /> *
+                         border="0" id="h_received_docs_from_sites-trigger" /> *
                     <script type="text/javascript">
-                        Calendar.setup({inputField: "h_site_sends_docs_to_irb",
+                        Calendar.setup({inputField: "h_received_docs_from_sites",
                             ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                            button: "h_site_sends_docs_to_irb-trigger", customPX: 300, customPY: 10 });
+                            button: "h_received_docs_from_sites-trigger", customPX: 300, customPY: 10 });
                     </script>
                 </td>
             </tr>
@@ -267,16 +267,16 @@
         jQuery('#h_version_number').attr('disabled', 'disabled');
         jQuery('#h_site_submitted_to_local_irb').attr('disabled', 'disabled');
         jQuery('#h_local_irb_approval').attr('disabled', 'disabled');
-        jQuery('#h_site_sends_docs_to_irb').attr('disabled', 'disabled');
+        jQuery('#h_received_docs_from_sites').attr('disabled', 'disabled');
         jQuery('#h_package_sent_to_cdc_irb').attr('disabled', 'disabled');
         jQuery('#h_cdc_approval').attr('disabled', 'disabled');
         jQuery('#h_enrollment_pause_date').attr('disabled', 'disabled');
         jQuery('#h_enrollment_restarted_date').attr('disabled', 'disabled');
         jQuery('#h_reason_for_enrollment_paused').attr('disabled', 'disabled');
 
-        if (jQuery(option).data('cdc-irb-protocol-version-date')) {
+        if (jQuery(option).data('version-date')) {
             jQuery('#h_version_date').removeAttr('disabled');
-            jQuery('#effective_date-trigger').css('display', 'initial');
+            jQuery('#h_version_date-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('version')) {
@@ -293,9 +293,9 @@
             jQuery('#h_local_irb_approval-trigger').css('display', 'initial');
         }
 
-        if (jQuery(option).data('site-sends-docs-to-crb')) {
-            jQuery('#h_site_sends_docs_to_irb').removeAttr('disabled');
-            jQuery('#h_site_sends_docs_to_irb-trigger').css('display', 'initial');
+        if (jQuery(option).data('received-docs-from-sites')) {
+            jQuery('#h_received_docs_from_sites').removeAttr('disabled');
+            jQuery('#h_received_docs_from_sites-trigger').css('display', 'initial');
         }
 
         if (jQuery(option).data('package-sent-to-cdc-irb')) {
