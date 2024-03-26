@@ -8,7 +8,7 @@
     </style>
 <script>
     function loadActionHistoryEditor(payload) {
-        jQuery("#studyActionHistoryParameterSelection").val(payload.actionType);
+        jQuery("#protocolActionHistoryParameterSelection").val(payload.actionType);
         jQuery('input[name="h_protocol_action_history_id"]').val(payload.id);
         jQuery('input[name="h_site_id"]').val(payload.siteId);
         jQuery('input[name="h_version_number"]').val(payload.versionNumber);
@@ -34,9 +34,9 @@
 
 
         jQuery('#protocol-action-open').click(function () {
-            jQuery('input[name="h_study_action_history_id"]').val('');
-            jQuery("#studyActionHistoryParameterSelection").val('');
-            jQuery('#study-action-editor input[type="text"]').val('');
+            jQuery('input[name="h_protocol_action_history_id"]').val('');
+            jQuery("#protocolActionHistoryParameterSelection").val('');
+            jQuery('#protocol-action-editor input[type="text"]').val('');
             enableFieldsByActionParameter();
 
             jQuery.blockUI({
@@ -106,7 +106,7 @@
     <jsp:include page="./irbProtocolActionEditor.jsp"/>
 </div>
 <h2>Protocol action history</h2>
-<table id="table-history-editor">
+<table id="table-history">
     <thead>
         <tr>
             <th>Action</th>
