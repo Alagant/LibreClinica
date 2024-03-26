@@ -1,5 +1,6 @@
 package org.akaza.openclinica.control.managestudy;
 
+import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.managestudy.*;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.control.form.DiscrepancyValidator;
@@ -24,6 +25,7 @@ import java.util.Locale;
 
 public class IRBSiteServlet extends SecureController {
     private IRBSiteDAO irbSiteDAO;
+    private ArrayList<IRBProtocolActionHistoryParameterBean> irbProtocolActionHistoryParameter;
     private static final String INPUT_VERSION_NUMBER = "version_number";
     private static final String INPUT_SITE_RELIES_ON_CDC_IRB = "site_relies_on_cdc_irb";
     private static final String INPUT_IS_1572  = "is_1572";
@@ -188,18 +190,76 @@ public class IRBSiteServlet extends SecureController {
         }
         DiscrepancyValidator v = new DiscrepancyValidator(request, discNotes);
 
-        /*
-        v.addValidation(INPUT_H_VERSION_DATE, Validator.IS_A_DATE);
-        v.addValidation(INPUT_H_VERSION_NUMBER, Validator.IS_A_NUMBER);
-        v.addValidation(INPUT_H_SITE_SUBMITTED_TO_LOCAL_IRB, Validator.IS_A_DATE);
-        v.addValidation(INPUT_H_TO_LOCAL_IRB, Validator.IS_A_DATE);
-        v.addValidation(INPUT_H_RECEIVED_DOCS_FROM_SITES, Validator.IS_A_DATE);
-        v.addValidation(INPUT_H_PACKAGE_SENT_TO_CDC_IRB, Validator.IS_A_DATE);
-        v.addValidation(INPUT_H_CDC_APPROVAL, Validator.IS_A_DATE);
-        v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.IS_A_DATE);
-        v.addValidation(INPUT_H_ENROLLMENT_RESTARTED_DATE, Validator.IS_A_DATE);
-        */
-        //v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSED, Validator.IS_A_DATE);
+        String stringProtocolActionHistoryType =
+                request.getParameter(INPUT_H_PROTOCOL_ACTION_TYPE_ID);
+        int protocolActionHistoryType = -1;
+        try {
+            protocolActionHistoryType = Integer.parseInt(stringProtocolActionHistoryType);
+        }
+        catch (NumberFormatException ex) {
+            //Don't do anything.
+        }
+        protocolActionHistoryType--;
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getCdcIrbProtocolVersionDate()) {
+            v.addValidation(INPUT_H_VERSION_DATE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_VERSION_DATE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_VERSION_DATE, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getVersion()) {
+            v.addValidation(INPUT_H_VERSION_NUMBER, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_VERSION_NUMBER, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 4);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getSiteSubmittedToLocalIrb()) {
+            v.addValidation(INPUT_H_SITE_SUBMITTED_TO_LOCAL_IRB, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_SITE_SUBMITTED_TO_LOCAL_IRB, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_SITE_SUBMITTED_TO_LOCAL_IRB, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getLocalIrbApproval()) {
+            v.addValidation(INPUT_H_TO_LOCAL_IRB, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_TO_LOCAL_IRB, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_TO_LOCAL_IRB, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getSiteSendsDocsToCrb()) {
+            v.addValidation(INPUT_H_RECEIVED_DOCS_FROM_SITES, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_RECEIVED_DOCS_FROM_SITES, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_RECEIVED_DOCS_FROM_SITES, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getPackageSentToCdcIrb()) {
+            v.addValidation(INPUT_H_PACKAGE_SENT_TO_CDC_IRB, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_PACKAGE_SENT_TO_CDC_IRB, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_PACKAGE_SENT_TO_CDC_IRB, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getCdcApprovalAcknowledgment()) {
+            v.addValidation(INPUT_H_CDC_APPROVAL, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_CDC_APPROVAL, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_CDC_APPROVAL, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getEnrollmentPauseDate()) {
+            v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_ENROLLMENT_PAUSE_DATE, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getEnrollmentReStartedDate()) {
+            v.addValidation(INPUT_H_ENROLLMENT_RESTARTED_DATE, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_ENROLLMENT_RESTARTED_DATE, Validator.IS_A_DATE);
+            v.addValidation(INPUT_H_ENROLLMENT_RESTARTED_DATE, Validator.DATE_IN_PAST);
+        }
+
+        if (irbProtocolActionHistoryParameter.get(protocolActionHistoryType).getReasonForEnrollmentPause()) {
+            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSED, Validator.NO_BLANKS);
+            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSED, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 120);
+        }
 
         return v.validate();
     }
@@ -262,9 +322,11 @@ public class IRBSiteServlet extends SecureController {
         FormProcessor fp = new FormProcessor(request);
         Locale locale = LocaleResolver.getLocale(request);
         SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);
-        request.setAttribute("openEditorOnStartup", false);
 
-        request.setAttribute("protocolActionHistoryParameter", getIrbProtocolActionHistoryParameter().findAll());
+        irbProtocolActionHistoryParameter = getIrbProtocolActionHistoryParameter().findAll();
+
+        request.setAttribute("openEditorOnStartup", false);
+        request.setAttribute("protocolActionHistoryParameter", irbProtocolActionHistoryParameter);
         request.setAttribute("protocolActionHistory", getProtocolActionHistory(siteId));
         request.setAttribute("siteId", siteId);
 
