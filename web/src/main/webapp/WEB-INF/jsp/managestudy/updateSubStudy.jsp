@@ -430,12 +430,12 @@
                                   <label>
                                     <input type="checkbox" value="ACTG" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">checked</c:if>/>
                                     ACTG</label>
-                                  <label>
+                                  <!--label>
                                     <input type="checkbox" value="TBESC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">checked</c:if>/>
                                     TBESC</label>
                                   <label>
                                     <input type="checkbox" value="MRC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('MRC')}">checked</c:if>/>
-                                    MRC</label>
+                                    MRC</label-->
                                 </div>
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="consortiumName"/>
