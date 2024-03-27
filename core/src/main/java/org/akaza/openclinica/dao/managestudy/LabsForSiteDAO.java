@@ -7,6 +7,7 @@
 package org.akaza.openclinica.dao.managestudy;
 
 import org.akaza.openclinica.bean.managestudy.CountryBean;
+import org.akaza.openclinica.bean.managestudy.LaboratoryBean;
 import org.akaza.openclinica.bean.managestudy.LabsForSiteBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.DAODigester;
@@ -14,6 +15,7 @@ import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.dao.core.TypeNames;
 
 import javax.sql.DataSource;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -130,6 +132,12 @@ public class LabsForSiteDAO extends AuditableEntityDAO<LabsForSiteBean> {
         return executeFindByPKQuery(queryName, variables);
     }
 
+    public ArrayList<LabsForSiteBean> findBySiteId(Integer siteId) {
+        this.setTypesExpected();
+        HashMap<Integer, Object> variables = variables(siteId);
+        ArrayList<HashMap<String, Object>> alist = select(digester.getQuery("findBySiteId"), variables);
+        return alist.stream().map(hm -> this.getEntityFromHashMap(hm)).collect(toCollection(ArrayList::new));
+    }
     /**
      * deleteTestOnly, used only to clean up after unit testing
      * 
@@ -159,13 +167,24 @@ public class LabsForSiteDAO extends AuditableEntityDAO<LabsForSiteBean> {
         throw new RuntimeException("Not implemented");
     }
 
+    @Override
     public LabsForSiteBean create(LabsForSiteBean sb) {
-        throw new RuntimeException("Not implemented");
-    }
+        HashMap<Integer, Object> variables = new HashMap<>();
+        HashMap<Integer, Integer> nullVars = new HashMap<>();
+        sb.setId(this.findNextKey());
 
+        variables.put(1, sb.getId());
+        variables.put(2, sb.getSite_id());
+        variables.put(3, sb.getLaboratory_id());
+
+        this.executeUpdate(digester.getQuery("create"), variables, nullVars);
+
+        return sb;
+    }
 
     public LabsForSiteBean emptyBean() {
         return new LabsForSiteBean();
     }
+
 
 }

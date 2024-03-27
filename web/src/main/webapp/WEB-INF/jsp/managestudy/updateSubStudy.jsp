@@ -532,7 +532,7 @@
                               <td class="table_cell select-autosize">
                                 <select name="laboratoryId" multiple>
                                   <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryIds.contains(lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                   </c:forEach>
                                 </select>
                               </td>

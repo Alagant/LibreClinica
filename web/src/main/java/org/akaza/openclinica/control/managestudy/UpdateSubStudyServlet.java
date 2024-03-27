@@ -185,6 +185,7 @@ public class UpdateSubStudyServlet extends SecureController {
         v.addValidation("fwaNumber", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 50);
         v.addValidation("fwaNumber", Validator.NO_BLANKS);
         v.addValidation("fwaExpirationDate", Validator.IS_A_DATE);
+        v.addValidation("laboratoryId", Validator.NO_BLANKS);
         errors = v.validate();
 
         // >> tbh
@@ -224,7 +225,9 @@ public class UpdateSubStudyServlet extends SecureController {
         if (fp.getInt("expectedTotalEnrollment") <= 0) {
             Validator.addError(errors, "expectedTotalEnrollment", respage.getString("expected_total_enrollment_must_be_a_positive_number"));
         }
-
+        if (fp.getStringArray("laboratoryId").isEmpty()) {
+            Validator.addError(errors, "laboratoryId", respage.getString("laboratory_selection_shouldnt_be_empty"));
+        }
         if (parentStudy.getStatus().equals(Status.LOCKED)) {
             if (fp.getInt("statusId") != Status.LOCKED.getId()) {
                 Validator.addError(errors, "statusId", respage.getString("study_locked_site_status_locked"));
@@ -614,6 +617,9 @@ public class UpdateSubStudyServlet extends SecureController {
         study.setUpdatedDate(new Date());
         study.setUpdater(ub);
         sdao.update(study);
+
+        List<String> labids = Arrays.asList(request.getParameterValues("laboratoryId"));
+
 
         StudyParameterValueDAO spvdao = new StudyParameterValueDAO(sm.getDataSource());
         for (int i = 0; i < parameters.size(); i++) {
