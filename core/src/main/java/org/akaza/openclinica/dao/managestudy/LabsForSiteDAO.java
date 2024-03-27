@@ -6,8 +6,6 @@
  */
 package org.akaza.openclinica.dao.managestudy;
 
-import org.akaza.openclinica.bean.managestudy.CountryBean;
-import org.akaza.openclinica.bean.managestudy.LaboratoryBean;
 import org.akaza.openclinica.bean.managestudy.LabsForSiteBean;
 import org.akaza.openclinica.dao.core.AuditableEntityDAO;
 import org.akaza.openclinica.dao.core.DAODigester;
@@ -15,7 +13,6 @@ import org.akaza.openclinica.dao.core.SQLFactory;
 import org.akaza.openclinica.dao.core.TypeNames;
 
 import javax.sql.DataSource;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -126,18 +123,22 @@ public class LabsForSiteDAO extends AuditableEntityDAO<LabsForSiteBean> {
         return executeFindByPKQuery(queryName, variables);
     }
 
-    public LabsForSiteBean findByName(String name) {
-        String queryName = "findByName";
-        HashMap<Integer, Object> variables = variables(name);
-        return executeFindByPKQuery(queryName, variables);
-    }
-
     public ArrayList<LabsForSiteBean> findBySiteId(Integer siteId) {
         this.setTypesExpected();
         HashMap<Integer, Object> variables = variables(siteId);
         ArrayList<HashMap<String, Object>> alist = select(digester.getQuery("findBySiteId"), variables);
-        return alist.stream().map(hm -> this.getEntityFromHashMap(hm)).collect(toCollection(ArrayList::new));
+        return alist.stream().map(this::getEntityFromHashMap).collect(toCollection(ArrayList::new));
     }
+
+
+    public ArrayList<LabsForSiteBean> findBySiteIdAndLabId(Integer siteId, Integer labId) {
+        this.setTypesExpected();
+        HashMap<Integer, Object> variables = variables(siteId, labId);
+        ArrayList<HashMap<String, Object>> alist = select(digester.getQuery("findBySiteIdAndLabId"), variables);
+        return alist.stream().map(this::getEntityFromHashMap).collect(toCollection(ArrayList::new));
+    }
+
+
     /**
      * deleteTestOnly, used only to clean up after unit testing
      * 
@@ -184,6 +185,11 @@ public class LabsForSiteDAO extends AuditableEntityDAO<LabsForSiteBean> {
 
     public LabsForSiteBean emptyBean() {
         return new LabsForSiteBean();
+    }
+    public boolean delete(LabsForSiteBean item){
+        HashMap<Integer, Object> variables = new HashMap<>();
+        variables.put(1, item.getId());
+        return this.executeUpdate(digester.getQuery("deleteById"), variables) > 0;
     }
 
 

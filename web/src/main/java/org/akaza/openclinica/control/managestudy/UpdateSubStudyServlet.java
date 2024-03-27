@@ -17,6 +17,7 @@ import org.akaza.openclinica.bean.core.NumericComparisonOperator;
 import org.akaza.openclinica.bean.core.Role;
 import org.akaza.openclinica.bean.core.Status;
 import org.akaza.openclinica.bean.managestudy.EventDefinitionCRFBean;
+import org.akaza.openclinica.bean.managestudy.LabsForSiteBean;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.bean.managestudy.StudyEventDefinitionBean;
 import org.akaza.openclinica.bean.service.StudyParameterValueBean;
@@ -25,10 +26,7 @@ import org.akaza.openclinica.bean.submit.CRFVersionBean;
 import org.akaza.openclinica.control.core.SecureController;
 import org.akaza.openclinica.control.form.FormProcessor;
 import org.akaza.openclinica.control.form.Validator;
-import org.akaza.openclinica.dao.managestudy.CountryDAO;
-import org.akaza.openclinica.dao.managestudy.EventDefinitionCRFDAO;
-import org.akaza.openclinica.dao.managestudy.LaboratoryDAO;
-import org.akaza.openclinica.dao.managestudy.StudyDAO;
+import org.akaza.openclinica.dao.managestudy.*;
 import org.akaza.openclinica.dao.service.StudyParameterValueDAO;
 import org.akaza.openclinica.dao.submit.CRFVersionDAO;
 import org.akaza.openclinica.domain.SourceDataVerification;
@@ -359,7 +357,7 @@ public class UpdateSubStudyServlet extends SecureController {
         study.setConsortiumNames(fp.getStringArray("consortiumName"));
         study.setLocationType(fp.getString("locationType"));
         study.setActive(fp.getString("active").equals("on"));
-        study.setLaboratoryId(fp.getInt("laboratoryId"));
+        study.setLaboratoryIds(fp.getStringArray("laboratoryId"));
         // YW 10-12-2007 <<
         study.getStudyParameterConfig().setInterviewerNameRequired(fp.getString("interviewerNameRequired"));
         study.getStudyParameterConfig().setInterviewerNameDefault(fp.getString("interviewerNameDefault"));
@@ -618,7 +616,35 @@ public class UpdateSubStudyServlet extends SecureController {
         study.setUpdater(ub);
         sdao.update(study);
 
-        List<String> labids = Arrays.asList(request.getParameterValues("laboratoryId"));
+        //String[] labids = request.getParameterValues("laboratoryId");
+        LabsForSiteDAO lfsDao = new LabsForSiteDAO(sm.getDataSource());
+        List<String> labids = study.getLaboratoryIds();
+        //study.setLaboratoryIds(labids);
+        ArrayList<LabsForSiteBean> allfs = lfsDao.findBySiteId(study.getId());
+        for (LabsForSiteBean lfs : allfs) {
+            if (!labids.contains(String.valueOf(lfs.getLaboratory_id()))) {
+                lfsDao.delete(lfs);
+            }
+        }
+        for (String labid : labids) {
+            int ilabid =  Integer.parseInt(labid);
+            ArrayList<LabsForSiteBean> lfsForSiteAndLab = lfsDao.findBySiteIdAndLabId(study.getId(), ilabid);
+            if ((lfsForSiteAndLab.size()>1)){
+                //once we detected multiplicity of references, remove the redindant ones
+                for (int i = 1; i < lfsForSiteAndLab.size(); i++) {
+                    lfsDao.delete(lfsForSiteAndLab.get(i));
+                }
+            } else if (lfsForSiteAndLab.isEmpty()){
+                LabsForSiteBean eb = lfsDao.emptyBean();
+                eb.setLaboratory_id(ilabid);
+                eb.setSite_id(study.getId());
+                lfsDao.create(eb);
+            } else {
+                // test the item deletion
+                lfsDao.delete(lfsForSiteAndLab.get(0));
+            }
+
+        }
 
 
         StudyParameterValueDAO spvdao = new StudyParameterValueDAO(sm.getDataSource());

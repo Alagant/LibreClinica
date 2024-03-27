@@ -174,5 +174,15 @@
                                   referencedTableSchemaName="public"
                                   validate="true"/>
     </changeSet>
-
+    <changeSet id="10" author="lucioric2000">
+        <comment>Deleted singular lab column and assed multiple labs column</comment>
+        <dropColumn tableName="study" columnName="id">
+                <column name="laboratory_id" type="INT"/>
+        </dropColumn>
+        <addColumn tableName="study">
+            <column name="laboratory_ids" type="TEXT">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

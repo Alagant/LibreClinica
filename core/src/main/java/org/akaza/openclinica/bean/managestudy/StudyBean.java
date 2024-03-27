@@ -50,7 +50,7 @@ public class StudyBean extends AuditableEntityBean {
     private String siteType = "";
     private String summary = "";// need to be removed
 
-    private List<Integer> laboratoryIds = null;
+    private List<String> laboratoryIds = null;//laboratory ids are strings at rest, but it may change for it to be integers
 
     private Date datePlannedStart;
     private Date datePlannedEnd;
@@ -1401,11 +1401,11 @@ public class StudyBean extends AuditableEntityBean {
         this.laboratoryId = laboratoryId;
     }
 
-    public List<Integer> getLaboratoryIds() {
+    public List<String> getLaboratoryIds() {
         return laboratoryIds;
     }
 
-    public void setLaboratoryIds(List<Integer> laboratoryIds) {
+    public void setLaboratoryIds(List<String> laboratoryIds) {
         this.laboratoryIds = laboratoryIds;
     }
 }

@@ -36,4 +36,8 @@
         <name>deleteBySiteIdAndLabId</name>
         <sql>DELETE FROM LABS_FOR_SITE WHERE SITE_ID = ? AND LAB_ID = ?</sql>
     </query>
+    <query>
+        <name>deleteById</name>
+        <sql>DELETE FROM LABS_FOR_SITE WHERE ID = ?</sql>
+    </query>
 </queries>
