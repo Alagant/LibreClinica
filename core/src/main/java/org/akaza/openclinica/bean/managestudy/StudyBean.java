@@ -50,6 +50,8 @@ public class StudyBean extends AuditableEntityBean {
     private String siteType = "";
     private String summary = "";// need to be removed
 
+    private List<Integer> laboratotyIds = null;
+
     private Date datePlannedStart;
     private Date datePlannedEnd;
 
@@ -1397,5 +1399,13 @@ public class StudyBean extends AuditableEntityBean {
 
     public void setLaboratoryId(int laboratoryId) {
         this.laboratoryId = laboratoryId;
+    }
+
+    public List<Integer> getLaboratotyIds() {
+        return laboratotyIds;
+    }
+
+    public void setLaboratotyIds(List<Integer> laboratotyIds) {
+        this.laboratotyIds = laboratotyIds;
     }
 }

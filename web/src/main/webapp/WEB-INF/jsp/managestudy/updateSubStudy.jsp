@@ -524,7 +524,7 @@
                             <tr valign="top">
                               <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
                               <td class="table_cell select-autosize">
-                                <select name="laboratoryId">
+                                <select name="laboratoryId" multiple>
                                   <c:forEach var="lab" items="${laboratories}">
                                   <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                   </c:forEach>
