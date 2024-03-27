@@ -254,22 +254,32 @@
             jQuery("#studyActionHistoryParameterSelection").val() + '"]'
     );
 
-
     jQuery('#study-action-editor .table-history-editor img').css('display', 'none');
+
     jQuery('#h_effective_date').attr('disabled', 'disabled');
+    jQuery('#h_effective_date').val('');
     jQuery('#h_hrpo_action').attr('disabled', 'disabled');
+    jQuery('#h_hrpo_action').val('');
     jQuery('#h_version_date').attr('disabled', 'disabled');
+    jQuery('#h_version_date').val('');
     jQuery('#h_version_number').attr('disabled', 'disabled');
+    jQuery('#h_version_number').val('');
     jQuery('#h_submission_to_cdc_irb').attr('disabled', 'disabled');
+    jQuery('#h_submission_to_cdc_irb').val('');
     jQuery('#h_cdc_irb_approval').attr('disabled', 'disabled');
+    jQuery('#h_cdc_irb_approval').val('');
     jQuery('#h_notification_sent_to_sites').attr('disabled', 'disabled');
+    jQuery('#h_notification_sent_to_sites').val('');
     jQuery('#h_enrollment_pause_date').attr('disabled', 'disabled');
+    jQuery('#h_enrollment_pause_date').val('');
     jQuery('#h_enrollment_re_started_date').attr('disabled', 'disabled');
+    jQuery('#h_enrollment_re_started_date').val('');
     jQuery('#h_reason_for_enrollment_pause').attr('disabled', 'disabled');
+    jQuery('#h_reason_for_enrollment_pause').val('');
 
     if (jQuery(option).data('effective-date')) {
       jQuery('#effective_date').removeAttr('disabled');
-      jQuery('#effective_date-trigger').removeAttr('disabled');
+      jQuery('#effective_date-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('hrpo-action')) {

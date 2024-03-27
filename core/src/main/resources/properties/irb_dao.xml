@@ -132,13 +132,27 @@
         <sql>
             SELECT iah.irb_protocol_action_history_id,
             iah.irb_protocol_action_type_id,
-            pat."label",
-            version_date, version_number, site_submitted_to_local_irb,
-            local_irb_approval, received_docs_from_sites,
-            package_sent_to_cdc_irb, cdc_approval
-            FROM irb_protocol_action_history iah INNER JOIN irb_protocol_action_type pat ON
-            iah.irb_protocol_action_type_id = pat.irb_protocol_action_type_id
+            pat."action",
+            iah.version_date, iah.version_number, iah.site_submitted_to_local_irb,
+            iah.local_irb_approval, iah.received_docs_from_sites,
+            iah.package_sent_to_cdc_irb, iah.cdc_approval
+            FROM irb_protocol_action_history iah INNER JOIN irb_protocol_action_history_parameter pat ON
+            iah.irb_protocol_action_type_id = pat.irb_protocol_action_history_parameter_id
             WHERE iah.irb_site_id = ?;
+        </sql>
+    </query>
+    <query>
+        <name>findProtocolActionHistoryById</name>
+        <sql>
+            SELECT iah.irb_protocol_action_history_id,
+            iah.irb_protocol_action_type_id,
+            pat."action",
+            iah.version_date, iah.version_number, iah.site_submitted_to_local_irb,
+            iah.local_irb_approval, iah.received_docs_from_sites,
+            iah.package_sent_to_cdc_irb, iah.cdc_approval
+            FROM irb_protocol_action_history iah INNER JOIN irb_protocol_action_history_parameter pat ON
+            iah.irb_protocol_action_type_id = pat.irb_protocol_action_history_parameter_id
+            WHERE iah.irb_protocol_action_history_id = ?;
         </sql>
     </query>
     <query>

@@ -92,7 +92,6 @@ public class IRBStudyServlet extends SecureController {
 
 
     private IRBStudyActionHistoryBean createOrUpdateActionHistory() throws NumberFormatException, OpenClinicaException {
-
         String stringStudyActionHistoryId =
                 request.getParameter(INPUT_H_STUDY_ACTION_HISTORY_ID);
         int studyActionHistoryId = -1;
@@ -102,6 +101,9 @@ public class IRBStudyServlet extends SecureController {
         catch (NumberFormatException ex) {
             //Don't do anything.
         }
+
+
+
         IRBStudyActionHistoryBean  irbStudyActionHistoryBean = null;
         if(studyActionHistoryId>0) {
             irbStudyActionHistoryBean = (IRBStudyActionHistoryBean) getIRBStudyActionHistoryDAO()
@@ -184,9 +186,6 @@ public class IRBStudyServlet extends SecureController {
             //Don't do anything.
         }
         studyActionHistoryType--;
-        System.out.println("validateIrbStudyActionHistoryRequest: " + stringStudyActionHistoryType);
-        System.out.println("validateIrbStudyActionHistoryRequest: " + studyActionHistoryType);
-        System.out.println("validateIrbStudyActionHistoryRequest: " + irbStudyActionHistoryParameter.get(studyActionHistoryType).getAction());
 
         if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getEffectiveDate()) {
             v.addValidation(INPUT_H_EFFECTIVE_DATE, Validator.NO_BLANKS);
@@ -244,8 +243,8 @@ public class IRBStudyServlet extends SecureController {
 
         if (irbStudyActionHistoryParameter.get(studyActionHistoryType).getReasonForEnrollmentPause()) {
             v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.NO_BLANKS);
-            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.IS_A_DATE);
-            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.DATE_IN_PAST);
+            v.addValidation(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE, Validator.LENGTH_NUMERIC_COMPARISON,
+                    NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 120);
         }
 
         return v.validate();
@@ -347,8 +346,6 @@ public class IRBStudyServlet extends SecureController {
         }
 
         irbStudyBean = getIRBStudyDAO().findByStudy(currentStudy);
-        /*Locale locale = LocaleResolver.getLocale(request);
-        SimpleDateFormat sdf= new SimpleDateFormat("dd-MMM-yyyy", locale);*/
 
         request.setAttribute("irbStudyBean", irbStudyBean);
         populateFormProcessorFromStudyBean(fp, irbStudyBean);
