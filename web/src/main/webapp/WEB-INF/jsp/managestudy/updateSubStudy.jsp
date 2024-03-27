@@ -424,13 +424,19 @@
                               <td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td>
                               <td>
                                 <div class="formfieldXL_BG">
-                                  <select multiple name="consortiumName"
-                                          value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
-                                    <option value="TBTC" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">selected</c:if>>TBTC</option>
-                                    <option value="ACTG" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">selected</c:if>>ACTG</option>
-                                    <!--option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBESC</option>
-                                    <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>MRC</option-->
-                                  </select></div>
+                                  <label>
+                                    <input type="checkbox" value="TBTC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">checked</c:if>/>
+                                    TBTC</label>
+                                  <label>
+                                    <input type="checkbox" value="ACTG" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">checked</c:if>/>
+                                    ACTG</label>
+                                  <label>
+                                    <input type="checkbox" value="TBESC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">checked</c:if>/>
+                                    TBESC</label>
+                                  <label>
+                                    <input type="checkbox" value="MRC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('MRC')}">checked</c:if>/>
+                                    MRC</label>
+                                </div>
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="consortiumName"/>
                                 </jsp:include>
@@ -503,8 +509,8 @@
                                 <jsp:include page="../showMessage.jsp">
                                   <jsp:param name="key" value="fwaExpirationDate"/>
                                 </jsp:include>
-                                </td><td>
-                                <A HREF="#">
+                              </td><td>
+                              <A HREF="#">
                                 <img src="images/bt_Calendar.gif"
                                      alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                                      title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"

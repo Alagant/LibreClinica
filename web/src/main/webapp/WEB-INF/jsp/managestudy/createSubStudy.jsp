@@ -234,8 +234,8 @@
                             <jsp:include page="../showMessage.jsp">
                               <jsp:param name="key" value="contractNumber"/>
                             </jsp:include>
-                              * required for TBTC sites</td>
-                            <td></td>
+                            </td><td>
+                            * required for TBTC sites</td>
                           </tr>
 
                           <tr valign="top">
@@ -460,13 +460,19 @@
                             <td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td>
                             <td>
                               <div class="formfieldXL_BG">
-                                <select multiple name="consortiumName"
-                                        value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
-                                  <option value="TBTC" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">selected</c:if>>TBTC</option>
-                                  <option value="ACTG" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">selected</c:if>>ACTG</option>
-                                  <!--option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBESC</option>
-                                  <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>MRC</option-->
-                                </select></div>
+                                <label>
+                                  <input type="checkbox" value="TBTC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">checked</c:if>/>
+                                  TBTC</label>
+                                <label>
+                                  <input type="checkbox" value="ACTG" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">checked</c:if>/>
+                                  ACTG</label>
+                                <label>
+                                  <input type="checkbox" value="TBESC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">checked</c:if>/>
+                                  TBESC</label>
+                                <label>
+                                  <input type="checkbox" value="MRC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('MRC')}">checked</c:if>/>
+                                  MRC</label>
+                              </div>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="consortiumName"/>
                               </jsp:include>
@@ -560,7 +566,7 @@
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
                             <td class="table_cell select-autosize">
-                              <select name="laboratoryId">
+                              <select name="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
