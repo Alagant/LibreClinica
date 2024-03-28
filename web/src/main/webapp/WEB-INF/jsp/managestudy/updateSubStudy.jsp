@@ -217,7 +217,8 @@
                                 </select>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="contractNumber"/>
-                              </jsp:include>                            </td>
+                              </jsp:include>
+                            </td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel">
@@ -339,8 +340,7 @@
                                 <jsp:param name="key" value="facAddress1"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*
-                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td>
@@ -441,7 +441,7 @@
                                 <jsp:param name="key" value="consortiumName"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
 
                           <tr valign="top">
@@ -457,7 +457,7 @@
                                 <jsp:param name="key" value="locationType"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
 
                           <tr valign="top">
@@ -470,7 +470,7 @@
                                 <jsp:param name="key" value="active"/>
                               </jsp:include>
                             </td>
-                            <td>*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr>
                             <td><h2>Federal wide assurance (FWA)</h2></td>
@@ -485,7 +485,7 @@
                                 <jsp:param name="key" value="fwaInstitution"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td>
@@ -497,7 +497,7 @@
                                 <jsp:param name="key" value="fwaNumber"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td>
@@ -539,6 +539,7 @@
                                 <jsp:param name="key" value="laboratoryId"/>
                               </jsp:include>
                             </td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <c:choose>
                             <c:when test="${newStudy.parentStudyId == 0}">
@@ -599,7 +600,7 @@
                                 <jsp:param name="key" value="statusId"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
 
                           <c:forEach var="config" items="${newStudy.studyParameters}">
