@@ -451,7 +451,7 @@
                                      <c:if test="${newStudy.locationType.equals('domestic')}">checked</c:if> value="domestic"
                                      id="domestic"/><label for="domestic">domestic</label>
                               <input type="radio" name="locationType" <c:if
-                                  test="${newStudy.locationType.equals('international')}">checked</c:if>value="international"
+                                  test="${newStudy.locationType.equals('international')}">checked</c:if> value="international"
                                      id="international"/><label for="international">International</label>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="locationType"/>

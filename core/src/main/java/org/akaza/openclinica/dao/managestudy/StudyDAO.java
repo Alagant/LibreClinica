@@ -422,7 +422,7 @@ public class StudyDAO extends AuditableEntityDAO<StudyBean> {
             nullVars.put(37, Types.DATE);
         }
         variables.put(38, sb.getSiteType());// site_type
-        variables.put(39, sb.getLaboratoryIds());// laboratory_ids
+        variables.put(39, String.join(",", sb.getLaboratoryIds()));// laboratory_ids
         variables.put(40, String.join(",", sb.getConsortiumNames()));// consortium_name
         // replace this with the owner id
         this.executeUpdate(digester.getQuery("createStepOne"), variables, nullVars);
