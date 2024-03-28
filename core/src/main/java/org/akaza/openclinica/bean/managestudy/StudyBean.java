@@ -88,7 +88,6 @@ public class StudyBean extends AuditableEntityBean {
     private String fwaInstitution = "";
     private String fwaNumber = "";
     private Date fwaExpirationDate = null;
-    private int laboratoryId = 0;
     private String facilityRecruitmentStatus = "";
     private String facilityContactName = "";
     private String facilityContactDegree = "";
@@ -1392,14 +1391,6 @@ public class StudyBean extends AuditableEntityBean {
 
     public void setSiteType(String siteType) {
         this.siteType = siteType;
-    }
-
-    public int getLaboratoryId() {
-        return laboratoryId;
-    }
-
-    public void setLaboratoryId(int laboratoryId) {
-        this.laboratoryId = laboratoryId;
     }
 
     public List<String> getLaboratoryIds() {
