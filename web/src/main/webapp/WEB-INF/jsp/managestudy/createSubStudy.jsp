@@ -187,7 +187,7 @@
 
                           <tr valign="top">
                             <td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId'); return false;"><b><fmt:message
-                                key="unique_protocol_ID" bundle="${resword}"/></b>:</a></td>
+                                key="unique_protocol_ID" bundle="${resword}"/></b></a>:</td>
                             <td>
                               <div class="formfieldXL_BG">
                                 <input type="text" name="uniqueProId" value="<c:out value="${newStudy.identifier}"/>"
@@ -239,14 +239,14 @@
                           </tr>
 
                           <tr valign="top">
-                            <td class="table_header_column"><fmt:message key="site_type" bundle="${resword}"/>:</td>
+                            <td class="formlabel"><fmt:message key="site_type" bundle="${resword}"/>:</td>
                             <td class="table_cell">
                               <div class="formfieldXL_BG">
                                 <select name="siteType">
                                   <option value="Depot" <c:if
-                                      test="${newStudy.siteType=='Depot'}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
+                                      test="${newStudy.siteType.equals('Depot')}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
                                   <option value="Site" <c:if
-                                      test="${newStudy.siteType=='Site'}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
+                                      test="${newStudy.siteType.equals('Site')}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
                                   <option value="External Partners" <c:if
                                       test="${newStudy.siteType=='External Partners'}">selected</c:if>><fmt:message key="site_type_external_partners"
                                                                                                                     bundle="${resword}"/></option>
@@ -442,7 +442,7 @@
 
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td>
-                            <td class="table_cell select-option">
+                            <td class="table_cell">
                               <div class="formfieldXL_BG select-autosize">
                                 <select name="facCountry">
                                   <c:forEach var="country" items="${countries}">
@@ -461,16 +461,16 @@
                             <td>
                               <div class="formfieldXL_BG">
                                 <label>
-                                  <input type="checkbox" value="TBTC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">checked</c:if>/>
+                                  <input type="checkbox" value="TBTC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'TBTC')}">checked</c:if>/>
                                   TBTC</label>
                                 <label>
-                                  <input type="checkbox" value="ACTG" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">checked</c:if>/>
+                                  <input type="checkbox" value="ACTG" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'ACTG')}">checked</c:if>/>
                                   ACTG</label>
                                 <!--label>
-                                  <input type="checkbox" value="TBESC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">checked</c:if>/>
+                                  <input type="checkbox" value="TBESC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'TBESC')}">checked</c:if>/>
                                   TBESC</label>
                                 <label>
-                                  <input type="checkbox" value="MRC" name="consortiumName" <c:if test="${newStudy.consortiumNames.contains('MRC')}">checked</c:if>/>
+                                  <input type="checkbox" value="MRC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'MRC')}">checked</c:if>/>
                                   MRC</label-->
                               </div>
                               <jsp:include page="../showMessage.jsp">
@@ -568,7 +568,7 @@
                             <td class="table_cell select-autosize">
                               <select name="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
                               </select>
                             </td>

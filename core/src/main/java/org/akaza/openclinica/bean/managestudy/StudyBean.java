@@ -16,6 +16,7 @@ import java.util.List;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 import org.akaza.openclinica.bean.core.AuditableEntityBean;
 import org.akaza.openclinica.bean.core.Status;
@@ -1407,5 +1408,8 @@ public class StudyBean extends AuditableEntityBean {
 
     public void setLaboratoryIds(List<String> laboratoryIds) {
         this.laboratoryIds = laboratoryIds;
+    }
+    public List<Integer> getLaboratoryIds_int() {
+        return laboratoryIds.stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 }

@@ -155,6 +155,7 @@ public class UpdateSubStudyServlet extends SecureController {
         if (!(verDate == null || verDate.trim().isEmpty())) {
             v.addValidation(INPUT_VER_DATE, Validator.IS_A_DATE);
         }
+        String fwaExpirationDate = fp.getString(FWA_EXPIRATION_DATE);
         // v.addValidation("statusId", Validator.IS_VALID_TERM);
         v.addValidation("secondProId", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
         v.addValidation("facName", Validator.LENGTH_NUMERIC_COMPARISON, NumericComparisonOperator.LESS_THAN_OR_EQUAL_TO, 255);
@@ -257,6 +258,7 @@ public class UpdateSubStudyServlet extends SecureController {
             fp.addPresetValue(INPUT_START_DATE, startDate);
             fp.addPresetValue(INPUT_VER_DATE, verDate);
             fp.addPresetValue(INPUT_END_DATE, endDate);
+            fp.addPresetValue(FWA_EXPIRATION_DATE, fwaExpirationDate);
             /*
             try {
                 local_df.parse(fp.getString(INPUT_START_DATE));
@@ -634,16 +636,12 @@ public class UpdateSubStudyServlet extends SecureController {
                 for (int i = 1; i < lfsForSiteAndLab.size(); i++) {
                     lfsDao.delete(lfsForSiteAndLab.get(i));
                 }
-            } else if (lfsForSiteAndLab.isEmpty()){
+            } else if (lfsForSiteAndLab.isEmpty()) {
                 LabsForSiteBean eb = lfsDao.emptyBean();
                 eb.setLaboratory_id(ilabid);
                 eb.setSite_id(study.getId());
                 lfsDao.create(eb);
-            } else {
-                // test the item deletion
-                lfsDao.delete(lfsForSiteAndLab.get(0));
             }
-
         }
 
 
