@@ -8,7 +8,9 @@
 <fmt:setBundle basename="org.akaza.openclinica.i18n.notes" var="restext"/>
 <fmt:setBundle basename="org.akaza.openclinica.i18n.format" var="resformat"/>
 
+
 <jsp:include page="../include/submit-header.jsp"/>
+
 <!-- move the alert message to the sidebar-->
 <jsp:include page="../include/sideAlert.jsp"/>
 
@@ -22,6 +24,11 @@
 
 <script type="text/javascript" language="JavaScript" src="includes/jmesa/jquery-migrate-1.1.1.js"></script>
 
+<style>
+    .oc_nav {
+        display: none;
+    }
+</style>
 
 <tr id="sidebar_Instructions_open" style="display: none">
     <td class="sidebar_tab">
@@ -53,7 +60,8 @@
 
 
 <h1><span class="title_manage">Oops! The date of visit is outside the acceptable visit window</span></h1>
-
+<br>
+<br>
 <div>
     You have entered a date that is not within ± 3 calendar days of scheduled visit for weeks 1 to 22 or not within ± 7 calendar days of scheduled visit for weeks 26 to 78. Please review the date.
 
