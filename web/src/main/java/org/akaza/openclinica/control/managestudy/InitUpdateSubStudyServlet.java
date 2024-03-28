@@ -133,13 +133,6 @@ public class InitUpdateSubStudyServlet extends SecureController {
 			request.setAttribute("countries", countries);
 			LabsForSiteDAO labsForSiteDAO = new LabsForSiteDAO(sm.getDataSource());
 			List labsForSite = labsForSiteDAO.findBySiteId(study.getId());
-			if (labsForSite.isEmpty()){
-				//Does the migration now from the old system
-				LabsForSiteBean lab_for_site = labsForSiteDAO.emptyBean();
-				lab_for_site.setSite_id(study.getId());
-				lab_for_site.setLaboratory_id(study.getLaboratoryId());
-				labsForSiteDAO.create(lab_for_site);
-			}
 			//labsForSite
 			request.setAttribute("labsForSite", labsForSite);
 
