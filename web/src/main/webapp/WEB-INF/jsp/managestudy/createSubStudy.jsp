@@ -540,7 +540,7 @@
                             <td>
                               <div class="formfieldXL_BG">
                                 <input type="text" name="fwaExpirationDate"
-                                       value="<c:out value="${newStudy.fwaExpirationDate}" />" class="formfieldXL"
+                                       value="<c:out value="${fwaExpirationDate}" />" class="formfieldXL"
                                        id="fwaExpirationDateField"></div>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="fwaExpirationDate"/>
@@ -571,12 +571,11 @@
                                   <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
                               </select>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="laboratoryId"/>
+                              </jsp:include>
                             </td>
-                            <jsp:include page="../showMessage.jsp">
-                              <jsp:param name="key" value="laboratoryId"/>
-                            </jsp:include>
                           </tr>
-
                           <c:choose>
                             <c:when test="${newStudy.parentStudyId == 0}">
                               <c:set var="key" value="study_system_status"/>
@@ -868,12 +867,9 @@
                                   <td class="formlabel"><fmt:message key="interviewer_date_required"
                                                                      bundle="${resword}"/></td>
                                   <td>
-                                    <input type="radio"
-                                    <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'yes'}"> checked </c:if> name="interviewDateRequired" value="yes"><fmt:message key="yes" bundle="${resword}"/>
-                                    <input type="radio"
-                                    <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'no'}"> checked </c:if> name="interviewDateRequired" value="no"><fmt:message key="no" bundle="${resword}"/>
-                                    <input type="radio"
-                                    <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'yes'}"> checked </c:if> name="interviewDateRequired" value="yes"><fmt:message key="yes" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'no'}"> checked </c:if> name="interviewDateRequired" value="no"><fmt:message key="no" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
                                   </td>
                                 </tr>
                               </c:when>
@@ -1254,7 +1250,8 @@
                    class="button_long">
           </td>
           <td>
-            <input type="button" name="Cancel" id="cancel" value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_long" onClick="javascript:myCancel();"/></td>
+            <input type="button" name="Cancel" id="cancel"
+                   value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_long" onClick="javascript:myCancel();"/></td>
           </td>
         </tr>
       </table>

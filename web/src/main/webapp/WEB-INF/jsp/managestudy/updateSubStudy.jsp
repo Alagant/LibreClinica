@@ -595,12 +595,12 @@
                                    <input type="text" name="statusName" value="Available" class="formfieldL" disabled>
                                    <input type="hidden" name="statusId" value="1">
                                    </div>--%>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="statusId"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*</td>
-                            </tr>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="statusId"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel">*</td>
+                          </tr>
 
                           <c:forEach var="config" items="${newStudy.studyParameters}">
                             <c:choose>
@@ -798,7 +798,6 @@
                                            <c:if test="${config.value.value== 'not_used'}">checked</c:if>
                                            name="interviewerNameRequired" value="not_used"><fmt:message key="not_used"
                                                                                                         bundle="${resword}"/>
-
                                   </td>
                                 </tr>
                               </c:when>
@@ -1237,11 +1236,11 @@
       <table border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td><input type="submit" name="Submit" value="<fmt:message key="submit_site" bundle="${resword}"/>"
-                     class="button_long">
+                   class="button_long">
           </td>
           <td>
-            <input type="button" onclick="confirmCancel('ListSite');" name="cancel"
-                   value="   <fmt:message key="cancel" bundle="${resword}"/>   " class="button_medium"/>
+            <input type="button" onclick="confirmCancel('ListSite');" name="cancel" id="cancel"
+                  value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_medium"/>
           </td>
         </tr>
       </table>
