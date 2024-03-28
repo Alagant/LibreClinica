@@ -21,7 +21,7 @@
 <script type="text/javascript" language="JavaScript" src="includes/jmesa/jquery.blockUI.js"></script>
 
 <script type="text/javascript" language="JavaScript" src="includes/jmesa/jquery-migrate-1.1.1.js"></script>
-<jsp:useBean id="siteId" scope="request" type="java.lang.Integer"/>
+
 
 <tr id="sidebar_Instructions_open" style="display: none">
     <td class="sidebar_tab">
@@ -59,10 +59,10 @@
 
     If the visit took place outside the accepted range then
     <ol>
-        <li>Select "missed visit" for the first question.</li>
-        <li>Do NOT enter a visit date.</li>
-        <li>Complete remaining questions as applicable and give an explanation in the comment section.</li>
-        <li>Record any assessments done outside the visit window as an UNSCHEDULED visit.</li>
+        <p>1. Select "missed visit" for the first question.</p>
+        <p>2. Do NOT enter a visit date.</p>
+        <p>3. Complete remaining questions as applicable and give an explanation in the comment section.</p>
+        <p>4. Record any assessments done outside the visit window as an UNSCHEDULED visit.</p>
     </ol>
 
     Return to the data entry screen now with your browser's BACK button.
