@@ -338,7 +338,7 @@
                         </td>
                         <td class="table_cell">
                           <c:forEach var="lab" items="${laboratories}">
-                            <c:if test="${siteToView.laboratoryId==lab.labId}"><c:out value="${lab.labName}"/></c:if>
+                            <c:if test="${siteToView.laboratoryIds_int.contains(lab.labId)}"><c:out value="${lab.labName}"/></c:if>
                           </c:forEach>
                         </td>
                       </tr>

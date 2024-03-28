@@ -16,6 +16,7 @@ import java.util.List;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 import org.akaza.openclinica.bean.core.AuditableEntityBean;
 import org.akaza.openclinica.bean.core.Status;
@@ -49,6 +50,8 @@ public class StudyBean extends AuditableEntityBean {
     private String contractNumber = "";
     private String siteType = "";
     private String summary = "";// need to be removed
+
+    private List<String> laboratoryIds = null;//laboratory ids are strings at rest, but it may change for it to be integers
 
     private Date datePlannedStart;
     private Date datePlannedEnd;
@@ -85,7 +88,6 @@ public class StudyBean extends AuditableEntityBean {
     private String fwaInstitution = "";
     private String fwaNumber = "";
     private Date fwaExpirationDate = null;
-    private int laboratoryId = 0;
     private String facilityRecruitmentStatus = "";
     private String facilityContactName = "";
     private String facilityContactDegree = "";
@@ -1391,11 +1393,14 @@ public class StudyBean extends AuditableEntityBean {
         this.siteType = siteType;
     }
 
-    public int getLaboratoryId() {
-        return laboratoryId;
+    public List<String> getLaboratoryIds() {
+        return laboratoryIds;
     }
 
-    public void setLaboratoryId(int laboratoryId) {
-        this.laboratoryId = laboratoryId;
+    public void setLaboratoryIds(List<String> laboratoryIds) {
+        this.laboratoryIds = laboratoryIds;
+    }
+    public List<Integer> getLaboratoryIds_int() {
+        return laboratoryIds.stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 }

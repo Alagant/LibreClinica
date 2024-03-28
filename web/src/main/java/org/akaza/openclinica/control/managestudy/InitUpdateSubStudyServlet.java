@@ -15,6 +15,7 @@ import org.akaza.openclinica.bean.admin.CRFBean;
 import org.akaza.openclinica.bean.core.Role;
 import org.akaza.openclinica.bean.core.Status;
 import org.akaza.openclinica.bean.managestudy.EventDefinitionCRFBean;
+import org.akaza.openclinica.bean.managestudy.LabsForSiteBean;
 import org.akaza.openclinica.bean.managestudy.StudyBean;
 import org.akaza.openclinica.bean.managestudy.StudyEventDefinitionBean;
 import org.akaza.openclinica.bean.service.StudyParameterValueBean;
@@ -130,6 +131,10 @@ public class InitUpdateSubStudyServlet extends SecureController {
 			CountryDAO countryDAO = new CountryDAO(sm.getDataSource());
 			List countries = countryDAO.findAll();
 			request.setAttribute("countries", countries);
+			LabsForSiteDAO labsForSiteDAO = new LabsForSiteDAO(sm.getDataSource());
+			List labsForSite = labsForSiteDAO.findBySiteId(study.getId());
+			//labsForSite
+			request.setAttribute("labsForSite", labsForSite);
 
 			FormProcessor fp = new FormProcessor(request);
 			logger.info("start date:" + study.getDatePlannedEnd());

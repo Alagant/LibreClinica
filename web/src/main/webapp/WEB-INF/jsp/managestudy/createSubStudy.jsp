@@ -187,7 +187,7 @@
 
                           <tr valign="top">
                             <td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId'); return false;"><b><fmt:message
-                                key="unique_protocol_ID" bundle="${resword}"/></b>:</a></td>
+                                key="unique_protocol_ID" bundle="${resword}"/></b></a>:</td>
                             <td>
                               <div class="formfieldXL_BG">
                                 <input type="text" name="uniqueProId" value="<c:out value="${newStudy.identifier}"/>"
@@ -234,26 +234,27 @@
                             <jsp:include page="../showMessage.jsp">
                               <jsp:param name="key" value="contractNumber"/>
                             </jsp:include>
-                              * required for TBTC sites</td>
-                            <td></td>
+                            </td><td>
+                            * required for TBTC sites</td>
                           </tr>
 
                           <tr valign="top">
-                            <td class="table_header_column"><fmt:message key="site_type" bundle="${resword}"/>:</td>
+                            <td class="formlabel"><fmt:message key="site_type" bundle="${resword}"/>:</td>
                             <td class="table_cell">
                               <div class="formfieldXL_BG">
                                 <select name="siteType">
                                   <option value="Depot" <c:if
-                                      test="${newStudy.siteType=='Depot'}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
+                                      test="${newStudy.siteType.equals('Depot')}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
                                   <option value="Site" <c:if
-                                      test="${newStudy.siteType=='Site'}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
+                                      test="${newStudy.siteType.equals('Site')}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
                                   <option value="External Partners" <c:if
                                       test="${newStudy.siteType=='External Partners'}">selected</c:if>><fmt:message key="site_type_external_partners"
                                                                                                                     bundle="${resword}"/></option>
                                 </select>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="contractNumber"/>
-                              </jsp:include>                            </td>
+                              </jsp:include>
+                            </td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel">
@@ -375,8 +376,7 @@
                                 <jsp:param name="key" value="facAddress1"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*
-                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td>
@@ -442,7 +442,7 @@
 
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td>
-                            <td class="table_cell select-option">
+                            <td class="table_cell">
                               <div class="formfieldXL_BG select-autosize">
                                 <select name="facCountry">
                                   <c:forEach var="country" items="${countries}">
@@ -460,34 +460,40 @@
                             <td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td>
                             <td>
                               <div class="formfieldXL_BG">
-                                <select multiple name="consortiumName"
-                                        value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
-                                  <option value="TBTC" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">selected</c:if>>TBTC</option>
-                                  <option value="ACTG" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">selected</c:if>>ACTG</option>
-                                  <!--option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBESC</option>
-                                  <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>MRC</option-->
-                                </select></div>
+                                <label>
+                                  <input type="checkbox" value="TBTC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'TBTC')}">checked</c:if>/>
+                                  TBTC</label>
+                                <label>
+                                  <input type="checkbox" value="ACTG" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'ACTG')}">checked</c:if>/>
+                                  ACTG</label>
+                                <!--label>
+                                  <input type="checkbox" value="TBESC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'TBESC')}">checked</c:if>/>
+                                  TBESC</label>
+                                <label>
+                                  <input type="checkbox" value="MRC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'MRC')}">checked</c:if>/>
+                                  MRC</label-->
+                              </div>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="consortiumName"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
 
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="location_type" bundle="${resword}"/>:</td>
                             <td>
                               <input type="radio" name="locationType"
-                                     <c:if test="${newStudy.locationType.equals('domestic')}">checked</c:if> value="domestic"
+                                     <c:if test="${newStudy.locationType eq 'domestic'}">checked</c:if> value="domestic"
                                      id="domestic"/><label for="domestic">domestic</label>
                               <input type="radio" name="locationType" <c:if
-                                  test="${newStudy.locationType.equals('international')}">checked</c:if>value="international"
+                                  test="${newStudy.locationType eq 'international'}">checked</c:if> value="international"
                                      id="international"/><label for="international">International</label>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="locationType"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
 
                           <tr valign="top">
@@ -500,7 +506,7 @@
                                 <jsp:param name="key" value="active"/>
                               </jsp:include>
                             </td>
-                            <td>*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr>
                             <td><h2>Federal wide assurance (FWA)</h2></td>
@@ -515,7 +521,7 @@
                                 <jsp:param name="key" value="fwaInstitution"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td>
@@ -527,14 +533,14 @@
                                 <jsp:param name="key" value="fwaNumber"/>
                               </jsp:include>
                             </td>
-                            <td class="formlabel">*</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td>
                             <td>
                               <div class="formfieldXL_BG">
                                 <input type="text" name="fwaExpirationDate"
-                                       value="<c:out value="${newStudy.fwaExpirationDate}" />" class="formfieldXL"
+                                       value="<c:out value="${fwaExpirationDate}" />" class="formfieldXL"
                                        id="fwaExpirationDateField"></div>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="fwaExpirationDate"/>
@@ -560,17 +566,17 @@
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
                             <td class="table_cell select-autosize">
-                              <select name="laboratoryId">
+                              <select name="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
                               </select>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="laboratoryId"/>
+                              </jsp:include>
                             </td>
-                            <jsp:include page="../showMessage.jsp">
-                              <jsp:param name="key" value="laboratoryId"/>
-                            </jsp:include>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
-
                           <c:choose>
                             <c:when test="${newStudy.parentStudyId == 0}">
                               <c:set var="key" value="study_system_status"/>
@@ -607,7 +613,7 @@
                                 <jsp:param name="key" value="statusId"/>
                               </jsp:include>
                             </td>
-                            <td> *</td>
+                            <td class="formlabel" style="text-align:left">*</td>
                           </tr>
 
                           <c:forEach var="config" items="${newStudy.studyParameters}">
@@ -862,12 +868,9 @@
                                   <td class="formlabel"><fmt:message key="interviewer_date_required"
                                                                      bundle="${resword}"/></td>
                                   <td>
-                                    <input type="radio"
-                                    <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'yes'}"> checked </c:if> name="interviewDateRequired" value="yes"><fmt:message key="yes" bundle="${resword}"/>
-                                    <input type="radio"
-                                    <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'no'}"> checked </c:if> name="interviewDateRequired" value="no"><fmt:message key="no" bundle="${resword}"/>
-                                    <input type="radio"
-                                    <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'yes'}"> checked </c:if> name="interviewDateRequired" value="yes"><fmt:message key="yes" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'no'}"> checked </c:if> name="interviewDateRequired" value="no"><fmt:message key="no" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${newStudy.studyParameterConfig.interviewDateRequired== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
                                   </td>
                                 </tr>
                               </c:when>
@@ -1248,7 +1251,8 @@
                    class="button_long">
           </td>
           <td>
-            <input type="button" name="Cancel" id="cancel" value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_long" onClick="javascript:myCancel();"/></td>
+            <input type="button" name="Cancel" id="cancel"
+                   value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_long" onClick="javascript:myCancel();"/></td>
           </td>
         </tr>
       </table>

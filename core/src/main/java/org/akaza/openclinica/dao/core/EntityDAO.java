@@ -188,7 +188,15 @@ public abstract class EntityDAO<B> implements DAOInterface<B> {
 			throw new RuntimeException(e);
 		}
     }
-    
+
+    public ArrayList<HashMap<String, Object>> delete(String query, HashMap<Integer, Object> variables) {
+        try {
+            Connection connection = getConnection(ds);
+            return select(query, variables, connection, false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void assertConnectionIsValid(Connection connection) throws IllegalArgumentException, RuntimeException {
     	if (connection == null) {
     		throw new IllegalArgumentException("The given connection is null.");

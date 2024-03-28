@@ -133,166 +133,167 @@
                               </td>
                             </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="site_name" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="name" value="<c:out value="${newStudy.name}"/>"
-                                         class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="name"/>
-                                </jsp:include>
-                              </td>
-                              <td>*</td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="site_name" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="name" value="<c:out value="${newStudy.name}"/>"
+                                       class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="name"/>
+                              </jsp:include>
+                            </td>
+                            <td>*</td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId'); return false;"><b><fmt:message
-                                  key="unique_protocol_ID" bundle="${resword}"/></b>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="uniqueProId" value="<c:out value="${newStudy.identifier}"/>"
-                                         class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="uniqueProId"/>
-                                </jsp:include>
-                              </td>
-                              <td>*</td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><a href="http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId" target="def_win" onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#PrimaryId'); return false;"><b><fmt:message
+                                key="unique_protocol_ID" bundle="${resword}"/></b></a>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="uniqueProId" value="<c:out value="${newStudy.identifier}"/>"
+                                       class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="uniqueProId"/>
+                              </jsp:include>
+                            </td>
+                            <td>*</td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="sub_site" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="subSite" value="<c:out value="${newStudy.subSite}"/>"
-                                         class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="subSite"/>
-                                </jsp:include>
-                              </td>
-                              <td></td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="sub_site" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="subSite" value="<c:out value="${newStudy.subSite}"/>"
+                                       class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="subSite"/>
+                              </jsp:include>
+                            </td>
+                            <td></td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><a
-                                  href="http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds"
-                                  target="def_win"
-                                  onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds'); return false;"><b><fmt:message
-                                  key="secondary_IDs" bundle="${resword}"/></b>:</a><br>(<fmt:message
-                                  key="separate_by_commas" bundle="${resword}"/>)
-                              </td>
-                              <td>
-                                <div class="formtextareaXL4_BG"><textarea class="formtextareaXL4" name="secondProId" rows="4" cols="50"><c:out
-                                      value="${newStudy.secondaryIdentifier}"/></textarea></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="secondProId" value="facName"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><a
+                                href="http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds"
+                                target="def_win"
+                                onClick="openDefWindow('http://prsinfo.clinicaltrials.gov/definitions.html#SecondaryIds'); return false;"><b><fmt:message
+                                key="secondary_IDs" bundle="${resword}"/></b>:</a><br>(<fmt:message
+                                key="separate_by_commas" bundle="${resword}"/>)
+                            </td>
+                            <td>
+                              <div class="formtextareaXL4_BG"><textarea class="formtextareaXL4" name="secondProId" rows="4" cols="50"><c:out
+                                  value="${newStudy.secondaryIdentifier}"/></textarea></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="secondProId" value="facName"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="contract_number" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="contractNumber"
-                                         value="<c:out value="${newStudy.contractNumber}"/>" class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="contractNumber"/>
-                                </jsp:include>
-                              </td><td>
-                              * required for TBTC sites</td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="contract_number" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="contractNumber"
+                                       value="<c:out value="${newStudy.contractNumber}"/>" class="formfieldXL"></div>
+                            <jsp:include page="../showMessage.jsp">
+                              <jsp:param name="key" value="contractNumber"/>
+                            </jsp:include>
+                            </td><td>
+                            * required for TBTC sites</td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="site_type" bundle="${resword}"/>:</td>
-                              <td class="table_cell">
-                                <div class="formfieldXL_BG">
-                                  <select name="siteType">
-                                    <option value="Depot" <c:if
-                                        test="${newStudy.siteType.equals('Depot')}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
-                                    <option value="Site" <c:if
-                                        test="${newStudy.siteType.equals('Site')}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
-                                    <option value="External Partners" <c:if
-                                        test="${newStudy.siteType=='External Partners'}">selected</c:if>><fmt:message key="site_type_external_partners"
-                                                                                                                     bundle="${resword}"/></option>
-                                  </select>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="contractNumber"/>
-                                </jsp:include>                            </td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel">
-                                <fmt:message key="protocol_verification" bundle="${resword}"/>:
-                              </td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="protocolDateVerification"
-                                         value="<c:out value="${protocolDateVerification}" />" class="formfieldXL"
-                                         id="protocolDateVerificationField"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="protocolDateVerification"/>
-                                </jsp:include>
-                              </td>
-                              <td><A HREF="#">
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="site_type" bundle="${resword}"/>:</td>
+                            <td class="table_cell">
+                              <div class="formfieldXL_BG">
+                                <select name="siteType">
+                                  <option value="Depot" <c:if
+                                      test="${newStudy.siteType.equals('Depot')}">selected</c:if>><fmt:message key="site_type_depot" bundle="${resword}"/></option>
+                                  <option value="Site" <c:if
+                                      test="${newStudy.siteType.equals('Site')}">selected</c:if>><fmt:message key="site_type_site" bundle="${resword}"/></option>
+                                  <option value="External Partners" <c:if
+                                      test="${newStudy.siteType=='External Partners'}">selected</c:if>><fmt:message key="site_type_external_partners"
+                                                                                                                    bundle="${resword}"/></option>
+                                </select>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="contractNumber"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel">
+                              <fmt:message key="protocol_verification" bundle="${resword}"/>:
+                            </td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="protocolDateVerification"
+                                       value="<c:out value="${protocolDateVerification}" />" class="formfieldXL"
+                                       id="protocolDateVerificationField"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="protocolDateVerification"/>
+                              </jsp:include>
+                            </td>
+                            <td><A HREF="#">
+                              <img src="images/bt_Calendar.gif"
+                                   alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                                   title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
+                                   id="protocolDateVerificationTrigger"/>
+                              <script type="text/javascript">
+                                  Calendar.setup({
+                                      inputField: "protocolDateVerificationField",
+                                      ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                                      button: "protocolDateVerificationTrigger"
+                                  });
+                              </script>
+
+                            </a>
+
+                            </td>
+                          </tr>
+
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="start_date" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="startDate" value="<c:out value="${startDate}" />"
+                                       class="formfieldXL" id="startDateField"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="startDate"/>
+                              </jsp:include>
+                            </td>
+                            <td><A HREF="#">
+                              <img src="images/bt_Calendar.gif"
+                                   alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                                   title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
+                                   id="startDateTrigger"/>
+                              <script type="text/javascript">
+                                  Calendar.setup({
+                                      inputField: "startDateField",
+                                      ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                                      button: "startDateTrigger"
+                                  });
+                              </script>
+                            </a>
+                            </td>
+                          </tr>
+
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="estimated_completion_date" bundle="${resword}"/>:
+                            </td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="endDate" value="<c:out value="${endDate}" />"
+                                       class="formfieldXL" id="endDateField"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="endDate"/>
+                              </jsp:include>
+                            </td>
+                            <td>
+                              <A HREF="#">
                                 <img src="images/bt_Calendar.gif"
                                      alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
                                      title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
-                                     id="protocolDateVerificationTrigger"/>
-                                <script type="text/javascript">
-                                    Calendar.setup({
-                                        inputField: "protocolDateVerificationField",
-                                        ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                                        button: "protocolDateVerificationTrigger"
-                                    });
-                                </script>
-
-                              </a>
-
-                              </td>
-                            </tr>
-
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="start_date" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="startDate" value="<c:out value="${startDate}" />"
-                                         class="formfieldXL" id="startDateField"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="startDate"/>
-                                </jsp:include>
-                              </td>
-                              <td><A HREF="#">
-                                <img src="images/bt_Calendar.gif"
-                                     alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                                     title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
-                                     id="startDateTrigger"/>
-                                <script type="text/javascript">
-                                    Calendar.setup({
-                                        inputField: "startDateField",
-                                        ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                                        button: "startDateTrigger"
-                                    });
-                                </script>
-                              </a>
-                              </td>
-                            </tr>
-
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="estimated_completion_date" bundle="${resword}"/>:
-                              </td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="endDate" value="<c:out value="${endDate}" />"
-                                         class="formfieldXL" id="endDateField"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="endDate"/>
-                                </jsp:include>
-                              </td>
-                              <td>
-                                <A HREF="#">
-                                  <img src="images/bt_Calendar.gif"
-                                       alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                                       title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
-                                       id="endDateTrigger"/></a>
+                                     id="endDateTrigger"/></a>
                                 <script type="text/javascript">
                                     Calendar.setup({
                                         inputField: "endDateField",
@@ -304,249 +305,254 @@
                               </td>
                           </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="expected_total_enrollment" bundle="${resword}"/>:
-                              </td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="expectedTotalEnrollment"
-                                                                   value="<c:out value="${newStudy.expectedTotalEnrollment}"/>"
-                                                                   class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="expectedTotalEnrollment"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*</td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="expected_total_enrollment" bundle="${resword}"/>:
+                            </td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="expectedTotalEnrollment"
+                                                                 value="<c:out value="${newStudy.expectedTotalEnrollment}"/>"
+                                                                 class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="expectedTotalEnrollment"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_name" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="facName" value="<c:out value="${newStudy.facilityName}"/>"
-                                         class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facName"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_name" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="facName" value="<c:out value="${newStudy.facilityName}"/>"
+                                       class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facName"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="facAddress1"
-                                         value="<c:out value="${newStudy.facilityAddress1}"/>" class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facAddress1"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*
-                              </td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="facAddress2"
-                                         value="<c:out value="${newStudy.facilityAddress2}"/>" class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facAddress2"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_address_3" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="facAddress3"
-                                         value="<c:out value="${newStudy.facilityAddress3}"/>" class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facAddress3"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_address_4" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="facAddress4"
-                                         value="<c:out value="${newStudy.facilityAddress4}"/>" class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facAddress4"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_city" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="facCity" value="<c:out value="${newStudy.facilityCity}"/>"
-                                         class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facCity"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_address_1" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="facAddress1"
+                                       value="<c:out value="${newStudy.facilityAddress1}"/>" class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facAddress1"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_address_2" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="facAddress2"
+                                       value="<c:out value="${newStudy.facilityAddress2}"/>" class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facAddress2"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_address_3" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="facAddress3"
+                                       value="<c:out value="${newStudy.facilityAddress3}"/>" class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facAddress3"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_address_4" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="facAddress4"
+                                       value="<c:out value="${newStudy.facilityAddress4}"/>" class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facAddress4"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_city" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="facCity" value="<c:out value="${newStudy.facilityCity}"/>"
+                                       class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facCity"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_state_province" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="facState" value="<c:out value="${newStudy.facilityState}"/>"
-                                         class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facState"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_state_province" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="facState" value="<c:out value="${newStudy.facilityState}"/>"
+                                       class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facState"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_ZIP" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG"><input type="text" name="facZip" value="<c:out value="${newStudy.facilityZip}"/>" class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facZip"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_ZIP" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG"><input type="text" name="facZip" value="<c:out value="${newStudy.facilityZip}"/>" class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facZip"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
 
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td>
-                              <td class="table_cell">
-                                <div class="formfieldXL_BG select-autosize">
-                                  <select name="facCountry">
-                                    <c:forEach var="country" items="${countries}">
-                                      <option value="<c:out value="${country.displayname}"/>" <c:if test="${country.displayname.equals(newStudy.facilityCountry)}">selected</c:if>><c:out value="${country.displayname}"/></option>
-                                    </c:forEach>
-                                  </select>
-                                </div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="facCountry"/>
-                                </jsp:include>
-                              </td>
-                            </tr>
-
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <select multiple name="consortiumName"
-                                          value="<c:out value="${newStudy.consortiumNames}"/>" class="formfieldXL">
-                                    <option value="TBTC" <c:if test="${newStudy.consortiumNames.contains('TBTC')}">selected</c:if>>TBTC</option>
-                                    <option value="ACTG" <c:if test="${newStudy.consortiumNames.contains('ACTG')}">selected</c:if>>ACTG</option>
-                                    <!--option value="TBESC" <c:if test="${newStudy.consortiumNames.contains('TBESC')}">selected</c:if>>TBESC</option>
-                                    <option value="MRC" <c:if test="${newStudy.consortiumNames.contains('MRC')}">selected</c:if>>MRC</option-->
-                                  </select></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="consortiumName"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*</td>
-                            </tr>
-
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="location_type" bundle="${resword}"/>:</td>
-                              <td>
-                                <input type="radio" name="locationType"
-                                       <c:if test="${newStudy.locationType.equals('domestic')}">checked</c:if> value="domestic"
-                                       id="domestic"/><label for="domestic">domestic</label>
-                                <input type="radio" name="locationType" <c:if
-                                    test="${newStudy.locationType.equals('international')}">checked</c:if>value="international"
-                                       id="international"/><label for="international">International</label>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="locationType"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*</td>
-                            </tr>
-
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="active_label" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="checkbox" name="active" <c:if test="${newStudy.active}">checked</c:if>/>
-                                </div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="active"/>
-                                </jsp:include>
-                              </td>
-                              <td>*</td>
-                            </tr>
-                            <tr>
-                              <td><h2>Federal wide assurance (FWA)</h2></td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="fwaInstitution"
-                                         value="<c:out value="${newStudy.fwaInstitution}"/>" class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="fwaInstitution"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*</td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="fwaNumber" value="<c:out value="${newStudy.fwaNumber}"/>"
-                                         class="formfieldXL"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="fwaNumber"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*</td>
-                            </tr>
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td>
-                              <td>
-                                <div class="formfieldXL_BG">
-                                  <input type="text" name="fwaExpirationDate"
-                                         value="<c:out value="${fwaExpirationDate}" />" class="formfieldXL"
-                                         id="fwaExpirationDateField"></div>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="fwaExpirationDate"/>
-                                </jsp:include>
-                                </td><td>
-                                <A HREF="#">
-                                <img src="images/bt_Calendar.gif"
-                                     alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
-                                     title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
-                                     id="fwaExpDateTrigger"/>
-                                <script type="text/javascript">
-                                    Calendar.setup({
-                                        inputField: "fwaExpirationDateField",
-                                        ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
-                                        button: "fwaExpDateTrigger"
-                                    });
-                                </script>
-
-                              </a>*
-                              </td>
-                            </tr>
-
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
-                              <td class="table_cell select-autosize">
-                                <select name="laboratoryId">
-                                  <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryId==lab.labId}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="facility_country" bundle="${resword}"/>:</td>
+                            <td class="table_cell">
+                              <div class="formfieldXL_BG select-autosize">
+                                <select name="facCountry">
+                                  <c:forEach var="country" items="${countries}">
+                                    <option value="<c:out value="${country.displayname}"/>" <c:if test="${country.displayname.equals(newStudy.facilityCountry)}">selected</c:if>><c:out value="${country.displayname}"/></option>
                                   </c:forEach>
                                 </select>
-                              </td>
+                              </div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="facCountry"/>
+                              </jsp:include>
+                            </td>
+                          </tr>
+
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="consortium_name" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <label>
+                                  <input type="checkbox" value="TBTC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'TBTC')}">checked</c:if>/>
+                                  TBTC</label>
+                                <label>
+                                  <input type="checkbox" value="ACTG" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'ACTG')}">checked</c:if>/>
+                                  ACTG</label>
+                                <!--label>
+                                  <input type="checkbox" value="TBESC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'TBESC')}">checked</c:if>/>
+                                  TBESC</label>
+                                <label>
+                                  <input type="checkbox" value="MRC" name="consortiumName" <c:if test="${fn:contains(newStudy.consortiumNames,'MRC')}">checked</c:if>/>
+                                  MRC</label-->
+                              </div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="consortiumName"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
+
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="location_type" bundle="${resword}"/>:</td>
+                            <td>
+                              <input type="radio" name="locationType"
+                                     <c:if test="${newStudy.locationType.equals('domestic')}">checked</c:if> value="domestic"
+                                     id="domestic"/><label for="domestic">domestic</label>
+                              <input type="radio" name="locationType" <c:if
+                                  test="${newStudy.locationType.equals('international')}">checked</c:if> value="international"
+                                     id="international"/><label for="international">International</label>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="locationType"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
+
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="active_label" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="checkbox" name="active" <c:if test="${newStudy.active}">checked</c:if>/>
+                              </div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="active"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
+                          <tr>
+                            <td><h2>Federal wide assurance (FWA)</h2></td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="fwaInstitution"
+                                       value="<c:out value="${newStudy.fwaInstitution}"/>" class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="fwaInstitution"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="FWA_number" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="fwaNumber" value="<c:out value="${newStudy.fwaNumber}"/>"
+                                       class="formfieldXL"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="fwaNumber"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="FWA_expiration_date" bundle="${resword}"/>:</td>
+                            <td>
+                              <div class="formfieldXL_BG">
+                                <input type="text" name="fwaExpirationDate"
+                                       value="<c:out value="${fwaExpirationDate}" />" class="formfieldXL"
+                                       id="fwaExpirationDateField"></div>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="fwaExpirationDate"/>
+                              </jsp:include>
+                            </td><td>
+                            <A HREF="#">
+                              <img src="images/bt_Calendar.gif"
+                                   alt="<fmt:message key="show_calendar" bundle="${resword}"/>"
+                                   title="<fmt:message key="show_calendar" bundle="${resword}"/>" border="0"
+                                   id="fwaExpDateTrigger"/>
+                              <script type="text/javascript">
+                                  Calendar.setup({
+                                      inputField: "fwaExpirationDateField",
+                                      ifFormat: "<fmt:message key="date_format_calender" bundle="${resformat}"/>",
+                                      button: "fwaExpDateTrigger"
+                                  });
+                              </script>
+
+                            </a>*
+                            </td>
+                          </tr>
+
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
+                            <td class="table_cell select-autosize">
+                              <select name="laboratoryId" multiple>
+                                <c:forEach var="lab" items="${laboratories}">
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                </c:forEach>
+                              </select>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="laboratoryId"/>
                               </jsp:include>
-                            </tr>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
+                          <c:choose>
+                            <c:when test="${newStudy.parentStudyId == 0}">
+                              <c:set var="key" value="study_system_status"/>
+                            </c:when>
+                            <c:otherwise>
+                              <c:set var="key" value="site_system_status"/>
+                            </c:otherwise>
+                          </c:choose>
 
-                            <c:choose>
-                              <c:when test="${newStudy.parentStudyId == 0}">
-                                <c:set var="key" value="study_system_status"/>
-                              </c:when>
-                              <c:otherwise>
-                                <c:set var="key" value="site_system_status"/>
-                              </c:otherwise>
-                            </c:choose>
-
-                            <tr valign="top">
-                              <td class="formlabel"><fmt:message key="${key}" bundle="${resword}"/>:</td>
-                              <td>
+                          <tr valign="top">
+                            <td class="formlabel"><fmt:message key="${key}" bundle="${resword}"/>:</td>
+                            <td>
 
                                 <!-- <tr valign="top"><td class="formlabel"><fmt:message key="facility_recruitment_status" bundle="${resword}"/>:</td><td>
                                 <c:set var="facStatus" value="${newStudy.facilityRecruitmentStatus}"/>
@@ -590,322 +596,321 @@
                                    <input type="text" name="statusName" value="Available" class="formfieldL" disabled>
                                    <input type="hidden" name="statusId" value="1">
                                    </div>--%>
-                                <jsp:include page="../showMessage.jsp">
-                                  <jsp:param name="key" value="statusId"/>
-                                </jsp:include>
-                              </td>
-                              <td class="formlabel">*</td>
-                            </tr>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="statusId"/>
+                              </jsp:include>
+                            </td>
+                            <td class="formlabel" style="text-align:left">*</td>
+                          </tr>
 
-                            <c:forEach var="config" items="${newStudy.studyParameters}">
-                              <c:choose>
-                                <c:when test="${config.parameter.handle=='collectDOB'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="collect_subject_date_of_birth"
-                                                                       bundle="${resword}"/>:
-                                    </td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value == '1'}">
-                                          <input type="radio" checked name="collectDob" value="1"><fmt:message key="yes"
-                                                                                                               bundle="${resword}"/>
-                                          <input type="radio" name="collectDob" value="2"><fmt:message
-                                            key="only_year_of_birth" bundle="${resword}"/>
-                                          <input type="radio" name="collectDob" value="3"><fmt:message key="not_used"
-                                                                                                       bundle="${resword}"/>
-                                        </c:when>
-                                        <c:when test="${config.value.value == '2'}">
-                                          <input type="radio" name="collectDob" value="1"><fmt:message key="yes"
-                                                                                                       bundle="${resword}"/>
-                                          <input type="radio" checked name="collectDob" value="2"><fmt:message
-                                            key="only_year_of_birth" bundle="${resword}"/>
-                                          <input type="radio" name="collectDob" value="3"><fmt:message key="not_used"
-                                                                                                       bundle="${resword}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="collectDob" value="1"><fmt:message key="yes"
-                                                                                                       bundle="${resword}"/>
-                                          <input type="radio" name="collectDob" value="2"><fmt:message
-                                            key="only_year_of_birth" bundle="${resword}"/>
-                                          <input type="radio" checked name="collectDob" value="3"><fmt:message
-                                            key="not_used" bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-
-                                </c:when>
-
-                                <c:when test="${config.parameter.handle=='discrepancyManagement'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="allow_discrepancy_management"
-                                                                       bundle="${resword}"/>:
-                                    </td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value == 'false'}">
-                                          <input type="radio" name="discrepancyManagement" value="true"><fmt:message
-                                            key="yes" bundle="${resword}"/>
-                                          <input type="radio" checked name="discrepancyManagement"
-                                                 value="false"><fmt:message key="no" bundle="${resword}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" checked name="discrepancyManagement"
-                                                 value="true"><fmt:message key="yes" bundle="${resword}"/>
-                                          <input type="radio" name="discrepancyManagement" value="false"><fmt:message
-                                            key="no" bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-
-                                <c:when test="${config.parameter.handle=='genderRequired'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="gender_required" bundle="${resword}"/>:</td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value == 'false'}">
-                                          <input type="radio" name="genderRequired" value="true"><fmt:message key="yes"
-                                                                                                              bundle="${resword}"/>
-                                          <input type="radio" checked name="genderRequired" value="false"><fmt:message
-                                            key="no" bundle="${resword}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" checked name="genderRequired" value="true"><fmt:message
-                                            key="yes" bundle="${resword}"/>
-                                          <input type="radio" name="genderRequired" value="false"><fmt:message key="no"
-                                                                                                               bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='subjectPersonIdRequired'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="subject_person_ID_required"
-                                                                       bundle="${resword}"/>:
-                                    </td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value == 'required'}">
-                                          <input type="radio" checked name="subjectPersonIdRequired"
-                                                 value="required"><fmt:message key="required" bundle="${resword}"/>
-                                          <input type="radio" name="subjectPersonIdRequired" value="optional"><fmt:message key="optional" bundle="${resword}"/>
-                                          <input type="radio" name="subjectPersonIdRequired" value="not used"><fmt:message key="not_used" bundle="${resword}"/>
-                                        </c:when>
-                                        <c:when test="${config.value.value == 'optional'}">
-                                          <input type="radio" name="subjectPersonIdRequired" value="required"><fmt:message key="required" bundle="${resword}"/>
-                                          <input type="radio" checked name="subjectPersonIdRequired"
-                                                 value="optional"><fmt:message key="optional" bundle="${resword}"/>
-                                          <input type="radio" name="subjectPersonIdRequired" value="not used"><fmt:message key="not_used" bundle="${resword}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="subjectPersonIdRequired" value="required"><fmt:message key="required" bundle="${resword}"/>
-                                          <input type="radio" name="subjectPersonIdRequired" value="optional"><fmt:message key="optional" bundle="${resword}"/>
-                                          <input type="radio" checked name="subjectPersonIdRequired"
-                                                 value="not used"><fmt:message key="not_used" bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='subjectIdGeneration'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="how_to_generate_the_subject"
-                                                                       bundle="${resword}"/>:
-                                    </td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value == 'manual'}">
-                                          <input type="radio" checked name="subjectIdGeneration"
-                                                 value="manual"><fmt:message key="manual_entry" bundle="${resword}"/>
-                                          <input type="radio" name="subjectIdGeneration"
-                                                 value="auto editable"><fmt:message key="auto_generated_and_editable"
-                                                                                    bundle="${resword}"/>
-                                          <input type="radio" name="subjectIdGeneration"
-                                                 value="auto non-editable"><fmt:message
-                                            key="auto_generated_and_non_editable" bundle="${resword}"/>
-                                        </c:when>
-                                        <c:when test="${config.value.value == 'auto editable'}">
-                                          <input type="radio" name="subjectIdGeneration" value="manual"><fmt:message
-                                            key="manual_entry" bundle="${resword}"/>
-                                          <input type="radio" checked name="subjectIdGeneration"
-                                                 value="auto editable"><fmt:message key="auto_generated_and_editable"
-                                                                                    bundle="${resword}"/>
-                                          <input type="radio" name="subjectIdGeneration"
-                                                 value="auto non-editable"><fmt:message
-                                            key="auto_generated_and_non_editable" bundle="${resword}"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="subjectIdGeneration" value="manual"><fmt:message
-                                            key="manual_entry" bundle="${resword}"/>
-                                          <input type="radio" name="subjectIdGeneration"
-                                                 value="auto editable"><fmt:message key="auto_generated_and_editable"
-                                                                                    bundle="${resword}"/>
-                                          <input type="radio" checked name="subjectIdGeneration"
-                                                 value="auto non-editable"><fmt:message
-                                            key="auto_generated_and_non_editable" bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='subjectIdPrefixSuffix'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="generate_study_subject_ID_automatically"
-                                                                       bundle="${resword}"/>:
-                                    </td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value == 'true'}">
-                                          <input type="radio" checked name="subjectIdPrefixSuffix"
-                                                 value="true"><fmt:message key="yes" bundle="${resword}"/>
-                                          <input type="radio" name="subjectIdPrefixSuffix" value="false"><fmt:message
-                                            key="no" bundle="${resword}"/>
-
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="subjectIdPrefixSuffix" value="true"><fmt:message
-                                            key="yes" bundle="${resword}"/>
-                                          <input type="radio" checked name="subjectIdPrefixSuffix"
-                                                 value="false"><fmt:message key="no" bundle="${resword}"/>
-
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='interviewerNameRequired'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="when_entering_data_entry_interviewer"
-                                                                       bundle="${resword}"/></td>
-                                    <td>
-                                      <input type="radio"
-                                             <c:if test="${config.value.value== 'yes'}">checked</c:if>
-                                             name="interviewerNameRequired" value="yes"><fmt:message key="yes"
+                          <c:forEach var="config" items="${newStudy.studyParameters}">
+                            <c:choose>
+                              <c:when test="${config.parameter.handle=='collectDOB'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="collect_subject_date_of_birth"
+                                                                     bundle="${resword}"/>:
+                                  </td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value == '1'}">
+                                        <input type="radio" checked name="collectDob" value="1"><fmt:message key="yes"
+                                                                                                             bundle="${resword}"/>
+                                        <input type="radio" name="collectDob" value="2"><fmt:message
+                                          key="only_year_of_birth" bundle="${resword}"/>
+                                        <input type="radio" name="collectDob" value="3"><fmt:message key="not_used"
                                                                                                      bundle="${resword}"/>
-                                      <input type="radio"
-                                             <c:if test="${config.value.value== 'no'}">checked</c:if>
-                                             name="interviewerNameRequired" value="no"><fmt:message key="no"
-                                                                                                    bundle="${resword}"/>
-                                      <input type="radio"
-                                             <c:if test="${config.value.value== 'not_used'}">checked</c:if>
-                                             name="interviewerNameRequired" value="not_used"><fmt:message key="not_used"
-                                                                                                          bundle="${resword}"/>
+                                      </c:when>
+                                      <c:when test="${config.value.value == '2'}">
+                                        <input type="radio" name="collectDob" value="1"><fmt:message key="yes"
+                                                                                                     bundle="${resword}"/>
+                                        <input type="radio" checked name="collectDob" value="2"><fmt:message
+                                          key="only_year_of_birth" bundle="${resword}"/>
+                                        <input type="radio" name="collectDob" value="3"><fmt:message key="not_used"
+                                                                                                     bundle="${resword}"/>
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="collectDob" value="1"><fmt:message key="yes"
+                                                                                                     bundle="${resword}"/>
+                                        <input type="radio" name="collectDob" value="2"><fmt:message
+                                          key="only_year_of_birth" bundle="${resword}"/>
+                                        <input type="radio" checked name="collectDob" value="3"><fmt:message
+                                          key="not_used" bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
 
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='interviewerNameDefault'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="interviewer_name_default_as_blank"
-                                                                       bundle="${resword}"/></td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value== 'blank'}">
-                                          <input type="radio" checked name="interviewerNameDefault"
-                                                 value="blank"><fmt:message key="blank" bundle="${resword}"/>
-                                          <input type="radio" name="interviewerNameDefault"
-                                                 value="pre-populated"><fmt:message key="pre_populated_from_active_user"
-                                                                                    bundle="${resword}"/>
+                              </c:when>
 
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="interviewerNameDefault" value="blank"><fmt:message
-                                            key="blank" bundle="${resword}"/>
-                                          <input type="radio" checked name="interviewerNameDefault"
-                                                 value="re-populated"><fmt:message key="pre_populated_from_active_user"
-                                                                                   bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='interviewerNameEditable'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="interviewer_name_editable"
-                                                                       bundle="${resword}"/></td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value== 'true'}">
-                                          <input type="radio" checked name="interviewerNameEditable"
-                                                 value="true"><fmt:message key="yes" bundle="${resword}"/>
-                                          <input type="radio" name="interviewerNameEditable" value="false"><fmt:message
-                                            key="no" bundle="${resword}"/>
+                              <c:when test="${config.parameter.handle=='discrepancyManagement'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="allow_discrepancy_management"
+                                                                     bundle="${resword}"/>:
+                                  </td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value == 'false'}">
+                                        <input type="radio" name="discrepancyManagement" value="true"><fmt:message
+                                          key="yes" bundle="${resword}"/>
+                                        <input type="radio" checked name="discrepancyManagement"
+                                               value="false"><fmt:message key="no" bundle="${resword}"/>
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" checked name="discrepancyManagement"
+                                               value="true"><fmt:message key="yes" bundle="${resword}"/>
+                                        <input type="radio" name="discrepancyManagement" value="false"><fmt:message
+                                          key="no" bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
 
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="interviewerNameEditable" value="true"><fmt:message
-                                            key="yes" bundle="${resword}"/>
-                                          <input type="radio" checked name="interviewerNameEditable"
-                                                 value="false"><fmt:message key="no" bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='interviewDateRequired'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="interviewer_date_required"
-                                                                       bundle="${resword}"/></td>
-                                    <td>
-                                      <input type="radio" <c:if test="${config.value.value== 'yes'}"> checked </c:if> name="interviewDateRequired" value="yes"><fmt:message key="yes" bundle="${resword}"/>
-                                      <input type="radio" <c:if test="${config.value.value== 'no'}"> checked </c:if> name="interviewDateRequired" value="no"><fmt:message key="no" bundle="${resword}"/>
-                                      <input type="radio" <c:if test="${config.value.value== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:when test="${config.parameter.handle=='interviewDateDefault'}">
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="interviewer_date_default_as_blank"
-                                                                       bundle="${resword}"/></td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value== 'blank'}">
-                                          <input type="radio" checked name="interviewDateDefault"
-                                                 value="blank"><fmt:message key="blank" bundle="${resword}"/>
-                                          <input type="radio" name="interviewDateDefault"
-                                                 value="pre-populated"><fmt:message key="pre_populated_from_SE"
-                                                                                    bundle="${resword}"/>
+                              <c:when test="${config.parameter.handle=='genderRequired'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="gender_required" bundle="${resword}"/>:</td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value == 'false'}">
+                                        <input type="radio" name="genderRequired" value="true"><fmt:message key="yes"
+                                                                                                            bundle="${resword}"/>
+                                        <input type="radio" checked name="genderRequired" value="false"><fmt:message
+                                          key="no" bundle="${resword}"/>
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" checked name="genderRequired" value="true"><fmt:message
+                                          key="yes" bundle="${resword}"/>
+                                        <input type="radio" name="genderRequired" value="false"><fmt:message key="no"
+                                                                                                             bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='subjectPersonIdRequired'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="subject_person_ID_required"
+                                                                     bundle="${resword}"/>:
+                                  </td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value == 'required'}">
+                                        <input type="radio" checked name="subjectPersonIdRequired"
+                                               value="required"><fmt:message key="required" bundle="${resword}"/>
+                                        <input type="radio" name="subjectPersonIdRequired" value="optional"><fmt:message key="optional" bundle="${resword}"/>
+                                        <input type="radio" name="subjectPersonIdRequired" value="not used"><fmt:message key="not_used" bundle="${resword}"/>
+                                      </c:when>
+                                      <c:when test="${config.value.value == 'optional'}">
+                                        <input type="radio" name="subjectPersonIdRequired" value="required"><fmt:message key="required" bundle="${resword}"/>
+                                        <input type="radio" checked name="subjectPersonIdRequired"
+                                               value="optional"><fmt:message key="optional" bundle="${resword}"/>
+                                        <input type="radio" name="subjectPersonIdRequired" value="not used"><fmt:message key="not_used" bundle="${resword}"/>
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="subjectPersonIdRequired" value="required"><fmt:message key="required" bundle="${resword}"/>
+                                        <input type="radio" name="subjectPersonIdRequired" value="optional"><fmt:message key="optional" bundle="${resword}"/>
+                                        <input type="radio" checked name="subjectPersonIdRequired"
+                                               value="not used"><fmt:message key="not_used" bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='subjectIdGeneration'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="how_to_generate_the_subject"
+                                                                     bundle="${resword}"/>:
+                                  </td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value == 'manual'}">
+                                        <input type="radio" checked name="subjectIdGeneration"
+                                               value="manual"><fmt:message key="manual_entry" bundle="${resword}"/>
+                                        <input type="radio" name="subjectIdGeneration"
+                                               value="auto editable"><fmt:message key="auto_generated_and_editable"
+                                                                                  bundle="${resword}"/>
+                                        <input type="radio" name="subjectIdGeneration"
+                                               value="auto non-editable"><fmt:message
+                                          key="auto_generated_and_non_editable" bundle="${resword}"/>
+                                      </c:when>
+                                      <c:when test="${config.value.value == 'auto editable'}">
+                                        <input type="radio" name="subjectIdGeneration" value="manual"><fmt:message
+                                          key="manual_entry" bundle="${resword}"/>
+                                        <input type="radio" checked name="subjectIdGeneration"
+                                               value="auto editable"><fmt:message key="auto_generated_and_editable"
+                                                                                  bundle="${resword}"/>
+                                        <input type="radio" name="subjectIdGeneration"
+                                               value="auto non-editable"><fmt:message
+                                          key="auto_generated_and_non_editable" bundle="${resword}"/>
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="subjectIdGeneration" value="manual"><fmt:message
+                                          key="manual_entry" bundle="${resword}"/>
+                                        <input type="radio" name="subjectIdGeneration"
+                                               value="auto editable"><fmt:message key="auto_generated_and_editable"
+                                                                                  bundle="${resword}"/>
+                                        <input type="radio" checked name="subjectIdGeneration"
+                                               value="auto non-editable"><fmt:message
+                                          key="auto_generated_and_non_editable" bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='subjectIdPrefixSuffix'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="generate_study_subject_ID_automatically"
+                                                                     bundle="${resword}"/>:
+                                  </td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value == 'true'}">
+                                        <input type="radio" checked name="subjectIdPrefixSuffix"
+                                               value="true"><fmt:message key="yes" bundle="${resword}"/>
+                                        <input type="radio" name="subjectIdPrefixSuffix" value="false"><fmt:message
+                                          key="no" bundle="${resword}"/>
 
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="interviewDateDefault" value="blank"><fmt:message
-                                            key="blank" bundle="${resword}"/>
-                                          <input type="radio" checked name="interviewDateDefault"
-                                                 value="re-populated"><fmt:message key="pre_populated_from_SE"
-                                                                                   bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:when>
-                                <c:otherwise>
-                                  <tr valign="top">
-                                    <td class="formlabel"><fmt:message key="interviewer_date_editable"
-                                                                       bundle="${resword}"/></td>
-                                    <td>
-                                      <c:choose>
-                                        <c:when test="${config.value.value== 'true'}">
-                                          <input type="radio" checked name="interviewDateEditable"
-                                                 value="true"><fmt:message key="yes" bundle="${resword}"/>
-                                          <input type="radio" name="interviewDateEditable" value="false"><fmt:message
-                                            key="no" bundle="${resword}"/>
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="subjectIdPrefixSuffix" value="true"><fmt:message
+                                          key="yes" bundle="${resword}"/>
+                                        <input type="radio" checked name="subjectIdPrefixSuffix"
+                                               value="false"><fmt:message key="no" bundle="${resword}"/>
 
-                                        </c:when>
-                                        <c:otherwise>
-                                          <input type="radio" name="interviewDateEditable" value="true"><fmt:message
-                                            key="yes" bundle="${resword}"/>
-                                          <input type="radio" checked name="interviewDateEditable"
-                                                 value="false"><fmt:message key="no" bundle="${resword}"/>
-                                        </c:otherwise>
-                                      </c:choose>
-                                    </td>
-                                  </tr>
-                                </c:otherwise>
-                              </c:choose>
-                            </c:forEach>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='interviewerNameRequired'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="when_entering_data_entry_interviewer"
+                                                                     bundle="${resword}"/></td>
+                                  <td>
+                                    <input type="radio"
+                                           <c:if test="${config.value.value== 'yes'}">checked</c:if>
+                                           name="interviewerNameRequired" value="yes"><fmt:message key="yes"
+                                                                                                   bundle="${resword}"/>
+                                    <input type="radio"
+                                           <c:if test="${config.value.value== 'no'}">checked</c:if>
+                                           name="interviewerNameRequired" value="no"><fmt:message key="no"
+                                                                                                  bundle="${resword}"/>
+                                    <input type="radio"
+                                           <c:if test="${config.value.value== 'not_used'}">checked</c:if>
+                                           name="interviewerNameRequired" value="not_used"><fmt:message key="not_used"
+                                                                                                        bundle="${resword}"/>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='interviewerNameDefault'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="interviewer_name_default_as_blank"
+                                                                     bundle="${resword}"/></td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value== 'blank'}">
+                                        <input type="radio" checked name="interviewerNameDefault"
+                                               value="blank"><fmt:message key="blank" bundle="${resword}"/>
+                                        <input type="radio" name="interviewerNameDefault"
+                                               value="pre-populated"><fmt:message key="pre_populated_from_active_user"
+                                                                                  bundle="${resword}"/>
+
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="interviewerNameDefault" value="blank"><fmt:message
+                                          key="blank" bundle="${resword}"/>
+                                        <input type="radio" checked name="interviewerNameDefault"
+                                               value="re-populated"><fmt:message key="pre_populated_from_active_user"
+                                                                                 bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='interviewerNameEditable'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="interviewer_name_editable"
+                                                                     bundle="${resword}"/></td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value== 'true'}">
+                                        <input type="radio" checked name="interviewerNameEditable"
+                                               value="true"><fmt:message key="yes" bundle="${resword}"/>
+                                        <input type="radio" name="interviewerNameEditable" value="false"><fmt:message
+                                          key="no" bundle="${resword}"/>
+
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="interviewerNameEditable" value="true"><fmt:message
+                                          key="yes" bundle="${resword}"/>
+                                        <input type="radio" checked name="interviewerNameEditable"
+                                               value="false"><fmt:message key="no" bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='interviewDateRequired'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="interviewer_date_required"
+                                                                     bundle="${resword}"/></td>
+                                  <td>
+                                    <input type="radio" <c:if test="${config.value.value== 'yes'}"> checked </c:if> name="interviewDateRequired" value="yes"><fmt:message key="yes" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${config.value.value== 'no'}"> checked </c:if> name="interviewDateRequired" value="no"><fmt:message key="no" bundle="${resword}"/>
+                                    <input type="radio" <c:if test="${config.value.value== 'not_used'}"> checked </c:if> name="interviewDateRequired" value="not_used"><fmt:message key="not_used" bundle="${resword}"/>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:when test="${config.parameter.handle=='interviewDateDefault'}">
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="interviewer_date_default_as_blank"
+                                                                     bundle="${resword}"/></td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value== 'blank'}">
+                                        <input type="radio" checked name="interviewDateDefault"
+                                               value="blank"><fmt:message key="blank" bundle="${resword}"/>
+                                        <input type="radio" name="interviewDateDefault"
+                                               value="pre-populated"><fmt:message key="pre_populated_from_SE"
+                                                                                  bundle="${resword}"/>
+
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="interviewDateDefault" value="blank"><fmt:message
+                                          key="blank" bundle="${resword}"/>
+                                        <input type="radio" checked name="interviewDateDefault"
+                                               value="re-populated"><fmt:message key="pre_populated_from_SE"
+                                                                                 bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:when>
+                              <c:otherwise>
+                                <tr valign="top">
+                                  <td class="formlabel"><fmt:message key="interviewer_date_editable"
+                                                                     bundle="${resword}"/></td>
+                                  <td>
+                                    <c:choose>
+                                      <c:when test="${config.value.value== 'true'}">
+                                        <input type="radio" checked name="interviewDateEditable"
+                                               value="true"><fmt:message key="yes" bundle="${resword}"/>
+                                        <input type="radio" name="interviewDateEditable" value="false"><fmt:message
+                                          key="no" bundle="${resword}"/>
+
+                                      </c:when>
+                                      <c:otherwise>
+                                        <input type="radio" name="interviewDateEditable" value="true"><fmt:message
+                                          key="yes" bundle="${resword}"/>
+                                        <input type="radio" checked name="interviewDateEditable"
+                                               value="false"><fmt:message key="no" bundle="${resword}"/>
+                                      </c:otherwise>
+                                    </c:choose>
+                                  </td>
+                                </tr>
+                              </c:otherwise>
+                            </c:choose>
+                          </c:forEach>
                           </table>
                         </div>
                       </div>
@@ -1232,11 +1237,11 @@
       <table border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td><input type="submit" name="Submit" value="<fmt:message key="submit_site" bundle="${resword}"/>"
-                     class="button_long">
+                   class="button_long">
           </td>
           <td>
-            <input type="button" onclick="confirmCancel('ListSite');" name="cancel"
-                   value="   <fmt:message key="cancel" bundle="${resword}"/>   " class="button_medium"/>
+            <input type="button" onclick="confirmCancel('ListSite');" name="cancel" id="cancel"
+                  value="<fmt:message key="cancel" bundle="${resword}"/>" class="button_medium"/>
           </td>
         </tr>
       </table>

@@ -69,7 +69,7 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
     /**
      * <P>
      * findNextKey, a method to return a simple int from the database.
-     * 
+     *
      * @return int, which is the next primary key for creating a study.
      */
     public int findNextKey() {
@@ -136,7 +136,7 @@ public class CountryDAO extends AuditableEntityDAO<CountryBean> {
 
     /**
      * deleteTestOnly, used only to clean up after unit testing
-     * 
+     *
      * @param name name
      */
     public void deleteTestOnly(String name) {
