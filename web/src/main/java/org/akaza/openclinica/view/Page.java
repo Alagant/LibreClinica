@@ -139,6 +139,8 @@ public enum Page {
    PROTOCOL_DEVIATIONS("/WEB-INF/jsp/managestudy/protocolDeviations.jsp", "Protocol deviations"),
    IRB_STUDY("/WEB-INF/jsp/managestudy/irbStudy.jsp", "IRB Study"),
    IRB_SITE("/WEB-INF/jsp/managestudy/irbSite.jsp", "IRB Site"),
+
+   VISIT_ERROR("/WEB-INF/jsp/managestudy/visitError.jsp", "Visit Error"),
     /**
      * Page for confirming a new study.
      */

@@ -405,6 +405,14 @@
         <servlet-class>org.akaza.openclinica.control.managestudy.IRBStudyServlet</servlet-class>
     </servlet>
 
+
+    <servlet>
+        <servlet-name>VisitErrorServlet</servlet-name>
+        <display-name>VisitErrorServlet</display-name>
+        <description>Servlet for IRB Study</description>
+        <servlet-class>org.akaza.openclinica.control.managestudy.VisitErrorServlet</servlet-class>
+    </servlet>
+
     <servlet>
         <servlet-name>IrbSiteServlet</servlet-name>
         <display-name>IrbSiteServlet</display-name>
@@ -2247,6 +2255,11 @@
     <servlet-mapping>
         <servlet-name>IrbStudyServlet</servlet-name>
         <url-pattern>/IrbStudy</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>VisitErrorServlet</servlet-name>
+        <url-pattern>/VisitError</url-pattern>
     </servlet-mapping>
 
 

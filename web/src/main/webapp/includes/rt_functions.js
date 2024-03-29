@@ -1,3 +1,10 @@
+// rt_functions.js
+// is part of a
+// library of JavaScript functions to be used in CRF-Definitions.xls
+// in OpenClinica or LibreClinica
+// (c) 2018, 2024 ReliaTec GmbH, Garching, www.reliatec.de
+// This is proprietary code, use or distribution without licensing or
+// written permission by ReliaTec is prohibited.
 
 function divsByName(name) {
 	var divs = jQuery("div[name^='" + name + "']");
@@ -46,6 +53,9 @@ function nonGroupFormElement(referenceElem) {
 	var formElem = elem.parent().parent().find("input");
 	if(!formElem || formElem.length < 1) {
 		formElem = elem.parent().parent().find("select");
+	}
+	if(!formElem || formElem.length < 1) {
+		formElem = elem.parent().parent().find("textarea");
 	}
 	return formElem;
 }
@@ -114,7 +124,11 @@ function copyValue(divName, value){
 		function(index, referenceElem){
 			referenceElem = jQuery(referenceElem);
 			var elem = nonGroupFormElement(referenceElem)
-			setElementValue(elem, value);
+			var currentValue = currentElementValue(elem);
+
+			if(currentValue != value){
+				setElementValue(elem, value);
+			}
 		});
 }
 
@@ -124,9 +138,26 @@ function setElementValue(targetElem, val) {
 	      if(val != null) {
 		targetElem.val([val]);
 	      } else {
-		targetElem.attr('checked', false);
+		targetElem.prop('checked', false);
 	      }
 	      targetElem.change();
+	    } else if(targetElem.is(':checkbox')) {
+	      var inputId = targetElem.attr('id');
+	      if(val != null && !Array.isArray(val)) {
+		      val = [val];
+	      }
+			var checkboxes = jQuery('[id=' + inputId + ']');
+			if(val != null) {
+				checkboxes.filter(function(){
+					return !val.includes(jQuery(this).val());
+				}).prop('checked', false);
+				checkboxes.filter(function(){
+					return val.includes(jQuery(this).val());
+				}).prop('checked', true);
+			} else {
+				checkboxes.prop('checked', false);
+			}
+			checkboxes.change();
 	    } else {
 	      targetElem.val(val);
 	      targetElem.change();
@@ -150,10 +181,51 @@ function setReadOnly() {
 	var divName = 'readOnly';
 	var divs = divsByName(divName);
 	divs.each(
-		function(index, elem){
-			elem = jQuery(elem);
+		function(index, div){
+			elem = nonGroupFormElement(div);
 			disableElement(elem);
 		});
+}
+
+function getEvent() {
+	const event = jQuery.trim(
+		jQuery(".tablebox_center")
+		.find("tbody:first")
+		.children("tr:nth-child(1)")
+		.children("td:nth-child(2)")
+		.text()
+	);
+
+	// name and date are separated by a non-breaking space
+	const match = event.match(/^(?<name>.+)\xa0\((?<date>\d{2}-[A-Za-z]{3}-\d{4})\)$/);
+	if (match === null)	return null;
+
+	return {
+		name: match.groups.name,
+		date: match.groups.date,
+	};
+}
+
+function getEventName() {
+	return getEvent()?.name ?? null;
+}
+
+function copyEventName() {
+	copyValue(
+		"copyEventName",
+		getEventName(),
+	);
+}
+
+function getEventDate() {
+	return getEvent()?.date ?? null;
+}
+
+function copyEventDate() {
+	copyValue(
+		"copyEventDate",
+		getEventDate(),
+	);
 }
 
 function getBirth(){
@@ -198,13 +270,30 @@ function disableElement(targetElem) {
 }
 
 function enableUpdateTargetOnChange(triggerId, targetId, calculation) {
-  // var triggerElem = jQuery(triggerId).parent().parent().find("input");
-  // var targetElem = jQuery(targetId).parent().parent().find("input");
-  var triggerElem = nonGroupFormElement(jQuery(triggerId));
+  var triggerElems = nonGroupFormElement(jQuery(triggerId));
   var targetElem = nonGroupFormElement(jQuery(targetId));
-  triggerElem.change(function() {
-    var result = calculation(triggerElem.val());
-    setElementValue(targetElem, result);
+  if(triggerElems != null && !Array.isArray(triggerElems)) {
+  	triggerElems = [triggerElems];
+  }
+
+  triggerElems.each(
+	  function(triggerElem, index){
+		  triggerElem = jQuery(triggerElem);
+		  triggerElem.change(function() {
+			  var result = calculation(currentElementValue(triggerElem));
+			  setElementValue(targetElem, result);
+		  });
+		  var triggerElemNative = document.getElementById(triggerElem.attr('id'));
+		  if(triggerElemNative != null && typeof triggerElemNative.onchange == 'function') {
+			  var f = triggerElemNative.onchange;
+			  triggerElemNative.onchange = function(event) {
+				  if(typeof event == 'undefined') {
+					  jQuery(this).change();
+				  } else {
+					  f();
+				  }
+			  }
+		  }
   });
 }
 
@@ -226,7 +315,6 @@ function requestValue(studySubjectOID, studyOID, eventOID, itemOID, calculationF
     } else {
       subjectCriteria = 'SubjectKey="' + studySubjectOID + '"';
     }
-    // var searchPath = '/ODM/SubjectData[' + subjectCriteria + ']/StudyEventData[StudyEventOID="' + eventOID + '"]/*/ItemData[ItemOID="' + itemOID + '"]';
 
     odm = jQuery(xml);
     jQuery(xml).find('ODM').find('SubjectData[' + subjectCriteria + ']').find('StudyEventData[StudyEventOID="' + eventOID + '"]').find('ItemData[ItemOID="' + itemOID + '"]').each(function(){
@@ -277,10 +365,40 @@ function setMessage(radiosToCheck, msgContainer, value) {
 	}
 }
 
+function gotoUrl(url) {
+	location.assign(url);
+}
+
+function currentElementValue(targetElem) {
+	if(targetElem == null) {
+		return null;
+	}
+	if(targetElem.is(':radio')) {
+		var checkedRadio = jQuery(targetElem).filter(':checked');
+		if(checkedRadio) {
+			return checkedRadio.val();
+		}
+	} else if(targetElem.is(':checkbox')) {
+		var checkedCheckboxes = targetElem.filter(':checked');
+		if(checkedCheckboxes) {
+			if(checkedCheckboxes.length == 1) {
+				return checkedCheckboxes.val();
+			} else if(checkedCheckboxes.length > 1) {
+				return checkedCheckboxes.map(function(){return jQuery(this).val()}).toArray();
+			}
+		}
+	} else {
+		return targetElem.val();
+	}
+	return null;
+}
+
 jQuery(document).ready(enableUndoForRadioButtons);
 jQuery(document).ready(updateInputStyles);
 jQuery(document).ready(configureToolTips);
 jQuery(document).ready(copySubjectID);
+jQuery(document).ready(copyEventName);
+jQuery(document).ready(copyEventDate);
 jQuery(document).ready(copyBirth);
 jQuery(document).ready(copyGender);
 jQuery(document).ready(setReadOnly);
