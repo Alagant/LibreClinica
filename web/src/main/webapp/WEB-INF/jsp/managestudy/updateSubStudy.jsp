@@ -448,10 +448,10 @@
                             <td class="formlabel"><fmt:message key="location_type" bundle="${resword}"/>:</td>
                             <td>
                               <input type="radio" name="locationType"
-                                     <c:if test="${newStudy.locationType.equals('domestic')}">checked</c:if> value="domestic"
+                                     <c:if test="${newStudy.locationType eq 'domestic'}">checked</c:if> value="domestic"
                                      id="domestic"/><label for="domestic">domestic</label>
                               <input type="radio" name="locationType" <c:if
-                                  test="${newStudy.locationType.equals('international')}">checked</c:if> value="international"
+                                  test="${newStudy.locationType eq 'international'}">checked</c:if> value="international"
                                      id="international"/><label for="international">International</label>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="locationType"/>
@@ -486,8 +486,7 @@
     </div>
   </div>
   <div class="table_title_Manage"><a href="javascript:leftnavExpand('fwaAssurance');">
-    <img id="excl_FWA" src="images/bt_Collapse.gif" border="0"> <fmt:message key="FWA"
-                                                                                        bundle="${resword}"/> </a></div>
+    <img id="excl_FWA" src="images/bt_Collapse.gif" border="0"> <fmt:message key="FWA" bundle="${resword}"/> </a></div>
 
   <div id="fwaAssurance">
     <!-- These DIVs define shaded box borders -->
@@ -584,10 +583,10 @@
                       <div class="textbox_center">
                         <table border="0" cellpadding="0" cellspacing="0">
 
-                          <tr>
+                          <tr valign="top">
                             <td class="table_cell select-autosize">
                               <span class="formlabel"><fmt:message key="available_laboratories" bundle="${resword}"/>:</span>
-                              <select name="laboratoryId" multiple>
+                              <select name="laboratoryId" id="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
@@ -595,12 +594,23 @@
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="laboratoryId"/>
                               </jsp:include>
+                            </td><td>
+                              <button class="button">&gt;&gt;</button>
+                              <br/>
+                              <button class="button">&lt;&lt;</button>
                             </td>
                             <td class="table_cell select-autosize">
                               <span class="formlabel"><fmt:message key="selected_laboratories" bundle="${resword}"/>:</span>
-                              <select name="laboratories" multiple>
+                              <select name="laboratories" id="laboratories" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                  <c:choose>
+                                    <c:when test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">
+                                      <option value="<c:out value="${lab.labId}"/>" selected><c:out value="${lab.labName}"/></option>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
+                                    </c:otherwise>
+                                  </c:choose>
                                 </c:forEach>
                               </select>
                               <jsp:include page="../showMessage.jsp">
@@ -608,8 +618,6 @@
                               </jsp:include>
                             </td>
                             <td class="formlabel" style="text-align:left">*</td>
-                          </tr>
-                          </td>
                           </tr>
                         </table>
                       </div>
