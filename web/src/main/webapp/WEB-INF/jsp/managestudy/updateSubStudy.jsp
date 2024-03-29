@@ -472,9 +472,37 @@
                             </td>
                             <td class="formlabel" style="text-align:left">*</td>
                           </tr>
-                          <tr>
-                            <td><h2>Federal wide assurance (FWA)</h2></td>
-                          </tr>
+                        </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table_title_Manage"><a href="javascript:leftnavExpand('fwaAssurance');">
+    <img id="excl_FWA" src="images/bt_Collapse.gif" border="0"> <fmt:message key="FWA"
+                                                                                        bundle="${resword}"/> </a></div>
+
+  <div id="fwaAssurance">
+    <!-- These DIVs define shaded box borders -->
+    <div style="width: 100%">
+      <div class="box_T">
+        <div class="box_L">
+          <div class="box_R">
+            <div class="box_B">
+              <div class="box_TL">
+                <div class="box_TR">
+                  <div class="box_BL">
+                    <div class="box_BR">
+
+                      <div class="textbox_center">
+                        <table border="0" cellpadding="0" cellspacing="0">
                           <tr valign="top">
                             <td class="formlabel"><fmt:message key="FWA_institution" bundle="${resword}"/>:</td>
                             <td>
@@ -522,15 +550,55 @@
                                       button: "fwaExpDateTrigger"
                                   });
                               </script>
-
                             </a>*
                             </td>
                           </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table_title_Manage"><a href="javascript:leftnavExpand('labInformation');">
+    <img id="excl_labInformation" src="images/bt_Collapse.gif" border="0"> <fmt:message key="laboratory_information"
+                                                                             bundle="${resword}"/> </a></div>
 
-                          <tr valign="top">
-                            <td class="formlabel"><fmt:message key="laboratory" bundle="${resword}"/>:</td>
+  <div id="labInformation">
+    <!-- These DIVs define shaded box borders -->
+    <div style="width: 100%">
+      <div class="box_T">
+        <div class="box_L">
+          <div class="box_R">
+            <div class="box_B">
+              <div class="box_TL">
+                <div class="box_TR">
+                  <div class="box_BL">
+                    <div class="box_BR">
+
+                      <div class="textbox_center">
+                        <table border="0" cellpadding="0" cellspacing="0">
+
+                          <tr>
                             <td class="table_cell select-autosize">
+                              <span class="formlabel"><fmt:message key="available_laboratories" bundle="${resword}"/>:</span>
                               <select name="laboratoryId" multiple>
+                                <c:forEach var="lab" items="${laboratories}">
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                </c:forEach>
+                              </select>
+                              <jsp:include page="../showMessage.jsp">
+                                <jsp:param name="key" value="laboratoryId"/>
+                              </jsp:include>
+                            </td>
+                            <td class="table_cell select-autosize">
+                              <span class="formlabel"><fmt:message key="selected_laboratories" bundle="${resword}"/>:</span>
+                              <select name="laboratories" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
@@ -541,6 +609,39 @@
                             </td>
                             <td class="formlabel" style="text-align:left">*</td>
                           </tr>
+                          </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table_title_Manage"><a href="javascript:leftnavExpand('siteConfiguration');">
+    <img id="excl_siteConfig" src="images/bt_Collapse.gif" border="0"> <fmt:message key="site_configuration"
+                                                                                        bundle="${resword}"/> </a></div>
+
+  <div id="siteConfiguration">
+    <!-- These DIVs define shaded box borders -->
+    <div style="width: 100%">
+      <div class="box_T">
+        <div class="box_L">
+          <div class="box_R">
+            <div class="box_B">
+              <div class="box_TL">
+                <div class="box_TR">
+                  <div class="box_BL">
+                    <div class="box_BR">
+
+                      <div class="textbox_center">
+                        <table border="0" cellpadding="0" cellspacing="0">
+
                           <c:choose>
                             <c:when test="${newStudy.parentStudyId == 0}">
                               <c:set var="key" value="study_system_status"/>
