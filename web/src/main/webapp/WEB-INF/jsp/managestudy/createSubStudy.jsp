@@ -601,7 +601,7 @@
   </div>
   <div class="table_title_Manage"><a href="javascript:leftnavExpand('labInformation');">
     <img id="excl_labInformation" src="images/bt_Collapse.gif" border="0"> <fmt:message key="laboratory_information"
-                                                                                        bundle="${resword}"/> </a></div>
+                                                                             bundle="${resword}"/> </a></div>
 
   <div id="labInformation">
     <!-- These DIVs define shaded box borders -->
@@ -623,23 +623,23 @@
                               <span class="formlabel"><fmt:message key="available_laboratories" bundle="${resword}"/>:</span>
                               <select name="laboratoryId" id="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryIds_int.contains(lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
                               </select>
                               <jsp:include page="../showMessage.jsp">
                                 <jsp:param name="key" value="laboratoryId"/>
                               </jsp:include>
                             </td><td>
-                            <button class="button">&gt;&gt;</button>
-                            <br/>
-                            <button class="button">&lt;&lt;</button>
-                          </td>
+                              <button class="button">&gt;&gt;</button>
+                              <br/>
+                              <button class="button">&lt;&lt;</button>
+                            </td>
                             <td class="table_cell select-autosize">
                               <span class="formlabel"><fmt:message key="selected_laboratories" bundle="${resword}"/>:</span>
                               <select name="laboratories" id="laboratories" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <c:choose>
-                                    <c:when test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">
+                                    <c:when test="${newStudy.laboratoryIds_int.contains(lab.labId)}">
                                       <option value="<c:out value="${lab.labId}"/>" selected><c:out value="${lab.labName}"/></option>
                                     </c:when>
                                     <c:otherwise>
@@ -649,7 +649,7 @@
                                 </c:forEach>
                               </select>
                               <jsp:include page="../showMessage.jsp">
-                                <jsp:param name="key" value="laboratoryId"/>
+                                <jsp:param name="key" value="laboratories"/>
                               </jsp:include>
                             </td>
                             <td class="formlabel" style="text-align:left">*</td>
@@ -685,7 +685,7 @@
                       <div class="textbox_center">
                         <table border="0" cellpadding="0" cellspacing="0">
 
-                        <c:choose>
+                          <c:choose>
                             <c:when test="${newStudy.parentStudyId == 0}">
                               <c:set var="key" value="study_system_status"/>
                             </c:when>

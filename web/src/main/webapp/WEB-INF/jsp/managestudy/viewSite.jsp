@@ -338,7 +338,7 @@
                         </td>
                         <td class="table_cell">
                           <c:forEach var="lab" items="${laboratories}">
-                            <c:if test="${siteToView.laboratoryIds_int.contains(lab.labId)}"><c:out value="${lab.labName}"/></c:if>
+                            <c:if test="${siteToView.laboratoryIds_int.contains(lab.labId)}"><c:out value="${lab.labName}"/><br/></c:if>
                           </c:forEach>
                         </td>
                       </tr>
@@ -487,7 +487,7 @@
     </c:otherwise>
   </c:choose>
 
-  <div style="width: 600px">
+  <div style="width: 100%">
     <div class="box_T">
       <div class="box_L">
         <div class="box_R">

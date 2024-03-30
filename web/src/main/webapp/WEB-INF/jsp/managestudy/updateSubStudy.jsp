@@ -588,7 +588,7 @@
                               <span class="formlabel"><fmt:message key="available_laboratories" bundle="${resword}"/>:</span>
                               <select name="laboratoryId" id="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryIds_int.contains(lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
                                 </c:forEach>
                               </select>
                               <jsp:include page="../showMessage.jsp">
@@ -604,7 +604,7 @@
                               <select name="laboratories" id="laboratories" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <c:choose>
-                                    <c:when test="${fn:contains(newStudy.laboratoryIds_int, lab.labId)}">
+                                    <c:when test="${newStudy.laboratoryIds_int.contains(lab.labId)}">
                                       <option value="<c:out value="${lab.labId}"/>" selected><c:out value="${lab.labName}"/></option>
                                     </c:when>
                                     <c:otherwise>
@@ -614,7 +614,7 @@
                                 </c:forEach>
                               </select>
                               <jsp:include page="../showMessage.jsp">
-                                <jsp:param name="key" value="laboratoryId"/>
+                                <jsp:param name="key" value="laboratories"/>
                               </jsp:include>
                             </td>
                             <td class="formlabel" style="text-align:left">*</td>
@@ -633,7 +633,7 @@
   </div>
   <div class="table_title_Manage"><a href="javascript:leftnavExpand('siteConfiguration');">
     <img id="excl_siteConfig" src="images/bt_Collapse.gif" border="0"> <fmt:message key="site_configuration"
-                                                                                        bundle="${resword}"/> </a></div>
+                                                                                    bundle="${resword}"/> </a></div>
 
   <div id="siteConfiguration">
     <!-- These DIVs define shaded box borders -->
@@ -1020,7 +1020,7 @@
                               </c:otherwise>
                             </c:choose>
                           </c:forEach>
-                          </table>
+                        </table>
                         </div>
                       </div>
                     </div>
