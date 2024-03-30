@@ -586,9 +586,11 @@
                           <tr valign="top">
                             <td class="table_cell select-autosize">
                               <span class="formlabel"><fmt:message key="available_laboratories" bundle="${resword}"/>:</span>
-                              <select name="laboratoryId" id="laboratoryId" multiple>
+                              <select name="available_laboratoryId" id="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
-                                  <option value="<c:out value="${lab.labId}"/>" <c:if test="${newStudy.laboratoryIds_int.contains(lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/></option>
+                                  <c:if test="${!newStudy.laboratoryIds_int.contains(lab.labId)}">
+                                    <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
+                                  </c:if>
                                 </c:forEach>
                               </select>
                               <jsp:include page="../showMessage.jsp">
@@ -601,15 +603,12 @@
                             </td>
                             <td class="table_cell select-autosize">
                               <span class="formlabel"><fmt:message key="selected_laboratories" bundle="${resword}"/>:</span>
-                              <select name="laboratories" id="laboratories" multiple>
+                              <select name="laboratoryId" id="laboratories" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <c:choose>
                                     <c:when test="${newStudy.laboratoryIds_int.contains(lab.labId)}">
                                       <option value="<c:out value="${lab.labId}"/>" selected><c:out value="${lab.labName}"/></option>
                                     </c:when>
-                                    <c:otherwise>
-                                      <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
-                                    </c:otherwise>
                                   </c:choose>
                                 </c:forEach>
                               </select>
