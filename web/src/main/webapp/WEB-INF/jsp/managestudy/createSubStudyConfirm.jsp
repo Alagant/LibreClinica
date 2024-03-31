@@ -95,7 +95,7 @@
                       </tr>
                       <tr valign="top">
                         <td class="table_header_column"><b><fmt:message key="unique_protocol_ID"
-                                                                        bundle="${resword}"/></b>:
+                                                                       bundle="${resword}"/></b>:
                         </td>
                         <td class="table_cell">
                           <c:out value="${newStudy.identifier}"/>
@@ -274,7 +274,7 @@
                         </td>
                         <td class="table_cell">
                           <c:forEach var="lab" items="${laboratories}">
-                            <c:if test="${newStudy.laboratoryIds_int.contains(lab.labId)}">selected</c:if>><c:out value="${lab.labName}"/>
+                            <c:if test="${newStudy.laboratoryIds_int.contains(lab.labId)}"><c:out value="${lab.labName}"/><br/></c:if>
                           </c:forEach>
                         </td>
                       </tr>
