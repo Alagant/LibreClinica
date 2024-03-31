@@ -136,6 +136,38 @@
             }
         }
     }
+    function add_laboratories() {
+        const available_laboratoryId = document.getElementById("available_laboratoryId");
+        const laboratoryId = document.getElementById("laboratoryId");
+        for(let i=0; i<available_laboratoryId.length; i++){
+            const option = available_laboratoryId.options[i];
+            if (option.selected) {
+                laboratoryId.options.add(option);
+            }
+        }
+        for(let i=available_laboratoryId.length-1; i>-1; i--){
+            const option = available_laboratoryId.options[i];
+            if (option.selected) {
+                available_laboratoryId.options.remove(option);
+            }
+        }
+    }
+    function remove_laboratories() {
+        const available_laboratoryId = document.getElementById("available_laboratoryId");
+        const laboratoryId = document.getElementById("laboratoryId");
+        for(let i=0; i<laboratoryId.length; i++){
+            const option = laboratoryId.options[i];
+            if (option.selected) {
+                available_laboratoryId.options.add(option);
+            }
+        }
+        for(let i=laboratoryId.length-1; i>-1; i--){
+            const option = laboratoryId.options[i];
+            if (option.selected) {
+                laboratoryId.options.remove(option);
+            }
+        }
+    }
 </script>
 
 <h1><span class="title_manage">
@@ -619,9 +651,10 @@
                         <table border="0" cellpadding="0" cellspacing="0">
 
                           <tr valign="top">
-                            <td class="table_cell select-autosize">
+                            <!-- the class select-autosize was removed temporally. It is used to make the select box auto size -->
+                            <td class="table_cell">
                               <span class="formlabel"><fmt:message key="available_laboratories" bundle="${resword}"/>:</span>
-                              <select name="available_laboratoryId" id="laboratoryId" multiple>
+                              <select name="available_laboratoryId" id="available_laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <c:if test="${!newStudy.laboratoryIds_int.contains(lab.labId)}">
                                     <option value="<c:out value="${lab.labId}"/>"><c:out value="${lab.labName}"/></option>
@@ -632,13 +665,13 @@
                                 <jsp:param name="key" value="laboratoryId"/>
                               </jsp:include>
                             </td><td>
-                              <button class="button">&gt;&gt;</button>
+                              <button class="button" type="button" onclick="add_laboratories();">&gt;&gt;</button>
                               <br/>
-                              <button class="button">&lt;&lt;</button>
+                              <button class="button" type="button" onclick="remove_laboratories();">&lt;&lt;</button>
                             </td>
-                            <td class="table_cell select-autosize">
+                            <td class="table_cell">
                               <span class="formlabel"><fmt:message key="selected_laboratories" bundle="${resword}"/>:</span>
-                              <select name="laboratoryId" id="laboratories" multiple>
+                              <select name="laboratoryId" id="laboratoryId" multiple>
                                 <c:forEach var="lab" items="${laboratories}">
                                   <c:choose>
                                     <c:when test="${newStudy.laboratoryIds_int.contains(lab.labId)}">
@@ -648,7 +681,7 @@
                                 </c:forEach>
                               </select>
                               <jsp:include page="../showMessage.jsp">
-                                <jsp:param name="key" value="laboratories"/>
+                                <jsp:param name="key" value="laboratoryId"/>
                               </jsp:include>
                             </td>
                             <td class="formlabel" style="text-align:left">*</td>
