@@ -133,6 +133,8 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         // eb.setEventStartDate((Date) hm.get("date_start"));
         // eb.setActive(true);
         eb.setTime_zone((String) hm.get("time_zone"));
+        eb.setTime_zone((String) hm.get("time_zone"));
+        eb.setRegimen((String) hm.get("regimen"));
         return eb;
     }
 
@@ -251,6 +253,8 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         this.setTypesExpected();
         // type for 'unique_identifier' from the subject table
         setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
+        //setTypeExpected(15, TypeNames.STRING);
 
         HashMap<Integer, Object> variables = variables(ID);
 
@@ -392,8 +396,9 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         setTypesExpected();
         // type for Study unique_identifier from StudySubject getWithFilterAndSort query
         setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
         // type for sort_order_by_enrollment from sorting getWithFilterAndSortByEnrollment query
-        setTypeExpected(15, TypeNames.INT);
+        setTypeExpected(16, TypeNames.INT);
         
         String partialSql;
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
@@ -703,6 +708,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         setTypesExpected();
         // type for 'unique_identifier' from the study table
         setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
 
         HashMap<Integer, Object> variables = variables(subjectId, study.getId(), study.getId());
 
