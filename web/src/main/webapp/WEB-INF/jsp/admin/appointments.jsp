@@ -71,6 +71,10 @@
             <td>${subject.secondaryLabel}</td>
         </tr>
         <tr>
+            <th>Regimen</th>
+            <td>${subject.secondaryLabel}</td>
+        </tr>
+        <tr>
             <th>gender</th>
             <td>${subject.gender}</td>
         </tr>

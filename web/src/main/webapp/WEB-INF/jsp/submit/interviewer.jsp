@@ -496,6 +496,9 @@ function callTip(html)
         <td class="table_cell_noborder" >
             <b>PID: <c:out value="${studySubject.secondaryLabel}" />
         </td>
+        <td class="table_cell_noborder" >
+            <b>Regimen: <c:out value="${studySubject.regimen}" />
+        </td>
 	<!--person id todo -->
        <c:choose>
         <c:when test="${study.studyParameterConfig.personIdShownOnCRF == 'true'}">
