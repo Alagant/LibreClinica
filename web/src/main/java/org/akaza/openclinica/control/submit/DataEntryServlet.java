@@ -2178,6 +2178,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                 }
 
                             }catch (Exception e){
+                                addPageMessage("Error on randomization", request);
+                                LOGGER.error("Error on randomization", e);
                             }
 
                         }
