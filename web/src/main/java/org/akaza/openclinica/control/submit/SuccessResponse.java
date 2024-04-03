@@ -11,6 +11,8 @@ public class SuccessResponse {
     private String libreclinicaId;
     @JsonProperty(value = "schedule", required = false)
     private Schedule schedule;
+    @JsonProperty(value = "regimen_strata", required = false)
+    private String regimen;
 
     public SuccessResponse() {
     }
@@ -55,5 +57,11 @@ public class SuccessResponse {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public void setRegimen(String regimen) {
+        this.regimen = regimen;
+    }
+    public String getRegimen() {
+        return regimen;
     }
 }
