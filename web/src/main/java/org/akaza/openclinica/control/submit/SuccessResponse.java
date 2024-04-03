@@ -12,7 +12,7 @@ public class SuccessResponse {
     @JsonProperty(value = "schedule", required = false)
     private Schedule schedule;
     @JsonProperty(value = "regimen_strata", required = false)
-    private String regimen;
+    private RegimenStrataResponse regimen;
 
     public SuccessResponse() {
     }
@@ -58,10 +58,10 @@ public class SuccessResponse {
     public void setId(int id) {
         this.id = id;
     }
-    public void setRegimen(String regimen) {
+    public void setRegimen(RegimenStrataResponse regimen) {
         this.regimen = regimen;
     }
-    public String getRegimen() {
+    public RegimenStrataResponse getRegimen() {
         return regimen;
     }
 }

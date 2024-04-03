@@ -103,6 +103,8 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         this.setTypeExpected(ind, TypeNames.STRING);
         ind++; // oc oid
         this.setTypeExpected(ind, TypeNames.STRING);
+        ind++; // regimen
+        this.setTypeExpected(ind, TypeNames.STRING);
         ind++; // time_zone
         // this.setTypeExpected(ind, TypeNames.INT);
         // ind++;
