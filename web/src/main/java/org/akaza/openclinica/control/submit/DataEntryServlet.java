@@ -2032,7 +2032,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     ssbe.setLabel(successObject.getPid());
                                     ssbe.setRegimen(
                                             successObject.getRegimen()!=null?
-                                            successObject.getRegimen().toString() :""
+                                            successObject.getRegimen().toString() :"N/A"
                                     );
                                     ssbe.setSecondaryLabel(successObject.getPid());
                                     studao.update(ssbe);
@@ -2695,7 +2695,9 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                                 StudySubjectDAO studao = new StudySubjectDAO(getDataSource());
                                                 StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
                                                 ssbe.setLabel(successObject.getPid());
-                                                ssbe.setRegimen(successObject.getRegimen().toString());
+                                                ssbe.setRegimen(
+                                                        successObject.getRegimen()!=null?
+                                                        successObject.getRegimen().toString() :"N/A");
                                                 ssbe.setSecondaryLabel(successObject.getPid());
                                                 studao.update(ssbe);
                                                 seb = sedao.update(seb);
