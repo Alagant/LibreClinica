@@ -16,6 +16,6 @@ public class RegimenStrataResponse {
 
     @Override
     public String toString() {
-        return String.format("weight=%s", getWeight());
+        return String.format("weight:%s", getWeight());
     }
 }
