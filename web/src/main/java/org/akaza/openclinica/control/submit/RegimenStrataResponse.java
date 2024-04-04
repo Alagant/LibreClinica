@@ -14,6 +14,7 @@ public class RegimenStrataResponse {
         this.weight = weight;
     }
 
+    @Override
     public String toString() {
         return String.format("weight=%s", getWeight());
     }

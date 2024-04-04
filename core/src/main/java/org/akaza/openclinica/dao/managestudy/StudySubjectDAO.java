@@ -679,6 +679,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         } else {
             variables.put(ind++, sb.getTime_zone());
         }
+        variables.put(ind++, sb.getRegimen());
         variables.put(ind++, sb.getId());
 
         String sql = digester.getQuery("update");
