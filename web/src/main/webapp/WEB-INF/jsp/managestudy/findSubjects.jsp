@@ -112,7 +112,7 @@
                 let tbody = tabla.querySelector('tbody.tbody');
                 if (tbody) {
                     let filas = tbody.getElementsByTagName('tr');
-                    let patronRegex = /\d{2}-\d{2}-N\d{5}/;
+                    let patronRegex = /\d{2}-\d{2}-N\d{5}|00-P\d{5}/;
                     for (let i = 0; i < filas.length; i++) {
                         let fila = filas[i];
                         let celdaSubjectID = fila.cells[0];
