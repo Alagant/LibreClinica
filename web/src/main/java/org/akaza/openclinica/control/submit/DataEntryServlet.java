@@ -918,6 +918,17 @@ public abstract class DataEntryServlet extends CoreSecureController {
             groupOrdinalPLusItemOid = runRules(allItems, ruleSets, true, shouldRunRules, MessageType.ERROR, phase2,ecb, request);
 
             logMe("allItems  Loop begin  "+System.currentTimeMillis());
+
+            if(sb.getTitle().equalsIgnoreCase("Treatment Assignment")){
+                for (int i = 0; i < allItems.size(); i++) {
+                    DisplayItemWithGroupBean diwg = allItems.get(i);
+                    if(diwg.getSingleItem().getItem().getName().equalsIgnoreCase("TDARM")){
+                        ssb.setRegimen(diwg.getSingleItem().getData().getValue());
+                        StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
+                        studySubjectDao.update(ssb);
+                    }
+                }
+            }
             for (int i = 0; i < allItems.size(); i++) {
                 DisplayItemWithGroupBean diwg = allItems.get(i);
                 if(diwg.getSingleItem().getItem().getDescription().equalsIgnoreCase("Site ID")){
@@ -2030,10 +2041,6 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     StudySubjectDAO studao = new StudySubjectDAO(getDataSource());
                                     StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
                                     ssbe.setLabel(successObject.getPid());
-                                    ssbe.setRegimen(
-                                            successObject.getRegimen()!=null?
-                                            successObject.getRegimen().toString() :"N/A"
-                                    );
                                     ssbe.setSecondaryLabel(successObject.getPid());
                                     studao.update(ssbe);
                                     seb = sedao.update(seb);
@@ -2695,9 +2702,6 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                                 StudySubjectDAO studao = new StudySubjectDAO(getDataSource());
                                                 StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
                                                 ssbe.setLabel(successObject.getPid());
-                                                ssbe.setRegimen(
-                                                        successObject.getRegimen()!=null?
-                                                        successObject.getRegimen().toString() :"N/A");
                                                 ssbe.setSecondaryLabel(successObject.getPid());
                                                 studao.update(ssbe);
                                                 seb = sedao.update(seb);
