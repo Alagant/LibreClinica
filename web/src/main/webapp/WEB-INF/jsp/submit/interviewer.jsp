@@ -497,7 +497,8 @@ function callTip(html)
             <b>PID: <c:out value="${studySubject.secondaryLabel}" />
         </td>
         <td class="table_cell_noborder" >
-            <b>Regimen: <c:out value="${studySubject.regimen}" />
+            <b>Regimen: <jsp:useBean id="regimenName" scope="request" type="java.lang.String"/>
+            <c:out value="${regimenName}" />
         </td>
 	<!--person id todo -->
        <c:choose>

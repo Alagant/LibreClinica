@@ -102,16 +102,9 @@ import org.akaza.openclinica.dao.managestudy.StudyDAO;
 import org.akaza.openclinica.dao.managestudy.StudyEventDAO;
 import org.akaza.openclinica.dao.managestudy.StudyEventDefinitionDAO;
 import org.akaza.openclinica.dao.managestudy.StudySubjectDAO;
-import org.akaza.openclinica.dao.submit.CRFVersionDAO;
-import org.akaza.openclinica.dao.submit.EventCRFDAO;
-import org.akaza.openclinica.dao.submit.ItemDAO;
-import org.akaza.openclinica.dao.submit.ItemDataDAO;
-import org.akaza.openclinica.dao.submit.ItemFormMetadataDAO;
-import org.akaza.openclinica.dao.submit.ItemGroupDAO;
-import org.akaza.openclinica.dao.submit.ItemGroupMetadataDAO;
-import org.akaza.openclinica.dao.submit.SectionDAO;
-import org.akaza.openclinica.dao.submit.SubjectDAO;
+import org.akaza.openclinica.dao.submit.*;
 import org.akaza.openclinica.domain.crfdata.DynamicsItemFormMetadataBean;
+import org.akaza.openclinica.domain.datamap.ResponseSet;
 import org.akaza.openclinica.domain.rule.RuleSetBean;
 import org.akaza.openclinica.domain.rule.action.RuleActionRunBean.Phase;
 import org.akaza.openclinica.exception.OpenClinicaException;
@@ -313,6 +306,50 @@ public abstract class DataEntryServlet extends CoreSecureController {
         return "";
     }
 
+    private String getRegimen(int studySubjectId, String name, int studyId) throws OpenClinicaException {
+        String retval = "(not set)";
+        ItemDataDAO iddao = new ItemDataDAO(getDataSource());
+        ArrayList<ItemDataBean> tdarms =
+                iddao.findAllItemDatabySubjectAndName(studySubjectId, studyId, "TDARM");
+        if(tdarms == null || tdarms.size()<1) return retval;
+
+        ItemDataBean tdarm = tdarms.get(0);
+        retval = tdarm.getValue();
+        int eventCrfId = tdarms.get(0).getEventCRFId();
+        EventCRFDAO eventCRFDAO = new EventCRFDAO(getDataSource());
+        EventCRFBean eventCRFBean = eventCRFDAO.findByPK(eventCrfId);
+
+
+        ResponseSetDAO responseSetDAO = new ResponseSetDAO(getDataSource());
+        ArrayList<ResponseSetBean> responseSets = responseSetDAO.findAllByItemIdAndCrfVersionId(
+                tdarm.getItemId(), eventCRFBean.getCRFVersionId());
+
+        if(responseSets.size()>0) {
+            ResponseSetBean rs = responseSets.get(0);
+            if(rs.getOptionsValue().containsKey(retval)) {
+                Integer intx = rs.getOptionsValue().get(retval);
+
+
+                retval = new Integer(intx.intValue()+1).toString();
+            }
+
+        }
+        /*
+        ItemFormMetadataDAO itfmdao = new ItemFormMetadataDAO(getDataSource());
+
+
+        ResponseSetDao responseSetDao = new ResponseSetDao();
+        List<ResponseSet> responses = responseSetDao.findAllByItemId(tdarm.getItemId());
+
+
+        if(tdarms.size()>0)
+            retval = tdarms.get(0).getValue();
+        */
+
+
+        return retval;
+    }
+
     private void logMe(String message) {
         LOGGER.trace(message);
     }
@@ -442,6 +479,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
         request.setAttribute("resolvedNum", resolvedNum + "");
         request.setAttribute("notAppNum", notAppNum + "");
 
+
         String fromViewNotes = fp.getString("fromViewNotes");
         if(fromViewNotes!=null && "1".equals(fromViewNotes)) {
             request.setAttribute("fromViewNotes", fromViewNotes);
@@ -451,6 +489,16 @@ public abstract class DataEntryServlet extends CoreSecureController {
         logMe("Entering Create studySubjDao.. ++++stuff"+System.currentTimeMillis());
         StudySubjectDAO ssdao = new StudySubjectDAO(getDataSource());
         StudySubjectBean ssb = (StudySubjectBean) ssdao.findByPK(ecb.getStudySubjectId());
+
+        request.setAttribute("regimenName",
+                getRegimen(ssb.getId(), "TDARM", currentStudy.getId())
+                );
+
+        /*
+        ArrayList<ItemDataBean> eventCrfs = iddao.findAllItemDatabySubjectAndName(
+                ssb.getId(), currentStudy.getId(), "TDARM");
+        */
+
         // YW 11-07-2007, data entry could not be performed if its study subject
         // has been removed.
         // Notice: ViewSectionDataEntryServelet, ViewSectionDataEntryPreview,

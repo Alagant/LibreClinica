@@ -52,6 +52,7 @@ public class SQLFactory {
     public final String DAO_ITEM = "item";
     public final String DAO_ITEMDATA = "item_data";
     public final String DAO_ITEMFORMMETADATA = "item_form_metadata";
+    public final String DAO_RESPONSESET = "response_set";
     public final String DAO_CRF = "crf";
     public final String DAO_CRFVERSION = "crfversion";
     public final String DAO_DATASET = "dataset";
@@ -174,6 +175,9 @@ public class SQLFactory {
             fileList.put(this.DAO_ITEM, "item_dao.xml");
             fileList.put(this.DAO_ITEMDATA, "itemdata_dao.xml");
             fileList.put(this.DAO_CRF, "crf_dao.xml");
+
+            fileList.put(this.DAO_RESPONSESET, "response_set_dao.xml");
+
             fileList.put(this.DAO_CRFVERSION, "crfversion_dao.xml");
             fileList.put(this.DAO_DATASET, "dataset_dao.xml");
             fileList.put(this.DAO_SECTION, "section_dao.xml");
