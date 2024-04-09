@@ -491,8 +491,8 @@ public abstract class DataEntryServlet extends CoreSecureController {
         StudySubjectBean ssb = (StudySubjectBean) ssdao.findByPK(ecb.getStudySubjectId());
 
         request.setAttribute("regimenName",
-                getRegimen(ssb.getId(), "TDARM", currentStudy.getId())
-                );
+                ssb.getRegimen()== null || ssb.getRegimen().isEmpty()
+                        ?"NA": ssb.getRegimen());
 
         /*
         ArrayList<ItemDataBean> eventCrfs = iddao.findAllItemDatabySubjectAndName(
@@ -970,11 +970,12 @@ public abstract class DataEntryServlet extends CoreSecureController {
             if(sb.getTitle().equalsIgnoreCase("Treatment Assignment")){
                 for (int i = 0; i < allItems.size(); i++) {
                     DisplayItemWithGroupBean diwg = allItems.get(i);
+                    /*
                     if(diwg.getSingleItem().getItem().getName().equalsIgnoreCase("TDARM")){
                         ssb.setRegimen(diwg.getSingleItem().getData().getValue());
                         StudySubjectDAO studySubjectDao = new StudySubjectDAO(getDataSource());
                         studySubjectDao.update(ssb);
-                    }
+                    }*/
                 }
             }
             for (int i = 0; i < allItems.size(); i++) {
@@ -2090,6 +2091,7 @@ public abstract class DataEntryServlet extends CoreSecureController {
                                     StudySubjectBean ssbe = studao.findByPK(seb.getStudySubjectId());
                                     ssbe.setLabel(successObject.getPid());
                                     ssbe.setSecondaryLabel(successObject.getPid());
+                                    ssbe.setRegimen(successObject.getArm());
                                     studao.update(ssbe);
                                     seb = sedao.update(seb);
                                     success = success && seb.isActive();

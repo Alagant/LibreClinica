@@ -13,6 +13,8 @@ public class SuccessResponse {
     private Schedule schedule;
     @JsonProperty(value = "regimen_strata", required = false)
     private RegimenStrataResponse regimen;
+    @JsonProperty(value = "arm", required = false)
+    private String arm;
 
     public SuccessResponse() {
     }
@@ -63,5 +65,13 @@ public class SuccessResponse {
     }
     public RegimenStrataResponse getRegimen() {
         return regimen;
+    }
+
+    public String getArm() {
+        return arm;
+    }
+
+    public void setArm(String arm) {
+        this.arm = arm;
     }
 }
