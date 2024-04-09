@@ -119,6 +119,7 @@
         }
 
         function showNoEnrollmentSubjects(showNoEnrollment) {
+            return;
             if (showNoEnrollment) {
                 let tabla = document.getElementById('findSubjects');
                 if (tabla) {
@@ -143,7 +144,7 @@
                         let filas = tbody.getElementsByTagName('tr');
                         for (let i = 0; i < filas.length; i++) {
                             let fila = filas[i];
-                            fila.style.display = 'table-row';
+                            fila.style.display = 'xtable-row';
                         }
                     }
                 }
