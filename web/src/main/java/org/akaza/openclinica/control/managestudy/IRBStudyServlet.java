@@ -123,6 +123,9 @@ public class IRBStudyServlet extends SecureController {
         irbStudyActionHistoryBean.setSubmissionToCdcIrb(dateValueOrNull(INPUT_H_SUBMISSION_TO_CDC_IRB));
         irbStudyActionHistoryBean.setCdcIrbApproval(dateValueOrNull(INPUT_H_CDC_IRB_APPROVAL));
         irbStudyActionHistoryBean.setNotificationSentToSites(dateValueOrNull(INPUT_H_NOTIFICATION_SENT_TO_SITES));
+        irbStudyActionHistoryBean.setEnrollmentPauseDate(dateValueOrNull(INPUT_H_ENROLLMENT_PAUSE_DATE));
+        irbStudyActionHistoryBean.setEnrollmentReStartedDate(dateValueOrNull(INPUT_H_ENROLLMENT_RE_STARTED_DATE));
+        irbStudyActionHistoryBean.setReasonForEnrollmentPause(request.getParameter(INPUT_H_REASON_FOR_ENROLLMENT_PAUSE));
 
         if(irbStudyActionHistoryBean.getIrbStudyActionHistoryId()<1)
             getIRBStudyActionHistoryDAO()
@@ -271,6 +274,9 @@ public class IRBStudyServlet extends SecureController {
             row.put("submissionToCdcIrb", sb.getSubmissionToCdcIrb()!=null? sdf.format(sb.getSubmissionToCdcIrb()):"");
             row.put("cdcIrbApproval", sb.getCdcIrbApproval()!=null? sdf.format(sb.getCdcIrbApproval()):"");
             row.put("notificationSentToSites", sb.getNotificationSentToSites()!=null? sdf.format(sb.getNotificationSentToSites()):"");
+            row.put("enrollmentPauseDate", sb.getEnrollmentPauseDate()!=null? sdf.format(sb.getEnrollmentPauseDate()):"");
+            row.put("enrollmentReStartedDate", sb.getEnrollmentReStartedDate()!=null? sdf.format(sb.getEnrollmentReStartedDate()):"");
+            row.put("reasonForEnrollmentPause", sb.getReasonForEnrollmentPause()!=null? sb.getReasonForEnrollmentPause():"");
             studyActionHistoryFormatted.add(row);
         }
 
@@ -293,7 +299,7 @@ public class IRBStudyServlet extends SecureController {
 
         IRBStudyBean irbStudyBean;
 
-        System.out.println("processRequest - fp.isSubmitted()" + fp.isSubmitted());
+        System.out.println("processRequest - fp.isSubmitted(): " + fp.isSubmitted());
         if(request.getMethod().compareToIgnoreCase("POST")==0) {
             if(request.getParameter("action") != null &&
                     (request.getParameter("action").compareToIgnoreCase("saveStudyActionEditor")==0)) {
