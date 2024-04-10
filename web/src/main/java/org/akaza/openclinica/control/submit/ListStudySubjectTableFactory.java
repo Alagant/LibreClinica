@@ -211,7 +211,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         FindSubjectsFilter subjectFilter = getSubjectFilter(limit);
 
         if (!limit.isComplete()) {
-            if(showNoEnrollment!=null || showNoEnrollment=="true"){
+            if(showNoEnrollment != null && showNoEnrollment.equals("true")){
                 int totalRows = getStudySubjectDAO().getCountWithFilterNoEnrrollment(subjectFilter, getStudyBean());
                 tableFacade.setTotalRows(totalRows);
             }else{
