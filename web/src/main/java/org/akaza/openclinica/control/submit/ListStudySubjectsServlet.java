@@ -89,7 +89,8 @@ public class ListStudySubjectsServlet extends SecureController {
         FormProcessor fp = new FormProcessor(request);
 
         String showNoEnrollment = request.getParameter("enrollment");
-        request.setAttribute("enrollment", showNoEnrollment==null?"":showNoEnrollment);
+        System.out.println("showNoEnrollment: "+ showNoEnrollment);
+        request.setAttribute("enrollment", showNoEnrollment);
 
         if(fp.getString("showMoreLink").equals("")){
             showMoreLink = true;

@@ -98,12 +98,12 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
 
     @Override
     // To avoid showing title in other pages, the request element is used to determine where the request came from.
-    public TableFacade createTable(HttpServletRequest request, HttpServletResponse response) {
+    public TableFacade createTable(HttpServletRequest request, HttpServletResponse response, String showNoEnrollment) {
         locale = LocaleResolver.getLocale(request);
         session = request.getSession();
         TableFacade tableFacade = getTableFacadeImpl(request, response);
         tableFacade.setStateAttr("restore");
-        setDataAndLimitVariables(tableFacade);
+        setDataAndLimitVariablesCustom(tableFacade, showNoEnrollment);
         configureTableFacade(response, tableFacade);
         if (!tableFacade.getLimit().isExported()) {
             configureColumns(tableFacade, locale);
@@ -206,7 +206,9 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     }
 
     @Override
-    public void setDataAndLimitVariables(TableFacade tableFacade) {
+    public void setDataAndLimitVariables(TableFacade tableFacade){}
+
+    public void setDataAndLimitVariablesCustom(TableFacade tableFacade, String showNoEnrollment) {
         Limit limit = tableFacade.getLimit();
 
         FindSubjectsFilter subjectFilter = getSubjectFilter(limit);
@@ -221,7 +223,7 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         int rowStart = limit.getRowSelect().getRowStart();
         int rowEnd = limit.getRowSelect().getRowEnd();
         Collection<StudySubjectBean> items = getStudySubjectDAO().getWithFilterAndSort(
-                getStudyBean(), subjectFilter, subjectSort, rowStart, rowEnd);
+                getStudyBean(), subjectFilter, subjectSort, rowStart, rowEnd, showNoEnrollment);
 
         Collection<HashMap<Object, Object>> theItems = new ArrayList<HashMap<Object, Object>>();
 

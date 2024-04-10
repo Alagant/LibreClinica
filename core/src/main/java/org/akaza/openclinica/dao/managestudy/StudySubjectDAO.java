@@ -394,7 +394,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
     }
 
     public ArrayList<StudySubjectBean> getWithFilterAndSort(
-            StudyBean currentStudy, FindSubjectsFilter filter, FindSubjectsSort sort, int rowStart, int rowEnd) {
+            StudyBean currentStudy, FindSubjectsFilter filter, FindSubjectsSort sort, int rowStart, int rowEnd, String showNoEnrollment) {
         setTypesExpected();
         // type for Study unique_identifier from StudySubject getWithFilterAndSort query
         setTypeExpected(14, TypeNames.STRING);
@@ -406,6 +406,45 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
         //String sql = digester.getQuery("getWithFilterAndSort");
         String sql = digester.getQuery("getWithFilterAndSortByEnrollment");
+        sql = sql + filter.execute("");
+        // Order by Clause for the defect id 0005480
+
+        //justo aca la condicion para que no muestre los que estan en enrollment
+        if(showNoEnrollment != null && showNoEnrollment.equals("true")){
+            sql = sql + " AND SS.label LIKE '%N%'";
+        }
+
+        partialSql = sort.execute("");
+        sql = sql + partialSql;
+        if (partialSql.equals("")) {
+            // sql = sql + "  ORDER BY SS.label LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+            sql = sql + "  ORDER BY sort_order_by_enrollment LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+        } else {
+            sql = sql + " LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+        }
+
+        ArrayList<HashMap<String, Object>> rows = this.select(sql, variables);
+        ArrayList<StudySubjectBean> studySubjects = new ArrayList<>();
+        for (HashMap<String, Object> hm : rows) {
+            StudySubjectBean studySubjectBean = this.getEntityFromHashMap(hm);
+            studySubjects.add(studySubjectBean);
+        }
+        return studySubjects;
+    }
+
+    public ArrayList<StudySubjectBean> getWithFilterAndSortForNoEnrrolment(
+            StudyBean currentStudy, FindSubjectsFilter filter, FindSubjectsSort sort, int rowStart, int rowEnd) {
+        setTypesExpected();
+        // type for Study unique_identifier from StudySubject getWithFilterAndSort query
+        setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
+        // type for sort_order_by_enrollment from sorting getWithFilterAndSortByEnrollment query
+        setTypeExpected(16, TypeNames.INT);
+
+        String partialSql;
+        HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
+        //String sql = digester.getQuery("getWithFilterAndSort");
+        String sql = digester.getQuery("getNoEnrollment");
         sql = sql + filter.execute("");
         // Order by Clause for the defect id 0005480
 
