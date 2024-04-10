@@ -77,8 +77,13 @@ public class DefaultToolbar extends AbstractToolbar {
 
         @Override
         public String enabled() {
+            String jsOnChange = "let showNoEnrollment = jQuery('#showNoEnrollment').is(':checked'); "+
+                    "window.location='"+
+                    "ListStudySubjects?showMoreLink=true&enrollment='+showNoEnrollment;";
+
+
             HtmlBuilder html = new HtmlBuilder();
-            html.input().type("checkbox").id("showNoEnrollment").end();
+            html.input().type("checkbox").id("showNoEnrollment").onchange(jsOnChange).end();
             html.label().forAttr("showNoEnrollment").style("color: var(--lightblue);").end().append("Show No Enrollment").labelEnd();
             return html.toString();
         }

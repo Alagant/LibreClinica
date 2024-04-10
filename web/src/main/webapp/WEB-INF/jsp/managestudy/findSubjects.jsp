@@ -101,6 +101,7 @@
 </script>
 
 <script type="text/javascript">
+    <%--
     document.addEventListener('DOMContentLoaded', function () {
         let showNoEnrollment = localStorage.getItem('showNoEnrollment') === 'true';
         let btnShowNoEnrollment = document.getElementById('showNoEnrollment');
@@ -151,4 +152,5 @@
             }
         }
     });
+    --%>
 </script>
