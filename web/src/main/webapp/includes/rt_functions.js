@@ -393,6 +393,109 @@ function currentElementValue(targetElem) {
 	return null;
 }
 
+function getRadioButtonValue(selector) {
+	return (
+		document.querySelector(selector)
+		.parentNode
+		.parentNode
+		.querySelector('input[type="radio"]:checked')
+		.value
+	);
+}
+
+/*
+ * fetch item value
+ */
+
+async function fetchItemValue(studySubjectOID, studyOID, eventOID, itemOID) {
+	const url = `rest/clinicaldata/xml/view/${studyOID}/${studySubjectOID}/${eventOID}/*`;
+	const subjectCriteria = `SubjectKey="${studySubjectOID}"`;
+
+	const res = await fetch(url);
+	const xml = await res.text();
+
+	return (
+		jQuery(jQuery.parseXML(xml))
+		.find("ODM")
+		.find(`SubjectData[${subjectCriteria}]`)
+		.find(`StudyEventData[StudyEventOID="${eventOID}"]`)
+		.find(`ItemData[ItemOID="${itemOID}"]`)
+		.attr("Value")
+	);
+}
+
+/*
+ * validation functions
+ */
+
+function validatedSubmit(formSelector, validators, skipValidation = null) {
+	document.querySelector(formSelector).addEventListener("submit", async (event) => {
+		event.preventDefault();
+
+		const form = event.target;
+
+		// submit if skipValidation returns true
+		if (skipValidation !== null && skipValidation(event)) {
+			// store submitter as hidden input
+			if (submitter !== null) {
+				var input = document.createElement("input");
+				input.setAttribute("type", "hidden");
+				input.setAttribute("name", event.submitter.name);
+				input.setAttribute("value", event.submitter.value);
+
+				// append hidden input to form
+				form.appendChild(input);
+			}
+
+			// submit form
+			form.submit();
+			return;
+		}
+
+		const valids = await Promise.all(validators.map(it => it()));
+
+		// submit if all validations succeeded
+		if (valids.every(it => it)) {
+			form.submit();
+		}
+	});
+}
+
+function validateOnSave(formSelector, validators) {
+	// remove "form.submit()" call from "Save" submit buttons
+	for (const submit of document.querySelectorAll('input[type="submit"][name="submittedResume"]')) {
+		submit.removeAttribute("onclick");
+		submit.addEventListener("click", (event) => {
+			elem = event.target;
+			form = elem.closest('form');
+
+			// disable all submit buttons
+			for (const submit of form.querySelectorAll('input[type="submit"]')) {
+				submit.setAttribute("disabled", "");
+			}
+
+			// submit form
+			form.requestSubmit(elem);
+
+			// re-enable submit buttons after 3 seconds
+			setTimeout(
+				() => {
+					for (const submit of form.querySelectorAll('input[type="submit"]')) {
+						submit.removeAttribute("disabled");
+					}
+				},
+				3000
+			);
+		});
+	}
+
+	return validatedSubmit(
+		formSelector,
+		validators,
+		(event) => event.submitter !== null && event.submitter.name === "submittedExit"
+	);
+}
+
 jQuery(document).ready(enableUndoForRadioButtons);
 jQuery(document).ready(updateInputStyles);
 jQuery(document).ready(configureToolTips);
