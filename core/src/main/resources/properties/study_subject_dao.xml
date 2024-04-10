@@ -115,6 +115,17 @@
 			AND label  like '%N%'
 		</sql>
 	</query>
+	<query>
+		<name>getCountWithFilterNoEnrrollment</name>
+		<sql>SELECT COUNT( DISTINCT  SS.study_subject_id)
+			FROM study_subject ss LEFT JOIN study_event se ON ss.study_subject_id = se.study_subject_id,STUDY ST,SUBJECT S
+			where
+			SS.SUBJECT_ID=S.SUBJECT_ID
+			AND SS.study_id = ST.study_id
+			AND (ST.study_id=? or ST.parent_study_id=?)
+			AND label  like '%N%'
+		</sql>
+	</query>
     <query>
         <name>getWithFilterAndSort</name>
         <sql>SELECT DISTINCT(ss.*), ST.unique_identifier 

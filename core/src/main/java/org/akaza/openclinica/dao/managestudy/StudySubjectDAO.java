@@ -587,6 +587,13 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         return studySubjects;
     }
 
+    public Integer getCountWithFilterNoEnrrollment(FindSubjectsFilter filter, StudyBean currentStudy) {
+        HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
+        String query = digester.getQuery("getCountWithFilterNoEnrrollment");
+        query += filter.execute("");
+        return getCountByQuery(query, variables);
+    }
+
     public Integer getCountWithFilter(FindSubjectsFilter filter, StudyBean currentStudy) {
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
         String query = digester.getQuery("getCountWithFilter");
