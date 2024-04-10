@@ -87,9 +87,9 @@ public class ListStudySubjectsServlet extends SecureController {
     protected void processRequest() throws Exception {
         getCrfLocker().unlockAllForUser(ub.getId());
         FormProcessor fp = new FormProcessor(request);
-        System.out.println("showNoEnrollment: ");
+
         String showNoEnrollment = request.getParameter("enrollment");
-        request.setAttribute("enrollment", showNoEnrollment);
+        request.setAttribute("enrollment", showNoEnrollment==null?"":showNoEnrollment);
 
         if(fp.getString("showMoreLink").equals("")){
             showMoreLink = true;
