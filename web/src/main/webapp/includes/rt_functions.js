@@ -436,12 +436,14 @@ function validatedSubmit(formSelector, validators, skipValidation = null) {
 
 		// submit if skipValidation returns true
 		if (skipValidation !== null && skipValidation(event)) {
+			const submitter = event.submitter;
+
 			// store submitter as hidden input
 			if (submitter !== null) {
 				var input = document.createElement("input");
 				input.setAttribute("type", "hidden");
-				input.setAttribute("name", event.submitter.name);
-				input.setAttribute("value", event.submitter.value);
+				input.setAttribute("name", submitter.name);
+				input.setAttribute("value", submitter.value);
 
 				// append hidden input to form
 				form.appendChild(input);
