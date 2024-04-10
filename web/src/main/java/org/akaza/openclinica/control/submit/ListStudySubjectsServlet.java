@@ -87,8 +87,9 @@ public class ListStudySubjectsServlet extends SecureController {
     protected void processRequest() throws Exception {
         getCrfLocker().unlockAllForUser(ub.getId());
         FormProcessor fp = new FormProcessor(request);
-        System.out.println("showNoEnrollment: ");
+
         String showNoEnrollment = request.getParameter("enrollment");
+        System.out.println("showNoEnrollment: "+ showNoEnrollment);
         request.setAttribute("enrollment", showNoEnrollment);
 
         if(fp.getString("showMoreLink").equals("")){
@@ -152,7 +153,7 @@ public class ListStudySubjectsServlet extends SecureController {
         factory.setStudyGroupDAO(getStudyGroupDAO());
         factory.setStudyParameterValueDAO(getStudyParameterValueDAO());
         factory.loadCountOfStudySubjectsAtStudyOrSiteToStudyBean();
-        String findSubjectsHtml = factory.createTable(request, response).render();
+        String findSubjectsHtml = factory.createTable(request, response, showNoEnrollment).render();
 
         request.setAttribute("findSubjectsHtml", findSubjectsHtml);
         // A. Hamid.
