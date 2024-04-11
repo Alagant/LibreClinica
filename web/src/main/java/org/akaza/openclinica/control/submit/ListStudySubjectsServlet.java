@@ -37,6 +37,9 @@ import org.akaza.openclinica.dao.submit.SubjectGroupMapDAO;
 import org.akaza.openclinica.i18n.core.LocaleResolver;
 import org.akaza.openclinica.view.Page;
 import org.akaza.openclinica.web.InsufficientPermissionException;
+
+import javax.servlet.RequestDispatcher;
+
 import static org.akaza.openclinica.core.util.ClassCastHelper.*;
 /**
  * Servlet for creating a table.
@@ -59,6 +62,7 @@ public class ListStudySubjectsServlet extends SecureController {
     private StudyGroupDAO studyGroupDAO;
     private boolean showMoreLink;
     private StudyParameterValueDAO studyParameterValueDAO;
+    private String showNoEnrollment = null;
     Locale locale;
 
     /*
@@ -88,7 +92,10 @@ public class ListStudySubjectsServlet extends SecureController {
         getCrfLocker().unlockAllForUser(ub.getId());
         FormProcessor fp = new FormProcessor(request);
 
-        String showNoEnrollment = request.getParameter("enrollment");
+
+        if("true".equalsIgnoreCase(request.getParameter("enrollment")) || "false".equalsIgnoreCase(request.getParameter("enrollment"))){
+            showNoEnrollment = request.getParameter("enrollment");
+        }
         System.out.println("showNoEnrollment: "+ showNoEnrollment);
         request.setAttribute("enrollment", showNoEnrollment);
 
@@ -132,7 +139,6 @@ public class ListStudySubjectsServlet extends SecureController {
             createTable(showNoEnrollment);
 
         }
-
     }
 
     private void createTable(String showNoEnrollment) {
