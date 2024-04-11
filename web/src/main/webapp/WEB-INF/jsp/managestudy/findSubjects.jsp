@@ -101,56 +101,25 @@
 </script>
 
 <script type="text/javascript">
-    <%--
-    document.addEventListener('DOMContentLoaded', function () {
-        let showNoEnrollment = localStorage.getItem('showNoEnrollment') === 'true';
-        let btnShowNoEnrollment = document.getElementById('showNoEnrollment');
-        btnShowNoEnrollment.addEventListener('change', function (e) {
-            showNoEnrollment = e.target.checked;
-            localStorage.setItem('showNoEnrollment', showNoEnrollment);
-            showNoEnrollmentSubjects(showNoEnrollment);
-        });
-
+    document.addEventListener('DOMContentLoaded', ()=>{
+        var showNoEnrollment = '${showNoEnrollment}';
+        var showNoEnrollmentInput = document.querySelector('#showNoEnrollment');
+        console.log(showNoEnrollment);
         if(showNoEnrollment){
-            btnShowNoEnrollment.checked = true;
-            showNoEnrollmentSubjects(true);
+            showNoEnrollmentInput.checked = true;
         }else{
-            btnShowNoEnrollment.checked = false;
-            showNoEnrollmentSubjects(false);
+            showNoEnrollmentInput.checked = false;
         }
-
-        function showNoEnrollmentSubjects(showNoEnrollment) {
-            return;
-            if (showNoEnrollment) {
-                let tabla = document.getElementById('findSubjects');
-                if (tabla) {
-                    let tbody = tabla.querySelector('tbody.tbody');
-                    if (tbody) {
-                        let filas = tbody.getElementsByTagName('tr');
-                        let patronRegex = /^\d{2}-\d{2}-N\d+$/;
-                        for (let i = 0; i < filas.length; i++) {
-                            let fila = filas[i];
-                            let celdaSubjectID = fila.cells[0];
-                            if (!patronRegex.test(celdaSubjectID.textContent)) {
-                                fila.style.display = 'none';
-                            }
-                        }
-                    }
-                }
+        showNoEnrollmentInput.addEventListener('change', (e)=>{
+            var checked = e.target.checked;
+            var url = new URL(window.location.href);
+            var searchParams = url.searchParams;
+            if(checked){
+                searchParams.set('enrollment', 'true');
             }else{
-                let tabla = document.getElementById('findSubjects');
-                if (tabla) {
-                    let tbody = tabla.querySelector('tbody.tbody');
-                    if (tbody) {
-                        let filas = tbody.getElementsByTagName('tr');
-                        for (let i = 0; i < filas.length; i++) {
-                            let fila = filas[i];
-                            fila.style.display = 'xtable-row';
-                        }
-                    }
-                }
+                searchParams.delete('enrollment');
             }
-        }
-    });
-    --%>
+            window.location.href = url.toString();
+        })
+    })
 </script>
