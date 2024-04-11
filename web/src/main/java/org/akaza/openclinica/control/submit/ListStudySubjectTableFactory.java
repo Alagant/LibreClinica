@@ -225,8 +225,12 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
 
         int rowStart = limit.getRowSelect().getRowStart();
         int rowEnd = limit.getRowSelect().getRowEnd();
-        Collection<StudySubjectBean> items = getStudySubjectDAO().getWithFilterAndSort(
-                getStudyBean(), subjectFilter, subjectSort, rowStart, rowEnd, showNoEnrollment);
+        Collection<StudySubjectBean> items;
+        if ("true".equals(showNoEnrollment)) {
+            items = getStudySubjectDAO().getWithFilterAndSort(getStudyBean(), subjectFilter, subjectSort, rowStart, rowEnd, showNoEnrollment);
+        } else {
+            items = getStudySubjectDAO().getWithFilterAndSort(getStudyBean(), subjectFilter, subjectSort, rowStart, rowEnd, showNoEnrollment);
+        }
 
         Collection<HashMap<Object, Object>> theItems = new ArrayList<HashMap<Object, Object>>();
 

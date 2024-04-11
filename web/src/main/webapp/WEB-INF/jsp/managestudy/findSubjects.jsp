@@ -102,7 +102,7 @@
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', ()=>{
-        var showNoEnrollment = '${showNoEnrollment}';
+        var showNoEnrollment = localStorage.getItem('showNoEnrollment') === 'true';
         var showNoEnrollmentInput = document.querySelector('#showNoEnrollment');
         console.log(showNoEnrollment);
         if(showNoEnrollment){
@@ -116,8 +116,10 @@
             var searchParams = url.searchParams;
             if(checked){
                 searchParams.set('enrollment', 'true');
+                localStorage.setItem('showNoEnrollment', 'true');
             }else{
                 searchParams.delete('enrollment');
+                localStorage.setItem('showNoEnrollment', null);
             }
             window.location.href = url.toString();
         })
