@@ -118,7 +118,7 @@
                 searchParams.set('enrollment', 'true');
                 localStorage.setItem('showNoEnrollment', 'true');
             }else{
-                searchParams.delete('enrollment');
+                searchParams.set('enrollment', 'false');
                 localStorage.setItem('showNoEnrollment', null);
             }
             window.location.href = url.toString();
