@@ -118,7 +118,7 @@ public class ListStudySubjectsServlet extends SecureController {
             Date today = new Date(System.currentTimeMillis());
             String todayFormatted = local_df.format(today);
             HashMap<String, Object> presetValues = asHashMap(request.getAttribute(PRESET_VALUES), String.class, Object.class);
-			if (presetValues != null) {
+            if (presetValues != null) {
                 fp.setPresetValues(presetValues);
             }
             fp.addPresetValue(AddNewSubjectServlet.INPUT_ENROLLMENT_DATE, todayFormatted);
@@ -159,7 +159,7 @@ public class ListStudySubjectsServlet extends SecureController {
         factory.setStudyGroupDAO(getStudyGroupDAO());
         factory.setStudyParameterValueDAO(getStudyParameterValueDAO());
         factory.loadCountOfStudySubjectsAtStudyOrSiteToStudyBean();
-        String findSubjectsHtml = factory.createTable(request, response).render();
+        String findSubjectsHtml = factory.createTable(request, response, showNoEnrollment).render();
 
         request.setAttribute("findSubjectsHtml", findSubjectsHtml);
         // A. Hamid.
@@ -177,17 +177,17 @@ public class ListStudySubjectsServlet extends SecureController {
     protected String getAdminServlet() {
         return SecureController.ADMIN_SERVLET_CODE;
     }
-    
+
     public StudyParameterValueDAO getStudyParameterValueDAO() {
         studyParameterValueDAO = this.studyParameterValueDAO == null ? new StudyParameterValueDAO(sm.getDataSource()) : studyParameterValueDAO;
-		return studyParameterValueDAO;
-	}
+        return studyParameterValueDAO;
+    }
 
-	public void setStudyParameterValueDAO(StudyParameterValueDAO studyParameterValueDAO) {
-		this.studyParameterValueDAO = studyParameterValueDAO;
-	}
+    public void setStudyParameterValueDAO(StudyParameterValueDAO studyParameterValueDAO) {
+        this.studyParameterValueDAO = studyParameterValueDAO;
+    }
 
-	public StudyEventDefinitionDAO getStudyEventDefinitionDao() {
+    public StudyEventDefinitionDAO getStudyEventDefinitionDao() {
         studyEventDefinitionDAO = studyEventDefinitionDAO == null ? new StudyEventDefinitionDAO(sm.getDataSource()) : studyEventDefinitionDAO;
         return studyEventDefinitionDAO;
     }
