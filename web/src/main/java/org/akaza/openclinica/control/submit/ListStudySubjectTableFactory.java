@@ -181,9 +181,12 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
     @Override
     public void configureTableFacade(HttpServletResponse response, TableFacade tableFacade) {
         super.configureTableFacade(response, tableFacade);
+        // getColumnNames();
         getColumnNamesMap();
         tableFacade.addFilterMatcher(new MatcherKey(Character.class), new CharFilterMatcher());
         tableFacade.addFilterMatcher(new MatcherKey(Status.class), new StatusFilterMatcher());
+        // tableFacade.addFilterMatcher(new MatcherKey(Integer.class), new
+        // SubjectEventStatusFilterMatcher());
 
         for (int i = 7; i < 7 + studyGroupClasses.size(); i++) {
             tableFacade.addFilterMatcher(new MatcherKey(Integer.class, columnNames[i]), new SubjectGroupFilterMatcher());
@@ -211,14 +214,8 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
         FindSubjectsFilter subjectFilter = getSubjectFilter(limit);
 
         if (!limit.isComplete()) {
-            if(showNoEnrollment!=null || showNoEnrollment=="true"){
-                int totalRows = getStudySubjectDAO().getCountWithFilterNoEnrrollment(subjectFilter, getStudyBean());
-                tableFacade.setTotalRows(totalRows);
-            }else{
-                int totalRows = getStudySubjectDAO().getCountWithFilter(subjectFilter, getStudyBean());
-                tableFacade.setTotalRows(totalRows);
-            }
-
+            int totalRows = getStudySubjectDAO().getCountWithFilter(subjectFilter, getStudyBean());
+            tableFacade.setTotalRows(totalRows);
         }
 
         FindSubjectsSort subjectSort = getSubjectSort(limit);
@@ -368,7 +365,11 @@ public class ListStudySubjectTableFactory extends AbstractTableFactory {
             String value = filter.getValue();
             if ("studySubject.status".equalsIgnoreCase(property)) {
                 value = Status.getByName(value).getId() + "";
-            } else if (property.startsWith("sgc_")) {
+            }
+            /*
+            else if ("pid".equalsIgnoreCase(property)) {
+                    value = Status.getByName(value).getId() + "";
+            }*/ else if (property.startsWith("sgc_")) {
                 int studyGroupClassId = property.endsWith("_") ? 0 : Integer.valueOf(property.split("_")[1]);
                 value = studyGroupDAO.findByNameAndGroupClassID(value, studyGroupClassId).getId() + "";
             }
