@@ -15,6 +15,7 @@
 <jsp:useBean scope='request' id='intrvDates' class='java.util.ArrayList'/>
 <jsp:useBean scope='request' id='existingNameNotes' class='java.util.ArrayList'/>
 <jsp:useBean scope='request' id='existingIntrvDateNotes' class='java.util.ArrayList'/>
+<jsp:useBean scope='request' id='regimenName' type='java.lang.String'/>
 
 
 <script type="text/javascript" src="includes/wz_tooltip/wz_tooltip.js"></script>
@@ -497,8 +498,7 @@ function callTip(html)
             <b>PID: <c:out value="${studySubject.secondaryLabel}" />
         </td>
         <td class="table_cell_noborder" >
-            <b>Regimen: <jsp:useBean id="regimenName" scope="request" type="java.lang.String"/>
-            <c:out value="${regimenName}" />
+            <b>Regimen: <c:out value="${regimenName}" />
         </td>
 	<!--person id todo -->
        <c:choose>
