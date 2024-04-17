@@ -522,7 +522,7 @@
             </td>
         </tr>
         <tr>
-            <td>10</td>
+            <td>8</td>
             <td><fmt:message key="irb_study" bundle="${resword}"/></td>
             <td>
 

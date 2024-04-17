@@ -278,8 +278,8 @@
     jQuery('#h_reason_for_enrollment_pause').val('');
 
     if (jQuery(option).data('effective-date')) {
-      jQuery('#effective_date').removeAttr('disabled');
-      jQuery('#effective_date-trigger').css('display', 'initial');
+      jQuery('#h_effective_date').removeAttr('disabled');
+      jQuery('#h_effective_date-trigger').css('display', 'initial');
     }
 
     if (jQuery(option).data('hrpo-action')) {
@@ -312,14 +312,20 @@
       jQuery('#h_notification_sent_to_sites-trigger').css('display', 'initial');
     }
 
-    if (jQuery(option).data('enrollment-pause-date'))
+    if (jQuery(option).data('enrollment-pause-date')) {
       jQuery('#h_enrollment_pause_date').removeAttr('disabled');
+      jQuery('#h_enrollment_pause_date-trigger').css('display', 'initial');
+    }
 
-    if (jQuery(option).data('enrollment-re-started-date'))
+    if (jQuery(option).data('enrollment-re-started-date')) {
       jQuery('#h_enrollment_re_started_date').removeAttr('disabled');
+      jQuery('#h_enrollment_re_started_date-trigger').css('display', 'initial');
+    }
 
-    if (jQuery(option).data('reason-for-enrollment-pause'))
+    if (jQuery(option).data('reason-for-enrollment-pause')) {
       jQuery('#h_reason_for_enrollment_pause').removeAttr('disabled');
+    }
+
   }
 
   jQuery("#studyActionHistoryParameterSelection").change(e => {

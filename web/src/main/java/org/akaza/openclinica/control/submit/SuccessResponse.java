@@ -11,6 +11,10 @@ public class SuccessResponse {
     private String libreclinicaId;
     @JsonProperty(value = "schedule", required = false)
     private Schedule schedule;
+    @JsonProperty(value = "regimen_strata", required = false)
+    private RegimenStrataResponse regimen;
+    @JsonProperty(value = "arm", required = false)
+    private String arm;
 
     public SuccessResponse() {
     }
@@ -55,5 +59,19 @@ public class SuccessResponse {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public void setRegimen(RegimenStrataResponse regimen) {
+        this.regimen = regimen;
+    }
+    public RegimenStrataResponse getRegimen() {
+        return regimen;
+    }
+
+    public String getArm() {
+        return arm;
+    }
+
+    public void setArm(String arm) {
+        this.arm = arm;
     }
 }

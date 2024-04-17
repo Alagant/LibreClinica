@@ -101,39 +101,27 @@
 </script>
 
 <script type="text/javascript">
-    let showNoEnrollment = false;
-    let btnShowNoEnrollment = document.getElementById('showNoEnrollment');
-    btnShowNoEnrollment.addEventListener('change', function (e) {
-        showNoEnrollment = e.target.checked;
+    document.addEventListener('DOMContentLoaded', ()=>{
+        var showNoEnrollment = localStorage.getItem('showNoEnrollment') === 'true';
+        var showNoEnrollmentInput = document.querySelector('#showNoEnrollment');
         console.log(showNoEnrollment);
-        if (showNoEnrollment) {
-            let tabla = document.getElementById('findSubjects');
-            if (tabla) {
-                let tbody = tabla.querySelector('tbody.tbody');
-                if (tbody) {
-                    let filas = tbody.getElementsByTagName('tr');
-                    let patronRegex = /\d{2}-\d{2}-N\d{5}/;
-                    for (let i = 0; i < filas.length; i++) {
-                        let fila = filas[i];
-                        let celdaSubjectID = fila.cells[0];
-                        if (!patronRegex.test(celdaSubjectID.textContent)) {
-                            fila.style.display = 'none';
-                        }
-                    }
-                }
-            }
+        if(showNoEnrollment){
+            showNoEnrollmentInput.checked = true;
         }else{
-            let tabla = document.getElementById('findSubjects');
-            if (tabla) {
-                let tbody = tabla.querySelector('tbody.tbody');
-                if (tbody) {
-                    let filas = tbody.getElementsByTagName('tr');
-                    for (let i = 0; i < filas.length; i++) {
-                        let fila = filas[i];
-                        fila.style.display = 'table-row';
-                    }
-                }
-            }
+            showNoEnrollmentInput.checked = false;
         }
-    });
+        showNoEnrollmentInput.addEventListener('change', (e)=>{
+            var checked = e.target.checked;
+            var url = new URL(window.location.href);
+            var searchParams = url.searchParams;
+            if(checked){
+                searchParams.set('enrollment', 'true');
+                localStorage.setItem('showNoEnrollment', 'true');
+            }else{
+                searchParams.set('enrollment', 'false');
+                localStorage.setItem('showNoEnrollment', null);
+            }
+            window.location.href = url.toString();
+        })
+    })
 </script>

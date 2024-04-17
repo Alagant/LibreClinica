@@ -37,6 +37,9 @@ import org.akaza.openclinica.dao.submit.SubjectGroupMapDAO;
 import org.akaza.openclinica.i18n.core.LocaleResolver;
 import org.akaza.openclinica.view.Page;
 import org.akaza.openclinica.web.InsufficientPermissionException;
+
+import javax.servlet.RequestDispatcher;
+
 import static org.akaza.openclinica.core.util.ClassCastHelper.*;
 /**
  * Servlet for creating a table.
@@ -59,6 +62,7 @@ public class ListStudySubjectsServlet extends SecureController {
     private StudyGroupDAO studyGroupDAO;
     private boolean showMoreLink;
     private StudyParameterValueDAO studyParameterValueDAO;
+    private String showNoEnrollment = null;
     Locale locale;
 
     /*
@@ -87,8 +91,14 @@ public class ListStudySubjectsServlet extends SecureController {
     protected void processRequest() throws Exception {
         getCrfLocker().unlockAllForUser(ub.getId());
         FormProcessor fp = new FormProcessor(request);
-        System.out.println("showNoEnrollment: ");
-        String showNoEnrollment = request.getParameter("enrollment");
+
+
+        if("true".equalsIgnoreCase(request.getParameter("enrollment")) || "false".equalsIgnoreCase(request.getParameter("enrollment"))){
+            showNoEnrollment = request.getParameter("enrollment");
+        }
+        System.out.println("showNoEnrollment: "+ showNoEnrollment);
+        request.setAttribute("enrollment", showNoEnrollment);
+
         if(fp.getString("showMoreLink").equals("")){
             showMoreLink = true;
         }else {
@@ -108,7 +118,7 @@ public class ListStudySubjectsServlet extends SecureController {
             Date today = new Date(System.currentTimeMillis());
             String todayFormatted = local_df.format(today);
             HashMap<String, Object> presetValues = asHashMap(request.getAttribute(PRESET_VALUES), String.class, Object.class);
-			if (presetValues != null) {
+            if (presetValues != null) {
                 fp.setPresetValues(presetValues);
             }
             fp.addPresetValue(AddNewSubjectServlet.INPUT_ENROLLMENT_DATE, todayFormatted);
@@ -129,7 +139,6 @@ public class ListStudySubjectsServlet extends SecureController {
             createTable(showNoEnrollment);
 
         }
-
     }
 
     private void createTable(String showNoEnrollment) {
@@ -150,7 +159,7 @@ public class ListStudySubjectsServlet extends SecureController {
         factory.setStudyGroupDAO(getStudyGroupDAO());
         factory.setStudyParameterValueDAO(getStudyParameterValueDAO());
         factory.loadCountOfStudySubjectsAtStudyOrSiteToStudyBean();
-        String findSubjectsHtml = factory.createTable(request, response).render();
+        String findSubjectsHtml = factory.createTable(request, response, showNoEnrollment).render();
 
         request.setAttribute("findSubjectsHtml", findSubjectsHtml);
         // A. Hamid.
@@ -168,17 +177,17 @@ public class ListStudySubjectsServlet extends SecureController {
     protected String getAdminServlet() {
         return SecureController.ADMIN_SERVLET_CODE;
     }
-    
+
     public StudyParameterValueDAO getStudyParameterValueDAO() {
         studyParameterValueDAO = this.studyParameterValueDAO == null ? new StudyParameterValueDAO(sm.getDataSource()) : studyParameterValueDAO;
-		return studyParameterValueDAO;
-	}
+        return studyParameterValueDAO;
+    }
 
-	public void setStudyParameterValueDAO(StudyParameterValueDAO studyParameterValueDAO) {
-		this.studyParameterValueDAO = studyParameterValueDAO;
-	}
+    public void setStudyParameterValueDAO(StudyParameterValueDAO studyParameterValueDAO) {
+        this.studyParameterValueDAO = studyParameterValueDAO;
+    }
 
-	public StudyEventDefinitionDAO getStudyEventDefinitionDao() {
+    public StudyEventDefinitionDAO getStudyEventDefinitionDao() {
         studyEventDefinitionDAO = studyEventDefinitionDAO == null ? new StudyEventDefinitionDAO(sm.getDataSource()) : studyEventDefinitionDAO;
         return studyEventDefinitionDAO;
     }

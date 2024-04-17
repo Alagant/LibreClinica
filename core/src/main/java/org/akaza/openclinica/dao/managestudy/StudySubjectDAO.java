@@ -103,6 +103,8 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         this.setTypeExpected(ind, TypeNames.STRING);
         ind++; // oc oid
         this.setTypeExpected(ind, TypeNames.STRING);
+        ind++; // regimen
+        this.setTypeExpected(ind, TypeNames.STRING);
         ind++; // time_zone
         // this.setTypeExpected(ind, TypeNames.INT);
         // ind++;
@@ -133,6 +135,8 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         // eb.setEventStartDate((Date) hm.get("date_start"));
         // eb.setActive(true);
         eb.setTime_zone((String) hm.get("time_zone"));
+        eb.setTime_zone((String) hm.get("time_zone"));
+        eb.setRegimen((String) hm.get("regimen"));
         return eb;
     }
 
@@ -251,6 +255,8 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         this.setTypesExpected();
         // type for 'unique_identifier' from the subject table
         setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
+        //setTypeExpected(15, TypeNames.STRING);
 
         HashMap<Integer, Object> variables = variables(ID);
 
@@ -388,17 +394,50 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
     }
 
     public ArrayList<StudySubjectBean> getWithFilterAndSort(
+            StudyBean currentStudy, FindSubjectsFilter filter, FindSubjectsSort sort, int rowStart, int rowEnd, String showNoEnrollment) {
+        setTypesExpected();
+        // type for Study unique_identifier from StudySubject getWithFilterAndSort query
+        setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
+        // type for sort_order_by_enrollment from sorting getWithFilterAndSortByEnrollment query
+        setTypeExpected(16, TypeNames.INT);
+
+        HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
+        String sql = digester.getQuery("getWithFilterAndSortByEnrollment");
+        sql = sql + filter.execute("");
+
+        // Filtrar los datos basado en el valor de showNoEnrollment
+        if ("true".equals(showNoEnrollment)) {
+            sql = sql + " AND SS.label LIKE '%N%'";
+            sql = sql + sort.execute("");
+            sql = sql + " LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+        } else {
+            sql = sql + sort.execute("");
+            sql = sql + " LIMIT " + (rowEnd - rowStart) + " OFFSET " + rowStart;
+        }
+
+        ArrayList<HashMap<String, Object>> rows = this.select(sql, variables);
+        ArrayList<StudySubjectBean> items = new ArrayList<>();
+        for (HashMap<String, Object> hm : rows) {
+            StudySubjectBean studySubjectBean = this.getEntityFromHashMap(hm);
+            items.add(studySubjectBean);
+        }
+        return items;
+    }
+
+    public ArrayList<StudySubjectBean> getWithFilterAndSortForNoEnrrolment(
             StudyBean currentStudy, FindSubjectsFilter filter, FindSubjectsSort sort, int rowStart, int rowEnd) {
         setTypesExpected();
         // type for Study unique_identifier from StudySubject getWithFilterAndSort query
         setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
         // type for sort_order_by_enrollment from sorting getWithFilterAndSortByEnrollment query
-        setTypeExpected(15, TypeNames.INT);
-        
+        setTypeExpected(16, TypeNames.INT);
+
         String partialSql;
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
         //String sql = digester.getQuery("getWithFilterAndSort");
-        String sql = digester.getQuery("getWithFilterAndSortByEnrollment");
+        String sql = digester.getQuery("getNoEnrollment");
         sql = sql + filter.execute("");
         // Order by Clause for the defect id 0005480
 
@@ -541,6 +580,13 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         return studySubjects;
     }
 
+    public Integer getCountWithFilterNoEnrrollment(FindSubjectsFilter filter, StudyBean currentStudy) {
+        HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
+        String query = digester.getQuery("getCountWithFilterNoEnrrollment");
+        query += filter.execute("");
+        return getCountByQuery(query, variables);
+    }
+
     public Integer getCountWithFilter(FindSubjectsFilter filter, StudyBean currentStudy) {
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
         String query = digester.getQuery("getCountWithFilter");
@@ -606,6 +652,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         setTypesExpected();
         // type for Study unique_identifier from StudySubject getWithFilterAndSort query
         setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
 
         HashMap<Integer, Object> variables = variables(currentStudy.getId(), currentStudy.getId());
         String sql = digester.getQuery("getWithFilterAndSort");
@@ -672,6 +719,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         } else {
             variables.put(ind++, sb.getTime_zone());
         }
+        variables.put(ind++, sb.getRegimen());
         variables.put(ind++, sb.getId());
 
         String sql = digester.getQuery("update");
@@ -703,6 +751,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         setTypesExpected();
         // type for 'unique_identifier' from the study table
         setTypeExpected(14, TypeNames.STRING);
+        setTypeExpected(15, TypeNames.STRING);
 
         HashMap<Integer, Object> variables = variables(subjectId, study.getId(), study.getId());
 

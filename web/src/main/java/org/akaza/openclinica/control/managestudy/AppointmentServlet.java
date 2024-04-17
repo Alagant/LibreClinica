@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 public class AppointmentServlet extends SecureController {
     protected String getSaltString() {
@@ -95,10 +96,12 @@ public class AppointmentServlet extends SecureController {
                 hashMap.put(3, "03-01-1990");*/
             }
         } catch (MalformedURLException e) {
+            logger.error(e.getMessage(), e);
             addPageMessage("An error occurred when retrieving the appointment schedule");
             //throw new RuntimeException(e);
         }
         catch (IOException e) {
+            logger.error(e.getMessage(), e);
             addPageMessage("Could not fetch the appointment schedule");
             //throw new RuntimeException(e);
         }
