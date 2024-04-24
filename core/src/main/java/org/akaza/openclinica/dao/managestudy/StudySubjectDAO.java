@@ -780,6 +780,7 @@ public class StudySubjectDAO extends AuditableEntityDAO<StudySubjectBean> {
         // gender
         this.setTypeExpected(16, TypeNames.STRING);
         // study.name
+        this.setTypeExpected(17, TypeNames.STRING);
 
         HashMap<Integer, Object> variables = variables(studyId, studyId);
 
