@@ -12,8 +12,8 @@ resources:
     - repository: LcRepo
       type: github
       endpoint: Alagant
-      name: Alagant/CDC_CTMS_LibreClinica
-      ref: refs/heads/merged-changes
+      name: Alagant/LibreClinica
+      ref: refs/heads/$(Build.SourceBranchName)
     - repository: LcQA
       type: github
       endpoint: Alagant
@@ -29,6 +29,11 @@ resources:
       endpoint: Alagant
       name: Alagant/cdc_oauth_portal_mockup
       ref: refs/heads/main
+    - repository: CDCCTMSLibreClinica
+      type: github
+      endpoint: Alagant
+      name: Alagant/CDC_CTMS_LibreClinica
+      ref: refs/heads/merged-changes
 
 
 variables:
@@ -56,6 +61,7 @@ stages:
     - checkout: LcQA
     - checkout: LcDMM
     - checkout: CDCOauthMockup
+    - checkout: CDCCTMSLibreClinica
     - task: Bash@3
       displayName: Create env files
       inputs:
