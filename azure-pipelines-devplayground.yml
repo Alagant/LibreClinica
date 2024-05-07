@@ -95,6 +95,7 @@ stages:
           # Docker DevOps
           cd ~/Alagant_projects/
           echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
+          echo git remote show origin
           git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
