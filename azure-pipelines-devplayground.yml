@@ -98,13 +98,16 @@ stages:
           git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
-          git submodule foreach "git checkout master||git checkout main"
+          git submodule foreach "git checkout master||git checkout main||git checkout lc-develop"
           git submodule foreach "git stash; git pull"
           echo "Status of submodules:"
           git submodule foreach --recursive git status
-          cd ~/Alagant_projects/LibreClinica/
-          git checkout $(Build.SourceBranchName)
-          echo checked out branch $(Build.SourceBranchName)
+          # cd ~/Alagant_projects/LibreClinica/
+          # git checkout $(Build.SourceBranchName)
+          # echo checked out branch $(Build.SourceBranchName)
+          cd ~/Alagant_projects/CDC_CTMS_LibreClinica/
+          git checkout merged-changes
+          echo checked out branch merged-changes
           git pull
           echo running git status
           git status
