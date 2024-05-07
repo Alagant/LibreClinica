@@ -11,8 +11,8 @@ resources:
     - repository: LcRepo
       type: github
       endpoint: Alagant
-      name: Alagant/LibreClinica
-      ref: refs/heads/$(Build.SourceBranchName)
+      name: Alagant/CDC_CTMS_LibreClinica
+      ref: refs/heads/merged-changes
     - repository: LcQA
       type: github
       endpoint: Alagant
