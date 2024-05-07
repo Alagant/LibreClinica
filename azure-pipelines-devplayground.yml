@@ -93,9 +93,14 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
+          git clone https://github.com/Alagant/LC_projects
+          cd LC_projects
+          git remote show origin
+          cd ..
+          
           cd ~/Alagant_projects/
           echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
-          echo git remote show origin
+          # git remote show origin
           git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
