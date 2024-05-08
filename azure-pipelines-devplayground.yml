@@ -99,12 +99,13 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          git clone https://github.com/Alagant/LC_projects
-          cd LC_projects
-          git remote show origin
-          cd ..
-          
+          # git clone https://github.com/Alagant/LC_projects
+          # cd LC_projects
+          # git remote show origin
+          # cd ..
+          ls -l
           cd ~/Alagant_projects/
+          ls -l
           echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
           # git remote show origin
           git pull
