@@ -34,6 +34,11 @@ resources:
       endpoint: Alagant
       name: Alagant/CDC_CTMS_LibreClinica
       ref: refs/heads/merged-changes
+    - repository: LCProjects
+      type: github
+      endpoint: Alagant
+      name: Alagant/LC_projects
+      ref: refs/heads/master
 
 
 variables:
@@ -104,8 +109,10 @@ stages:
           # git remote show origin
           # cd ..
           ls -l
+          pwd
           cd ~/Alagant_projects/
           ls -l
+          pwd
           echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
           # git remote show origin
           git pull
