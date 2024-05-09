@@ -105,16 +105,16 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
+          echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
           # git clone https://github.com/Alagant/LC_projects
           # cd LC_projects
           # git remote show origin
           # cd ..
           ls -l
           pwd
-          cd ~/Alagant_projects/
+          cd LC_projects
           ls -l
           pwd
-          echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
           # git remote show origin
           git pull
           git submodule update --init --recursive
@@ -126,7 +126,7 @@ stages:
           # cd ~/Alagant_projects/LibreClinica/
           # git checkout $(Build.SourceBranchName)
           # echo checked out branch $(Build.SourceBranchName)
-          cd ~/Alagant_projects/CDC_CTMS_LibreClinica/
+          cd CDC_CTMS_LibreClinica/
           git checkout merged-changes
           echo checked out branch merged-changes
           git pull
