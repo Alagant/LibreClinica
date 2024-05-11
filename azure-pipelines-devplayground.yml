@@ -153,7 +153,7 @@ stages:
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
           
-          cd ~/Alagant_projects/LibreClinica/dbbackup/
+          cd ~/dbbackup/
           ls -ltra
       env:
         MAILPASSWORD: $(mailPassword)
