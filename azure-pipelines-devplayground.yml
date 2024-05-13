@@ -155,8 +155,8 @@ stages:
           docker compose run postgres pwd
           docker compose run postgres ls
           docker compose run postgres ls /dbbackup
-          docker compose run postgres find libreclinica_2024-05-06T22:45:01+00:00.sql
-          docker compose run postgres psql -d libreclinica -U clinica -h postgres -f /libreclinica_backup.sql
+          # docker compose run postgres find libreclinica_2024-05-06T22:45:01+00:00.sql
+          docker compose run postgres psql -d libreclinica -U clinica -h postgres -f /dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql
           
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
