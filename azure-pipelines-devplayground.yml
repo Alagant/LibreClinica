@@ -154,14 +154,15 @@ stages:
           docker compose run postgres psql -d postgres -U clinica -h postgres -c "CREATE DATABASE libreclinica;"
           docker compose run postgres pwd
           docker compose run postgres ls
+          docker compose run postgres ls -d dbbackup
           docker compose run postgres psql -d libreclinica -U clinica -h postgres -f /libreclinica_backup.sql
           
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
           ls -ltra
           
-          cd ~/dbbackup/
-          ls -ltra
+          # cd ~/dbbackup/
+          # ls -ltra
       env:
         MAILPASSWORD: $(mailPassword)
 
