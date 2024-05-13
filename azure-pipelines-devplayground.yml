@@ -73,14 +73,14 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          cd LibreClinica/
+          cd LC_projects/CDC_CTMS_LibreClinica
           echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
     - task: Bash@3
       displayName: Backup the database
       inputs:
         targetType: 'inline'
         script: |
-          ./LibreClinica/install/db_backup.bash
+          ./LC_projects/CDC_CTMS_LibreClinica/install/db_backup.bash
       continueOnError: true
     - task: Bash@3
       displayName: Clean the docker environment
@@ -128,6 +128,9 @@ stages:
           # git checkout $(Build.SourceBranchName)
           # echo checked out branch $(Build.SourceBranchName)
           cp LibreClinica/.env CDC_CTMS_LibreClinica/.env
+          cp LibreClinica/install/libreclinica.conf CDC_CTMS_LibreClinica/install/libreclinica.conf
+          cp LibreClinica/install/vmdev.conf CDC_CTMS_LibreClinica/install/vmdev.conf
+          cp LibreClinica/install/vmdev_wildcard_cert.conf CDC_CTMS_LibreClinica/install/vmdev_wildcard_cert.conf
           cd CDC_CTMS_LibreClinica/
           git checkout merged-changes
           echo checked out branch merged-changes
@@ -148,15 +151,15 @@ stages:
           # If you need to paste in a new database, adapt and uncomment the following line:
           # sleep 10; sudo ./install/db_restore.bash ~/dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql
           # Be aware that the database restore script is not yet fully tested and may not work as expected.
-          cp ~/dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql libreclinica_backup.sql
+          # cp ~/dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql libreclinica_backup.sql
           # chmod 777 libreclinica_2024-05-06T22:45:01+00:00.sql
-          docker compose run postgres psql -d postgres -U clinica -h postgres -c "DROP DATABASE IF EXISTS libreclinica;"
-          docker compose run postgres psql -d postgres -U clinica -h postgres -c "CREATE DATABASE libreclinica;"
-          docker compose run postgres pwd
-          docker compose run postgres ls
-          docker compose run postgres ls /dbbackup
+          # docker compose run postgres psql -d postgres -U clinica -h postgres -c "DROP DATABASE IF EXISTS libreclinica;"
+          # docker compose run postgres psql -d postgres -U clinica -h postgres -c "CREATE DATABASE libreclinica;"
+          # docker compose run postgres pwd
+          # docker compose run postgres ls
+          # docker compose run postgres ls /dbbackup
           # docker compose run postgres find libreclinica_2024-05-06T22:45:01+00:00.sql
-          docker compose run postgres psql -d libreclinica -U clinica -h postgres -f /dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql
+          # docker compose run postgres psql -d libreclinica -U clinica -h postgres -f /dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql
           
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
