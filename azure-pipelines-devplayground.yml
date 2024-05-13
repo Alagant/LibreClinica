@@ -135,7 +135,6 @@ stages:
           echo running git status
           git status
           
-          cp ~/dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql libreclinica_backup.sql
           echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
           docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=${MAIL_PASSWORD} --build-arg MAIL_ERROR_MSG=${DEVELOPER_EMAILS}
           echo docker volume ls
@@ -149,11 +148,11 @@ stages:
           # If you need to paste in a new database, adapt and uncomment the following line:
           # sleep 10; sudo ./install/db_restore.bash ~/dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql
           # Be aware that the database restore script is not yet fully tested and may not work as expected.
-          # cp ~/dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql libreclinica_backup.sql
+          cp ~/dbbackup/libreclinica_2024-05-06T22:45:01+00:00.sql libreclinica_backup.sql
           # chmod 777 libreclinica_2024-05-06T22:45:01+00:00.sql
-          # docker compose run postgres psql -d postgres -U clinica -h postgres -c "DROP DATABASE IF EXISTS libreclinica;"
-          # docker compose run postgres psql -d postgres -U clinica -h postgres -c "CREATE DATABASE libreclinica;"
-          # docker compose run postgres psql -d libreclinica -U clinica -h postgres -f libreclinica_backup.sql
+          docker compose run postgres psql -d postgres -U clinica -h postgres -c "DROP DATABASE IF EXISTS libreclinica;"
+          docker compose run postgres psql -d postgres -U clinica -h postgres -c "CREATE DATABASE libreclinica;"
+          docker compose run postgres psql -d libreclinica -U clinica -h postgres -f ./libreclinica_backup.sql
           
           docker ps -a
           echo 'Hello DevOps to $(adminEmail)'
