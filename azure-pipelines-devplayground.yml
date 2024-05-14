@@ -131,6 +131,8 @@ stages:
           cp LibreClinica/install/libreclinica.conf CDC_CTMS_LibreClinica/install/libreclinica.conf
           cp LibreClinica/install/vmdev.conf CDC_CTMS_LibreClinica/install/vmdev.conf
           cp LibreClinica/install/vmdev_wildcard_cert.conf CDC_CTMS_LibreClinica/install/vmdev_wildcard_cert.conf
+          echo ls /CDC_CTMS_LibreClinica/install
+          ls /CDC_CTMS_LibreClinica/install
           cd CDC_CTMS_LibreClinica/
           git checkout merged-changes
           echo checked out branch merged-changes
