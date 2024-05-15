@@ -130,30 +130,40 @@ stages:
           # git checkout $(Build.SourceBranchName)
           # echo checked out branch $(Build.SourceBranchName)
           
+          echo Enter LibreClinica
           cd LibreClinica/
           git checkout develop
           echo checked out branch develop
           git pull
           echo running git status
           git status
-          ls install
           cd ..
+          echo Exit LibreClinica
           
-          cp LibreClinica/.env CDC_CTMS_LibreClinica/.env
-          cp -a LibreClinica/install/. CDC_CTMS_LibreClinica/install/
+          # cp LibreClinica/.env CDC_CTMS_LibreClinica/.env
+          # cp -a LibreClinica/install/. CDC_CTMS_LibreClinica/install/
           # cp LibreClinica/install/libreclinica.conf CDC_CTMS_LibreClinica/install/libreclinica.conf
           # cp LibreClinica/install/vmdev.conf CDC_CTMS_LibreClinica/install/vmdev.conf
           # cp LibreClinica/install/vmdev_wildcard_cert.conf CDC_CTMS_LibreClinica/install/vmdev_wildcard_cert.conf
-          echo ls CDC_CTMS_LibreClinica/install
-          ls CDC_CTMS_LibreClinica/install
+          # echo ls CDC_CTMS_LibreClinica/install
+          # ls CDC_CTMS_LibreClinica/install
           
+          echo Enter CDC_CTMS_LibreClinica
           cd CDC_CTMS_LibreClinica/
           git checkout merged-changes
           echo checked out branch merged-changes
           git pull
           echo running git status
           git status
-          ls install
+          cd ..
+          echo Exit CDC_CTMS_LibreClinica
+          
+          echo Copying Files
+          cp LibreClinica/.env CDC_CTMS_LibreClinica/.env
+          cp -a LibreClinica/install/. CDC_CTMS_LibreClinica/install/
+          
+          echo Enter CDC_CTMS_LibreClinica
+          cd CDC_CTMS_LibreClinica/
           
           echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
           docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=${MAIL_PASSWORD} --build-arg MAIL_ERROR_MSG=${DEVELOPER_EMAILS}
