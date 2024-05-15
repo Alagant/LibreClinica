@@ -113,10 +113,11 @@ stages:
           ls -l
           pwd
           cd LC_projects
-          cp /libreclinica/.env /CDC_CTMS_LibreClinica/.env
+          # cp /libreclinica/.env /CDC_CTMS_LibreClinica/.env
           ls -l
           pwd
           # git remote show origin
+          
           git pull
           git submodule update --init --recursive
           git submodule foreach "git stash"
@@ -124,15 +125,26 @@ stages:
           git submodule foreach "git stash; git pull"
           echo "Status of submodules:"
           git submodule foreach --recursive git status
+          
           # cd ~/Alagant_projects/LibreClinica/
           # git checkout $(Build.SourceBranchName)
           # echo checked out branch $(Build.SourceBranchName)
+          
+          cd LibreClinica/
+          git checkout develop
+          echo checked out branch develop
+          git pull
+          echo running git status
+          git status
+          cd ..
+          
           cp LibreClinica/.env CDC_CTMS_LibreClinica/.env
           cp LibreClinica/install/libreclinica.conf CDC_CTMS_LibreClinica/install/libreclinica.conf
           cp LibreClinica/install/vmdev.conf CDC_CTMS_LibreClinica/install/vmdev.conf
           cp LibreClinica/install/vmdev_wildcard_cert.conf CDC_CTMS_LibreClinica/install/vmdev_wildcard_cert.conf
-          echo ls /CDC_CTMS_LibreClinica/install
-          ls /CDC_CTMS_LibreClinica/install
+          echo ls CDC_CTMS_LibreClinica/install
+          ls CDC_CTMS_LibreClinica/install
+          
           cd CDC_CTMS_LibreClinica/
           git checkout merged-changes
           echo checked out branch merged-changes
