@@ -166,7 +166,7 @@ stages:
           
           echo Copying Files
           cp LibreClinica/.env CDC_CTMS_LibreClinica/.env
-          # cp -a LibreClinica/install/. CDC_CTMS_LibreClinica/install/
+          cp LibreClinica/install/*.conf CDC_CTMS_LibreClinica/install/
           
           echo Enter CDC_CTMS_LibreClinica
           cd CDC_CTMS_LibreClinica/
