@@ -136,6 +136,7 @@ stages:
           git pull
           echo running git status
           git status
+          ls install
           cd ..
           
           cp LibreClinica/.env CDC_CTMS_LibreClinica/.env
@@ -151,6 +152,7 @@ stages:
           git pull
           echo running git status
           git status
+          ls install
           
           echo -e "ADMINEMAIL=$(adminEmail)\nMAILUSERNAME=$(mailUsername)\nDEVELOPEREMAILS=$(developerEmails)">.env_emails
           docker compose build --build-arg ENVIRONMENT=development --build-arg ADMIN_EMAIL=$(adminEmail) --build-arg MAIL_USERNAME=$(mailUsername) --build-arg MAIL_PASSWORD=${MAIL_PASSWORD} --build-arg MAIL_ERROR_MSG=${DEVELOPER_EMAILS}
