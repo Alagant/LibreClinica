@@ -113,7 +113,8 @@ stages:
           ls -l
           pwd
           cd LC_projects
-          git reset --hard HEAD
+          git reset --hard origin/master
+          git clean -d -f
           # cp /libreclinica/.env /CDC_CTMS_LibreClinica/.env
           ls -l
           pwd
@@ -133,8 +134,9 @@ stages:
           
           echo Enter LibreClinica
           cd LibreClinica/
-          git reset --hard HEAD
           git checkout develop
+          git reset --hard origin/develop
+          git clean -d -f
           echo checked out branch develop
           git pull
           echo running git status
@@ -152,8 +154,9 @@ stages:
           
           echo Enter CDC_CTMS_LibreClinica
           cd CDC_CTMS_LibreClinica/
-          git reset --hard HEAD
           git checkout merged-changes
+          git reset --hard origin/merged-changes
+          git clean -d -f
           echo checked out branch merged-changes
           git pull
           echo running git status
