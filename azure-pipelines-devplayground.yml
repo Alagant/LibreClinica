@@ -87,14 +87,14 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          cd LibreClinica/
+          cd LC_projects/CDC_CTMS_LibreClinica/
           docker compose down
           docker container stop $(docker container ls -aq)||echo No Docker containers to stop
           docker container prune -f
           docker image prune -af
           docker network prune -f
           docker system prune -af
-          docker volume rm libreclinica_libreclinica_src libreclinica_libreclinica_webapps libreclinica_libreclinica_config libreclinica_mvn_cache libreclinica_libreclinica_src
+          docker volume rm cdc_ctms_libreclinica_libreclinica_src cdc_ctms_libreclinica_libreclinica_webapps cdc_ctms_libreclinica_libreclinica_config cdc_ctms_libreclinica_mvn_cache cdc_ctms_libreclinica_libreclinica_src
           docker container prune -f
           docker image prune -af
           docker system prune -af
