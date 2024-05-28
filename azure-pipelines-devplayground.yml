@@ -105,7 +105,7 @@ stages:
         targetType: 'inline'
         script: |
           # Docker DevOps
-          echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}
+          echo user string ${USER}, for $(adminEmail), oe ${ADMINEMAIL}, mu ${MAILUSERNAME}, mp ${MAIL_PASSWORD}
           # git clone https://github.com/Alagant/LC_projects
           # cd LC_projects
           # git remote show origin
